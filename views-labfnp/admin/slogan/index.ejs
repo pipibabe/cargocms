@@ -1,9 +1,7 @@
 <!-- widget grid -->
 <section id="slogan-index" class="">
-
 	<!-- row -->
 	<div class="row">
-
 		<!-- NEW WIDGET START -->
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -22,11 +20,10 @@
 				data-widget-sortable="false"
 
 				-->
-
-        <header>
-          <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-          <h2>Slogan管理</h2>
-        </header>
+				<header>
+					<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+					<h2>Slogan管理</h2>
+				</header>
 
 				<!-- widget div-->
 				<div>
@@ -39,33 +36,34 @@
 
 					<!-- widget content -->
 					<div class="widget-body no-padding">
-            <!-- end messageBox div -->
+						<!-- end messageBox div -->
 						<table id="slogan-table" class="table table-striped table-bordered table-hover" width="100%">
 							<thead>
-								<tr>
-									<th class="" data-hide="phone">#</th>
-									<th class="" data-class="expand"><i class="fa fa-fw fa-slogan text-muted hidden-md hidden-sm hidden-xs"></i>Source</th>
-									<th class="" data-hide="phone,tablet">content</th>
-									<th class="no-sort"></th>
-								</tr>
+							<tr>
+								<th class="" data-hide="phone">#</th>
+								<th class="" data-class="expand"><i class="fa fa-fw fa-slogan text-muted hidden-md hidden-sm hidden-xs"></i>Source</th>
+								<th class="" data-hide="phone,tablet">content</th>
+								<th class=""></th>
+								<th class="no-sort"></th>
+							</tr>
 							</thead>
 							<tbody>
-								<tr v-for="slogan in data.items" v-on:click="selection($index)" v-on:dblclick="dblclick($index)">
-									<td>{{ slogan.id }}</td>
-									<td><a href="/admin/#/admin/slogan/show/{{slogan.id}}">{{ slogan.content }}</a></td>
-									<td>{{ slogan.source }}</td>
-									<td>{{ slogan.lastLogin }}</td>
-									<td align="center" style="cursor: pointer;">
-										<div class="row">
-											<a class="btn btn-default btn-xs" role="button" v-on:click="show(slogan.id)">
-												<i class="fa-fw fa fa-eye text-muted" />
-											</a>
-											<a class="btn btn-default btn-xs" role="button" v-on:click="edit(slogan.id)">
-												<i class="fa-fw fa fa-pencil-square-o text-muted"/>
-											</a>
-										</div>
-									</td>
-								</tr>
+							<tr v-for="slogan in data.items" v-on:click="selection($index)" v-on:dblclick="dblclick($index)">
+								<td>{{ slogan.id }}</td>
+								<td><a href="/admin/#/admin/slogan/show/{{slogan.id}}">{{ slogan.content }}</a></td>
+								<td>{{ slogan.source }}</td>
+								<td>{{ slogan.lastLogin }}</td>
+								<td align="center" style="cursor: pointer;">
+									<div class="row">
+										<a class="btn btn-default btn-xs" role="button" v-on:click="show(slogan.id)">
+											<i class="fa-fw fa fa-eye text-muted" />
+										</a>
+										<a class="btn btn-default btn-xs" role="button" v-on:click="edit(slogan.id)">
+											<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+										</a>
+									</div>
+								</td>
+							</tr>
 							</tbody>
 						</table>
 
@@ -76,10 +74,12 @@
 				<!-- end widget div -->
 
 			</div>
-			<!-- end widget -->
 
-		</article>
-		<!-- WIDGET END -->
+	</div>
+	<!-- end widget -->
+
+	</article>
+	<!-- WIDGET END -->
 
 	</div>
 
@@ -143,19 +143,19 @@
 
 		/* // DOM Position key index //
 
-			l - Length changing (dropdown)
-			f - Filtering input (search)
-			t - The Table! (datatable)
-			i - Information (records)
-			p - Pagination (paging)
-			r - pRocessing
-			< and > - div elements
-			<"#id" and > - div with an id
-			<"class" and > - div with a class
-			<"#id.class" and > - div with an id and class
+		 l - Length changing (dropdown)
+		 f - Filtering input (search)
+		 t - The Table! (datatable)
+		 i - Information (records)
+		 p - Pagination (paging)
+		 r - pRocessing
+		 < and > - div elements
+		 <"#id" and > - div with an id
+		 <"class" and > - div with a class
+		 <"#id.class" and > - div with an id and class
 
-			Also see: http://legacy.datatables.net/usage/features
-		*/
+		 Also see: http://legacy.datatables.net/usage/features
+		 */
 
 		<%- include vue.js %>
 		sloganApp.$mount("#slogan-index");
