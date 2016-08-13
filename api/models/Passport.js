@@ -42,6 +42,30 @@ module.exports = {
           }
         });
 
+      },
+      createDefaultLocalProviderIfNotExist: async function (user) {
+        try {
+
+          let localPassport = await Passport.findOne({
+            where: {
+              provider: 'local',
+              UserId: user.id
+            }
+          });
+          console.log('localPassport ==', localPassport);
+          if(localPassport == null){
+            let newLocalPassport = {
+              provider: "local",
+              password: "password",
+              UserId: user.id
+            }
+            console.log("=== newLocalPassport ===", newLocalPassport);
+            await Passport.create(newLocalPassport);
+          }
+
+        } catch (e) {
+          throw e;
+        }
       }
     },
     instanceMethods: {

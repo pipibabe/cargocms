@@ -9,7 +9,7 @@ describe('about Post Controller operation.', function() {
     };
     try {
       const res = await request(sails.hooks.http.app)
-      .post(`/api/post`)
+      .post(`/api/admin/post`)
       .send(data);
       res.status.should.be.eq(200);
       res.body.should.be.Object;
@@ -50,7 +50,7 @@ describe('about Post Controller operation.', function() {
     it('get all post', async(done) => {
       try {
         const res = await request(sails.hooks.http.app)
-        .get(`/api/post`);
+        .get(`/api/admin/post`);
         sails.log.info(JSON.stringify(res.body, null, 2));
         res.status.should.be.eq(200);
         res.body.should.be.Object;
@@ -63,7 +63,7 @@ describe('about Post Controller operation.', function() {
     it('findOne Post should be success.', async (done) => {
       try {
         const res = await request(sails.hooks.http.app)
-        .get(`/api/post/${targetPost.id}`);
+        .get(`/api/admin/post/${targetPost.id}`);
         res.status.should.be.eq(200);
         res.body.should.be.Object;
         done();
@@ -82,7 +82,7 @@ describe('about Post Controller operation.', function() {
           TagsArray: [ '香水', '花' ],
         }
         const res = await request(sails.hooks.http.app)
-        .put(`/api/post/${targetPost.id}`)
+        .put(`/api/admin/post/${targetPost.id}`)
         .send(data);
         sails.log.info(JSON.stringify(res.body, null, 2));
         res.status.should.be.eq(200);
@@ -102,7 +102,7 @@ describe('about Post Controller operation.', function() {
           abstract: '我們可以這樣形容，當你手中捧到一束花時，可以聞到花束中的各種花材',
         }
         const res = await request(sails.hooks.http.app)
-        .put(`/api/post/${targetPost.id}`)
+        .put(`/api/admin/post/${targetPost.id}`)
         .send(data);
         sails.log.info(JSON.stringify(res.body, null, 2));
         res.status.should.be.eq(200);
@@ -145,7 +145,7 @@ describe('about Post Controller operation.', function() {
     it('delete Post should success.', async (done) => {
       try {
         const res = await request(sails.hooks.http.app)
-        .delete(`/api/post/${targetPost.id}`);
+        .delete(`/api/admin/post/${targetPost.id}`);
         sails.log.info(JSON.stringify(res.body, null, 2));
         res.status.should.be.eq(200);
         res.body.should.be.Object;

@@ -13,7 +13,7 @@ FB.api(
     }
 );
 */
-module.exports = { data:
+module.exports.feed = { data:
    [ { full_picture: 'https://scontent.xx.fbcdn.net/v/t1.0-9/13728958_1407701562579431_7501307264702736046_n.jpg?oh=d8a612fb03f0a28f6e80fac2649bc68f&oe=57EEE4FD',
        message: '【活動】LFP in 台北 八月松菸誠品進駐計畫✨\n開幕進入倒數，LFP要把優惠給你和朋友們囉！即日起，兩人一起預約至松菸誠品櫃調香，並分享指定活動訊息，當天LFP將招待一位免費體驗調香哦！\n活動時間：8/1-8/3\n櫃位地點：台北松菸誠品1F正門入口處\n預約方式：FB私訊\n＃LFP香料香水實驗室 ＃台北 ＃松菸 ＃誠品 ＃LFP八月計畫 ＃客製化香水',
        name: 'Timeline Photos',

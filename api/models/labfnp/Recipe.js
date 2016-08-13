@@ -13,8 +13,19 @@ module.exports = {
         }
       },
       get: function () {
-        var formula = this.getDataValue('formula');
-        return JSON.parse(formula);
+        try {
+          var formula = this.getDataValue('formula');
+          if (formula) {
+            return JSON.parse(formula);
+          }
+          else {
+            return [];
+          }
+        }
+        catch (e) {
+          console.log(e);
+          return [];
+        }
       }
     },
     formulaLogs: {

@@ -112,6 +112,16 @@ passport.connect = async function(req, query, profile, next) {
       user.username = user.lastName + user.firstName;
     }
 
+    // 儲存 Facebook ID 和個人頭像照片
+    user.facebookId = profile.id;
+    user.avatar = "https://graph.facebook.com/" + profile.id + "/picture?redirect=true&height=470&width=470";
+
+    if (profile.hasOwnProperty('photos') && profile.photos.length > 0) {
+      user.avatarThumb = profile.photos[0].value;
+    }
+
+    console.log("new user", user);
+
 
 
     if (!user.username && !user.email) {
@@ -168,6 +178,8 @@ passport.connect = async function(req, query, profile, next) {
 
       let newUser = await User.create(user);
       query.UserId = newUser.id;
+
+      await Passport.createDefaultLocalProviderIfNotExist(newUser);
 
       newUser = await User.findOne({
         where:{

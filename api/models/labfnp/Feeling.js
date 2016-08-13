@@ -5,7 +5,7 @@ module.exports = {
     }
   },
   associations: function() {
-    Feeling.belongsTo(Scent);
+    //Feeling.belongsTo(Scent);
   },
   options: {
     timestamps: false,

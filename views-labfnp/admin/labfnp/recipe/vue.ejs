@@ -1,10 +1,9 @@
 <%- include ../metadata.js.ejs %>
 
 var COMMON = {
-	DOUBLE_CLICK_TIME_PERIOD: 250,
 	DEFAULT_INDEX: -1,
   PAGE_NAME: 'labfnp-recipe-',
-  DROPS_MAX: 9,
+  DROPS_MAX: 100,
   DROPS_MIN: 1,
 };
 
@@ -48,17 +47,6 @@ var userAppModel = {
 
 var userApp = new Vue({
 	data: userAppModel,
-  computed: {
-    requiredErrorMsg: function () {
-      return 'Required fruit !!'
-    },
-    minlengthErrorMsg: function () {
-      return 'Please chose at least 1 fruit !!'
-    },
-    maxlengthErrorMsg: function () {
-      return 'Please chose at most 2 fruits !!'
-    }
-  },
 	methods: {
 		cancel: function (event) {
 			userApp.onLeavePage(function () {
@@ -70,8 +58,12 @@ var userApp = new Vue({
       var dataJson = JSON.parse(JSON.stringify(userAppModel.data.item));
       var newFormula = [];
       for (var i=0;i<dataJson.formula.length;i++) {
-        var checkDrops = dataJson.formula[i].drops !== "0";
-        var checkScent = dataJson.formula[i].scent !== '';
+        var checkDropsType = typeof dataJson.formula[i].drops === 'string';
+        var checkDropsZero = dataJson.formula[i].drops !== 0;
+        var checkDrops = checkDropsType && checkDropsZero;
+        var checkScentType = typeof dataJson.formula[i].scent === 'string';
+        var checkScentEmpty = dataJson.formula[i].scent !== '';
+        var checkScent = checkScentType && checkScentEmpty;
         if (checkDrops && checkScent) newFormula.push(dataJson.formula[i]);
       }
       for (var i=0;i<newFormula.length;i++) {
@@ -137,51 +129,56 @@ var userApp = new Vue({
 			});
 		},
     loadSelectOptions: function (cb) {
-      var bindDefaultFormlaValue = function () {
-        for (var i=0;i<6;i++) {
-          var checkFormula = typeof userAppModel.data.item.formula[i] !== 'undefined';
-          if (!checkFormula) userAppModel.data.item.formula[i] = {};
-
-          var checkScent = typeof userAppModel.data.item.formula[i].scent !== 'undefined';
-          var checkDrops = userAppModel.data.item.formula[i].drops !== '0';
-          if (!checkFormula || !checkScent) userAppModel.data.item.formula[i].scent = '';
-          if (!checkFormula || !checkDrops) userAppModel.data.item.formula[i].drops = 0;
-        }
-      };
-      bindDefaultFormlaValue();
-
       var ajaxSuccess = function (result) {
         userAppModel.data.scentData = result.data.items;
         userAppModel.data.scentColor = new Object();
-
         var scentData = userAppModel.data.scentData;
         for (var i=0;i<scentData.length;i++) {
           userAppModel.data.scentColor[scentData[i].name] = scentData[i].color;
         }
-        console.log("userAppModel.data.scentColor->", userAppModel.data.scentColor);
-
         if (typeof cb !== 'undefined') setTimeout(cb, 0);
       };
 
       $.ajax({
         url: LINK.API_LIST_SCENT,
-        async: false,
+        // async: false,
         success: ajaxSuccess,
         // error: ajaxError,
       });
     },
+    saveItemStatusBeforeEdit: function () {
+      this.data.status.itemBeforeEdit = JSON.stringify(this.data.item);
+			window.onbeforeunload = function (e) {
+				if (userApp.isPageEditDataModified()) {
+					var message = '您已經修改過資料，是否確定要放棄本次的修改？';
+					e.returnValue = message;
+					return message;
+				}
+			};
+    },
+    insertEmptyFormulaItem: function () {
+      console.log(userAppModel.data.item.formula);
+      for (var i=0;i<6;i++) {
+        var thisFormula = userAppModel.data.item.formula[i];
+        var checkFormula = typeof thisFormula === 'undefined';
+
+        if (checkFormula) {
+          userAppModel.data.item.formula[i] = {
+            color: '',
+            scent: '',
+            drops: 0,
+          };
+        } else {
+          var checkDrops = typeof thisFormula.drops === 'string';
+          var checkDropsValue = thisFormula.drops === '0';
+          if (!checkDrops || checkDropsValue) 
+            userAppModel.data.item.formula[i].scent = '';
+
+        }
+
+      }
+    },
 		loadItem: function (cb) {
-			window.onbeforeunload = null;
-
-      // var bindScentColor = function() {
-      //   // var scentColor = LABFNP.SCENT_COLOR();
-      //   var scentColor = userAppModel.data.scentColor;
-      //   var formula = userAppModel.data.item.formula;
-      //   for (var i=0;i<formula.length;i++) {
-      //     formula[i].color = scentColor[formula[i].scent];
-      //   }
-      // };
-
 			var ajaxSuccess = function(result) {
 				userAppModel.data.item = result.data;
 				var hasAvatar = typeof result.data.avatar === 'string';
@@ -203,7 +200,6 @@ var userApp = new Vue({
 
 			registerForm.validate({
 				// Rules for form validation
-        // ignore: [],
 				rules: {
           authorName: {
             required: true
@@ -239,7 +235,7 @@ var userApp = new Vue({
 						required: '請至少給予 1 滴香味分子',
             minlength: '請至少選擇一種香味分子',
             min: '請至少給予 1 滴香味分子',
-            max: '請至多只給予 9 滴',
+            max: '請至多只給予 ' + COMMON.DROPS_MAX + ' 滴',
           }
 				},
 
@@ -273,23 +269,21 @@ var userApp = new Vue({
       if (itemBeforeEdit) {
   			var itemBeforeLeave = JSON.stringify(userAppModel.data.item);
   			isDataModified = itemBeforeEdit !== itemBeforeLeave;
-      }
+      } else window.onbeforeunload = null;
      return isDataModified;
 		},
     onEnterPageCreare: function () {
-      userAppModel.data.status.itemBeforeEdit = null;
+      this.insertEmptyFormulaItem();
       this.loadSelectOptions();
+  		this.setupForm("create");
+      this.data.status.itemBeforeEdit = null;
     },
 		onEnterPageEdit: function () {
-      userAppModel.data.status.itemBeforeEdit = JSON.stringify(userAppModel.data.item);
+      this.loadItem();
+      this.insertEmptyFormulaItem();
       this.loadSelectOptions();
-			window.onbeforeunload = function (e) {
-				if (userApp.isPageEditDataModified()) {
-					var message = '您已經修改過資料，是否確定要放棄本次的修改？';
-					e.returnValue = message;
-					return message;
-				}
-			};
+  		this.setupForm("edit");
+      this.saveItemStatusBeforeEdit();
 		},
     onEnterPageShow: function () {
       var formula = userAppModel.data.item.formula;
@@ -348,12 +342,10 @@ var userApp = new Vue({
 				};
 				messageApp.confirm(msgInfo, action);
 			} else {
-		    window.onbeforeunload = null;
         return cb();
       };
 		},
 		loadItems: function (cb) {
-			window.onbeforeunload = null;
 			var ajaxSuccess = function(result) {
 				userAppModel.data.items = result.data.items;
 				if (typeof cb !== 'undefined') setTimeout(cb, 0);

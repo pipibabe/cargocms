@@ -59,9 +59,9 @@
 		<span> <!-- User image size is adjusted inside CSS, it should stay as is -->
 
 			<a href="#">
-				<img src="/assets/admin/img/avatars/default.png" alt="me" class="online" />
+				<img src="<%= data.avatar %>" alt="me" class="online" />
 				<span>
-					<%= req.session.passport?req.session.passport.user.displayName:'未登入' %>
+					<%= data.displayName %>
 				</span>
 				<i class="fa fa-angle-right"></i>
 			</a>
@@ -79,9 +79,9 @@
 					<i class="fa fa-lg fa-fw fa-<%= item.icon %>"></i>
 					<span class="menu-item-parent"><%= item.title %></span>
 				</a>
-				<% if (item.subItems) { %>
+				<% if (item.SubMenuItems && item.SubMenuItems.length > 0) { %>
 				<ul>
-					<% item.subItems.forEach(function(subItem) { %>
+					<% item.SubMenuItems.forEach(function(subItem) { %>
 					<li>
 						<a href="<%= subItem.href %>" title="<%= subItem.title %>"><span class="menu-item-parent"><%= subItem.title %></span></a>
 					</li>

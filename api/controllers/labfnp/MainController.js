@@ -46,9 +46,16 @@ module.exports = {
   },
 
   portfolio: async function(req, res) {
+
+    let user = await User.findById(req.params.id);
+
     try {
       return res.view({
-        recipes: await Recipe.findAll()
+        user,
+        recipes: await Recipe.findAll({
+          where: { userId: user.id },
+          order: 'updatedAt desc',
+        })
       });
     }
     catch (e) {

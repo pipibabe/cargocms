@@ -31,28 +31,16 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-  '/api/admin/mock': "admin/MockController.find",
-  '/api/labfnp/scent': 'labfnp/ScentController.index',
-  'get /api/labfnp/scent/simpleList': 'labfnp/ScentController.find',
-
-  'get /api/labfnp/recipe': 'labfnp/RecipeController.find',
-  'post /api/labfnp/recipe': 'labfnp/RecipeController.create',
-  'get /api/labfnp/recipe/:id': 'labfnp/RecipeController.findOne',
-  'put /api/labfnp/recipe/:id': 'labfnp/RecipeController.update',
-  'delete /api/labfnp/recipe/:id': 'labfnp/RecipeController.destroy',
-
-  'get /api/labfnp/scent': 'labfnp/ScentController.find',
-
-  'get /api/labfnp/scentnote': 'labfnp/ScentNoteController.find',
-
+  //----- index -----
   '/': {
     view: 'index'
   },
 
-  '/api/admin/mock': "admin/MockController.find",
+  //----- api -----
+  'get /api/admin/mock': "api/admin/MockController.find",
 
-  '/api/labfnp/scent': 'api/labfnp/ScentController.index',
-  'get /api/labfnp/scent/simpleList': 'api/labfnp/ScentController.find',
+  'post /api/admin/upload': 'api/admin/ImageController.upload',
+  'delete /api/admin/upload/:id': 'api/admin/ImageController.destroy',
 
   'get /api/labfnp/recipe': 'api/labfnp/RecipeController.find',
   'post /api/labfnp/recipe': 'api/labfnp/RecipeController.create',
@@ -60,10 +48,35 @@ module.exports.routes = {
   'put /api/labfnp/recipe/:id': 'api/labfnp/RecipeController.update',
   'delete /api/labfnp/recipe/:id': 'api/labfnp/RecipeController.destroy',
 
+  'get /api/labfnp/scent/simpleList': 'api/labfnp/ScentController.find',
+  'get /api/labfnp/scent': 'api/labfnp/ScentController.find',
+  'get /api/labfnp/scentnote': 'api/labfnp/ScentNoteController.find',
+
+  'get /api/admin/user': 'api/admin/UserController.find',
+  'get /api/admin/user/:id': 'api/admin/UserController.findOne',
+  'post /api/admin/user': 'api/admin/UserController.create',
+  'put /api/admin/user/:id': 'api/admin/UserController.update',
+  'delete /api/admin/user/:id': 'api/admin/UserController.destroy',
+
+  'get /api/admin/post': 'api/admin/PostController.find',
+  'get /api/admin/post/:id': 'api/admin/PostController.findOne',
+  'post /api/admin/post': 'api/admin/PostController.create',
+  'put /api/admin/post/:id': 'api/admin/PostController.update',
+  'delete /api/admin/post/:id': 'api/admin/PostController.destroy',
+
+  // 'get /api/admin/Default': 'api/admin/DefaultController.find',
+  // 'get /api/admin/Default/:id': 'api/admin/DefaultController.findOne',
+  // 'post /api/admin/Default': 'api/admin/DefaultController.create',
+  // 'put /api/admin/Default/:id': 'api/admin/DefaultController.update',
+  // 'delete /api/admin/Default/:id': 'api/admin/DefaultController.destroy',
+
+  //----- custom -----
   '/creator':     'labfnp/MainController.creator',
   '/lab':         'labfnp/MainController.explore',
   '/recipe/:id':  'labfnp/MainController.recipe',
   '/me/:id':      'labfnp/MainController.portfolio',
+  '/admin/config.js': "AdminController.config",
+  '/admin': 'AdminController.index',
 
   //----- AuthController -----
   'get /login': 'AuthController.login',
@@ -77,35 +90,12 @@ module.exports.routes = {
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
 
-  //----- UserController -----
-  'get /api/user': 'UserController.find',
-  'get /api/user/:id': 'UserController.findOne',
-
-  'post /api/user': 'UserController.create',
-  'put /api/user/:id': 'UserController.update',
-  'delete /api/user/:id': 'UserController.destroy',
-
-
-  //----- PostController -----
-  'get /api/post': 'PostController.find',
-  'get /api/post/:id': 'PostController.findOne',
-
-  'post /api/post': 'PostController.create',
-  'put /api/post/:id': 'PostController.update',
-  'delete /api/post/:id': 'PostController.destroy',
-
-  //----- ImageController -----
-  'post /api/upload': 'ImageController.upload',
-  'delete /api/upload/:id': 'ImageController.destroy',
-
-  '/admin/config.js': "AdminController.config",
-
-  "/api/:controller/:action/:id?": {},
+  //----- view -----
   "/labfnp/:controller/:action/:id?": {},
   "/admin/:controller/:action/:id?": {},
   "/:controller/:action/:id?": {},
 
-  '/admin': 'AdminController.index',
+
 
   //----- SloganController -----
   'get /api/slogan': 'SloganController.find',

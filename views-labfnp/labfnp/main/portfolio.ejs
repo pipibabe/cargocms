@@ -7,7 +7,9 @@
     <!--Left Sidebar-->
 		<div class="col-md-3 md-margin-bottom-40">
 
-      <img class="img-responsive img-bordered margin-bottom-20" src="http://htmlstream.com/preview/unify-v1.9.5/assets/img/team/img32-md.jpg" alt="">
+			<div class="margin-bottom-20">
+	      <img class="img-responsive img-bordered" src="<%= user.avatar %>" alt="" style="margin: auto" />
+			</div>
 
 			<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
 				<li class="list-group-item active">
@@ -29,27 +31,39 @@
 
 	    	<ul class="timeline-v1">
 
-	        <% var i = 0; recipes.forEach(function(recipe) { %>
-	    		<li class="timeline<%= i%2?'-inverted':'' %>">
+	    		<li class="timeline">
 	    			<div class="timeline-badge primary"><i class="glyphicon glyphicon-record<%= i%2?' invert':'' %>"></i></div>
 	    			<div class="timeline-panel">
-	    				<div class="timeline-heading">
-	    					<img class="img-responsive" src="http://loremflickr.com/640/480/perfume<%= ([',girl', ',boy', ''])[parseInt(Math.random() * 3)] %>/all?<%= Math.random() * Date.now() %>" alt=""/>
-	    				</div>
 	    				<div class="timeline-body text-justify">
-	    					<h2><a href="#"><%= recipe.perfumeName %></a></h2>
-	    					<p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-	    					<a class="btn-u btn-u-sm" href="#">Read More</a>
-	    				</div>
-	    				<div class="timeline-footer">
-	    					<ul class="list-unstyled list-inline blog-info">
-	    						<li><i class="fa fa-clock-o"></i> March 16, 2014</li>
-	    						<li><i class="fa fa-comments-o"></i> <a href="#">12 Comments</a></li>
-	    					</ul>
-	    					<a class="likes" href="#"><i class="fa fa-heart"></i>87</a>
+	    					<h2>新配方？</h2>
+	    					<p><span class="brand-font">LFP</span> 香料香水實驗室的好友們，正在關注您的創作。</p>
+	    					<a class="btn-u btn-u-sm" href="#">繼續創作</a>
 	    				</div>
 	    			</div>
 	    		</li>
+
+	        <% var i = 0; recipes.forEach(function(recipe) { %>
+		    		<li class="timeline<%= i%2?'':'-inverted' %>">
+		    			<div class="timeline-badge primary"><i class="glyphicon glyphicon-record<%= i%2?' invert':'' %>"></i></div>
+		    			<div class="timeline-panel">
+		    				<div class="timeline-heading">
+		    					<img class="img-responsive" src="http://loremflickr.com/640/480/perfume<%= ([',girl', ',boy', ''])[parseInt(Math.random() * 3)] %>/all?<%= Math.random() * Date.now() %>" alt=""/>
+		    				</div>
+		    				<div class="timeline-body text-justify">
+		    					<h2><a href="#"><%= recipe.perfumeName %></a></h2>
+		    					<% if (recipe.message) { %>
+		    						<p><%= recipe.message %></p>
+	    						<% } %>
+		    				</div>
+		    				<div class="timeline-footer">
+		    					<ul class="list-unstyled list-inline blog-info">
+		    						<li><i class="fa fa-clock-o"></i> <%=: recipe.updatedAt | formatDateOnly %></li>
+		    						<li><i class="fa fa-comments-o"></i> <a href="#">12 Comments</a></li>
+		    					</ul>
+		    					<a class="likes" href="#"><i class="fa fa-heart"></i>87</a>
+		    				</div>
+		    			</div>
+		    		</li>
 	        <% i++; }); %>
 
 	    		<li class="clearfix" style="float: none;"></li>

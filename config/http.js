@@ -9,6 +9,7 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
 var express = require('express');
+var moment = require('moment');
 
 module.exports.http = {
 
@@ -186,9 +187,9 @@ module.exports.http = {
   },
   locals: {
     filters: {
-      // formatDate: function(date) {
-      //   return ...;
-      // }
+      formatDateOnly: function(date) {
+        return moment(date).format('YYYY/MM/DD');
+      }
     }
   }
 };

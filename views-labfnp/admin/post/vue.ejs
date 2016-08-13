@@ -58,7 +58,7 @@ var postApp = new Vue({
       postAppModel.data.item.TagsArray = $('#tagsinput').tagsinput('items');
       postAppModel.data.item.content = $('.summernote').summernote('code');
       $.ajax({
-        url: '/api/post',
+        url: '/api/admin/post',
         type: 'POST',
         dataType: 'json',
         data: postAppModel.data.item,
@@ -82,7 +82,7 @@ var postApp = new Vue({
       postAppModel.data.item.TagsArray = $('#tagsinput').tagsinput('items');
       postAppModel.data.item.content = $('.summernote').summernote('code');
       $.ajax({
-        url: '/api/post/' + postAppModel.data.item.id,
+        url: '/api/admin/post/' + postAppModel.data.item.id,
         type: 'PUT',
         dataType: 'json',
         data: postAppModel.data.item,
@@ -105,7 +105,7 @@ var postApp = new Vue({
     },
     loadItem: function (cb) {
       window.onbeforeunload = null;
-      $.get('/api/post/' + postAppModel.data.item.id, ajaxSuccess);
+      $.get('/api/admin/post/' + postAppModel.data.item.id, ajaxSuccess);
 
       function ajaxSuccess(result) {
         console.log("loadItem result.data=>", result.data);
@@ -243,7 +243,7 @@ var postApp = new Vue({
     },
     loadItems: function (cb) {
       window.onbeforeunload = null;
-      $.get('/api/post', ajaxSuccess);
+      $.get('/api/admin/post', ajaxSuccess);
 
       function ajaxSuccess(result) {
         console.log(result);
@@ -389,7 +389,7 @@ var postApp = new Vue({
       function(ButtonPressed) {
         if (ButtonPressed ==='刪除') {
           $.ajax({
-            url: '/api/post/' + postAppModel.data.item.id,
+            url: '/api/admin/post/' + postAppModel.data.item.id,
             type: 'DELETE',
             dataType: 'json',
             xhrFields: {

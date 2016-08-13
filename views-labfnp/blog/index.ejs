@@ -7,30 +7,28 @@
 				<div class="headline-v2"><h2>精選文章</h2></div>
 				<!-- Trending -->
 				<ul class="list-unstyled blog-trending margin-bottom-50">
-					<li>
-						<h3><a href="#">香味的一沙一世界：Zoom in &amp; out</a></h3>
-						<small>23 Jan, 2015</small>
-					</li>
-					<li>
-						<h3><a href="#">自造者世代（Makers）與第三次工業革命</a></h3>
-						<small>22 Jan, 2015</small>
-					</li>
+					<% data.items.forEach(function(post){ %>
+						<li>
+							<h3><a href="/blog/show/<%= post.id %>"><%= post.title %></a></h3>
+							<small><%= post.createdAtFormat %></small>
+						</li>
+					<% }); %>
 				</ul>
 				<!-- End Trending -->
 
-				<div class="headline-v2"><h2>Tags</h2></div>
+				<!-- <div class="headline-v2"><h2>Tags</h2></div> -->
 				<!-- Tags v2 -->
-				<ul class="list-inline tags-v2 margin-bottom-50">
+				<!-- <ul class="list-inline tags-v2 margin-bottom-50">
 					<li><a href="#">活動</a></li>
 					<li><a href="#">新聞</a></li>
 					<li><a href="#">實驗室</a></li>
 					<li><a href="#">課程</a></li>
-				</ul>
+				</ul> -->
 				<!-- End Tags v2 -->
 
-				<div class="headline-v2"><h2>電子報</h2></div>
+				<!-- <div class="headline-v2"><h2>電子報</h2></div> -->
 				<!-- Blog Newsletter -->
-				<div class="blog-newsletter">
+				<!-- <div class="blog-newsletter">
 					<p>獲得每月最新的活動訊息與產品情報。</p>
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Email">
@@ -38,7 +36,7 @@
 							<button class="btn-u" type="button">訂閱</button>
 						</span>
 					</div>
-				</div>
+				</div> -->
 				<!-- End Blog Newsletter -->
 			</div>
 			<!-- End Blog Sidebar -->

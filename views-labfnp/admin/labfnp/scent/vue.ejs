@@ -259,10 +259,15 @@ var scentApp = new Vue({
          		"sortDescending": ": 降冪排列"
          	}
        },
+       "order": [[1, 'asc']],
       "columnDefs": [
         {
           "targets"  : 'no-sort',
           "orderable": false,
+        },
+        {
+          "targets": [ 1 ],
+          "visible": false
         },
       ],
        "oTableTools": {

@@ -45,7 +45,7 @@ var userApp = new Vue({
     },
     save: function (event) {
       $.ajax({
-        url: '/api/user',
+        url: '/api/admin/user',
         type: 'POST',
         dataType: 'json',
         data: userAppModel.data.item,
@@ -67,7 +67,7 @@ var userApp = new Vue({
     },
     update: function (event) {
       $.ajax({
-        url: '/api/user/' + userAppModel.data.item.id,
+        url: '/api/admin/user/' + userAppModel.data.item.id,
         type: 'PUT',
         dataType: 'json',
         data: userAppModel.data.item,
@@ -90,7 +90,7 @@ var userApp = new Vue({
     },
     loadItem: function (cb) {
       window.onbeforeunload = null;
-      $.get('/api/user/' + userAppModel.data.item.id, ajaxSuccess);
+      $.get('/api/admin/user/' + userAppModel.data.item.id, ajaxSuccess);
 
       function ajaxSuccess(result) {
         console.log("loadItem result.data=>", result.data);
@@ -216,7 +216,7 @@ var userApp = new Vue({
     },
     loadItems: function (cb) {
       window.onbeforeunload = null;
-      $.get('/api/user', ajaxSuccess);
+      $.get('/api/admin/user', ajaxSuccess);
 
       function ajaxSuccess(result) {
         userAppModel.data.items = result.data.items;
@@ -361,7 +361,7 @@ var userApp = new Vue({
       function(ButtonPressed) {
         if (ButtonPressed ==='刪除') {
           $.ajax({
-            url: '/api/user/' + userAppModel.data.item.id,
+            url: '/api/admin/user/' + userAppModel.data.item.id,
             type: 'DELETE',
             dataType: 'json',
             xhrFields: {

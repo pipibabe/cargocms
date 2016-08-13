@@ -56,17 +56,25 @@
 							<thead>
 								<tr>
 									<th class="" data-class="expand"><i class="text-muted hidden-md hidden-sm hidden-xs"></i>ID</th>
-									<th class="" >名稱</th>
-									<th class="" >顏色</th>
-									<th class="" >感覺</th>
+									<th class="">排序</th>
+									<th class="">香味分子</th>
+									<th class="">名稱</th>
+									<th class="">顏色</th>
+									<th class="" data-hide="phone,tablet">香味感受</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr v-for="scent in data.items" v-on:click="selection($index)">
-									<td><a href="/admin/#/admin/labfnp/scent/show/{{scent.id}}">{{ scent.id }}</a></td>
+									<td><a href="/admin/#/admin/labfnp/scent/show/{{scent.id}}">{{ scent.sequence }}</a></td>
+									<td>{{ scent.sequence }}</td>
 									<td>{{ scent.name }}</td>
-									<td ><span class="color" style="background: {{ scentNote.color }};">{{ scent.color }}</span></td>
-									<td><span v-for="feeling in scent.feelings"> {{ feeling.title }}、</span></td>
+									<td>{{ scent.scentNote.title }} {{ scent.scentNote.title2 }}</td>
+									<td><span class="color" style="background: {{ scent.color }};">{{ scent.color }}</span></td>
+									<td>
+										<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:280px;">
+											<span title="{{ scent.feelings.join(', ') }}">{{ scent.feelings.join(', ') }}</span>
+										</div>
+									</td>
 									<!-- <td align="center" style="cursor: pointer;">
                     <div class="row">
                       <a class="btn btn-default btn-xs" role="button" v-on:click="show(scent.id)">
