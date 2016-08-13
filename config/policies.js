@@ -48,6 +48,14 @@ module.exports.policies = {
       // 'passport', 'sessionAuth', 'isAdmin'
     ],
   },
+  'SloganController': {
+    'index': [],
+    'findOne': [],
+    'create': [],
+    'update': [],
+    'delete': []
+  },
+
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *
