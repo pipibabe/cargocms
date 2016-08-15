@@ -1,17 +1,5 @@
-<style>
-.color {
-	color:white;
-	padding: 2px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	border: none;
-	font-family: monospace;
-}
-</style>
-
 <!-- widget grid -->
-<section id="scentNote-index" class="">
+<section id="main-index" class="">
 
 	<!-- row -->
 	<div class="row">
@@ -20,7 +8,7 @@
 		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget jarviswidget-color-darken" id="scentNote-table-widget" data-widget-editbutton="false" style="display: none;">
+			<div class="jarviswidget jarviswidget-color-darken" id="main-table-widget" data-widget-editbutton="false" style="display: none;">
 				<!-- widget options:
 				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -52,36 +40,8 @@
 					<!-- widget content -->
 					<div class="widget-body no-padding">
             <!-- end messageBox div -->
-						<table id="scentNote-table" class="table table-striped table-bordered table-hover" width="100%">
-							<thead>
-								<tr>
-									<th class="" data-class="expand"><i class="text-muted hidden-md hidden-sm hidden-xs"></i>ID</th>
-									<th class="" >名稱</th>
-									<th class="" >名稱2</th>
-									<th class="" >顏色</th>
-									<th class="" data-hide="phone,tablet">描述</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="scentNote in data.items" v-on:click="selection($index)" >
-									<td><a href="/admin/#/admin/labfnp/scentnote/show/{{scentNote.id}}">{{ scentNote.id }}</a></td>
-									<td>{{ scentNote.title }}</td>
-									<td>{{ scentNote.title2 }}</td>
-									<td ><span class="color" style="background: {{ scentNote.color }};">{{ scentNote.color }}</span></td>
-									<td>{{ scentNote.description }}</td>
-									<!-- <td align="center" style="cursor: pointer;">
-                    <div class="row">
-                      <a class="btn btn-default btn-xs" role="button" v-on:click="show(scentNote.id)">
-                        <i class="fa-fw fa fa-eye text-muted" />
-                      </a>
-                      <a class="btn btn-default btn-xs" role="button" v-on:click="edit(scentNote.id)">
-      									<i class="fa-fw fa fa-pencil-square-o text-muted"/>
-                      </a>
-                    </div>
-									</td> -->
-								</tr>
-							</tbody>
-						</table>
+
+						<%- body -%>
 
 					</div>
 					<!-- end widget content -->
@@ -102,7 +62,6 @@
 	<!-- end row -->
 
 </section>
-<!-- end widget grid -->
 <script type="text/javascript">
 
 	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -152,30 +111,6 @@
 
 	// pagefunction
 
-	var pagefunction = function() {
-		//console.log("cleared");
-
-		/* // DOM Position key index //
-
-			l - Length changing (dropdown)
-			f - Filtering input (search)
-			t - The Table! (datatable)
-			i - Information (records)
-			p - Pagination (paging)
-			r - pRocessing
-			< and > - div elements
-			<"#id" and > - div with an id
-			<"class" and > - div with a class
-			<"#id.class" and > - div with an id and class
-
-			Also see: http://legacy.datatables.net/usage/features
-		*/
-
-		<%- include vue.ejs %>
-		scentNoteApp.$mount("#scentNote-index");
-		scentNoteApp.loadItems(scentNoteApp.renderTable);
-
-	};
 
 	// load related plugins
 
@@ -190,11 +125,11 @@
 	});
 
 	var pagedestroy = function() {
-		scentNoteApp = null;
-		scentNoteAppModel = null;
-		$("#scentNote-table").remove();
+		appMain = null;
+		appModel = null;
+		$("#main-table").remove();
 		if (debugState) {
-			console.log("✔ scentNote-table unbind");
+			console.log("✔ main-table unbind");
 		}
 	}
 

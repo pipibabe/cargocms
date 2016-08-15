@@ -1,9 +1,10 @@
 module.exports = {
 
   find: async (req, res) => {
-    console.log("=== find ===");
+
     try {
-      const recipes = await Recipe.findAll();
+      let user = AuthService.getSessionUser(req);
+      const recipes = await Recipe.findAndIncludeUserLike({user});
       res.ok({
         data: {
           items: recipes
@@ -78,5 +79,43 @@ module.exports = {
     } catch (e) {
       res.serverError({ message: e.message, data: {}});
     }
+  },
+
+  like: async(req, res) => {
+    try {
+      const { id } = req.params;
+      const loginUser = AuthService.getSessionUser(req);
+      if (!loginUser) throw Error('permission denied');
+      const recipe = await Recipe.findById(id);
+      await UserLikeRecipe.createIfNotExist({RecipeId: id, UserId: loginUser.id})
+
+      res.ok({
+        message: 'success like recipe',
+        data: true,
+      });
+    } catch (e) {
+      sails.log.error(e);
+      res.serverError({ message: e.message, data: {}});
+    }
+  },
+  unlike: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const loginUser = AuthService.getSessionUser(req);
+      if (!loginUser) throw Error('permission denied');
+
+      const recipe = await Recipe.findById(id);
+      await UserLikeRecipe.destroy({
+        where: {RecipeId: id, UserId: loginUser.id}
+      })
+      res.ok({
+        message: 'success dislike recipe',
+        data: true,
+      });
+    } catch (e) {
+      sails.log.error(e);
+      res.serverError({ message: e.message, data: {}});
+    }
   }
+
 }

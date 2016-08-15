@@ -15,7 +15,8 @@ var postAppModel = {
       url: '',
       abstract: '',
       tags: [],
-      TagsArray: []
+      TagsArray: [],
+      coverType: 'img',
     },
     items: [],
     option: {
@@ -429,6 +430,9 @@ var postApp = new Vue({
         ]
       });
     },
+    selectOnChange: function() {
+      postAppModel.data.item.coverUrl = '';
+    }
   },
 });
 

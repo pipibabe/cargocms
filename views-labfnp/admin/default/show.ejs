@@ -1,0 +1,96 @@
+<!-- Bread crumbs -->
+<div class="row">
+  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h1 class="page-title txt-color-blueDark">
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i>
+				資料
+			<span>>
+				檢視
+			</span>
+		</h1>
+  </div>
+</div>
+<!-- END Bread crumbs -->
+
+<!-- vue section -->
+<section id="main-show">
+  <input type="text" name="id" id="id" v-model="data.item.id" hidden="hidden" value="<%= req.params.id %>">
+
+  <!-- row -->
+  <div class="row" style="padding-top: 50px;">
+    <div class="col-sm-12">
+      <div class="well-sm">
+        <div class="row center-block">
+          <div class="col-sm-12 col-md-12">
+            <div class="well well-light well-sm no-margin no-padding">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div id="myCarousel" class="carousel fade profile-carousel">
+                    <div class="air air-bottom-right padding-10">
+                      <a href="/admin/#/admin/{{modelName}}" class="btn btn-default">
+                        返回
+                      </a>
+                      <a href="/admin/#/admin/{{modelName}}/edit/{{data.item.id}}" class="btn btn-default">
+                        編輯
+                      </a>
+                    </div>
+                    <!-- end row -->
+                  </div>
+                  <%- body -%>
+                </div>
+                <!-- end row -->
+              </div>
+            </div>
+          </div>
+          <!-- end row -->
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+
+</section>
+<script type="text/javascript">
+  /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+   *
+   * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+   *
+   * // activate tooltips
+   * $("[rel=tooltip]").tooltip();
+   *
+   * // activate popovers
+   * $("[rel=popover]").popover();
+   *
+   * // activate popovers with hover states
+   * $("[rel=popover-hover]").popover({ trigger: "hover" });
+   *
+   * // activate inline charts
+   * runAllCharts();
+   *
+   * // setup widgets
+   * setup_widgets_desktop();
+   *
+   * // run form elements
+   * runAllForms();
+   *
+   ********************************
+   *
+   * pageSetUp() is needed whenever you load a page.
+   * It initializes and checks for all basic elements of the page
+   * and makes rendering easier.
+   *
+   */
+
+  pageSetUp();
+
+  // var pagedestroy = function() {
+  // $(window).unload(function() {
+  //   return "Handler for .unload() called.";
+  // });
+  // }
+
+  // end pagefunction
+
+  // Load form valisation dependency
+  loadScript("/assets/admin/js/plugin/jquery-form/jquery-form.min.js", pagefunction);
+</script>

@@ -1,6 +1,12 @@
 <div class="news-v3 bg-color-white margin-bottom-60">
   <% if (data.coverUrl) { %>
-    <img class="img-responsive full-width" src="<%= data.coverUrl %>" alt="">
+    <% if (data.coverType == 'img') { %>
+      <img class="img-responsive full-width" src="<%= data.coverUrl %>" alt="">
+    <% } else{ %>
+      <div class="responsive-video">
+        <iframe src="<%= data.coverUrl %>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+    <% } %>
   <% } %>
   <div class="news-v3-in">
     <ul class="list-inline posted-info">

@@ -1,0 +1,300 @@
+var defaultVueMathod = {
+  cancel: function (event) {
+    appMain.onLeavePageEdit(function() {
+      location.href = '/admin/#/admin/'+modelName;
+    });
+  },
+  save: function (event) {
+    $.ajax({
+      url: '/api/admin/'+modelName,
+      type: 'POST',
+      dataType: 'json',
+      data: appModel.data.item,
+      xhrFields: {
+        withCredentials: true,
+      },
+      success: ajaxSuccess,
+      error: ajaxError,
+    });
+
+    function ajaxSuccess(result) {
+      location.href = '/admin/#/admin/'+modelName;
+      messageApp.show({desc: '新增成功！', type: 'success'});
+    } // end ajaxSuccess
+
+    function ajaxError(result) {
+      messageApp.show({desc: '新增資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+    }
+  },
+  update: function (event) {
+    $.ajax({
+      url: '/api/admin/' + modelName + '/' + appModel.data.item.id,
+      type: 'PUT',
+      dataType: 'json',
+      data: appModel.data.item,
+      xhrFields: {
+        withCredentials: true,
+      },
+      success: ajaxSuccess,
+      error: ajaxError,
+    });
+
+    function ajaxSuccess(result) {
+      location.href = '/admin/#/admin/' + modelName;
+      messageApp.show({desc: '更新會員資料成功！', type: 'success'});
+    } // end ajaxSuccess
+
+    function ajaxError(result) {
+      console.log(result);
+      messageApp.show({desc: '更新資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+    }
+  },
+  loadItem: function (cb) {
+
+    window.onbeforeunload = null;
+    $.get('/api/admin/'+modelName+'/' + appModel.data.item.id, ajaxSuccess);
+
+    function ajaxSuccess(result) {
+      if (result.success) {
+        appModel.data.item = result.data;
+        appModel.data.option.passwordConfirm = result.data.Passports[0].password;
+        var hasAvatar = typeof result.data.avatar === 'string';
+        if (!hasAvatar) {
+          appModel.data.item.avatar = COMMON.DEFAULT_AVATAR;
+        }
+      }
+      if (typeof cb !== 'undefined') setTimeout(cb, 0);
+    } // end ajaxSuccess
+  },
+
+  isPageEditDataModified: function() {
+    var itemBeforeLeave = JSON.stringify(appModel.data.item);
+    var isDataModified = itemBeforeEdit !== itemBeforeLeave;
+    if (!isDataModified) window.onbeforeunload = null;
+    return isDataModified;
+  },
+  onEnterPageEdit: function() {
+    itemBeforeEdit = JSON.stringify(appModel.data.item);
+    window.onbeforeunload = function(e) {
+      if (appMain.isPageEditDataModified()) {
+        var message = '您已經修改過資料，是否確定要放棄本次的修改？';
+        e.returnValue = message;
+        return message;
+      }
+    };
+  },
+  onLeavePageEdit: function(cb) {
+    if (appMain.isPageEditDataModified()) {
+      var msgInfo = {
+        title: '注意',
+        content: '您已經修改過資料，是否確定要放棄本次的修改？',
+        btnArray: ['放棄', '取消'],
+      };
+      var action = function(ButtonPressed) {
+        if (ButtonPressed === '放棄') {
+          setTimeout(function() {
+            return cb();
+          }, 500);
+        }
+      };
+      messageApp.confirm(msgInfo, action);
+    } else return cb();
+  },
+  loadItems: function (cb) {
+    if(serverSidePaging){
+      if (typeof cb !== 'undefined') setTimeout(cb, 0);
+      return;
+    }
+
+    window.onbeforeunload = null;
+    $.get('/api/admin/'+modelName, ajaxSuccess);
+
+    function ajaxSuccess(result) {
+      appModel.data.items = result.data.items;
+      if (typeof cb !== 'undefined') setTimeout(cb, 0);
+    } // end ajaxSuccess
+  },
+  renderTable: function() {
+    /* BASIC ;*/
+    var responsiveHelper_user_table = undefined;
+    var responsiveHelper_datatable_fixed_column = undefined;
+    var responsiveHelper_datatable_col_reorder = undefined;
+    var responsiveHelper_datatable_tabletools = undefined;
+
+    var breakpointDefinition = {
+     tablet : 1024,
+     phone : 480
+    };
+
+    var ajax = "/api/admin/"+ modelName+ "?serverSidePaging=" + serverSidePaging;
+    var defaultTableConfig = {
+      "processing": false,
+      "serverSide": serverSidePaging,
+      "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f>T<'hidden-xs'l>r>" +
+        "t"+
+        "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+      "oLanguage": {
+        "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+        "sInfo": "顯示 _START_ 到 _END_ 總共 _TOTAL_ 筆紀錄",
+        "sInfoPostFix":  "",
+        "sInfoEmpty":    "顯示第 0 至 0 項結果，共 0 項",
+        "sInfoFiltered": "(從 _MAX_ 項結果中過濾)",
+        "sProcessing":   "處理中...",
+        "sLoadingRecords": "載入中...",
+        "sLengthMenu":   "顯示 _MENU_ 項結果　",
+        "sZeroRecords":  "沒有符合的結果",
+        "oPaginate": {
+          "sFirst":    "第一頁",
+          "sPrevious": "上一頁",
+          "sNext":     "下一頁",
+          "sLast":     "最後一頁"
+        },
+        "sAria": {
+          "sortAscending":  ": 升冪排列",
+          "sortDescending": ": 降冪排列"
+        }
+      },
+      "oTableTools": {
+       "aButtons": [
+         {
+           "sExtends": "text",
+           "sButtonText": "檢視",
+           "fnClick": function ( nButton, oConfig, oFlash ) {
+             var isSelected = appModel.view.table.selectIndex !== COMMON.DEFAULT_INDEX;
+             if (isSelected) {
+               var id = appModel.view.table.selectIndex;
+               location.href = '/admin/#/admin/' + modelName + '/show/' + id;
+             } else {
+               messageApp.show({desc: '請選擇一筆', type: 'warning'});
+             }
+           }
+         },
+         {
+           "sExtends": "text",
+           "sButtonText": "新增",
+           "fnClick": function ( nButton, oConfig, oFlash ) {
+             location.href = '/admin/#/admin/'+ modelName +'/create';
+           }
+         },
+         {
+           "sExtends": "text",
+           "sButtonText": "編輯",
+           "fnClick": function ( nButton, oConfig, oFlash ) {
+             var isSelected = appModel.view.table.selectIndex !== COMMON.DEFAULT_INDEX;
+             if (isSelected) {
+               var id = appModel.view.table.selectIndex;
+               location.href = '/admin/#/admin/'+ modelName +'/edit/' + id;
+             } else {
+               messageApp.show({desc: '請選擇一筆資料', type: 'warning'});
+             }
+           }
+         },
+       ]
+      },
+      "autoWidth" : true,
+      "preDrawCallback" : function() {
+        if (!responsiveHelper_datatable_tabletools) {
+          responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#main-table'), breakpointDefinition);
+        }
+      },
+      "rowCallback" : function(nRow) {
+       responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+      },
+      "drawCallback" : function(oSettings) {
+       responsiveHelper_datatable_tabletools.respond();
+      }
+    }
+
+    if (serverSidePaging) {
+      defaultTableConfig.columns = columns;
+      defaultTableConfig.columnDefs = columnDefs;
+      defaultTableConfig.ajax = ajax;
+    }
+
+    var defaultTable = $('#main-table').dataTable(defaultTableConfig);
+
+    // selection
+    defaultTable.on('click', 'tr', function () {
+
+      if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+      } else {
+        var data = defaultTable.fnGetData(this);
+        $('#main-table tbody tr').removeClass('selected');
+        $(this).addClass('selected');
+      }
+    }).on('dblclick', 'tr', function() {
+    });
+
+
+    $('#main-table-widget').fadeIn();
+  },
+  dblclick: function(index) {
+    var id = appModel.data.items[index].id;
+    this.show(id);
+  },
+  show: function (id) {
+    location.href = '/admin/#/admin/' + modelName + '/show/' + id;
+  },
+  edit: function (id) {
+    location.href = '/admin/#/admin/' + modelName + '/edit/' + id;
+  },
+  delete: function() {
+    messageApp.confirm({
+      title: '刪除',
+      content: '確認刪除此筆資料？',
+      btnArray: ['刪除', '取消'],
+    },
+    function(ButtonPressed) {
+      if (ButtonPressed ==='刪除') {
+        $.ajax({
+          url: '/api/admin/' + modelName + '/' + appModel.data.item.id,
+          type: 'DELETE',
+          dataType: 'json',
+          xhrFields: {
+            withCredentials: true
+          },
+          success: ajaxSuccess,
+          error: ajaxError,
+        });
+
+        function ajaxSuccess(result) {
+          appModel.view.table.selectIndex = COMMON.DEFAULT_INDEX;
+          messageApp.show({desc: `刪除資料成功！`, type: 'success'});
+          setTimeout(function() {
+            location.href = '/admin/#/admin/' + modelName;
+          }, 500);
+        } // end ajaxSuccess
+
+        function ajaxError(result) {
+          messageApp.show({desc: '刪除資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+        }
+      }
+    });
+  },
+  setupForm: function(type) {
+
+    var registerForm = $("#main-form");
+    registerForm.validate({
+      rules : formRules,
+      messages : formMessages,
+      errorPlacement : function(error, element) {
+        error.insertAfter(element.parent());
+      },
+      submitHandler: function(form) {
+        if (type == 'create') {
+          appMain.save();
+          return false;
+        } else if(type == 'edit') {
+          appMain.update();
+          return false;
+        }
+      }
+    });
+  }
+}
+
+window.appMain = new Vue({
+  data: appModel,
+  methods: defaultVueMathod,
+});

@@ -161,17 +161,18 @@ var getFormulaData = function() {
 
       var scent = $(this).val();
       var drops = $('.scents-drops[data-index='+idx+']').val();
+      var color = $('option:selected', this).data('color');
 
 	    result.push({
 	      "scent": scent,
 	      "drops": drops,
+        "color": color
 	    });
     }
   });
 
   return result;
 };
-
 
 $(function() {
 	$('.scents-dropdown').change(function() {
@@ -229,6 +230,7 @@ $(function() {
 
     var authorName = $('input[name=authorName]').val();
     var perfumeName = $('input[name=perfumeName]').val();
+    var message = $('textarea[name=message]').val();
 
     $.ajax({
       url: endpoint,
@@ -240,11 +242,12 @@ $(function() {
         authorName: authorName,
         perfumeName: perfumeName,
         formulaLogs: '',
-        formula: getFormulaData()
+        formula: getFormulaData(),
+        message: message
       }
     }).done(function(result) {
       console.log(result);
-      location.href='/lab';
+      location.href='/me';
     });
 
   });

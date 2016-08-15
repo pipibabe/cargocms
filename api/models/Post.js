@@ -14,11 +14,19 @@ module.exports = {
     abstract: {
       type: Sequelize.STRING,
     },
+    coverType: {
+      type: Sequelize.ENUM('img', 'video'),
+      defaultValue: 'img',
+    },
     coverUrl: {
-      type: Sequelize.VIRTUAL,
+      type: Sequelize.STRING,
       get: function() {
         try {
-          return this.Image ? this.Image.url : '';
+          if (this.coverType === 'img') {
+            return this.Image ? this.Image.url : '';
+          } else {
+            return this.getDataValue('coverUrl');
+          }
         } catch (e) {
           sails.log.error(e);
         }
@@ -64,6 +72,7 @@ module.exports = {
         name: 'UserId'
       }
     });
+    Post.belongsTo(Location);
   },
   options: {
     classMethods: {
@@ -73,7 +82,7 @@ module.exports = {
             offset,
             limit,
             order: [['createdAt', order || 'DESC']],
-            include: [Tag, Image, User],
+            include: [Tag, Image, User, Location],
           });
         } catch (e) {
           sails.log.error(e);
@@ -84,7 +93,7 @@ module.exports = {
         try {
           return await Post.findOne({
             where: { id },
-            include: [ Tag, Image, User ]
+            include: [ Tag, Image, User, Location]
           });
         } catch (e) {
           sails.log.error(e);

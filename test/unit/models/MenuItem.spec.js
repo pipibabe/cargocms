@@ -1,4 +1,4 @@
-describe.only('about MenuItem model operation.', function() {
+describe('about MenuItem model operation.', function() {
   it('create tree MenuItems should success.', async (done) => {
     try {
       let newMenuItem = { icon: 'wrench', href: '#', title: '資料維護'}

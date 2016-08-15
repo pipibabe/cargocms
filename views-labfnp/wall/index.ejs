@@ -8,13 +8,13 @@
 				<img class="img-responsive" src="<%= post.full_picture %>" alt="">
 				<div class="grid-boxes-caption">
 					<ul class="list-inline grid-boxes-news">
-						<li><span>By</span> <a href="#">Kathy Reyes</a></li>
-						<li>|</li>
 						<li><i class="fa fa-clock-o"></i> <%=: post.created_time.substring(0, 10) %></li>
-						<li>|</li>
-						<li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+						<!--<li>|</li>
+						<li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>-->
 					</ul>
+					<% if (post.message) { %>
 					<p class="dont-break-out"><%= post.message %></p>
+					<% } %>
 				</div>
 			</div>
 

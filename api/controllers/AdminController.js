@@ -16,7 +16,7 @@ module.exports = {
     loginUser = AuthService.getSessionUser(req);
 
     if(loginUser != null){
-      avatar = loginUser.avatar
+      if(loginUser.avatar != null) avatar = loginUser.avatar
       displayName = loginUser.displayName
     }
 

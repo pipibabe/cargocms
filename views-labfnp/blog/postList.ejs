@@ -1,8 +1,15 @@
 <% data.items.forEach(function(post){ %>
   <div class="news-v3 bg-color-white margin-bottom-60">
     <% if (post.coverUrl) { %>
-      <img class="img-responsive full-width" src="<%= post.coverUrl %>" alt="">
+      <% if (post.coverType == 'img') { %>
+        <img class="img-responsive full-width" src="<%= post.coverUrl %>" alt="">
+      <% } else{ %>
+        <div class="responsive-video">
+          <iframe src="<%= post.coverUrl %>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+      <% } %>
     <% } %>
+
     <div class="news-v3-in">
       <ul class="list-inline posted-info">
         <% if (post.UserId) { %>

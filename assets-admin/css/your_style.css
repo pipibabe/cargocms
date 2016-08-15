@@ -29,8 +29,21 @@
  table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
    background-color: #aab7d1;
  }
+ .dt-toolbar .dataTables_length {
+   float: right;
+ }
 
 
 nav ul span.menu-item-parent {
  font-size: 13px;
+}
+
+.btn.btn-default.btn-xs {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.row-action-buttons {
+  cursor: pointer;
+  text-align: center;
 }

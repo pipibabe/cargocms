@@ -1,8 +1,27 @@
 
 <fieldset>
 
-  <label class="label">封面</label>
-  <%- include ../image/upload.ejs %>
+  <section>
+    <label class="label">封面類型</label>
+    <label class="select">
+      <select v-model="data.item.coverType" v-on:change="selectOnChange">
+        <option value="img" selected>圖片</option>
+        <option value="video">影片</option>
+      </select> <i></i> </label>
+  </section>
+
+
+  <section v-show="data.item.coverType === 'img'">
+    <label class="label">封面</label>
+    <%- include ../image/upload.ejs %>
+  </section>
+  <section v-show="data.item.coverType === 'video'">
+    <label class="label">封面影片</label>
+    <label class="input">
+      <input type="text" name="coverUrl" placeholder="請輸入影片連結" v-model="data.item.coverUrl">
+    </label>
+  </section>
+
 
   <section>
     <label class="label">標題</label>

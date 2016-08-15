@@ -62,7 +62,7 @@
 
 					<!-- widget content -->
 					<div class="widget-body no-padding">
-						<img src="{{data.item.coverUrl}}" alt="" class="img-responsive">
+						<img v-show="data.item.coverType === 'img'" src="{{data.item.coverUrl}}" alt="" class="img-responsive">
 						<form id="post-form" class="smart-form">
 							<input type="text" name="id" id="id" v-model="data.item.id" hidden="hidden" value="<%= req.params.id %>">
 
@@ -157,9 +157,9 @@
 	// end pagefunction
 
 	// Load form valisation dependency
-	loadScript("js/plugin/jquery-form/jquery-form.min.js", function () {
-		loadScript("js/plugin/summernote/summernote.min.js", function(){
-			loadScript("js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js", pagefunction);
+	loadScript("/assets/admin/js/plugin/jquery-form/jquery-form.min.js", function () {
+		loadScript("/assets/admin/js/plugin/summernote/summernote.min.js", function(){
+			loadScript("/assets/admin/js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js", pagefunction);
 		});
 	});
 

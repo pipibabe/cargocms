@@ -157,7 +157,6 @@ var userApp = new Vue({
 			};
     },
     insertEmptyFormulaItem: function () {
-      console.log(userAppModel.data.item.formula);
       for (var i=0;i<6;i++) {
         var thisFormula = userAppModel.data.item.formula[i];
         var checkFormula = typeof thisFormula === 'undefined';
@@ -166,16 +165,13 @@ var userApp = new Vue({
           userAppModel.data.item.formula[i] = {
             color: '',
             scent: '',
-            drops: 0,
+            drops: '0',
           };
         } else {
           var checkDrops = typeof thisFormula.drops === 'string';
           var checkDropsValue = thisFormula.drops === '0';
-          if (!checkDrops || checkDropsValue) 
-            userAppModel.data.item.formula[i].scent = '';
-
+          if (!checkDrops || checkDropsValue) userAppModel.data.item.formula[i].scent = '';
         }
-
       }
     },
 		loadItem: function (cb) {
@@ -197,7 +193,6 @@ var userApp = new Vue({
 		},
 		setupForm: function (type) {
 			var registerForm = $('#main-form');
-
 			registerForm.validate({
 				// Rules for form validation
 				rules: {
@@ -263,6 +258,16 @@ var userApp = new Vue({
 				}
 			});
 		},
+    onSelectChange: function (e) {
+      var targetId = e.target.id.split("-")[1];
+      userAppModel.data.item.formula[targetId].drops = '1';
+    },
+    onBtnCleanClick: function (e) {
+      var targetId = e.target.id.split("-")[1];
+      userAppModel.data.item.formula[targetId].drops = '0';
+      userAppModel.data.item.formula[targetId].scent = '';
+      $("select#scent-" + targetId).select(0).val('');
+    },
 		isPageEditDataModified: function () {
       var isDataModified = false;
       var itemBeforeEdit = userAppModel.data.status.itemBeforeEdit;

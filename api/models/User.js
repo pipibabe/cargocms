@@ -49,17 +49,28 @@ module.exports = {
     },
     lastLogin: {
       type: Sequelize.DATE,
+      get: function () {
+        try {
+          let lastLogin = this.getDataValue("lastLogin");
+          if(lastLogin == null) lastLogin = "從未登入";
+          return lastLogin;
+
+        } catch (e) {
+          throw e;
+        }
+
+      }
     },
     facebookId: {
       type: Sequelize.STRING,
     },
     avatar: {
       type: Sequelize.STRING,
-      defaultValues: '/assets/admin/img/avatars/default.png'
+      defaultValue: '/assets/admin/img/avatars/default.png'
     },
     avatarThumb: {
       type: Sequelize.STRING,
-      defaultValues: '/assets/admin/img/avatars/default.png'
+      defaultValue: '/assets/admin/img/avatars/default.png'
     }
   },
   associations: function() {
@@ -78,11 +89,7 @@ module.exports = {
         name: 'UserId'
       }
     });
-    User.hasMany(Recipe, {
-      foreignKey: {
-        name: 'UserId'
-      }
-    });
+
     User.belongsToMany(Role, {
       through: 'UserRole',
       foreignKey: {
@@ -90,6 +97,10 @@ module.exports = {
         as: 'Roles'
       }
     });
+    User.hasMany(UserLikeRecipe);
+    User.hasMany(Recipe);
+
+
   },
   options: {
     // tableName: 'Users',

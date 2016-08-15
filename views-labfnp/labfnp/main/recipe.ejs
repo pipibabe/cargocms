@@ -1,49 +1,74 @@
 <% LayoutUtils.addStylesheets('/assets/unify/css/pages/profile.css'); %>
+  <!--<div class="container">-->
+  <!--<pre><%= JSON.stringify(recipe, null, 2) %></pre>-->
+  <!--</div>-->
+
+  <style>
+    .cover-photo {
+      min-height: 150px;
+    }
+    .drops, .scent {
+      font-size: 16px;
+      font-weight: bold;
+      color: black;
+    }
+    .scent {
+      padding: 2px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      border: none;
+      color: white;
+    }
+  </style>
 
 
-<!--<div class="container">-->
-<!--<pre><%= JSON.stringify(recipe, null, 2) %></pre>-->
-<!--</div>-->
+  <div class="container content profile">
 
-<style>
-.cover-photo {
-	min-height: 150px;
-}
-</style>
+    <!-- begin row -->
+    <div class="row">
 
+      <div class="col-md-6 col-md-offset-3">
 
-<div class="container content profile">
+        <div class="margin-bottom-10">
+          <button class="btn-u btn-u-default" onclick="window.history.back()">返回</button>
+        </div>
 
-  <!-- begin row -->
-  <div class="row">
+        <!-- begin .profile-body -->
+        <div class="profile-body">
 
-  	<div class="col-md-6 col-md-offset-3">
+          <div class="easy-block-v1">
+            <div class="easy-block-v1-badge rgba-red">精選</div>
+            <img class="img-responsive cover-photo" src="http://loremflickr.com/640/480/perfume/all?<%= Math.random() * Date.now() %>" alt="" />
+          </div>
+          <div class="projects">
 
-			<!-- begin .profile-body -->
-			<div class="profile-body">
+            <div style="float:right">
+              <button class="btn-u btn-u-red">
+                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                收藏
+              </button>
+            </div>
 
-	  		<div class="easy-block-v1">
-					<img class="img-responsive cover-photo" src="http://loremflickr.com/640/480/perfume<%= ([',girl', ',boy', ''])[parseInt(Math.random() * 3)] %>/all?<%= Math.random() * Date.now() %>" alt="" />
-					<div class="easy-block-v1-badge rgba-red">編輯精選</div>
-				</div>
-				<div class="projects">
-					<h2>
-						<a class="color-dark" href="#">
-							<%= recipe.perfumeName %>
-						</a>
-					</h2>
-					<ul class="list-unstyled list-inline blog-info-v2">
-						<li>
-							By:
-							<a class="color-green" href="#">
-								<%= recipe.authorName %>
-							</a>
-						</li>
-						<li><i class="fa fa-clock-o"></i> <%= recipe.createdAt %></li>
-					</ul>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry printing. Donec non dignissim eros. Mauris faucibus turpis volutpat sagittis rhoncus. Pellentesque et rhoncus sapien, sed ullamcorper justo.</p>
-				</div>
-				<div class="project-share">
+            <h1><p><span class="padding-5"><%= recipe.perfumeName %></span></p></h1>
+            <ul class="list-unstyled list-inline blog-info-v2">
+              <li>
+                <i class="fa fa-user"></i>
+                <a class="color-green" href="#">
+                  <%= recipe.authorName %>
+                </a>
+              </li>
+              <li><i class="fa fa-clock-o"></i>
+                <%=: recipe.createdAt | formatDateOnly %>
+              </li>
+            </ul>
+            <hr />
+            <% if (recipe.message) { %>
+              <p class="padding-5"><%= recipe.message %></p>
+            <% } %>
+          </h4>
+          </div>
+          <!-- <div class="project-share">
 					<ul class="list-inline comment-list-v2 pull-left">
 						<li><i class="fa fa-eye"></i> <a href="#">25</a></li>
 						<li><i class="fa fa-comments"></i> <a href="#">32</a></li>
@@ -56,16 +81,17 @@
 						<li><i class="color-green fa fa-star-half-o"></i></li>
 						<li><i class="color-green fa fa-star-o"></i></li>
 					</ul>
-				</div>
+				</div> -->
 
-			</div>
-			<!-- end .profile-body -->
+        </div>
+        <!-- end .profile-body -->
 
-  	</div>
-  	<!-- end col -->
+      </div>
+      <!-- end col -->
 
+    </div>
+    <!-- end row -->
   </div>
-  <!-- end row -->
-
-
-</div>
+  <% LayoutUtils.addScripts ('/assets/admin/js/plugin/moment/moment.min.js'); %>
+    <% LayoutUtils.addScripts ('/assets/admin/js/plugin/chartjs/chart.min.js'); %>
+      <% LayoutUtils.addScripts('/assets/labfnp/page/recipe/show.js'); %>

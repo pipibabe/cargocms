@@ -1,5 +1,38 @@
 <!-- CSS Page Style -->
-	<link rel="stylesheet" href="/assets/unify/css/pages/shortcode_timeline1.css">
+<% LayoutUtils.addStylesheets('/assets/unify/css/pages/shortcode_timeline1.css'); %>
+<% LayoutUtils.addStylesheetBlock(`
+
+.user-profile-block h1 {
+	color: #000;
+	line-height: 1;
+}
+
+.user-profile-block h1 small {
+	color: #666;
+}
+
+.user-profile-block hr {
+	margin: 15px 0;
+}
+
+.user-profile-block ul {
+	margin: auto;
+}
+
+.user-profile-block ul li {
+  font-size: 11px;
+  color: #999;
+}
+
+.user-profile-block ul li strong {
+	font-size: 28px;
+	color: #4078c0;
+	font-weight: 600;
+	line-height: 1;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+`); %>
 
 <div class="container content">
   <div class="row">
@@ -8,16 +41,52 @@
 		<div class="col-md-3 md-margin-bottom-40">
 
 			<div class="margin-bottom-20">
-	      <img class="img-responsive img-bordered" src="<%= user.avatar %>" alt="" style="margin: auto" />
+	      <img class="img-responsive img-bordered" src="<%= user.avatar %>" alt="" style="margin: auto; width: 100%;" />
+			</div>
+
+			<div class="user-profile-block margin-bottom-20">
+				<div style="float:right">
+					<button class="btn btn-primary" onclick="$(this).toggleClass('btn-primary').toggleClass('btn-default').text($(this).text()=='追蹤'?'取消追蹤':'追蹤').blur()">追蹤</button>
+				</div>
+				<h1>
+					<div><%= user.username %></div>
+					<div><small>創作者</small></div>
+				</h1>
+				<hr />
+				<div>
+					<i class="fa fa-map-marker"></i><span> Taiwan</span><br/>
+					<i class="fa fa-clock-o" aria-hidden="true"></i> Joined on 29 Apr 2012
+				</div>
+				<hr />
+				<ul class="list-inline">
+					<li class="text-center">
+						<strong>12</strong>
+						<br/>
+						Followers
+					</li>
+					<li class="text-center">
+						<strong>25</strong>
+						<br/>
+						Starred
+					</li>
+					<li class="text-center">
+						<strong>7</strong>
+						<br/>
+						Following
+					</li>
+				</ul>
 			</div>
 
 			<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-				<li class="list-group-item active">
-					<a href="page_profile.html"><i class="fa fa-bar-chart-o"></i> 作品集</a>
+				<li class="list-group-item">
+					<a href="/me"><i class="fa fa-bar-chart-o"></i> 我的配方</a>
 				</li>
 				<li class="list-group-item">
-					<a href="page_profile_users.html"><i class="fa fa-group"></i> 粉絲</a>
+					<a href="/creator"><i class="fa fa-flask"></i> 創作新配方</a>
 				</li>
+				<!-- <li class="list-group-item">
+					<a href="page_profile_users.html"><i class="fa fa-group"></i> 粉絲</a>
+				</li> -->
 			</ul>
 
 		</div>
@@ -37,7 +106,7 @@
 	    				<div class="timeline-body text-justify">
 	    					<h2>新配方？</h2>
 	    					<p><span class="brand-font">LFP</span> 香料香水實驗室的好友們，正在關注您的創作。</p>
-	    					<a class="btn-u btn-u-sm" href="#">繼續創作</a>
+	    					<a class="btn-u btn-u-sm" href="/creator">繼續創作</a>
 	    				</div>
 	    			</div>
 	    		</li>
@@ -47,10 +116,12 @@
 		    			<div class="timeline-badge primary"><i class="glyphicon glyphicon-record<%= i%2?' invert':'' %>"></i></div>
 		    			<div class="timeline-panel">
 		    				<div class="timeline-heading">
-		    					<img class="img-responsive" src="http://loremflickr.com/640/480/perfume<%= ([',girl', ',boy', ''])[parseInt(Math.random() * 3)] %>/all?<%= Math.random() * Date.now() %>" alt=""/>
-		    				</div>
+      						<a href="/recipe/<%= recipe.id %>">
+    				        <img class="img-responsive" src="http://loremflickr.com/640/480/perfume<%= ([',girl', ',boy', ''])[parseInt(Math.random() * 3)] %>/all?<%= Math.random() * Date.now() %>" alt=""/>
+                  </a>
+                </div>
 		    				<div class="timeline-body text-justify">
-		    					<h2><a href="#"><%= recipe.perfumeName %></a></h2>
+		    					<h2><a href="/recipe/<%= recipe.id %>"><%= recipe.perfumeName %></a></h2>
 		    					<% if (recipe.message) { %>
 		    						<p><%= recipe.message %></p>
 	    						<% } %>
@@ -58,9 +129,9 @@
 		    				<div class="timeline-footer">
 		    					<ul class="list-unstyled list-inline blog-info">
 		    						<li><i class="fa fa-clock-o"></i> <%=: recipe.updatedAt | formatDateOnly %></li>
-		    						<li><i class="fa fa-comments-o"></i> <a href="#">12 Comments</a></li>
+		    						<!-- <li><i class="fa fa-comments-o"></i> <a href="#">12 Comments</a></li> -->
 		    					</ul>
-		    					<a class="likes" href="#"><i class="fa fa-heart"></i>87</a>
+		    					<!-- <a class="likes" href="#"><i class="fa fa-heart"></i>87</a> -->
 		    				</div>
 		    			</div>
 		    		</li>

@@ -5,9 +5,9 @@
 
 			<!-- PAGE HEADER -->
 			<i class="fa-fw fa fa-pencil-square-o"></i>
-				內容資料
+				資料
 			<span>>
-				建立
+				編輯
 			</span>
 		</h1>
 	</div>
@@ -15,7 +15,7 @@
 </div>
 
 <!-- widget grid -->
-<section id="post-create" class="">
+<section id="main-edit" class="">
 
 
 	<!-- START ROW -->
@@ -27,7 +27,7 @@
 		<article class="col-sm-12 col-md-12 col-lg-12">
 
 			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false" style="display: none;">
+			<div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
 				<!-- widget options:
 					usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -44,7 +44,7 @@
         <header role="heading">
           <div class="jarviswidget-ctrls" role="menu"></div>
 					<span class="widget-icon"><i class="fa fa-edit"></i></span>
-					<h2>新增內容</h2>
+					<h2>資料維護</h2>
 				  <span class="jarviswidget-loader">
             <i class="fa fa-refresh fa-spin"></i>
           </span>
@@ -62,17 +62,21 @@
 
 					<!-- widget content -->
 					<div class="widget-body no-padding">
-						<img v-show="data.item.coverType === 'img'" src="{{data.item.coverUrl}}" alt="" class="img-responsive">
-						<form id="post-form" class="smart-form">
 
-							<%- include form.ejs %>
+						<form id="main-form" class="smart-form">
+							<input type="text" name="id" id="id" v-model="data.item.id" hidden="hidden" value="<%= req.params.id %>">
+
+							<%- body -%>
 
 							<footer>
 								<button type="button" v-on:click="cancel" class="btn btn-default">
 									取消
 								</button>
 								<button type="submit" class="btn btn-primary">
-									送出
+									儲存
+								</button>
+								<button type="button" v-on:click="delete" class="btn btn-danger pull-left">
+									刪除
 								</button>
 							</footer>
 						</form>
@@ -95,9 +99,6 @@
 
 </section>
 <!-- end widget grid -->
-
-
-<!-- SCRIPTS ON PAGE EVENT -->
 <script type="text/javascript">
 
 	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -135,23 +136,6 @@
 
 	// PAGE RELATED SCRIPTS
 
-	// pagefunction
-	var pagefunction = function() {
-
-		<%- include vue.ejs %>
-		postApp.$mount("#post-create");
-		postApp.setupForm("create");
-		postApp.onEnterPageEdit();
-
-	};
-
-	// end pagefunction
-
-	// Load form valisation dependency
-	loadScript("/assets/admin/js/plugin/jquery-form/jquery-form.min.js", function () {
-		loadScript("/assets/admin/js/plugin/summernote/summernote.min.js", function(){
-			loadScript("/assets/admin/js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js", pagefunction);
-		});
-	});
+	loadScript("/assets/admin/js/plugin/jquery-form/jquery-form.min.js", pagefunction);
 
 </script>

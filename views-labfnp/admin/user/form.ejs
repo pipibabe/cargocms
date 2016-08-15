@@ -79,3 +79,53 @@
       <i></i>I agree with the Terms and Conditions</label>
   </section> -->
 </fieldset>
+<script>
+var formRules = {
+  username : {
+    required : true
+  },
+  email : {
+    required : true,
+    email : true
+  },
+  firstname : {
+    required : true
+  },
+  lastname : {
+    required : true
+  },
+  password : {
+    required : true,
+    minlength : 3,
+  },
+  passwordConfirm : {
+    required : true,
+    minlength : 3,
+    equalTo : '#password'
+  },
+}
+
+  // Messages for form validation
+var formMessages = {
+  username : {
+    required : '請輸入使用者帳號'
+  },
+  email : {
+    required : '請輸入 Email',
+    email : '請確認輸入的 Email 格式'
+  },
+  firstname : {
+    required : '請輸入使用者姓'
+  },
+  lastname : {
+    required : '請輸入使用者名'
+  },
+  password : {
+    required : '請輸入密碼'
+  },
+  passwordConfirm : {
+    required : '請再次輸入密碼以便確認',
+    equalTo : '請輸入相同的密碼'
+  },
+}
+</script>

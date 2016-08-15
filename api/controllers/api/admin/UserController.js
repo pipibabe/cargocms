@@ -1,17 +1,31 @@
 module.exports = {
 
   find: async (req, res) => {
-    console.log("=== find ===");
     try {
-      const users = await UserService.findAll();
-      res.ok({
-        data: {
-          items: users
-      }});
+      let {query} = req
+      let {serverSidePaging} = query
+
+      if(serverSidePaging){
+
+        const findQuery = FormatService.getQueryObj(query);
+        let result = await User.findAndCountAll(findQuery)
+        let data = result.rows
+        let recordsTotal = data.length
+        let recordsFiltered =  result.count
+        let draw = parseInt(req.draw) + 1
+        res.ok({draw, recordsTotal, recordsFiltered, data});
+      }else {
+        const users = await UserService.findAll();
+        res.ok({
+          data: {
+            items: users
+        }});
+      }
     } catch (e) {
       res.serverError({ message: e, data: {}});
     }
   },
+
   findOne: async (req, res) => {
     console.log("=== findOne ===");
     const { id } = req.params;

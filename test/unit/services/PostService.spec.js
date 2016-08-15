@@ -11,6 +11,8 @@ describe('about Post Service operation.', function() {
           content: '我們可以這樣形容，當你手中捧到一束花時，可以聞到花束中的各種花材（ex:玫瑰、康乃馨..等)所組成的『這束花的味道』，接著抽出其中的一朵康乃馨',
           url: 'http://localhost:5001/blog/flower',
           abstract: '我們可以這樣形容，當你手中捧到一束花時，可以聞到花束中的各種花材',
+          longitude: 10,
+          latitude: 10,
         });
         done();
       } catch (e) {
@@ -53,6 +55,8 @@ describe('about Post Service operation.', function() {
           url: 'http://localhost:5001/blog/flower',
           abstract: '我們可以這樣形容，當你手中捧到一束花時，可以聞到花束中的各種花材',
           TagsArray: [ '香水', '花' ],
+          longitude: 11,
+          latitude: 11,
         }
         const post = await PostService.update(targetPost.id, data);
         done()

@@ -5,7 +5,7 @@
 
 			<!-- PAGE HEADER -->
 			<i class="fa-fw fa fa-pencil-square-o"></i>
-				內容資料
+				資料
 			<span>>
 				建立
 			</span>
@@ -15,7 +15,7 @@
 </div>
 
 <!-- widget grid -->
-<section id="post-create" class="">
+<section id="main-create" class="">
 
 
 	<!-- START ROW -->
@@ -27,7 +27,7 @@
 		<article class="col-sm-12 col-md-12 col-lg-12">
 
 			<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false" style="display: none;">
+			<div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
 				<!-- widget options:
 					usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -44,7 +44,7 @@
         <header role="heading">
           <div class="jarviswidget-ctrls" role="menu"></div>
 					<span class="widget-icon"><i class="fa fa-edit"></i></span>
-					<h2>新增內容</h2>
+					<h2>新增</h2>
 				  <span class="jarviswidget-loader">
             <i class="fa fa-refresh fa-spin"></i>
           </span>
@@ -62,10 +62,10 @@
 
 					<!-- widget content -->
 					<div class="widget-body no-padding">
-						<img v-show="data.item.coverType === 'img'" src="{{data.item.coverUrl}}" alt="" class="img-responsive">
-						<form id="post-form" class="smart-form">
 
-							<%- include form.ejs %>
+						<form id="main-form" class="smart-form">
+
+							<%- body -%>
 
 							<footer>
 								<button type="button" v-on:click="cancel" class="btn btn-default">
@@ -94,9 +94,6 @@
 	<!-- END ROW -->
 
 </section>
-<!-- end widget grid -->
-
-
 <!-- SCRIPTS ON PAGE EVENT -->
 <script type="text/javascript">
 
@@ -135,23 +132,11 @@
 
 	// PAGE RELATED SCRIPTS
 
-	// pagefunction
-	var pagefunction = function() {
 
-		<%- include vue.ejs %>
-		postApp.$mount("#post-create");
-		postApp.setupForm("create");
-		postApp.onEnterPageEdit();
-
-	};
 
 	// end pagefunction
 
 	// Load form valisation dependency
-	loadScript("/assets/admin/js/plugin/jquery-form/jquery-form.min.js", function () {
-		loadScript("/assets/admin/js/plugin/summernote/summernote.min.js", function(){
-			loadScript("/assets/admin/js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js", pagefunction);
-		});
-	});
+	loadScript("/assets/admin/js/plugin/jquery-form/jquery-form.min.js", pagefunction);
 
 </script>
