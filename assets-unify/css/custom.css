@@ -1,1 +1,6 @@
 /* Add here all your css styles (customizations) */
+
+/* fix header height will change when nav item been select */
+.header {
+  height: 60px;
+}
