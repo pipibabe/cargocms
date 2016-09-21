@@ -12,6 +12,9 @@
       <th class="no-search" data-hide="">製作狀態</th>
       <th class="no-search" data-hide="always" style="width: 30%;"><i class="fa fa-fw fa-comment text-muted hidden-xs" /> 香水描述</th>
       <th class="no-search" data-hide="always" style="width: 30%;"><i class="fa fa-fw fa-comment text-muted hidden-xs" /> 額外資訊</th>
+			<template v-for="n in 6">
+				<th class="no-sort" data-hide="always" style="">香味分子{{n+1}} - 滴數(百分比)</th>
+			</template>
 			<th class="no-sort no-search" data-hide="phone,tablet"></th>
 		</tr>
 	</thead>
@@ -26,6 +29,11 @@
       <td>{{ item.productionStatusDesc }}</td>
       <td>{{ item.description }}</td>
       <td>{{ item.message }}</td>
+
+      <template v-for="n in 6">
+        <td> {{ item.formula[n].scent }} - {{ item.formula[n].drops }}滴 - ({{ Math.round((item.formula[n].drops / item.formulaTotalDrops * 100)*10000)/10000 + '%'}})</td>
+      </template>
+
 			<td align="center" style="cursor: pointer;">
 				<div class="row">
 					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
