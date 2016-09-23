@@ -111,11 +111,6 @@ module.exports = {
         // update user lastLogin status
         const userAgent = req.headers['user-agent'];
         user.loginSuccess({ userAgent });
-        
-        const noEmail = !user.email;
-        if (noEmail || user.email === '') {
-          return res.redirect('/edit/me');
-        }
 
         return res.redirect(req.body.url || sails.config.urls.afterSignIn);
       });

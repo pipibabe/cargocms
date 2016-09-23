@@ -39,7 +39,6 @@ module.exports.policies = {
   },
   'labfnp/RecipeController': {
     'create': ['passport', 'sessionAuth'],
-    'order': ['passport', 'sessionAuth'],
     'update': ['nocache']
   },
   'BlogController': {
