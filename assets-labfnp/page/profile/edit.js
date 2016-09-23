@@ -69,7 +69,8 @@ var submitData = function (form) {
 		});
 	};
 	var catchFail = function (result) {
-		swal('錯誤', '更新使用者資料發生錯誤，請稍候再試。', 'error');
+		var msg = result.responseJSON.message || '更新使用者資料發生錯誤，請稍候再試。'
+		swal('錯誤', msg, 'error');
 	};
 	$.ajax(ajaxConfig).done(catchDone).fail(catchFail);
 };

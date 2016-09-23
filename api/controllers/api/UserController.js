@@ -38,6 +38,9 @@ module.exports = {
     try {
       sails.log.info('update user controller id=>', id);
       sails.log.info('update user controller data=>', data);
+      if (data.email.length === 0) {
+        throw Error('Validation error: Email 不可為空');
+      }
       const { password, passwordConfirm } = data;
       const checkPwdEqual = password === passwordConfirm;
 

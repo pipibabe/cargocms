@@ -4,18 +4,33 @@ module.exports = {
     username: {
       type: Sequelize.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     email: {
       type: Sequelize.STRING,
       allowNull: true,
+      validate:  {
+        isEmail: {
+          msg: "請確認 Email"
+        }
+      },
       unique: true
     },
     firstName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      validate:  {
+        notEmpty: {
+          msg: "請確認姓名"
+        }
+      },
     },
     lastName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      validate:  {
+        notEmpty: {
+          msg: "請確認姓名"
+        }
+      },
     },
     birthday:{
       type: Sequelize.DATE,
