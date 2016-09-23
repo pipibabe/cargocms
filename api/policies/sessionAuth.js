@@ -13,11 +13,11 @@ module.exports = function(req, res, next) {
   // or if this is the last policy, the controller
   console.log("req.session.authenticated", req.session.authenticated);
   if (sails.config.offAuth || req.session.authenticated) {
-    const user = AuthService.getSessionUser(req);
-    const noEmail = !user.email;
-    if (noEmail || user.email === '') {
-      return res.redirect('/edit/me');
-    }
+    // const user = AuthService.getSessionUser(req);
+    // const noEmail = !user.email;
+    // if (noEmail || user.email === '') {
+    //   return res.redirect('/edit/me');
+    // }
     return next();
   }
 
