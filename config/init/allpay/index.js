@@ -22,7 +22,7 @@ module.exports.init = async () => {
         ]
       }
     }
-    let AllpayClass = require('../api/services/libraries/Allpay');
+    let AllpayClass = require('../../../api/services/libraries/Allpay');
     global.AllpayService = new AllpayClass.default({
       domain: allpayConfig.domain,
       merchantID: allpayConfig.merchantID,
