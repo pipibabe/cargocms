@@ -24,7 +24,6 @@ module.exports.bootstrap = async (cb) => {
 
     sails.services.passport.loadStrategies();
 
-    let {environment} = sails.config;
     let {connection} = sails.config.models;
 
     if (!sails.config.hasOwnProperty('offAuth'))

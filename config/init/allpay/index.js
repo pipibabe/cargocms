@@ -1,7 +1,7 @@
 import path from 'path';
 module.exports.init = async () => {
   try {
-
+    const {environment} = sails.config;
     let allpayConfig = sails.config.allpay;
     if (!allpayConfig) {
       allpayConfig = {
