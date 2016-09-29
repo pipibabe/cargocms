@@ -16,28 +16,13 @@ var mvpready_admin = function () {
 
   "use strict"
 
-  var initSearchField = function () {
-    $('.navbar-search-field').focus (function (e) {
-      $(this).parents ('form').addClass ('active')
-      $(this).animate ({ width: '250px' })
-    }).blur (function (e) {
-      $(this).parents ('form').removeClass ('active')
-
-      if (!$(this).val ()) {
-        $(this).animate ({ width: '170px' })
-      }
-    })
-  }
-
   return {
     init: function () {
       // Layouts
+      mvpready_core.initNavEnhanced ()
       mvpready_core.initNavHover ({ delay: { show: 250, hide: 350 } })
 
-      initSearchField ()
-
       mvpready_core.initNavbarNotifications ()
-      mvpready_core.initSidebarNav ()
       mvpready_core.initLayoutToggles ()
       mvpready_core.initBackToTop ()
 
