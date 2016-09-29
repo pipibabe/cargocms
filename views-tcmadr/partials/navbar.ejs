@@ -1,156 +1,25 @@
-<div class="navbar navbar-default" role="navigation">
+<header class="navbar" role="banner">
 
   <div class="container">
 
     <div class="navbar-header">
-      <div class="navbar-brand">
-        <a href="/assets/mvp/index.html" class="logo">
-          <img src="http://metarocket.space/mockups/mvpready-2.3.2/templates/admin/img/logo.png" alt="">
-        </a>
-      </div>
-
-      <button class="navbar-toggle pull-right" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <i class="fa fa-cog"></i>
       </button>
-    </div><!-- /.navbar-header -->
 
-    <div class="navbar-collapse collapse">
+      <a href="/assets/mvp/index.html" class="navbar-brand navbar-brand-img">
+        <img src="/assets/mvp/img/logo.png" alt="MVP Ready">
+      </a>
+    </div> <!-- /.navbar-header -->
 
-      <form class="navbar-form navbar-search-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control navbar-search-field" placeholder="Type here for search...">
-        </div>
-      </form>
+    <nav class="collapse navbar-collapse" role="navigation">
 
-      <ul class="nav navbar-nav navbar-right">
-
-        <li class="divider"></li>
-
-        <li class="dropdown navbar-profile">
-          <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" href="javascript:;">
-            <img src="/assets/mvp/global/img/avatars/avatar-6-sm.jpg" class="navbar-profile-avatar" alt="">
-            <span class="visible-xs-inline">@peterlandt &nbsp;</span>
-            <i class="fa fa-caret-down"></i>
-          </a>
-
-          <ul class="dropdown-menu" role="menu">
-
-            <li>
-              <a href="/assets/mvp/page-profile.html">
-                <i class="fa fa-user"></i>
-                &nbsp;&nbsp;My Profile
-              </a>
-            </li>
-
-            <li>
-              <a href="/assets/mvp/page-pricing-plans.html">
-                <i class="fa fa-dollar"></i>
-                &nbsp;&nbsp;Plans &amp; Billing
-              </a>
-            </li>
-
-            <li>
-              <a href="/assets/mvp/page-settings.html">
-                <i class="fa fa-cogs"></i>
-                &nbsp;&nbsp;Settings
-              </a>
-            </li>
-
-            <li class="divider"></li>
-
-            <li>
-              <a href="/assets/mvp/account-login.html">
-                <i class="fa fa-sign-out"></i>
-                &nbsp;&nbsp;Logout
-              </a>
-            </li>
-
-          </ul>
-
-        </li>
-
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-
-        <li class="dropdown">
-
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-            Templates&nbsp;
-            <i class="fa fa-caret-down"></i>
-          </a>
-
-          <ul class="dropdown-menu mega-menu-2" role="menu">
-
-            <li>
-                    <div class="mega-menu-content">
-
-                <div class="mega-menu-col">
-
-                  <div class="demo-block">
-                    <a href="../admin-1/index.html" class="demo-launcher">
-                      <img src="/assets/mvp/previews/img/theme-drop-admin-1.png" class="img-responsive" alt="">
-
-                      View Admin Layout #1
-                    </a>
-
-                    <div class="demo-external">
-                      <a href="../admin-1/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
-                    </div>
-                  </div><!-- /.demo-block -->
-
-                  <div class="demo-block">
-                    <a href="../landing/index.html" class="demo-launcher">
-                      <img src="/assets/mvp/previews/img/theme-drop-landing.png" class="img-responsive" alt="">
-
-                      View Frontend Template
-                    </a>
-
-                    <div class="demo-external">
-                      <a href="../landing/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
-                    </div>
-                  </div><!-- /.demo-block -->
-                </div> <!-- /.mega-menu-col -->
-
-                <div class="mega-menu-col">
-                  <div class="demo-block">
-                    <a href="../admin-2/index.html" class="demo-launcher">
-                      <img src="/assets/mvp/previews/img/theme-drop-admin-2.png" class="img-responsive" alt="">
-
-                      View Admin Layout #2
-                    </a>
-
-                    <div class="demo-external">
-                      <a href="../admin-2/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
-                    </div>
-                  </div><!-- /.demo-block -->
-
-                  <div class="demo-block">
-                    <a href="../launch/index.html" class="demo-launcher">
-                      <img src="/assets/mvp/previews/img/theme-drop-launch.png" class="img-responsive" alt="">
-
-                      View Launch Template
-                    </a>
-
-                    <div class="demo-external">
-                      <a href="../launch/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
-                    </div>
-                  </div><!-- /.demo-block -->
-                </div> <!-- /.mega-menu-col -->
-
-              </div> <!-- /.mega-menu-content -->
-            </li>
-
-          </ul>
-
-        </li>
-
-        <li class="navbar-divider"></li><!-- /.navbar-divider -->
+      <ul class="nav navbar-nav navbar-left">
 
         <li class="dropdown navbar-notification">
 
-          <a href="/assets/mvp/page-notifications.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          <a href="/assets/mvp/page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-bell navbar-notification-icon"></i>
             <span class="visible-xs-inline">&nbsp;Notifications</span>
             <b class="badge badge-primary">3</b>
@@ -202,7 +71,7 @@
 
         <li class="dropdown navbar-notification">
 
-          <a href="/assets/mvp/page-notifications.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          <a href="/assets/mvp/page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-envelope navbar-notification-icon"></i>
             <span class="visible-xs-inline">&nbsp;Messages</span>
           </a>
@@ -214,7 +83,7 @@
             <div class="notification-list">
 
               <a href="/assets/mvp/page-notifications.html" class="notification">
-                <div class="notification-icon"><img src="/assets/mvp/global/img/avatars/avatar-3-md.jpg" alt=""></div>
+                <div class="notification-icon"><img src="../../global/img/avatars/avatar-3-md.jpg" alt=""></div>
                 <div class="notification-title">New Message</div>
                 <div class="notification-description">Praesent dictum nisl non est sagittis luctus.</div>
                 <div class="notification-time">20 minutes ago</div>
@@ -252,7 +121,7 @@
 
         <li class="dropdown navbar-notification empty">
 
-          <a href="/assets/mvp/page-notifications.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          <a href="/assets/mvp/page-notifications.html" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-warning navbar-notification-icon"></i>
             <span class="visible-xs-inline">&nbsp;&nbsp;Alerts</span>
           </a>
@@ -274,14 +143,67 @@
 
         </li>
 
+      </ul>
 
 
-        <li class="navbar-divider"></li><!-- /.navbar-divider -->
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+          <a href="javsacript:;">Projects</a>
+        </li>
+
+        <li>
+          <a href="javascript:;">Support</a>
+        </li>
+
+        <li class="dropdown navbar-profile">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+            <img src="/assets/mvp/global/img/avatars/avatar-6-sm.jpg" class="navbar-profile-avatar" alt="">
+            <span class="visible-xs-inline">@peterlandt &nbsp;</span>
+            <i class="fa fa-caret-down"></i>
+          </a>
+
+          <ul class="dropdown-menu" role="menu">
+
+            <li>
+              <a href="/assets/mvp/page-profile.html">
+                <i class="fa fa-user"></i>
+                &nbsp;&nbsp;My Profile
+              </a>
+            </li>
+
+            <li>
+              <a href="/assets/mvp/page-pricing-plans.html">
+                <i class="fa fa-dollar"></i>
+                &nbsp;&nbsp;Plans & Billing
+              </a>
+            </li>
+
+            <li>
+              <a href="/assets/mvp/page-settings.html">
+                <i class="fa fa-cogs"></i>
+                &nbsp;&nbsp;Settings
+              </a>
+            </li>
+
+            <li class="divider"></li>
+
+            <li>
+              <a href="/assets/mvp/account-login.html">
+                <i class="fa fa-sign-out"></i>
+                &nbsp;&nbsp;Logout
+              </a>
+            </li>
+
+          </ul>
+
+        </li>
 
       </ul>
 
-    </div>
+    </nav>
 
-  </div> <!--/.container -->
+  </div> <!-- /.container -->
 
-</div> <!--/.navbar -->
+</header>
