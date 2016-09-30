@@ -10,7 +10,7 @@
 
 ### assets-jason
 
-使用標準 bootstrap 即可，在此資料夾放置相關檔案
+與客戶網站直接相關素材
 
 ### views-jason
 
