@@ -35,6 +35,7 @@ module.exports = {
   '/creator':         'labfnp/RecipeController.create',
   '/lab':             'labfnp/MainController.explore',
   '/me/:id?':         'labfnp/MainController.portfolio',
+  '/like':            'labfnp/MainController.portfolioLike',
   '/edit/me':         'labfnp/MainController.editPofile',
 
   "/labfnp/:controller/:action/:id?": {}

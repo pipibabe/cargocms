@@ -98,4 +98,71 @@ module.exports = {
       res.serverError(e);
     }
   },
+
+  portfolioLike: async function(req, res) {
+    let user = null;
+    let isMe = false;
+    try {
+      const { id } = req.params;
+      const loginUser = AuthService.getSessionUser(req);
+
+      let score = 0;
+      if (id) {
+        user = await User.findOne({where:{ id }});
+        if(!user) return res.notFound("查無使用者");
+        score = user.score;
+      } else {
+        user = loginUser
+        if(!user) return res.redirect("/login");
+
+        user = await User.findById(loginUser.id);
+        const userRecipes = await Recipe.findAll({where: { UserId: user.id }});
+        const userRecipesIds = userRecipes.map((recipe) => recipe.id);
+        score = await UserLikeRecipe.count({where: { RecipeId: userRecipesIds }});
+        user.score = score;
+        await user.save();
+      }
+      isMe = (loginUser && (loginUser.id == user.id));
+
+      let notShowPrivateRecipe = {};
+      if(!isMe) notShowPrivateRecipe = { visibility: { $not: 'PRIVATE' } };
+
+      const followers = await Follow.count({ where: { following: user.id }});
+      const favorited = await UserLikeRecipe.count({where: { UserId: user.id }});
+      const following = await Follow.count({ where: { follower: user.id }});
+      let isFollowing = false;
+      if(loginUser) {
+        isFollowing  = await Follow.findOne({
+          where: {
+            follower: loginUser.id,
+            following: user.id,
+          }
+        });
+      }
+
+      const likedRecipes = await Recipe.findAll({
+        where: {
+          ...notShowPrivateRecipe
+        },
+        order: 'Recipe.updatedAt desc',
+        include: [
+          Image,
+          {
+            model: UserLikeRecipe,
+            where: {
+              UserId: user.id
+            }
+          },
+        ],
+      })
+
+      return res.view({
+        user, recipes: likedRecipes, followers, favorited, following, isMe, score,
+        isFollowing: !!isFollowing,
+      });
+    }
+    catch (e) {
+      res.serverError(e);
+    }
+  },
 }
