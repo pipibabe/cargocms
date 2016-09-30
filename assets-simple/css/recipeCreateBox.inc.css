@@ -1,0 +1,136 @@
+.box-wrapper {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.box-inner {
+  background-color: white;
+  margin: 200px auto 0;
+  max-width: 700px;
+  max-height: 1000px;
+  border-radius: 20px 20px 20px 20px;
+  -moz-border-radius: 20px 20px 20px 20px;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border: 0;
+  -webkit-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section.control {
+  padding-right: 10px;
+  margin-top: -20px;
+}
+
+article.title {
+  margin-top: -55px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#btn-cancel {
+  opacity: 0.5;
+  background-color: transparent;
+  border: 0;
+  color: rgb(231, 68, 32);
+}
+
+#btn-cancel:hover {
+  opacity: 1;
+}
+
+section.description, section.mode, section.title {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.box-byFeeling {
+  border-right-width: 1px;
+  border-style: dotted;
+  border-right-color: gray;
+  border-left: 0;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.box-byFeeling img {
+  -webkit-box-shadow: 0 0 5px 5px rgba(129, 103, 75, 0.5);
+  -moz-box-shadow: 0 0 5px 5px rgba(129, 103, 75, 0.5);
+  box-shadow: 0 0 5px 5px rgba(129, 103, 75, 0.5);
+}
+
+.box-byFeeling label {
+  font-weight: bold;
+  color: #6f0f0f;
+}
+
+.box-byScent {
+  opacity: 0.8;
+}
+
+.box-byScent:hover {
+  opacity: 1;
+}
+
+.img-wrapper {
+  text-align: center;
+  width: 220px;
+  padding: 10px;
+  opacity: 1;
+}
+
+.img-wrapper:hover {
+  opacity: 0.7;
+  background-color: rgba(129, 103, 75, 0.5);
+}
+
+.img-wrapper img {
+  width: 200px;
+  height: 200px;
+}
+
+article.description {
+  padding: 10px;
+}
+
+@media (max-width: 990px) {
+  .box-wrapper {
+    background: white;
+  }
+  .box-inner {
+    margin: 100px auto 0;
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    max-height: 100%;
+  }
+  .box-byFeeling {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom-width: 1px;
+    border-bottom-color: gray;
+    border-style: dotted;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+  }
+  .box-content {
+    background: white;
+    margin-top: -50px;
+    height: 100%;
+  }
+  .img-wrapper img {
+    width: 100px;
+    height: 100px;
+  }
+}

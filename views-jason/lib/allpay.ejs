@@ -1,0 +1,28 @@
+<!--=== Allpay ===-->
+<div class="bg-color-light">
+	<div class="container content-sm">
+		<div class="row">
+      <h1>交易進行中，請勿關閉視窗....</h1>
+      <form name="allpay" action="<%= AioCheckOut %>" method="POST">
+        <input type='hidden', name='MerchantID' value="<%= MerchantID %>" >
+        <input type='hidden', name='MerchantTradeNo' value="<%= MerchantTradeNo %>" >
+        <input type='hidden', name='MerchantTradeDate' value="<%= MerchantTradeDate %>" >
+        <input type='hidden', name='PaymentType' value="<%= PaymentType %>" >
+        <input type='hidden', name='TotalAmount' value="<%= TotalAmount %>" >
+        <input type='hidden', name='TradeDesc' value="<%= TradeDesc %>" >
+        <input type='hidden', name='ItemName' value="<%= ItemName %>" >
+        <input type='hidden', name='ReturnURL' value="<%= ReturnURL %>" >
+        <input type='hidden', name='ChoosePayment' value="<%= ChoosePayment %>" >
+        <input type='hidden', name='ClientBackURL' value="<%= ClientBackURL %>" >
+        <input type='hidden', name='CheckMacValue' value="<%= CheckMacValue %>" >
+        <input type='hidden', name='PaymentInfoURL' value="<%= PaymentInfoURL %>" >
+      </form>
+		</div>
+	</div>
+</div>
+<!--=== Allpay ===-->
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+    $("form[name='allpay']").submit();
+  });
+`); %>

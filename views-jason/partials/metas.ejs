@@ -1,0 +1,14 @@
+<!-- Meta -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="author" content="">
+<meta name="description" content="">
+
+<!-- FB OG tags -->
+<meta property="og:site_name" content="" />
+<meta property="og:locale" content="zh_TW" />
+<!--  <meta name="fb:app_id" content="<%= sails.config.passport.facebook.options.clientID %>"> -->
+<meta name="fb:app_id" content="">
+
+<!-- other Meta tags -->
+<% LayoutUtils.getMetas().forEach(function(meta) { %> <meta property="<%= meta.property %>" content="<%= meta.content %>" /> <% }); %>

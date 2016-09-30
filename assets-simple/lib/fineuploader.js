@@ -1,0 +1,62 @@
+var restrictedUploader = new qq.FineUploader({
+  element: document.getElementById("fine-uploader-validation"),
+  template: 'qq-template-validation',
+  autoUpload: true,
+  request: {
+    endpoint: '/api/admin/upload',
+    inputName: 'uploadPic'
+  },
+  deleteFile: {
+    enabled: true,
+    endpoint: '/api/admin/upload',
+  },
+  thumbnails: {
+    placeholders: {
+      waitingPath: '/source/placeholders/waiting-generic.png',
+      notAvailablePath: '/source/placeholders/not_available-generic.png'
+    }
+  },
+  validation: {
+    allowedExtensions: ['jpeg', 'jpg', 'png'],
+    itemLimit: 1,
+    sizeLimit: 3 * 1024 * 1024 // 50 kB = 50 * 1024 bytes
+  },
+  callbacks: {
+    onError: function(id, name, isError) {
+      console.log(id, name, isError);
+    },
+    onComplete: function(id, name, response) {
+      console.log(id, name, response);
+      $('input[name=coverPhotoId]').val(response.data.id);
+    },
+    onDeleteComplete: function(id, name, response) {
+      console.log(id, name, response);
+      $('input[name=coverPhotoId]').val(null);
+    },
+  },
+  showMessage: function(message) {
+    swal({
+      title: '注意',
+      text: message,
+      type: 'warning',
+    });
+  },
+  messages: {
+    emptyError: '{file} 檔案是空的, 請選擇其他檔案',
+    maxHeightImageError: '圖片高度太高',
+    maxWidthImageError: '圖片寬度太寬',
+    minHeightImageError: '圖片不夠高',
+    minWidthImageError: '圖片不夠寬',
+    minSizeError: '{file} 檔案過小，最小檔案大小為 {minSizeLimit}',
+    noFilesError: '請選擇檔案',
+    onLeave: '該檔案正在上傳，如果你離開現在的上傳將被取消。',
+    retryFailTooManyItemsError: '重試失敗 - 您已經達到您的檔案限制。',
+    sizeError: '{file} 檔案過大，最大檔案大小為 {sizeLimit}.',
+    tooManyItemsError: '選擇太多檔案, 檔案限制數量為: {itemLimit}',
+    typeError: '{file} 不支援此檔案, 請選擇: {extensions}.',
+    unsupportedBrowserIos8Safari: '不可恢復的錯誤 - 這個瀏覽器不允許任何形式的文件上傳，由於iOS8上的Safari嚴重錯誤，請使用iOS8上的Chrome直到蘋果修復了這些問題。',
+  }
+});
+qq(document.getElementById("trigger-upload")).attach("click", function() {
+  restrictedUploader.uploadStoredFiles();
+});

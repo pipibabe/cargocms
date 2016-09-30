@@ -1,0 +1,125 @@
+<!-- CSS Page Style -->
+<link rel="stylesheet" href="/assets/unify/css/pages/page_log_reg_v1.css">
+
+<style type="text/css">
+.login-block .social-login {
+    margin-bottom: 70px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+.login-block .or {
+    position: relative;
+    border: 1px solid #eee;
+    width: 70px;
+    height: 70px;
+    top: 35px;
+    left: 50%;
+    margin-left: -35px;
+    text-transform: uppercase;
+    color: #333;
+    background: #fff;
+    line-height: 70px;
+    padding: 0 24px;
+    z-index: 1;
+}
+.rounded-x {
+    border-radius: 50% !important;
+}
+.input-group label.error {
+  position: absolute;
+  bottom: -2em;
+  width: 100%;
+  left: 0;
+  color: red;
+}
+</style>
+
+<!--=== Content Part ===-->
+<div class="container content">
+  <div class="row">
+    <div class="login-block col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <form class="reg-page" method="post" action="/auth/local?url=/">
+        <!--
+        <div class="reg-header">
+          <h2>使用 Facebook 帳號登入</h2>
+        </div>
+        -->
+
+        <div class="social-login">
+          <ul class="list-unstyled">
+            <li>
+              <a class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20" href="/auth/facebook">
+                <i class="fa fa-facebook"></i> 直接以 FB 帳號登入
+              </a>
+            </li>
+          </ul>
+          <div class="or rounded-x">Or</div>
+        </div>
+
+        <div class="reg-header">
+          <h2>輸入帳號及密碼</h2>
+        </div>
+
+        <div class="input-group margin-bottom-25">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input type="text" placeholder="Username" value="<%= data.user.identifier %>" id="identifier" name="identifier" class="form-control">
+        </div>
+        <div class="input-group margin-bottom-25">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="password" placeholder="Password" value="<%= data.user.password %>" id="password" name="password" class="form-control">
+        </div>
+
+        <input id='backUrl' type="hidden" name="url" value='/'>
+
+        <div class="row">
+          <div class="col-md-6 checkbox">
+            <!--<label><input type="checkbox"> 保持登入狀態</label>-->
+
+            <div class="margin-top-20">
+              還沒有帳號嗎？<a href="/register">註冊新帳號</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <button id="submit-button" class="btn-u pull-right" type="submit">登入</button>
+          </div>
+        </div>
+        <% if (data.errors) { %>
+          <div class="alert alert-warning" role="alert">帳號或密碼錯誤！</div>
+        <% } %>
+        <hr>
+
+        <!--<h4>忘記密碼？</h4>
+        <p>別擔心，<a class="color-green" href="#">點擊這裡</a>重新設定密碼！</p>-->
+      </form>
+    </div>
+  </div><!--/row-->
+</div><!--/container-->
+
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $(".reg-page").validate({
+      rules: {
+        identifier: {
+          required: true
+        },
+        password: {
+          required: true
+        },
+
+      },
+      messages: {
+        identifier: {
+          required: "請輸入帳號"
+        },
+        password:{
+          required: "請輸入密碼"
+        },
+      }
+    });
+
+    document.referrer && $('#backUrl').val(document.referrer);
+
+  });
+`); %>
+<!--=== End Content Part ===-->

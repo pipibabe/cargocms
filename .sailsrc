@@ -8,6 +8,6 @@
     "grunt": false
   },
   "paths": {
-    "views": "views-labfnp"
+    "views": "views-jason"
   }
 }

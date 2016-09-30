@@ -1,0 +1,82 @@
+/*.logo h1 {*/
+/*  font-family: Bell MT;*/
+/*  font-size: 40px;*/
+/*  height: 50px;*/
+/*  padding-top: 15px;*/
+/*  color: #777;*/
+/*  text-shadow: 2px 2px 2px #ddd;*/
+/*}*/
+
+.brand-font {
+  font-family: Bell MT;
+}
+
+.header .logo img {
+  margin: 20px 0 15px 0;
+  height: 20px;
+  opacity: .8;
+}
+
+.header .topbar ul.loginbar > li > a, .header .topbar ul.loginbar > li > a:hover {
+  font-size: 13px;
+}
+
+.header .navbar-nav > li > a:hover, .header .navbar-nav > .active > a {
+  border-bottom-width: 4px;
+}
+
+.header .navbar-nav > li > a {
+  text-transform: none;
+}
+
+.header .navbar-nav > li.base{
+  width: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 991px) {
+  .header .navbar-nav > li.base{
+    display: none;
+  }
+}
+
+.header .navbar-toggle {
+  margin-top: 1em;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.dont-break-out {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* Facebook Widget */
+
+/* facebook comments */
+.fb-comments, .fb-comments iframe[style], .fb-like-box, .fb-like-box iframe[style] {width: 100% !important;}
+.fb-comments span, .fb-comments iframe span[style], .fb-like-box span, .fb-like-box iframe span[style] {width: 100% !important;}
+
+/* Blog */
+
+.blog-title {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 500;
+}
+
+.blog-content {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 150%;
+  text-rendering: optimizeLegibility;
+}

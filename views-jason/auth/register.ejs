@@ -1,0 +1,178 @@
+<!-- CSS Page Style -->
+<link rel="stylesheet" href="/assets/unify/css/pages/page_log_reg_v1.css">
+<style type="text/css">
+.login-block .social-login {
+    margin-bottom: 70px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+.login-block .or {
+    position: relative;
+    border: 1px solid #eee;
+    width: 70px;
+    height: 70px;
+    top: 35px;
+    left: 50%;
+    margin-left: -35px;
+    text-transform: uppercase;
+    color: #333;
+    background: #fff;
+    line-height: 70px;
+    padding: 0 24px;
+    z-index: 1;
+}
+.rounded-x {
+    border-radius: 50% !important;
+}
+label.error{
+  color: red;
+}
+</style>
+
+<!--=== Content Part ===-->
+<div class="container content">
+  <div class="row">
+    <div class="login-block col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <form id="registerForm" class="reg-page" method='post' action="/auth/local/register">
+
+        <div class="social-login">
+          <ul class="list-unstyled">
+            <li>
+              <a class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20" href="/auth/facebook">
+                <i class="fa fa-facebook"></i> 直接以 FB 帳號登入
+              </a>
+            </li>
+          </ul>
+          <div class="or rounded-x">Or</div>
+        </div>
+
+        <div class="reg-header">
+          <h2>註冊新帳號</h2>
+          <p>如果已經註冊帳號，請直接<a href="/login" class="color-green">登入</a>即可。</p>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label>姓氏</label>
+            <input type="text" name="firstName" value="<%= data.user.firstName %>" class="form-control margin-bottom-20">
+          </div>
+          <div class="col-sm-6">
+            <label>名字</label>
+            <input type="text" name="lastName" value="<%= data.user.lastName %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Email <span class="color-red">*</span></label>
+            <input type="text" name="email" value="<%= data.user.email %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <label>帳號 <span class="color-red">*</span></label>
+            <input type="text" name="username" value="<%= data.user.username %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label>密碼 <span class="color-red">*</span></label>
+            <input id="firstPassword" type="password" name="password" class="form-control margin-bottom-20">
+          </div>
+          <div class="col-sm-6">
+            <label>再次確認密碼 <span class="color-red">*</span></label>
+            <input type="password" name="passwordAgain" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-lg-6 checkbox">
+            <label>
+              <input type="checkbox" name="agree">
+              我已閱讀並且同意<a href="#" class="color-green" data-toggle="modal" data-target="#myModal">會員服務條款</a>
+            </label>
+          </div>
+          <div class="col-lg-6 text-right">
+            <button class="btn-u" type="submit">註冊</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">會員服務條款</h4>
+      </div>
+      <div class="modal-body">
+        <div style="max-height: 400px; overflow-y: scroll">
+          <% include agreement.inc.ejs %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $("#registerForm").validate({
+      rules: {
+        email: {
+          required: true,
+          email: true
+        },
+        username: {
+          required: true
+        },
+        password: {
+          required: true,
+          minlength: 6
+        },
+        passwordAgain: {
+          required: true,
+          minlength: 6,
+          equalTo: "#firstPassword"
+        },
+        agree: "required"
+
+      },
+      messages: {
+        email: {
+          required: "請輸入 Email",
+          email: "請輸入有效的 Email"
+        },
+        username:{
+          required: "請輸入帳號"
+        },
+        password: {
+          required: "請輸入密碼",
+          minlength: "密碼長度不足"
+        },
+        passwordAgain: {
+          required: "請輸入密碼",
+          minlength: "密碼長度不足",
+          equalTo: "請輸入相同密碼"
+        },
+        agree: "尚未同意會員服務條款"
+      }
+    });
+
+  });
+`); %>
