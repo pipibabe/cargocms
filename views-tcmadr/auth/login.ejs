@@ -13,7 +13,7 @@
     <div class="row">
 
       <div class="col-sm-12">
-        <a href="javascript:;" class="btn btn-facebook btn-block">
+        <a href="/auth/facebook" class="btn btn-facebook btn-block">
         <i class="fa fa-facebook"></i>
         &nbsp;&nbsp;以Facebook帳號登入
         </a>
@@ -23,19 +23,18 @@
 
     <span class="account-or-social text-muted">或使用本系統帳號登入</span>
 
-    <form class="form account-form" method="POST" action="./index.html">
-
+    <form class="form account-form" method="post" action="/auth/local?url=/">
       <div class="form-group">
         <label for="login-username" class="placeholder-hidden">帳號</label>
-        <input type="text" class="form-control" id="login-username" placeholder="帳號" tabindex="1">
+        <input type="text" class="form-control" id="login-username" placeholder="帳號" tabindex="1" value="<%= data.user.identifier %>" id="identifier" name="identifier" >
       </div> <!-- /.form-group -->
 
       <div class="form-group">
         <label for="login-password" class="placeholder-hidden">密碼</label>
-        <input type="password" class="form-control" id="login-password" placeholder="密碼" tabindex="2">
+        <input type="password" class="form-control" id="login-password" placeholder="密碼" tabindex="2" value="<%= data.user.password %>" id="password" name="password">
       </div> <!-- /.form-group -->
 
-      <div class="form-group clearfix">
+      <!--<div class="form-group clearfix">
         <div class="pull-left">
           <label class="checkbox-inline">
           <input type="checkbox" class="" value="" tabindex="3"> <small>記住帳號</small>
@@ -45,11 +44,14 @@
         <div class="pull-right">
           <small><a href="./account-forgot.html">忘記密碼？</a></small>
         </div>
-      </div> <!-- /.form-group -->
+      </div>--> <!-- /.form-group -->
 
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block btn-lg" tabindex="4">登入 &nbsp; <i class="fa fa-play-circle"></i></button>
       </div> <!-- /.form-group -->
+      <% if (data.errors) { %>
+        <div class="alert alert-warning" role="alert">帳號或密碼錯誤！</div>
+      <% } %>
 
     </form>
 
