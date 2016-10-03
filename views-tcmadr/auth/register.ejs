@@ -4,40 +4,65 @@
 
   <div class="account-body">
 
-    <h3>註冊帳號</h3>
+    <h3>註冊新帳號</h3>
 
-    <h5>填寫以下內容</h5>
+    <h5>如果已經註冊帳號，請直接<a href="/login" class="color-green">登入</a>即可。</h5>
 
-    <form class="form account-form" method="POST" action="./index.html">
+    <form id="registerForm" class="form account-form" method='post' action="/auth/local/register">
 
       <div class="form-group">
+          <label for="signup-first-name" class="placeholder-hidden">姓名</label>
+          <input type="text" name="firstName" value="<%= data.user.firstName %>" class="form-control" placeholder="姓名">
+      </div>
+
+      <div class="form-group">
+        <label for="signup-email" class="placeholder-hidden">Email</label>
+        <input type="text" name="email" value="<%= data.user.email %>" class="form-control" placeholder="Email">
+      </div>
+
+      <div class="form-group">
+        <label for="signup-account" class="placeholder-hidden">帳號</label>
+        <input type="text" name="username" value="<%= data.user.username %>" class="form-control" placeholder="帳號">
+      </div>
+
+      <div class="form-group">
+        <label for="signup-password" class="placeholder-hidden">密碼</label>
+        <input id="firstPassword" type="password" name="password" class="form-control" placeholder="密碼">
+      </div>
+
+      <div class="form-group">
+        <label for="signup-comfirm-password" class="placeholder-hidden">確認密碼</label>
+        <input type="password" name="passwordAgain" class="form-control" placeholder="確認密碼">
+      </div>
+
+      <!--<div class="form-group">
         <label for="signup-email" class="placeholder-hidden">Email Address</label>
-        <input type="text" class="form-control" id="signup-email" placeholder="姓名" tabindex="1">
-      </div> <!-- /.form-group -->
+        <input type="text" class="form-control" id="signup-email"   tabindex="1">
+      </div>--> <!-- /.form-group -->
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label for="signup-fullname" class="placeholder-hidden">Your Name</label>
         <input type="text" class="form-control" id="signup-fullname" placeholder="信箱" tabindex="2">
-      </div> <!-- /.form-group -->
+      </div>--> <!-- /.form-group -->
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label for="signup-username" class="placeholder-hidden">Username</label>
         <input type="text" class="form-control" id="signup-username" placeholder="密碼" tabindex="3">
-      </div> <!-- /.form-group -->
+      </div>--> <!-- /.form-group -->
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label for="login-password" class="placeholder-hidden">Password</label>
         <input type="password" class="form-control" id="login-password" placeholder="確認密碼" tabindex="4">
-      </div> <!-- /.form-group -->
+      </div>--> <!-- /.form-group -->
 
       <div class="form-group">
         <label class="checkbox-inline">
-        <input type="checkbox" class="" value="" tabindex="5"> 我已閱讀並且同意 <a href="javascript:;" target="_blank">會員服務條款</a>
+        <input type="checkbox" class="" value="" name="agree"> 我已閱讀並且同意 <a href="#" target="_blank" data-toggle="modal" data-target="#myModal">會員服務條款</a>
         </label>
       </div> <!-- /.form-group -->
 
       <div class="form-group">
-        <button type="submit" class="btn btn-secondary btn-block btn-lg" tabindex="6">
+        <button type="submit" class="btn btn-secondary btn-block btn-lg">
         註冊 &nbsp; <i class="fa fa-play-circle"></i>
         </button>
       </div> <!-- /.form-group -->
@@ -46,12 +71,12 @@
 
   </div> <!-- /.account-body -->
 
-  <div class="account-footer">
+  <!--<div class="account-footer">
     <p>
     已經有帳號了？ &nbsp;
     <a href="./account-login.html" class="">立即登入！</a>
     </p>
-  </div> <!-- /.account-footer -->
+  </div>--> <!-- /.account-footer -->
 
 </div> <!-- /.account-wrapper -->
 <!--=== End Content Part ===-->
@@ -81,7 +106,7 @@
 
 <% LayoutUtils.addScriptBlock(`
   $(document).ready(function(){
-
+    console.log("!!!");
     $("#registerForm").validate({
       rules: {
         email: {

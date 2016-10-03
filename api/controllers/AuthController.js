@@ -16,7 +16,7 @@ module.exports = {
     if(form) user = form;
 
     res.ok({
-      //layout: false,
+      layout: 'layout-login',
       user,
       errors: req.flash('error')[0]
     });
@@ -45,7 +45,7 @@ module.exports = {
       let form = req.flash('form')[0];
       if(form) user = form;
 
-      res.ok({user, errors: req.flash('error')});
+      res.ok({layout: 'layout-login', user, errors: req.flash('error')});
     } catch (e) {
       res.serverError(e);
     }
@@ -58,7 +58,6 @@ module.exports = {
 
   },
   callback: async function(req, res) {
-
     var tryAgain = function(err) {
 
       var action, flashError;
