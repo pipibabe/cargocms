@@ -1,0 +1,32 @@
+<% LayoutUtils.addScripts('/assets/simple/js/plugin/swiper/swiper.jquery.min.js'); %>
+<% LayoutUtils.addStylesheets('/assets/simple/js/plugin/swiper/swiper.min.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/css/banner.css'); %>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+      <% for(let i = 1;i<=3;i++) {%>
+        <div class="swiper-slide" style="background-image:url(/assets/jason/images/banner-swiper/<%= i %>.jpg)">
+          <div class="slogan">
+            <p>專業團隊 責任施工 品質打造 服務熱誠</p>
+            <h3>諮詢/設計/安裝/保養/維修</h3>
+          </div>
+        </div>
+      <% } %>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function () {
+    var mySwiper = new Swiper ('.swiper-container', {
+      loop: true,
+      autoplay: 3500,//可选选项，自动滑动
+      spaceBetween: 30,
+      effect: 'fade',
+      speed: 800,
+
+      // 如果需要分页器
+      pagination: '.swiper-pagination',
+    })
+  })
+`); %>

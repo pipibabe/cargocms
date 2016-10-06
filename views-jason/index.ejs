@@ -6,150 +6,37 @@
 <% LayoutUtils.addMeta({ property:"og:title", content:"CargoCMS" }); %>
 <% LayoutUtils.addMeta({ property:"og:description", content:"CargoCMS" }); %>
 <% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
-<style>
-.interactive-slider-v2 {
-  padding: 0 0;
-  background-image: url(/assets/mvp/main/admin/img/mockup.png);
-}
+<% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
+<% include partials/banner.ejs %>
 
-.interactive-slider-v2 img {
-}
+<div class="container body">
 
-.interactive-slider-v2:after {
-  background: linear-gradient(to bottom, rgba(0,0,0,.5) 5%, rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%);
-}
-
-.purchase span {
-  font-family: 'Noto Sans TC', sans-serif;
-  line-height: 150%;
-  font-size: 22px;
-  font-weight: 300;
-}
-
-.purchase p {
-  font-family: 'Noto Sans TC', sans-serif;
-  line-height: 150%;
-  font-size: 16px;
-  font-weight: 100;
-}
-
-.headline h2 {
-  font-size: 26px;
-  font-family: 'Noto Sans TC', sans-serif;
-  /* font-family: 'cwTeXHei', sans-serif; */
-  font-weight: 700;
-}
-
-p.lead {
-  font-family: 'Noto Sans TC', sans-serif;
-  line-height: 200%;
-  font-size: 20px;
-  font-weight: 300;
-}
-
-.testimonials-v3 .item > p {
-  font-family: 'Noto Sans TC', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 200%;
-}
-
-.purchase .btn-u {
-  font-size: 18px;
-}
-
-.feature-slogan {
-  position: relative;
-  top: -100px;
-}
-
-@media (max-width: 543px) {
-  .feature-slogan {
-    top: -65px;
-  }
-}
-
-.feature-slogan p {
-  font-size: 24px;
-  font-family: 'Noto Sans TC', serif;
-  font-weight: 300;
-  color: #fff;
-  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
-}
-
-.feature-buttons {
-  position: relative;
-  top: -50px;
-}
-
-.feature-buttons .btn-u {
-  font-size: 16px;
-  color: #333;
-  background: rgba(255,255,255,.7);
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-.feature-buttons .btn-u:hover {
-  background: rgba(255,255,255,1);
-}
-</style>
-
-<!-- Interactive Slider v2 -->
-<div class="interactive-slider-v2">
-  <div class="container">
-    <img src="/assets/mvp/main/admin/img/logo.png" alt="LFP: Laboratory of Fragrance &amp; Perfume - 我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水" class="img-responsive animated zoomIn" />
-    <!--
-
-    <h1>Laboratory of Fragrance &amp; Perfume</h1>
-    -->
-    <div class="feature-slogan">
-      <p>CargoCMS</p>
+  <div class="row">
+    <div class="col-md-2 sec-menu">
+      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-th-list"></i></button>
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active"><a href="#">公司簡介</a></li>
+        <li role="presentation"><a href="#">成立沿革</a></li>
+        <li role="presentation"><a href="#">地理位置</a></li>
+      </ul>
     </div>
-
-    <div class="feature-buttons">
-      <a href="/lab" class="btn-u rounded">
-        <i class="fa fa-flask fa-fw"></i>
-        CargoCMS
-      </a>
-      <a href="https://www.facebook.com/trunkStudio" target="_blank" class="btn-u rounded hidden-xs">
-        <i class="fa fa-facebook fa-fw"></i>
-        FACEBOOK
-      </a>
+    <div class="col-md-10 content">
+      <header class="article-title">
+        <i class="fa fa-flag"></i>
+        <h1>成立沿革</h2>
+      </header>
     </div>
   </div>
-</div>
-<!-- End Interactive Slider v2 -->
 
-<!--=== Purchase Block ===-->
-<div class="purchase">
-	<div class="container overflow-h">
-		<div class="row">
-			<div class="col-md-9">
-				<span class="call-to-action">
-          我們認為 CargoCMS 是最獨特的風格呈現
-        </span>
-				<p class="hidden-sm hidden-xs">
-          我們製作 CargoCMS 並把關品質。
-        </p>
-			</div>
-			<div class="col-md-3 btn-buy animated bounce">
-				<a href="/login" class="btn-u btn-u-lg">
-          <i class="fa fa-eyedropper"></i>
-          登入 CargoCMS 系統
-        </a>
-			</div>
-		</div>
-	</div>
-</div><!--/row-->
-<!-- End Purchase Block -->
+</div>
 
 
 
 <% LayoutUtils.addScripts('/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
 <% LayoutUtils.addScriptBlock(`
 jQuery(document).ready(function() {
-  App.init();
-		OwlCarousel.initOwlCarousel();
+  $('.sec-menu .sidebar-toggle').click(function(){
+    $('.sec-menu').toggleClass('open');
+  });
 });
 `); %>
