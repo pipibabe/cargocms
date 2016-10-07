@@ -14,15 +14,7 @@
 <% include partials/banner.ejs %>
 
   <div class="row">
-    <div class="col-md-2 sec-menu">
-      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-th-list"></i></button>
-      <ul class="nav nav-pills nav-stacked" id='sticker'>
-        <li data-link="intro" role="presentation" class="active"><a href="#">公司簡介</a></li>
-        <li data-link="history" role="presentation"><a href="#">成立沿革</a></li>
-        <li data-link="location" role="presentation"><a href="#">地理位置</a></li>
-      </ul>
-    </div>
-    <div class="col-md-10 content">
+    <div class="col-md-9 col-md-push-3 content">
 
       <article>
         <header class="article-title">
@@ -90,10 +82,26 @@
         <header class="article-title">
           <h1 id="location">地理位置</h2>
         </header>
-        <img style="max-width:100%;" src="/assets/jason/images/map.jpg">
+        <img src="/assets/jason/images/map.jpg">
       </article>
     </div>
+
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+      <div class="side-menu" id="sticker">
+        <h3>
+          關於我們
+          <small>About Us</small>
+        </h3>
+        <div class="list-group">
+          <a data-link="intro" href="#" class="list-group-item">公司簡介</a>
+          <a data-link="history" href="#" class="list-group-item">成立沿革</a>
+          <a data-link="location" href="#" class="list-group-item">地理位置</a>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 
 </div>
 

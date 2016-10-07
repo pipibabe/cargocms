@@ -1,20 +1,26 @@
 <% LayoutUtils.addScripts('/assets/simple/js/plugin/jquery.sticky.js', '/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
 <% LayoutUtils.addScriptBlock(`
 jQuery(document).ready(function() {
-  $("#sticker").sticky({topSpacing: 25});
-  $('.sec-menu .sidebar-toggle').click(function(){
-    $('.sec-menu').toggleClass('open');
-  });
-  $('.navbar-toggle').click(function(){
-    $('.sec-menu').removeClass('open');
-  });
-  $('.nav-pills li').click(function(){
-    $('.nav-pills li').removeClass('active');
-    $(this).addClass('active');
+  // $("#sticker").sticky({topSpacing: 30});
+  // $('.sec-menu .sidebar-toggle').click(function(){
+  //   $('.sec-menu').toggleClass('open');
+  // });
+  // $('.navbar-toggle').click(function(){
+  //   $('.sec-menu').removeClass('open');
+  // });
+  // $('.nav-pills li').click(function(){
+  //   $('.nav-pills li').removeClass('active');
+  //   $(this).addClass('active');
+  //   $('html, body').animate({
+  //     scrollTop: $('#'+$(this).data('link')).offset().top
+  //   }, 500);
+  //   $('.sec-menu').toggleClass('open');
+  // });
+  $('.side-menu div a').click(function(e){
+    e.preventDefault();
     $('html, body').animate({
-      scrollTop: $('#'+$(this).data('link')).offset().top
+      scrollTop: $('#'+$(this).data('link')).offset().top - 55
     }, 500);
-    $('.sec-menu').toggleClass('open');
   });
 });
 `); %>

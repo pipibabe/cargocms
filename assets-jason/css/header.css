@@ -2,14 +2,10 @@
   background: linear-gradient(to bottom,#007dd8,#d5eeff 24%,white 33%);
   background-size: 100% 1500px;
   background-repeat: no-repeat;
+  margin-top: 50px;
 }
 .wrapper > .navbar{
   margin-bottom: 0;
-}
-.wrapper > .navbar .navbar-collapse.in{
-  position: relative;
-  z-index: 100005;
-  background: rgb(248, 248, 248);
 }
 .navbar-inverse {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#333333+0,0e0e0e+100 */

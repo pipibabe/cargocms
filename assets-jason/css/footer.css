@@ -1,47 +1,20 @@
-.footer-v1 {
-  background-color: #1a1b1c;
-  padding: 2em;
+.web-footer{
+  background: #f9f8f6;
+  padding: 15px;
+  text-align: center;
 }
-.footer-v1 .headline{
-  color: rgba(255, 255, 255, 0.76);
+.web-footer span, .web-footer a{
+  margin: 0 2em;
+  color: #33363c;
 }
-.footer-v1 .headline h2{
-  font-size: 1.6em;
-}
-.footer-v1 .headline h2:after{
-  content: '';
+.web-footer copyright{
+  color: rgba(0, 0, 0, 0.49);
+  margin-top: 5px;
   display: block;
-  width: 2em;
-  height: 2px;
-  background-color: #45494c;
-  margin: 6px 0 14px;
-}
-.footer-v1 .link-list li{
-  margin: 8px 0;
-  margin-right: 2em;
-  border-bottom: 1px dashed #383e4c;
-  padding-bottom: 6px;
-}
-.footer-v1 .link-list li i{
-  float: right;
-}
-.footer-v1 .footer-title{
-  color: rgba(255, 255, 255, 0.86);
-}
-.footer-v1 .container.blocks{
-  background: #212325;
-  padding: 0 3em 1em;
-  box-shadow: 0 2px 3px #1d1e1e;
-}
-.footer-v1 .copyright{
-  margin-top: 1.6em;
-  color: #e7ebf0;
 }
 @media (max-width: 767px){
-  .footer-v1 {
-    padding: 1.2em;
-  }
-  .footer-v1 .container.blocks{
-    padding: 0 1.5em 1.2em;
+  .web-footer span, .web-footer a{
+    display: block;
+    margin: 3px;
   }
 }
