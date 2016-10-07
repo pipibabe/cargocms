@@ -33,6 +33,9 @@ module.exports = {
         }
       }
     },
+    type: {
+      type: Sequelize.ENUM('product', 'part', 'performance'),
+    },
     TagsArray: {
       type: Sequelize.VIRTUAL,
       get: function() {
@@ -85,6 +88,7 @@ module.exports = {
       }
     });
     Post.belongsTo(Location);
+    // Post.belongsTo(Group);
   },
   options: {
     classMethods: {
