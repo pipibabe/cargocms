@@ -16,6 +16,7 @@ module.exports = {
     type: {
       type: Sequelize.ENUM('product', 'part', 'performance'),
     },
+    sourceId: Sequelize.INTEGER,
   },
   associations: () => {
     Group.hasMany(Post);

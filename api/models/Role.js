@@ -3,7 +3,7 @@ module.exports = {
     authority: Sequelize.STRING
   },
 
-  associate: (models) => {
+  associations: () => {
     User.belongsToMany(Role, {
 
       through: 'UserRole',
