@@ -16,14 +16,14 @@
 
       <ul class="mainnav-menu">
 
-        <li class="dropdown active">
-          <a href="/assets/mvp/index.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+        <li class="dropdown <%= (req.path=='/')?'active':'' %>">
+          <a href="/">
 
             通報首頁
-            <i class="mainnav-caret"></i>
+            <!-- <i class="mainnav-caret"></i> -->
           </a>
 
-          <ul class="dropdown-menu" role="menu">
+          <!-- <ul class="dropdown-menu" role="menu">
             <li>
               <a href="/assets/mvp/index.html">
               <i class="fa fa-dashboard dropdown-icon "></i>
@@ -44,18 +44,18 @@
               Reports Dashboard
               </a>
             </li>
-          </ul>
+          </ul> -->
         </li>
 
-        <li class="dropdown ">
+        <li class="dropdown <%= (req.path=='/report')?'active':'' %>">
 
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          <a href="/report">
 
             我要通報
-            <i class="mainnav-caret"></i>
+            <!-- <i class="mainnav-caret"></i> -->
           </a>
 
-          <ul class="dropdown-menu mega-dropdown-menu mega-menu-2" role="menu">
+          <!-- <ul class="dropdown-menu mega-dropdown-menu mega-menu-2" role="menu">
 
             <li>
               <div class="mega-menu-content">
@@ -107,9 +107,9 @@
                       </a>
                     </li>
                   </ul>
-                </div> <!-- /.mega-menu-col -->
+                </div>--> <!-- /.mega-menu-col -->
 
-                <div class="mega-menu-col">
+                <!--<div class="mega-menu-col">
 
                   <ul class="mega-menu-menu">
                     <li class="mega-menu-header">More Elements</li>
@@ -153,26 +153,26 @@
 
                   </ul>
 
-                </div> <!-- /.mega-menu-col -->
+                </div>--> <!-- /.mega-menu-col -->
 
-              </div> <!-- /.mega-menu-content -->
+              <!--</div>--> <!-- /.mega-menu-content -->
 
-            </li>
+            <!--</li>
 
-          </ul>
+          </ul> -->
 
         </li>
 
 
         <li class="dropdown ">
 
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          <a href="javascript:;">
 
             通報歷史
-            <i class="mainnav-caret"></i>
+            <!-- <i class="mainnav-caret"></i> -->
           </a>
 
-          <ul class="dropdown-menu mega-menu-2" role="menu">
+          <!-- <ul class="dropdown-menu mega-menu-2" role="menu">
 
             <li>
 
@@ -263,10 +263,10 @@
                     </a>
                   </li>
                 </ul>
-              </div> <!-- /.mega-menu-col -->
+              </div>--> <!-- /.mega-menu-col -->
 
 
-              <div class="mega-menu-col">
+              <!--<div class="mega-menu-col">
                 <ul class="mega-menu-menu">
 
                   <li class="mega-menu-header">Account Pages</li>
@@ -303,23 +303,23 @@
                     </a>
                   </li>
                 </ul>
-              </div> <!-- /.mega-menu-col -->
+              </div>--> <!-- /.mega-menu-col -->
 
-            </li>
+            <!--</li>
 
-          </ul>
+          </ul> -->
 
         </li>
 
 
         <li class="dropdown">
 
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+          <a href="javascript:;">
             聯絡我們
-            <i class="mainnav-caret"></i>
+            <!-- <i class="mainnav-caret"></i> -->
           </a>
 
-          <ul class="dropdown-menu mega-menu-2" role="menu">
+          <!-- <ul class="dropdown-menu mega-menu-2" role="menu">
 
             <li>
                     <div class="mega-menu-content">
@@ -336,9 +336,9 @@
                     <div class="demo-external">
                       <a href="./assets/mvp/admin-1/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
                     </div>
-                  </div><!-- /.demo-block -->
+                  </div>--><!-- /.demo-block -->
 
-                  <div class="demo-block">
+                  <!--<div class="demo-block">
                     <a href="./assets/mvp/landing/index.html" class="demo-launcher">
                       <img src="/assets/mvp/previews/img/theme-drop-landing.png" class="img-responsive" alt="">
 
@@ -348,10 +348,10 @@
                     <div class="demo-external">
                       <a href="./assets/mvp/landing/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
                     </div>
-                  </div><!-- /.demo-block -->
-                </div> <!-- /.mega-menu-col -->
+                  </div>--><!-- /.demo-block -->
+                <!-- </div>--> <!-- /.mega-menu-col -->
 
-                <div class="mega-menu-col">
+                <!--<div class="mega-menu-col">
                   <div class="demo-block">
                     <a href="./assets/mvp/admin-2/index.html" class="demo-launcher">
                       <img src="/assets/mvp/previews/img/theme-drop-admin-2.png" class="img-responsive" alt="">
@@ -362,9 +362,9 @@
                     <div class="demo-external">
                       <a href="./assets/mvp/admin-2/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
                     </div>
-                  </div><!-- /.demo-block -->
+                  </div>--><!-- /.demo-block -->
 
-                  <div class="demo-block">
+                  <!--<div class="demo-block">
                     <a href="./assets/mvp/launch/index.html" class="demo-launcher">
                       <img src="/assets/mvp/previews/img/theme-drop-launch.png" class="img-responsive" alt="">
 
@@ -374,13 +374,13 @@
                     <div class="demo-external">
                       <a href="./assets/mvp/launch/index.html" target="_blank"><small><i class="fa fa-external-link"></i>&nbsp;&nbsp;(Open in new tab)</small></a>
                     </div>
-                  </div><!-- /.demo-block -->
-                </div> <!-- /.mega-menu-col -->
+                  </div>--><!-- /.demo-block -->
+                <!--</div>--> <!-- /.mega-menu-col -->
 
-              </div> <!-- /.mega-menu-content -->
-            </li>
+              <!--</div>--> <!-- /.mega-menu-content -->
+            <!--</li>
 
-          </ul>
+          </ul> -->
 
         </li>
 

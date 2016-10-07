@@ -3,26 +3,26 @@ $(function () {
 	var data, chartOptions
 
 	data = [
-		{ label: "Product 1", data: Math.floor (Math.random() * 100 + 250) }, 
-		{ label: "Product 2", data: Math.floor (Math.random() * 100 + 350) }, 
-		{ label: "Product 3", data: Math.floor (Math.random() * 100 + 650) }, 
-		{ label: "Product 4", data: Math.floor (Math.random() * 100 + 50) },
-		{ label: "Product 5", data: Math.floor (Math.random() * 100 + 250) }
+		{ label: "一般藥物", data: Math.floor (Math.random() * 100 + 250) },
+		{ label: "臨床藥物", data: Math.floor (Math.random() * 100 + 350) },
+		{ label: "不良品", data: Math.floor (Math.random() * 100 + 650) },
+		{ label: "醫療器材不良", data: Math.floor (Math.random() * 100 + 50) },
+		{ label: "醫療作業不良", data: Math.floor (Math.random() * 100 + 250) }
 	]
 
-	chartOptions = {		
+	chartOptions = {
 		series: {
 			pie: {
-				show: true,  
-				innerRadius: .5, 
+				show: true,
+				innerRadius: .5,
 				stroke: {
 					width: 4
 				}
 			}
-		}, 
+		},
 		legend: {
 			position: 'ne'
-		}, 
+		},
 		tooltip: true,
 		tooltipOpts: {
 			content: '%s: %y'

@@ -37,7 +37,7 @@ var defaultConfig = {
   },
   'WallController': true,
   'MainController': {
-    'index': ['nocache']
+    'index': ['nocache', 'passport', 'forceLogin']
   },
   'AdminController': {
     'index': ['passport', 'sessionAuth', 'isAdmin']

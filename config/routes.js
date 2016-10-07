@@ -83,14 +83,22 @@ var defaultConfig = {
   'get /auth/:provider/callback': 'AuthController.callback',
   'get /auth/:provider/:action': 'AuthController.callback',
 
+  //----- MainController -----
+  'get /': 'MainController.index',
+
+  //----- ReportController -----
+  'get /report': 'ReportController.index',
+  'get /report/knowtype': 'ReportController.knowtype',
+  'get /report/general': 'ReportController.general',
+
   //----- WallController -----
   'get /wall/:id': 'WallController.show',
 };
 
 module.exports.routes = {
-  '/': {
-    view: 'index'
-  },
+  // '/': {
+  //   view: 'index'
+  // },
   ...customConfig,
   ...defaultConfig,
   "/admin/:controller/:action/:id?": {},

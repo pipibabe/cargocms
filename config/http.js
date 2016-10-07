@@ -171,7 +171,6 @@ module.exports.http = {
           return res._scripts;
         },
         addScriptBlock: function(block) {
-          console.log("??????????");
           res._scriptBlock += block;
         },
         getScriptBlock: function() {
