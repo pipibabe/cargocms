@@ -11,6 +11,7 @@ module.exports = {
     },
     sequence: {
       type: Sequelize.INTEGER,
+      defaultValue: 0
     },
     type: {
       type: Sequelize.ENUM('product', 'part', 'performance'),
@@ -21,11 +22,12 @@ module.exports = {
   },
   options: {
     classMethods: {
-      findWithType: (type) => {
-        const groups = await Group.find({
+      findWithType: async (type) => {
+        const groups = await Group.findAll({
           where: {
             type
           },
+          order: 'sequence'
         });
         return groups;
       }

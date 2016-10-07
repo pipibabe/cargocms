@@ -88,10 +88,28 @@ module.exports = {
       }
     });
     Post.belongsTo(Location);
-    // Post.belongsTo(Group);
+    Post.belongsTo(Group);
+    Post.hasOne(Product);
+    Post.hasOne(Part);
+    Post.hasOne(Performance);
   },
   options: {
     classMethods: {
+      findProductByGroupId: async (groupId) => {
+        try {
+          return await Post.findAll({
+            include: [{
+              model: Group,
+              where: {
+                id: groupId
+              }
+            }, Product],
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
       findAllHasJoin: async (order, offset, limit) => {
         try {
           return await Post.findAll({

@@ -18,13 +18,9 @@
       <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-filter"></i></button>
       <ul class="nav nav-pills nav-stacked" id='sticker'>
         <li data-link="intro" role="presentation" class="active"><a href="#">全部產品</a></li>
-        <li data-link="intro" role="presentation"><a href="#">輕型自動門機</a></li>
-        <li data-link="history" role="presentation"><a href="#">中型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">重型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">重疊型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">圓弧型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">特殊自動門機</a></li>
-
+        <% for(let group of productGroups) { %>
+          <li data-link="intro" role="presentation"><a href="#"><%= group.title %></a></li>
+        <% } %>
       </ul>
     </div>
     <div class="col-md-9 col-md-push-3 content">
