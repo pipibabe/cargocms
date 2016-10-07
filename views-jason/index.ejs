@@ -16,17 +16,17 @@
   <div class="row">
     <div class="col-md-2 sec-menu">
       <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-th-list"></i></button>
-      <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active"><a href="#">公司簡介</a></li>
-        <li role="presentation"><a href="#">成立沿革</a></li>
-        <li role="presentation"><a href="#">地理位置</a></li>
+      <ul class="nav nav-pills nav-stacked" id='sticker'>
+        <li data-link="intro" role="presentation" class="active"><a href="#">公司簡介</a></li>
+        <li data-link="history" role="presentation"><a href="#">成立沿革</a></li>
+        <li data-link="location" role="presentation"><a href="#">地理位置</a></li>
       </ul>
     </div>
     <div class="col-md-10 content">
 
       <article>
         <header class="article-title">
-          <h1 class="article-title">公司簡介</h2>
+          <h1 id="intro">公司簡介</h2>
         </header>
         <img src="/assets/jason/images/j1-1.png">
         <p>歡迎蒞臨「捷陞專業自動門資訊網」!</p>
@@ -42,7 +42,7 @@
 
       <article>
         <header class="article-title">
-          <h1>成立沿革</h2>
+          <h1 id="history">成立沿革</h2>
         </header>
         <ul class="company-info">
           <li>
@@ -88,9 +88,9 @@
 
       <article>
         <header class="article-title">
-          <h1>地理位置</h2>
+          <h1 id="location">地理位置</h2>
         </header>
-        <img src="/assets/jason/images/map.jpg">
+        <img style="max-width:100%;" src="/assets/jason/images/map.jpg">
       </article>
     </div>
   </div>
@@ -99,11 +99,19 @@
 
 
 
-<% LayoutUtils.addScripts('/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
+<% LayoutUtils.addScripts('/assets/simple/js/plugin/jquery.sticky.js', '/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
 <% LayoutUtils.addScriptBlock(`
 jQuery(document).ready(function() {
+  $("#sticker").sticky({topSpacing: 25});
   $('.sec-menu .sidebar-toggle').click(function(){
     $('.sec-menu').toggleClass('open');
+  });
+  $('.nav-pills li').click(function(){
+    $('.nav-pills li').removeClass('active');
+    $(this).addClass('active');
+    $('html, body').animate({
+      scrollTop: $('#'+$(this).data('link')).offset().top
+    }, 500);
   });
 });
 `); %>
