@@ -1,0 +1,90 @@
+.container.body{
+  margin: 0 auto 3em;
+  padding: 0;
+  background: white;
+  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.06);
+}
+.container.body > .row{
+  padding: 0 2em;
+}
+.article-title h1{
+  display: inline-block;
+  font-size: 2em;
+  margin: 0;
+}
+.article-title h1{
+  color: #5d6267;
+  padding-left: 0.6em;
+  position: relative;
+  font-size: 1.8em;
+}
+.article-title h1:before{
+  content: "";
+  width: 4px;
+  height: 31px;
+  background: #2e9bea;
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: -2px;
+  border-radius: 4px;
+}
+.article-title h1:after{
+  content: "JASON AUTOMATIC DOOR";
+  font-size: 10px;
+  margin-left: 7px;
+  color: gray;
+}
+.sec-title{
+  margin: 1em 0 1em;
+  font-size: 1.5em;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed #1faee4;
+  float: left;
+}
+.col-md-9.content{
+  padding: 0 3em;
+}
+.col-md-9.content article{
+  margin-bottom: 3.5em;
+}
+.col-md-9.content article img{
+  margin: 1em 1em 3em;
+  margin-top:1.3em;
+  margin-bottom:1.6em;
+  max-width:100%;
+}
+.col-md-9.content .row{
+  padding: 2em 0 3em;
+}
+.company-info{
+  margin-top: 2.3em;
+}
+.company-info li h6{
+  color: #2e9bea;
+}
+.company-info li span{
+  color: #3e4146;
+  font-size: 1.3em;
+}
+@media (max-width: 767px){
+  .col-md-10.content{
+    padding: 0 1em;
+  }
+  .col-md-9.content{
+    padding: 0 1.2em;
+  }
+}
+@media (max-width: 767px){
+  .col-md-10.content{
+    padding: 0 1em;
+  }
+  .col-md-9.content{
+    padding: 0 1.2em;
+  }
+}
+@media (max-width: 349px){
+  .article-title h1:after{
+    display: none;
+  }
+}

@@ -9,16 +9,29 @@
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 
+<% include ../../partials/banner.ejs %>
+
 <div class="container body">
 
-<% include partials/banner.ejs %>
-
   <div class="row">
-    <div class="col-md-9 col-md-push-3 content">
+    <div class="col-md-2 sec-menu">
+      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-filter"></i></button>
+      <ul class="nav nav-pills nav-stacked" id='sticker'>
+        <li data-link="intro" role="presentation" class="active"><a href="#">全部配件</a></li>
+        <li data-link="history" role="presentation"><a href="#">無線觸摸開關</a></li>
+        <li data-link="location" role="presentation"><a href="#">紅外線感應器</a></li>
+        <li data-link="location" role="presentation"><a href="#">各式感應開關</a></li>
+        <li data-link="location" role="presentation"><a href="#">對照式安全光線</a></li>
+        <li data-link="location" role="presentation"><a href="#">感應卡機及電鎖</a></li>
+        <li data-link="location" role="presentation"><a href="#">自動門耗材</a></li>
+        <li data-link="location" role="presentation"><a href="#">免灌膠玻璃上下料</a></li>
+      </ul>
+    </div>
+    <div class="col-md-10 content">
 
       <article>
         <header class="article-title">
-          <h1 id="intro">公司簡介</h2>
+          <h1 id="intro">週邊配件</h2>
         </header>
         <img src="/assets/jason/images/j1-1.png">
         <p>歡迎蒞臨「捷陞專業自動門資訊網」!</p>
@@ -82,27 +95,11 @@
         <header class="article-title">
           <h1 id="location">地理位置</h2>
         </header>
-        <img src="/assets/jason/images/map.jpg">
+        <img style="max-width:100%;" src="/assets/jason/images/map.jpg">
       </article>
     </div>
-
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
-      <div class="side-menu" id="sticker">
-        <h3>
-          關於我們
-          <small>About Us</small>
-        </h3>
-        <div class="list-group">
-          <a data-link="intro" href="#" class="list-group-item">公司簡介</a>
-          <a data-link="history" href="#" class="list-group-item">成立沿革</a>
-          <a data-link="location" href="#" class="list-group-item">地理位置</a>
-        </div>
-      </div>
-    </div>
-
   </div>
-
 
 </div>
 
-<% include jason/pageScript.ejs %>
+<% include ../pageScript.ejs %>
