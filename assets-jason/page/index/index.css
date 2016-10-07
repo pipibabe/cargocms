@@ -1,5 +1,11 @@
 .container.body{
-  margin: 2.3em auto 3em;
+  margin: 0 auto 3em;
+  padding: 0;
+  background: white;
+  box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.06);
+}
+.container.body > .row{
+  padding: 0 2em;
 }
 .article-title h1{
   display: inline-block;

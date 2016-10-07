@@ -5,6 +5,9 @@ jQuery(document).ready(function() {
   $('.sec-menu .sidebar-toggle').click(function(){
     $('.sec-menu').toggleClass('open');
   });
+  $('.navbar-toggle').click(function(){
+    $('.sec-menu').removeClass('open');
+  });
   $('.nav-pills li').click(function(){
     $('.nav-pills li').removeClass('active');
     $(this).addClass('active');
