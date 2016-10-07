@@ -15,12 +15,29 @@ describe.only('jason legacy data', function() {
     done();
   })
 
-  it('import group should be success.', async (done) => {
+  it('import group should be success.',  (done) => {
     connection.query('SELECT * from tb_class', function(err, rows, fields) {
       if (err) throw err;
+
       console.log('The length is: ', rows.length);
 
-      done();
+      let createRows = rows.map((row, index) => {
+        let newGroup = Group.build();
+        newGroup.title = row.c_title
+        newGroup.sourceId = row.c_id
+        newGroup.save();
+      });
+
+      Promise.all(createRows)
+      .then(() => {
+        done();
+      }).catch(function(reason) {
+        console.log(reason.stack);
+        done();
+      });
+
+
+
     });
   });
 
@@ -51,7 +68,7 @@ describe.only('jason legacy data', function() {
     });
   });
 
-  it('import file to image should be success.', async (done) => {
+  it('import file should be success.', async (done) => {
     connection.query('SELECT * from tb_file', function(err, rows, fields) {
       if (err) throw err;
       console.log('The length is: ', rows.length);
