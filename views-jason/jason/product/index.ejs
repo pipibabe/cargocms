@@ -9,24 +9,29 @@
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 
-<% include partials/banner.ejs %>
+<% include ../../partials/banner.ejs %>
 
 <div class="container body">
 
   <div class="row">
     <div class="col-md-2 sec-menu">
-      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-th-list"></i></button>
+      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-filter"></i></button>
       <ul class="nav nav-pills nav-stacked" id='sticker'>
-        <li data-link="intro" role="presentation" class="active"><a href="#">公司簡介</a></li>
-        <li data-link="history" role="presentation"><a href="#">成立沿革</a></li>
-        <li data-link="location" role="presentation"><a href="#">地理位置</a></li>
+        <li data-link="intro" role="presentation" class="active"><a href="#">全部產品</a></li>
+        <li data-link="intro" role="presentation"><a href="#">輕型自動門機</a></li>
+        <li data-link="history" role="presentation"><a href="#">中型自動門機</a></li>
+        <li data-link="location" role="presentation"><a href="#">重型自動門機</a></li>
+        <li data-link="location" role="presentation"><a href="#">重疊型自動門機</a></li>
+        <li data-link="location" role="presentation"><a href="#">圓弧型自動門機</a></li>
+        <li data-link="location" role="presentation"><a href="#">特殊自動門機</a></li>
+
       </ul>
     </div>
     <div class="col-md-10 content">
 
       <article>
         <header class="article-title">
-          <h1 id="intro">公司簡介</h2>
+          <h1 id="intro">產品介紹</h2>
         </header>
         <img src="/assets/jason/images/j1-1.png">
         <p>歡迎蒞臨「捷陞專業自動門資訊網」!</p>
@@ -39,62 +44,9 @@
         <p>在瀏覽過本公司的網站後，希望您能夠獲得所需要的相關資訊，也希望您能夠透過這個聯繫彼此的橋樑，對本公司的業務範疇及進步情況有更深一層的認識，更希望您日後仍能秉持一貫的關心與愛護之意，多多給我們指教與批評，讓本公司的工作團隊可以因您的參與而成長，再次謝謝您的蒞臨。</p>
 
       </article>
-
-      <article>
-        <header class="article-title">
-          <h1 id="history">成立沿革</h2>
-        </header>
-        <ul class="company-info">
-          <li>
-            <h6>電話：</h6>
-            <span><a href="tel:+886422467160">04-2246-7160</a></span>
-          </li>
-          <li>
-            <h6>傳真：</h6>
-            <span><a href="fax:+886422467392">04-2246-7392</a></span>
-          </li>
-          <li>
-            <h6>地址：</h6>
-            <span>406台中市北屯區修齊街156號</span>
-          </li>
-          <li>
-            <h6>英文地址：</h6>
-            <span>No.156, Xiuqi St., Beitun Dist., Taichung City 406, Taiwan</span>
-          </li>
-          <li>
-            <h6>成立日期：</h6>
-            <span>民國94年07月04日</span>
-          </li>
-          <li>
-            <h6>統一編號：</h6>
-            <span>21898327</span>
-          </li>
-          <li>
-            <h6>電子郵件：</h6>
-            <span><a href="mailto:autodoor@ms95.url.com.tw">autodoor@ms95.url.com.tw</a></span>
-          </li>
-          <li>
-            <h6>營運內容：</h6>
-            <span>各型類自動門(AutoMatic Door)、空氣門及週邊配備之安裝、維修、保養 </span>
-          </li>
-          <li>
-            <h6>相關配備：</h6>
-            <span>紅外線感應器、雷達、DC(AC)馬達、專用電鎖、無線手壓開關 （觸摸開關）、密碼機、互控
-            裝置、感控裝 置、多功能遙控器、 感應卡機、陽極鎖、磁力鎖、安全防 夾、叮噹機、來客報知器、 定位開關、
-            鋁材不銹鋼及玻璃、玻璃快速夾具等。</span>
-          </li>
-        </ul>
-      </article>
-
-      <article>
-        <header class="article-title">
-          <h1 id="location">地理位置</h2>
-        </header>
-        <img style="max-width:100%;" src="/assets/jason/images/map.jpg">
-      </article>
     </div>
   </div>
 
 </div>
 
-<% include jason/pageScript.ejs %>
+<% include ../pageScript.ejs %>

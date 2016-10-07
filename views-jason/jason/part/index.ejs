@@ -9,24 +9,29 @@
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 
-<% include partials/banner.ejs %>
+<% include ../../partials/banner.ejs %>
 
 <div class="container body">
 
   <div class="row">
     <div class="col-md-2 sec-menu">
-      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-th-list"></i></button>
+      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-filter"></i></button>
       <ul class="nav nav-pills nav-stacked" id='sticker'>
-        <li data-link="intro" role="presentation" class="active"><a href="#">公司簡介</a></li>
-        <li data-link="history" role="presentation"><a href="#">成立沿革</a></li>
-        <li data-link="location" role="presentation"><a href="#">地理位置</a></li>
+        <li data-link="intro" role="presentation" class="active"><a href="#">全部配件</a></li>
+        <li data-link="history" role="presentation"><a href="#">無線觸摸開關</a></li>
+        <li data-link="location" role="presentation"><a href="#">紅外線感應器</a></li>
+        <li data-link="location" role="presentation"><a href="#">各式感應開關</a></li>
+        <li data-link="location" role="presentation"><a href="#">對照式安全光線</a></li>
+        <li data-link="location" role="presentation"><a href="#">感應卡機及電鎖</a></li>
+        <li data-link="location" role="presentation"><a href="#">自動門耗材</a></li>
+        <li data-link="location" role="presentation"><a href="#">免灌膠玻璃上下料</a></li>
       </ul>
     </div>
     <div class="col-md-10 content">
 
       <article>
         <header class="article-title">
-          <h1 id="intro">公司簡介</h2>
+          <h1 id="intro">週邊配件</h2>
         </header>
         <img src="/assets/jason/images/j1-1.png">
         <p>歡迎蒞臨「捷陞專業自動門資訊網」!</p>
@@ -97,4 +102,4 @@
 
 </div>
 
-<% include jason/pageScript.ejs %>
+<% include ../pageScript.ejs %>

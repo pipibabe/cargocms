@@ -3,6 +3,6 @@
 }
 .wrapper > .navbar .navbar-collapse.in{
   position: relative;
-  z-index: 100000000;
+  z-index: 100005;
   background: rgb(248, 248, 248);
 }
