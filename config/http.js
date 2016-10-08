@@ -90,11 +90,8 @@ module.exports.http = {
   customMiddleware: function(app) {
     // app.use(express.logger());
     // app.use(express.compress());
-    app.use('/assets/util', express.static('assets'));
     app.use('/assets/mvp', express.static('assets-mvp'));
-    app.use('/assets/labfnp', express.static('assets-labfnp'));
-    app.use('/assets/unify', express.static('assets-unify'));
-    app.use('/assets/admin', express.static('assets-admin'));
+    app.use('/assets/tcmadr', express.static('assets-tcmadr'));
   },
   middleware: {
     order: [

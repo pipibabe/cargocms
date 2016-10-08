@@ -21,6 +21,15 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="/assets/mvp/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
+  <!-- Bower CSS -->
+  <link rel="stylesheet" href="/assets/mvp/bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/jquery-icheck/skins/minimal/_all.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/bootstrap-3-timepicker/css/bootstrap-timepicker.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/bootstrap-datepicker/css/datepicker3.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/bootstrap-jasny/dist/css/jasny-bootstrap.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/jquery-simplecolorpicker/jquery.simplecolorpicker.css">
+
   <!-- App CSS -->
   <link rel="stylesheet" href="/assets/mvp/css/mvpready-admin.css">
 
@@ -32,6 +41,9 @@
   <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+  <!-- Customize -->
+  <link rel="stylesheet" href="/assets/tcmadr/css/custom.css" />
 </head>
 
 <body class="  ">
@@ -68,6 +80,8 @@
 <script src="/assets/mvp/bower_components/flot/jquery.flot.stack.js"></script>
 <script src="/assets/mvp/bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
 <script src="/assets/mvp/bower_components/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="/assets/mvp/bower_components/select2/dist/js/select2.min.js"></script>
+<script src="/assets/mvp/bower_components/jquery-icheck/icheck.min.js"></script>
 
 <!-- App JS -->
 <script src="/assets/mvp/global/js/mvpready-core.js"></script>
@@ -80,6 +94,17 @@
 <script src="/assets/mvp/global/js/demos/flot/donut.js"></script>
 <script src="/assets/mvp/global/js/demos/flot/stacked-horizontal.js"></script>
 <script src="/assets/mvp/global/js/demos/flot/auto.js"></script>
+
+
+<script type="text/javascript">
+$('.demo-icheck input').iCheck ({
+checkboxClass: 'ui-icheck icheckbox_minimal-grey',
+radioClass: 'ui-icheck iradio_minimal-grey'
+}).on ('ifChanged', function (e) {
+$(e.currentTarget).trigger ('change')
+});
+</script>
+
 
 </body>
 </html>
