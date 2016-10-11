@@ -139,7 +139,6 @@
       {
         "targets": 2,
         "render": function(data, type, row) {
-					console.log(data, type, row);
           if (data) {
             return '<td>' + data +'</td>';
           }else{
@@ -190,7 +189,19 @@
         "searchable": false,
         "targets": 12,
         "render": function (data, type, row) {
-          return '<td>' + data.RecipeOrder.productionStatusDesc + '</td>';
+					console.log(row);
+          // return '<td>' + data.RecipeOrder.productionStatusDesc + '</td>';
+					var productionStatus =  row.RecipeOrder.productionStatus;
+					return '<select class="form-control input-xs" data-id="'+ row.RecipeOrderId +'" name="updateProductionStatus">' +
+	          '<option value="NEW" '+ (productionStatus == 'NEW' ? 'selected' : '') + '>NEW</option>' +
+	          '<option value="SUBMITTED" '+ (productionStatus == 'SUBMITTED' ? 'selected' : '') +' >下訂單</option>' +
+	          '<option value="PAID" '+ (productionStatus == 'PAID' ? 'selected' : '') +'>已付款</option>' +
+	          '<option value="PROCESSING"'+ (productionStatus == 'PROCESSING' ? 'selected' : '') +' >製作中</option>' +
+	          '<option value="CANCELLED"'+ (productionStatus == 'CANCELLED' ? 'selected' : '') +' >取消</option>' +
+	          '<option value="SHIPPED"'+ (productionStatus == 'SHIPPED' ? 'selected' : '') +' >已寄出</option>' +
+	          '<option value="DELIVERED"'+ (productionStatus == 'DELIVERED' ? 'selected' : '') +' >已交付</option>' +
+	          '<option value="COMPLETED"'+ (productionStatus == 'COMPLETED' ? 'selected' : '') +' >完成</option>' +
+	        '</select>'
         }
       },
       {

@@ -89,6 +89,47 @@ appMain.DataTableInitComplete = function() {
   $('#productionStatus').on('change', function(){
     api.columns().search().draw();
   })
+  $("[name='updateProductionStatus']").focus(function() {
+    $(this).attr('data-oldValue', $(this).val());
+  });
+
+  $("[name='updateProductionStatus']").on('change', function() {
+    var that = this;
+    var id = $(this).data("id")
+    var selectedDesc = $(this).find('option:selected').text();
+    var oldVal = $(this).attr('data-oldValue');
+    var newVal = $(this).val();
+
+    console.log(id, $(this).val(), selectedDesc, oldVal, newVal);
+
+    var msgInfo = {
+      title: '注意',
+      content: '確認更新訂單 ID: '+ id +' 訂單狀態為: '+ selectedDesc,
+      btnArray: ['確認', '取消'],
+    };
+    var action = function(ButtonPressed) {
+      if (ButtonPressed === '確認') {
+        $(that).val(newVal);
+        $.ajax({
+          url: "/api/admin/labfnp/recipeorder/status/"+id,
+          method: "put",
+          dataType: 'json',
+          cache: false,
+          data:{
+            productionStatus: newVal
+          }
+        }).done(function (result) {
+          messageApp.show({
+            desc: result.message,
+            type: 'success'
+          });
+        });
+      } else {
+        $(that).val(oldVal);
+      }
+    };
+    messageApp.confirm(msgInfo, action);
+  });
 }
 appMain.customSearch = function() {
   var searchProductionStatus = $('#productionStatus').val() || "";
