@@ -1,12 +1,3 @@
-<% LayoutUtils.addMeta({ property:"og:image", content:SocialService.getShareUrl() + "/assets/tcmadr/img/logo.png" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:url", content:SocialService.getShareUrl() + "/assets/tcmadr/img/logo.png"  }); %>
-<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/jpeg" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:width", content:"1200" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:height", content:"630" }); %>
-<% LayoutUtils.addMeta({ property:"og:title", content:"CargoCMS" }); %>
-<% LayoutUtils.addMeta({ property:"og:description", content:"CargoCMS" }); %>
-<% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
-
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
 
@@ -22,18 +13,20 @@
           <h1 id="intro">產品介紹</h2>
         </header>
 
-        <div class="product row">
-          <div class="col-xs-3 product-img-wrapper">
-            <img class="img-thumbnail" src="http://www.autodoor.twmail.net/webadmin/goods/file/HC-168-1.jpg" alt="產品圖" />
+        <% for(let item of products) { %>
+          <div class="product row">
+            <div class="col-xs-3 product-img-wrapper">
+              <img class="img-thumbnail" src="http://www.autodoor.twmail.net/webadmin/goods/file/HC-168-1.jpg" alt="產品圖" />
+            </div>
+            <div class="col-xs-9 product-content">
+              <h1><%= item.Product.title %></h1>
+              <small><%= item.Product.specification %></small>
+              <p>
+                <%= item.Product.introduction %>
+              </p>
+            </div>
           </div>
-          <div class="col-xs-9 product-content">
-            <h1>產品</h1>
-            <small>HC-168-1</small>
-            <p>
-              產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹
-            </p>
-          </div>
-        </div>
+        <% } %>
 
       </article>
     </div>
@@ -45,8 +38,9 @@
           <small>About Us</small>
         </h3>
         <div class="list-group">
+          <a href="/product" class="list-group-item">全部產品</a>
           <% for(let group of productGroups) { %>
-            <a href="#" class="list-group-item"><%= group.title %></a>
+            <a href="/product?type=<%= group.id %>" class="list-group-item"><%= group.title %></a>
           <% } %>
         </div>
       </div>
@@ -55,4 +49,8 @@
 
 </div>
 
-<% include ../pageScript.ejs %>
+<% LayoutUtils.addScriptBlock(`
+jQuery(document).ready(function() {
+
+});
+`); %>

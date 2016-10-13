@@ -3,6 +3,9 @@ module.exports = {
     title: {
       type: Sequelize.STRING,
     },
+    modelName: {
+      type: Sequelize.STRING,
+    },
     specification: {
       type: Sequelize.STRING,
     },

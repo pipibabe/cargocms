@@ -1,22 +1,25 @@
 .product {
-  min-height: 230px;
+  /*min-height: 230px;*/
+  margin-top: 1em;
 }
 .product:after {
-    content: '';
-    width: 93%;
-    height: 0px;
-    margin-left: 30px;
-    display: block;
-    border-bottom: 1px dashed #e2e2e2;
+  content: '';
+  width: 93%;
+  height: 0px;
+  margin-left: 30px;
+  display: block;
+  border-bottom: 1px dashed #e2e2e2;
 }
 .product h1 {
-  font-size: 1.6em;
-  margin-top: 1.3em;
+  font-size: 1.4em;
   margin-bottom: 8px;
 }
 .product small {
   display: block;
   margin-bottom: 0.6em;
+}
+.product p {
+  color: #51545a;
 }
 .product small:before {
     content: '';

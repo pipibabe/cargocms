@@ -65,7 +65,7 @@ module.exports.init = async () => {
     });
     const newProduct2 = await Product.create({
       title: '180度推開式自動門 單扇/雙扇',
-      specification: 'DC-380-1R / DC-380-2R',
+      specification: 'DC-388-1R / DC-388-2R',
       introduction: 'a door',
       PostId: post.id,
     });

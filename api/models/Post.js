@@ -110,6 +110,19 @@ module.exports = {
           throw e;
         }
       },
+      findAllProduct: async () => {
+        try {
+          return await Post.findAll({
+            include: [{
+              model: Product,
+              required: true
+            }],
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
       findAllHasJoin: async (order, offset, limit) => {
         try {
           return await Post.findAll({
