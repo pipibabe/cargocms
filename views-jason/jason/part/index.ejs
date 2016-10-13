@@ -8,95 +8,52 @@
 <% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
 
 <div class="container body">
 
 <% include ../../partials/banner.ejs %>
 
   <div class="row">
-    <div class="col-md-2 sec-menu">
-      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-filter"></i></button>
-      <ul class="nav nav-pills nav-stacked" id='sticker'>
-        <li data-link="intro" role="presentation" class="active"><a href="#">全部配件</a></li>
-        <li data-link="history" role="presentation"><a href="#">無線觸摸開關</a></li>
-        <li data-link="location" role="presentation"><a href="#">紅外線感應器</a></li>
-        <li data-link="location" role="presentation"><a href="#">各式感應開關</a></li>
-        <li data-link="location" role="presentation"><a href="#">對照式安全光線</a></li>
-        <li data-link="location" role="presentation"><a href="#">感應卡機及電鎖</a></li>
-        <li data-link="location" role="presentation"><a href="#">自動門耗材</a></li>
-        <li data-link="location" role="presentation"><a href="#">免灌膠玻璃上下料</a></li>
-      </ul>
-    </div>
     <div class="col-md-9 col-md-push-3 content">
 
       <article>
         <header class="article-title">
           <h1 id="intro">週邊配件</h2>
         </header>
-        <img src="/assets/jason/images/j1-1.png">
-        <p>歡迎蒞臨「捷陞專業自動門資訊網」!</p>
-        <p>本公司的團隊成員於自動門界服務已超過10年以上資歷，安裝過台灣前500大型企業內-包括了無塵室自動門包括聯電、 台積電、日月光、奇美電子、矽品、友達等不勝枚舉…，歡迎參觀比較。捷陞的團隊成員們都有經過無塵室的施工規則教育訓練 ，在各個知名大醫院手術室及X光室之鉛板門也都有專業的施工經驗。多年的經驗與專業技術是您的最佳選擇。</p>
-        <p>我們自信能幫客戶完成自動門及邊配備之整合規劃及統包施工與維修，近幾年盛行自動門搭配門禁或相關控制，自動控制對我們而言是基本的，一般人的認知自動門價格很高，其實不然， 捷陞會依照您的預算提供諮詢與規劃。</p>
-        <header style="overflow: hidden;">
-          <h2 class="sec-title">優質服務，優惠價格</h2>
-        </header>
-        <p>我們一貫的宗旨是服務客戶及價格最適化的選擇，若您有自動門相關的難題，歡迎來電咨詢。</p>
-        <p>在瀏覽過本公司的網站後，希望您能夠獲得所需要的相關資訊，也希望您能夠透過這個聯繫彼此的橋樑，對本公司的業務範疇及進步情況有更深一層的認識，更希望您日後仍能秉持一貫的關心與愛護之意，多多給我們指教與批評，讓本公司的工作團隊可以因您的參與而成長，再次謝謝您的蒞臨。</p>
+        <div class="product row">
+          <div class="col-xs-3 product-img-wrapper">
+            <img class="img-thumbnail" src="http://www.autodoor.twmail.net/webadmin/goods/file/HC-168-1.jpg" alt="產品圖" />
+          </div>
+          <div class="col-xs-9 product-content">
+            <h1>產品</h1>
+            <small>HC-168-1</small>
+            <p>
+              產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹
+            </p>
+          </div>
+        </div>
 
       </article>
+    </div>
 
-      <article>
-        <header class="article-title">
-          <h1 id="history">成立沿革</h2>
-        </header>
-        <ul class="company-info">
-          <li>
-            <h6>電話：</h6>
-            <span><a href="tel:+886422467160">04-2246-7160</a></span>
-          </li>
-          <li>
-            <h6>傳真：</h6>
-            <span><a href="fax:+886422467392">04-2246-7392</a></span>
-          </li>
-          <li>
-            <h6>地址：</h6>
-            <span>406台中市北屯區修齊街156號</span>
-          </li>
-          <li>
-            <h6>英文地址：</h6>
-            <span>No.156, Xiuqi St., Beitun Dist., Taichung City 406, Taiwan</span>
-          </li>
-          <li>
-            <h6>成立日期：</h6>
-            <span>民國94年07月04日</span>
-          </li>
-          <li>
-            <h6>統一編號：</h6>
-            <span>21898327</span>
-          </li>
-          <li>
-            <h6>電子郵件：</h6>
-            <span><a href="mailto:autodoor@ms95.url.com.tw">autodoor@ms95.url.com.tw</a></span>
-          </li>
-          <li>
-            <h6>營運內容：</h6>
-            <span>各型類自動門(AutoMatic Door)、空氣門及週邊配備之安裝、維修、保養 </span>
-          </li>
-          <li>
-            <h6>相關配備：</h6>
-            <span>紅外線感應器、雷達、DC(AC)馬達、專用電鎖、無線手壓開關 （觸摸開關）、密碼機、互控
-            裝置、感控裝 置、多功能遙控器、 感應卡機、陽極鎖、磁力鎖、安全防 夾、叮噹機、來客報知器、 定位開關、
-            鋁材不銹鋼及玻璃、玻璃快速夾具等。</span>
-          </li>
-        </ul>
-      </article>
-
-      <article>
-        <header class="article-title">
-          <h1 id="location">地理位置</h2>
-        </header>
-        <img style="max-width:100%;" src="/assets/jason/images/map.jpg">
-      </article>
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+      <div class="side-menu" id="sticker">
+        <h3>
+          週邊配件
+          <small>About Us</small>
+        </h3>
+        <div class="list-group">
+          <a href="#" class="list-group-item">全部配件</a>
+          <a href="#" class="list-group-item">無線觸摸開關</a>
+          <a href="#" class="list-group-item">紅外線感應器</a>
+          <a href="#" class="list-group-item">各式感應開關</a>
+          <a href="#" class="list-group-item">對照式安全光線</a>
+          <a href="#" class="list-group-item">感應卡機及電鎖</a>
+          <a href="#" class="list-group-item">自動門耗材</a>
+          <a href="#" class="list-group-item">免灌膠玻璃上下料</a>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -5,7 +5,7 @@
   box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.06);
 }
 .container.body > .row{
-  padding: 0 2em;
+  margin: 0 2em;
 }
 .article-title h1{
   display: inline-block;
@@ -81,6 +81,9 @@
   }
   .col-md-9.content{
     padding: 0 1.2em;
+  }
+  .container.body > .row{
+    margin: 0 0.5em;
   }
 }
 @media (max-width: 349px){
