@@ -12,18 +12,55 @@
         <header class="article-title">
           <h1 id="intro">週邊配件</h2>
         </header>
-        <div class="product row">
-          <div class="col-xs-3 product-img-wrapper">
-            <img class="img-thumbnail" src="http://www.autodoor.twmail.net/webadmin/goods/file/HC-168-1.jpg" alt="產品圖" />
+
+        <% if (posts.length === 0) { %>
+          <div class="no-product">
+            配件尚未推出，敬請期待
           </div>
-          <div class="col-xs-9 product-content">
-            <h1>產品</h1>
-            <small>HC-168-1</small>
-            <p>
-              產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹產品介紹
-            </p>
+        <% } %>
+        <% for (let item of posts) { %>
+          <div class="product row">
+            <div class="col-xs-3 product-img-wrapper">
+              <img class="img-thumbnail" src="http://www.autodoor.twmail.net/webadmin/goods/file/HC-168-1.jpg" alt="產品圖" />
+            </div>
+            <div class="col-xs-9 product-content">
+              <h1><%= item.Part.title %></h1>
+              <small><%= item.Part.specification %></small>
+              <p>
+                <%= item.Part.introduction %>
+              </p>
+            </div>
           </div>
-        </div>
+        <% } %>
+
+        <% if (maxPage > 1) { %>
+        <nav aria-label="Page navigation">
+          <ul class="product pagination">
+            <li>
+              <a href="/part/group/<%= req.params.groupId %>/page/<%= prevPage %>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+
+            <% for (let i = 1; i <= maxPage; i++){ %>
+              <% if (i == page) { %>
+                <li class="active">
+                  <a href="/part/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                </li>
+              <% } else { %>
+                <li>
+                  <a href="/part/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                </li>
+              <% } %>
+            <% } %>
+            <li>
+              <a href="/part/group/<%= req.params.groupId %>/page/<%= nextPage %>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <% } %>
 
       </article>
     </div>
@@ -35,14 +72,10 @@
           <small>About Us</small>
         </h3>
         <div class="list-group">
-          <a href="#" class="list-group-item">全部配件</a>
-          <a href="#" class="list-group-item">無線觸摸開關</a>
-          <a href="#" class="list-group-item">紅外線感應器</a>
-          <a href="#" class="list-group-item">各式感應開關</a>
-          <a href="#" class="list-group-item">對照式安全光線</a>
-          <a href="#" class="list-group-item">感應卡機及電鎖</a>
-          <a href="#" class="list-group-item">自動門耗材</a>
-          <a href="#" class="list-group-item">免灌膠玻璃上下料</a>
+          <a href="/part/group/0/page/1" class="list-group-item">全部配件</a>
+          <% for(let group of partGroups) { %>
+            <a href="/part/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+          <% } %>
         </div>
       </div>
     </div>

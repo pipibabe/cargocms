@@ -95,7 +95,7 @@ module.exports = {
   },
   options: {
     classMethods: {
-      findProductByGroupId: async (groupId, offset = 0, limit) => {
+      findItemsByGroupId: async (itemType, groupId, offset = 0, limit) => {
         try {
           return await Post.findAll({
             offset,
@@ -105,20 +105,8 @@ module.exports = {
               where: {
                 id: groupId
               }
-            }, Product],
-          });
-        } catch (e) {
-          sails.log.error(e);
-          throw e;
-        }
-      },
-      findAllProduct: async (offset = 0, limit) => {
-        try {
-          return await Post.findAll({
-            offset,
-            limit,
-            include: [{
-              model: Product,
+            }, {
+              model: itemType,
               required: true
             }],
           });
@@ -127,21 +115,37 @@ module.exports = {
           throw e;
         }
       },
-      createProduct: async ({
+      findAllItems: async (itemType, offset = 0, limit) => {
+        try {
+          return await Post.findAll({
+            offset,
+            limit,
+            include: [{
+              model: itemType,
+              required: true
+            }],
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
+      createItem: async ({
         title,
         modelName,
         specification,
         introduction,
-        GroupId,
+        groupId,
+        itemType
       }) => {
         try {
           let post = await Post.create({
             title: '新產品',
             content: '詳細說明',
-            type: 'product',
-            GroupId
+            type: itemType.getTableName().toLowerCase(),
+            GroupId: groupId
           });
-          return await Product.create({
+          return await itemType.create({
             title,
             modelName,
             specification,

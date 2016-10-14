@@ -3,6 +3,8 @@
 // const ScentData = require('./data/Scent');
 // const ScentDetail = require('./data/ScentDetail.json');
 // const FeelingData = require('./data/Feeling');
+const products = require('./data/Product.json');
+const parts = require('./data/Part.json');
 
 module.exports.init = async () => {
   try {
@@ -38,84 +40,21 @@ module.exports.init = async () => {
       await Group.create(item);
     });
 
-    const products = [
-      {
-        title: '0度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '1度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '2度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 2
-      },{
-        title: '3度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '4度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '5度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '00度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '10度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '20度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 2
-      },{
-        title: '30度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '40度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      },{
-        title: '50度推開式自動門 單扇/雙扇',
-        modelName: 'DC-388-1R / DC-388-2R',
-        specification: 'DC-380-1R / DC-380-2R',
-        introduction: 'a door',
-        GroupId: 1
-      }
-    ];
+    const partGroups = ['無線觸摸開關', '紅外線感應器', '各式感應開關', '對照式安全光線', '感應卡機及電鎖', '自動門耗材', '免灌膠玻璃上下料'];
+    partGroups.map(async (item, i) => {
+      let newGroup = { title: item };
+      newGroup.sequence = i;
+      newGroup.name = '123';
+      newGroup.type = 'part';
+      await Group.create(newGroup);
+    });
 
-    products.forEach((e) => {
-      Post.createProduct(e)
+    products.rows.forEach((e) => {
+      Post.createItem(Object.assign({}, e, { itemType: Product }))
+    });
+
+    parts.rows.forEach((e) => {
+      Post.createItem(Object.assign({}, e, { itemType: Part }))
     });
 
   } catch (e) {

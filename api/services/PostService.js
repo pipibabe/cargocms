@@ -102,19 +102,19 @@ module.exports = {
   }) => {
     try {
       const offset = (page - 1) * size;
+      let maxPage, posts;
       if (groupId == 0) {
-        const maxPage = Math.ceil( (await Post.findAllProduct(0)).length / size );
-        return {
-          maxPage,
-          products: await Post.findAllProduct(offset, size)
-        };
+        maxPage = Math.ceil( (await Post.findAllItems(contentType, 0)).length / size );
+        posts = await Post.findAllItems(contentType, offset, size);
       } else {
-        const maxPage = Math.ceil( (await Post.findProductByGroupId(groupId, 0)).length / size );
-        return {
-          maxPage,
-          products: await Post.findProductByGroupId(groupId, offset, size)
-        };
+        maxPage = Math.ceil( (await Post.findItemsByGroupId(contentType, groupId, 0)).length / size );
+        posts = await Post.findItemsByGroupId(contentType, groupId, offset, size);
       }
+      const nextPage = (page === maxPage) ? page : page+1;
+      const prevPage = (page === 1) ? page : page-1;
+      return {
+        maxPage, posts, prevPage, nextPage
+      };
     } catch (e) {
       sails.log.error(e);
       throw e;

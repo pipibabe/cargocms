@@ -13,7 +13,12 @@
           <h1 id="intro">產品介紹</h2>
         </header>
 
-        <% for(let item of products) { %>
+        <% if (posts.length === 0) { %>
+          <div class="no-product">
+            產品尚未推出，敬請期待
+          </div>
+        <% } %>
+        <% for (let item of posts) { %>
           <div class="product row">
             <div class="col-xs-3 product-img-wrapper">
               <img class="img-thumbnail" src="http://www.autodoor.twmail.net/webadmin/goods/file/HC-168-1.jpg" alt="產品圖" />

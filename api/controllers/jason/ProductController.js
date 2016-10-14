@@ -8,18 +8,19 @@ module.exports = {
       const pageData = await PostService.getPostsInPage({
         groupId,
         page,
-        size: 8,
+        size: 6,
+        contentType: Product
       });
       const maxPage = pageData.maxPage;
-      const nextPage = (page === maxPage) ? page : page+1;
-      const prevPage = (page === 1) ? page : page-1;
-      if(maxPage !== 0 && page > maxPage){
+      const nextPage = pageData.nextPage;
+      const prevPage = pageData.prevPage;
+      if(page < 1 || (maxPage !== 0 && page > maxPage)){
         res.redirect(`product/group/${groupId}/page/1`);
         return;
       }
       return res.view({
         productGroups,
-        products: pageData.products,
+        posts: pageData.posts,
         maxPage,
         page,
         prevPage,

@@ -41,6 +41,12 @@
 .product.pagination{
   margin-top: 2.6em;
 }
+.no-product{
+  margin: 4.5em 0 5em 0;
+  text-align: center;
+  font-size: 1.5em;
+  color: #d0d0d0;
+}
 @media (min-width: 1200px){
   .product .product-content {
     padding: 0.8em 2em;
