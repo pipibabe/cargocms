@@ -28,6 +28,35 @@
           </div>
         <% } %>
 
+        <% if (maxPage > 1) { %>
+        <nav aria-label="Page navigation">
+          <ul class="product pagination">
+            <li>
+              <a href="/product/group/<%= req.params.groupId %>/page/<%= prevPage %>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+
+            <% for (let i = 1; i <= maxPage; i++){ %>
+              <% if (i == page) { %>
+                <li class="active">
+                  <a href="/product/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                </li>
+              <% } else { %>
+                <li>
+                  <a href="/product/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                </li>
+              <% } %>
+            <% } %>
+            <li>
+              <a href="/product/group/<%= req.params.groupId %>/page/<%= nextPage %>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <% } %>
+
       </article>
     </div>
 
@@ -38,9 +67,9 @@
           <small>About Us</small>
         </h3>
         <div class="list-group">
-          <a href="/product" class="list-group-item">全部產品</a>
+          <a href="/product/group/0/page/1" class="list-group-item">全部產品</a>
           <% for(let group of productGroups) { %>
-            <a href="/product?type=<%= group.id %>" class="list-group-item"><%= group.title %></a>
+            <a href="/product/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
           <% } %>
         </div>
       </div>

@@ -6,7 +6,7 @@
   content: '';
   width: 93%;
   height: 0px;
-  margin-left: 30px;
+  margin-left: 13px;
   display: block;
   border-bottom: 1px dashed #e2e2e2;
 }
@@ -37,6 +37,9 @@
 }
 .product .product-content {
   padding: 0 2em;
+}
+.product.pagination{
+  margin-top: 2.6em;
 }
 @media (min-width: 1200px){
   .product .product-content {

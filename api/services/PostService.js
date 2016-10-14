@@ -93,4 +93,32 @@ module.exports = {
       throw e;
     }
   },
+
+  getPostsInPage: async ({
+    page,
+    contentType,
+    size,
+    groupId,
+  }) => {
+    try {
+      const offset = (page - 1) * size;
+      if (groupId == 0) {
+        const maxPage = Math.ceil( (await Post.findAllProduct(0)).length / size );
+        return {
+          maxPage,
+          products: await Post.findAllProduct(offset, size)
+        };
+      } else {
+        const maxPage = Math.ceil( (await Post.findProductByGroupId(groupId, 0)).length / size );
+        return {
+          maxPage,
+          products: await Post.findProductByGroupId(groupId, offset, size)
+        };
+      }
+    } catch (e) {
+      sails.log.error(e);
+      throw e;
+    }
+  },
+
 }

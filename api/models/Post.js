@@ -95,9 +95,11 @@ module.exports = {
   },
   options: {
     classMethods: {
-      findProductByGroupId: async (groupId) => {
+      findProductByGroupId: async (groupId, offset = 0, limit) => {
         try {
           return await Post.findAll({
+            offset,
+            limit,
             include: [{
               model: Group,
               where: {
@@ -110,13 +112,41 @@ module.exports = {
           throw e;
         }
       },
-      findAllProduct: async () => {
+      findAllProduct: async (offset = 0, limit) => {
         try {
           return await Post.findAll({
+            offset,
+            limit,
             include: [{
               model: Product,
               required: true
             }],
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
+      createProduct: async ({
+        title,
+        modelName,
+        specification,
+        introduction,
+        GroupId,
+      }) => {
+        try {
+          let post = await Post.create({
+            title: '新產品',
+            content: '詳細說明',
+            type: 'product',
+            GroupId
+          });
+          return await Product.create({
+            title,
+            modelName,
+            specification,
+            introduction,
+            PostId: post.id,
           });
         } catch (e) {
           sails.log.error(e);
