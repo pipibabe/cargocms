@@ -89,7 +89,10 @@ var defaultConfig = {
   //----- ReportController -----
   'get /report': 'ReportController.index',
   'get /report/knowtype': 'ReportController.knowtype',
-  'get /report/general': 'ReportController.general',
+  'get /report/general/step1': 'ReportController.generalStep1',
+  'get /report/general/step2': 'ReportController.generalStep2',
+  'get /report/general/step3': 'ReportController.generalStep3',
+  'get /report/general/step4': 'ReportController.generalStep4',
 
   //----- WallController -----
   'get /wall/:id': 'WallController.show',

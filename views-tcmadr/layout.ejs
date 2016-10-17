@@ -105,6 +105,13 @@ $(e.currentTarget).trigger ('change')
 });
 </script>
 
+<!-- JS Page Level -->
+<% LayoutUtils.getScripts().forEach(function(scriptSrc) { %><script type="text/javascript" src="<%= scriptSrc %>"></script>
+<% }); %>
+
+<script type="text/javascript">
+<%- LayoutUtils.getScriptBlock() %>
+</script>
 
 </body>
 </html>

@@ -21,6 +21,11 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="/assets/mvp/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
+  <!-- Bower CSS -->
+  <link rel="stylesheet" href="/assets/mvp/bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/mvp/bower_components/jquery-icheck/skins/minimal/_all.css">
+
   <!-- App CSS -->
   <link rel="stylesheet" href="/assets/mvp/css/mvpready-admin.css">
 
@@ -56,27 +61,39 @@
 
 
 <!-- Plugin JS -->
-<script src="/assets/mvp/bower_components/flot/excanvas.min.js"></script>
+<!-- <script src="/assets/mvp/bower_components/flot/excanvas.min.js"></script>
 <script src="/assets/mvp/bower_components/flot/jquery.flot.js"></script>
 <script src="/assets/mvp/bower_components/flot/jquery.flot.pie.js"></script>
 <script src="/assets/mvp/bower_components/flot/jquery.flot.resize.js"></script>
 <script src="/assets/mvp/bower_components/flot/jquery.flot.time.js"></script>
 <script src="/assets/mvp/bower_components/flot/jquery.flot.stack.js"></script>
 <script src="/assets/mvp/bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
-<script src="/assets/mvp/bower_components/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="/assets/mvp/bower_components/flot.orderbars/js/jquery.flot.orderBars.js"></script> -->
 
 <!-- App JS -->
 <script src="/assets/mvp/global/js/mvpready-core.js"></script>
 <script src="/assets/mvp/global/js/mvpready-helpers.js"></script>
 <script src="/assets/mvp/js/mvpready-admin.js"></script>
 
+<!-- Plugin JS -->
+<script src="/assets/mvp/bower_components/parsleyjs/dist/parsley.js"></script>
+<script src="/assets/mvp/bower_components/select2/dist/js/select2.min.js"></script>
+<script src="/assets/mvp/bower_components/jquery-icheck/icheck.min.js"></script>
+
 
 <!-- Demo JS -->
-<script src="/assets/mvp/global/js/demos/reports/line.js"></script>
+<!-- <script src="/assets/mvp/global/js/demos/reports/line.js"></script>
 <script src="/assets/mvp/global/js/demos/flot/donut.js"></script>
 <script src="/assets/mvp/global/js/demos/flot/stacked-horizontal.js"></script>
-<script src="/assets/mvp/global/js/demos/flot/auto.js"></script>
+<script src="/assets/mvp/global/js/demos/flot/auto.js"></script> -->
 
+<!-- JS Page Level -->
+<% LayoutUtils.getScripts().forEach(function(scriptSrc) { %><script type="text/javascript" src="<%= scriptSrc %>"></script>
+<% }); %>
+
+<script type="text/javascript">
+<%- LayoutUtils.getScriptBlock() %>
+</script>
 
 </body>
 </html>
