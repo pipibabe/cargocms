@@ -1,0 +1,31 @@
+.contact-form {
+  margin: 3em 0;
+  padding: 2em 2.8em;
+  max-width: 500px;
+  border-radius: 2px;
+  border: 1px solid rgba(105, 97, 97, 0.11);
+}
+.contact-info {
+  margin-top: 3em;
+}
+.contact-info-icon {
+  text-align: center;
+}
+.contact-info-icon .fa {
+  margin-top: 9px;
+  margin-bottom: 8px;
+  width: 90px;
+  height: 90px;
+  font-size: 3em;
+  background: rgba(81, 175, 255, 0.32);
+  line-height: 82px;
+  border-radius: 50%;
+  color: rgba(0, 0, 0, 0.56);
+  border: 4px solid white;
+  box-shadow: 0 0 0 2px #ebf6ff;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
+}
+@media (max-width: 767px){
+  .contact-info-content {
+    text-align: center;
+  }

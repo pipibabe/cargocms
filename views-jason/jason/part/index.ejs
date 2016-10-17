@@ -69,12 +69,12 @@
       <div class="side-menu" id="sticker">
         <h3>
           週邊配件
-          <small>About Us</small>
+          <small>Parts</small>
         </h3>
         <div class="list-group">
-          <a href="/part/group/0/page/1" class="list-group-item">全部配件</a>
+          <a href="/part/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">全部配件</a>
           <% for(let group of partGroups) { %>
-            <a href="/part/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+            <a href="/part/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
           <% } %>
         </div>
       </div>
