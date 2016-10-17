@@ -23,15 +23,15 @@
 
     <span class="account-or-social text-muted">或使用本系統帳號登入</span>
 
-    <form class="form account-form" method="post" action="/auth/local?url=/">
+    <form class="form account-form parsley-form" method="post" action="/auth/local?url=/" id="login-form">
       <div class="form-group">
         <label for="login-username" class="placeholder-hidden">帳號</label>
-        <input type="text" class="form-control" id="login-username" placeholder="帳號" tabindex="1" value="<%= data.user.identifier %>" id="identifier" name="identifier" >
+        <input type="text" class="form-control parsley-error" id="identifier" placeholder="帳號" tabindex="1" name="identifier" data-parsley-required="true" data-parsley-required-message="請填入帳號">
       </div> <!-- /.form-group -->
 
       <div class="form-group">
         <label for="login-password" class="placeholder-hidden">密碼</label>
-        <input type="password" class="form-control" id="login-password" placeholder="密碼" tabindex="2" value="<%= data.user.password %>" id="password" name="password">
+        <input type="password" class="form-control" placeholder="密碼" tabindex="2" value="<%= data.user.password %>" id="password" name="password" data-parsley-required="true" data-parsley-required-message="請填入密碼">
       </div> <!-- /.form-group -->
 
       <!--<div class="form-group clearfix">
@@ -69,30 +69,10 @@
 <% LayoutUtils.addScriptBlock(`
   $(document).ready(function(){
 
-    $(".reg-page").validate({
-      rules: {
-        identifier: {
-          required: true
-        },
-        password: {
-          required: true
-        },
-
-      },
-      messages: {
-        identifier: {
-          required: "請輸入帳號"
-        },
-        password:{
-          required: "請輸入密碼"
-        },
-      }
-    });
-
-    document.referrer && $('#backUrl').val(document.referrer);
+    $('#login-form').parsley();
 
   });
 `); %>
 
 <!-- Demo JS -->
-<script src="/assets/mvp/global/js/mvpready-account.js"></script>
+<!-- <script src="/assets/mvp/global/js/mvpready-account.js"></script> -->
