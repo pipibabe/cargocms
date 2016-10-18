@@ -77,7 +77,7 @@ module.exports = {
         as: 'Tags'
       }
     }),
-    Post.belongsTo(Image, {
+    Post.hasOne(Image, {
       foreignKey: {
         name: 'cover'
       }

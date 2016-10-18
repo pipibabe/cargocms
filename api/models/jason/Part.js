@@ -15,7 +15,7 @@ module.exports = {
   },
   associations: () => {
     Part.belongsTo(Post);
-    // Part.hasMany(Image);
+    Part.hasMany(Image);
     Part.hasMany(File);
   },
   options: {
