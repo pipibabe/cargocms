@@ -19,7 +19,7 @@
           </div>
         <% } %>
         <% for (let item of posts) { %>
-          <div class="product row">
+          <a class="product row" href="/product/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
               <img class="img-thumbnail" src="<%= item.coverUrl %>" alt="產品圖" />
             </div>
@@ -30,7 +30,7 @@
                 <%= item.Product.introduction %>
               </p>
             </div>
-          </div>
+          </a>
         <% } %>
 
         <% if (maxPage > 1) { %>

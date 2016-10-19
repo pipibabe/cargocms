@@ -32,4 +32,25 @@ module.exports = {
     }
   },
 
+  show: async function(req, res) {
+    try {
+      const productId = req.params.productId;
+      const product = await Post.findOne({
+        where: {
+          id: productId,
+        },
+        include: [ Product ],
+      });
+      const productGroups = await Group.findWithType('product');
+
+      return res.view({
+        product,
+        productGroups,
+      });
+    }
+    catch (e) {
+      res.serverError(e);
+    }
+  },
+
 }

@@ -1,6 +1,8 @@
 .product {
   /*min-height: 230px;*/
   margin-top: 1em;
+  display: block;
+  color: #2d3238;
 }
 .product:after {
   content: '';
@@ -70,4 +72,54 @@
     margin-top: 1em;
     margin-bottom: 8px;
   }
+}
+// show
+* {}
+.col-md-6.img-content {
+  padding-right: 2.6em;
+}
+.post-swiper-container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12) inset;
+}
+.thumbnail-swiper-container {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  margin-top: 0;
+  border: 1px solid #e8e8e8;
+  padding: 12px 8px;
+  background: #f7f7f7;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+  padding-top: 1.3em;
+}
+.swiper-slide {
+  background: url('http://www.autodoor.twmail.net/webadmin/performance/file/PA030166.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-color: rgba(247, 247, 247, 0.18);
+}
+.product-detail {
+  margin-top: 3em;
+}
+.product-detail h1 {
+  margin-top: 0;
+  font-size: 1.6em;
+}
+.product-info-list {
+  list-style: none;
+  padding: 1em 0;
+  margin-bottom: 2.6em;
+}
+.product-info-list label {
+  min-width: 3.8em;
+}
+.product-info-list span, .product-info-list p {
+  color: #646a6f;
 }
