@@ -21,7 +21,7 @@
         <% for (let item of posts) { %>
           <div class="product row">
             <div class="col-xs-3 product-img-wrapper">
-              <img class="img-thumbnail" src="http://www.autodoor.twmail.net/webadmin/goods/file/HC-168-1.jpg" alt="產品圖" />
+              <img class="img-thumbnail" src="<%= item.coverUrl %>" alt="產品圖" />
             </div>
             <div class="col-xs-9 product-content">
               <h1><%= item.Part.title %></h1>

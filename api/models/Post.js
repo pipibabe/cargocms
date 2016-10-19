@@ -24,7 +24,7 @@ module.exports = {
         try {
           if (this.coverType === 'img') {
             const thisImage = this.getDataValue('Image');
-            return thisImage ? thisImage.url : '';
+            return thisImage ? thisImage.url : '/assets/jason/images/default_icon.jpg';
           } else {
             return this.getDataValue('coverUrl');
           }
@@ -136,14 +136,16 @@ module.exports = {
         specification,
         introduction,
         groupId,
-        itemType
+        itemType,
+        imageFilePath,
       }) => {
         try {
           let post = await Post.create({
             title: '新產品',
             content: '詳細說明',
             type: itemType.getTableName().toLowerCase(),
-            GroupId: groupId
+            GroupId: groupId,
+            coverType: 'img',
           });
           return await itemType.create({
             title,
