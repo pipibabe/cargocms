@@ -1,0 +1,116 @@
+<% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
+
+<div class="container body">
+
+<% include ../../partials/banner.ejs %>
+
+  <div class="row">
+    <div class="col-md-9 col-md-push-3 content">
+
+      <article>
+        <header class="article-title">
+          <h1 id="intro">產品介紹</h2>
+        </header>
+
+        <div class="row product-detail">
+          <div class="col-md-6 col-md-push-6">
+            <h1><%= product.Product.title %></h1>
+            <ul class="product-info-list">
+              <li>
+                <label>型號</label>
+                <span><%= product.Product.modelName %></span>
+              </li>
+              <li>
+                <label>規格</label>
+                <span><%= product.Product.specification %></span>
+              </li>
+              <li>
+                <label>介紹</label>
+                <p><%= product.Product.introduction %></p>
+              </li>
+              <li>
+                <button style="margin-top: 0.8em;" class="btn btn-primary"><i class="fa fa-floppy-o" style="margin-right: 5px;" aria-hidden="true"></i>檔案下載</button>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 col-md-pull-6 img-content">
+            <div class="post-swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+              </div>
+              <!-- 如果需要分页器 -->
+              <!-- <div class="swiper-pagination"></div> -->
+            </div>
+
+            <div class="thumbnail-swiper-container">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" data-idx="1">Slide 1</div>
+                <div class="swiper-slide" data-idx="2">Slide 2</div>
+                <div class="swiper-slide" data-idx="3">Slide 3</div>
+              </div>
+              <!-- 如果需要分页器 -->
+              <!-- <div class="swiper-pagination"></div> -->
+              <!-- 如果需要导航按钮 -->
+              <!-- <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div> -->
+            </div>
+          </div>
+        </div>
+
+
+      </article>
+    </div>
+
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+      <div class="side-menu" id="sticker">
+        <h3>
+          產品介紹
+          <small>Product</small>
+        </h3>
+        <div class="list-group">
+          <a href="/product/group/0/page/1" class="list-group-item">全部產品</a>
+          <% for(let group of productGroups) { %>
+            <a href="/product/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+var postSwiper, postThumbSwiper;
+jQuery(document).ready(function() {
+  postSwiper = new Swiper ('.post-swiper-container', {
+    loop: true,
+    // spaceBetween: 30,
+    speed: 250,
+
+    // 如果需要分页器
+    // pagination: '.swiper-pagination',
+  })
+
+  postThumbSwiper = new Swiper ('.thumbnail-swiper-container', {
+    // loop: true,
+    spaceBetween: 15,
+    speed: 250,
+    slidesPerView: 4,
+    // centeredSlides: true,
+    paginationClickable: true,
+
+    // 如果需要分页器
+    // pagination: '.swiper-pagination',
+    // 如果需要前进后退按钮
+    // nextButton: '.swiper-button-next',
+    // prevButton: '.swiper-button-prev',
+  })
+
+  $('.thumbnail-swiper-container .swiper-slide').click(function (){
+    postSwiper.slideTo($(this).data('idx'));
+  });
+});
+`); %>
