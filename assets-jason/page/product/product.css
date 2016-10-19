@@ -117,9 +117,22 @@
   padding: 1em 0;
   margin-bottom: 2.6em;
 }
+.product-info-list li:not(.no-baseline):after {
+    content: '';
+    display: block;
+    height: 0;
+    width: 90%;
+    border-top: 1px dashed rgba(0, 0, 0, 0.18);
+    margin: 1px 0 10px;
+}
 .product-info-list label {
   min-width: 3.8em;
 }
 .product-info-list span, .product-info-list p {
   color: #646a6f;
+}
+@media (max-width: 767px){
+  .col-md-6.img-content {
+    padding-right: 15px;
+  }
 }
