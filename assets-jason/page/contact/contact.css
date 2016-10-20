@@ -5,6 +5,9 @@
   border-radius: 2px;
   border: 1px solid rgba(105, 97, 97, 0.11);
 }
+.contact-form .error {
+  color: #f10f0f;
+}
 .contact-info {
   margin-top: 3em;
 }
@@ -25,7 +28,8 @@
   box-shadow: 0 0 0 2px #ebf6ff;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
 }
-@media (max-width: 767px){
+@media (max-width: 767px) {
   .contact-info-content {
     text-align: center;
   }
+}

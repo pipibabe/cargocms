@@ -8,5 +8,8 @@ module.exports = {
   'get /issue':      { view: 'jason/issue' },
   'get /contact':    'jason/ContactController.index',
 
+  // api
+  'post /api/contact':  'api/ContactController.create',
+
   "/jason/:controller/:action/:id?": {}
 };
