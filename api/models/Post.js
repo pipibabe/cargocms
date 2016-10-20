@@ -159,6 +159,32 @@ module.exports = {
           throw e;
         }
       },
+      createPerformance: async ({
+        title,
+        location,
+        introduction,
+        groupId,
+        imageFilePath,
+      }) => {
+        try {
+          let post = await Post.create({
+            title: '新實績',
+            content: '詳細說明',
+            type: Performance.getTableName().toLowerCase(),
+            GroupId: groupId,
+            coverType: 'img',
+          });
+          return await Performance.create({
+            title,
+            location,
+            introduction,
+            PostId: post.id,
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
       findAllHasJoin: async (order, offset, limit) => {
         try {
           return await Post.findAll({

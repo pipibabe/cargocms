@@ -4,22 +4,22 @@ module.exports = {
     try {
       const groupId = req.params.groupId;
       const page = ~~req.params.page;
-      const partGroups = await Group.findWithType('part');
+      const performanceGroups = await Group.findWithType('performance');
       const pageData = await PostService.getPostsInPage({
         groupId,
         page,
         size: 6,
-        contentType: Part
+        contentType: Performance
       });
       const maxPage = pageData.maxPage;
       const nextPage = pageData.nextPage;
       const prevPage = pageData.prevPage;
       if(page < 1 || (maxPage !== 0 && page > maxPage)){
-        res.redirect(`part/group/${groupId}/page/1`);
+        res.redirect(`performance/group/${groupId}/page/1`);
         return;
       }
       return res.view({
-        partGroups,
+        performanceGroups,
         posts: pageData.posts,
         maxPage,
         page,
@@ -34,18 +34,18 @@ module.exports = {
 
   show: async function(req, res) {
     try {
-      const partId = req.params.partId;
-      const part = await Post.findOne({
+      const performanceId = req.params.performanceId;
+      const performance = await Post.findOne({
         where: {
-          id: partId,
+          id: performanceId,
         },
-        include: [ Part ],
+        include: [ Performance ],
       });
-      const partGroups = await Group.findWithType('part');
+      const performanceGroups = await Group.findWithType('performance');
 
       return res.view({
-        part,
-        partGroups,
+        performance,
+        performanceGroups,
       });
     }
     catch (e) {

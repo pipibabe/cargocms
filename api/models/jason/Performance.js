@@ -3,7 +3,7 @@ module.exports = {
     title: {
       type: Sequelize.STRING,
     },
-    localtion: {
+    location: {
       type: Sequelize.STRING,
     },
     introduction: {
@@ -12,7 +12,7 @@ module.exports = {
   },
   associations: () => {
     Performance.belongsTo(Post);
-    // Performance.hasMany(Image);
+    Performance.hasMany(Image);
   },
   options: {
     classMethods: {},

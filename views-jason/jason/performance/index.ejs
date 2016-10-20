@@ -10,24 +10,24 @@
 
       <article>
         <header class="article-title">
-          <h1 id="intro">週邊配件</h2>
+          <h1 id="intro">工程實績</h2>
         </header>
 
         <% if (posts.length === 0) { %>
           <div class="no-product">
-            配件尚未推出，敬請期待
+            實績尚未整理，敬請期待
           </div>
         <% } %>
         <% for (let item of posts) { %>
-          <a class="product row" href="/part/show/<%= item.id %>">
+          <a class="product row" href="/performance/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
-              <img class="img-thumbnail" src="<%= item.coverUrl %>" alt="產品圖" />
+              <img class="img-thumbnail" src="<%= item.coverUrl %>" alt="工程實績圖" />
             </div>
             <div class="col-xs-9 product-content">
-              <h1><%= item.Part.title %></h1>
-              <small><%= item.Part.specification %></small>
+              <h1><%= item.Performance.title %></h1>
+              <small><%= item.Performance.location %></small>
               <p>
-                <%= item.Part.introduction %>
+                <%= item.Performance.introduction %>
               </p>
             </div>
           </a>
@@ -37,7 +37,7 @@
         <nav aria-label="Page navigation">
           <ul class="product pagination">
             <li>
-              <a href="/part/group/<%= req.params.groupId %>/page/<%= prevPage %>" aria-label="Previous">
+              <a href="/performance/group/<%= req.params.groupId %>/page/<%= prevPage %>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
@@ -45,16 +45,16 @@
             <% for (let i = 1; i <= maxPage; i++){ %>
               <% if (i == page) { %>
                 <li class="active">
-                  <a href="/part/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                  <a href="/performance/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
                 </li>
               <% } else { %>
                 <li>
-                  <a href="/part/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                  <a href="/performance/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
                 </li>
               <% } %>
             <% } %>
             <li>
-              <a href="/part/group/<%= req.params.groupId %>/page/<%= nextPage %>" aria-label="Next">
+              <a href="/performance/group/<%= req.params.groupId %>/page/<%= nextPage %>" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -68,13 +68,13 @@
     <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
       <div class="side-menu" id="sticker">
         <h3>
-          週邊配件
-          <small>Parts</small>
+          產品介紹
+          <small>Product</small>
         </h3>
         <div class="list-group">
-          <a href="/part/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">全部配件</a>
-          <% for(let group of partGroups) { %>
-            <a href="/part/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
+          <a href="/performance/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">實例照片</a>
+          <% for(let group of performanceGroups) { %>
+            <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
           <% } %>
         </div>
       </div>
@@ -82,3 +82,9 @@
   </div>
 
 </div>
+
+<% LayoutUtils.addScriptBlock(`
+jQuery(document).ready(function() {
+
+});
+`); %>

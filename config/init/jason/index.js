@@ -5,6 +5,7 @@
 // const FeelingData = require('./data/Feeling');
 const products = require('./data/Product.json');
 const parts = require('./data/Part.json');
+const performances = require('./data/Performance.json');
 
 module.exports.init = async () => {
   try {
@@ -49,12 +50,25 @@ module.exports.init = async () => {
       await Group.create(newGroup);
     });
 
+    const performanceGroups = ['上市櫃、高科技', '學校、公家機構', '生技、醫療業', '食品餐飲業', '服務、製造業', '門市、連鎖超商', '大樓、華廈社區'];
+    performanceGroups.map(async (item, i) => {
+      let newGroup = { title: item };
+      newGroup.sequence = i;
+      newGroup.name = '123';
+      newGroup.type = 'performance';
+      await Group.create(newGroup);
+    });
+
     products.rows.forEach((e) => {
       Post.createItem(Object.assign({}, e, { itemType: Product }))
     });
 
     parts.rows.forEach((e) => {
       Post.createItem(Object.assign({}, e, { itemType: Part }))
+    });
+
+    performances.rows.forEach((e) => {
+      Post.createPerformance(e)
     });
 
   } catch (e) {

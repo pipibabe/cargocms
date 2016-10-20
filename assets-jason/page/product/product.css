@@ -127,6 +127,7 @@
 }
 .product-info-list label {
   min-width: 3.8em;
+  font-size: 0.8em;
 }
 .product-info-list span, .product-info-list p {
   color: #646a6f;
