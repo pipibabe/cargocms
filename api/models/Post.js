@@ -168,7 +168,7 @@ module.exports = {
       }) => {
         try {
           let post = await Post.create({
-            title: '新實績',
+            title: '新實蹟',
             content: '詳細說明',
             type: Performance.getTableName().toLowerCase(),
             GroupId: groupId,

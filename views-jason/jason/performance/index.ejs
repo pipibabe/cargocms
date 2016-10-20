@@ -10,18 +10,18 @@
 
       <article>
         <header class="article-title">
-          <h1 id="intro">工程實績</h2>
+          <h1 id="intro">工程實蹟</h2>
         </header>
 
         <% if (posts.length === 0) { %>
           <div class="no-product">
-            實績尚未整理，敬請期待
+            實蹟尚未整理，敬請期待
           </div>
         <% } %>
         <% for (let item of posts) { %>
           <a class="product row" href="/performance/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
-              <img class="img-thumbnail" src="<%= item.coverUrl %>" alt="工程實績圖" />
+              <img class="img-thumbnail" src="<%= item.coverUrl %>" alt="工程實蹟圖" />
             </div>
             <div class="col-xs-9 product-content">
               <h1><%= item.Performance.title %></h1>
