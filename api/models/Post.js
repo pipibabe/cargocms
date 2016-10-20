@@ -138,14 +138,16 @@ module.exports = {
         groupId,
         itemType,
         imageFilePath,
+        content,
       }) => {
         try {
           let post = await Post.create({
-            title: '新產品',
+            title,
             content: '詳細說明',
-            type: itemType.getTableName().toLowerCase(),
+            type: itemType.getTableName().toLowerCase().replace('s',''),
             GroupId: groupId,
             coverType: 'img',
+            content,
           });
           return await itemType.create({
             title,
@@ -165,14 +167,16 @@ module.exports = {
         introduction,
         groupId,
         imageFilePath,
+        content,
       }) => {
         try {
           let post = await Post.create({
-            title: '新實蹟',
+            title,
             content: '詳細說明',
-            type: Performance.getTableName().toLowerCase(),
+            type: Performance.getTableName().toLowerCase().replace('s',''),
             GroupId: groupId,
             coverType: 'img',
+            content,
           });
           return await Performance.create({
             title,

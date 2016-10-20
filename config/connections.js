@@ -34,8 +34,10 @@ module.exports.connections = {
 
   mysql: {
     'user': process.env.MYSQL_ENV_MYSQL_USER_NAME || "root",
-    'password': process.env.MYSQL_ENV_MYSQL_USER_PASS || "root",
-    'database': process.env.MYSQL_ENV_MYSQL_USER_DB ||'127.0.0.1',
+    // 'password': process.env.MYSQL_ENV_MYSQL_USER_PASS || "root",
+    // 'database': process.env.MYSQL_ENV_MYSQL_USER_DB ||'127.0.0.1',
+    'password': process.env.MYSQL_ENV_MYSQL_USER_PASS || "",
+    'database': process.env.MYSQL_ENV_MYSQL_USER_DB ||'jason',
     'dialect': 'mysql',
     options: {
       'host': process.env.MYSQL_PORT_3306_TCP_ADDR || "127.0.0.1",
