@@ -25,10 +25,15 @@
             </div>
             <div class="col-xs-9 product-content">
               <h1><%= item.Performance.title %></h1>
-              <small><%= item.Performance.location %></small>
-              <p>
-                <%= item.Performance.introduction %>
-              </p>
+              <% if (item.Performance.location) { %>
+                <small><%= item.Performance.location %></small>
+              <% } %>
+
+              <% if (item.Performance.introduction) { %>
+                <p>
+                  <%= item.Performance.introduction %>
+                </p>
+              <% } %>
             </div>
           </a>
         <% } %>

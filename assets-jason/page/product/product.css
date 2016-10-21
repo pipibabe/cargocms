@@ -132,6 +132,24 @@
 .product-info-list span, .product-info-list p {
   color: #646a6f;
 }
+.product-intro {
+  margin-top: 3.5em;
+}
+.product-intro table {
+  width: auto !important;
+}
+.product-intro .intro-title {
+  font-size: 1.5em;
+  text-align: center;
+}
+.product-intro .intro-title:after {
+  content: '';
+  display: block;
+  height: 0;
+  width: 2.5em;
+  border-top: 2px solid #FFC107;
+  margin: 11px auto 1.2em;
+}
 @media (max-width: 767px){
   .col-md-6.img-content {
     padding-right: 15px;

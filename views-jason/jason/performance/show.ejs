@@ -17,14 +17,18 @@
           <div class="col-md-6 col-md-push-6">
             <h1><%= performance.Performance.title %></h1>
             <ul class="product-info-list">
-              <li>
-                <label>地點</label>
-                <span><%= performance.Performance.location %></span>
-              </li>
-              <li>
-                <label>介紹</label>
-                <p><%= performance.Performance.introduction %></p>
-              </li>
+              <% if (performance.Performance.location) { %>
+                <li>
+                  <label>地點</label>
+                  <span><%= performance.Performance.location %></span>
+                </li>
+              <% } %>
+              <% if (performance.Performance.introduction) { %>
+                <li>
+                  <label>介紹</label>
+                  <span><%= performance.Performance.introduction %></span>
+                </li>
+              <% } %>
               <li class="no-baseline">
                 <button style="margin-top: 8px;" class="btn btn-primary"><i class="fa fa-floppy-o" style="margin-right: 5px;" aria-hidden="true"></i>檔案下載</button>
               </li>
