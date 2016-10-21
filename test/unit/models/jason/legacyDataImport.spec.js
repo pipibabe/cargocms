@@ -16,7 +16,7 @@ describe.only('jason legacy data', function() {
   })
 
   it('import product group should be success.',  (done) => {
-    connection.query('SELECT DISTINCT c_title, a.c_id, c_sort FROM `tb_goods` a, `tb_class` b WHERE a.c_id = b.c_id ORDER BY `b`.`c_title` ASC', function(err, rows, fields) {
+    connection.query('SELECT DISTINCT c_title, c_id, c_sort FROM `tb_class` WHERE c_belong = 1', function(err, rows, fields) {
       if (err) throw err;
 
       let productRows = rows.map((row, index) => {
@@ -40,7 +40,7 @@ describe.only('jason legacy data', function() {
   });
 
   it('import part group should be success.',  (done) => {
-    connection.query('SELECT DISTINCT c_title, a.c_id, c_sort FROM `tb_part` a, `tb_class` b WHERE a.c_id = b.c_id ORDER BY `b`.`c_title` ASC', function(err, rows, fields) {
+    connection.query('SELECT DISTINCT c_title, c_id, c_sort FROM `tb_class` WHERE c_belong = 3', function(err, rows, fields) {
       if (err) throw err;
 
       let partRows = rows.map((row, index) => {
@@ -64,7 +64,7 @@ describe.only('jason legacy data', function() {
   });
 
   it('import performance group should be success.',  (done) => {
-    connection.query('SELECT DISTINCT c_title, a.c_id, c_sort FROM `tb_performance` a, `tb_class` b WHERE a.c_id = b.c_id ORDER BY `b`.`c_title` ASC', function(err, rows, fields) {
+    connection.query('SELECT DISTINCT c_title, c_id, c_sort FROM `tb_class` WHERE c_belong = 7', function(err, rows, fields) {
       if (err) throw err;
 
       let performanceRows = rows.map((row, index) => {
@@ -183,64 +183,31 @@ describe.only('jason legacy data', function() {
   });
 
   it('import product file should be success.', async (done) => {
-    connection.query('SELECT f_name, f_belong, belong_id, f_type, f_size FROM `tb_file` WHERE f_belong in ("goods", "goods_pdf")', function(err, rows, fields) {
+    connection.query('SELECT f_id, f_name, f_belong, belong_id, f_type, f_size FROM `tb_file` WHERE f_belong in ("goods", "goods_pdf", "part", "part_pdf", "performance")', function(err, rows, fields) {
       if (err) throw err;
       console.log('The length is: ', rows.length);
+      const imageTypes = ["goods", "part", "performance"];
       let createRows = rows.map(async (e) => {
-        let fileType = (e.f_belong === 'goods') ? Image : File;
-        let newImage = fileType.build();
-        newImage.filePath = e.f_name;
-        newImage.type = e.f_type;
-        newImage.size = e.f_size;
-        newImage.ProductId = e.belong_id;
-        return newImage.save();
-      });
-
-      Promise.all(createRows)
-      .then(() => {
-        done();
-      }).catch(function(reason) {
-        console.log(reason.stack);
-        done();
-      });
-    });
-  });
-
-  it('import part file should be success.', async (done) => {
-    connection.query('SELECT f_name, f_belong, belong_id, f_type, f_size FROM `tb_file` WHERE f_belong in ("part", "part_pdf")', function(err, rows, fields) {
-      if (err) throw err;
-      console.log('The length is: ', rows.length);
-      let createRows = rows.map(async (e) => {
-        let fileType = (e.f_belong === 'part') ? Image : File;
-        let newImage = fileType.build();
-        newImage.filePath = e.f_name;
-        newImage.type = e.f_type;
-        newImage.size = e.f_size;
-        newImage.PartId = e.belong_id;
-        return newImage.save();
-      });
-
-      Promise.all(createRows)
-      .then(() => {
-        done();
-      }).catch(function(reason) {
-        console.log(reason.stack);
-        done();
-      });
-    });
-  });
-
-  it('import performance file should be success.', async (done) => {
-    connection.query('SELECT f_name, f_belong, belong_id, f_type, f_size FROM `tb_file` WHERE f_belong = "performance"', function(err, rows, fields) {
-      if (err) throw err;
-      console.log('The length is: ', rows.length);
-      let createRows = rows.map(async (e) => {
-        let newImage = Image.build();
-        newImage.filePath = e.f_name;
-        newImage.type = e.f_type;
-        newImage.size = e.f_size;
-        newImage.performanceId = e.belong_id;
-        return newImage.save();
+        let fileType = (imageTypes.indexOf(e.f_belong) > -1) ? Image : File;
+        let newFile = fileType.build();
+        newFile.filePath = e.f_name;
+        newFile.type = e.f_type;
+        newFile.size = e.f_size;
+        newFile.id = e.f_id;
+        if (["goods", "goods_pdf"].indexOf(e.f_belong) > -1) {
+          let belongsToItem = await Product.findOne({ where: { id: e.belong_id } });
+          if(belongsToItem)
+            newFile.ProductId = e.belong_id;
+        } else if (["part", "part_pdf"].indexOf(e.f_belong) > -1) {
+          let belongsToItem = await Part.findOne({ where: { id: e.belong_id } });
+          if(belongsToItem)
+            newFile.PartId = e.belong_id;
+        } else {
+          let belongsToItem = await Performance.findOne({ where: { id: e.belong_id } });
+          if(belongsToItem)
+            newFile.PerformanceId = e.belong_id;
+        }
+        return newFile.save();
       });
 
       Promise.all(createRows)
