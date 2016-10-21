@@ -130,8 +130,8 @@ describe.only('jason legacy data', function() {
     });
   });
 
-  it('import product file should be success.', async (done) => {
-    connection.query('SELECT f_id, f_name, f_belong, belong_id, f_type, f_size FROM `tb_file` WHERE f_belong in ("goods", "goods_pdf", "part", "part_pdf", "performance")', function(err, rows, fields) {
+  it('import file should be success.', async (done) => {
+    connection.query('SELECT f_id, f_name, f_belong, belong_id, f_type, f_size, f_note, f_serial FROM `tb_file` WHERE f_belong in ("goods", "goods_pdf", "part", "part_pdf", "performance")', function(err, rows, fields) {
       if (err) throw err;
       console.log('The length is: ', rows.length);
       const imageTypes = ["goods", "part", "performance"];
@@ -141,6 +141,8 @@ describe.only('jason legacy data', function() {
         newFile.type = e.f_type;
         newFile.size = e.f_size;
         newFile.id = e.f_id;
+        newFile.note = e.f_note;
+        newFile.sequence = e.f_serial;
         const basePath = '/public/uploads/';
         if (["goods", "goods_pdf"].indexOf(e.f_belong) > -1) {
           newFile.filePath = basePath + 'product/' + e.f_name;

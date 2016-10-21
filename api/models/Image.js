@@ -13,6 +13,13 @@ module.exports = {
       type: Sequelize.ENUM('local', 's3', 'url'),
       defaultValue: 'local',
     },
+    note: {
+      type: Sequelize.STRING,
+    },
+    sequence: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
     fileName: {
       type: Sequelize.VIRTUAL,
       get: function() {

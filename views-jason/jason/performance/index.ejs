@@ -77,7 +77,6 @@
           <small>Product</small>
         </h3>
         <div class="list-group">
-          <a href="/performance/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">實例照片</a>
           <% for(let group of performanceGroups) { %>
             <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
           <% } %>
