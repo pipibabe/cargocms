@@ -15,68 +15,31 @@ describe.only('jason legacy data', function() {
     done();
   })
 
-  it('import product group should be success.',  (done) => {
-    connection.query('SELECT DISTINCT c_title, c_id, c_sort FROM `tb_class` WHERE c_belong = 1', function(err, rows, fields) {
+  it('import group should be success.',  (done) => {
+    connection.query('SELECT DISTINCT c_title, c_id, c_sort, c_belong FROM `tb_class` WHERE c_belong != 0', function(err, rows, fields) {
       if (err) throw err;
 
       let productRows = rows.map((row, index) => {
         let newGroup = Group.build();
         newGroup.title = row.c_title
         newGroup.sequence = row.c_sort
-        newGroup.type = 'product'
+        switch (row.c_belong) {
+          case 1:
+            newGroup.type = 'product';
+            break;
+          case 3:
+            newGroup.type = 'part';
+            break;
+          case 7:
+            newGroup.type = 'performance';
+            break;
+          default:
+        }
         newGroup.id = row.c_id
         return newGroup.save();
       });
       console.log('The length is: ', productRows.length);
       Promise.all(productRows)
-      .then(() => {
-        done();
-      }).catch(function(reason) {
-        console.log(reason.stack);
-        done();
-      });
-    });
-
-  });
-
-  it('import part group should be success.',  (done) => {
-    connection.query('SELECT DISTINCT c_title, c_id, c_sort FROM `tb_class` WHERE c_belong = 3', function(err, rows, fields) {
-      if (err) throw err;
-
-      let partRows = rows.map((row, index) => {
-        let newGroup = Group.build();
-        newGroup.title = row.c_title
-        newGroup.sequence = row.c_sort
-        newGroup.type = 'part'
-        newGroup.id = row.c_id
-        return newGroup.save();
-      });
-      console.log('The length is: ', partRows.length);
-      Promise.all(partRows)
-      .then(() => {
-        done();
-      }).catch(function(reason) {
-        console.log(reason.stack);
-        done();
-      });
-    });
-
-  });
-
-  it('import performance group should be success.',  (done) => {
-    connection.query('SELECT DISTINCT c_title, c_id, c_sort FROM `tb_class` WHERE c_belong = 7', function(err, rows, fields) {
-      if (err) throw err;
-
-      let performanceRows = rows.map((row, index) => {
-        let newGroup = Group.build();
-        newGroup.title = row.c_title
-        newGroup.sequence = row.c_sort
-        newGroup.type = 'performance'
-        newGroup.id = row.c_id
-        return newGroup.save();
-      });
-      console.log('The length is: ', performanceRows.length);
-      Promise.all(performanceRows)
       .then(() => {
         done();
       }).catch(function(reason) {
