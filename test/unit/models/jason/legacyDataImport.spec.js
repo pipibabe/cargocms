@@ -138,19 +138,22 @@ describe.only('jason legacy data', function() {
       let createRows = rows.map(async (e) => {
         let fileType = (imageTypes.indexOf(e.f_belong) > -1) ? Image : File;
         let newFile = fileType.build();
-        newFile.filePath = e.f_name;
         newFile.type = e.f_type;
         newFile.size = e.f_size;
         newFile.id = e.f_id;
+        const basePath = '/public/uploads/';
         if (["goods", "goods_pdf"].indexOf(e.f_belong) > -1) {
+          newFile.filePath = basePath + 'product/' + e.f_name;
           let belongsToItem = await Product.findOne({ where: { id: e.belong_id } });
           if(belongsToItem)
             newFile.ProductId = e.belong_id;
         } else if (["part", "part_pdf"].indexOf(e.f_belong) > -1) {
+          newFile.filePath = basePath + 'part/' + e.f_name;
           let belongsToItem = await Part.findOne({ where: { id: e.belong_id } });
           if(belongsToItem)
             newFile.PartId = e.belong_id;
         } else {
+          newFile.filePath = basePath + 'performance/' + e.f_name;
           let belongsToItem = await Performance.findOne({ where: { id: e.belong_id } });
           if(belongsToItem)
             newFile.PerformanceId = e.belong_id;

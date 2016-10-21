@@ -21,7 +21,7 @@
         <% for (let item of posts) { %>
           <a class="product row" href="/product/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
-              <img class="img-thumbnail" src="<%= item.coverUrl %>" alt="產品圖" />
+              <img class="img-thumbnail" src="<%= item.Product.Images[0].url %>" alt="產品圖" />
             </div>
             <div class="col-xs-9 product-content">
               <h1><%= item.Product.title %></h1>

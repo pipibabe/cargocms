@@ -107,7 +107,8 @@ module.exports = {
               }
             }, {
               model: itemType,
-              required: true
+              required: true,
+              include: [ Image ],
             }],
           });
         } catch (e) {
@@ -122,7 +123,8 @@ module.exports = {
             limit,
             include: [{
               model: itemType,
-              required: true
+              required: true,
+              include: [ Image ],
             }],
           });
         } catch (e) {
