@@ -172,6 +172,7 @@ module.exports = {
         groupId,
         imageFilePath,
         content,
+        id,
       }) => {
         try {
           let post = await Post.create({
@@ -187,6 +188,7 @@ module.exports = {
             location,
             introduction,
             PostId: post.id,
+            id,
           });
         } catch (e) {
           sails.log.error(e);
