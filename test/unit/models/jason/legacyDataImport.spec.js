@@ -51,21 +51,16 @@ describe.only('jason legacy data', function() {
   });
 
   it('import product should be success.', async (done) => {
-    connection.query('SELECT p_id, p_title, p_type, p_type2, p_note, p_content, c_title FROM `tb_goods` a, `tb_class` b WHERE a.c_id = b.c_id', function(err, rows, fields) {
+    connection.query('SELECT p_id, p_title, p_type, p_type2, p_note, p_content, c_id FROM `tb_goods`', function(err, rows, fields) {
       if (err) throw err;
       console.log('The length is: ', rows.length);
       let createRows = rows.map(async (e) => {
-        let group = await Group.findOne({
-          where: {
-            title: e.c_title
-          }
-        });
         return Post.createItem({
           title: e.p_title,
           modelName: e.p_type,
           specification: e.p_type2,
           introduction: e.p_note,
-          groupId: group.id,
+          groupId: e.c_id,
           itemType: Product,
           content: e.p_content,
           id: e.p_id,
@@ -83,21 +78,16 @@ describe.only('jason legacy data', function() {
   });
 
   it('import part should be success.', async (done) => {
-    connection.query('SELECT p_id, p_title, p_type, p_type2, p_note, p_content, c_title FROM `tb_part` a, `tb_class` b WHERE a.c_id = b.c_id', function(err, rows, fields) {
+    connection.query('SELECT p_id, p_title, p_type, p_type2, p_note, p_content, c_id FROM `tb_part`', function(err, rows, fields) {
       if (err) throw err;
       console.log('The length is: ', rows.length);
       let createRows = rows.map(async (e) => {
-        let group = await Group.findOne({
-          where: {
-            title: e.c_title
-          }
-        });
         return Post.createItem({
           title: e.p_title,
           modelName: e.p_type,
           specification: e.p_type2,
           introduction: e.p_note,
-          groupId: group.id,
+          groupId: e.c_id,
           itemType: Part,
           content: e.p_content,
           id: e.p_id,
@@ -115,20 +105,15 @@ describe.only('jason legacy data', function() {
   });
 
   it('import performance should be success.', async (done) => {
-    connection.query('SELECT p_id, p_title, p_type, p_note, p_content, c_title FROM `tb_performance` a, `tb_class` b WHERE a.c_id = b.c_id', function(err, rows, fields) {
+    connection.query('SELECT p_id, p_title, p_type, p_note, p_content, c_id FROM `tb_performance`', function(err, rows, fields) {
       if (err) throw err;
       console.log('The length is: ', rows.length);
       let createRows = rows.map(async (e) => {
-        let group = await Group.findOne({
-          where: {
-            title: e.c_title
-          }
-        });
         return Post.createPerformance({
           title: e.p_title,
           location: e.p_type,
           introduction: e.p_note,
-          groupId: group.id,
+          groupId: e.c_id,
           itemType: Performance,
           content: e.p_content,
           id: e.p_id,
