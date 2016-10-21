@@ -11,7 +11,7 @@ module.exports = {
     },
     introduction: {
       type: Sequelize.STRING,
-    },
+    }
   },
   associations: () => {
     Part.belongsTo(Post);

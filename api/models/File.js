@@ -38,7 +38,11 @@ module.exports = {
       }
     }
   },
-  associations: () => {},
+  associations: () => {
+    Image.belongsTo(Product);
+    Image.belongsTo(Part);
+    Image.belongsTo(Performance);
+  },
   options: {
     classMethods: {},
     instanceMethods: {},
