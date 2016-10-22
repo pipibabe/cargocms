@@ -108,7 +108,12 @@ module.exports = {
             }, {
               model: itemType,
               required: true,
-              include: [ Image ],
+              include: [{
+                model: Image,
+                order: [
+                  ['sequence', 'ASC'],
+                ]
+              }],
             }],
           });
         } catch (e) {
@@ -124,7 +129,12 @@ module.exports = {
             include: [{
               model: itemType,
               required: true,
-              include: [ Image ],
+              include: [{
+                model: Image,
+                order: [
+                  ['sequence', 'ASC'],
+                ]
+              }],
             }],
           });
         } catch (e) {

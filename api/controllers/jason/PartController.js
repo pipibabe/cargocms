@@ -18,6 +18,15 @@ module.exports = {
         res.redirect(`part/group/${groupId}/page/1`);
         return;
       }
+      for (let value of pageData.posts) {
+        let images = await Image.findAll({
+          where: {
+            PartId: value.Part.id
+          },
+          order: 'sequence'
+        });
+        value.Part.Images = images;
+      }
       return res.view({
         partGroups,
         posts: pageData.posts,

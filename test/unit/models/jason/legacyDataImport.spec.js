@@ -142,7 +142,7 @@ describe.only('jason legacy data', function() {
         newFile.size = e.f_size;
         newFile.id = e.f_id;
         newFile.note = e.f_note;
-        newFile.sequence = e.f_serial;
+        newFile.sequence = (e.f_serial) ? e.f_serial : undefined;
         const basePath = '/public/uploads/';
         if (["goods", "goods_pdf"].indexOf(e.f_belong) > -1) {
           newFile.filePath = basePath + 'product/' + e.f_name;
