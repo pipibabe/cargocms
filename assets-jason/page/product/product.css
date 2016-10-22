@@ -98,8 +98,15 @@
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
   padding-top: 1.3em;
 }
+.thumbnail-swiper-container .swiper-slide {
+  transition: 0.2s all ease-in;
+}
+.thumbnail-swiper-container .swiper-slide.active {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
+  border-radius: 2px;
+}
 .swiper-slide {
-  background: url('http://www.autodoor.twmail.net/webadmin/performance/file/PA030166.jpg');
+  /*background: url('http://www.autodoor.twmail.net/webadmin/performance/file/PA030166.jpg');*/
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -118,12 +125,12 @@
   margin-bottom: 2.6em;
 }
 .product-info-list li:not(.no-baseline):after {
-    content: '';
-    display: block;
-    height: 0;
-    width: 90%;
-    border-top: 1px dashed rgba(0, 0, 0, 0.18);
-    margin: 1px 0 10px;
+  content: '';
+  display: block;
+  height: 0;
+  width: 90%;
+  border-top: 1px dashed rgba(0, 0, 0, 0.18);
+  margin: 1px 0 10px;
 }
 .product-info-list label {
   min-width: 3.8em;

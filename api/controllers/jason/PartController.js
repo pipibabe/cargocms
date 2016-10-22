@@ -48,7 +48,13 @@ module.exports = {
         where: {
           id: partId,
         },
-        include: [ Part ],
+        include: [{
+          model: Part,
+          include: [{
+            model: Image,
+            order: 'sequence'
+          }]
+        }],
       });
       const partGroups = await Group.findWithType('part');
 

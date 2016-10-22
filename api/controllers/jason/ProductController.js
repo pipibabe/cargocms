@@ -48,7 +48,13 @@ module.exports = {
         where: {
           id: productId,
         },
-        include: [ Product ],
+        include: [{
+          model: Product,
+          include: [{
+            model: Image,
+            order: 'sequence'
+          }]
+        }],
       });
       const productGroups = await Group.findWithType('product');
 

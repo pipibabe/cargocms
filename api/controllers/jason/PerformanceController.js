@@ -48,7 +48,13 @@ module.exports = {
         where: {
           id: performanceId,
         },
-        include: [ Performance ],
+        include: [{
+          model: Performance,
+          include: [{
+            model: Image,
+            order: 'sequence'
+          }]
+        }],
       });
       const performanceGroups = await Group.findWithType('performance');
 

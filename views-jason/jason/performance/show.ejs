@@ -37,9 +37,9 @@
           <div class="col-md-6 col-md-pull-6 img-content">
             <div class="post-swiper-container">
               <div class="swiper-wrapper">
-                <div class="swiper-slide">Slide 1</div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
+                <% for (image of performance.Performance.Images) { %>
+                  <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
+                <% } %>
               </div>
               <!-- 如果需要分页器 -->
               <!-- <div class="swiper-pagination"></div> -->
@@ -47,9 +47,12 @@
 
             <div class="thumbnail-swiper-container">
               <div class="swiper-wrapper">
-                <div class="swiper-slide" data-idx="1">Slide 1</div>
-                <div class="swiper-slide" data-idx="2">Slide 2</div>
-                <div class="swiper-slide" data-idx="3">Slide 3</div>
+                <%
+                for (let i = 0; i < performance.Performance.Images.length; i++) {
+                  let image = performance.Performance.Images[i];
+                %>
+                  <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
+                <% } %>
               </div>
               <!-- 如果需要分页器 -->
               <!-- <div class="swiper-pagination"></div> -->
@@ -85,12 +88,15 @@
 var postSwiper, postThumbSwiper;
 jQuery(document).ready(function() {
   postSwiper = new Swiper ('.post-swiper-container', {
-    loop: true,
     // spaceBetween: 30,
     speed: 250,
 
     // 如果需要分页器
     // pagination: '.swiper-pagination',
+    onSlideChangeStart: function(swiper){
+      $('.thumbnail-swiper-container .swiper-slide').removeClass('active');
+      $('.thumbnail-swiper-container .swiper-slide:nth-child(' + (swiper.activeIndex+1) + ')').addClass('active');
+    }
   })
 
   postThumbSwiper = new Swiper ('.thumbnail-swiper-container', {
@@ -110,6 +116,8 @@ jQuery(document).ready(function() {
 
   $('.thumbnail-swiper-container .swiper-slide').click(function (){
     postSwiper.slideTo($(this).data('idx'));
+    $('.thumbnail-swiper-container .swiper-slide').removeClass('active');
+    $(this).addClass('active');
   });
 });
 `); %>
