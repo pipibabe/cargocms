@@ -50,10 +50,10 @@ module.exports = {
         },
         include: [{
           model: Product,
-          // include: [{
-          //   model: Image,
-          //   order: 'sequence'
-          // }]
+          include: [{
+            model: File,
+            order: 'sequence'
+          }]
         }],
       });
       const productImages = await Image.findAll({

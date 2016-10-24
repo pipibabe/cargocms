@@ -50,10 +50,6 @@ module.exports = {
         },
         include: [{
           model: Performance,
-          // include: [{
-          //   model: Image,
-          //   order: 'sequence'
-          // }]
         }],
       });
       const performanceImages = await Image.findAll({

@@ -112,6 +112,7 @@
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-color: rgba(247, 247, 247, 0.18);
+  background-position-y: 2px;
 }
 .product-detail {
   margin-top: 3em;
