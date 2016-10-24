@@ -50,16 +50,23 @@ module.exports = {
         },
         include: [{
           model: Performance,
-          include: [{
-            model: Image,
-            order: 'sequence'
-          }]
+          // include: [{
+          //   model: Image,
+          //   order: 'sequence'
+          // }]
         }],
+      });
+      const performanceImages = await Image.findAll({
+        where: {
+          PerformanceId: performance.Performance.id,
+        },
+        order: 'sequence',
       });
       const performanceGroups = await Group.findWithType('performance');
 
       return res.view({
-        performance,
+        performance: performance.Performance,
+        performanceImages,
         performanceGroups,
       });
     }

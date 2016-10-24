@@ -50,16 +50,23 @@ module.exports = {
         },
         include: [{
           model: Product,
-          include: [{
-            model: Image,
-            order: 'sequence'
-          }]
+          // include: [{
+          //   model: Image,
+          //   order: 'sequence'
+          // }]
         }],
+      });
+      const productImages = await Image.findAll({
+        where: {
+          ProductId: product.Product.id,
+        },
+        order: 'sequence',
       });
       const productGroups = await Group.findWithType('product');
 
       return res.view({
-        product,
+        product: product.Product,
+        productImages,
         productGroups,
       });
     }

@@ -15,18 +15,18 @@
 
         <div class="row product-detail">
           <div class="col-md-6 col-md-push-6">
-            <h1><%= performance.Performance.title %></h1>
+            <h1><%= performance.title %></h1>
             <ul class="product-info-list">
-              <% if (performance.Performance.location) { %>
+              <% if (performance.location) { %>
                 <li>
                   <label>地點</label>
-                  <span><%= performance.Performance.location %></span>
+                  <span><%= performance.location %></span>
                 </li>
               <% } %>
-              <% if (performance.Performance.introduction) { %>
+              <% if (performance.introduction) { %>
                 <li>
                   <label>介紹</label>
-                  <span><%= performance.Performance.introduction %></span>
+                  <span><%= performance.introduction %></span>
                 </li>
               <% } %>
               <li class="no-baseline">
@@ -37,7 +37,7 @@
           <div class="col-md-6 col-md-pull-6 img-content">
             <div class="post-swiper-container">
               <div class="swiper-wrapper">
-                <% for (image of performance.Performance.Images) { %>
+                <% for (image of performanceImages) { %>
                   <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
                 <% } %>
               </div>
@@ -48,8 +48,8 @@
             <div class="thumbnail-swiper-container">
               <div class="swiper-wrapper">
                 <%
-                for (let i = 0; i < performance.Performance.Images.length; i++) {
-                  let image = performance.Performance.Images[i];
+                for (let i = 0; i < performanceImages.length; i++) {
+                  let image = performanceImages[i];
                 %>
                   <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
                 <% } %>
@@ -90,6 +90,7 @@ jQuery(document).ready(function() {
   postSwiper = new Swiper ('.post-swiper-container', {
     // spaceBetween: 30,
     speed: 250,
+    grabCursor: true,
 
     // 如果需要分页器
     // pagination: '.swiper-pagination',

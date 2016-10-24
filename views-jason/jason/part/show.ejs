@@ -15,24 +15,24 @@
 
         <div class="row product-detail">
           <div class="col-md-6 col-md-push-6">
-            <h1><%= part.Part.title %></h1>
+            <h1><%= part.title %></h1>
             <ul class="product-info-list">
-              <% if (part.Part.modelName) { %>
+              <% if (part.modelName) { %>
                 <li>
                   <label>型號</label>
-                  <span><%= part.Part.modelName %></span>
+                  <span><%= part.modelName %></span>
                 </li>
               <% } %>
-              <% if (part.Part.specification) { %>
+              <% if (part.specification) { %>
                 <li>
                   <label>規格</label>
-                  <span><%= part.Part.specification %></span>
+                  <span><%= part.specification %></span>
                 </li>
               <% } %>
-              <% if (part.Part.introduction) { %>
+              <% if (part.introduction) { %>
                 <li>
                   <label>介紹</label>
-                  <span><%= part.Part.introduction %></span>
+                  <span><%= part.introduction %></span>
                 </li>
               <% } %>
               <li class="no-baseline">
@@ -43,7 +43,7 @@
           <div class="col-md-6 col-md-pull-6 img-content">
             <div class="post-swiper-container">
               <div class="swiper-wrapper">
-                <% for (image of part.Part.Images) { %>
+                <% for (image of partImages) { %>
                   <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
                 <% } %>
               </div>
@@ -54,8 +54,8 @@
             <div class="thumbnail-swiper-container">
               <div class="swiper-wrapper">
                 <%
-                for (let i = 0; i < part.Part.Images.length; i++) {
-                  let image = part.Part.Images[i];
+                for (let i = 0; i < partImages.length; i++) {
+                  let image = partImages[i];
                 %>
                   <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
                 <% } %>
@@ -103,6 +103,7 @@ jQuery(document).ready(function() {
   postSwiper = new Swiper ('.post-swiper-container', {
     // spaceBetween: 30,
     speed: 250,
+    grabCursor: true,
 
     // 如果需要分页器
     // pagination: '.swiper-pagination',
