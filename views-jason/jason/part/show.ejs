@@ -126,11 +126,10 @@ jQuery(document).ready(function() {
     // nextButton: '.swiper-button-next',
     // prevButton: '.swiper-button-prev',
   })
+  postSwiper.params.control = postThumbSwiper;
 
   $('.thumbnail-swiper-container .swiper-slide').click(function (){
     postSwiper.slideTo($(this).data('idx'));
-    $('.thumbnail-swiper-container .swiper-slide').removeClass('active');
-    $(this).addClass('active');
   });
 });
 `); %>
