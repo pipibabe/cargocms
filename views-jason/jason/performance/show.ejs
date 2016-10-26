@@ -45,8 +45,8 @@
             <div class="thumbnail-swiper-container">
               <div class="swiper-wrapper">
                 <%
-                for (let i = 0; i < performanceImages.length; i++) {
-                  let image = performanceImages[i];
+                for (var i = 0; i < performanceImages.length; i++) {
+                  var image = performanceImages[i];
                 %>
                   <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
                 <% } %>
@@ -71,7 +71,7 @@
           <small>Product</small>
         </h3>
         <div class="list-group">
-          <% for(let group of performanceGroups) { %>
+          <% for(var group of performanceGroups) { %>
             <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
           <% } %>
         </div>

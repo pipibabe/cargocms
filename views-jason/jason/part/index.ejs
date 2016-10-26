@@ -18,7 +18,7 @@
             配件尚未推出，敬請期待
           </div>
         <% } %>
-        <% for (let item of posts) { %>
+        <% for (var item of posts) { %>
           <a class="product row" href="/part/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
               <img class="img-thumbnail" src="<%= item.Part.Images[0].url %>" alt="產品圖" />
@@ -47,7 +47,7 @@
               </a>
             </li>
 
-            <% for (let i = 1; i <= maxPage; i++){ %>
+            <% for (var i = 1; i <= maxPage; i++){ %>
               <% if (i == page) { %>
                 <li class="active">
                   <a href="/part/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
@@ -78,7 +78,7 @@
         </h3>
         <div class="list-group">
           <a href="/part/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">全部配件</a>
-          <% for(let group of partGroups) { %>
+          <% for(var group of partGroups) { %>
             <a href="/part/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
           <% } %>
         </div>

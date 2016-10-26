@@ -18,7 +18,7 @@
             產品尚未推出，敬請期待
           </div>
         <% } %>
-        <% for (let item of posts) { %>
+        <% for (var item of posts) { %>
           <a class="product row" href="/product/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
               <img class="img-thumbnail" src="<%= item.Product.Images[0].url %>" alt="產品圖" />
@@ -48,7 +48,7 @@
               </a>
             </li>
 
-            <% for (let i = 1; i <= maxPage; i++){ %>
+            <% for (var i = 1; i <= maxPage; i++){ %>
               <% if (i == page) { %>
                 <li class="active">
                   <a href="/product/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
@@ -79,7 +79,7 @@
         </h3>
         <div class="list-group">
           <a href="/product/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">全部產品</a>
-          <% for(let group of productGroups) { %>
+          <% for(var group of productGroups) { %>
             <a href="/product/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
           <% } %>
         </div>

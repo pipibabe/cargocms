@@ -24,7 +24,7 @@
             <tr>
               <th>單位名稱</th><th>地點</th>
             </tr>
-            <% for (let item of posts) { %>
+            <% for (var item of posts) { %>
               <tr>
                 <td><%= item.Performance.title %></td> <td><%= item.Performance.location %></td>
               </tr>
@@ -32,7 +32,7 @@
           </table>
         <% } else { %>
 
-          <% for (let item of posts) { %>
+          <% for (var item of posts) { %>
             <a class="product row" href="/performance/show/<%= item.id %>">
               <div class="col-xs-3 product-img-wrapper">
                 <img class="img-thumbnail" src="<%= (item.Performance.Images[0])?item.Performance.Images[0].url:'' %>" alt="工程實蹟圖" />
@@ -63,7 +63,7 @@
               </a>
             </li>
 
-            <% for (let i = 1; i <= maxPage; i++){ %>
+            <% for (var i = 1; i <= maxPage; i++){ %>
               <% if (i == page) { %>
                 <li class="active">
                   <a href="/performance/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
@@ -93,7 +93,7 @@
           <small>Product</small>
         </h3>
         <div class="list-group">
-          <% for(let group of performanceGroups) { %>
+          <% for(var group of performanceGroups) { %>
             <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
           <% } %>
         </div>

@@ -56,8 +56,8 @@
             <div class="thumbnail-swiper-container">
               <div class="swiper-wrapper">
                 <%
-                for (let i = 0; i < partImages.length; i++) {
-                  let image = partImages[i];
+                for (var i = 0; i < partImages.length; i++) {
+                  var image = partImages[i];
                 %>
                   <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
                 <% } %>
@@ -89,7 +89,7 @@
         </h3>
         <div class="list-group">
           <a href="/part/group/0/page/1" class="list-group-item">全部配件</a>
-          <% for(let group of partGroups) { %>
+          <% for(var group of partGroups) { %>
             <a href="/part/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
           <% } %>
         </div>
