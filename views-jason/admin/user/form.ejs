@@ -1,0 +1,172 @@
+<fieldset>
+
+  <section>
+    <label class="label">權限</label>
+    <label class="checkbox state-disabled">
+      <input type="checkbox" id="admin" name="admin" value="admin" v-model="data.item.RolesArray">
+      <i></i>管理員</label>
+    <label class="user checkbox state-disabled">
+      <input type="checkbox" id="user" name="user" value="user" v-model="data.item.RolesArray" checked disabled>
+      <i></i>使用者</label>
+  </section>
+
+  <br>
+  <hr>
+  <br>
+
+  <section>
+    <label class="label">使用者名稱</label>
+    <label class="input state-disabled"><i class="icon-append fa fa-user"></i>
+      <input type="text" name="username" placeholder="" v-model="data.item.username" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入使用者名稱</b></label>
+  </section>
+
+  <section>
+    <label class="label">Email</label>
+    <label class="input state-disabled"><i class="icon-append fa fa-envelope-o"></i>
+      <input type="email" name="email" placeholder="" v-model="data.item.email" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入 Email</b></label>
+  </section>
+
+  <div class="row">
+    <section class="col col-xs-12 col-sm-6">
+      <label class="label">名</label>
+      <label class="input state-disabled">
+        <input type="text" name="firstName" placeholder="" v-model="data.item.firstName" disabled>
+      </label>
+    </section>
+    <section class="col col-6">
+      <label class="label">姓</label>
+      <label class="input">
+        <input type="text" name="lastName" placeholder="" v-model="data.item.lastName" disabled>
+      </label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-xs-12 col-sm-6">
+      <label class="label">密碼</label>
+      <label class="input state-disabled"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" name="password" placeholder="" id="password" v-model="data.item.Passports[0].password" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入密碼</b> </label>
+    </section>
+
+    <section class="col col-xs-12 col-sm-6">
+      <label class="label">確認密碼</label>
+      <label class="input state-disabled"> <i class="icon-append fa fa-lock"></i>
+        <input type="password" name="passwordConfirm" placeholder="" v-model="data.option.passwordConfirm" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入密碼</b> </label>
+    </section>
+  </div>
+
+  <section>
+    <label class="input state-disabled"><i class="icon-append fa fa-birthday-cake"></i>
+      <input type="date" name="birthday" placeholder="請輸入生日 例：1970-01-01" v-model="data.item.birthday" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入 生日</b></label>
+  </section>
+  <section>
+    <label class="input state-disabled"><i class="icon-append fa fa-phone"></i>
+      <input type="number" name="phone1" placeholder="請輸入手機號碼" v-model="data.item.phone1" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入 手機號碼</b></label>
+  </section>
+  <section>
+    <label class="input state-disabled"><i class="icon-append fa fa-phone"></i>
+      <input type="number" name="phone2" placeholder="請輸入市話號碼" v-model="data.item.phone2" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入 市話號碼</b></label>
+  </section>
+  <section>
+    <label class="input state-disabled"><i class="icon-append fa fa-map-marker"></i>
+      <input type="text" name="address" placeholder="請輸入收件地址1" v-model="data.item.address" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入 收件地址1</b></label>
+  </section>
+  <section>
+    <label class="input state-disabled"><i class="icon-append fa fa-map-marker"></i>
+      <input type="text" name="address2" placeholder="請輸入收件地址2" v-model="data.item.address2" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入 收件地址2</b></label>
+  </section>
+  <!--
+  <div class="row">
+    <section class="col col-6">
+      <label class="select">
+        <select name="gender">
+          <option value="0" selected="" disabled="">Gender</option>
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+          <option value="3">Prefer not to answer</option>
+        </select> <i></i> </label>
+    </section>
+    <section class="col col-6">
+      <label class="input"> <i class="icon-append fa fa-calendar"></i>
+        <input type="text" name="request" placeholder="Request activation on" class="datepicker" data-dateformat='dd/mm/yy'>
+      </label>
+    </section>
+  </div>
+
+  <section>
+    <label class="checkbox">
+      <input type="checkbox" name="subscription" id="subscription">
+      <i></i>I want to receive news and special offers</label>
+    <label class="checkbox">
+      <input type="checkbox" name="terms" id="terms">
+      <i></i>I agree with the Terms and Conditions</label>
+  </section> -->
+</fieldset>
+<script>
+
+var formRules = {
+  username : {
+    required : true
+  },
+  email : {
+    required : true,
+    email : true
+  },
+  firstname : {
+    required : true
+  },
+  lastname : {
+    required : true
+  },
+  password : {
+    required : true,
+    minlength : 3,
+  },
+  passwordConfirm : {
+    required : true,
+    minlength : 3,
+    equalTo : '#password'
+  },
+  brithday : {
+    required : false,
+    onsubmit : false,
+    dateISO: true
+  },
+}
+
+  // Messages for form validation
+var formMessages = {
+  username : {
+    required : '請輸入使用者帳號'
+  },
+  email : {
+    required : '請輸入 Email',
+    email : '請確認輸入的 Email 格式'
+  },
+  firstname : {
+    required : '請輸入使用者姓'
+  },
+  lastname : {
+    required : '請輸入使用者名'
+  },
+  password : {
+    required : '請輸入密碼'
+  },
+  passwordConfirm : {
+    required : '請再次輸入密碼以便確認',
+    equalTo : '請輸入相同的密碼'
+  },
+  brithday : {
+    dateISO : "請輸入正確日期格式"
+  },
+}
+</script>

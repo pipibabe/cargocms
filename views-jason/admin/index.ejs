@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>CargoCMS - Cloud Web Management</title>
+<meta name="description" content="CargoCMS Web Management">
+<meta name="author" content="Trunk Studio">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<% include partials/styles.ejs %>
+
+<style type="text/css">
+#admin-title {
+	font-size: 15px;
+	margin: 15px 0;
+	padding: 0;
+	color: #ffffff;
+	letter-spacing: .5px;
+}
+#admin-copyright {
+	color: #ffffff;
+}
+</style>
+</head>
+<body class="smart-style-2">
+
+	<% include partials/header %>
+
+	<!-- #MAIN PANEL -->
+	<div id="main" role="main">
+
+		<!-- RIBBON -->
+		<div id="ribbon">
+			<!-- breadcrumb -->
+			<ol class="breadcrumb">
+				<!-- This is auto generated -->
+			</ol>
+			<!-- end breadcrumb -->
+		</div>
+		<!-- END RIBBON -->
+
+		<!-- #MAIN CONTENT -->
+		<div id="message" v-show="desc != ''">
+			<span class="{{type}}">{{desc}}</span>
+		</div>
+		<div id="content"></div>
+		<!-- END #MAIN CONTENT -->
+
+	</div>
+	<!-- END #MAIN PANEL -->
+
+  <% include partials/footer %>
+	<% include partials/scripts %>
+
+	<script type="text/javascript" src="/admin/config.js"></script>
+	<script type="text/javascript">
+
+	// $(function() {
+	//   $('#admin-title').html(__ADMIN_CONFIG__.title);
+	//   $('#admin-copyright').html(__ADMIN_CONFIG__.copyright);
+	// });
+
+	var messageModel = { type: "", desc: "" };
+
+	var messageApp = new Vue({
+		el: "#message",
+	  data: messageModel,
+	  methods: {
+	    show: function(params) {
+				// messageModel.type = type;
+				// messageModel.desc = desc;
+				var iconSmall;
+				var color;
+				switch (params.type) {
+					case 'success':
+						iconSmall = "fa-fw fa fa-check";
+						color = "#356635";
+						break;
+					case 'error':
+						iconSmall = "fa-fw fa fa-times";
+						color = "#953b39";
+						break;
+					case 'warning':
+						iconSmall = "fa-fw fa fa-warning";
+						color = "#dfb56c";
+						break;
+					default:
+						iconSmall = "fa-fw fa fa-info";
+						color = "#305d8c";
+						break;
+				}
+				$.smallBox({
+          title: params.desc,
+          content: "",
+          color: color,
+          iconSmall: iconSmall,
+          sound: false,
+          timeout: 3000
+        });
+	    },
+			// confirm: ({title, content, btnArray}, cb) => {
+			confirm: function(params, cb) {
+				var buttons = '';
+				params.btnArray.forEach(function(btn) {
+					buttons += '[' + btn + ']';
+				});
+				$.SmartMessageBox({
+					title: params.title,
+					content: params.content,
+					buttons: buttons,
+				}, function(ButtonPressed) {
+					cb(ButtonPressed);
+				});
+			}
+		}
+	});
+	</script>
+</body>
+
+</html>

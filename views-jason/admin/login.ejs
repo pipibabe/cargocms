@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>Login 2 | Unify - Responsive Website Template</title>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- Web Fonts -->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=cyrillic,latin">
+
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="/assets/unify/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/unify/css/style.css">
+
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="/assets/unify/plugins/animate.css">
+	<link rel="stylesheet" href="/assets/unify/plugins/line-icons/line-icons.css">
+	<link rel="stylesheet" href="/assets/unify/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/unify/plugins/brand-buttons/brand-buttons.css">
+
+	<!-- CSS Page Style -->
+	<link rel="stylesheet" href="/assets/unify/css/pages/page_log_reg_v4.css">
+
+	<!-- CSS Theme -->
+	<link rel="stylesheet" href="/assets/unify/css/theme-colors/blue.css">
+
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="/assets/unify/css/custom.css">
+
+	<style type="text/css">
+		body {
+			margin-bottom: 0;
+		}
+		.sticky-footer {
+			padding: 15px 15px 25px;
+		}
+		.equal-height-column img {
+			height: 42px;
+		}
+	</style>
+</head>
+
+<body>
+	<!--=== Content Part ===-->
+	<div class="container-fluid">
+		<div class="row equal-height-columns">
+			<div class="col-md-6 col-sm-6 hidden-xs image-block equal-height-column"></div>
+
+			<div class="col-md-6 col-sm-6 form-block equal-height-column">
+				<!-- <a href="index.html">
+					<img src="/assets/labfnp/img/lfp-logo.png" alt="" style="max-width:100px">
+				</a> -->
+				<h2 class="margin-bottom-50">網站管理系統</h2>
+				<form action="/auth/local?url=/admin/" method="post">
+					<div class="login-block">
+						<div class="input-group margin-bottom-40">
+							<span class="input-group-addon rounded-left"><i class="icon-user color-blue"></i></span>
+							<input type="text" name="identifier" class="form-control rounded-right" placeholder="Username">
+						</div>
+
+						<div class="input-group margin-bottom-40">
+							<span class="input-group-addon rounded-left"><i class="icon-lock color-blue"></i></span>
+							<input type="password" name="password" class="form-control rounded-right" placeholder="Password">
+						</div>
+
+
+						<div class="checkbox">
+							<ul class="list-inline">
+								<li>
+									<label>
+										<!-- <input type="checkbox"> Remember me -->
+									</label>
+								</li>
+
+								<!--<li class="pull-right">-->
+								<!--	<a href="#">Forgot password?</a>-->
+								<!--</li>-->
+							</ul>
+						</div>
+
+						<div class="row margin-bottom-100">
+							<div class="col-md-12">
+								<button type="submit" class="btn-u btn-u-blue btn-block rounded">登入</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div><!--/container-->
+	<!--=== End Content Part ===-->
+
+	<!--=== Sticky Footer ===-->
+	<div class="container sticky-footer">
+		<p class="copyright-space">
+			2016 &copy; All Rights Reserved. Powered by <a href="#">CargoCMS</a>
+		</p>
+	</div>
+	<!--=== End Sticky Footer ===-->
+
+	<!-- JS Global Compulsory -->
+	<script src="/assets/unify/plugins/jquery/jquery.min.js"></script>
+	<script src="/assets/unify/plugins/jquery/jquery-migrate.min.js"></script>
+	<script src="/assets/unify/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- JS Implementing Plugins -->
+	<script src="/assets/unify/plugins/back-to-top.js"></script>
+	<script src="/assets/unify/plugins/backstretch/jquery.backstretch.min.js"></script>
+
+	<!-- JS Customization -->
+	<script src="/assets/unify/js/custom.js"></script>
+
+	<!-- JS Page Level -->
+	<script src="/assets/unify/js/app.js"></script>
+	<script>
+		jQuery(document).ready(function() {
+			App.init();
+		});
+	</script>
+	<script>
+		$(".image-block").backstretch([
+			"/assets/labfnp/img/admin-login-bg.jpg",
+			"/assets/labfnp/img/admin-login-bg-2.jpg",
+			], {
+				fade: 1000,
+				duration: 3000
+			});
+	</script>
+	<!--[if lt IE 9]>
+	<script src="/assets/unify/plugins/respond.js"></script>
+	<script src="/assets/unify/plugins/html5shiv.js"></script>
+	<script src="/assets/unify/plugins/placeholder-IE-fixes.js"></script>
+	<![endif]-->
+</body>
+</html>

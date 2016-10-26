@@ -1,0 +1,22 @@
+
+<%- include form.ejs %>
+
+<!-- SCRIPTS ON PAGE EVENT -->
+<script type="text/javascript">
+
+
+	var pagefunction = function() {
+		<%- include vue.ejs %>
+		appMain.$mount("#main-edit");
+		appMain.loadItem(appMain.onEnterPageEdit);
+
+
+		$('label.user').removeClass('state-disabled');
+		$('input[name="user"]').removeAttr('chekced');
+		$('input[name="user"]').removeAttr('disabled');
+
+		appMain.setupForm("edit");
+    appMain.DateOfBirthday();
+	};
+
+</script>

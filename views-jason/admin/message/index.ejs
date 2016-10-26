@@ -1,0 +1,101 @@
+
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+	<thead>
+		<tr>
+			<th width="10%" class="" data-hide="phone"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/> ID</th>
+			<th width="10%" class="" data-class="expand"><i class="fa fa-fw fa-envelope hidden-md hidden-lg" /> <span class="hidden-sm hidden-xs">發送方式</span></th>
+      <th width="20%" class=""> 類型</th>
+      <th width="20%" class="" data-hide="phone,tablet"> 寄件人</th>
+      <th width="20%" class=""> 收件人</th>
+      <th class="" data-hide="always"> 主旨</th>
+      <th class="" data-hide="always"> 訊息內容</th>
+      <th class="" data-hide="always"> Html</th>
+      <th width="10%" class=""><i class="fa fa-fw fa-share hidden-md hidden-lg" /> <span class="hidden-sm hidden-xs">發送成功</span></th>
+      <th class="" data-hide="always"> 異常訊息</th>
+			<th data-hide="always" class="asc">發送日期</th>
+			<th width="10%" class="" data-hide="phone,tablet"></th>
+		</tr>
+	</thead>
+	<!-- client only -->
+	<tbody>
+		<tr v-for="item in data.items">
+			<td>{{ item.id }}</td>
+			<td>{{ item.sendBy }}</td>
+      <td>{{ item.type }}</td>
+      <td>{{ item.from }}</td>
+      <td>{{ item.to }}</td>
+      <td>{{ item.subject }}</td>
+      <td>{{ item.text }}</td>
+      <td>{{ item.html }}</td>
+      <td>{{ item.success }}</td>
+      <td>{{ item.error }}</td>
+			<td>{{ item.createdAt }}</td>
+			<td align="center" style="cursor: pointer;">
+				<div class="row">
+					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
+						<i class="fa-fw fa fa-eye text-muted" />
+					</a>
+					<a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+						<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+					</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+ </table>
+
+
+<script type="text/javascript">
+	var pagefunction = function() {
+
+		// server only
+		var columns = [
+			{ "data": "id" },
+			{ "data": "sendBy" },
+			{ "data": "type" },
+      { "data": "from" },
+      { "data": "to" },
+      { "data": "subject" },
+      { "data": "text" },
+      { "data": "html" },
+      { "data": "success" },
+      { "data": "error" },
+			{ "data": "createdAt" },
+			{ "data": null }
+		]
+
+		// server only
+		var columnDefs = [
+      {
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+			{
+        "searchable": false,
+        "targets": 2
+      },
+			{
+				"targets"  : 3,
+				"orderable": false,
+				"searchable": false,
+				"render": function ( data, type, row ) {
+					var colBody =
+					'<div class="row-action-buttons hidden-xs hidden-sm">'+
+						'<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-eye text-muted" />'+
+						'</a>'+
+						'<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+						'</a>'+
+					'</div>';
+					return colBody;
+				}
+			},
+		]
+		var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+		<%- include vue.ejs %>
+		appMain.$mount("#main-index");
+		appMain.loadItems(appMain.renderTable);
+	};
+</script>
