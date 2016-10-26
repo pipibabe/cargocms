@@ -103,12 +103,13 @@
 .thumbnail-swiper-container .swiper-slide {
   transition: 0.2s all ease-in;
   cursor: pointer;
+  background-size: cover;
 }
 .thumbnail-swiper-container .swiper-slide.active {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
   border-radius: 2px;
 }
-.swiper-slide {
+.post-swiper-container .swiper-slide {
   /*background: url('http://www.autodoor.twmail.net/webadmin/performance/file/PA030166.jpg');*/
   background-size: contain;
   background-repeat: no-repeat;
