@@ -101,7 +101,7 @@
   padding-top: 1.3em;
 }
 .thumbnail-swiper-container .swiper-slide {
-  transition: 0.2s all ease-in;
+  transition: 0.2s box-shadow ease-in;
   cursor: pointer;
   background-size: cover;
 }
