@@ -32,6 +32,7 @@ module.exports = {
   'put /api/admin/jason/performance/:id':    'api/admin/jason/PerformanceController.update',
   'delete /api/admin/jason/performance/:id': 'api/admin/jason/PerformanceController.destroy',
 
+  'get /api/admin/jason/group/select/:group':  'api/admin/jason/GroupController.selectfind',
   'get /api/admin/jason/group/:group':  'api/admin/jason/GroupController.find',
   'get /api/admin/jason/group/:id':     'api/admin/jason/GroupController.findOne',
   'post /api/admin/jason/group':       'api/admin/jason/GroupController.create',
