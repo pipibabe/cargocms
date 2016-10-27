@@ -38,5 +38,7 @@ module.exports = {
   'put /api/admin/jason/group/:id':     'api/admin/jason/GroupController.update',
   'delete /api/admin/jason/group/:id':  'api/admin/jason/GroupController.destroy',
 
+  'get /api/admin/jason/partgroup':  'api/admin/jason/PartGroupController.find',
+
   "/jason/:controller/:action/:id?": {}
 };
