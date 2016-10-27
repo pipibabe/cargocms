@@ -93,3 +93,14 @@ appMain.onImageDelete = function(index) {
   appModel.data.item.postCovers.splice(index, 1);
   appModel.data.item.postCoverUrl.splice(index, 1);
 }
+appMain.customSearch = function() {
+  appModel.pagingQuery.columns.push({
+    data: 'title',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'Post.Group',
+      column: 'title',
+    }
+  })
+}
