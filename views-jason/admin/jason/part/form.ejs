@@ -7,7 +7,7 @@
     <section class="col col-lg-6 col-xs-6 col-xs-6">
       <label class="label">名稱</label>
       <label class="input state-disabled">
-        <input type="text" name="title" placeholder="配件名稱" v-model="data.item.title" disabled>
+        <input type="text" name="title" placeholder="配件名稱" v-model="data.item.title" v-on:change="titleOnChange" disabled>
         <b class="tooltip tooltip-bottom-right">請輸入配件名稱</b></label>
     </section>
 
@@ -52,41 +52,42 @@
   <br/>
 
   <div class="row">
-    <section class="col col-lg-6 col-xs-6 col-xs-6">
+    <!--<section class="col col-lg-6 col-xs-6 col-xs-6">
       <label class="label">封面類型</label>
       <label class="select">
         <select class="state-disabled" v-model="data.item.postCoverType" v-on:change="selectOnChange" disabled>
           <option value="img" selected>圖片</option>
           <option value="video">影片</option>
         </select> <i></i> </label>
-    </section>
+    </section>-->
 
 
-    <section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'img'">
+  <!--  <section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'img'">-->
+    <section  class="col col-lg-12 col-xs-12 col-xs-12">
       <label class="label">封面</label>
       <%- include ../../image/upload.ejs %>
     </section>
-    <section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'video'">
+    <!--<section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'video'">
       <label class="label">封面影片</label>
       <label class="input">
         <input type="text" name="postCoverUrl" placeholder="請輸入影片連結" v-model="data.item.postCoverUrl">
       </label>
-    </section>
+    </section>-->
   </div>
 
-  <section>
+  <section v-show='false'>
     <label class="label">標題</label>
     <label class="input state-disabled">
       <input type="text" name="postTitle" placeholder="請輸入標題" v-model="data.item.postTitle" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入標題</b> </label>
   </section>
 
-  <section>
+  <!--<section>
     <label class="label">簡述</label>
     <label class="textarea state-disabled">
       <textarea rows="5" name="postAbstract" placeholder="請輸入 100 字以內的簡短的描述" v-model="data.item.postAbstract" disabled></textarea>
       <b class="tooltip tooltip-bottom-right">請輸入 100 字以內的簡短的描述</b> </label>
-  </section>
+  </section>-->
 
   <section>
     <label class="label">內容</label>
@@ -95,10 +96,10 @@
         <b class="tooltip tooltip-bottom-right">請輸入 內容</b> </label>
   </section>
 
-  <section>
+  <!--<section>
     <label class="label">標籤</label>
     <input id="tagsinput" value="" data-role="tagsInputLabel">
-  </section>
+  </section>-->
 
 </fieldset>
 <script>

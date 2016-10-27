@@ -52,3 +52,7 @@ appMain.enableSelect = function () {
   $('select').attr('disabled', false);
   $('.select').removeClass('state-disabled');
 }
+
+appMain.titleOnChange = function() {
+  appModel.data.item.postTitle = appModel.data.item.title;
+}
