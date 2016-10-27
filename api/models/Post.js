@@ -19,7 +19,7 @@ module.exports = {
       defaultValue: 'img',
     },
     coverUrl: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       get: function() {
         try {
           if (this.coverType === 'img') {
