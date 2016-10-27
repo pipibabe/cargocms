@@ -29,7 +29,8 @@ var appModel = {
     },
     items: [],
     option: {
-      defaultSort: [[ 0, 'desc' ]]
+      defaultSort: [[ 0, 'desc' ]],
+      group: []
     }
   },
   view: {
@@ -51,4 +52,13 @@ appMain.enableText = function(){
 appMain.enableSelect = function () {
   $('select').attr('disabled', false);
   $('.select').removeClass('state-disabled');
+}
+
+appMain.getPartGroup = function() {
+  var ajaxSuccess = function (result) {
+      console.log('get Part group result=>', result);
+      appModel.data.option.group = result.data.items;
+    } // end ajaxSuccess
+
+  $.get('/api/admin/jason/group/part', ajaxSuccess);
 }
