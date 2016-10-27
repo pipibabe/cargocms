@@ -61,13 +61,19 @@ module.exports = {
         content: data.postContent,
         url: data.postUrl,
         abstract: data.postAbstract,
-        coverType: data.postCoverType,
-        coverUrl: data.postCoverUrl,
+        // coverType: data.postCoverType,
+        // coverUrl: data.postCoverUrl,
         type: data.postType
       };
+      const image = {
+        ids:  data.postCovers.map((data) => data.id),
+      }
       let item = {};
       item.post = await Post.create(post);
       item.part = await Part.create({...part, PostId: item.post.id});
+      await Image.update({ PartId: item.part.id }, {
+        where: { id: image.ids }
+      });
 
       const message = 'Create success.';
       res.ok({ message, data: { item } });
@@ -91,10 +97,15 @@ module.exports = {
         content: data.postContent,
         url: data.postUrl,
         abstract: data.postAbstract,
-        coverType: data.postCoverType,
-        coverUrl: data.postCoverUrl,
+        // coverType: data.postCoverType,
+        // coverUrl: data.postCoverUrl,
         type: data.postType
       };
+      const image = {
+        ids:  data.postCovers.map((data) => {
+          return parseInt(data.id, 10)
+        }),
+      }
 
       let item = {};
       item.part = await Part.update(part ,{
@@ -103,6 +114,12 @@ module.exports = {
       item.post = await Post.update(post ,{
         where: { id }
       })
+      await Image.update({ PartId: null }, {
+        where: { id: { $notIn: image.ids }, PartId: id}
+      });
+      await Image.update({ PartId: id }, {
+        where: { id: image.ids }
+      });
       const message = 'Update success.';
       res.ok({ message, data: { item } });
     } catch (e) {

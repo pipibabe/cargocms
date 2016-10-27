@@ -93,7 +93,7 @@ module.exports = {
         try {
           let thisImages = [];
           thisImages = this.getDataValue('Images');
-          if(thisImages.length > 0){
+          if(thisImages){
             thisImages = thisImages.map((image) => {
               return {
                 id: image.id
@@ -112,7 +112,7 @@ module.exports = {
         try {
           let thisImages = [];
           thisImages = this.getDataValue('Images');
-          if(thisImages.length > 0){
+          if(thisImages){
             thisImages = thisImages.map((image) => image.url);
           }
           return thisImages;

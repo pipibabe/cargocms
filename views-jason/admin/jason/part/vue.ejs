@@ -74,9 +74,12 @@ appMain.setupImageUpload = function () {
         appModel.data.item.postCoverUrl.splice(i, 1);
       }
     })
-    console.log(appModel.data.item.postCovers, appModel.data.item.postCoverUrl);
-    // appModel.data.item.cover = null;
-    // appModel.data.item.coverUrl = '';
   })
   uploadImageApp.setup();
+}
+
+appMain.onImageDelete = function(index) {
+  console.log(index);
+  appModel.data.item.postCovers.splice(index, 1);
+  appModel.data.item.postCoverUrl.splice(index, 1);
 }
