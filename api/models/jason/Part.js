@@ -87,16 +87,35 @@ module.exports = {
         }
       }
     },
+    postCovers: {
+      type: Sequelize.VIRTUAL,
+      get: function() {
+        try {
+          let thisImages = [];
+          thisImages = this.getDataValue('Images');
+          if(thisImages.length > 0){
+            thisImages = thisImages.map((image) => {
+              return {
+                id: image.id
+              }
+            });
+          }
+          return thisImages;
+        } catch (e) {
+          sails.log.error(e);
+        }
+      }
+    },
     postCoverUrl: {
       type: Sequelize.VIRTUAL,
       get: function() {
         try {
-          const post = this.getDataValue('Post');
-          let postCoverUrl = '';
-          if(post){
-            postCoverUrl = post.coverUrl;
+          let thisImages = [];
+          thisImages = this.getDataValue('Images');
+          if(thisImages.length > 0){
+            thisImages = thisImages.map((image) => image.url);
           }
-          return postCoverUrl;
+          return thisImages;
         } catch (e) {
           sails.log.error(e);
         }

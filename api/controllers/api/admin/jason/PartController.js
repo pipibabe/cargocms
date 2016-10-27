@@ -34,12 +34,13 @@ module.exports = {
         where: {
           id
         },
-        include: {
+        include: [{
           model: Post,
           include: Group
-        }
+        }, {
+          model: Image,
+        }]
       });
-
       res.ok({ data: { item } });
     } catch (e) {
       res.serverError(e);
