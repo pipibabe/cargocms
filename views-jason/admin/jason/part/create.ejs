@@ -6,10 +6,12 @@
 	var pagefunction = function() {
 
 		<%- include vue.ejs %>
+    appMain.getPartGroup();
 		appMain.$mount("#main-create");
 		appMain.setupForm("create");
 		appMain.onEnterPageEdit();
     appMain.enableText();
     appMain.enableSelect();
+
 	};
 </script>
