@@ -65,7 +65,7 @@ module.exports = {
         type: data.postType
       };
       let item = {};
-      item.post = await Post.create(post);
+      item.post = await Post.create({...post, GroupId: data.groupId});
       item.part = await Part.create({...part, PostId: item.post.id});
 
       const message = 'Create success.';
@@ -92,7 +92,8 @@ module.exports = {
         abstract: data.postAbstract,
         coverType: data.postCoverType,
         coverUrl: data.postCoverUrl,
-        type: data.postType
+        type: data.postType,
+        groupId: data.groupId
       };
 
       let item = {};
