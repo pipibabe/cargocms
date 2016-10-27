@@ -34,11 +34,27 @@ module.exports = {
 
   'get /api/admin/jason/group/:group':  'api/admin/jason/GroupController.find',
   'get /api/admin/jason/group/:id':     'api/admin/jason/GroupController.findOne',
-  'post /api/admin/jason/group/':       'api/admin/jason/GroupController.create',
+  'post /api/admin/jason/group':       'api/admin/jason/GroupController.create',
   'put /api/admin/jason/group/:id':     'api/admin/jason/GroupController.update',
   'delete /api/admin/jason/group/:id':  'api/admin/jason/GroupController.destroy',
 
-  'get /api/admin/jason/partgroup':  'api/admin/jason/PartGroupController.find',
+  'get /api/admin/jason/partgroup':         'api/admin/jason/PartGroupController.find',
+  'get /api/admin/jason/partgroup/:id':     'api/admin/jason/PartGroupController.findOne',
+  'post /api/admin/jason/partgroup':       'api/admin/jason/PartGroupController.create',
+  'put /api/admin/jason/partgroup/:id':     'api/admin/jason/PartGroupController.update',
+  'delete /api/admin/jason/partgroup/:id':  'api/admin/jason/PartGroupController.destroy',
+
+  'get /api/admin/jason/productgroup':        'api/admin/jason/ProductGroupController.find',
+  'get /api/admin/jason/productgroup/:id':    'api/admin/jason/ProductGroupController.findOne',
+  'post /api/admin/jason/productgroup':       'api/admin/jason/ProductGroupController.create',
+  'put /api/admin/jason/productgroup/:id':    'api/admin/jason/ProductGroupController.update',
+  'delete /api/admin/jason/productgroup/:id': 'api/admin/jason/ProductGroupController.destroy',
+
+  'get /api/admin/jason/performancegroup':        'api/admin/jason/PerformanceGroupController.find',
+  'get /api/admin/jason/performancegroup/:id':    'api/admin/jason/PerformanceGroupController.findOne',
+  'post /api/admin/jason/performancegroup':       'api/admin/jason/PerformanceGroupController.create',
+  'put /api/admin/jason/performancegroup/:id':    'api/admin/jason/PerformanceGroupController.update',
+  'delete /api/admin/jason/performancegroup/:id': 'api/admin/jason/PerformanceGroupController.destroy',
 
   "/jason/:controller/:action/:id?": {}
 };
