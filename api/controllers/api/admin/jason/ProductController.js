@@ -34,10 +34,12 @@ module.exports = {
         where: {
           id
         },
-        include: {
+        include: [{
           model: Post,
           include: Group
-        }
+        }, {
+          model: Image,
+        }]
       });
 
       res.ok({ data: { item } });
@@ -60,13 +62,20 @@ module.exports = {
         content: data.postContent,
         url: data.postUrl,
         abstract: data.postAbstract,
-        coverType: data.postCoverType,
-        coverUrl: data.postCoverUrl,
+        // coverType: data.postCoverType,
+        // coverUrl: data.postCoverUrl,
         type: data.postType
       };
+      const image = {
+        ids:  data.postCovers.map((data) => data.id),
+      }
+
       let item = {};
       item.post = await Post.create({...post, GroupId: data.groupId});
       item.product = await Part.create({...part, PostId: item.post.id});
+      await Image.update({ Product: item.product.id }, {
+        where: { id: image.ids }
+      });
 
       const message = 'Create success.';
       res.ok({ message, data: { item } });
@@ -90,11 +99,17 @@ module.exports = {
         content: data.postContent,
         url: data.postUrl,
         abstract: data.postAbstract,
-        coverType: data.postCoverType,
-        coverUrl: data.postCoverUrl,
+        // coverType: data.postCoverType,
+        // coverUrl: data.postCoverUrl,
         type: data.postType,
-        groupId: data.groupId
+        GroupId: data.groupId
       };
+      const image = {
+        ids:  data.postCovers.map((data) => {
+          return parseInt(data.id, 10)
+        }),
+      }
+
 
       let item = {};
       item.product = await Product.update(product ,{
@@ -103,6 +118,12 @@ module.exports = {
       item.post = await Post.update(post ,{
         where: { id }
       })
+      await Image.update({ ProductId: null }, {
+        where: { id: { $notIn: image.ids }, ProductId: id}
+      });
+      await Image.update({ ProductId: id }, {
+        where: { id: image.ids }
+      });
       const message = 'Update success.';
       res.ok({ message, data: { item } });
     } catch (e) {

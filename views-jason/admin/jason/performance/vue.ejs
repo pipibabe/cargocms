@@ -21,8 +21,9 @@ var appModel = {
       postUrl: '',
       postAbstract: '',
       postCoverType: '',
-      postCoverUrl: '',
-      postType: 'part',
+      postCoverUrl: [],
+      postCovers: [],
+      postType: 'performance',
       groupTitle: '',
       groupId: ''
     },
@@ -64,4 +65,31 @@ appMain.getPartGroup = function() {
 
 appMain.titleOnChange = function() {
   appModel.data.item.postTitle = appModel.data.item.title;
+}
+
+
+appMain.setupImageUpload = function () {
+  uploadImageApp.updateModel('itemLimit', 10);
+  uploadImageApp.updateModel('onComplete', function(index, name, response){
+    console.log(response.data.id, response.data.url);
+    console.log(appModel.data.item.postCovers, appModel.data.item.postCoverUrl);
+    appModel.data.item.postCovers.push({index: index, id: response.data.id});
+    appModel.data.item.postCoverUrl.push(response.data.url);
+  })
+  uploadImageApp.updateModel('onDeleteComplete', function(index, name, response){
+    console.log(index, name, response);
+    appModel.data.item.postCovers.forEach((val, i) => {
+      if ('index' in val  && val.index === index) {
+        appModel.data.item.postCovers.splice(i, 1);
+        appModel.data.item.postCoverUrl.splice(i, 1);
+      }
+    })
+  })
+  uploadImageApp.setup();
+}
+
+appMain.onImageDelete = function(index) {
+  console.log(index);
+  appModel.data.item.postCovers.splice(index, 1);
+  appModel.data.item.postCoverUrl.splice(index, 1);
 }

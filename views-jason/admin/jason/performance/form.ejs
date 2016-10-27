@@ -58,7 +58,15 @@
 
   <!--  <section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'img'">-->
     <section  class="col col-lg-12 col-xs-12 col-xs-12">
-      <label class="label">封面</label>
+      <label class="label">圖片</label>
+      <div class="row">
+        <section  class="col col-lg-3 col-xs-4 col-xs-6" v-for="src in data.item.postCoverUrl">
+          <img src="{{src}}" alt="" class="img-responsive">
+          <div class="air air-bottom-right" style="padding-right: 20px; padding-bottom: 5px;">
+            <input type="button" value="刪除" v-on:click="onImageDelete($index)" class="btn btn-danger state-disabled" disabled></input>
+          </div>
+        </section>
+      </div>
       <%- include ../../image/upload.ejs %>
     </section>
     <!--<section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'video'">

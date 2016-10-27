@@ -34,10 +34,12 @@ module.exports = {
         where: {
           id
         },
-        include: {
+        include: [{
           model: Post,
           include: Group
-        }
+        }, {
+          model: Image,
+        }]
       });
 
       res.ok({ data: { item } });
@@ -59,13 +61,20 @@ module.exports = {
         content: data.postContent,
         url: data.postUrl,
         abstract: data.postAbstract,
-        coverType: data.postCoverType,
-        coverUrl: data.postCoverUrl,
+        // coverType: data.postCoverType,
+        // coverUrl: data.postCoverUrl,
         type: data.postType
       };
+      const image = {
+        ids:  data.postCovers.map((data) => data.id),
+      }
+
       let item = {};
       item.post = await Post.create({...post, GroupId: data.groupId});
       item.performance = await Performance.create({...performance, PostId: item.post.id});
+      await Image.update({ PerformanceId: item.performance.id }, {
+        where: { id: image.ids }
+      });
 
       const message = 'Create success.';
       res.ok({ message, data: { item } });
@@ -88,11 +97,17 @@ module.exports = {
         content: data.postContent,
         url: data.postUrl,
         abstract: data.postAbstract,
-        coverType: data.postCoverType,
-        coverUrl: data.postCoverUrl,
+        // coverType: data.postCoverType,
+        // coverUrl: data.postCoverUrl,
         type: data.postType,
-        groupId: data.groupId
+        GroupId: data.groupId
       };
+      const image = {
+        ids:  data.postCovers.map((data) => {
+          return parseInt(data.id, 10)
+        }),
+      }
+
 
       let item = {};
       item.performance = await Performance.update(performance ,{
@@ -101,6 +116,12 @@ module.exports = {
       item.post = await Post.update(post ,{
         where: { id }
       })
+      await Image.update({ PerformanceId: null }, {
+        where: { id: { $notIn: image.ids }, PerformanceId: id}
+      });
+      await Image.update({ PerformanceId: id }, {
+        where: { id: image.ids }
+      });
       const message = 'Update success.';
       res.ok({ message, data: { item } });
     } catch (e) {
