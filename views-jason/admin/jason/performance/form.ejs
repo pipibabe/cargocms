@@ -14,7 +14,7 @@
     <section class="col col-lg-6 col-xs-6 col-xs-6">
       <label class="label">地點</label>
       <label class="input state-disabled">
-        <input type="text" name="modelName" placeholder="地點" v-model="data.item.location" disabled>
+        <input type="text" name="location" placeholder="地點" v-model="data.item.location" disabled>
         <b class="tooltip tooltip-bottom-right">請輸入地點位置</b></label>
     </section>
   </div>
@@ -109,15 +109,15 @@ var formRules = {
   title: {
     required: true
   },
-  modelName: {
+  location: {
     required: true
   },
-  specification: {
+  groupId: {
     required: true
-  },
-  introduction: {
-    required: true
-  },
+  }
+  // introduction: {
+  //   required: true
+  // },
 }
 
 // Messages for form validation
@@ -125,14 +125,14 @@ var formMessages = {
   title: {
     required: "請輸入名稱"
   },
-  modelName: {
+  location: {
     required: "請輸入模組名稱"
   },
-  specification: {
-    required: "請輸入規格"
-  },
-  introduction: {
-    required: "請輸入說明"
-  },
+  groupId: {
+    required: "請選擇類別"
+  }
+  // introduction: {
+  //   required: "請輸入說明"
+  // },
 }
 </script>

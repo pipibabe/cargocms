@@ -16,7 +16,7 @@ module.exports = {
 
   'get /api/admin/jason/product':        'api/admin/jason/ProductController.find',
   'get /api/admin/jason/product/:id':    'api/admin/jason/ProductController.findOne',
-  'post /api/admin/jason/product/':      'api/admin/jason/ProductController.create',
+  'post /api/admin/jason/product':      'api/admin/jason/ProductController.create',
   'put /api/admin/jason/product/:id':    'api/admin/jason/ProductController.update',
   'delete /api/admin/jason/product/:id': 'api/admin/jason/ProductController.destroy',
 
