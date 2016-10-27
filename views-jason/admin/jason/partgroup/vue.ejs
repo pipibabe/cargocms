@@ -14,10 +14,10 @@ var appModel = {
     item: {
       id: '',
       title: '',
-      name: '',
+      // name: '',
       sequence: '',
-      type: '',
-      sourceId: '',
+      type: 'part',
+      // sourceId: '',
     },
     items: [],
     option: {
@@ -36,24 +36,3 @@ var appModel = {
 <%- include ../../default/vue.ejs %>
 // 需要新增函式可以對 appMain 進行定義，如：
 // appMain.log = function () {console.log("123")}
-appMain.enableText = function(){
-  $("textarea").attr("disabled", false);
-  $(".textarea").removeClass('state-disabled');
-}
-appMain.enableSelect = function () {
-  $('select').attr('disabled', false);
-  $('.select').removeClass('state-disabled');
-}
-
-appMain.getPartGroup = function() {
-  var ajaxSuccess = function (result) {
-      console.log('get Part group result=>', result);
-      appModel.data.option.group = result.data.items;
-    } // end ajaxSuccess
-
-  $.get('/api/admin/jason/group/part', ajaxSuccess);
-}
-
-appMain.titleOnChange = function() {
-  appModel.data.item.postTitle = appModel.data.item.title;
-}
