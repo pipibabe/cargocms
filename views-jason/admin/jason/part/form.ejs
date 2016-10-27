@@ -39,7 +39,7 @@
     <section class="col col-lg-6 col-xs-6 col-xs-6">
       <label class="label">類別</label>
       <label class="select">
-        <select class="state-disable" name="groupId" v-model="data.item.groupId" disabled>
+        <select class="state-disabled" name="groupId" v-model="data.item.groupId" disabled>
           <option value="0"></option>
           <option v-for="groupPart in data.option.group" v-bind:value="groupPart.id">
             {{ groupPart.title }}
