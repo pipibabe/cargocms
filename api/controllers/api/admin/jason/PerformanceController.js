@@ -65,9 +65,9 @@ module.exports = {
         // coverUrl: data.postCoverUrl,
         type: data.postType
       };
-      if (!data.postCovers || data.postCovers.length === 0) {
-        throw Error('請至少上傳一張圖片')
-      }
+      // if (!data.postCovers || data.postCovers.length === 0) {
+      //   throw Error('請至少上傳一張圖片')
+      // }
       const image = {
         ids: data.postCovers ? data.postCovers.map((data) => data.id) : [],
       }
@@ -104,9 +104,9 @@ module.exports = {
         type: data.postType,
         GroupId: data.groupId
       };
-      if (!data.postCovers || data.postCovers.length === 0) {
-        throw Error('請至少上傳一張圖片')
-      }
+      // if (!data.postCovers || data.postCovers.length === 0) {
+      //   throw Error('請至少上傳一張圖片')
+      // }
       const image = {
         ids: data.postCovers ? data.postCovers.map((data) => {
           return parseInt(data.id, 10)

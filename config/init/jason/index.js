@@ -14,14 +14,19 @@ module.exports.init = async () => {
     sails.log.debug('>>>> config/init/jason >>>>');
     let newMenuItems = [
       { icon: 'home', href: '/admin/dashboard', title: '控制台', sequence: 0},
-      { icon: 'wrench', href: '#', title: '資料維護', sequence: 1},
+      { icon: 'wrench', href: '#', title: '產品管理', sequence: 1},
+      { icon: 'wrench', href: '#', title: '配件管理', sequence: 1},
+      { icon: 'wrench', href: '#', title: '工程實績管理', sequence: 1},
       // { icon: 'puzzle-piece', href: '#', title: '實驗室', sequence: 2},
 
       // { href: '/admin/user', title: '會員資料', sequence: 20, ParentMenuItemId: 2},
       // { href: '/admin/post', title: '內容資料', sequence: 30, ParentMenuItemId: 2},
       { href: '/admin/jason/product', title: '產品介紹管理', sequence: 20, ParentMenuItemId: 2},
-      { href: '/admin/jason/part', title: '周邊配件管理', sequence: 30, ParentMenuItemId: 2},
-      { href: '/admin/jason/performance', title: '工程實績管理', sequence: 40, ParentMenuItemId: 2},
+      { href: '/admin/jason/productgroup', title: '分類管理', sequence: 30, ParentMenuItemId: 2},
+      { href: '/admin/jason/part', title: '周邊配件管理', sequence: 40, ParentMenuItemId: 3},
+      { href: '/admin/jason/partgroup', title: '分類管理', sequence: 50, ParentMenuItemId: 3},
+      { href: '/admin/jason/performance', title: '工程實績管理', sequence: 60, ParentMenuItemId: 4},
+      { href: '/admin/jason/performancegroup', title: '分類管理', sequence: 70, ParentMenuItemId: 4},
 
     ]
 
