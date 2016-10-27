@@ -1,0 +1,192 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+		<h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> 控制台 <span>> 儀表板</span></h1>
+	</div>
+	<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+
+		<!--
+		TODO: 整合 Google Analytics 後讀入統計資訊
+		<ul id="sparks" class="">
+			<li class="sparks-info">
+				<h5> 總流量 <span class="txt-color-purple"><i class="fa fa-arrow-circle-up"></i>&nbsp;45%</span></h5>
+				<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+					110,150,300,130,400,240,220,310,220,300, 270, 210
+				</div>
+			</li>
+			<li class="sparks-info">
+				<h5> 每日訪客數 <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+				<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+					110,150,300,130,400,240,220,310,220,300, 270, 210
+				</div>
+			</li>
+		</ul>
+		-->
+
+	</div>
+</div>
+
+<!-- row -->
+<div class="row">
+
+	<div class="col-sm-8">
+
+		<div class="well">
+
+			<h1>System Load / 系統負載</h1>
+
+			<ul class="list-inline text-center">
+				<li>
+					<div id="loadavg1" class="easy-pie-chart txt-color-green easyPieChart" data-percent="0" data-pie-size="160">
+						<span class="percent percent-sign txt-color-green font-xl semi-bold">0</span>
+					</div>
+					<div class="text-center">1 分鐘平均</div>
+				</li>
+				<li class="hidden-xs hidden-sm">
+					<div id="loadavg2" class="easy-pie-chart txt-color-blue easyPieChart" data-percent="0" data-pie-size="160">
+						<span class="percent percent-sign txt-color-blue font-xl semi-bold">0</span>
+					</div>
+					<div class="text-center">5 分鐘平均</div>
+				</li>
+				<li class="hidden-xs hidden-sm hidden-md">
+					<div id="loadavg3" class="easy-pie-chart txt-color-pinkDark easyPieChart" data-percent="0" data-pie-size="160">
+						<span class="percent percent-sign txt-color-pinkDark font-xl semi-bold">0</span>
+					</div>
+					<div class="text-center">15 分鐘平均</div>
+				</li>
+			</ul>
+
+		</div>
+
+	</div>
+
+	<div class="col-sm-4">
+		<div class="well">
+			<h1>Uptime / 運行時間</h1>
+
+			<p>
+				作業系統：
+				<span id="sys-uptime"></span>
+			</p>
+
+			<p>
+				網站：
+				<span id="process-uptime"></span>
+			</p>
+		</div>
+	</div>
+</div>
+
+<!-- end row -->
+
+<!-- row -->
+
+<div class="row">
+
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<h1 class="page-title txt-color-blueDark text-center well">
+			<!-- PAGE HEADER -->
+			CargoCMS - Next Generation Cloud Platform<br>
+			<small class="text-success">Designed for the fast growing internet business. Powered by Trunk Studio.</small>
+		</h1>
+
+	</div>
+
+</div>
+
+<!-- end row -->
+
+
+<script type="text/javascript">
+
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	var uptimeToHumanReadable = function(uptime) {
+		var days = parseInt(uptime / 60 / 60 / 24);
+		var hours = parseInt(uptime / 60 / 60 % 24);
+		var minutes = parseInt(uptime / 60 % 60);
+
+		return days + ' 天 ' + hours + ' 小時 ' + minutes + ' 分';
+
+	};
+
+  $.getJSON('/utils/sysInfo', function(data) {
+
+		$('#sys-uptime').text(uptimeToHumanReadable(data.sysUptime));
+
+		$('#process-uptime').text(uptimeToHumanReadable(data.processUptime));
+
+
+		var loadavg1 = parseInt(data.loadavg[0]*100/data.cpuCount),
+    		loadavg2 = parseInt(data.loadavg[1]*100/data.cpuCount),
+		    loadavg3 = parseInt(data.loadavg[2]*100/data.cpuCount);
+
+		$('#loadavg1').attr('data-percent', loadavg1).children('span').text(loadavg1);
+		$('#loadavg2').attr('data-percent', loadavg2).children('span').text(loadavg2);
+		$('#loadavg3').attr('data-percent', loadavg3).children('span').text(loadavg3);
+
+		pageSetUp();
+  });
+
+
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 *
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 *
+	 * TO LOAD A SCRIPT:
+	 * var pagefunction = function (){
+	 *  loadScript(".../plugin.js", run_after_loaded);
+	 * }
+	 *
+	 * OR
+	 *
+	 * loadScript(".../plugin.js", run_after_loaded);
+	 */
+
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+
+	var pagefunction = function() {
+
+	};
+
+	// end pagefunction
+
+	// run pagefunction on load
+
+	pagefunction();
+
+</script>
