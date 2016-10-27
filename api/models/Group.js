@@ -4,10 +4,7 @@ module.exports = {
       type: Sequelize.STRING,
     },
     name: {
-      type: Sequelize.STRING,
-      validate: {
-        isAlphanumeric: true,
-      },
+      type: Sequelize.STRING
     },
     sequence: {
       type: Sequelize.INTEGER,
@@ -31,6 +28,14 @@ module.exports = {
           order: 'sequence'
         });
         return groups;
+      },
+      deleteById: async (id) => {
+        try {
+          return await Group.destroy({ where: { id } });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
       }
     },
     instanceMethods: {},
