@@ -69,7 +69,7 @@ module.exports = {
         ids:  data.postCovers.map((data) => data.id),
       }
       let item = {};
-      item.post = await Post.create(post);
+      item.post = await Post.create({...post, GroupId: data.groupId});
       item.part = await Part.create({...part, PostId: item.post.id});
       await Image.update({ PartId: item.part.id }, {
         where: { id: image.ids }
@@ -99,7 +99,8 @@ module.exports = {
         abstract: data.postAbstract,
         // coverType: data.postCoverType,
         // coverUrl: data.postCoverUrl,
-        type: data.postType
+        type: data.postType,
+        GroupId: data.groupId
       };
       const image = {
         ids:  data.postCovers.map((data) => {

@@ -1,14 +1,14 @@
 <fieldset>
 
-  <h3 class="text-center">周邊配件<h3>
+  <h3 class="text-center">產品介紹<h3>
   <hr style="border: 1px solid #a9a9a9;"/>
   <br/>
   <div class="row">
     <section class="col col-lg-6 col-xs-6 col-xs-6">
       <label class="label">名稱</label>
       <label class="input state-disabled">
-        <input type="text" name="title" placeholder="配件名稱" v-model="data.item.title" v-on:change="titleOnChange" disabled>
-        <b class="tooltip tooltip-bottom-right">請輸入配件名稱</b></label>
+        <input type="text" name="title" placeholder="產品名稱" v-model="data.item.title" v-on:change="titleOnChange" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入產品名稱</b></label>
     </section>
 
     <section class="col col-lg-6 col-xs-6 col-xs-6">
@@ -49,7 +49,7 @@
   </div>
 
   <br/>
-  <h3 class="text-center">配件內容<h3>
+  <h3 class="text-center">產品內容<h3>
   <hr style="border: 1px solid #a9a9a9;"/>
   <br/>
 
@@ -66,15 +66,7 @@
 
   <!--  <section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'img'">-->
     <section  class="col col-lg-12 col-xs-12 col-xs-12">
-      <label class="label">圖片</label>
-      <div class="row">
-        <section  class="col col-lg-3 col-xs-4 col-xs-6" v-for="src in data.item.postCoverUrl">
-          <img src="{{src}}" alt="" class="img-responsive">
-          <div class="air air-bottom-right" style="padding-right: 20px; padding-bottom: 5px;">
-            <input type="button" value="刪除" v-on:click="onImageDelete($index)" class="btn btn-danger state-disabled" disabled></input>
-          </div>
-        </section>
-      </div>
+      <label class="label">封面</label>
       <%- include ../../image/upload.ejs %>
     </section>
     <!--<section class="col col-lg-6 col-xs-6 col-xs-6" v-show="data.item.postCoverType === 'video'">

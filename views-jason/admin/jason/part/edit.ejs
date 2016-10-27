@@ -7,6 +7,7 @@
 
 	var pagefunction = function() {
 		<%- include vue.ejs %>
+    appMain.getPartGroup();
 		appMain.$mount("#main-edit");
 		appMain.loadItem( function(){
       appMain.onEnterPageEdit();

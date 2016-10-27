@@ -16,11 +16,21 @@ var appModel = {
       title: '',
       modelName: '',
       specification: '',
-      introduction: ''
+      introduction: '',
+      postTitle: '',
+      postContent: '',
+      postUrl: '',
+      postAbstract: '',
+      postCoverType: '',
+      postCoverUrl: '',
+      postType: 'product',
+      groupTitle: '',
+      groupId: ''
     },
     items: [],
     option: {
-      defaultSort: [[ 0, 'desc' ]]
+      defaultSort: [[ 0, 'desc' ]],
+      group: []
     }
   },
   view: {
@@ -35,3 +45,24 @@ var appModel = {
 <%- include ../../default/vue.ejs %>
 // 需要新增函式可以對 appMain 進行定義，如：
 // appMain.log = function () {console.log("123")}
+appMain.enableText = function(){
+  $("textarea").attr("disabled", false);
+  $(".textarea").removeClass('state-disabled');
+}
+appMain.enableSelect = function () {
+  $('select').attr('disabled', false);
+  $('.select').removeClass('state-disabled');
+}
+
+appMain.getPartGroup = function() {
+  var ajaxSuccess = function (result) {
+      console.log('get Part group result=>', result);
+      appModel.data.option.group = result.data.items;
+    } // end ajaxSuccess
+
+  $.get('/api/admin/jason/group/product', ajaxSuccess);
+}
+
+appMain.titleOnChange = function() {
+  appModel.data.item.postTitle = appModel.data.item.title;
+}
