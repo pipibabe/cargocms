@@ -62,3 +62,7 @@ appMain.getPartGroup = function() {
 
   $.get('/api/admin/jason/group/part', ajaxSuccess);
 }
+
+appMain.titleOnChange = function() {
+  appModel.data.item.postTitle = appModel.data.item.title;
+}
