@@ -9,10 +9,25 @@ module.exports = {
       for (const index in input.columns) {
         let result = {};
         const column = input.columns[index];
-        if (column.searchable !== "false" && column.data !== '') {
-          result[column.data] = {
-            $like: `%${input.search.value}%`
-          };
+        const needSearch = column.searchable !== "false" && column.data !== '';
+        if (needSearch) {
+          const searchInclude = column.findInclude && !column.search.where;
+          if (searchInclude) {
+            if (column.search.concat) {
+              const concat = column.search.concat;
+              result = Sequelize.where(Sequelize.fn("concat", Sequelize.col(concat[0]), Sequelize.col(concat[1])), {
+                like: `%${input.search.value}%`
+              })
+            } else {
+              result[`$${column.search.model}.${column.search.column}$`] = {
+                $like: `%${input.search.value}%`
+              };
+            }
+          } else {
+            result[column.data] = {
+              $like: `%${input.search.value}%`
+            };
+          }
           data.where.$or.push(result);
           if (column.search && column.search.custom) {
             data.where[column.data] = {
@@ -51,7 +66,7 @@ module.exports = {
       let result = include;
       for (const index in query.columns) {
         const column = query.columns[index];
-        if (column.searchable !== "false" && column.findInclude) {
+        if (column.searchable !== "false" && column.findInclude && column.search.where) {
           if (Array.isArray(include)) {
             result = include.map((data) => {
               let inputIncludeModelName = data.model.name;
