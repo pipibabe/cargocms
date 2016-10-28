@@ -6,7 +6,7 @@
 	var pagefunction = function() {
 
 		<%- include vue.ejs %>
-    appMain.getPartGroup();
+    appMain.getGroup('product');
 		appMain.$mount("#main-create");
 		appMain.setupForm("create");
 		appMain.onEnterPageEdit();

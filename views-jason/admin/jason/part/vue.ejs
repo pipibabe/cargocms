@@ -55,13 +55,13 @@ appMain.enableSelect = function () {
   $('.select').removeClass('state-disabled');
 }
 
-appMain.getPartGroup = function() {
+appMain.getGroup = function(group) {
   var ajaxSuccess = function (result) {
       console.log('get Part group result=>', result);
       appModel.data.option.group = result.data.items;
     } // end ajaxSuccess
 
-  $.get('/api/admin/jason/group/part', ajaxSuccess);
+  $.get(`/api/admin/jason/group/select/${group}`, ajaxSuccess);
 }
 
 appMain.titleOnChange = function() {

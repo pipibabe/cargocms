@@ -1,6 +1,6 @@
 module.exports = {
 
-  find: async (req, res) => {
+  selectfind: async (req, res) => {
     try {
       let { query } = req;
       const { group } = req.params;

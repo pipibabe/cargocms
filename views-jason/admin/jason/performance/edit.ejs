@@ -7,7 +7,7 @@
 
 	var pagefunction = function() {
 		<%- include vue.ejs %>
-    appMain.getPartGroup();
+    appMain.getGroup('performance');
 		appMain.$mount("#main-edit");
 		appMain.loadItem( function(){
       appMain.onEnterPageEdit();
