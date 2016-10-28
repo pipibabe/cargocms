@@ -1,0 +1,114 @@
+<% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/page/issue/issue.css'); %>
+
+<div class="container body">
+
+<% include ../partials/banner.ejs %>
+
+  <div class="row">
+    <div class="col-md-9 col-md-push-3 content">
+
+      <article>
+        <header class="article-title">
+          <h1 id="issueTable">常見問題</h2>
+        </header>
+        <table class="table table-bordered" style="margin-top: 2.6em;max-width: 600px;">
+          <tr>
+            <th>問題狀況</th><th>可能原因</th><th>處理方式</th>
+          </tr>
+          <tr>
+            <td rowspan="8">門無法動作</td><td>電源開關未開</td><td>開啟電源開關</td>
+          </tr>
+            <tr>
+              <td>電路故障</td><td>檢查電路是否斷路</td>
+            </tr>
+            <tr>
+                <td>門鎖未開</td><td>打開門鎖</td>
+            </tr>
+            <tr>
+              <td>感應器故障</td><td>檢查感應器線路或更換感應器</td>
+            </tr>
+            <tr>
+              <td rowspan="2">門扇脫落</td><td>檢查吊環螺絲是否鬆動</td>
+            </tr>
+              <tr>
+                <td>門扇若是玻璃門，檢查上料 AB 膠是否脫落</td>
+              </tr>
+            <tr>
+              <td rowspan="2">變壓器故障或線路未接好</td><td>更換變壓器</td>
+            </tr>
+              <tr>
+                <td>檢查線路並確切修好</td>
+              </tr>
+          <tr>
+            <td>門運行異常</td><td>馬達 IC 故障</td><td>更換馬達</td>
+          </tr>
+          <tr>
+            <td rowspan="2">無人進出，門自動開啟</td><td>感應器不穩定</td><td>更換感應器</td>
+          </tr>
+            <tr>
+              <td>外面環境有類似彩球、布旗等會晃動之物體</td><td>固定或移開會晃動之物體</td>
+            </tr>
+          <tr>
+            <td rowspan="2">門會抖動</td><td>機箱軌道受損或有污染物</td><td>更換軌道、排除污物</td>
+          </tr>
+            <tr>
+              <td>吊輪損壞</td><td>更換吊輪</td>
+            </tr>
+          <tr>
+            <td rowspan="3">門有異聲</td><td>地面導輪有污物</td><td>清潔導輪</td>
+          </tr>
+            <tr>
+              <td>吊具培林受損</td><td>更換吊具</td>
+            </tr>
+            <tr>
+              <td>門與門側邊過近造成摩擦</td><td>調整門與門側邊的距離</td>
+            </tr>
+          <tr>
+            <td>其他</td><td colspan="2">請向本公司聯絡</td>
+          </tr>
+        </table>
+      </article>
+
+      <article style="margin-top:6em;">
+        <header class="article-title">
+          <h1 id="maintain">注意事項及保養</h2>
+        </header>
+        <ol class="maintain-list">
+          <li>自動門門扇行徑之處應保持暢通物堆積貨物。</li>
+          <li>避免孩童在此處玩耍。</li>
+          <li>地面應經常打掃不可有小石頭之類垃圾。</li>
+          <li>門扇應標示清楚以防止人員有撞門或夾人的情形。</li>
+          <li>自動門機附近應注意不可有彩球、布旗等會晃動的物體以防止誤動作。</li>
+          <li>自動門機及門扇應以幹布擦拭不可用水清洗以防漏電危險。</li>
+          <li>自動門軌道及機件應定期找專業人員保養及檢查。</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+      <div class="side-menu" id="sticker">
+        <h3>
+          常見問題
+          <small>Q and A</small>
+        </h3>
+        <div class="list-group">
+          <a data-link="issueTable" href="/product/group/0/page/1" class="list-group-item">常見問題</a>
+          <a data-link="maintain" href="/product/group/0/page/1" class="list-group-item">注意事項及保養</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+jQuery(document).ready(function() {
+  $('.side-menu div a').click(function(e){
+    e.preventDefault();
+    $('html, body').animate({
+      scrollTop: $('#'+$(this).data('link')).offset().top - 55
+    }, 500);
+  });
+});
+`); %>

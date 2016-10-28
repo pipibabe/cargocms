@@ -1,0 +1,38 @@
+var COMMON = {
+  DOUBLE_CLICK_TIME_PERIOD: 250,
+  DEFAULT_INDEX: -1,
+  DEFAULT_AVATAR: "/assets/admin/img/avatars/default.png",
+};
+
+var itemBeforeEdit = {};
+var prefix = 'admin/';
+var modelName = "jason/performancegroup";
+var appModel = {
+  modelName: modelName,
+  prefix: prefix,
+  data: {
+    item: {
+      id: '',
+      title: '',
+      name: '',
+      sequence: '',
+      type: 'performance',
+      sourceId: '',
+    },
+    items: [],
+    option: {
+      defaultSort: [[ 2, 'asc' ]],
+    }
+  },
+  view: {
+    table: {
+      selectIndex: COMMON.DEFAULT_INDEX,
+    },
+  }
+}
+
+/* TABLETOOLS */
+
+<%- include ../../default/vue.ejs %>
+// 需要新增函式可以對 appMain 進行定義，如：
+// appMain.log = function () {console.log("123")}

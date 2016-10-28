@@ -1,0 +1,77 @@
+{
+  "rows": [
+    {
+      "title": "0度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "1度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "2度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 2
+    },{
+      "title": "3度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "4度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "5度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "00度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "10度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "20度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 2
+    },{
+      "title": "30度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "40度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    },{
+      "title": "50度推開式自動門 單扇/雙扇",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a door",
+      "groupId": 1
+    }
+  ]
+}

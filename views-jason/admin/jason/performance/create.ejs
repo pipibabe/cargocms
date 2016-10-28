@@ -1,0 +1,18 @@
+<%- include form.ejs %>
+
+<!-- SCRIPTS ON PAGE EVENT -->
+<script type="text/javascript">
+
+	var pagefunction = function() {
+
+		<%- include vue.ejs %>
+    appMain.getGroup('performance');
+		appMain.$mount("#main-create");
+		appMain.setupForm("create");
+		appMain.onEnterPageEdit();
+    appMain.enableText();
+    appMain.enableSelect();
+		appMain.setupImageUpload();
+
+	};
+</script>

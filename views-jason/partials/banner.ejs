@@ -3,7 +3,7 @@
 <% LayoutUtils.addStylesheets('/assets/jason/css/banner.css'); %>
 <div class="swiper-container">
     <div class="swiper-wrapper">
-      <% for(let i = 1;i<=3;i++) {%>
+      <% for(var i = 1;i<=3;i++) {%>
         <div class="swiper-slide" style="background-image:url(/assets/jason/images/banner-swiper/<%= i %>.jpg)">
           <div class="slogan">
             <p>專業團隊 責任施工 品質打造 服務熱誠</p>
@@ -18,7 +18,7 @@
 
 <% LayoutUtils.addScriptBlock(`
   $(document).ready(function () {
-    var mySwiper = new Swiper ('.swiper-container', {
+    var banner = new Swiper ('.swiper-container', {
       loop: true,
       autoplay: 3500,//可选选项，自动滑动
       spaceBetween: 30,

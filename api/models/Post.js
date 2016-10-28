@@ -19,12 +19,12 @@ module.exports = {
       defaultValue: 'img',
     },
     coverUrl: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       get: function() {
         try {
           if (this.coverType === 'img') {
             const thisImage = this.getDataValue('Image');
-            return thisImage ? thisImage.url : '';
+            return thisImage ? thisImage.url : '/assets/jason/images/default_icon.jpg';
           } else {
             return this.getDataValue('coverUrl');
           }
@@ -32,6 +32,9 @@ module.exports = {
           sails.log.error(e);
         }
       }
+    },
+    type: {
+      type: Sequelize.ENUM('product', 'part', 'performance'),
     },
     TagsArray: {
       type: Sequelize.VIRTUAL,
@@ -74,7 +77,7 @@ module.exports = {
         as: 'Tags'
       }
     }),
-    Post.belongsTo(Image, {
+    Post.hasOne(Image, {
       foreignKey: {
         name: 'cover'
       }
@@ -85,9 +88,123 @@ module.exports = {
       }
     });
     Post.belongsTo(Location);
+    Post.belongsTo(Group);
+    Post.hasOne(Product);
+    Post.hasOne(Part);
+    Post.hasOne(Performance);
   },
   options: {
     classMethods: {
+      findItemsByGroupId: async (itemType, groupId, offset = 0, limit) => {
+        try {
+          return await Post.findAll({
+            offset,
+            limit,
+            include: [{
+              model: Group,
+              where: {
+                id: groupId
+              }
+            }, {
+              model: itemType,
+              required: true,
+              include: [{
+                model: Image,
+                order: [
+                  ['sequence', 'ASC'],
+                ]
+              }],
+            }],
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
+      findAllItems: async (itemType, offset = 0, limit) => {
+        try {
+          return await Post.findAll({
+            offset,
+            limit,
+            include: [{
+              model: itemType,
+              required: true,
+              include: [{
+                model: Image,
+                order: [
+                  ['sequence', 'ASC'],
+                ]
+              }],
+            }],
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
+      createItem: async ({
+        title,
+        modelName,
+        specification,
+        introduction,
+        groupId,
+        itemType,
+        imageFilePath,
+        content,
+        id,
+      }) => {
+        try {
+          let post = await Post.create({
+            title,
+            content: '詳細說明',
+            type: itemType.getTableName().toLowerCase().replace('s',''),
+            GroupId: groupId,
+            coverType: 'img',
+            content,
+          });
+          return await itemType.create({
+            title,
+            modelName,
+            specification,
+            introduction,
+            PostId: post.id,
+            id,
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
+      createPerformance: async ({
+        title,
+        location,
+        introduction,
+        groupId,
+        imageFilePath,
+        content,
+        id,
+      }) => {
+        try {
+          let post = await Post.create({
+            title,
+            content: '詳細說明',
+            type: Performance.getTableName().toLowerCase().replace('s',''),
+            GroupId: groupId,
+            coverType: 'img',
+            content,
+          });
+          return await Performance.create({
+            title,
+            location,
+            introduction,
+            PostId: post.id,
+            id,
+          });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
       findAllHasJoin: async (order, offset, limit) => {
         try {
           return await Post.findAll({

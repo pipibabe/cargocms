@@ -1,0 +1,77 @@
+{
+  "rows": [
+    {
+      "title": "0無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "1無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "2無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "3無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 8
+    },{
+      "title": "4無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 8
+    },{
+      "title": "5無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 7
+    },{
+      "title": "00無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "10無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "20無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "30無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "40無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    },{
+      "title": "50無線觸摸開關",
+      "modelName": "DC-388-1R / DC-388-2R",
+      "specification": "DC-380-1R / DC-380-2R",
+      "introduction": "a button",
+      "groupId": 6
+    }
+  ]
+}

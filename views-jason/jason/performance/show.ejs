@@ -1,0 +1,120 @@
+<% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
+
+<div class="container body">
+
+<% include ../../partials/banner.ejs %>
+
+  <div class="row">
+    <div class="col-md-9 col-md-push-3 content">
+
+      <article>
+        <header class="article-title">
+          <h1 id="intro">工程實蹟</h2>
+        </header>
+
+        <div class="row product-detail">
+          <div class="col-md-6 col-md-push-6">
+            <h1><%= performance.title %></h1>
+            <ul class="product-info-list">
+              <% if (performance.location) { %>
+                <li>
+                  <label>地點</label>
+                  <span><%= performance.location %></span>
+                </li>
+              <% } %>
+              <% if (performance.introduction) { %>
+                <li>
+                  <label>介紹</label>
+                  <span><%= performance.introduction %></span>
+                </li>
+              <% } %>
+            </ul>
+          </div>
+          <div class="col-md-6 col-md-pull-6 img-content">
+            <div class="post-swiper-container">
+              <div class="swiper-wrapper">
+                <% for (image of performanceImages) { %>
+                  <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
+                <% } %>
+              </div>
+              <!-- 如果需要分页器 -->
+              <!-- <div class="swiper-pagination"></div> -->
+            </div>
+
+            <div class="thumbnail-swiper-container">
+              <div class="swiper-wrapper">
+                <%
+                for (var i = 0; i < performanceImages.length; i++) {
+                  var image = performanceImages[i];
+                %>
+                  <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
+                <% } %>
+              </div>
+              <!-- 如果需要分页器 -->
+              <!-- <div class="swiper-pagination"></div> -->
+              <!-- 如果需要导航按钮 -->
+              <!-- <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div> -->
+            </div>
+          </div>
+        </div>
+
+
+      </article>
+    </div>
+
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+      <div class="side-menu" id="sticker">
+        <h3>
+          工程實蹟
+          <small>Product</small>
+        </h3>
+        <div class="list-group">
+          <% for(var group of performanceGroups) { %>
+            <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+var postSwiper, postThumbSwiper;
+jQuery(document).ready(function() {
+  postSwiper = new Swiper ('.post-swiper-container', {
+    // spaceBetween: 30,
+    speed: 250,
+    grabCursor: true,
+
+    // 如果需要分页器
+    // pagination: '.swiper-pagination',
+    onSlideChangeStart: function(swiper){
+      $('.thumbnail-swiper-container .swiper-slide').removeClass('active');
+      $('.thumbnail-swiper-container .swiper-slide:nth-child(' + (swiper.activeIndex+1) + ')').addClass('active');
+    }
+  })
+
+  postThumbSwiper = new Swiper ('.thumbnail-swiper-container', {
+    // loop: true,
+    spaceBetween: 15,
+    speed: 250,
+    slidesPerView: 4,
+    // centeredSlides: true,
+    paginationClickable: true,
+
+    // 如果需要分页器
+    // pagination: '.swiper-pagination',
+    // 如果需要前进后退按钮
+    // nextButton: '.swiper-button-next',
+    // prevButton: '.swiper-button-prev',
+  })
+  postSwiper.params.control = postThumbSwiper;
+
+  $('.thumbnail-swiper-container .swiper-slide').click(function (){
+    postSwiper.slideTo($(this).data('idx'));
+  });
+});
+`); %>

@@ -246,7 +246,7 @@ module.exports = {
   associations: function() {
     Recipe.hasMany(UserLikeRecipe);
     Recipe.belongsTo(User);
-    Recipe.belongsTo(Image, {
+    Recipe.hasOne(Image, {
       foreignKey: {
         name: 'coverPhotoId'
       }

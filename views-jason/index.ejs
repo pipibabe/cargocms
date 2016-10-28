@@ -105,4 +105,14 @@
 
 </div>
 
-<% include jason/pageScript.ejs %>
+<% LayoutUtils.addScripts('/assets/simple/js/plugin/jquery.sticky.js', '/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
+<% LayoutUtils.addScriptBlock(`
+jQuery(document).ready(function() {
+  $('.side-menu div a').click(function(e){
+    e.preventDefault();
+    $('html, body').animate({
+      scrollTop: $('#'+$(this).data('link')).offset().top - 55
+    }, 500);
+  });
+});
+`); %>

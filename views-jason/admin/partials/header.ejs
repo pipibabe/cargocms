@@ -1,0 +1,100 @@
+<!-- #HEADER -->
+<header id="header">
+	<div id="logo-group">
+
+		<!-- PLACE YOUR LOGO HERE -->
+		<span id="logo" class="hidden">
+			<img src="/assets/labfnp/img/logo-text-dark.png" alt="logo" />
+		</span>
+		<!-- END LOGO PLACEHOLDER -->
+
+  </div>
+
+  <div class="hidden-xs">
+    <h2 id="admin-title">
+    	<!--CargoCMS Web Management-->
+    	JasonCMS - Cloud Web Management
+  	</h2>
+  </div>
+
+	<!-- #TOGGLE LAYOUT BUTTONS -->
+	<!-- pulled right: nav area -->
+	<div class="pull-right">
+
+		<!-- collapse menu button -->
+		<div id="hide-menu" class="btn-header pull-right">
+			<span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+		</div>
+		<!-- end collapse menu -->
+
+		<!-- logout button -->
+		<div id="logout" class="btn-header transparent pull-right">
+			<span>
+				<a href="/logout?url=/admin/login" title="Sign Out" data-action="userLogout" data-logout-msg="請確認是否要登出目前的管理帳號？">
+					<i class="fa fa-sign-out"></i>
+				</a>
+			</span>
+		</div>
+		<!-- end logout button -->
+
+		<!-- fullscreen button -->
+		<div id="fullscreen" class="btn-header transparent pull-right">
+			<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+		</div>
+		<!-- end fullscreen button -->
+
+	</div>
+	<!-- end pulled right: nav area -->
+
+</header>
+<!-- END HEADER -->
+
+<!-- #NAVIGATION -->
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS/SASS variables -->
+<aside id="left-panel">
+
+	<!-- User info -->
+	<div class="login-info">
+		<span> <!-- User image size is adjusted inside CSS, it should stay as is -->
+
+			<a href="#">
+				<img src="<%= data.avatar %>" alt="me" class="online" />
+				<span>
+					<%= data.displayName %>
+				</span>
+				<i class="fa fa-angle-right"></i>
+			</a>
+
+		</span>
+	</div>
+	<!-- end user info -->
+
+	<nav>
+
+		<ul>
+		<% data.menuItems.forEach(function(item) { %>
+		  <li>
+				<a href="<%= item.href %>" title="<%= item.title %>">
+					<i class="fa fa-lg fa-fw fa-<%= item.icon %>"></i>
+					<span class="menu-item-parent"><%= item.title %></span>
+				</a>
+				<% if (item.SubMenuItems && item.SubMenuItems.length > 0) { %>
+				<ul>
+					<% item.SubMenuItems.forEach(function(subItem) { %>
+					<li>
+						<a href="<%= subItem.href %>" title="<%= subItem.title %>"><span class="menu-item-parent"><%= subItem.title %></span></a>
+					</li>
+					<% }); %>
+				</ul>
+				<% } %>
+		  </li>
+		<% }); %>
+		</ul>
+
+	</nav>
+
+	<span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+
+</aside>
+<!-- END NAVIGATION -->

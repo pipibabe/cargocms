@@ -1,52 +1,96 @@
-<% LayoutUtils.addMeta({ property:"og:image", content:SocialService.getShareUrl() + "/assets/tcmadr/img/logo.png" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:url", content:SocialService.getShareUrl() + "/assets/tcmadr/img/logo.png"  }); %>
-<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/jpeg" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:width", content:"1200" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:height", content:"630" }); %>
-<% LayoutUtils.addMeta({ property:"og:title", content:"CargoCMS" }); %>
-<% LayoutUtils.addMeta({ property:"og:description", content:"CargoCMS" }); %>
-<% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
-
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
-
-<% include ../../partials/banner.ejs %>
+<% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
 
 <div class="container body">
 
-  <div class="row">
-    <div class="col-md-2 sec-menu">
-      <button class="sidebar-toggle btn btn-primary visible-sm-block visible-xs-block"><i class="fa fa-filter"></i></button>
-      <ul class="nav nav-pills nav-stacked" id='sticker'>
-        <li data-link="intro" role="presentation" class="active"><a href="#">全部產品</a></li>
-        <li data-link="intro" role="presentation"><a href="#">輕型自動門機</a></li>
-        <li data-link="history" role="presentation"><a href="#">中型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">重型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">重疊型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">圓弧型自動門機</a></li>
-        <li data-link="location" role="presentation"><a href="#">特殊自動門機</a></li>
+<% include ../../partials/banner.ejs %>
 
-      </ul>
-    </div>
-    <div class="col-md-10 content">
+  <div class="row">
+    <div class="col-md-9 col-md-push-3 content">
 
       <article>
         <header class="article-title">
           <h1 id="intro">產品介紹</h2>
         </header>
-        <img src="/assets/jason/images/j1-1.png">
-        <p>歡迎蒞臨「捷陞專業自動門資訊網」!</p>
-        <p>本公司的團隊成員於自動門界服務已超過10年以上資歷，安裝過台灣前500大型企業內-包括了無塵室自動門包括聯電、 台積電、日月光、奇美電子、矽品、友達等不勝枚舉…，歡迎參觀比較。捷陞的團隊成員們都有經過無塵室的施工規則教育訓練 ，在各個知名大醫院手術室及X光室之鉛板門也都有專業的施工經驗。多年的經驗與專業技術是您的最佳選擇。</p>
-        <p>我們自信能幫客戶完成自動門及邊配備之整合規劃及統包施工與維修，近幾年盛行自動門搭配門禁或相關控制，自動控制對我們而言是基本的，一般人的認知自動門價格很高，其實不然， 捷陞會依照您的預算提供諮詢與規劃。</p>
-        <header style="overflow: hidden;">
-          <h2 class="sec-title">優質服務，優惠價格</h2>
-        </header>
-        <p>我們一貫的宗旨是服務客戶及價格最適化的選擇，若您有自動門相關的難題，歡迎來電咨詢。</p>
-        <p>在瀏覽過本公司的網站後，希望您能夠獲得所需要的相關資訊，也希望您能夠透過這個聯繫彼此的橋樑，對本公司的業務範疇及進步情況有更深一層的認識，更希望您日後仍能秉持一貫的關心與愛護之意，多多給我們指教與批評，讓本公司的工作團隊可以因您的參與而成長，再次謝謝您的蒞臨。</p>
+
+        <% if (posts.length === 0) { %>
+          <div class="no-product">
+            產品尚未推出，敬請期待
+          </div>
+        <% } %>
+        <% for (var item of posts) { %>
+          <a class="product row" href="/product/show/<%= item.id %>">
+            <div class="col-xs-3 product-img-wrapper">
+              <img class="img-thumbnail" src="<%= item.Product.Images[0]? item.Product.Images[0].url:'' %>" alt="產品圖" />
+            </div>
+            <div class="col-xs-9 product-content">
+              <h1><%= item.Product.title %></h1>
+              <% if (item.Product.modelName) { %>
+                <small><%= item.Product.modelName %></small>
+              <% } %>
+
+              <% if (item.Product.introduction) { %>
+                <p>
+                  <%= item.Product.introduction %>
+                </p>
+              <% } %>
+
+            </div>
+          </a>
+        <% } %>
+
+        <% if (maxPage > 1) { %>
+        <nav aria-label="Page navigation">
+          <ul class="product pagination">
+            <li>
+              <a href="/product/group/<%= req.params.groupId %>/page/<%= prevPage %>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+
+            <% for (var i = 1; i <= maxPage; i++){ %>
+              <% if (i == page) { %>
+                <li class="active">
+                  <a href="/product/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                </li>
+              <% } else { %>
+                <li>
+                  <a href="/product/group/<%= req.params.groupId %>/page/<%= i %>"><%= i %></a>
+                </li>
+              <% } %>
+            <% } %>
+            <li>
+              <a href="/product/group/<%= req.params.groupId %>/page/<%= nextPage %>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <% } %>
 
       </article>
+    </div>
+
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+      <div class="side-menu" id="sticker">
+        <h3>
+          產品介紹
+          <small>Product</small>
+        </h3>
+        <div class="list-group">
+          <a href="/product/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">全部產品</a>
+          <% for(var group of productGroups) { %>
+            <a href="/product/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
+          <% } %>
+        </div>
+      </div>
     </div>
   </div>
 
 </div>
 
-<% include ../pageScript.ejs %>
+<% LayoutUtils.addScriptBlock(`
+jQuery(document).ready(function() {
+
+});
+`); %>

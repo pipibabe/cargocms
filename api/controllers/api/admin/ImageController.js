@@ -29,10 +29,14 @@ module.exports = {
     }
   },
   destroy: async (req, res) => {
-    sails.log.info('Not implemented');
-    res.ok({
-      message: 'Delete Success',
-      data: true,
-    });
+    try {
+      sails.log.info('Not implemented', req.body, req.params.id);
+      res.ok({
+        message: 'Delete Success',
+        data: true,
+      });
+    } catch (e) {
+      res.serverError(e);
+    }
   }
 }

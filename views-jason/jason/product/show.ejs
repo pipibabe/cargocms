@@ -1,0 +1,138 @@
+<% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
+
+<div class="container body">
+
+<% include ../../partials/banner.ejs %>
+
+  <div class="row">
+    <div class="col-md-9 col-md-push-3 content">
+
+      <article>
+        <header class="article-title">
+          <h1 id="intro">產品介紹</h2>
+        </header>
+
+        <div class="row product-detail">
+          <div class="col-md-6 col-md-push-6">
+            <h1><%= product.title %></h1>
+            <ul class="product-info-list">
+              <% if (product.modelName) { %>
+                <li>
+                  <label>型號</label>
+                  <span><%= product.modelName %></span>
+                </li>
+              <% } %>
+              <% if (product.specification) { %>
+                <li>
+                  <label>規格</label>
+                  <span><%= product.specification %></span>
+                </li>
+              <% } %>
+              <% if (product.introduction) { %>
+                <li>
+                  <label>介紹</label>
+                  <span><%= product.introduction %></span>
+                </li>
+              <% } %>
+              <% if (product.Files.length > 0) { %>
+                <li class="no-baseline">
+                  <a target="_blank" href="<%= product.Files[0].url %>" style="margin-top: 8px;" class="btn btn-primary"><i class="fa fa-floppy-o" style="margin-right: 5px;" aria-hidden="true"></i>檔案下載</a>
+                </li>
+              <% } %>
+            </ul>
+          </div>
+          <div class="col-md-6 col-md-pull-6 img-content">
+            <div class="post-swiper-container">
+              <div class="swiper-wrapper">
+                <% for (image of productImages) { %>
+                  <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
+                <% } %>
+              </div>
+              <!-- 如果需要分页器 -->
+              <!-- <div class="swiper-pagination"></div> -->
+            </div>
+
+            <div class="thumbnail-swiper-container">
+              <div class="swiper-wrapper">
+                <%
+                for (var i = 0; i < productImages.length; i++) {
+                  var image = productImages[i];
+                %>
+                  <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
+                <% } %>
+              </div>
+              <!-- 如果需要分页器 -->
+              <!-- <div class="swiper-pagination"></div> -->
+              <!-- 如果需要导航按钮 -->
+              <!-- <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div> -->
+            </div>
+          </div>
+        </div>
+
+        <% if (product.content) { %>
+          <div class="product-intro">
+            <h1 class="intro-title">詳細內容介紹</h1>
+            <%- product.content %>
+          </div>
+        <% } %>
+
+      </article>
+    </div>
+
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+      <div class="side-menu" id="sticker">
+        <h3>
+          產品介紹
+          <small>Product</small>
+        </h3>
+        <div class="list-group">
+          <a href="/product/group/0/page/1" class="list-group-item">全部產品</a>
+          <% for(var group of productGroups) { %>
+            <a href="/product/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+var postSwiper, postThumbSwiper;
+jQuery(document).ready(function() {
+  postSwiper = new Swiper ('.post-swiper-container', {
+    // spaceBetween: 30,
+    speed: 250,
+    grabCursor: true,
+
+    // 如果需要分页器
+    // pagination: '.swiper-pagination',
+    onSlideChangeStart: function(swiper){
+      $('.thumbnail-swiper-container .swiper-slide').removeClass('active');
+      $('.thumbnail-swiper-container .swiper-slide:nth-child(' + (swiper.activeIndex+1) + ')').addClass('active');
+    }
+  })
+
+  postThumbSwiper = new Swiper ('.thumbnail-swiper-container', {
+    // loop: true,
+    spaceBetween: 15,
+    speed: 250,
+    slidesPerView: 4,
+    // centeredSlides: true,
+    paginationClickable: true,
+
+    // 如果需要分页器
+    // pagination: '.swiper-pagination',
+    // 如果需要前进后退按钮
+    // nextButton: '.swiper-button-next',
+    // prevButton: '.swiper-button-prev',
+  })
+  postSwiper.params.control = postThumbSwiper;
+
+  $('.thumbnail-swiper-container .swiper-slide').click(function (){
+    postSwiper.slideTo($(this).data('idx'));
+  });
+});
+`); %>
