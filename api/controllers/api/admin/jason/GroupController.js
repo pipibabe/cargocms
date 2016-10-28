@@ -18,14 +18,17 @@ module.exports = {
 
   find: async (req, res) => {
     try {
-      const { query } = req;
+      let { query } = req;
+      const group = req.query.type
+      console.log("group find type==>", group);
       const { serverSidePaging } = query;
       const modelName = req.options.controller.split("/").reverse()[0];
       let result;
       if (serverSidePaging) {
         result = await PagingService.process({query, modelName});
       } else {
-        const items = await sails.models[modelName].findAll();
+        query.where = { type: group}
+        const items = await sails.models[modelName].findAll(query);
         result = { data: { items } };
       }
       res.ok(result);
@@ -47,6 +50,10 @@ module.exports = {
   create: async (req, res) => {
     try {
       const data = req.body;
+      // name and sourceId not be used.
+      data.name = null;
+      data.sourceId = null;
+
       const item = await Group.create(data);
       const message = 'Create success.';
       res.ok({ message, data: { item } });
@@ -59,6 +66,10 @@ module.exports = {
     try {
       const { id } = req.params;
       const data = req.body;
+      // name and sourceId not be used.
+      data.name = null;
+      data.sourceId = null;
+
       const message = 'Update success.';
       const item = await Group.update(data ,{
         where: { id, },
