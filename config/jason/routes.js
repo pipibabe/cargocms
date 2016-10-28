@@ -56,5 +56,12 @@ module.exports = {
   'put /api/admin/jason/performancegroup/:id':    'api/admin/jason/PerformanceGroupController.update',
   'delete /api/admin/jason/performancegroup/:id': 'api/admin/jason/PerformanceGroupController.destroy',
 
+  // 'post /api/contact':       'api/ContactController.create',
+  'get /api/admin/contact':        'api/admin/ContactController.find',
+  'get /api/admin/contact/:id':    'api/admin/ContactController.findOne',
+  // 'post /api/admin/contact':       'api/admin/ContactController.create',
+  // 'put /api/admin/contact/:id':    'api/admin/ContactController.update',
+  'delete /api/admin/contact/:id': 'api/admin/ContactController.destroy',
+
   "/jason/:controller/:action/:id?": {}
 };
