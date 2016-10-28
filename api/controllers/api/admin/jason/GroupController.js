@@ -20,7 +20,6 @@ module.exports = {
     try {
       let { query } = req;
       const group = req.query.type
-      console.log("group find type==>", group);
       const { serverSidePaging } = query;
       const modelName = req.options.controller.split("/").reverse()[0];
       let result;
