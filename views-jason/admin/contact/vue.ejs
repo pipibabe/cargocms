@@ -6,22 +6,24 @@ var COMMON = {
 
 var itemBeforeEdit = {};
 var prefix = 'admin/';
-var modelName = "jason/partgroup";
+var modelName = "contact";
 var appModel = {
   modelName: modelName,
   prefix: prefix,
   data: {
     item: {
       id: '',
-      title: '',
       name: '',
-      sequence: '',
-      type: 'part',
-      sourceId: '',
+      email: '',
+      subject: '',
+      content: '',
+      success: '',
+      phone: '',
+      createdAt: '',
     },
     items: [],
     option: {
-      defaultSort: [[ 2, 'asc' ]],
+      defaultSort: [[ 0, 'desc' ]]
     }
   },
   view: {
@@ -33,6 +35,18 @@ var appModel = {
 
 /* TABLETOOLS */
 
-<%- include ../../default/vue.ejs %>
+<%- include ../default/vue.ejs %>
 // 需要新增函式可以對 appMain 進行定義，如：
 // appMain.log = function () {console.log("123")}
+appMain.enableText = function () {
+  $('textarea').attr('disabled', false);
+}
+
+appMain.DataTableInitComplete = function() {
+  $('#ToolTables_main-table_2').hide();
+  $('#ToolTables_main-table_3').hide();
+}
+
+appMain.hideSubmit = function() {
+  $('button[type="submit"]').hide();
+}
