@@ -100,6 +100,7 @@ module.exports = {
           return await Post.findAll({
             offset,
             limit,
+            order: 'id DESC',
             include: [{
               model: Group,
               where: {
@@ -126,6 +127,7 @@ module.exports = {
           return await Post.findAll({
             offset,
             limit,
+            order: 'id DESC',
             include: [{
               model: itemType,
               required: true,
