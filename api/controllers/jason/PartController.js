@@ -56,6 +56,7 @@ module.exports = {
           }]
         }],
       });
+      part.Part.content = part.content;
       const partImages = await Image.findAll({
         where: {
           PartId: part.Part.id,

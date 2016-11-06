@@ -58,6 +58,7 @@ module.exports = {
           model: Performance,
         }],
       });
+      performance.Performance.content = performance.content;
       const performanceImages = await Image.findAll({
         where: {
           PerformanceId: performance.Performance.id,

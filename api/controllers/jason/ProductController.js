@@ -56,6 +56,7 @@ module.exports = {
           }]
         }],
       });
+      product.Product.content = product.content;
       const productImages = await Image.findAll({
         where: {
           ProductId: product.Product.id,
