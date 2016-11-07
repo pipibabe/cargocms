@@ -28,7 +28,7 @@ module.exports = {
           where: {
             PerformanceId: value.Performance.id
           },
-          order: 'sequence'
+          order: ['sequence', ['filePath', 'DESC']],
         });
         value.Performance.Images = images;
       }
@@ -63,7 +63,7 @@ module.exports = {
         where: {
           PerformanceId: performance.Performance.id,
         },
-        order: 'sequence',
+        order: ['sequence', ['filePath', 'DESC']],
       });
       const performanceGroups = await Group.findWithType('performance');
 

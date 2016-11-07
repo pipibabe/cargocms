@@ -23,7 +23,7 @@ module.exports = {
           where: {
             PartId: value.Part.id
           },
-          order: 'sequence'
+          order: ['sequence', ['filePath', 'DESC']],
         });
         value.Part.Images = images;
       }
@@ -52,7 +52,7 @@ module.exports = {
           model: Part,
           include: [{
             model: File,
-            order: 'sequence'
+            order: ['sequence', ['filePath', 'DESC']],
           }]
         }],
       });

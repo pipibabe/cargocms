@@ -23,7 +23,7 @@ module.exports = {
           where: {
             ProductId: value.Product.id
           },
-          order: 'sequence'
+          order: ['sequence', ['filePath', 'DESC']],
         });
         value.Product.Images = images;
       }
@@ -61,7 +61,7 @@ module.exports = {
         where: {
           ProductId: product.Product.id,
         },
-        order: 'sequence',
+        order: ['sequence', ['filePath', 'DESC']],
       });
       const productGroups = await Group.findWithType('product');
 
