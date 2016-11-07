@@ -97,23 +97,23 @@ module.exports = {
     classMethods: {
       findItemsByGroupId: async (itemType, groupId, offset = 0, limit) => {
         try {
-          return await Post.findAll({
+          return await itemType.findAll({
             offset,
             limit,
-            order: 'id DESC',
+            order: [ ['id', 'DESC'] ],
             include: [{
-              model: Group,
-              where: {
-                id: groupId
-              }
+              model: Image,
+              order: [
+                ['sequence', 'ASC'],
+              ]
             }, {
-              model: itemType,
+              model: Post,
               required: true,
               include: [{
-                model: Image,
-                order: [
-                  ['sequence', 'ASC'],
-                ]
+                model: Group,
+                where: {
+                  id: groupId
+                }
               }],
             }],
           });
@@ -124,20 +124,16 @@ module.exports = {
       },
       findAllItems: async (itemType, offset = 0, limit) => {
         try {
-          return await Post.findAll({
+          return await itemType.findAll({
             offset,
             limit,
-            order: 'id DESC',
+            order: [ ['id', 'DESC'] ],
             include: [{
-              model: itemType,
-              required: true,
-              include: [{
-                model: Image,
-                order: [
-                  ['sequence', 'ASC'],
-                ]
-              }],
-            }],
+              model: Image,
+              order: [
+                ['sequence', 'ASC'],
+              ]
+            }, Post],
           });
         } catch (e) {
           sails.log.error(e);

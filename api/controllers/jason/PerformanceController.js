@@ -26,11 +26,11 @@ module.exports = {
       for (let value of pageData.posts) {
         let images = await Image.findAll({
           where: {
-            PerformanceId: value.Performance.id
+            PerformanceId: value.id
           },
-          order: ['sequence', ['filePath', 'DESC']],
+          order: ['sequence', ['id', 'DESC']],
         });
-        value.Performance.Images = images;
+        value.Images = images;
       }
       return res.view({
         performanceGroups,

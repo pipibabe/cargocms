@@ -19,19 +19,19 @@
           </div>
         <% } %>
         <% for (var item of posts) { %>
-          <a class="product row" href="/part/show/<%= item.id %>">
+          <a class="product row" href="/part/show/<%= item.Post.id %>">
             <div class="col-xs-3 product-img-wrapper">
-              <img class="img-thumbnail" src="<%= item.Part.Images[0] ? item.Part.Images[0].url:'' %>" alt="產品圖" />
+              <img class="img-thumbnail" src="<%= item.Images[0] ? item.Images[0].url:'' %>" alt="產品圖" />
             </div>
             <div class="col-xs-9 product-content">
-              <h1><%= item.Part.title %></h1>
-              <% if (item.Part.modelName) { %>
-                <small><%= item.Part.modelName %></small>
+              <h1><%= item.title %></h1>
+              <% if (item.modelName) { %>
+                <small><%= item.modelName %></small>
               <% } %>
 
-              <% if (item.Part.introduction) { %>
+              <% if (item.introduction) { %>
                 <p>
-                  <%= item.Part.introduction %>
+                  <%= item.introduction %>
                 </p>
               <% } %>
             </div>

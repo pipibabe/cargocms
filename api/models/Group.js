@@ -25,7 +25,7 @@ module.exports = {
           where: {
             type
           },
-          order: 'sequence'
+          order: ['sequence', ['id', 'DESC']]
         });
         return groups;
       },

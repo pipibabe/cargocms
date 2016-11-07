@@ -21,11 +21,11 @@ module.exports = {
       for (let value of pageData.posts) {
         let images = await Image.findAll({
           where: {
-            ProductId: value.Product.id
+            ProductId: value.id
           },
           order: ['sequence', ['filePath', 'DESC']],
         });
-        value.Product.Images = images;
+        value.Images = images;
       }
       return res.view({
         productGroups,
