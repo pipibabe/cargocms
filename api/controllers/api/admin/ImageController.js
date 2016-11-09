@@ -2,6 +2,7 @@ module.exports = {
   upload: async(req, res) => {
     try {
       sails.log.info(req.body);
+      sails.log.info(req.query);
       const dirname = '../../.tmp/public/uploads/';
       let promise = new Promise((resolve, reject) => {
       req.file('uploadPic').upload({ dirname }, async(err, files) => {
@@ -13,7 +14,12 @@ module.exports = {
     const { size, type, fd } = files[0];
     const user = AuthService.getSessionUser(req);
     const UserId = user ? user.id : null;
-    const upload = await Image.create({ filePath: fd, size, type, UserId });
+    let upload;
+    if (req.query.type === 'image') {
+      upload = await Image.create({ filePath: fd, size, type, UserId });
+    } else {
+      upload = await File.create({ filePath: fd, size, type, UserId, note: req.body.qqfilename});
+    }
 
     res.ok({
       message: 'Upload Success',

@@ -1,32 +1,32 @@
-<section id="image-create" class="">
+<section id="file-create" class="">
 
     <%- include template.ejs %>
-    <div id="fine-uploader-validation"></div>
+    <div id="file-fine-uploader-validation"></div>
 
 </section>
 
 <script type="text/javascript">
 	pageSetUp();
-  var uploadImageAppModel = {
+  var uploadFileAppModel = {
     itemLimit: 1,
     onError: function(){},
     onComplete: function(){},
     onDeleteComplete: function(){},
   }
 
-  var uploadImageApp = new Vue({
-    data: uploadImageAppModel,
+  var uploadFileApp = new Vue({
+    data: uploadFileAppModel,
     methods: {
       updateModel: function(key, value) {
-        uploadImageAppModel[key] = value;
+        uploadFileAppModel[key] = value;
       },
       setup: function() {
         var restrictedUploader = new qq.FineUploader({
-          element: document.getElementById("fine-uploader-validation"),
-          template: 'qq-template-validation',
+          element: document.getElementById("file-fine-uploader-validation"),
+          template: 'file-qq-template-validation',
           autoUpload: true,
           request: {
-            endpoint: '/api/admin/upload?type=image',
+            endpoint: '/api/admin/upload?type=file',
             inputName: 'uploadPic'
           },
           deleteFile: {
@@ -40,21 +40,21 @@
             }
           },
           validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'png'],
-            itemLimit: uploadImageAppModel.itemLimit,
+            // allowedExtensions: ['jpeg', 'jpg', 'png'],
+            itemLimit: uploadFileAppModel.itemLimit,
             sizeLimit: 10240 * 1024 // 50 kB = 50 * 1024 bytes
           },
           callbacks: {
             onError: function(id, name, isError) {
-              uploadImageAppModel.onError(id, name, isError);
+              uploadFileAppModel.onError(id, name, isError);
             },
             onComplete: function(id, name, response) {
               console.log(id, name, response);
-              uploadImageAppModel.onComplete(id, name, response);
+              uploadFileAppModel.onComplete(id, name, response);
             },
             onDeleteComplete: function(id, name, response) {
               console.log(id, name, response);
-              uploadImageAppModel.onDeleteComplete(id, name, response);
+              uploadFileAppModel.onDeleteComplete(id, name, response);
             },
           },
           showMessage: function(message) {
@@ -62,10 +62,10 @@
           },
           messages: {
             emptyError: '{file} 檔案是空的, 請選擇其他檔案',
-            maxHeightImageError: '圖片高度太高',
-            maxWidthImageError: '圖片寬度太寬',
-            minHeightImageError: '圖片不夠高',
-            minWidthImageError: '圖片不夠寬',
+            // maxHeightImageError: '圖片高度太高',
+            // maxWidthImageError: '圖片寬度太寬',
+            // minHeightImageError: '圖片不夠高',
+            // minWidthImageError: '圖片不夠寬',
             minSizeError: '{file} 檔案過小，最小檔案大小為 {minSizeLimit}',
             noFilesError: '請選擇檔案',
             onLeave: '該檔案正在上傳，如果你離開現在的上傳將被取消。',
@@ -83,5 +83,5 @@
     },
   });
 
-	uploadImageApp.$mount("#image-create");
+	uploadFileApp.$mount("#file-create");
 </script>

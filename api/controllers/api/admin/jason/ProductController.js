@@ -39,6 +39,8 @@ module.exports = {
           include: Group
         }, {
           model: Image,
+        }, {
+          model: File,
         }]
       });
 
@@ -79,6 +81,12 @@ module.exports = {
       await Image.update({ ProductId: item.product.id }, {
         where: { id: image.ids }
       });
+
+      if(data.fileId) {
+        await File.update({ ProductId: item.product.id }, {
+          where: { id: data.fileId }
+        });
+      }
 
       const message = 'Create success.';
       res.ok({ message, data: { item } });
@@ -129,6 +137,17 @@ module.exports = {
       await Image.update({ ProductId: id }, {
         where: { id: image.ids }
       });
+
+      if(data.fileId === '') {
+        await File.update({ ProductId: null }, {
+          where: { ProductId: id }
+        });
+      } else {
+        await File.update({ ProductId: id }, {
+          where: { id : data.fileId }
+        });
+      }
+
       const message = 'Update success.';
       res.ok({ message, data: { item } });
     } catch (e) {

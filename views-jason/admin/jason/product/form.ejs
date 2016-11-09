@@ -106,6 +106,18 @@
         <b class="tooltip tooltip-bottom-right">請輸入 內容</b> </label>
   </section>
 
+  <section class="margin-bottom-10">
+    <label class="label">檔案</label>
+    <div class="row" v-show="data.item.fileId !== '' && data.item.fileName">
+      <section  class="col">
+        <i class="fa fa-file-text" style="font-size: 60px;"></i>
+        {{data.item.fileName}}
+        <input type="button" value="刪除" v-on:click="onFileDelete()" class="btn btn-danger state-disabled" disabled></input>
+      </section>
+    </div>
+    <%- include ../../file/upload.ejs %>
+  </section>
+
   <!--<section>
     <label class="label">標籤</label>
     <input id="tagsinput" value="" data-role="tagsInputLabel">

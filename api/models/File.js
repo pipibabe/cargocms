@@ -23,8 +23,11 @@ module.exports = {
     fileName: {
       type: Sequelize.VIRTUAL,
       get: function() {
-        const thisFilePath = this.getDataValue('filePath');
-        return thisFilePath.split('/uploads/')[1];
+        let thisFilePath = this.getDataValue('filePath');
+        if (thisFilePath){
+          thisFilePath = thisFilePath.split('/uploads/')[1];
+        }
+        return thisFilePath;
       }
     },
     url: {
@@ -32,15 +35,17 @@ module.exports = {
       get: function() {
         try {
           const thisFilePath = this.getDataValue('filePath');
-          if (this.storage === 'local') {
+          const thisStorage = this.getDataValue('storage');
+          if (thisFilePath && thisStorage === 'local') {
             return thisFilePath.split('/public')[1];
-          } else if (this.storage ==='url') {
+          } else if (thisFilePath && thisStorage ==='url') {
             return thisFilePath;
           } else {
-            throw Error('Not implemented');
+            sails.log.warn('Not implemented');
+            return thisFilePath;
           }
         } catch (e) {
-          salis.log.error(e);
+          sails.log.error(e);
         }
       }
     }
