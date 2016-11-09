@@ -26,7 +26,8 @@ var appModel = {
       postCovers: [],
       postType: 'part',
       groupTitle: '',
-      groupId: ''
+      groupId: '',
+      fileId: ''
     },
     items: [],
     option: {
@@ -103,4 +104,19 @@ appMain.customSearch = function() {
       column: 'title',
     }
   })
+}
+
+appMain.setupFileUpload = function () {
+  uploadFileApp.updateModel('itemLimit', 1);
+  uploadFileApp.updateModel('onComplete', function(index, name, response){
+    appModel.data.item.fileId = response.data.id;
+  })
+  uploadFileApp.updateModel('onDeleteComplete', function(index, name, response){
+    console.log(index, name, response);
+  })
+  uploadFileApp.setup();
+}
+
+appMain.onFileDelete = function() {
+  appModel.data.item.fileId = "";
 }
