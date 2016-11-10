@@ -63,12 +63,30 @@ module.exports = {
         },
         order: ['sequence', ['id', 'DESC']],
       });
+      const prevProduct = await await Product.findOne({
+        where: {
+          id: {
+            $lt: productId,
+          },
+        },
+        order: 'id DESC',
+      });
+      const nextProduct = await await Product.findOne({
+        where: {
+          id: {
+            $gt: productId,
+          },
+        },
+        order: 'id',
+      });
       const productGroups = await Group.findWithType('product');
 
       return res.view({
         product,
         productImages,
         productGroups,
+        prevProduct,
+        nextProduct,
       });
     }
     catch (e) {

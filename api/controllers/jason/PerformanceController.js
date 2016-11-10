@@ -65,12 +65,50 @@ module.exports = {
         },
         order: ['sequence', ['id', 'DESC']],
       });
+      const prevPerformance = await await Performance.findOne({
+        where: {
+          id: {
+            $lt: performanceId,
+          },
+        },
+        include: [{
+          model: Post,
+          required: true,
+          include: [{
+            model: Group,
+            where: {
+              title: '實例照片'
+            }
+          }]
+        }],
+        order: 'id DESC',
+      });
+      const nextPerformance = await await Performance.findOne({
+        where: {
+          id: {
+            $gt: performanceId,
+          },
+        },
+        include: [{
+          model: Post,
+          required: true,
+          include: [{
+            model: Group,
+            where: {
+              title: '實例照片'
+            }
+          }]
+        }],
+        order: 'id',
+      });
       const performanceGroups = await Group.findWithType('performance');
 
       return res.view({
         performance,
         performanceImages,
         performanceGroups,
+        nextPerformance,
+        prevPerformance,
       });
     }
     catch (e) {

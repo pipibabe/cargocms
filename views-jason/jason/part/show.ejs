@@ -70,6 +70,18 @@
             </div>
           </div>
         </div>
+        <div style="margin-top: 1.8em; text-align: center;">
+          <% if(prevPart) { %>
+            <a class="btn btn-default" href="/part/show/<%= prevPart.id %>" role="button">上一頁</a>
+          <% } else { %>
+            <a disabled="disabled" class="btn btn-default" role="button">上一頁</a>
+          <% } %>
+          <% if(nextPart) { %>
+            <a class="btn btn-default" href="/part/show/<%= nextPart.id %>" role="button">下一頁</a>
+          <% } else { %>
+            <a disabled="disabled" class="btn btn-default" role="button">下一頁</a>
+          <% } %>
+        </div>
 
         <% if (part.content) { %>
           <div class="product-intro">

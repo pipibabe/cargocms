@@ -63,12 +63,30 @@ module.exports = {
         },
         order: 'sequence',
       });
+      const prevPart = await await Part.findOne({
+        where: {
+          id: {
+            $lt: partId,
+          },
+        },
+        order: 'id DESC',
+      });
+      const nextPart = await await Part.findOne({
+        where: {
+          id: {
+            $gt: partId,
+          },
+        },
+        order: 'id',
+      });
       const partGroups = await Group.findWithType('part');
 
       return res.view({
         part,
         partImages,
         partGroups,
+        nextPart,
+        prevPart,
       });
     }
     catch (e) {
