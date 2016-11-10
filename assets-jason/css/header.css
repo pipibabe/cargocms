@@ -1,11 +1,18 @@
 .wrapper{
-  background: linear-gradient(to bottom,#007dd8,#d5eeff 24%,white 33%);
+  /*background: linear-gradient(to bottom,#007dd8,#d5eeff 24%,white 33%);
   background-size: 100% 1500px;
-  background-repeat: no-repeat;
-  margin-top: 50px;
+  background-repeat: no-repeat;*/
+  /*margin-top: 50px;*/
+  background-color: rgba(239, 239, 239, 1);
 }
 .wrapper > .navbar{
   margin-bottom: 0;
+  height: 49px;
+  position: relative;
+  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.36);
+  z-index: 100;
+  border-radius: 0;
+  border: black;
 }
 .navbar-inverse {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#333333+0,0e0e0e+100 */
@@ -14,8 +21,66 @@
   background: -webkit-linear-gradient(top, rgba(51,51,51,1) 0%,rgba(14,14,14,1) 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, rgba(51,51,51,1) 0%,rgba(14,14,14,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+  background-image: url('/assets/jason/images/texture-carbon-fiber.png');
+  background-size: auto 100%;
 }
 .navbar-inverse a.navbar-brand {
   color: #fff;
   text-shadow: -1px -1px 2px #000;
+  padding: 0;
+  line-height: 49px;
+}
+.navbar-inverse a.navbar-brand img {
+  display: inline;
+  height: 49px;
+}
+.navbar-inverse a.navbar-brand span{
+  font-size: 14px;
+  margin-left: 0.8em;
+}
+.sec-nav {
+  width: 100%;
+  background: #07509d;
+  overflow: hidden;
+  height: 49px;
+  position: relative;
+  box-shadow: 0 -2px 6px rgba(5, 32, 60, 0.15) inset;
+}
+.sec-nav ul {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 100000;
+  margin: 0;
+}
+.sec-nav li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 1px;
+}
+.sec-nav li a {
+  display: block;
+  background-color: rgba(37, 76, 124, 1);
+  background-image: linear-gradient(rgba(52, 108, 174, 1) 0%, rgba(37, 76, 124, 1) 49%, rgba(33, 69, 112, 1) 50%, rgba(29, 65, 111, 1) 100%);
+  height: 36px;
+  line-height: 40px;
+  border-radius: 3px 3px 0 0;
+  color: rgba(255, 255, 255, 0.91);
+  padding: 0 3em;
+  font-size: 13px;
+  text-decoration: none !important;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.sec-nav li.active a {
+  background-color: white;
+  background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(228, 228, 228, 1) 50%, rgba(248, 248, 248, 1) 100%);
+  color: rgba(0, 0, 0, 0.91);
+}
+@media (min-width: 768px){
+  .navbar .navbar-collapse.collapse {
+    display: none !important;
+  }
 }

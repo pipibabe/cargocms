@@ -1,30 +1,49 @@
 .swiper-container {
-    width: 100%;
-    height: 300px;
-    margin-bottom: 4.5em !important;
+  /*width: 100%;*/
+  height: 360px;
+  margin-bottom: 4.5em !important;
+  margin: 26px;
+  padding: 17px;
+  border-radius: 5px;
+  background-image: linear-gradient(rgba(248, 248, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 .swiper-container .swiper-slide{
   background-size: cover;
 }
+.swiper-container .swiper-slide .bg-text{
+  position: absolute;
+  top: 27px;
+  right: 27px;
+}
+.swiper-container .swiper-slide .bg-text p{
+  font-size: 2em;
+  margin: 0;
+  text-align: right;
+  font-weight: 900;
+}
+.swiper-container .swiper-slide .bg-text span{
+  color: gray;
+}
 .swiper-container .swiper-slide .slogan{
   color: #f1f1f1;
   text-align: right;
-  padding: 2em 2em 3.5em;
+  padding: 0 0 19px;
   width: 100%;
   position: absolute;
   right: 0;
   bottom: 0;
 }
 .swiper-container .swiper-slide .slogan p{
-  color: #197bc3;
-  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.47);
+  font-size: 16px;
+  margin: 7px 0 0;
 }
 .swiper-container .swiper-slide .slogan h3{
   margin: 0.3em 0 0;
-  background: rgba(32, 35, 35, 0.78);
   float: right;
   clear: right;
-  padding: 6px 12px;
+  padding: 20px 37px 20px 129px;
+  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
 }
 @media (max-width: 767px){
   .swiper-container {

@@ -3,11 +3,24 @@
 <% LayoutUtils.addStylesheets('/assets/jason/css/banner.css'); %>
 <div class="swiper-container">
     <div class="swiper-wrapper">
-      <% for(var i = 1;i<=3;i++) {%>
+      <% for(var i = 5;i<=5;i++) {%>
         <div class="swiper-slide" style="background-image:url(/assets/jason/images/banner-swiper/<%= i %>.jpg)">
+          <div class="bg-text">
+            <p>
+              <span>EX</span>CELLENT
+            </p>
+            <p>
+              <span>HIGH</span> QUALITY
+            </p>
+            <p>
+              <span>SE</span>RVICE
+            </p>
+          </div>
           <div class="slogan">
-            <p>專業團隊 責任施工 品質打造 服務熱誠</p>
-            <h3>諮詢/設計/安裝/保養/維修</h3>
+            <h3>
+              諮詢/設計/安裝/保養/維修
+              <p>專業團隊 責任施工 品質打造 服務熱誠</p>
+            </h3>
           </div>
         </div>
       <% } %>

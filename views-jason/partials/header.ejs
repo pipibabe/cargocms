@@ -1,5 +1,5 @@
 <!--=== Header ===-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -9,7 +9,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">捷陞專業自動門</a>
+      <a class="navbar-brand" href="/">
+        <img src="/assets/jason/images/logo.png" />
+        <span>捷陞專業自動門</span>
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -26,6 +29,16 @@
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+</nav>
+<nav class="sec-nav">
+  <ul>
+    <li class="<%= (req.path == '/')?'active':'' %>"><a href="/">關於我們</a></li>
+    <li class="<%= (req.path.search('/product') != -1)?'active':'' %>"><a href="/product/group/0/page/1">產品介紹</a></li>
+    <li class="<%= (req.path.search('/part') != -1)?'active':'' %>"><a href="/part/group/0/page/1">周邊配件</a></li>
+    <li class="<%= (req.path.search('/performance') != -1)?'active':'' %>"><a href="/performance/group/0/page/1">工程實蹟</a></li>
+    <li class="<%= (req.path === '/issue')?'active':'' %>"><a href="/issue">常見問題</a></li>
+    <li class="<%= (req.path === '/contact')?'active':'' %>"><a href="/contact">聯絡我們</a></li>
+  </ul>
 </nav>
 <!--=== End Header ===-->
 
