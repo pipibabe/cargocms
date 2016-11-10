@@ -20,9 +20,11 @@
   margin: 0;
   text-align: right;
   font-weight: 900;
+  color: rgb(74, 74, 74);
+  letter-spacing: 1.5px;
 }
 .swiper-container .swiper-slide .bg-text span{
-  color: gray;
+  color: rgb(144, 144, 144);
 }
 .swiper-container .swiper-slide .slogan{
   color: #f1f1f1;
@@ -44,6 +46,9 @@
   clear: right;
   padding: 20px 37px 20px 129px;
   background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+}
+.swiper-container .swiper-slide .slogan h3 span{
+  margin: 0 2px;
 }
 @media (max-width: 767px){
   .swiper-container {
