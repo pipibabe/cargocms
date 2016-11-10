@@ -50,25 +50,25 @@ module.exports = {
   show: async function(req, res) {
     try {
       const performanceId = req.params.performanceId;
-      const performance = await Post.findOne({
+      const performance = await Performance.findOne({
         where: {
           id: performanceId,
         },
-        include: [{
-          model: Performance,
-        }],
+        include: [
+          Post,
+        ],
       });
-      performance.Performance.content = performance.content;
+      performance.content = performance.Post.content;
       const performanceImages = await Image.findAll({
         where: {
-          PerformanceId: performance.Performance.id,
+          PerformanceId: performance.id,
         },
         order: ['sequence', ['id', 'DESC']],
       });
       const performanceGroups = await Group.findWithType('performance');
 
       return res.view({
-        performance: performance.Performance,
+        performance,
         performanceImages,
         performanceGroups,
       });

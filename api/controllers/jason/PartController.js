@@ -44,29 +44,29 @@ module.exports = {
   show: async function(req, res) {
     try {
       const partId = req.params.partId;
-      const part = await Post.findOne({
+      const part = await Part.findOne({
         where: {
           id: partId,
         },
-        include: [{
-          model: Part,
-          include: [{
+        include: [
+          {
             model: File,
-            order: ['sequence', ['id', 'DESC']],
-          }]
-        }],
+            order: 'sequence'
+          },
+          Post,
+        ],
       });
-      part.Part.content = part.content;
+      part.content = part.Post.content;
       const partImages = await Image.findAll({
         where: {
-          PartId: part.Part.id,
+          PartId: part.id,
         },
         order: 'sequence',
       });
       const partGroups = await Group.findWithType('part');
 
       return res.view({
-        part: part.Part,
+        part,
         partImages,
         partGroups,
       });

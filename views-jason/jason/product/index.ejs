@@ -19,7 +19,7 @@
           </div>
         <% } %>
         <% for (var item of posts) { %>
-          <a class="product row" href="/product/show/<%= item.Post.id %>">
+          <a class="product row" href="/product/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
               <img class="img-thumbnail" src="<%= item.Images[0]? item.Images[0].url:'' %>" alt="產品圖" />
             </div>
