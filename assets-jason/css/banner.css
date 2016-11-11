@@ -6,6 +6,15 @@
   padding: 17px;
   border-radius: 5px;
   background-image: linear-gradient(rgba(248, 248, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  overflow: visible;
+}
+.swiper-container .swiper-pagination.swiper-pagination-bullets{
+  bottom: -10px;
+}
+.swiper-pagination-bullet {
+  width: 12px;
+  border-radius: 3px;
+  height: 5px;
 }
 .swiper-container .swiper-slide{
   background-size: cover;
