@@ -291,7 +291,7 @@ module.exports = {
             notAdmin = currentUser.RolesArray.indexOf('admin') === -1;
             ownUserId.UserId = currentUser.id;
           }
-          if (notAdmin) {
+          if (notAdmin && likeUser === null) {
             whereParam.where.$or = [
               { visibility: { $not: 'PRIVATE' } },
               ownUserId
