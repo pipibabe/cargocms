@@ -86,7 +86,7 @@
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;margin-top: -2px;">
       <div class="side-menu" id="sticker">
         <ul class="list-group">
           <li>
@@ -109,14 +109,14 @@
     </div>
 
   </div>
-
+  <% include partials/footer.ejs %>
 
 </div>
 
 <% LayoutUtils.addScripts('/assets/simple/js/plugin/jquery.sticky.js', '/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
 <% LayoutUtils.addScriptBlock(`
 jQuery(document).ready(function() {
-  $('.side-menu div a').click(function(e){
+  $('.side-menu li a').click(function(e){
     e.preventDefault();
     $('html, body').animate({
       scrollTop: $('#'+$(this).data('link')).offset().top - 55

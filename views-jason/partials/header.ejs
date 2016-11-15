@@ -28,9 +28,13 @@
         <li class="<%= (req.path === '/contact')?'active':'' %>"><a href="/contact">聯絡我們</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
+    <span class="tel"><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+886422467160">04 2246-7160</a></span>
   </div><!-- /.container-fluid -->
 </nav>
 <nav class="sec-nav">
+  <div class="container">
+    <h2>AUTOMATIC DOOR</h2>
+  </div>
   <ul>
     <li class="<%= (req.path == '/')?'active':'' %>"><a href="/">關於我們</a></li>
     <li class="<%= (req.path.search('/product') != -1)?'active':'' %>"><a href="/product/group/0/page/1">產品介紹</a></li>

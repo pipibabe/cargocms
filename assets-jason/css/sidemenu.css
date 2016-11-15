@@ -9,12 +9,27 @@
   margin-right: 13px;
   line-height: 36px;
 }
+.side-menu .list-group:after {
+  content: '';
+  display: block;
+  background-color: rgba(209, 209, 209, 1);
+  height: 5px;
+  width: 100%;
+  border-radius: 3px;
+  margin-top: 5px;
+}
 .side-menu .list-group-item {
   height: 36px;
   padding: 0;
   line-height: 36px;
   font-size: 13px;
   color: rgba(74, 74, 74, 1);
+}
+.side-menu .list-group-item:hover {
+  background-color: rgba(247, 247, 247, 0.8);
+}
+.side-menu .list-group-item:hover:before {
+  background: rgba(42, 161, 223, 1);
 }
 .side-menu .list-group-item-title {
   margin-top: 0;
@@ -29,7 +44,10 @@
   background: rgba(22, 53, 90, 1);
   display: block;
   float: left;
-  margin: 16px 10.5px 0 13px;
+  margin: 16px 12px 0 17px;
+}
+.side-menu .list-group-item-title {
+  height: 39px;
 }
 .side-menu .list-group-item-title:before {
   content: '+';
@@ -37,5 +55,5 @@
   float: none;
   background: transparent;
   line-height: 37px;
-  margin: 0 2px 0 11px;
+  margin: 0 6px 0 15px;
 }
