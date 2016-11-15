@@ -72,6 +72,11 @@
     padding: 0 1.2em;
   }
 }
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
 @media (max-width: 767px){
   .col-md-10.content{
     padding: 0 1em;

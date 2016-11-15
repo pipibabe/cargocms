@@ -59,17 +59,46 @@
 .swiper-container .swiper-slide .slogan h3 span{
   margin: 0 2px;
 }
-@media (max-width: 767px){
+@media (max-width: 913px) {
   .swiper-container {
-    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 39px;
+    background: #fafafa;
+  }
+  .swiper-container .swiper-pagination.swiper-pagination-bullets{
+    bottom: 12px;
+  }
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+}
+@media (max-width: 767px){
+  .swiper-container .swiper-slide .bg-text {
+    display: none;
+  }
+  .swiper-container {
     max-width: 1170px;
-    height: 220px;
+    height: 310px;
     margin-bottom: 2.5em !important;
   }
   .swiper-container .swiper-slide .slogan p{
-    background: rgba(255, 255, 255, 0.5);
+    /*background: rgba(255, 255, 255, 0.5);*/
     padding: 1px 2px;
-    float: right;
+    text-align: right;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+  .swiper-container .swiper-slide .slogan {
+    padding-bottom: 24px;
+  }
+  .swiper-container .swiper-slide .slogan h3 {
+    width: 100%;
+    padding-left: 0;
+    font-size: 1.2em;
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0) 60%);
   }
 }
 @media (max-width: 355px){

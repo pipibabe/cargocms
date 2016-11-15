@@ -34,6 +34,22 @@
   line-height: 23px;
   text-align: center;
 }
+.navbar-inverse .navbar-toggle {
+  margin: 0;
+  margin-top: 3px;
+  margin-right: 8px;
+  border: none;
+}
+.navbar-inverse .navbar-toggle:hover {
+  background-color: transparent !important;
+}
+.navbar-inverse .navbar-toggle:hover i {
+  color: rgb(4, 121, 175);
+}
+.navbar-inverse .navbar-toggle i {
+  font-size: 22px;
+  color: rgb(0, 153, 224);
+}
 .navbar-inverse {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#333333+0,0e0e0e+100 */
   background: rgb(51,51,51); /* Old browsers */
@@ -43,6 +59,9 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
   background-image: url('/assets/jason/images/texture-carbon-fiber.png');
   background-size: auto 100%;
+}
+.navbar-inverse .navbar-collapse {
+  background: transparent;
 }
 .navbar-inverse a.navbar-brand {
   color: #fff;
@@ -75,6 +94,7 @@
   width: 100%;
   z-index: 100000;
   margin: 0;
+  padding: 0;
 }
 .sec-nav li {
   list-style: none;
@@ -113,8 +133,61 @@
     visibility: visible;
   }
 }
-@media (min-width: 768px){
+@media (max-width: 343px) {
+  .navbar-inverse a.navbar-brand span {
+    display: none;
+  }
+}
+@media (max-width: 414px) {
+  .sec-nav .container h2 {
+    margin-left: 0px !important;
+  }
+  .navbar-inverse a.navbar-brand img {
+    margin-left: 14px !important;
+  }
+}
+@media (max-width: 913px) {
+  .sec-nav ul {
+     display: none !important;
+  }
+  .navbar .tel {
+    display: none;
+  }
+  .sec-nav {
+    height: 32px;
+  }
+  .sec-nav .container h2 {
+    visibility: visible;
+    height: 32px;
+    line-height: 32px;
+    margin: 0;
+    float: left;
+    margin-left: 22px;
+  }
+  .navbar-inverse a.navbar-brand img {
+    margin-left: 34px;
+  }
+}
+@media (max-width: 913px) and (min-width: 768px) {
+  .navbar-inverse a.navbar-brand span {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .navbar.navbar-inverse {
+    position: fixed;
+    width: 100%;
+    top: 0;
+  }
+  .wrapper {
+    padding-top: 49px;
+  }
+  .navbar-inverse .navbar-collapse {
+    background: linear-gradient(to top, rgb(46, 46, 46) 0%, rgb(31, 31, 31) 80%, rgb(35, 35, 35) 100%);
+  }
+}
+@media (min-width: 914px){
   .navbar .navbar-collapse.collapse {
-    display: none !important;
+     display: none !important;
   }
 }
