@@ -10,6 +10,7 @@
 .web-footer .sponser a{
   margin: 0;
   color: #196dc5;
+  display: inline !important;
 }
 .web-footer copyright{
   margin-top: 5px;

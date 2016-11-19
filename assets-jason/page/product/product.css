@@ -139,6 +139,16 @@
 .product-info-list span, .product-info-list p {
   color: #646a6f;
 }
+.product-info-list li label {
+  float: left;
+}
+.product-info-list li span {
+  margin-left: 45px;
+  display: block;
+  padding: 0;
+  transform: translateY(-2.5px);
+  margin-bottom: 4px;
+}
 .product-intro {
   margin-top: 3.5em;
 }
