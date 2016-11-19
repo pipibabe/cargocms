@@ -7,9 +7,15 @@
   margin: 0 2em;
   color: #33363c;
 }
+.web-footer .sponser a{
+  margin: 0;
+  color: #196dc5;
+}
 .web-footer copyright{
-  color: rgba(0, 0, 0, 0.49);
   margin-top: 5px;
+}
+.web-footer copyright, .web-footer .sponser{
+  color: rgba(0, 0, 0, 0.49);
   display: block;
 }
 @media (max-width: 767px){

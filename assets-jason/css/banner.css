@@ -78,6 +78,7 @@
   .swiper-container {
     margin: 0 !important;
     padding: 0;
+    border-radius: 0;
   }
   .swiper .swiper-pagination {
     margin-top: 16px;

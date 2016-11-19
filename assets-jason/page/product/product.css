@@ -157,8 +157,19 @@
   border-top: 2px solid #FFC107;
   margin: 11px auto 1.2em;
 }
+.product-pagination {
+  margin-top: 1.8em;
+  text-align: center;
+  overflow: auto;
+}
 @media (max-width: 767px){
   .col-md-6.img-content {
     padding-right: 15px;
+  }
+  .product-pagination .btn:first-child {
+    float: left;
+  }
+  .product-pagination .btn:nth-child(2) {
+    float: right;
   }
 }
