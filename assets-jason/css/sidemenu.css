@@ -42,11 +42,11 @@
 .side-menu .list-group-item:not(.list-group-item-title):hover:before {
   background: rgba(42, 161, 223, 1);
 }
-.side-menu .list-group-item.active {
-  background-color: rgba(247, 247, 247, 0.8);
+.side-menu .list-group-item.act {
+   background-color: rgba(247, 247, 247, 0.8);
 }
-.side-menu .list-group-item.active:before {
-  background: rgba(42, 161, 223, 1);
+.side-menu .list-group-item.act:before {
+   background: rgba(42, 161, 223, 1); 
 }
 .side-menu .list-group-item-title {
   margin-top: 0;

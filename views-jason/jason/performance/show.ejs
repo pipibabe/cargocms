@@ -82,17 +82,21 @@
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9">
       <div class="side-menu" id="sticker">
-        <h3>
-          工程實蹟
-          <small>Product</small>
-        </h3>
-        <div class="list-group">
+        <ul class="list-group">
+          <li>
+            <h3 class="list-group-item list-group-item-title">
+              工程實蹟
+              <small>Product</small>
+            </h3>
+          </li>
           <% for(var group of performanceGroups) { %>
-            <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+            <li>
+              <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+            </li>
           <% } %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>

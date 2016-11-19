@@ -51,11 +51,6 @@
   font-size: 1.5em;
   color: #d0d0d0;
 }
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
-  background-color: #cdddea;
-  border-color: #c3d4e2;
-  box-shadow: 0 1px 1px #bfd4e4 inset;
-}
 @media (min-width: 1200px){
   .product .product-content {
     padding: 0.8em 2em;

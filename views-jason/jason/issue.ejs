@@ -86,16 +86,22 @@
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9">
       <div class="side-menu" id="sticker">
-        <h3>
-          常見問題
-          <small>Q and A</small>
-        </h3>
-        <div class="list-group">
-          <a data-link="issueTable" href="/product/group/0/page/1" class="list-group-item">常見問題</a>
-          <a data-link="maintain" href="/product/group/0/page/1" class="list-group-item">注意事項及保養</a>
-        </div>
+        <ul class="list-group">
+          <li>
+            <h3 class="list-group-item list-group-item-title">
+              常見問題
+              <small>Q and A</small>
+            </h3>
+          </li>
+          <li>
+            <a data-link="issueTable" href="/product/group/0/page/1" class="list-group-item">常見問題</a>
+          </li>
+          <li>
+            <a data-link="maintain" href="/product/group/0/page/1" class="list-group-item">注意事項及保養</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -106,7 +112,7 @@
 
 <% LayoutUtils.addScriptBlock(`
 jQuery(document).ready(function() {
-  $('.side-menu div a').click(function(e){
+  $('.side-menu li a').click(function(e){
     e.preventDefault();
     $('html, body').animate({
       scrollTop: $('#'+$(this).data('link')).offset().top - 55
