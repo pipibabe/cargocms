@@ -1,12 +1,23 @@
+.swiper {
+  margin-bottom: 33px !important;
+  padding-bottom: 10px;
+  margin: auto;
+}
+.swiper .swiper-pagination {
+  position: relative;
+}
+.swiper .swiper-pagination-bullet {
+  margin: 0 3px;
+}
 .swiper-container {
   /*width: 100%;*/
   height: 360px;
-  margin-bottom: 4.5em !important;
+  margin-bottom: 0 !important;
   margin: 26px;
   padding: 17px;
   border-radius: 5px;
   background-image: linear-gradient(rgba(248, 248, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
-  overflow: visible;
+  /*overflow: visible;*/
 }
 .swiper-container .swiper-pagination.swiper-pagination-bullets{
   bottom: -10px;
@@ -54,17 +65,22 @@
   float: right;
   clear: right;
   padding: 20px 37px 20px 129px;
-  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
 }
 .swiper-container .swiper-slide .slogan h3 span{
   margin: 0 2px;
 }
 @media (max-width: 913px) {
-  .swiper-container {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 39px;
+  .swiper {
+    padding-bottom: 18px;
     background: #fafafa;
+  }
+  .swiper-container {
+    margin: 0 !important;
+    padding: 0;
+  }
+  .swiper .swiper-pagination {
+    margin-top: 16px;
   }
   .swiper-container .swiper-pagination.swiper-pagination-bullets{
     bottom: 12px;
@@ -82,7 +98,6 @@
   .swiper-container {
     max-width: 1170px;
     height: 310px;
-    margin-bottom: 2.5em !important;
   }
   .swiper-container .swiper-slide .slogan p{
     /*background: rgba(255, 255, 255, 0.5);*/
