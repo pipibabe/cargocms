@@ -116,6 +116,14 @@
     background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0) 60%);
   }
 }
+@media (max-width: 450px){
+  .swiper-container {
+    height: 260px;
+  }
+  .swiper-container .swiper-slide .slogan h3 {
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 55%, rgba(0, 0, 0, 0) 75%);
+  }
+}
 @media (max-width: 355px){
   .swiper-container .swiper-slide .slogan p{
     display: none;

@@ -59,6 +59,14 @@
             </div>
           </div>
         </div>
+
+        <% if (performance.content) { %>
+          <div class="product-intro">
+            <h1 class="intro-title">詳細內容介紹</h1>
+            <%- performance.content %>
+          </div>
+        <% } %>
+
         <div style="margin-top: 1.8em; text-align: center;">
           <% if(prevPerformance) { %>
             <a class="btn btn-default" href="/performance/show/<%= prevPerformance.id %>" role="button">上一頁</a>
@@ -71,13 +79,6 @@
             <a disabled="disabled" class="btn btn-default" role="button">下一頁</a>
           <% } %>
         </div>
-
-        <% if (performance.content) { %>
-          <div class="product-intro">
-            <h1 class="intro-title">詳細內容介紹</h1>
-            <%- performance.content %>
-          </div>
-        <% } %>
 
       </article>
     </div>
