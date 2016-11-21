@@ -1,6 +1,6 @@
 module.exports = {
   siteId: 'labfnp',
-  appUrl: 'https://fdeb4c17.ngrok.io',
+  appUrl: 'http://linode1.trunksys.com:5022',
   // port: 5001,
   urls: {
     afterSignIn: '/lab'
