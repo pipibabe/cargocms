@@ -46,13 +46,16 @@
    background-color: rgba(247, 247, 247, 0.8);
 }
 .side-menu .list-group-item.act:before {
-   background: rgba(42, 161, 223, 1); 
+   background: rgba(42, 161, 223, 1);
 }
 .side-menu .list-group-item-title {
   margin-top: 0;
   font-size: 15px;
   color: rgba(255, 255, 255, 1);
   background-image: linear-gradient(rgba(0, 78, 159, 1) 0%, rgba(30, 66, 107, 1) 100%);
+}
+.side-menu .list-group-item-title small {
+  color: rgba(255, 255, 255, 0.7);
 }
 .side-menu .list-group-item:before {
   content: '';

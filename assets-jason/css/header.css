@@ -116,6 +116,9 @@
   letter-spacing: 1px;
   font-weight: 700;
 }
+.sec-nav li a:hover {
+  background-image: linear-gradient(rgb(62, 115, 177) 0%, rgb(39, 88, 150) 49%, rgb(37, 87, 146) 50%, rgb(35, 79, 131) 100%);
+}
 .sec-nav li.active a {
   background-color: white;
   background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(228, 228, 228, 1) 50%, rgba(248, 248, 248, 1) 100%);

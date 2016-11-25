@@ -33,7 +33,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">電話</label>
-            <input type="number" name="phone" class="form-control">
+            <input type="tel" name="phone" class="form-control">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">內容</label>
@@ -81,7 +81,7 @@
             <p>
               假如您需要以傳真方式與我們連絡，請註明您的姓名連絡資料及相關事項
             </p>
-            <a href="tel:+886422467161">(04)2246-7160</a>
+            <a href="tel:+886422467392">(04)2246-7392</a>
           </div>
         </div>
         <div class="row contact-info">
@@ -93,7 +93,7 @@
             <p>
               假如您需要以郵局郵寄方式與我們連絡，請將相關資料郵寄至下列地址：
             </p>
-            <span style="color: #337ab7;">郵遞區號：406-68 台中市北屯區修齊巷23號 捷陞專業自動門工程行</span>
+            <span style="color: #337ab7;font-size: 1.3em;">郵遞區號：406 台中市北屯區修齊街156號 捷陞專業自動門工程行</span>
           </div>
         </div>
 
@@ -152,7 +152,6 @@ jQuery(document).ready(function() {
       },
       phone: {
         required: true,
-        number: true,
       },
       content: {
         required: true
@@ -169,7 +168,6 @@ jQuery(document).ready(function() {
       },
       phone: {
         required: "請輸入電話",
-        number: "請輸入有效電話",
       },
       content: {
         required: "請輸入內容"

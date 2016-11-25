@@ -11,6 +11,9 @@
 .contact-info {
   margin-top: 3em;
 }
+.contact-info a {
+  font-size: 2em;
+}
 .contact-info-icon {
   text-align: center;
 }
