@@ -63,7 +63,7 @@ module.exports = {
         },
         order: ['sequence', ['id', 'DESC']],
       });
-      const prevProduct = await await Product.findOne({
+      const nextProduct = await await Product.findOne({
         where: {
           id: {
             $lt: productId,
@@ -71,7 +71,7 @@ module.exports = {
         },
         order: 'id DESC',
       });
-      const nextProduct = await await Product.findOne({
+      const prevProduct = await await Product.findOne({
         where: {
           id: {
             $gt: productId,

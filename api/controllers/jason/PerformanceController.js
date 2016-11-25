@@ -65,7 +65,7 @@ module.exports = {
         },
         order: ['sequence', ['id', 'DESC']],
       });
-      const prevPerformance = await await Performance.findOne({
+      const nextPerformance = await await Performance.findOne({
         where: {
           id: {
             $lt: performanceId,
@@ -83,7 +83,7 @@ module.exports = {
         }],
         order: 'id DESC',
       });
-      const nextPerformance = await await Performance.findOne({
+      const prevPerformance = await await Performance.findOne({
         where: {
           id: {
             $gt: performanceId,

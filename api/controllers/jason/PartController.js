@@ -63,7 +63,7 @@ module.exports = {
         },
         order: 'sequence',
       });
-      const prevPart = await await Part.findOne({
+      const nextPart = await await Part.findOne({
         where: {
           id: {
             $lt: partId,
@@ -71,7 +71,7 @@ module.exports = {
         },
         order: 'id DESC',
       });
-      const nextPart = await await Part.findOne({
+      const prevPart = await await Part.findOne({
         where: {
           id: {
             $gt: partId,
