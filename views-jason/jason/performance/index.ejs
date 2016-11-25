@@ -42,7 +42,7 @@
           <% for (var item of posts) { %>
             <a class="product row" href="/performance/show/<%= item.id %>">
               <div class="col-xs-3 product-img-wrapper">
-                <img class="img-thumbnail" src="<%= (item.Images[0])?item.Images[0].url:'' %>" alt="工程實蹟圖" />
+                <img alt="<%= item.title %>" class="img-thumbnail" src="<%= (item.Images[0])?item.Images[0].url:'' %>" alt="工程實蹟圖" />
               </div>
               <div class="col-xs-9 product-content">
                 <h1><%= item.title %></h1>
