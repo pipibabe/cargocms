@@ -54,6 +54,7 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.82);
 }
 .swiper-container .swiper-slide .slogan p{
   color: rgba(255, 255, 255, 0.47);
