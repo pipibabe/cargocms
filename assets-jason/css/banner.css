@@ -9,8 +9,14 @@
 .swiper .swiper-pagination-bullet {
   margin: 0 3px;
 }
+.swiper .swiper-wrapper {
+  overflow: hidden;
+}
+.swiper .swiper-pagination {
+  min-height: 20px;
+}
 .swiper-container {
-  /*width: 100%;*/
+  /* width: 100%; */
   height: 360px;
   margin-bottom: 0 !important;
   margin: 26px;
