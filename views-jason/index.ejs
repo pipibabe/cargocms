@@ -1,10 +1,9 @@
-<% LayoutUtils.addMeta({ property:"og:image", content:SocialService.getShareUrl() + "/assets/tcmadr/img/logo.png" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:url", content:SocialService.getShareUrl() + "/assets/tcmadr/img/logo.png"  }); %>
-<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/jpeg" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:width", content:"1200" }); %>
-<% LayoutUtils.addMeta({ property:"og:image:height", content:"630" }); %>
-<% LayoutUtils.addMeta({ property:"og:title", content:"CargoCMS" }); %>
-<% LayoutUtils.addMeta({ property:"og:description", content:"CargoCMS" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:url", content: SocialService.getShareUrl() + "/assets/jason/images/map.jpg" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/png" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:width", content:"553" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:height", content:"457" }); %>
+<% LayoutUtils.addMeta({ property:"og:title", content:"捷陞專業自動門" }); %>
+<% LayoutUtils.addMeta({ property:"og:description", content:"關於我們" }); %>
 <% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
@@ -20,7 +19,7 @@
         <header class="article-title">
           <h1 id="intro">公司簡介</h2>
         </header>
-        <img src="/assets/jason/images/j1-1.png">
+        <img alt="Jason 提供多元化服務歡迎來電洽詢" src="/assets/jason/images/j1-1.png">
         <p>歡迎蒞臨「捷陞專業自動門資訊網」!</p>
         <p>本公司的團隊成員於自動門界服務已超過10年以上資歷，安裝過台灣前500大型企業內-包括了無塵室自動門包括聯電、 台積電、日月光、奇美電子、矽品、友達等不勝枚舉…，歡迎參觀比較。捷陞的團隊成員們都有經過無塵室的施工規則教育訓練 ，在各個知名大醫院手術室及X光室之鉛板門也都有專業的施工經驗。多年的經驗與專業技術是您的最佳選擇。</p>
         <p>我們自信能幫客戶完成自動門及邊配備之整合規劃及統包施工與維修，近幾年盛行自動門搭配門禁或相關控制，自動控制對我們而言是基本的，一般人的認知自動門價格很高，其實不然， 捷陞會依照您的預算提供諮詢與規劃。</p>
@@ -82,33 +81,46 @@
         <header class="article-title">
           <h1 id="location">地理位置</h2>
         </header>
-        <img src="/assets/jason/images/map.jpg">
+        <!-- <img src="/assets/jason/images/map.jpg"> -->
+        <a target="_blank" href="https://www.google.com.tw/maps/place/%E6%8D%B7%E9%99%9E%E5%B0%88%E6%A5%AD%E8%87%AA%E5%8B%95%E9%96%80%E5%B7%A5%E7%A8%8B%E8%A1%8C/@24.1603435,120.6562729,12z/data=!4m8!1m2!2m1!1z5o236Zme!3m4!1s0x346917eb7a5e1107:0xbbb0324c084f5529!8m2!3d24.182055!4d120.6942855
+0">
+          <img style="margin-top: 2.5em;" alt="map" src="http://maps.google.com/maps/api/staticmap?zoom=17&size=550x420&sensor=false&markers=24.182044,120.694285">
+        </a>
+
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9">
       <div class="side-menu" id="sticker">
-        <h3>
-          關於我們
-          <small>About Us</small>
-        </h3>
-        <div class="list-group">
-          <a data-link="intro" href="#" class="list-group-item">公司簡介</a>
-          <a data-link="history" href="#" class="list-group-item">成立沿革</a>
-          <a data-link="location" href="#" class="list-group-item">地理位置</a>
-        </div>
+        <ul class="list-group">
+          <li>
+            <h3 class="list-group-item list-group-item-title">
+              關於我們
+              <small>About Us</small>
+            </h3>
+          </li>
+          <li>
+            <a data-link="intro" href="#" class="list-group-item">公司簡介</a>
+          </li>
+          <li>
+            <a data-link="history" href="#" class="list-group-item">成立沿革</a>
+          </li>
+          <li>
+            <a data-link="location" href="#" class="list-group-item">地理位置</a>
+          </li>
+        </ul>
       </div>
     </div>
 
   </div>
-
+  <% include partials/footer.ejs %>
 
 </div>
 
 <% LayoutUtils.addScripts('/assets/simple/js/plugin/jquery.sticky.js', '/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
 <% LayoutUtils.addScriptBlock(`
 jQuery(document).ready(function() {
-  $('.side-menu div a').click(function(e){
+  $('.side-menu li a').click(function(e){
     e.preventDefault();
     $('html, body').animate({
       scrollTop: $('#'+$(this).data('link')).offset().top - 55

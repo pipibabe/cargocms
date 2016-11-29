@@ -1,7 +1,6 @@
 module.exports = {
   getShareUrl: function() {
-    const url = "http://" + sails.config.shareUrl
-    return url;
+    return sails.config.appUrl;
   },
 
 

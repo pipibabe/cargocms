@@ -1,42 +1,135 @@
+.swiper {
+  margin-bottom: 33px !important;
+  padding-bottom: 10px;
+  margin: auto;
+}
+.swiper .swiper-pagination {
+  position: relative;
+}
+.swiper .swiper-pagination-bullet {
+  margin: 0 3px;
+}
+.swiper .swiper-wrapper {
+  overflow: hidden;
+}
+.swiper .swiper-pagination {
+  min-height: 20px;
+}
 .swiper-container {
-    width: 100%;
-    height: 300px;
-    margin-bottom: 4.5em !important;
+  /* width: 100%; */
+  height: 360px;
+  margin-bottom: 0 !important;
+  margin: 26px;
+  padding: 17px;
+  border-radius: 5px;
+  background-image: linear-gradient(rgba(248, 248, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  /*overflow: visible;*/
+}
+.swiper-container .swiper-pagination.swiper-pagination-bullets{
+  bottom: -10px;
+}
+.swiper-pagination-bullet {
+  width: 12px;
+  border-radius: 3px;
+  height: 5px;
 }
 .swiper-container .swiper-slide{
   background-size: cover;
 }
+.swiper-container .swiper-slide .bg-text{
+  position: absolute;
+  top: 27px;
+  right: 27px;
+}
+.swiper-container .swiper-slide .bg-text p{
+  font-size: 2em;
+  margin: 0;
+  text-align: right;
+  font-weight: 900;
+  color: rgb(74, 74, 74);
+  letter-spacing: 1.5px;
+}
+.swiper-container .swiper-slide .bg-text span{
+  color: rgb(144, 144, 144);
+}
 .swiper-container .swiper-slide .slogan{
   color: #f1f1f1;
   text-align: right;
-  padding: 2em 2em 3.5em;
+  padding: 0 0 19px;
   width: 100%;
   position: absolute;
   right: 0;
   bottom: 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.82);
 }
 .swiper-container .swiper-slide .slogan p{
-  color: #197bc3;
-  font-size: 1.2em;
+  color: rgb(218, 218, 218);
+  font-size: 16px;
+  margin: 7px 0 0;
 }
 .swiper-container .swiper-slide .slogan h3{
   margin: 0.3em 0 0;
-  background: rgba(32, 35, 35, 0.78);
   float: right;
   clear: right;
-  padding: 6px 12px;
+  padding: 20px 37px 20px 129px;
+  background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.swiper-container .swiper-slide .slogan h3 span{
+  margin: 0 2px;
+}
+@media (max-width: 913px) {
+  .swiper {
+    padding-bottom: 18px;
+    background: #fafafa;
+  }
+  .swiper-container {
+    margin: 0 !important;
+    padding: 0;
+    border-radius: 0;
+  }
+  .swiper .swiper-pagination {
+    margin-top: 16px;
+  }
+  .swiper-container .swiper-pagination.swiper-pagination-bullets{
+    bottom: 12px;
+  }
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
 }
 @media (max-width: 767px){
+  .swiper-container .swiper-slide .bg-text {
+    display: none;
+  }
   .swiper-container {
-    width: 100%;
     max-width: 1170px;
-    height: 220px;
-    margin-bottom: 2.5em !important;
+    height: 310px;
   }
   .swiper-container .swiper-slide .slogan p{
-    background: rgba(255, 255, 255, 0.5);
+    /*background: rgba(255, 255, 255, 0.5);*/
     padding: 1px 2px;
-    float: right;
+    text-align: right;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+  .swiper-container .swiper-slide .slogan {
+    padding-bottom: 24px;
+  }
+  .swiper-container .swiper-slide .slogan h3 {
+    width: 100%;
+    padding-left: 0;
+    font-size: 1.2em;
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0) 60%);
+  }
+}
+@media (max-width: 450px){
+  .swiper-container {
+    height: 260px;
+  }
+  .swiper-container .swiper-slide .slogan h3 {
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 55%, rgba(0, 0, 0, 0) 75%);
   }
 }
 @media (max-width: 355px){

@@ -1,3 +1,10 @@
+<% LayoutUtils.addMeta({ property:"og:image:url", content: SocialService.getShareUrl() + encodeURI(performanceImages[0].url) }); %>
+<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/png" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:width", content:"500" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:height", content:"500" }); %>
+<% LayoutUtils.addMeta({ property:"og:title", content: performance.title }); %>
+<% LayoutUtils.addMeta({ property:"og:description", content:"捷陞專業自動門 - 工程實蹟" }); %>
+
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
 
@@ -59,7 +66,15 @@
             </div>
           </div>
         </div>
-        <div style="margin-top: 1.8em; text-align: center;">
+
+        <% if (performance.content) { %>
+          <div class="product-intro">
+            <h1 class="intro-title">詳細內容介紹</h1>
+            <%- performance.content %>
+          </div>
+        <% } %>
+
+        <div class="product-pagination">
           <% if(prevPerformance) { %>
             <a class="btn btn-default" href="/performance/show/<%= prevPerformance.id %>" role="button">上一頁</a>
           <% } else { %>
@@ -72,30 +87,29 @@
           <% } %>
         </div>
 
-        <% if (performance.content) { %>
-          <div class="product-intro">
-            <h1 class="intro-title">詳細內容介紹</h1>
-            <%- performance.content %>
-          </div>
-        <% } %>
-
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9">
       <div class="side-menu" id="sticker">
-        <h3>
-          工程實蹟
-          <small>Product</small>
-        </h3>
-        <div class="list-group">
+        <ul class="list-group">
+          <li>
+            <h3 class="list-group-item list-group-item-title">
+              工程實蹟
+              <small>Product</small>
+            </h3>
+          </li>
           <% for(var group of performanceGroups) { %>
-            <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+            <li>
+              <a href="/performance/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+            </li>
           <% } %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>
+
+  <% include ../../partials/footer.ejs %>
 
 </div>
 
@@ -103,7 +117,7 @@
 var postSwiper, postThumbSwiper;
 jQuery(document).ready(function() {
   postSwiper = new Swiper ('.post-swiper-container', {
-    // spaceBetween: 30,
+    spaceBetween: 3,
     speed: 250,
     grabCursor: true,
 

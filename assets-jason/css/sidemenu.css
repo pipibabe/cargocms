@@ -1,43 +1,79 @@
 .side-menu {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1e5799+0,2989d8+50,207cca+51,7db9e8+100;Blue+Gloss+Default */
-  background: rgb(30,87,153); /* Old browsers */
-  background: -moz-linear-gradient(-45deg, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-  box-shadow: 1px 1px 2px rgba(0,0,0,.5);
-  padding: 15px;
-  border-radius: 3px;
-  margin-bottom: 3.5em;
+  padding-right: 2.5em;
+  margin-top: -2px;
+  margin-bottom: 2em;
 }
-
-.side-menu h3 {
-  margin-top: 0;
-  text-align: right;
-  color: #fff;
-  font-size: 22px;
-  text-shadow: 0 0 2px rgba(0,0,0,.8);
+@media (max-width: 991px) {
+  .side-menu {
+    padding-right: 0;
+    margin-top: 0;
+  }
 }
-
-.side-menu small {
+.side-menu ul li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+.side-menu ul h3 small {
+  float: right;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+  margin-right: 13px;
+  line-height: 36px;
+}
+.side-menu .list-group:after {
+  content: '';
   display: block;
-  color: #78abcf;
-  text-shadow: none;
+  background-color: rgba(209, 209, 209, 1);
+  height: 5px;
+  width: 100%;
+  border-radius: 3px;
+  margin-top: 5px;
 }
-
-.side-menu .list-group {
-  margin-bottom: 0;
-}
-
 .side-menu .list-group-item {
-  background-color: rgba(255,255,255,.85);
+  height: 36px;
+  padding: 0;
+  line-height: 36px;
+  font-size: 13px;
+  color: rgba(74, 74, 74, 1);
 }
-
-.side-menu a.list-group-item {
-  color: #333;
+.side-menu .list-group-item:hover {
+  background-color: rgba(247, 247, 247, 0.8);
 }
-
-.side-menu a.list-group-item:hover {
-  color:  #000;
+.side-menu .list-group-item:not(.list-group-item-title):hover:before {
+  background: rgba(42, 161, 223, 1);
+}
+.side-menu .list-group-item.act {
+   background-color: rgba(247, 247, 247, 0.8);
+}
+.side-menu .list-group-item.act:before {
+   background: rgba(42, 161, 223, 1);
+}
+.side-menu .list-group-item-title {
+  margin-top: 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 1);
+  background-image: linear-gradient(rgba(0, 78, 159, 1) 0%, rgba(30, 66, 107, 1) 100%);
+}
+.side-menu .list-group-item-title small {
+  color: rgba(255, 255, 255, 0.7);
+}
+.side-menu .list-group-item:before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: rgba(22, 53, 90, 1);
+  display: block;
+  float: left;
+  margin: 16px 12px 0 17px;
+}
+.side-menu .list-group-item-title {
+  height: 39px;
+}
+.side-menu .list-group-item-title:before {
+  content: '+';
+  display: inline;
+  float: none;
+  background: transparent;
+  line-height: 37px;
+  margin: 0 6px 0 15px;
 }
