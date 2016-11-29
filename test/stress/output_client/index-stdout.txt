@@ -1,0 +1,162 @@
+Log file: test/stress/output_client/index.json
+Phase 0 started - duration: 60s
+Report for the previous 10s @ 2016-11-29T08:28:16.546Z
+  Scenarios launched:  90
+  Scenarios completed: 89
+  Requests completed:  1785
+  Concurrent users:    8
+  RPS sent: 188.2
+  Request latency:
+    min: 1.7
+    max: 132.8
+    median: 2.3
+    p95: 5.7
+    p99: 11.5
+  Scenario duration:
+    min: 57.1
+    max: 373.2
+    median: 66
+    p95: 132.4
+    p99: 339
+  Codes:
+    200: 1785
+Report for the previous 10s @ 2016-11-29T08:28:26.548Z
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  2010
+  Concurrent users:    10
+  RPS sent: 189.8
+  Request latency:
+    min: 1.7
+    max: 15.6
+    median: 2.2
+    p95: 3.6
+    p99: 12.9
+  Scenario duration:
+    min: 55.3
+    max: 83.7
+    median: 64.5
+    p95: 77.6
+    p99: 81
+  Codes:
+    200: 2010
+Report for the previous 10s @ 2016-11-29T08:28:36.549Z
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  1997
+  Concurrent users:    10
+  RPS sent: 188.93
+  Request latency:
+    min: 1.8
+    max: 19.2
+    median: 2.2
+    p95: 3.8
+    p99: 14.6
+  Scenario duration:
+    min: 55
+    max: 105.5
+    median: 62.7
+    p95: 87.5
+    p99: 103.5
+  Codes:
+    200: 1997
+Report for the previous 10s @ 2016-11-29T08:28:46.555Z
+  Scenarios launched:  100
+  Scenarios completed: 101
+  Requests completed:  2008
+  RPS sent: 190.42
+  Request latency:
+    min: 1.4
+    max: 28.9
+    median: 1.9
+    p95: 3.3
+    p99: 8.9
+  Scenario duration:
+    min: 47.4
+    max: 146.6
+    median: 56.9
+    p95: 72.5
+    p99: 132.6
+  Codes:
+    200: 2008
+Report for the previous 10s @ 2016-11-29T08:28:56.557Z
+  Scenarios launched:  101
+  Scenarios completed: 100
+  Requests completed:  2000
+  Concurrent users:    2
+  RPS sent: 190.21
+  Request latency:
+    min: 1.4
+    max: 27.7
+    median: 1.9
+    p95: 3.3
+    p99: 8.9
+  Scenario duration:
+    min: 48.3
+    max: 92.4
+    median: 57.2
+    p95: 82.8
+    p99: 90.1
+  Codes:
+    200: 2000
+Report for the previous 10s @ 2016-11-29T08:29:06.559Z
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  2007
+  Concurrent users:    10
+  RPS sent: 190.78
+  Request latency:
+    min: 1.4
+    max: 25.2
+    median: 1.8
+    p95: 3.1
+    p99: 8.9
+  Scenario duration:
+    min: 48.5
+    max: 91.7
+    median: 55.6
+    p95: 71.3
+    p99: 87
+  Codes:
+    200: 2007
+Report for the previous 10s @ 2016-11-29T08:29:07.602Z
+  Scenarios launched:  9
+  Scenarios completed: 10
+  Requests completed:  193
+  RPS sent: 124.68
+  Request latency:
+    min: 1.6
+    max: 8.9
+    median: 1.8
+    p95: 3.2
+    p99: 8.1
+  Scenario duration:
+    min: 48.8
+    max: 67.1
+    median: 50.8
+    p95: 67.1
+    p99: NaN
+  Codes:
+    200: 193
+all scenarios completed
+Complete report @ 2016-11-29T08:29:07.612Z
+  Scenarios launched:  600
+  Scenarios completed: 600
+  Requests completed:  12000
+  RPS sent: 198.12
+  Request latency:
+    min: 1.4
+    max: 132.8
+    median: 2.1
+    p95: 3.6
+    p99: 10.9
+  Scenario duration:
+    min: 47.4
+    max: 373.2
+    median: 60.6
+    p95: 83.3
+    p99: 124.2
+  Scenario counts:
+    0: 600 (100%)
+  Codes:
+    200: 12000
