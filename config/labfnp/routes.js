@@ -56,6 +56,7 @@ module.exports = {
   '/me/:id?':         'labfnp/MainController.portfolio',
   '/edit/me':         'labfnp/MainController.editPofile',
   '/update/password': 'labfnp/MainController.updatePassword',
+  '/validate/email':  'labfnp/MainController.validateEmail',
 
   "/labfnp/:controller/:action/:id?": {}
 };

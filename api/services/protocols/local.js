@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 var validator = require('validator');
 import axios from 'axios';
 
@@ -20,6 +21,7 @@ exports.register = async (req, res, next) => {
   let phone2    = req.param('phone2');
   let address   = req.param('address');
   let address2  = req.param('address2');
+  const verificationEmailToken = crypto.randomBytes(32).toString('hex').substr(0, 32);
 
   try {
 
@@ -42,6 +44,7 @@ exports.register = async (req, res, next) => {
       phone2,
       address,
       address2,
+      verificationEmailToken,
     }
 
     if (birthday){
@@ -62,6 +65,12 @@ exports.register = async (req, res, next) => {
         id: user.id
       },
       include: [Role]
+    });
+    await UserService.sendVerificationEmail({
+      userId: user.id,
+      email: user.email,
+      displayName: user.displayName,
+      signToken: verificationEmailToken,
     });
     return next(null, user);
 

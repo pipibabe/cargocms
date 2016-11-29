@@ -19,6 +19,6 @@ module.exports = {
     'explore': ['nocache', 'passport'],
     'portfolio': ['nocache'],
     'editPofile': ['nocache'],
-
+    'validateEmail': [],
   },
 }

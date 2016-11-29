@@ -289,6 +289,27 @@ module.exports = {
     }
   },
 
+  checkNewEmail: ({username, api, email}) => {
+    try {
+      let forgotPasswordTemplete = sails.config.mail.templete.checkNewEmail;
+      let mailSendConfig = {...forgotPasswordTemplete, to: email};
+      let DOMAIN_HOST = sails.config.appUrl;
+      const url = `${DOMAIN_HOST}${api}`
+
+      mailSendConfig.subject = sprintf(mailSendConfig.subject, { username });
+      mailSendConfig.html = sprintf(mailSendConfig.html, {
+        username,
+        url,
+        storeName: 'LFP',
+      });
+
+      mailSendConfig.type = 'newEmail';
+      return mailSendConfig;
+    } catch (e) {
+      throw e;
+    }
+  },
+
   sendMail: async (message) => {
 
     try {

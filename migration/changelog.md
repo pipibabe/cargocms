@@ -82,6 +82,9 @@
 
 ## v6
 
+
+### 新增 verification Email Token
+
 ### Post 欄位增加
 * Post 增加 publish 型態 BOOLEAN，預設 true
 

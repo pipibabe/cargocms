@@ -1,3 +1,6 @@
+import jwt from 'jsonwebtoken';
+import moment from 'moment';
+
 module.exports = {
 
   explore: async function(req, res) {
@@ -31,7 +34,9 @@ module.exports = {
       if (!loginUser) return res.redirect('/login');
 
       const user = await User.findOneWithPassport({ id: loginUser.id });
-
+      if (user.verificationEmailToken) {
+        req.flash('info', '您更新了 Email ，請至新信箱點擊認證連結');
+      }
       return res.view({
         user: user,
       });
@@ -104,6 +109,37 @@ module.exports = {
     try {
       const { token } = req.query;
       res.ok({ token });
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
+
+  validateEmail: async(req, res) => {
+    try {
+      const { token } = req.query;
+      const decoded = jwt.decode(token);
+      const timeout = moment(new Date()).valueOf() > decoded.exp;
+      if (timeout) throw Error('驗證連結已逾時');
+
+      let user = await User.findOne({
+        where: {
+          id: decoded.userId,
+          email: decoded.email,
+        }
+      });
+      if (!user.verificationEmailToken) throw Error('請點擊 Email 驗證連結');
+
+      jwt.verify(token, user.verificationEmailToken);
+      user.verificationEmailToken = '';
+      await user.save();
+
+      if(AuthService.isAuthenticated(req)) {
+        req.session.passport.user.verificationEmailToken = '';
+        // res.send(req.session);
+      }
+
+      req.flash('info', '您更新了 Email ，請至新信箱點擊認證連結');
+      res.ok({});
     } catch (e) {
       res.serverError(e);
     }

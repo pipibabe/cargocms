@@ -128,6 +128,12 @@ module.exports = {
         const userAgent = req.headers['user-agent'];
         user.loginSuccess({ userAgent });
 
+        let action = req.param('action');
+        if (action === 'register' && sails.config.verificationEmail) {
+          req.flash('info', '註冊成功!! 接下來補齊您的資料，並於信箱查收驗證信');
+          return res.redirect('/edit/me');
+        }
+
         let url = req.query.url;
         if (!url && req.body) url = req.body.url;
         url = url || sails.config.urls.afterSignIn;
