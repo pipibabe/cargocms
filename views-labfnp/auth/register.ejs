@@ -48,7 +48,7 @@ label.error{
           <ul class="list-unstyled">
             <li>
               <a class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20" href="/auth/facebook">
-                <i class="fa fa-facebook"></i> 直接以 FB 帳號登入
+                <i class="fa fa-facebook"></i> <%= __('login.facebook') %>
               </a>
             </li>
           </ul>
@@ -56,17 +56,17 @@ label.error{
         </div>
 
         <div class="reg-header">
-          <h2>註冊新帳號</h2>
-          <p>如果已經註冊帳號，請直接<a href="/login" class="color-green">登入</a>即可。</p>
+          <h2><%= __('register.title') %></h2>
+          <p><%- __('register.sec_title', `<a href="/login" class="color-green">${__('login')}</a>`) %></p>
         </div>
 
         <div class="row">
           <div class="col-sm-6">
-            <label>姓氏 <span class="color-red">*</span></label>
+            <label><%= __('register.last_name') %> <span class="color-red">*</span></label>
             <input type="text" name="lastName" value="<%= data.user.lastName %>" class="form-control margin-bottom-20">
           </div>
           <div class="col-sm-6">
-            <label>名字 <span class="color-red">*</span></label>
+            <label><%= __('register.first_name') %> <span class="color-red">*</span></label>
             <input type="text" name="firstName" value="<%= data.user.firstName %>" class="form-control margin-bottom-20">
           </div>
         </div>
@@ -80,50 +80,50 @@ label.error{
 
         <% var error = data.errors[0]; %>
         <% if(error === 'email must be unique' ){ %>
-            <div class="alert alert-warning" role="alert"> 此 Email 已被註冊，請更換 Email！</div>
+            <div class="alert alert-warning" role="alert">此 Email 已被註冊，請更換 Email</div>
         <% }%>
 
         <div class="row">
           <div class="col-sm-12">
-            <label>帳號 <span class="color-red">*</span></label>
+            <label><%= __('register.username') %> <span class="color-red">*</span></label>
             <input type="text" name="username" value="<%= data.user.username %>" class="form-control margin-bottom-20">
           </div>
         </div>
 
         <% if(error === 'username must be unique' ){ %>
-            <div class="alert alert-warning" role="alert">此 帳號 已被使用，請更換帳號</div>
+            <div class="alert alert-warning" role="alert">此帳號已被使用，請更換帳號</div>
         <% }%>
 
         <div class="row">
           <div class="col-sm-6">
-            <label>密碼 <span class="color-red">*</span></label>
+            <label><%= __('register.password') %> <span class="color-red">*</span></label>
             <input id="firstPassword" type="password" name="password" class="form-control margin-bottom-20">
           </div>
           <div class="col-sm-6">
-            <label>再次確認密碼 <span class="color-red">*</span></label>
+            <label><%= __('register.repeat_password') %> <span class="color-red">*</span></label>
             <input type="password" name="passwordAgain" class="form-control margin-bottom-20">
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12">
-            <label>生日 </label>
-            <input type="text" name="birthday" value="<%= data.user.birthday %>" class="form-control margin-bottom-20" placeholder="例：1970-01-01">
+            <label><%= __('register.birthday') %> </label>
+            <input type="text" name="birthday" value="<%= data.user.birthday %>" class="form-control margin-bottom-20" placeholder="<%= __('register.EX') %>1970-01-01">
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <label>手機 </label>
+            <label><%= __('register.cell_phone') %> </label>
             <input type="number" name="phone1" value="<%= data.user.phone1 %>" class="form-control margin-bottom-20">
           </div>
           <div class="col-sm-6">
-            <label>市話 </label>
+            <label><%= __('register.telephone') %> </label>
             <input type="number" name="phone2" value="<%= data.user.phone2 %>" class="form-control margin-bottom-20">
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <label>收件地址 </label>
+            <label><%= __('register.address') %> </label>
             <input type="text" name="address" value="<%= data.user.address %>" class="form-control margin-bottom-20">
           </div>
         </div>
@@ -142,11 +142,11 @@ label.error{
           <div class="col-lg-6 checkbox">
             <label>
               <input type="checkbox" name="agree">
-              我已閱讀並且同意<a href="#" class="color-green" data-toggle="modal" data-target="#myModal">會員服務條款</a>
+              <%- __('register.agree', `<a href="#" class="color-green" data-toggle="modal" data-target="#myModal">${__('register.terms_of_service')}</a>`) %>
             </label>
           </div>
           <div class="col-lg-6 text-right">
-            <button id="submit-button" class="btn-u" type="submit">註冊</button>
+            <button id="submit-button" class="btn-u" type="submit"><%= __('register') %></button>
           </div>
         </div>
 

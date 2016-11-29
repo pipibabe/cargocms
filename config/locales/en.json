@@ -1,4 +1,35 @@
 {
 	"user": "USER",
-	"home": "HOME"
+	"home": "HOME",
+	"login": "Login",
+	"register": "Register",
+	"languages": "Languages",
+	"registration": "Registration",
+
+	"register.title": "Register a new account",
+	"register.sec_title": "Already Signed Up? Click %s to login your account.",
+	"register.last_name": "Last Name",
+	"register.first_name": "First Name",
+	"register.username": "Username",
+	"register.password": "Password",
+	"register.repeat_password": "Confirm the Password Again",
+	"register.birthday": "Birthday",
+	"register.cell_phone": "Cell Phone",
+  "register.telephone": "Telephone",
+  "register.address": "Address",
+	"register.agree": "I have read and agree the %s",
+	"register.terms_of_service": "Terms of Service",
+	"register.EX": "e.g. ",
+
+	"login.facebook": "Login with Facebook",
+	"login.title": "Login to your account",
+	"login.no_account": "Not a member yet? ",
+	"login.go_register": "Sign up now",
+	"login.forget_password_title": "Forget password?",
+	"login.forget_password_content": "Don't worry, %s to reset the password!",
+	"login.forget_password_link": "click here",
+	"login.need_login": "To subscribe to this site, please login or register",
+	"login.bad_user_password": "Account or password is incorrect!",
+	"login.username_empty": "Please fill username",
+	"login.password_empty": "Please fill password"
 }

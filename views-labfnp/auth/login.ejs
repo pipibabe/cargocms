@@ -54,7 +54,7 @@
           <ul class="list-unstyled">
             <li>
               <a class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20" href="/auth/facebook">
-                <i class="fa fa-facebook"></i> 直接以 FB 帳號登入
+                <i class="fa fa-facebook"></i> <%= __('login.facebook') %>
               </a>
             </li>
           </ul>
@@ -62,7 +62,7 @@
         </div>
 
         <div class="reg-header">
-          <h2>輸入帳號及密碼</h2>
+          <h2><%= __('login.title') %></h2>
         </div>
 
         <div class="input-group margin-top-20">
@@ -81,22 +81,22 @@
             <!--<label><input type="checkbox"> 保持登入狀態</label>-->
 
             <div class="margin-top-20">
-              還不是會員嗎？<a href="/register">立即註冊</a>
+              <%= __('login.no_account') %><a href="/register"><%= __('login.go_register') %></a>
             </div>
           </div>
           <div class="col-md-6">
-            <button id="submit-button" class="btn-u pull-right" type="submit">登入</button>
+            <button id="submit-button" class="btn-u pull-right" type="submit"><%= __('login') %></button>
           </div>
         </div>
         <% if (data.errors === 'Error.Passport.BadUserPassword') { %>
-          <div class="alert alert-warning" role="alert">帳號或密碼錯誤！</div>
+          <div class="alert alert-warning" role="alert"><%= __('login.bad_user_password') %></div>
         <% } else if(data.errors === 'Error.Order.Need.Login') { %>
-          <div class="alert alert-warning" role="alert">訂購需為本站會員，請先登入帳號或註冊</div>
+          <div class="alert alert-warning" role="alert"><%= __('login.need_login') %></div>
         <% } %>
         <hr>
 
-        <h4>忘記密碼？</h4>
-        <p>別擔心，<a class="color-green" href="/forgot">點擊這裡</a>重新設定密碼！</p>
+        <h4><%= __('login.forget_password_title') %></h4>
+        <p><%- __('login.forget_password_content', `<a class="color-green" href="/forgot">${__('login.forget_password_link')}</a>`) %></p>
 
         <% var info = req.flash('info')[0]; %>
         <% if (info) { %>
@@ -122,10 +122,10 @@
       },
       messages: {
         identifier: {
-          required: "請輸入帳號"
+          required: "${__('login.username_empty')}"
         },
         password:{
-          required: "請輸入密碼"
+          required: "${__('login.password_empty')}"
         },
       },
       highlight: function(element) {
