@@ -1,26 +1,38 @@
 describe("traffic test", function() {
   this.timeout(10000000);
-  const logPath = "test/stress/output_client/";
+  const fs = require('fs');
+  const logPath = "test/stress/"
+  const clientLogPath = logPath+"output_client/";
   const spawn = require('child_process').spawn;
   let baseURL;
   before(function(done) {
-    baseURL = "http://"+sails.config.appUrl+"/";
+    baseURL = "http://localhost:"+sails.config.port+"/";
     done();
   });
 
   it("make an simple traffic test on index", async function(done) {
     try {
+      const fileName = "index";
       let url = baseURL;
-      let logFilename = logPath + "index.json";
+      let jsonFileName = clientLogPath + fileName + ".json";
+
       let beforeTestMemoryUsage = process.memoryUsage();
-      const command = spawn('artillery', ['quick','--duration','60','--rate','10','-n','20',url,'-o',logFilename]);
+      console.log("testing URL: "+url);
+      const command = spawn('artillery', ['quick',
+        '--duration','60',
+        '--rate','10',
+        '-n','20',
+        url,
+        '--output',jsonFileName]);
 
       command.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
+        let stdoutFile = clientLogPath + fileName + "-stdout.txt";
+        fs.appendFile(stdoutFile, data , 'utf8')
       });
 
       command.stderr.on('data', (data) => {
-        console.log(`stderr: ${data}`);
+        let stdoutFile = clientLogPath + fileName + "-stderr.txt";
+        fs.appendFile(stdoutFile, data , 'utf8')
       });
 
       command.on('close', (code) => {
@@ -32,6 +44,7 @@ describe("traffic test", function() {
 
         console.log(`child process exited with code ${code}`);
         if (code>=0) {
+          console.log("full log available at "+logPath);
           done();
         } else {
           throw("process exit with error!");
