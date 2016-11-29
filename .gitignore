@@ -122,3 +122,8 @@ www
 assets/bower
 coverage
 test-results.xml
+
+test/stress/output_client/
+test/stress/output_serverMemory.xls
+test/stress/*.txt
+test/stress/*.xls
