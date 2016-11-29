@@ -25,4 +25,4 @@ preview:
 
 
 deploy-beta:
-	ssh cargo@linode1.trunksys.com ". .nvm/nvm.sh && cd labfnp && git checkout . && git pull && npm i && npm run build && pm2 restart labfnp"
+	ssh cargo@linode1.trunksys.com ". .nvm/nvm.sh && nvm use stable && cd labfnp && git checkout . && git pull origin release-labfnp && npm i && npm run build && pm2 restart labfnp"
