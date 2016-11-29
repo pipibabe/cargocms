@@ -4,7 +4,7 @@ describe("traffic test", function() {
   const spawn = require('child_process').spawn;
   let logPath = "test/stress/";
   if (process.env.STRESS_TAG) {
-    logPath += process.env.STRESS_TAG;
+    logPath += process.env.STRESS_TAG+"/";
   }
   const clientLogPath = logPath+"output_client/";
 
@@ -80,5 +80,69 @@ describe("traffic test", function() {
     }
   });
 
+  it("make an simple traffic test on lab", async function(done) {
+    try {
+      const fileName = "lab";
+      let url = baseURL+"lab";
+
+      let beforeTestMemoryUsage = process.memoryUsage();
+      simpleTraffic(fileName,url,beforeTestMemoryUsage,done);
+
+    } catch (e) {
+      done(e);
+    }
+  });
+
+  it("make an simple traffic test on wall", async function(done) {
+    try {
+      const fileName = "wall";
+      let url = baseURL+"wall";
+
+      let beforeTestMemoryUsage = process.memoryUsage();
+      simpleTraffic(fileName,url,beforeTestMemoryUsage,done);
+
+    } catch (e) {
+      done(e);
+    }
+  });
+
+  it("make an simple traffic test on event", async function(done) {
+    try {
+      const fileName = "event";
+      let url = baseURL+"event";
+
+      let beforeTestMemoryUsage = process.memoryUsage();
+      simpleTraffic(fileName,url,beforeTestMemoryUsage,done);
+
+    } catch (e) {
+      done(e);
+    }
+  });
+
+  it("make an simple traffic test on register", async function(done) {
+    try {
+      const fileName = "register";
+      let url = baseURL+"register";
+
+      let beforeTestMemoryUsage = process.memoryUsage();
+      simpleTraffic(fileName,url,beforeTestMemoryUsage,done);
+
+    } catch (e) {
+      done(e);
+    }
+  });
+
+  it("make an simple traffic test on login", async function(done) {
+    try {
+      const fileName = "login";
+      let url = baseURL+"login";
+
+      let beforeTestMemoryUsage = process.memoryUsage();
+      simpleTraffic(fileName,url,beforeTestMemoryUsage,done);
+
+    } catch (e) {
+      done(e);
+    }
+  });
 
 });
