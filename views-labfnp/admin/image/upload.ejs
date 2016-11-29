@@ -8,7 +8,12 @@
 <script type="text/javascript">
 	pageSetUp();
   var uploadImageAppModel = {
+    autoUpload: true,
     itemLimit: 1,
+    sizeLimit: 10240 * 1024,
+    allowedExtensions: ['jpeg', 'jpg', 'png'],
+    endpoint: '/api/admin/upload',
+    inputName: 'uploadPic',
     onError: function(){},
     onComplete: function(){},
     onDeleteComplete: function(){},
@@ -24,14 +29,14 @@
         var restrictedUploader = new qq.FineUploader({
           element: document.getElementById("fine-uploader-validation"),
           template: 'qq-template-validation',
-          autoUpload: true,
+          autoUpload: uploadImageAppModel.autoUpload,
           request: {
-            endpoint: '/api/admin/upload',
-            inputName: 'uploadPic'
+            endpoint: uploadImageAppModel.endpoint,
+            inputName: uploadImageAppModel.inputName
           },
           deleteFile: {
             enabled: true,
-            endpoint: '/api/admin/upload',
+            endpoint: uploadImageAppModel.endpoint,
           },
           thumbnails: {
             placeholders: {
@@ -40,9 +45,9 @@
             }
           },
           validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'png'],
+            allowedExtensions: uploadImageAppModel.allowedExtensions,
             itemLimit: uploadImageAppModel.itemLimit,
-            sizeLimit: 10240 * 1024 // 50 kB = 50 * 1024 bytes
+            sizeLimit: uploadImageAppModel.sizeLimit // 50 kB = 50 * 1024 bytes
           },
           callbacks: {
             onError: function(id, name, isError) {

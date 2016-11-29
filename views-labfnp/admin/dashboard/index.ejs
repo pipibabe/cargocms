@@ -60,19 +60,56 @@
 	</div>
 
 	<div class="col-sm-4">
-		<div class="well">
-			<h1>Uptime / 運行時間</h1>
+    <div class="row">
+      <div class="well">
+  			<h1>Uptime / 運行時間</h1>
 
-			<p>
-				作業系統：
-				<span id="sys-uptime"></span>
-			</p>
+  			<p>
+  				作業系統：
+  				<span id="sys-uptime"></span>
+  			</p>
 
-			<p>
-				網站：
-				<span id="process-uptime"></span>
-			</p>
-		</div>
+  			<p>
+  				網站：
+  				<span id="process-uptime"></span>
+  			</p>
+  		</div>
+
+      <div class="well">
+        <h1>Memory / 記憶體用量</h1>
+        <p>
+          系統記憶體：
+          <span id="totalmem"></span> MB
+        </p>
+        <p>
+          可用記憶體：
+          <span id="freemem"></span> MB
+        </p>
+        <p>
+          Resident Set Size：
+          <span id="resident-set-size"></span> MB
+        </p>
+        <p>
+          Heap Size：
+          <span id="heap"></span> MB
+        </p>
+        <p>
+          Heap Used：
+          <span id="heap-used"></span> MB
+        </p>
+      </div>
+
+      <div class="well">
+        <h1>Hard Disk / 硬碟</h1>
+        <p>
+          硬碟使用：
+          <span id="hard-disk"></span> %
+        </p>
+
+
+      </div>
+    </div>
+
 	</div>
 </div>
 
@@ -137,6 +174,10 @@
 
 	};
 
+  var memoryToMB = function(memory){
+    return (memory / 1024 / 1024).toFixed(2);
+  }
+
   $.getJSON('/utils/sysInfo', function(data) {
 
 		$('#sys-uptime').text(uptimeToHumanReadable(data.sysUptime));
@@ -151,6 +192,13 @@
 		$('#loadavg1').attr('data-percent', loadavg1).children('span').text(loadavg1);
 		$('#loadavg2').attr('data-percent', loadavg2).children('span').text(loadavg2);
 		$('#loadavg3').attr('data-percent', loadavg3).children('span').text(loadavg3);
+
+    $('#totalmem').text(data.totalmem);
+    $('#freemem').text((data.freemem).toFixed(2));
+    $('#resident-set-size').text(memoryToMB(data.residentSet.rss));
+    $('#heap').text(memoryToMB(data.residentSet.heapTotal));
+    $('#heap-used').text(memoryToMB(data.residentSet.heapUsed));
+    $('#hard-disk').text(Number(data.diskUsage) * 100);
 
 		pageSetUp();
   });

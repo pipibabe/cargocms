@@ -4,11 +4,13 @@
 <!-- SCRIPTS ON PAGE EVENT -->
 <script type="text/javascript">
 
+
 	var pagefunction = function() {
 		<%- include vue.ejs %>
-
 		appMain.$mount("#main-edit");
-		appMain.loadItem();
+		appMain.loadItem(appMain.onEnterPageEdit);
+		appMain.setupForm("edit");
+    appMain.enableText();
 	};
 
 </script>

@@ -118,11 +118,6 @@ describe('about LikeRecipe Controller operation.', function() {
         scentFeeling: { BA69: '水果香,蜂蜜', BA70: '冰淇淋' },
       });
       res.status.should.be.eq(200);
-
-      sails.log(res.body.data);
-      res.body.data.invoiceNo.should.be.eq('123');
-      res.body.data.tradeNo.should.be.eq(1608301610017019);
-
       done();
     } catch (e) {
       done(e);

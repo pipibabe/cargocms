@@ -18,6 +18,7 @@ module.exports = {
     connection: 'sqlite',
     migrate: 'drop'
   },
+  verificationEmail: false,
   log: {
     level: 'verbose'
   },

@@ -1,7 +1,7 @@
 describe('test Feeling model operation', function() {
   before(async (done) =>{
     try {
-
+      await Feeling.destroy({where: {}});
       await Feeling.bulkCreate([
         {title: '感覺棒', scentName: 'BU1'}, {title: '感覺棒', scentName: 'BU2'},
         {title: '感覺棒', scentName: 'BU3'},

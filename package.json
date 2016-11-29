@@ -1,7 +1,7 @@
 {
   "name": "cargocms",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.6.0",
   "description": "Cargo CMS",
   "author": "Trunk Studio <office@trunk-studio.com>",
   "contributors": [
@@ -23,6 +23,7 @@
     "connect-redis": "^3.1.0",
     "crypto": "0.0.3",
     "csv-stringify": "^1.0.4",
+    "diskusage": "^0.1.5",
     "ejs": "~0.8.4",
     "excel-export": "^0.5.1",
     "express-helpers": "^1.3.2",

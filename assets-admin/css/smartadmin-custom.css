@@ -85,13 +85,13 @@ nav ul span.menu-item-parent {
 
 @media screen and (min-width: 1200px) {
   #main-table_filter input {
-    width: 500px;
+    width: 300px;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   #main-table_filter input {
-    width: 300px;
+    width: 200px;
   }
 }
 

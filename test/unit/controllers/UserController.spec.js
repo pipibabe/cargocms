@@ -1,4 +1,24 @@
+import {mockAdmin, unMockAdmin} from "../../util/adminAuthHelper.js"
+
 describe('about User Controller operation.', function() {
+
+  before(async (done) => {
+    try {
+      await mockAdmin();
+      done();
+    } catch (e) {
+      done(e);
+    }
+  });
+
+  after(async (done)=>{
+    try {
+      await unMockAdmin();
+      done();
+    } catch (e) {
+      done(e);
+    }
+  })
 
   it('create User should success.', async (done) => {
     const createThisUser = {

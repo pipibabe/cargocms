@@ -45,6 +45,25 @@ option:first {
 .pc-border {
   padding: 10px;
 }
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  #rc-imageselect, .g-recaptcha {
+    transform:scale(0.77);
+    -webkit-transform:scale(0.77);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
+}
+
+@media screen and (max-width: 399px ){
+  #rc-imageselect, .g-recaptcha {
+    transform:scale(0.77);
+    -webkit-transform:scale(0.77);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
+}
+
 </style>
 <script src="https://www.google.com/recaptcha/api.js?hl=zh-TW" async defer></script>
 <!--
@@ -110,7 +129,9 @@ option:first {
           <textarea class="form-control" id="content" name="content" placeholder="聯繫內容" rows="3"></textarea>
         </div>
 
+
         <div class="margin-top-20 g-recaptcha" data-sitekey="<%= data.reCAPTCHAKey %>"></div>
+
 
         <div class="row margin-top-20 margin-bottom-25">
           <div class="col-md-6 checkbox">

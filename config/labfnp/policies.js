@@ -8,7 +8,7 @@ module.exports = {
     destroy: ['passport', 'sessionAuth'],
   },
   'labfnp/RecipeController': {
-    'create': ['passport', 'sessionAuth'],
+    'create': ['passport', 'sessionAuth', 'jwtEncode'],
     'order': ['passport', 'sessionAuth'],
     'feedback': ['passport', 'sessionAuth'],
     'allpay': ['passport', 'sessionAuth'],
@@ -19,6 +19,6 @@ module.exports = {
     'explore': ['nocache', 'passport'],
     'portfolio': ['nocache'],
     'editPofile': ['nocache'],
-
+    'validateEmail': [],
   },
 }

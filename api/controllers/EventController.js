@@ -8,10 +8,12 @@ module.exports = {
       const {type} = req.query
       const order = 'DESC';
       let where = {
+        publish: true,
         type: ["internal-event", "external-event"]
       }
 
-      const posts = await Post.findAllHasJoin({order, where});
+      let posts = await Post.findAllHasJoin({order, where});
+
       const social = SocialService.forPost({posts});
       const items = posts;
       const data = {items}
@@ -27,8 +29,8 @@ module.exports = {
       const {id, name} = req.params
       let data = await Post.findByIdHasJoinByEvent({id, name});
 
-      if(!data){
-        sails.log.error(`Event ID or Name: ${id || name} ,data not found.`);
+      if(!data || !data.publish){
+        sails.log.error(`Event ID or Name: ${id || name} ,data not found or not publish.`);
         return res.notFound();
       }
 

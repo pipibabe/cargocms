@@ -232,15 +232,15 @@ var defaultVueMathod = {
 					appMain.customSaveParams(data);
 				}
 		  },
-			stateSaveCallback: function(settings,data) {
-      	localStorage.setItem( 'DataTables_' + modelName, JSON.stringify(data) )
-	    },
-		  stateLoadCallback: function(settings) {
-		    return JSON.parse( localStorage.getItem( 'DataTables_' + modelName ) )
-			},
+			// stateSaveCallback: function(settings,data) {
+      // 	localStorage.setItem( 'DataTables_' + modelName, JSON.stringify(data) )
+	    // },
+		  // stateLoadCallback: function(settings) {
+		  //   return JSON.parse( localStorage.getItem( 'DataTables_' + modelName ) )
+			// },
 			"processing": false,
 			"serverSide": serverSidePaging,
-			"sDom": "<'dt-toolbar'<'row'r<'col-xs-12 col-md-6 col-sm-7'f><'col-xs-12 col-md-5 col-sm-4'T><'col-md-1 col-sm-1 hidden-xs'l>>>" +
+			"sDom": "<'dt-toolbar'<'row'r<'col-xs-12 col-md-5 col-sm-5'f><'col-xs-12 col-md-6 col-sm-6'T><'hidden-xs col-md-1 col-sm-1'l>>>" +
 				"t" +
 				"<'dt-toolbar-footer'<'row'<'col-md-6 col-xs-12 hidden-xs'i><'col-md-6 col-xs-12'p>>>",
 			"oLanguage": {
@@ -349,8 +349,9 @@ var defaultVueMathod = {
 		if (appMain.DataTableInitComplete) {
 			defaultTableConfig.initComplete = appMain.DataTableInitComplete
 		}
-		
+
 		localStorage.removeItem('DataTablesResponsiveHelper_main-table');
+		localStorage.removeItem('DataTablesResponsiveHelper_main-table_admin');
 		defaultTable = $('#main-table').dataTable(defaultTableConfig);
 
 		if (!appModel.data.option.exportCSV) {
@@ -440,6 +441,15 @@ var defaultVueMathod = {
 	},
 	setupForm: function (type) {
 		var registerForm = $("#main-form");
+
+    if(appModel.data.option.imgUpload){
+      var imgUploadSteup = appModel.data.option.imgUpload;
+      Object.keys(imgUploadSteup).forEach(function (key) {
+         uploadImageApp.updateModel(key, imgUploadSteup[key]);
+      });
+      uploadImageApp.setup();
+    }
+
 		registerForm.validate({
 			rules: formRules,
 			messages: formMessages,

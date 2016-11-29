@@ -1,15 +1,27 @@
 
 <fieldset>
 
-  <section>
-    <label class="label">內容類型</label>
-    <label class="select">
-      <select v-model="data.item.type">
-        <option value="blog" selected>部落格</option>
-        <option value="internal-event">活動</option>
-        <option value="external-event">外部活動</option>
-      </select> <i></i> </label>
-  </section>
+  <div class="row">
+    <section class="col col-md-6 col-sm-6 col-xs-6">
+      <label class="label">內容類型</label>
+      <label class="select">
+        <select v-model="data.item.type">
+          <option value="blog" selected>部落格</option>
+          <option value="internal-event">活動</option>
+          <option value="external-event">外部活動</option>
+        </select> <i></i> </label>
+    </section>
+
+    <section class="col col-md-6 col-sm-6 col-xs-6">
+      <label class="label">狀態</label>
+      <label class="select">
+        <select v-model="data.item.publish">
+          <option value=0 selected>未公開</option>
+          <option value=1 >公開</option>
+        </select> <i></i> </label>
+    </section>
+  </div>
+
 
   <section v-show="data.item.type === 'external-event'">
     <label class="label">外連連結</label>

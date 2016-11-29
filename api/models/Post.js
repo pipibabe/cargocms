@@ -68,6 +68,12 @@ module.exports = {
         }
       }
     },
+
+    publish: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: true
+    },
+
     TagsArray: {
       type: Sequelize.VIRTUAL,
       get: function() {

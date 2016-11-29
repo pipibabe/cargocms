@@ -9,12 +9,24 @@ module.exports = {
         order: [['createdAt', 'DESC']],
       });
 
+      let quotes = await Quote.findAll({
+        where:{
+          type: 'quote'
+        },
+        limit: 5,
+        order: [['createdAt', 'DESC']],
+        include:{
+          model: Image
+        }
+      })
+
       if (req.wantsJSON) {
         return res.json(feeds);
       }
       else {
         res.view({
-          feeds
+          feeds,
+          quotes
         });
       }
     } catch (e) {

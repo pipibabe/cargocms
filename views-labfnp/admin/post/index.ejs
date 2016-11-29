@@ -45,14 +45,15 @@
 							<thead>
 								<tr>
 									<th width="10%" class="" data-hide="phone"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/> ID</th>
-									<th class="40%" data-class="expand"><i class="fa fa-fw fa-sticky-note text-muted hidden-sm hidden-xs"/> 標題</th>
-									<th class="15%" data-class="expand"><i class="fa fa-fw fa-sticky-note text-muted hidden-sm hidden-xs"/> 類型</th>
+									<th class="35%" data-class="expand"><i class="fa fa-fw fa-sticky-note text-muted hidden-sm hidden-xs"/> 標題</th>
+									<th class="10%" data-class="expand"><i class="fa fa-fw fa-sticky-note text-muted hidden-sm hidden-xs"/> 類型</th>
 									<!-- <th class="" data-hide="phone" data-class="expand">簡述</th> -->
 									<th width="15%" class="" ><i class="fa fa-fw fa-clock-o text-muted hidden-sm hidden-xs"/> 更新日期</th>
 									<th width="25%" class="" ><i class="fa fa-fw fa-tags text-muted hidden-sm hidden-xs"/> 標籤</th>
 									<!-- <th class="" data-hide="phone,tablet">內容</th> -->
 									<!-- <th class="" data-hide="phone,tablet">封面</th> -->
-									<!-- <th class="" data-hide="phone,tablet">網址</th> -->
+                  <!-- <th class="" data-hide="phone,tablet">網址</th> -->
+									<th width="10%" class="" data-hide="phone,tablet">狀態</th>
 									<th width="10%" class="no-sort" data-hide="phone,tablet"></th>
 								</tr>
 							</thead>
@@ -67,6 +68,11 @@
 									<!-- <td>{{ post.content }}</td> -->
 									<!-- <td>{{ post.cover }}</td> -->
                   <!-- <td>{{ post.url }}</td> -->
+                  <td>
+                    <div class="row-action-buttons hidden-xs hidden-sm">
+                      <input type="checkbox" data-id="{{ post.id }}" name="publish" checked="{{ post.publish }}">
+                    </div>
+                  </td>
 									<td align="center" style="cursor: pointer;">
                     <div class="row">
                       <a class="btn btn-default btn-xs" role="button" v-on:click="show(post.id)">
@@ -169,9 +175,42 @@
 			Also see: http://legacy.datatables.net/usage/features
 		*/
 
-		<%- include vue.ejs %>
-		postApp.$mount("#main-index");
-		postApp.loadItems(postApp.renderTable);
+    <%- include vue.ejs %>
+    postApp.$mount("#main-index");
+    postApp.loadItems( function(){
+      postApp.renderTable();
+
+      $("input[name='publish']").bootstrapSwitch();
+
+      //偵測表格，下方table_info，變動時，重新將 publish 套用 bootstrapSwitch
+      $("#main-table_info").on("DOMSubtreeModified", function(event){
+        $("input[name='publish']").each(function(index , value){
+          console.log(value);
+          $(value).bootstrapSwitch();
+        })
+      });
+
+      $("#main-table").on('switchChange.bootstrapSwitch',"input[name='publish']",function(event ,state) {
+        var id = $(this).data("id")
+        var publish = $(this).prop("checked");
+
+        $.ajax({
+          url: "/api/admin/post/changePublish/"+id,
+          method: "put",
+          dataType: 'json',
+          cache: false,
+          data:{
+            publish: publish
+          }
+        }).done(function (result) {
+          messageApp.show({
+            desc: result.message,
+            type: 'success'
+          });
+        });
+      });
+
+    });
 
 	};
 

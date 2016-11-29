@@ -14,7 +14,7 @@
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
     select.form-control {
       padding: 2px 0px;
       font-size: 1px;
@@ -44,10 +44,10 @@
 			<th width="11%" data-class="expand">訂單編號</th>
 			<th width="13%" data-hide="phone"><i class="fa fa-fw text-muted hidden-sm hidden-xs"/> 金流交易編號 </th>
       <th data-hide="always" class="hide">交易訊息</th>
-      <th width="9%" data-hide="phone,tablet">付款時間</th>
-      <th width="8%" class="no-sort no-over" data-hide="phone,tablet">付款方式</th>
+      <th width="9%" data-hide="always">付款時間</th>
+      <th width="8%" class="no-sort no-over" data-hide="always">付款方式</th>
       <th width="9%" class="no-sort" data-hide="">發票號碼</th>
-      <th width="6%">金額</th>
+      <th width="6%" data-hide="always">金額</th>
       <th data-hide="always" class="hide">付款帳號</th>
       <th data-hide="always" class="hide">訂購物品</th>
       <th width="8%" class="no-sort">訂購人</th>
@@ -67,7 +67,7 @@
       <th class="hide" data-hide="always">物流編號</th>
 			<th class="hide" data-hide="always">備註</th>
       <th class="hide" data-hide="always">收件人</th>
-      <th width="95px" data-hide="phone,tablet"></th>
+      <th width="80px" data-hide="phone,tablet"></th>
 
 		</tr>
 	</thead>
@@ -202,7 +202,15 @@
         "searchable": false,
         "targets": 5,
         "render": function(data, type, row) {
-          return '<td><p class="textOver">' + data +'</p></td>';
+          return '<td>' + data +'</td>';
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 5,
+        "render": function(data, type, row) {
+          var data = data || ""
+          return '<td>' + data +'</td>';
         }
       },
       {

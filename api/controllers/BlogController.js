@@ -5,11 +5,12 @@ module.exports = {
       const {type} = req.query
       const order = 'DESC';
       let where = {
+        publish: true,
         type: "blog"
       }
 
+      let posts = await Post.findAllHasJoin({order, where});
 
-      const posts = await Post.findAllHasJoin({order, where});
       const social = SocialService.forPost({posts});
       const items = posts;
       const data = {items}
@@ -27,8 +28,8 @@ module.exports = {
         include: [ Tag, Image, User, Location]
       });
 
-      if(!data){
-        sails.log.error(`Post ID or Name: ${id || name}, data not found.`);
+      if(!data || !data.publish){
+        sails.log.error(`Post ID or Name: ${id || name}, data not found or not publish.`);
         return res.notFound();
       }
       const social = SocialService.forPost({posts: [data]});

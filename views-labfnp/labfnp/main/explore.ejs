@@ -131,17 +131,17 @@
 		    <i class="fa fa-flask fa-fw"></i>
 		    創作一個新配方
 		  </a>
-		  <a href="/me/<%= req.session.passport.user.id %>" class="btn btn-default ">
+		  <a href="/me/<%= req.session.passport.user.id %>" class="btn btn-default native-hide">
 		    <i class="fa fa-user fa-fw"></i>
 		    我的配方
 		  </a>
       <% if (req.query.type === 'like') { %>
-        <a href="/lab" class="btn btn-default hidden-xs">
+        <a href="/lab" class="btn btn-default hidden-xs native-hide">
           <i class="fa fa-bar-chart-o fa-fw"></i>
           所有配方
         </a>
       <% } else { %>
-        <a href="/lab?type=like" class="btn btn-default hidden-xs">
+        <a href="/lab?type=like" class="btn btn-default hidden-xs native-hide">
   		    <i class="fa fa-heart-o fa-fw"></i>
   		    我的收藏
   		  </a>

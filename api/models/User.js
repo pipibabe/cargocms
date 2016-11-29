@@ -162,6 +162,10 @@ module.exports = {
       type: Sequelize.STRING(32),
     },
 
+    verificationEmailToken: {
+      type: Sequelize.STRING(32),
+    },
+
   },
   associations: function() {
     User.hasMany(Image, {

@@ -1,8 +1,23 @@
 <% var shareUrl ='' %>
 <% if(req.url === "/") { %>
   <% shareUrl = encodeURI( 'https://www.facebook.com/' + SocialService.getFBPageId()); %>
-  <iframe src="https://www.facebook.com/plugins/like.php?href=<%= shareUrl %>&width=142&layout=button_count&action=like&size=large&show_faces=false&share=true&height=46&appId=<%= SocialService.getFBAppId() %>" width="142" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <% if(AuthService.isWebView(req.headers['user-agent'])) { %>
+    <!-- 按讚 -->
+    <iframe src="https://www.facebook.com/plugins/like.php?href=<%= shareUrl %>&width=96&layout=button_count&action=like&size=large&show_faces=true&share=false&height=21&appId=915539495181624" width="142" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <% } else { %>
+    <!-- 分享 + 按讚 -->
+    <iframe src="https://www.facebook.com/plugins/like.php?href=<%= shareUrl %>&width=142&layout=button_count&action=like&size=large&show_faces=false&share=true&height=46&appId=<%= SocialService.getFBAppId() %>" width="142" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <% } %>
 <% } else { %>
   <% shareUrl = encodeURI(socialData.url); %>
-  <iframe src="https://www.facebook.com/plugins/like.php?href=<%= shareUrl %>&width=142&layout=button_count&action=like&size=large&show_faces=false&share=true&height=46&appId=<%= SocialService.getFBAppId() %>" width="142" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <% if(AuthService.isWebView(req.headers['user-agent'])) { %>
+    <!-- 按讚 -->
+    <iframe src="https://www.facebook.com/plugins/like.php?href=<%= shareUrl %>&width=96&layout=button_count&action=like&size=large&show_faces=true&share=false&height=21&appId=915539495181624" width="142" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <% } else { %>
+    <!-- 分享 + 按讚 -->
+    <iframe src="https://www.facebook.com/plugins/like.php?href=<%= shareUrl %>&width=142&layout=button_count&action=like&size=large&show_faces=false&share=true&height=46&appId=<%= SocialService.getFBAppId() %>" width="142" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+  <% } %>
+  <script>
+    var shareUrl = "<%= shareUrl %>";
+  </script>
 <% } %>

@@ -1,0 +1,62 @@
+<fieldset>
+
+  <section class="fn-hidden-create">
+      <img src="{{data.item.imgUrl}}" class="img-responsive">
+  </section>
+
+  <section>
+    <label class="label">類型</label>
+    <label class="select state-disabled">
+      <select v-model="data.item.type" disabled>
+        <option value="quote" selected>箴言</option>
+        <option value="recommend">推薦</option>
+      </select> <i></i> </label>
+  </section>
+
+  <section>
+    <label class="label">作者</label>
+    <label class="input state-disabled">
+      <input type="text" name="author" placeholder="" v-model="data.item.author" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入作者</b></label>
+  </section>
+
+  <section>
+    <label class="label">內容</label>
+    <label class="input state-disabled">
+      <textarea class="form-control" name="content" placeholder="" v-model="data.item.content" rows="5"  disabled></textarea>
+      <b class="tooltip tooltip-bottom-right">請輸入內容</b></label>
+  </section>
+
+  <section>
+    <label class="label">來源</label>
+    <label class="input state-disabled">
+      <input type="text" name="source" placeholder="" v-model="data.item.source" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入來源</b></label>
+  </section>
+
+  <section class="fn-hidden-show">
+    <label class="label">圖片</label>
+    <%- include ../image/upload.ejs %>
+  </section>
+
+</fieldset>
+<script>
+var formRules = {
+  content : {
+    required : true
+  },
+  source : {
+    required : true
+  },
+}
+
+// Messages for form validation
+var formMessages = {
+  content : {
+    required : '請給予內容'
+  },
+  source : {
+    required : '請給予來源'
+  },
+}
+</script>

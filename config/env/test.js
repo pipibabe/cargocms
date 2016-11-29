@@ -20,6 +20,7 @@ module.exports = {
   log: {
     level: 'verbose'
   },
+  verificationEmail: false,
   passport: {
     local: {
       strategy: require('passport-local').Strategy

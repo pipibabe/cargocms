@@ -10,7 +10,8 @@
  * @param  {String|Object} options
  *          - pass string to render specified view
  */
-
+ 
+import jwt from 'jsonwebtoken';
 module.exports = function sendOK (data, options) {
   // Get access to `req`, `res`, & `sails`
   var req = this.req;

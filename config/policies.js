@@ -36,6 +36,11 @@ var defaultConfig = {
   'AdminController': {
     'index': ['passport', 'sessionAuth', 'isAdmin']
   },
+  'api/UserController': {
+    '*': ['passport', 'sessionAuth'],
+    'forgotPassword': [],
+    'updatePassword': [],
+  },
   'EventController': {
     'allpay': ['passport', 'sessionAuth'],
   },
@@ -78,6 +83,9 @@ var defaultConfig = {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
   "api/admin/UserController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  "UtilsController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
 

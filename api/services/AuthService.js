@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 module.exports = {
 
   isAuthenticated: function(req) {
@@ -27,6 +28,20 @@ module.exports = {
     }
 
     return isAdmin;
-  }
+  },
 
+  getSessionEncodeToJWT: function(req) {
+    const session = AuthService.getSessionUser(req);
+    const isWebView = AuthService.isWebView(req.headers['user-agent']);
+    let jwtToken = '';
+    if ((req.session.needJwt || isWebView ) && session ) {
+      jwtToken = jwt.sign(session, 'secret');
+    }
+    req.session.needJwt = false;
+    return jwtToken;
+  },
+
+  isWebView: function(userAgent) {
+    return userAgent.indexOf('React-Native') !== -1;
+  }
 }

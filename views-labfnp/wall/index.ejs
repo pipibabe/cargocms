@@ -2,8 +2,8 @@
 <div class="blog_masonry_3col">
 	<div class="container content grid-boxes">
 		<%- include ../labfnp/main/contentPlaceHolder.inc.ejs %>
-
-	  <% var c = 0; feeds.forEach(function(feed, index) { c++; %>
+    <% var c = 0; var quoteIndex = 0; var qutoeRandom = 6 %>
+	  <% feeds.forEach(function(feed, index) { c++; %>
 
 			<div class="grid-boxes-in" style="display: none;">
 
@@ -48,7 +48,23 @@
 				    <div class="fb-follow" data-href="https://www.facebook.com/labfnp/" data-width="200" data-height="40" data-layout="standard" data-size="large" data-show-faces="true"></div>
 					</div>
 				</div>
-			<% } %>
+			<% } else if (c % qutoeRandom === 0 && quoteIndex < quotes.length ) {  %>
+          <% qutoeRandom = qutoeRandom + (Math.floor( Math.random() * (8 - 3) + 1 ) + 3) ; %>
+
+          <div class="grid-boxes-in grid-boxes-qoute" style="display: none;">
+
+            <% if( quotes[quoteIndex].imgUrl && index < 30) { %>
+              <img class="img-responsive" src="<%= quotes[quoteIndex].imgUrl %>" />
+            <% } %>
+
+  					<div class="grid-boxes-caption grid-boxes-quote">
+              <p><%= quotes[quoteIndex].content %></p>
+  						<p><%= quotes[quoteIndex].source %></p>
+  						<span>- <%= quotes[quoteIndex].author %> -</span>
+  					</div>
+				  </div>
+        <% quoteIndex++; %>
+      <% } %>
 
 	  <% }); %>
 

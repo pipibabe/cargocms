@@ -1,6 +1,24 @@
+import {mockAdmin, unMockAdmin} from "../../../util/adminAuthHelper.js"
 
 describe('about Allpay controllers', () => {
+  before(async (done) => {
+    try {
+      await mockAdmin();
+      done();
+    } catch (e) {
+      done(e);
+    }
+  });
 
+  after(async (done)=>{
+    try {
+      await unMockAdmin();
+      done();
+    } catch (e) {
+      done(e);
+    }
+  })
+  
   describe('second if allpay order create success allpay will callback data , use paymentinfo() handle', () => {
 
     const serialize = (obj, prefix) => {

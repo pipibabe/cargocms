@@ -27,8 +27,17 @@
 label.error{
   color: red;
 }
-</style>
 
+@media screen and (max-width: 399px ){
+  #rc-imageselect, .g-recaptcha {
+    transform:scale(0.77);
+    -webkit-transform:scale(0.77);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
+}
+</style>
+<script src="https://www.google.com/recaptcha/api.js?hl=zh-TW" async defer></script>
 <!--=== Content Part ===-->
 <div class="container content">
   <div class="row">
@@ -127,7 +136,9 @@ label.error{
 
         <hr>
 
-        <div class="row">
+        <div class="margin-top-20 g-recaptcha" data-sitekey="<%= data.reCAPTCHAKey %>"></div>
+
+        <div class="row margin-top-20">
           <div class="col-lg-6 checkbox">
             <label>
               <input type="checkbox" name="agree">
@@ -138,6 +149,11 @@ label.error{
             <button id="submit-button" class="btn-u" type="submit">註冊</button>
           </div>
         </div>
+
+        <% var error = req.flash('error')[0]; %>
+        <% if (error) { %>
+          <div class="alert alert-warning" role="alert"><%= error %></div>
+        <% } %>
       </form>
     </div>
   </div>
@@ -171,7 +187,13 @@ label.error{
   $(document).ready(function(){
 
     $.fn.preventDoubleSubmission = function() {
-      $(this).on("submit", defaultFormSubmit);
+      $(this).on("submit", function(event) {
+        if (grecaptcha.getResponse() === "") {
+          swal('錯誤', '請勾選我不是機器人', 'warning');
+          return event.preventDefault();
+        }
+        defaultFormSubmit(event);
+      });
       return this;
     }
 

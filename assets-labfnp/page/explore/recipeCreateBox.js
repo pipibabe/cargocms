@@ -4,9 +4,9 @@ $(document).ready(function () {
 
 	$('#btn-cancel').click(hideBox);
 
-	$('#btn-byFeeling').click(linkByFeeling);
-
-	$('#btn-byScent').click(linkByScent);
+	// $('#btn-byFeeling').click(linkByFeeling);
+	//
+	// $('#btn-byScent').click(linkByScent);
 
 	$(document).click(clickOutOfBox);
 
@@ -14,15 +14,15 @@ $(document).ready(function () {
 
 // -------------------------------------------------------------------------- //
 
-var linkByFeeling = function (event) {
-	location.href = '../creator?from=feeling';
-};
-
-// -------------------------------------------------------------------------- //
-
-var linkByScent = function (event) {
-	location.href = '../creator?from=scent'
-};
+// var linkByFeeling = function (event) {
+// 	location.replace('/creator?from=feeling');
+// };
+//
+// // -------------------------------------------------------------------------- //
+//
+// var linkByScent = function (event) {
+// 	location.replace('/creator?from=scent');
+// };
 
 // -------------------------------------------------------------------------- //
 

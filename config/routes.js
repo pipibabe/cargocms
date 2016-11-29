@@ -39,15 +39,16 @@ var defaultConfig = {
   'get /api/admin/post': 'api/admin/PostController.find',
   'get /api/admin/post/:id': 'api/admin/PostController.findOne',
   'post /api/admin/post': 'api/admin/PostController.create',
+  'put /api/admin/post/changePublish/:id': 'api/admin/PostController.changePublish',
   'put /api/admin/post/:id': 'api/admin/PostController.update',
   'delete /api/admin/post/:id': 'api/admin/PostController.destroy',
 
 
-  'get /api/admin/slogan': 'api/admin/SloganController.find',
-  'get /api/admin/slogan/:id': 'api/admin/SloganController.findOne',
-  'post /api/admin/slogan': 'api/admin/SloganController.create',
-  'put /api/admin/slogan/:id': 'api/admin/SloganController.update',
-  'delete /api/admin/slogan/:id': 'api/admin/SloganController.destroy',
+  'get /api/admin/quote': 'api/admin/QuoteController.find',
+  'get /api/admin/quote/:id': 'api/admin/QuoteController.findOne',
+  'post /api/admin/quote': 'api/admin/QuoteController.create',
+  'put /api/admin/quote/:id': 'api/admin/QuoteController.update',
+  'delete /api/admin/quote/:id': 'api/admin/QuoteController.destroy',
 
   'post /api/admin/allpay/find':  'api/admin/AllpayController.find',
   'post /api/admin/allpay/export': 'api/admin/AllpayController.export',
@@ -70,9 +71,10 @@ var defaultConfig = {
 
   'post /api/user/follow/:id':    'api/UserController.follow',
   'post /api/user/unfollow/:id':  'api/UserController.unfollow',
-  'post /api/user/edit/:id':      'api/UserController.update',
+  'post /api/user/edit':      'api/UserController.update',
   'post /api/user/forgotPassword':'api/UserController.forgotPassword',
   'post /api/user/password':       'api/UserController.updatePassword',
+  'get /api/user/validate/resend':  'api/UserController.validateResend',
 
   'post /api/contact':       'api/ContactController.create',
   'get /api/admin/contact':        'api/admin/ContactController.find',

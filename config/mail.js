@@ -122,6 +122,25 @@ var defaultConfig = {
       <br />From %(storeName)s
       `
     },
+    checkNewEmail: {
+      sendBy: 'email',
+      subject: '%(username)s - 信箱驗證信',
+      html: `
+      <br />Hi %(username)s:
+      <br />
+      <br />我們接收到您的 email 修改申請, 請點擊下方的確認修改按鈕，以套用新的 email 設定。
+      <br /><a href='%(url)s'>Click Me</a>
+      <br />
+      <br />若無法點擊連結，請複製下方連結至瀏覽器中
+      <br />
+      <br />%(url)s
+      <br />
+      <br />若不是您，您可以選擇忽略此封郵件。
+      <br />
+      <br />此為系統信件，請勿直接回覆此信件
+      <br />From %(storeName)s
+      `
+    },
     event : {
       orderConfirm: {
         sendBy: 'email',
