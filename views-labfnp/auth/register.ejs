@@ -189,7 +189,7 @@ label.error{
     $.fn.preventDoubleSubmission = function() {
       $(this).on("submit", function(event) {
         if (grecaptcha.getResponse() === "") {
-          swal('錯誤', '請勾選我不是機器人', 'warning');
+          swal('${__('warning')}', '${__('register.not_robot')}', 'warning');
           return event.preventDefault();
         }
         defaultFormSubmit(event);
@@ -239,28 +239,28 @@ label.error{
       },
       messages: {
         firstName: {
-          required: "請輸入姓氏"
+          required: "${__('register.first_name_empty')}"
         },
         lastName: {
-          required: "請輸入名字"
+          required: "${__('register.last_name_empty')}"
         },
         email: {
-          required: "請輸入 Email",
-          email: "請輸入有效的 Email"
+          required: "${__('register.email_empty')}",
+          email: "${__('register.email_format')}"
         },
         username:{
-          required: "請輸入帳號"
+          required: "${__('register.username_empty')}"
         },
         password: {
-          required: "請輸入密碼",
-          minlength: "密碼長度不足"
+          required: "${__('register.password_empty')}",
+          minlength: "${__('register.password_not_strong')}"
         },
         passwordAgain: {
-          required: "請輸入密碼",
-          minlength: "密碼長度不足",
-          equalTo: "請輸入相同密碼"
+          required: "${__('register.password_empty')}",
+          minlength: "${__('register.password_not_strong')}",
+          equalTo: "${__('register.password_not_equal')}"
         },
-        agree: "尚未同意會員服務條款"
+        agree: "${__('register.not_agree')}"
       }
     });
 
