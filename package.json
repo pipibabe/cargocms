@@ -81,7 +81,7 @@
     "test-e2e-docker-watch": "npm run clean-e2e && make start-e2e-docker && chimp chimp-docker.js --mocha --path=test/e2e --watch",
     "test-e2e-watch": "npm run clean-e2e && chimp --mocha --path=test/e2e --watch",
     "test-stress": "npm run clean-stress && TEST_MODE=STRESS mocha test/stress --reporter spec",
-    "clean-e2e": "rm -rf test/e2e/screenshot/*.png",
+    "clean-e2e": "rm -rf test/e2e/screenshot/*.png test/e2e/{memory.xls,PID.json}",
     "clean-stress": "rm -rf test/stress/output_client test/stress/output_serverMemory.xls; mkdir test/stress/output_client",
     "build": "npm i && node_modules/grunt-cli/bin/grunt build",
     "start": "node app.js",
@@ -121,6 +121,8 @@
     "mocha": "^2.3.4",
     "mocha-junit-reporter": "^1.11.1",
     "mongodb": "^2.2.9",
+    "pidusage": "^1.1.0",
+    "ps-node": "^0.1.4",
     "sinon": "^1.17.2",
     "supertest": "^2.0.0",
     "supertest-as-promised": "^2.0.2"
