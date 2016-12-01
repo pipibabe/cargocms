@@ -38,7 +38,7 @@ let self = module.exports = {
       command: 'chrome$',
       arguments: '',
     }, function(err, resultList) {
-      let pidList = resultList.map(function(process) {return process.pid});
+      const pidList = resultList.map(function(process) {return process.pid});
       self.writePID(resultList);
       self.writeHeader(pidList);
 
@@ -48,35 +48,44 @@ let self = module.exports = {
     });
   },
 
-  log: (pidList) => {
+  log: async (pidList) => {
     let pusage = require('pidusage')
     let excelField = [];
     let totalMemory = 0;
     let totalCPU = 0;
-    pidList.forEach(function(pid, pidIndex) {
-      pusage.stat(pid, function(err, result) {
-        if (err) {
-          console.log("not exist PID:" ,pid)
-          excelField.push("");
-          excelField.push("");
-          //continue;
-          //break;
-        } else {
-          excelField.push(result.memory);
-          excelField.push(result.cpu);
+    
+    let getUsage = function(pid) { 
+      return new Promise((resolve, reject) => {
+        let usages = {};
+        pusage.stat(pid, function(err, result) {
+          console.log("PID: ", pid);
+          if (err) {
+            console.log("not exist PID:" ,pid)
+            usages.mem = "";
+            usages.cpu = "";
+          } else {
+            usages.mem = result.memory;
+            usages.cpu = result.cpu;
+          }
+          resolve(usages);
+        });
+      })
+    };
 
-          totalMemory += result.memory;
-          totalCPU += result.cpu;
+    for (let pid of pidList)  {
+      let usage = await getUsage(pid);
+      excelField.push(usage.mem);
+      excelField.push(usage.cpu);
 
-        }
-        if (pidIndex === pidList.length -1) {
-          excelField.push(totalMemory);
-          excelField.push(totalCPU);
-          self.writeContent(excelField);
-        }
+      totalMemory += usage.mem;
+      totalCPU += usage.cpu;
+    }
 
-      });
-    });
+    console.log("SUM: total ");
+    excelField.push(totalMemory);
+    excelField.push(totalCPU);
+    self.writeContent(excelField);
+      
   },
 
   writePID: (pid) => {
