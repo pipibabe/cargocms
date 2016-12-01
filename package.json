@@ -82,7 +82,7 @@
     "test-e2e-watch": "npm run clean-e2e && chimp --mocha --path=test/e2e --watch",
     "test-stress": "npm run clean-stress && TEST_MODE=STRESS mocha test/stress --reporter spec",
     "clean-e2e": "rm -rf test/e2e/screenshot/*.png",
-    "clean-stress": "rm -rf test/stress/output_client test/stress/output_serverMemory.xls; mkdir test/stress/output_client",
+    "clean-stress": "rm -rf test/stress/${STRESS_TAG}/output_client test/stress/${STRESS_TAG}/output_serverMemory.xls; mkdir -p test/stress/${STRESS_TAG}/output_client",
     "build": "npm i && node_modules/grunt-cli/bin/grunt build",
     "start": "node app.js",
     "preview": "make preview",
