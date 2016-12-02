@@ -85,7 +85,7 @@ let self = module.exports = {
     if (process.env.E2E_LOGGER_FOLDER) {
       return process.env.E2E_LOGGER_FOLDER;
     } else {
-      return sails.config.e2eClientLog.Folder;
+      return sails.config.e2eClientLog.folder;
     }
   },
 
