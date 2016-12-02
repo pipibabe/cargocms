@@ -62,11 +62,11 @@ label.error{
 
         <div class="row">
           <div class="col-sm-6">
-            <label><%= __('register.last_name') %> <span class="color-red">*</span></label>
+            <label><%= __('register.label.last_name') %> <span class="color-red">*</span></label>
             <input type="text" name="lastName" value="<%= data.user.lastName %>" class="form-control margin-bottom-20">
           </div>
           <div class="col-sm-6">
-            <label><%= __('register.first_name') %> <span class="color-red">*</span></label>
+            <label><%= __('register.label.first_name') %> <span class="color-red">*</span></label>
             <input type="text" name="firstName" value="<%= data.user.firstName %>" class="form-control margin-bottom-20">
           </div>
         </div>
@@ -85,7 +85,7 @@ label.error{
 
         <div class="row">
           <div class="col-sm-12">
-            <label><%= __('register.username') %> <span class="color-red">*</span></label>
+            <label><%= __('register.label.username') %> <span class="color-red">*</span></label>
             <input type="text" name="username" value="<%= data.user.username %>" class="form-control margin-bottom-20">
           </div>
         </div>
@@ -96,34 +96,34 @@ label.error{
 
         <div class="row">
           <div class="col-sm-6">
-            <label><%= __('register.password') %> <span class="color-red">*</span></label>
+            <label><%= __('register.label.password') %> <span class="color-red">*</span></label>
             <input id="firstPassword" type="password" name="password" class="form-control margin-bottom-20">
           </div>
           <div class="col-sm-6">
-            <label><%= __('register.repeat_password') %> <span class="color-red">*</span></label>
+            <label><%= __('register.label.repeat_password') %> <span class="color-red">*</span></label>
             <input type="password" name="passwordAgain" class="form-control margin-bottom-20">
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12">
-            <label><%= __('register.birthday') %> </label>
-            <input type="text" name="birthday" value="<%= data.user.birthday %>" class="form-control margin-bottom-20" placeholder="<%= __('register.EX') %>1970-01-01">
+            <label><%= __('register.label.birthday') %> </label>
+            <input type="text" name="birthday" value="<%= data.user.birthday %>" class="form-control margin-bottom-20" placeholder="<%= __('register.placeholder.EX') %>1970-01-01">
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <label><%= __('register.cell_phone') %> </label>
+            <label><%= __('register.label.cell_phone') %> </label>
             <input type="number" name="phone1" value="<%= data.user.phone1 %>" class="form-control margin-bottom-20">
           </div>
           <div class="col-sm-6">
-            <label><%= __('register.telephone') %> </label>
+            <label><%= __('register.label.telephone') %> </label>
             <input type="number" name="phone2" value="<%= data.user.phone2 %>" class="form-control margin-bottom-20">
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <label><%= __('register.address') %> </label>
+            <label><%= __('register.label.address') %> </label>
             <input type="text" name="address" value="<%= data.user.address %>" class="form-control margin-bottom-20">
           </div>
         </div>
@@ -142,7 +142,7 @@ label.error{
           <div class="col-lg-6 checkbox">
             <label>
               <input type="checkbox" name="agree">
-              <%- __('register.agree', `<a href="#" class="color-green" data-toggle="modal" data-target="#myModal">${__('register.terms_of_service')}</a>`) %>
+              <%- __('register.label.agree', `<a href="#" class="color-green" data-toggle="modal" data-target="#myModal">`, `</a>`) %>
             </label>
           </div>
           <div class="col-lg-6 text-right">
@@ -189,7 +189,7 @@ label.error{
     $.fn.preventDoubleSubmission = function() {
       $(this).on("submit", function(event) {
         if (grecaptcha.getResponse() === "") {
-          swal('${__('warning')}', '${__('register.not_robot')}', 'warning');
+          swal('${__('warning')}', '${__('register.invalid.not_robot.not_check')}', 'warning');
           return event.preventDefault();
         }
         defaultFormSubmit(event);
@@ -239,28 +239,28 @@ label.error{
       },
       messages: {
         firstName: {
-          required: "${__('register.first_name_empty')}"
+          required: "${__('register.invalid.first_name.empty')}"
         },
         lastName: {
-          required: "${__('register.last_name_empty')}"
+          required: "${__('register.invalid.last_name.empty')}"
         },
         email: {
-          required: "${__('register.email_empty')}",
-          email: "${__('register.email_format')}"
+          required: "${__('register.invalid.email.empty')}",
+          email: "${__('register.invalid.email.format')}"
         },
         username:{
-          required: "${__('register.username_empty')}"
+          required: "${__('register.invalid.username.empty')}"
         },
         password: {
-          required: "${__('register.password_empty')}",
-          minlength: "${__('register.password_not_strong')}"
+          required: "${__('register.invalid.password.empty')}",
+          minlength: "${__('register.invalid.password.not_strong')}"
         },
         passwordAgain: {
-          required: "${__('register.password_empty')}",
-          minlength: "${__('register.password_not_strong')}",
-          equalTo: "${__('register.password_not_equal')}"
+          required: "${__('register.invalid.password.empty')}",
+          minlength: "${__('register.invalid.password.not_strong')}",
+          equalTo: "${__('register.invalid.password.not_equal')}"
         },
-        agree: "${__('register.not_agree')}"
+        agree: "${__('register.invalid.not_agree')}"
       }
     });
 
