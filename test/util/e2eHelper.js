@@ -29,10 +29,6 @@ let self = module.exports = {
     }
   },
 
-  logFolder: "test/e2e/",
-  logPID: "PID.json",
-  logMEMORY: "memory.xls",
-
   startLogging: () => {
     ps.lookup({
       // TODO: support other browser than chrome
@@ -44,7 +40,7 @@ let self = module.exports = {
       self.writeHeader(pidList);
 
       setInterval(function() {
-        self.log(pidList);
+        sails.config.log(pidList);
       },1000);
     });
   },
@@ -89,14 +85,14 @@ let self = module.exports = {
   },
 
   writePID: (pid) => {
-    let file = self.logFolder + self.logPID;
+    let file = sails.config.logFolder + sails.config.logPID;
     let JSONString = JSON.stringify(pid);
 
     fs.appendFile(file,JSONString , "utf8");
   },
 
   writeHeader: (pidList) => {
-    let file = self.logFolder + self.logMEMORY;
+    let file = sails.config.logFolder + sails.config.logMEMORY;
     let fieldString = "";
     pidList.forEach(function(pid,pidIndex) {
       if (pidIndex!=0) {
@@ -112,7 +108,7 @@ let self = module.exports = {
   },
 
   writeContent: (excelField) => {
-    let file = self.logFolder + self.logMEMORY;
+    let file = sails.config.logFolder + sails.config.logMEMORY;
     let fieldString = "";
     excelField.forEach(function(field,fieldIndex) {
       if (fieldIndex!=0) {

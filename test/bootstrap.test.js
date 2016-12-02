@@ -9,14 +9,30 @@ before(function(done) {
   if (process.env.TEST_MODE == "STRESS")  {
     // ref from https://segmentfault.com/a/1190000004888348
     var fs = require('fs');
-    // (see note below)
-    setInterval(function takeSnapshot() {
-      var mem = process.memoryUsage();
-      fs.appendFile('./test/stress/output_serverMemory.xls', 
-        mem.rss / 1024 / 1024 + '\t' +
-        mem.heapUsed / 1024 / 1024 + '\t' + 
-        mem.heapTotal / 1024 / 1024 + '\n', 'utf8');
-    }, 1000); // Snapshot every second
+    var logFileName = './test/stress/';
+    if (process.env.STRESS_TAG) {
+      logFileName += process.env.STRESS_TAG+"/";
+    }
+    logFileName += "output_serverMemory.xls";
+
+    // write header
+    try {
+      fs.statSync(logFileName);
+      console.log("logging file alreay exist");
+    } catch(e) {
+      fs.appendFile(logFileName, 
+        "memory-rss" + '\t' +
+        "memory-heapUsed" + '\t' + 
+        "memory-heapTotal" + '\n', 'utf8');
+      setInterval(function takeSnapshot() {
+        var mem = process.memoryUsage();
+        fs.appendFile(logFileName, 
+          mem.rss / 1024 / 1024 + '\t' +
+          mem.heapUsed / 1024 / 1024 + '\t' + 
+          mem.heapTotal / 1024 / 1024 + '\n', 'utf8');
+      }, 1000);
+    }
+    // write data
     config.environment = 'production';
   }
   else {

@@ -124,3 +124,7 @@ coverage
 test-results.xml
 test/e2e/PID.json
 test/e2e/memory.xls
+test/stress/output_client/
+test/stress/output_serverMemory.xls
+test/stress/*.txt
+test/stress/*.xls

@@ -57,5 +57,10 @@ module.exports = {
   google: {
     name: 'GoogleAPIKey',
     key: 'AIzaSyBSPvypkv-HnFRsC0ZFDvinPMPlEC59Ous'
+  },
+  e2e-client-log: {
+    logFolder: "test/e2e/",
+    logPID: "PID.json",
+    logMEMORY: "memory.xls"
   }
 };
