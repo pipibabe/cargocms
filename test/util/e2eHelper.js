@@ -1,4 +1,6 @@
-
+let ps = require('ps-node');
+let pusage = require('pidusage')
+let fs = require('fs');
 
 let self = module.exports = {
   login: async (user) => {
@@ -32,7 +34,6 @@ let self = module.exports = {
   logMEMORY: "memory.xls",
 
   startLogging: () => {
-    let ps = require('ps-node');
     ps.lookup({
       // TODO: support other browser than chrome
       command: 'chrome$',
@@ -49,7 +50,6 @@ let self = module.exports = {
   },
 
   log: async (pidList) => {
-    let pusage = require('pidusage')
     let excelField = [];
     let totalMemory = 0;
     let totalCPU = 0;
@@ -89,7 +89,6 @@ let self = module.exports = {
   },
 
   writePID: (pid) => {
-    let fs = require('fs');
     let file = self.logFolder + self.logPID;
     let JSONString = JSON.stringify(pid);
 
@@ -97,7 +96,6 @@ let self = module.exports = {
   },
 
   writeHeader: (pidList) => {
-    let fs = require('fs');
     let file = self.logFolder + self.logMEMORY;
     let fieldString = "";
     pidList.forEach(function(pid,pidIndex) {
@@ -114,7 +112,6 @@ let self = module.exports = {
   },
 
   writeContent: (excelField) => {
-    let fs = require('fs');
     let file = self.logFolder + self.logMEMORY;
     let fieldString = "";
     excelField.forEach(function(field,fieldIndex) {
