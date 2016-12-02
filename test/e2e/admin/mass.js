@@ -24,7 +24,7 @@ describe('test browser admin pages', function() {
     }
   })
 
-  it.only('loading 104 page of user',async (done) => {
+  it('loading 104 page of user',async (done) => {
     try {
       await browser.url('/admin/#/admin/user');
       await browser.pause(1000);
