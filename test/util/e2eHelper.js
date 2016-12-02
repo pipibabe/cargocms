@@ -54,7 +54,6 @@ let self = module.exports = {
       return new Promise((resolve, reject) => {
         let usages = {};
         pusage.stat(pid, function(err, result) {
-          console.log("PID: ", pid);
           if (err) {
             console.log("not exist PID:" ,pid)
             usages.mem = "";
@@ -77,11 +76,9 @@ let self = module.exports = {
       totalCPU += usage.cpu;
     }
 
-    console.log("SUM: total ");
     excelField.push(totalMemory);
     excelField.push(totalCPU);
     self.writeContent(excelField);
-      
   },
 
   getLogFolder: () => {
