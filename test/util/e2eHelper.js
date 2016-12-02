@@ -40,7 +40,7 @@ let self = module.exports = {
       self.writeHeader(pidList);
 
       setInterval(function() {
-        sails.config.log(pidList);
+        self.log(pidList);
       },1000);
     });
   },
@@ -84,15 +84,23 @@ let self = module.exports = {
       
   },
 
+  getLogFolder: () => {
+    if (process.env.E2E_LOGGER_FOLDER) {
+      return process.env.E2E_LOGGER_FOLDER;
+    } else {
+      return sails.config.e2eClientLog.Folder;
+    }
+  },
+
   writePID: (pid) => {
-    let file = sails.config.logFolder + sails.config.logPID;
+    let file = self.getLogFolder() + sails.config.e2eClientLog.PID;
     let JSONString = JSON.stringify(pid);
 
     fs.appendFile(file,JSONString , "utf8");
   },
 
   writeHeader: (pidList) => {
-    let file = sails.config.logFolder + sails.config.logMEMORY;
+    let file = self.getLogFolder() + sails.config.e2eClientLog.MEMORY;
     let fieldString = "";
     pidList.forEach(function(pid,pidIndex) {
       if (pidIndex!=0) {
@@ -108,7 +116,7 @@ let self = module.exports = {
   },
 
   writeContent: (excelField) => {
-    let file = sails.config.logFolder + sails.config.logMEMORY;
+    let file = self.getLogFolder() + sails.config.e2eClientLog.MEMORY;
     let fieldString = "";
     excelField.forEach(function(field,fieldIndex) {
       if (fieldIndex!=0) {
