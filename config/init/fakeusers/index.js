@@ -11,10 +11,12 @@ module.exports.init = async () => {
   try {
     const isDevMode = sails.config.environment === 'development';
     const isDropMode = sails.config.models.migrate == 'drop';
+    const isTestMode = sails.config.environment === 'test';
 
-    if (isDevMode && isDropMode) {
+    if (isDevMode || isTestMode && isDropMode) {
 
-      fetch('http://api.randomuser.me/?results=100')
+      const amount = isTestMode ? "800" : "100";
+      fetch('http://api.randomuser.me/?results='+amount)
       .then(function(res) {
         return res.json();
       })
