@@ -15,7 +15,7 @@ module.exports = {
   socials: ["facebook", "googleplus", "twitter"],
   models: {
     connection: 'sqlite',
-    migrate: 'drop'
+    migrate: 'save'
   },
   log: {
     level: 'verbose'

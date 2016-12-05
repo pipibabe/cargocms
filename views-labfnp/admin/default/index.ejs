@@ -102,7 +102,6 @@
 	 * and makes rendering easier.
 	 *
 	 */
-
 	pageSetUp();
 
 	/*
@@ -136,11 +135,19 @@
 	});
 
 	var pagedestroy = function() {
-		appMain = null;
-		appModel = null;
-		$("#main-table").remove();
-		if (debugState) {
-			console.log("✔ main-table unbind");
+		try {
+			console.log("!!!!!!!!!!!!!!!", appMain, appModel);
+			appMain = null;
+			appModel = null;
+			$('#main-table').dataTable().api().destroy();
+			console.log("!!!!!!!!!!!!!", pagefunction);
+			pagefunction = function(){};
+			$("#main-table").remove();
+			if (debugState) {
+				console.log("✔ main-table unbind");
+			}
+		} catch (e) {
+			console.error(e);
 		}
 	}
 
