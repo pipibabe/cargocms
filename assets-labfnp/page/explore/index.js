@@ -1,3 +1,23 @@
+$.fn.masonryImagesReveal = function( $items ) {
+  var msnry = this.data('masonry');
+  var itemSelector = msnry.options.itemSelector;
+  // hide by default
+  $items.hide();
+  // append to container
+  this.append( $items );
+  $items.imagesLoaded().progress( function( imgLoad, image ) {
+    // get item
+    // image is imagesLoaded class, not <img>, <img> is image.img
+    var $item = $( image.img ).parents( itemSelector );
+    // un-hide item
+    $item.show();
+    // masonry does its thing
+    msnry.appended( $item );
+  });
+
+  return this;
+};
+
 $(document).ready(function(){
 
   var scrollLoad = true;
@@ -31,16 +51,31 @@ $(document).ready(function(){
     });
   });
 
-  var append = function(recipe, social, targets) {
-    var newRecipe = $('#recipeTmpl').tmpl({
-      recipe: recipe,
-      social: social,
-      targets: targets,
+  // var append = function(recipe, social, targets) {
+  var append = function(result){
+
+    var newRecipes = '';
+    result.data.items.forEach(function(recipe, i) {
+      temp = $('#recipeTmpl').tmpl({
+        recipe:recipe,
+        social:result.data.social.data[i],
+        targets:result.data.social.targets
+      }).html();
+      newRecipes += temp;
     });
-    $container.append(newRecipe).masonry( 'appended', newRecipe)
-    setTimeout(function(){
-      $container.masonry();
-    },0);
+
+    $container.masonryImagesReveal( $(newRecipes) );
+    // var newRecipe = $('#recipeTmpl').tmpl({
+    //   recipe: recipe,
+    //   social: social,
+    //   targets: targets,
+    // });
+
+    // $container.append(newRecipe).masonry( 'appended', newRecipe)
+    //
+    // setTimeout(function(){
+    //   $container.masonry();
+    // },0);
   }
 
   var bindLike = function() {
@@ -125,9 +160,10 @@ $(document).ready(function(){
 
     function ajaxSuccess(result) {
 
-      result.data.items.forEach(function(recipe, i) {
-        append(recipe, result.data.social.data[i], result.data.social.targets);
-      });
+      append(result);
+      // result.data.items.forEach(function(recipe, i) {
+      //   append(recipe, result.data.social.data[i], result.data.social.targets);
+      // });
 
       // setTimeout(function(){
       //   $container.masonry();
