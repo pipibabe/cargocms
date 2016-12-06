@@ -91,6 +91,7 @@
     "pm2-stop": "pm2 stop cargocms",
     "start-prod": "NODE_ENV=production node app.js",
     "build-prod": "grunt prod",
+    "build-dev": "grunt dev",
     "build-docker-env": "docker build -t agileworks/sails_sample_env dockers/node",
     "build-docker-prod-image": "docker build -t agileworks/sails_sample_prod .",
     "build-docker": "docker-compose run --rm buildDev",
