@@ -31,8 +31,8 @@ module.exports = {
     },
 
     mpn: {
-      Sequelize.STRING(64)
-      ,allowNull: false,
+      Sequelize.STRING(64),
+      allowNull: false,
     }
     location: {
       Sequelize.STRING(128),
@@ -40,8 +40,8 @@ module.exports = {
     },
 
     quantity: {
-      Sequelize.INTEGER(4)
-      ,allowNull: false,
+      Sequelize.INTEGER(4),
+      allowNull: false,
       defaultValue: 0,
     },
 
@@ -52,13 +52,13 @@ module.exports = {
 
     shipping: {
       Sequelize.BOOLEAN,
-      allowNull: false
+      allowNull: false,
       defaultValue: 'true',
     },
 
     price: {
-      Sequelize.DECIMAL(15,4)
-      ,allowNull: false,
+      Sequelize.DECIMAL(15,4),
+      allowNull: false,
       defaultValue: '0.0000',
     },
 
@@ -68,10 +68,10 @@ module.exports = {
       defaultValue: 0,
     },
 
-    tax_class_id: {
-      Sequelize.INTEGER(11),
-      allowNull: false,
-    },
+    // tax_class_id: {
+    //   Sequelize.INTEGER(11),
+    //   allowNull: false,
+    // },
 
     date_available: {
       Sequelize.DATEONLY,
@@ -85,11 +85,11 @@ module.exports = {
       defaultValue: '0.00000000',
     },
 
-    weight_class_id: {
-      Sequelize.INTEGER(11),
-      allowNull: false,
-      defaultValue: 0,
-    },
+    // weight_class_id: {
+    //   Sequelize.INTEGER(11),
+    //   allowNull: false,
+    //   defaultValue: 0,
+    // },
 
     length: {
       Sequelize.DECIMAL(15,8),
@@ -109,11 +109,11 @@ module.exports = {
       defaultValue: '0.00000000',
     },
 
-    length_class_id: {
-      Sequelize.INTEGER(11),
-      allowNull: false,
-      defaultValue: 0,
-    },
+    // length_class_id: {
+    //   Sequelize.INTEGER(11),
+    //   allowNull: false,
+    //   defaultValue: 0,
+    // },
 
     subtract: {
       Sequelize.BOOLEAN,
@@ -144,6 +144,16 @@ module.exports = {
       allowNull: false,
       defaultValue: 0,
     },
+
+    // stock_status_id: {
+    //   Sequelize.INTEGER(11),
+    //   allowNull: false,
+    // },
+
+    // manufacturer_id: {
+    //   Sequelize.INTEGER(11),
+    //   allowNull: false,
+    // },
 
   },
   associations: function() {
