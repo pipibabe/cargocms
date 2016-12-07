@@ -41,7 +41,7 @@ module.exports = {
     },
   },
   associations: function() {
-
+    ProductDescription.belongsTo(Product);
   },
   options: {
     paranoid: true,
