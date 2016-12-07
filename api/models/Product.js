@@ -48,13 +48,13 @@ module.exports = {
 
     image: {
       type: Sequelize.STRING(255),
-      defaultValue: NULL,
+      defaultValue: null,
     },
 
     shipping: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: 'true',
+      defaultValue: true,
     },
 
     price: {
@@ -77,7 +77,7 @@ module.exports = {
     date_available: {
       type: Sequelize.DATEONLY,
       allowNull: false,
-      defaultValue: '0000-00-00',
+      defaultValue: '1970-01-01',
     },
 
     weight :{
