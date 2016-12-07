@@ -18,7 +18,7 @@ module.exports = {
 
   },
   associations: function() {
-
+    ProductTag.belongsTo(Product);
   },
   options: {
     paranoid: true,
