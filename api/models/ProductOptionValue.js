@@ -2,62 +2,62 @@ module.exports = {
   attributes: {
 
       // product_option_id: {
-      //   Sequelize.INTEGER(11),
+      //   type: Sequelize.INTEGER(11),
       //   allowNull: false
       // },
 
       // product_id: {
-      //   Sequelize.INTEGER(11),
+      //   type: Sequelize.INTEGER(11),
       //   allowNull: false
       // },
 
       // option_id: {
-      //   Sequelize.INTEGER(11),
+      //   type: Sequelize.INTEGER(11),
       //   allowNull: false
       // },
 
       // option_value_id: {
-      //   Sequelize.INTEGER(11),
+      //   type: Sequelize.INTEGER(11),
       //   allowNull: false
       // },
 
       quantity: {
-        Sequelize.INTEGER(3),
+        type: Sequelize.INTEGER(3),
         allowNull: false
       },
 
       subtract: {
-        Sequelize.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
 
       price: {
-        Sequelize.DECIMAL(15,4),
+        type: Sequelize.DECIMAL(15,4),
         allowNull: false
       },
 
       price_prefix: {
-        Sequelize.STRING(1),
+        type: Sequelize.STRING(1),
         allowNull: false
       },
 
       points: {
-        Sequelize.INTEGER(8),
+        type: Sequelize.INTEGER(8),
         allowNull: false
       },
 
       points_prefix: {
-        Sequelize.STRING(1),
+        type: Sequelize.STRING(1),
         allowNull: false
       },
 
       weight: {
-        Sequelize.DECIMAL(15,8),
+        type: Sequelize.DECIMAL(15,8),
         allowNull: false
       },
 
       weight_prefix: {
-        Sequelize.STRING(1),
+        type: Sequelize.STRING(1),
         allowNull: false
       },
 

@@ -2,12 +2,12 @@ module.exports = {
   attributes: {
 
     type: {
-      Sequelize.STRING(32),
+      type: Sequelize.STRING(32),
       allowNull: false,
     },
 
     sort_order: {
-      Sequelize.INTEGER(3),
+      type: Sequelize.INTEGER(3),
       allowNull: false,
     },
 

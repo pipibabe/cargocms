@@ -2,17 +2,17 @@ module.exports = {
   attributes: {
 
     // option_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false
     // },
 
     image: {
-      Sequelize.STRING(255),
+      type: Sequelize.STRING(255),
       allowNull: false
     },
 
     sort_order: {
-      Sequelize.INTEGER(3),
+      type: Sequelize.INTEGER(3),
       allowNull: false
     },
   },

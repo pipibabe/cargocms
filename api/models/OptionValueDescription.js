@@ -1,22 +1,22 @@
 module.exports = {
   attributes: {
     // option_value_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
     //
     // language_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
     //
     // option_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
 
     name: {
-      Sequelize.STRING(128),
+      type: Sequelize.STRING(128),
       allowNull: false,
     },
   },

@@ -2,27 +2,27 @@ module.exports = {
   attributes: {
 
     // product_option_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false
     // },
 
     // product_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false
     // },
 
     // option_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false
     // },
 
     value: {
-      Sequelize.TEXT,
+      type: Sequelize.TEXT,
       allowNull: false
     },
 
     required: {
-      Sequelize.BOOLEAN,
+      type: Sequelize.BOOLEAN,
       allowNull: false
     },
 

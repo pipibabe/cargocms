@@ -2,17 +2,17 @@ module.exports = {
   attributes: {
 
     // product_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
     //
     // language_id: {
-    //   Sequelize.INTEGER(11),
+    //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
 
     tag: {
-      Sequelize.STRING(32),
+      type: Sequelize.STRING(32),
       allowNull: false,
     },
 
