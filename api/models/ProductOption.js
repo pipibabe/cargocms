@@ -10,7 +10,7 @@ module.exports = {
     //   Sequelize.INTEGER(11),
     //   allowNull: false
     // },
-    
+
     // option_id: {
     //   Sequelize.INTEGER(11),
     //   allowNull: false
@@ -28,7 +28,8 @@ module.exports = {
 
   },
   associations: function() {
-
+    ProductOption.belongsTo(Product);
+    ProductOption.belongsTo(Option);
   },
   options: {
     paranoid: true,
