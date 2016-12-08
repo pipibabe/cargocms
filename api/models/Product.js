@@ -134,7 +134,7 @@ module.exports = {
       defaultValue: 0,
     },
 
-    status: {
+    publish: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
