@@ -86,6 +86,7 @@
     "clean-stress": "rm -rf test/stress/${STRESS_TAG}/output_client test/stress/${STRESS_TAG}/output_serverMemory.xls; mkdir -p test/stress/${STRESS_TAG}/output_client",
     "build": "npm i && node_modules/grunt-cli/bin/grunt build",
     "start": "node app.js",
+    "dev": "grunt dev & node app.js",
     "preview": "make preview",
     "pm2-start": "pm2 start -f app.js --name 'cargocms'",
     "pm2-stop": "pm2 stop cargocms",
