@@ -123,6 +123,7 @@ module.exports = {
       defaultValue: true,
     },
 
+    // 最小庫存數量
     minimum: {
       type: Sequelize.INTEGER(11),
       allowNull: false,
