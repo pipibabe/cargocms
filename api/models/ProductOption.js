@@ -30,6 +30,7 @@ module.exports = {
   associations: function() {
     // ProductOption.belongsTo(Product);
     // ProductOption.belongsTo(Option);
+    ProductOption.hasOne(ProductOptionValue);
   },
   options: {
     paranoid: true,
