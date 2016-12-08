@@ -4,32 +4,32 @@ module.exports = {
       type: Sequelize.STRING(64),
       allowNull: false,
     },
-
+    //Stock-keeping units
     sku: {
       type: Sequelize.STRING(64),
       allowNull: false,
     },
-
+    //universal product codes
     upc: {
       type: Sequelize.STRING(12),
       allowNull: false,
     },
-
+    //European article number
     ean: {
       type: Sequelize.STRING(14),
       allowNull: false,
     },
-
+    //Japanese Article Numbering
     jan: {
       type: Sequelize.STRING(13),
       allowNull: false,
     },
-
+    // International Standard Book Number
     isbn: {
       type: Sequelize.STRING(17),
       allowNull: false,
     },
-
+    // Manufacturer Part Number
     mpn: {
       type: Sequelize.STRING(64),
       allowNull: false,
