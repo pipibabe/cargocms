@@ -163,6 +163,7 @@ module.exports = {
     Product.hasMany(ProductOption);
     Product.hasMany(ProductOptionValue);
     Product.hasMany(ProductImage);
+    Product.belongsTo(Image);
   },
   options: {
     paranoid: true,
