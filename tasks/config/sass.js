@@ -16,7 +16,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: "assets-labfnp/sass/",
           src: ["importer.scss"],
-          dest: ".tmp/public/css/",
+          dest: ".tmp/public/css/labfnp/",
           ext: ".css"
         }
       ]
