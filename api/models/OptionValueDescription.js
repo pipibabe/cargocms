@@ -22,7 +22,7 @@ module.exports = {
   },
   associations: function() {
     // OptionValueDescription.belongsTo(Option);
-    OptionValueDescription.belongsTo(OptionValue);
+    // OptionValueDescription.belongsTo(OptionValue);
   },
   options: {
     classMethods: {
