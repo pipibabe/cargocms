@@ -77,7 +77,7 @@ module.exports = {
     dateAvailable: {
       type: Sequelize.DATEONLY,
       allowNull: false,
-      defaultValue: '1970-01-01',
+      defaultValue: Sequelize.NOW,
     },
 
     weight :{
