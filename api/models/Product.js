@@ -162,7 +162,7 @@ module.exports = {
     Product.hasOne(ProductDescription);
     Product.hasMany(ProductOption);
     Product.hasMany(ProductOptionValue);
-
+    Product.hasMany(ProductImage);
   },
   options: {
     paranoid: true,
