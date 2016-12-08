@@ -116,6 +116,7 @@ module.exports = {
     //   defaultValue: 0,
     // },
 
+    // 設定賣出時是否減少庫存
     subtract: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
