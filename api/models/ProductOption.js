@@ -28,7 +28,7 @@ module.exports = {
 
   },
   associations: function() {
-    ProductOption.belongsTo(Product);
+    // ProductOption.belongsTo(Product);
     ProductOption.belongsTo(Option);
   },
   options: {

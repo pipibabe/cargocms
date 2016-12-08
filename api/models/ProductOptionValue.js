@@ -63,7 +63,7 @@ module.exports = {
 
   },
   associations: function() {
-    ProductOptionValue.belongsTo(Product);
+    // ProductOptionValue.belongsTo(Product);
     ProductOptionValue.belongsTo(ProductOption);
     ProductOptionValue.belongsTo(Option);
     ProductOptionValue.belongsTo(OptionValue);

@@ -158,7 +158,11 @@ module.exports = {
 
   },
   associations: function() {
-
+    Product.hasOne(ProductTag);
+    Product.hasOne(ProductDescription);
+    Product.hasMany(ProductOption);
+    Product.hasMany(ProductOptionValue);
+    
   },
   options: {
     paranoid: true,
