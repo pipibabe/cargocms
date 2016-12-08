@@ -13,7 +13,11 @@ module.exports = {
 
   },
   associations: function() {
-
+    Option.hasOne(ProductOption);
+    Option.hasOne(OptionValue);
+    Option.hasOne(OptionDescription);
+    Option.hasOne(OptionValueDescription);
+    Option.hasOne(ProductOptionValue);
   },
   options: {
     classMethods: {

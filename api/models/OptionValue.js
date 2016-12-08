@@ -17,7 +17,7 @@ module.exports = {
     },
   },
   associations: function() {
-    OptionValue.belongsTo(Option);
+    // OptionValue.belongsTo(Option);
   },
   options: {
     classMethods: {

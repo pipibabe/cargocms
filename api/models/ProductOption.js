@@ -29,7 +29,7 @@ module.exports = {
   },
   associations: function() {
     // ProductOption.belongsTo(Product);
-    ProductOption.belongsTo(Option);
+    // ProductOption.belongsTo(Option);
   },
   options: {
     paranoid: true,
