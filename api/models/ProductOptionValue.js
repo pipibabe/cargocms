@@ -66,7 +66,7 @@ module.exports = {
     // ProductOptionValue.belongsTo(Product);
     // ProductOptionValue.belongsTo(ProductOption);
     // ProductOptionValue.belongsTo(Option);
-    ProductOptionValue.belongsTo(OptionValue);
+    // ProductOptionValue.belongsTo(OptionValue);
   },
   options: {
     paranoid: true,
