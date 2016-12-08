@@ -25,17 +25,17 @@ module.exports = {
       allowNull: false,
     },
 
-    meta_title: {
+    metaTitle: {
       type: Sequelize.STRING(255),
       allowNull: false,
     },
 
-    meta_description: {
+    metaDescription: {
       type: Sequelize.STRING(255),
       allowNull: false,
     },
 
-    meta_keyword: {
+    metaKeyword: {
       type: Sequelize.STRING(255),
       allowNull: false,
     },

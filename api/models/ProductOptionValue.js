@@ -36,7 +36,7 @@ module.exports = {
         allowNull: false
       },
 
-      price_prefix: {
+      pricePrefix: {
         type: Sequelize.STRING(1),
         allowNull: false
       },
@@ -46,7 +46,7 @@ module.exports = {
         allowNull: false
       },
 
-      points_prefix: {
+      pointsPrefix: {
         type: Sequelize.STRING(1),
         allowNull: false
       },
@@ -56,7 +56,7 @@ module.exports = {
         allowNull: false
       },
 
-      weight_prefix: {
+      weightPrefix: {
         type: Sequelize.STRING(1),
         allowNull: false
       },

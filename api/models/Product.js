@@ -69,12 +69,12 @@ module.exports = {
       defaultValue: 0,
     },
 
-    // tax_class_id: {
+    // taxClassId: {
     //   Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
 
-    date_available: {
+    dateAvailable: {
       type: Sequelize.DATEONLY,
       allowNull: false,
       defaultValue: '1970-01-01',
@@ -86,7 +86,7 @@ module.exports = {
       defaultValue: '0.00000000',
     },
 
-    // weight_class_id: {
+    // weightClassId: {
     //   Sequelize.INTEGER(11),
     //   allowNull: false,
     //   defaultValue: 0,
@@ -110,7 +110,7 @@ module.exports = {
       defaultValue: '0.00000000',
     },
 
-    // length_class_id: {
+    // lengthClassId: {
     //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     //   defaultValue: 0,
@@ -128,7 +128,7 @@ module.exports = {
       defaultValue: 1,
     },
 
-    sort_order: {
+    sortOrder: {
       type: Sequelize.INTEGER(11),
       allowNull: false,
       defaultValue: 0,
@@ -146,12 +146,12 @@ module.exports = {
       defaultValue: 0,
     },
 
-    // stock_status_id: {
+    // stockStatusId: {
     //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
 
-    // manufacturer_id: {
+    // manufacturerId: {
     //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
@@ -162,7 +162,7 @@ module.exports = {
     Product.hasOne(ProductDescription);
     Product.hasMany(ProductOption);
     Product.hasMany(ProductOptionValue);
-    
+
   },
   options: {
     paranoid: true,

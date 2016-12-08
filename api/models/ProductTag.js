@@ -1,12 +1,12 @@
 module.exports = {
   attributes: {
 
-    // product_id: {
+    // productId: {
     //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },
-    //
-    // language_id: {
+    
+    // languageId: {
     //   type: Sequelize.INTEGER(11),
     //   allowNull: false,
     // },

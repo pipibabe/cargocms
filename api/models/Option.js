@@ -6,7 +6,7 @@ module.exports = {
       allowNull: false,
     },
 
-    sort_order: {
+    sortOrder: {
       type: Sequelize.INTEGER(3),
       allowNull: false,
     },

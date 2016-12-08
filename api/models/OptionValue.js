@@ -1,7 +1,7 @@
 module.exports = {
   attributes: {
 
-    // option_id: {
+    // optionId: {
     //   type: Sequelize.INTEGER(11),
     //   allowNull: false
     // },
@@ -11,7 +11,7 @@ module.exports = {
       allowNull: false
     },
 
-    sort_order: {
+    sortOrder: {
       type: Sequelize.INTEGER(3),
       allowNull: false
     },
