@@ -42,7 +42,7 @@
             <div class="post-swiper-container">
               <div class="swiper-wrapper">
                 <% for (image of performanceImages) { %>
-                  <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
+                  <div class="swiper-slide" style="background-image: url('<%= image.url%>')"><img class="watermark" src="/assets/jason/images/watermark.png"></div>
                 <% } %>
               </div>
               <!-- 如果需要分页器 -->
@@ -55,7 +55,7 @@
                 for (var i = 0; i < performanceImages.length; i++) {
                   var image = performanceImages[i];
                 %>
-                  <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
+                  <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"><img class="watermark" src="/assets/jason/images/watermark.png"></div>
                 <% } %>
               </div>
               <!-- 如果需要分页器 -->

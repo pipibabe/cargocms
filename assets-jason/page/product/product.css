@@ -184,3 +184,16 @@
     float: right;
   }
 }
+.watermark {
+  width: 80%;
+  display: block;
+  margin: 0 auto !important;
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(50%);
+}
+.product-img-wrapper .watermark {
+  transform: translateX(7px);
+}
