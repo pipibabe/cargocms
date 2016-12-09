@@ -119,7 +119,9 @@ module.exports = {
         where: { id }
       });
       item.post = await Post.update(post ,{
-        where: { id }
+        where: {
+          id: data.PostId,
+        }
       })
       await Image.update({ PerformanceId: null }, {
         where: { id: { $notIn: image.ids }, PerformanceId: id}
