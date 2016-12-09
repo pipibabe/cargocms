@@ -310,7 +310,7 @@ module.exports = {
         returnURL: '/api/recipe/paid',
         paymentInfoURL: '/api/recipe/paymentinfo',
       });
-
+      MerchantTradeNo = allPayData.allpay.MerchantTradeNo;
       sails.log.warn('訂單建立 RecipeOrder',
         '收件人:', recipeOrder.recipient,
         'UserId:', recipeOrder.UserId,
