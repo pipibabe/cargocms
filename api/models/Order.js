@@ -189,11 +189,6 @@ module.exports = {
       defaultValue: '0.000',
       allowNull: false,
     },
-    orderStatusId: {
-      type: Sequelize.INTEGER(11),
-      defaultValue: 0,
-      allowNull: false,
-    },
 
     // 聯盟
     // http://docs.opencart.com/marketing/affiliate/
@@ -259,7 +254,11 @@ module.exports = {
       allowNull: false,
     }
   },
-  associations: () => {},
+  associations: () => {
+    Order.hasOne(OrderStatus);
+    Order.hasOne(OrderOption);
+    Order.hasOne(OrderProduct);
+  },
   options: {
     classMethods: {},
     instanceMethods: {},
