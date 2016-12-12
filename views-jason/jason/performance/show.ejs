@@ -7,6 +7,8 @@
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/plugins/lightbox/lightbox.min.css'); %>
+<% LayoutUtils.addScripts('/assets/jason/plugins/lightbox/lightbox.min.js'); %>
 
 <div class="container body">
 
@@ -43,7 +45,7 @@
               <div class="post-swiper-container">
                 <div class="swiper-wrapper">
                   <% for (image of performanceImages) { %>
-                    <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
+                    <a href="<%= image.url%>" data-lightbox="products" class="swiper-slide" style="background-image: url('<%= image.url%>')"></a>
                   <% } %>
                 </div>
                 <!-- 如果需要分页器 -->

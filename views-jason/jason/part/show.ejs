@@ -7,6 +7,8 @@
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/plugins/lightbox/lightbox.min.css'); %>
+<% LayoutUtils.addScripts('/assets/jason/plugins/lightbox/lightbox.min.js'); %>
 
 <div class="container body">
 
@@ -54,7 +56,7 @@
               <div class="post-swiper-container">
                 <div class="swiper-wrapper">
                   <% for (image of partImages) { %>
-                    <div class="swiper-slide" style="background-image: url('<%= image.url%>')"><img class="watermark" src="/assets/jason/images/watermark.png"></div>
+                    <a href="<%= image.url%>" data-lightbox="products" class="swiper-slide" style="background-image: url('<%= image.url%>')"><img class="watermark" src="/assets/jason/images/watermark.png"></a href="<%= image.url%>" data-lightbox="products">
                   <% } %>
                 </div>
                 <!-- 如果需要分页器 -->
