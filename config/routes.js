@@ -108,6 +108,8 @@ var defaultConfig = {
   'get /api/admin/facebook/import':        'api/admin/facebook/FeedController.import',
   'put /api/admin/facebook/update':        'api/admin/facebook/FeedController.update',
 
+  'get /api/admin/product':  'api/admin/ProductController.find',
+
 
   //----- Event -----
   'get /events/:name': 'EventController.show',
