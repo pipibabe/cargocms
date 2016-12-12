@@ -39,31 +39,33 @@
             </ul>
           </div>
           <div class="col-md-6 col-md-pull-6 img-content">
-            <div class="post-swiper-container">
-              <div class="swiper-wrapper">
-                <% for (image of performanceImages) { %>
-                  <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
-                <% } %>
+            <% if (performanceImages) { %>
+              <div class="post-swiper-container">
+                <div class="swiper-wrapper">
+                  <% for (image of performanceImages) { %>
+                    <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
+                  <% } %>
+                </div>
+                <!-- 如果需要分页器 -->
+                <!-- <div class="swiper-pagination"></div> -->
               </div>
-              <!-- 如果需要分页器 -->
-              <!-- <div class="swiper-pagination"></div> -->
-            </div>
 
-            <div class="thumbnail-swiper-container">
-              <div class="swiper-wrapper">
-                <%
-                for (var i = 0; i < performanceImages.length; i++) {
-                  var image = performanceImages[i];
-                %>
-                  <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
-                <% } %>
+              <div class="thumbnail-swiper-container">
+                <div class="swiper-wrapper">
+                  <%
+                  for (var i = 0; i < performanceImages.length; i++) {
+                    var image = performanceImages[i];
+                  %>
+                    <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
+                  <% } %>
+                </div>
+                <!-- 如果需要分页器 -->
+                <!-- <div class="swiper-pagination"></div> -->
+                <!-- 如果需要导航按钮 -->
+                <!-- <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div> -->
               </div>
-              <!-- 如果需要分页器 -->
-              <!-- <div class="swiper-pagination"></div> -->
-              <!-- 如果需要导航按钮 -->
-              <!-- <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div> -->
-            </div>
+            <% } %>
           </div>
         </div>
 
