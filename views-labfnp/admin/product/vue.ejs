@@ -17,7 +17,7 @@ var appModel = {
       sku: '',
       upc: '',
       ean:'',
-      jap:'',
+      jan:'',
       isbn:'',
       mpn:'',
       location:'',
@@ -26,7 +26,7 @@ var appModel = {
       shipping:'',
       price:'',
       points:'',
-      dataAvailable:'',
+      dateAvailable:'',
       weight:'',
       length:'',
       width:'',
@@ -38,7 +38,8 @@ var appModel = {
       viewed:'',
     },
     items: [],
-    option: {}
+    option: {
+      defaultSort: [[ 0, 'desc' ]],
     }
   },
   view: {
