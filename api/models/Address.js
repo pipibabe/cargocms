@@ -35,9 +35,9 @@ module.exports = {
     },
   },
   associations: () => {
-    Address.belongsTo(User),
-    Address.hasOne(Country),
-    Address.hasOne(Zone),
+    Address.belongsTo(User);
+    Address.hasOne(Country);
+    Address.hasOne(Zone);
   },
   options: {
     classMethods: {},

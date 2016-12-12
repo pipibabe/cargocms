@@ -258,6 +258,8 @@ module.exports = {
     Order.hasOne(OrderStatus);
     Order.hasOne(OrderOption);
     Order.hasOne(OrderProduct);
+    Order.belongsTo(Allpay);
+    Order.belongsTo(User);
   },
   options: {
     classMethods: {},

@@ -16,7 +16,7 @@ module.exports = {
     },
   },
   associations: () => {
-    Zone.hasOne(ZoneToGeoZon),
+    Zone.hasOne(ZoneToGeoZon);
   },
   options: {
     classMethods: {},

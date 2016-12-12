@@ -5,19 +5,19 @@ module.exports = {
       type: Sequelize.STRING(128),
       allowNull: false,
     },
-    iso_code_2: {
+    isoCode2: {
       type: Sequelize.STRING(2),
       allowNull: false,
     },
-    iso_code_3: {
+    isoCode3: {
       type: Sequelize.STRING(3),
       allowNull: false,
     },
-    address_format: {
+    addressFormat: {
       type: Sequelize.TEXT,
       allowNull: false,
     },
-    postcode_required: {
+    postcodeRequired: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
     },
@@ -28,7 +28,7 @@ module.exports = {
     },
   },
   associations: () => {
-    Country.hasOne(Zone),
+    Country.hasOne(Zone);
   },
   options: {
     classMethods: {},
