@@ -34,8 +34,7 @@ module.exports = {
     },
   },
   associations: () => {
-    // Product 尚未合併先註解
-    // OrderProduct.belongsTo(Product);
+    OrderProduct.belongsTo(Product);
   },
   options: {
     classMethods: {},

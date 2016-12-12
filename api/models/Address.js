@@ -1,9 +1,6 @@
 
 module.exports = {
   attributes: {
-    customerId: {
-
-    },
     firstname: {
       type: Sequelize.STRING(32),
       allowNull: false,
@@ -39,6 +36,8 @@ module.exports = {
   },
   associations: () => {
     Address.belongsTo(User),
+    Address.hasOne(Country),
+    Address.hasOne(Zone),
   },
   options: {
     classMethods: {},
