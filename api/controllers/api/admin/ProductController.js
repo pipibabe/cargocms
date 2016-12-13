@@ -16,11 +16,11 @@ module.exports = {
       res.serverError(e);
     }
   },
-  
+
   findOne: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await Model.findById(id);
+      const item = await Product.findById(id);
       res.ok({ data: { item } });
     } catch (e) {
       res.serverError(e);
@@ -30,7 +30,7 @@ module.exports = {
   create: async (req, res) => {
     try {
       const data = req.body;
-      const item = await Model.create(data);
+      const item = await Product.create(data);
       const message = 'Create success.';
       res.ok({ message, data: { item } });
     } catch (e) {
@@ -43,7 +43,7 @@ module.exports = {
       const { id } = req.params;
       const data = req.body;
       const message = 'Update success.';
-      const item = await Model.update(data ,{
+      const item = await Product.update(data ,{
         where: { id, },
       });
       res.ok({ message, data: { item } });
@@ -55,7 +55,7 @@ module.exports = {
   destroy: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await Model.deleteById(id);
+      const item = await Product.deleteById(id);
       const message = 'Delete success.';
       res.ok({ message, data: { item } });
     } catch (e) {
