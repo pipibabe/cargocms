@@ -4,7 +4,19 @@ Cargo CMS
 Installation
 -------------
 
+Mac
 ```
+brew install imagemagick
+brew install graphicsmagick
+```
+
+Linux
+```
+apt-get install graphicsmagick imagemagick
+```
+
+```
+gem install sass compass
 npm -g install babel-cli
 
 npm install
