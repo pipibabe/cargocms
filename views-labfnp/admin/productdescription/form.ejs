@@ -1,47 +1,61 @@
 <fieldset>
 
-  <section>
-    <label class="label">名稱</label>
-    <label class="input state-disabled">
-      <input type="text" name="name" placeholder="名稱" v-model="data.item.name" disabled>
-      <b class="tooltip tooltip-bottom-right">名稱</b></label>
-  </section>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">名稱</label>
+      <label class="input state-disabled">
+        <input type="text" name="name" placeholder="名稱" v-model="data.item.name" disabled>
+        <b class="tooltip tooltip-bottom-right">名稱</b></label>
+    </section>
 
-  <section>
-    <label class="label">描述</label>
-    <label class="input state-disabled">
-      <input type="text" name="description" placeholder="描述" v-model="data.item.description" disabled>
-      <b class="tooltip tooltip-bottom-right">描述</b></label>
-  </section>
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">描述</label>
+      <label class="input state-disabled">
+        <input type="text" name="description" placeholder="描述" v-model="data.item.description" disabled>
+        <b class="tooltip tooltip-bottom-right">描述</b></label>
+    </section>
+  </div>
 
-  <section>
-    <label class="label">標籤</label>
-    <label class="input state-disabled">
-      <input type="text" name="tag" placeholder="標籤" v-model="data.item.tag" disabled>
-      <b class="tooltip tooltip-bottom-right">標籤</b></label>
-  </section>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">標籤</label>
+      <label class="input state-disabled">
+        <input type="text" name="tag" placeholder="標籤" v-model="data.item.tag" disabled>
+        <b class="tooltip tooltip-bottom-right">標籤</b></label>
+    </section>
 
-  <section>
-    <label class="label">meta 標題</label>
-    <label class="input state-disabled">
-      <input type="text" name="metaTitle" placeholder="meta 標題" v-model="data.item.metaTitle" disabled>
-      <b class="tooltip tooltip-bottom-right">meta 標題</b></label>
-  </section>
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">meta 標題</label>
+      <label class="input state-disabled">
+        <input type="text" name="metaTitle" placeholder="meta 標題" v-model="data.item.metaTitle" disabled>
+        <b class="tooltip tooltip-bottom-right">meta 標題</b></label>
+    </section>
+  </div>
 
-  <section>
-    <label class="label">meta 描述</label>
-    <label class="input state-disabled">
-      <input type="text" name="metaDescription" placeholder="meta 描述" v-model="data.item.metaDescription" disabled>
-      <b class="tooltip tooltip-bottom-right">meta 描述</b></label>
-  </section>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">meta 描述</label>
+      <label class="input state-disabled">
+        <input type="text" name="metaDescription" placeholder="meta 描述" v-model="data.item.metaDescription" disabled>
+        <b class="tooltip tooltip-bottom-right">meta 描述</b></label>
+    </section>
 
-  <section>
-    <label class="label">meta 關鍵字</label>
-    <label class="input state-disabled">
-      <input type="text" name="metaKeyword" placeholder="meta 關鍵字" v-model="data.item.metaKeyword" disabled>
-      <b class="tooltip tooltip-bottom-right">meta 關鍵字</b></label>
-  </section>
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">meta 關鍵字</label>
+      <label class="input state-disabled">
+        <input type="text" name="metaKeyword" placeholder="meta 關鍵字" v-model="data.item.metaKeyword" disabled>
+        <b class="tooltip tooltip-bottom-right">meta 關鍵字</b></label>
+    </section>
+  </div>
 
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">產品 ID</label>
+      <label class="input state-disabled">
+        <input type="text" name="ProductId" placeholder="產品 ID" v-model="data.item.ProductId" disabled>
+        <b class="tooltip tooltip-bottom-right">產品 ID</b></label>
+    </section>
+  </div>
 
 </fieldset>
 <script>
