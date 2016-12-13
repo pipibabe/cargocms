@@ -29,6 +29,7 @@ module.exports.init = async () => {
       { href: '/admin/facebook/feed', title: '動態', sequence: 130, ParentMenuItemId: 2},
       { href: '/admin/message', title: '訊息', sequence: 140, ParentMenuItemId: 2},
       { href: '/admin/contact', title: '聯繫訊息', sequence: 150, ParentMenuItemId: 2},
+      { href: '/admin/product', title: 'product', sequence: 160, ParentMenuItemId: 2},
       { href: '/admin/mock', title: '隨機資料表', sequence: 20, ParentMenuItemId: 3},
 
     ]
