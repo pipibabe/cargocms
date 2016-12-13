@@ -28,7 +28,7 @@ describe('test browser admin pages', function() {
 
   it('loading different pages',async (done) => {
     try {
-      for (let value of [...Array(3)]) {
+      for (let value of [...Array(100)]) {
 
         await browser.url('/admin/#/admin/user');
         await browser.pause(400);
