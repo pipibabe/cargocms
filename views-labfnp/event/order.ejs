@@ -107,7 +107,12 @@
           <!-- <label for="description">描述</label> -->
           <ul class="list-unstyled list-inline description">
             <li>
-              <p class="padding-5"><%= event.description %></p>
+              <% var description = event.description.replace(/[\r\n|\n]/g,"<br/>").split('<br/>');%>
+              <p class="padding-5">
+                <% description.forEach(function( desc ){ %>
+                  <%= desc %><br/>
+                <% }); %>
+              </p>
             </li>
             <li>
               <p class="padding-5">價錢: <%= event.price === 0 ? '免費' : event.price %></p>

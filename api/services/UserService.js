@@ -192,7 +192,7 @@ module.exports = {
     }
   },
 
-  sendVerificationEmail: async({ userId, email,  displayName, signToken}) => {
+  sendVerificationEmail: async({ userId, email,  displayName, signToken, type}) => {
     try {
       const token = jwt.sign({
         exp: moment(new Date()).add(1, 'h').valueOf(),
@@ -203,6 +203,7 @@ module.exports = {
         email: email,
         api: `/validate/email?token=${token}`,
         username: displayName,
+        type: type,
       });
       let message = await Message.create(messageConfig);
       await MessageService.sendMail(message);

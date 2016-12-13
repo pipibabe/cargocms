@@ -61,6 +61,7 @@ module.exports = {
             email: data.email,
             displayName: loginUser.displayName,
             signToken: verificationEmailToken,
+            type: '更新',
           })
           req.flash('info', '修改 Email 後，請至信箱收驗證信');
         }
@@ -96,10 +97,7 @@ module.exports = {
     try {
       const { email } = req.body;
 
-      const secret = sails.config.reCAPTCHA.secret;
-      const response = req.body['g-recaptcha-response'];
-      const recaptcha = await axios.get(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`);
-      if (!recaptcha.data.success) throw Error('請稍候再試');
+      await UtilsService.checkRecaptcha(req.body);
 
       let user = await User.findOne({
         where: { email }
@@ -188,6 +186,7 @@ module.exports = {
         email: user.email,
         displayName: user.displayName,
         signToken: user.verificationEmailToken,
+        type: '重新驗證',
       })
       res.ok({
         message:`send emaill success.`,

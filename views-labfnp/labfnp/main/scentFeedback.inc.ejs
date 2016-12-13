@@ -44,36 +44,41 @@
   // $(document).ready(function(){
     var successCatch = function(e) {
       $('#scentNote').empty();
-      if(Object.keys(e.data.scentItem).length === 0 || Object.keys(e.data.recipeItem).length === 0){
+      if(Object.keys(e.data.scentItem).length === 0 && Object.keys(e.data.recipeItem).length === 0){
         $('#scentNote').append($('#noneScentFeedback').tmpl());
       } else {
-        $('#scentNote').append('<h2>香味分子筆記</h2>');
-        Object.keys(e.data.scentItem).forEach(function(key){
-          var data = e.data.scentItem[key];
-          var scentFeedback = $('#scentFeedback').tmpl({
-            name: data.Scent.name,
-            title: data.Scent.title,
-            description: data.Scent.description,
-            color: data.Scent.ScentNote.color,
-            feeling: data.info
+        if(Object.keys(e.data.scentItem).length > 0){
+          $('#scentNote').append('<h2>香味分子筆記</h2>');
+          Object.keys(e.data.scentItem).forEach(function(key){
+            var data = e.data.scentItem[key];
+            var scentFeedback = $('#scentFeedback').tmpl({
+              name: data.Scent.name,
+              title: data.Scent.title,
+              description: data.Scent.description,
+              color: data.Scent.ScentNote.color,
+              feeling: data.info
+            });
+            $('#scentNote').append(scentFeedback);
           });
-          $('#scentNote').append(scentFeedback);
-        });
+        }
 
-        $('#scentNote').append('<h2>配方感覺筆記</h2>');
-        Object.keys(e.data.recipeItem).forEach(function(key){
-          var data = e.data.recipeItem[key];
-          console.log(data.Recipe.coverPhoto);
-          var recipeFeedback = $('#recipeFeedback').tmpl({
-            name: data.Recipe.perfumeName,
-            description: data.Recipe.description,
-            feeling: data.info,
-            coverPhoto: data.Recipe.coverPhoto,
-            coverPhoto2: '/assets/labfnp/img/recipe-default-cover.'+ data.Recipe.id % 7 + '.jpg',
-            hashId: data.Recipe.hashId,
+        if(Object.keys(e.data.recipeItem).length > 0){
+          $('#scentNote').append('<h2>配方感覺筆記</h2>');
+          Object.keys(e.data.recipeItem).forEach(function(key){
+            var data = e.data.recipeItem[key];
+            console.log(data.Recipe.coverPhoto);
+            var recipeFeedback = $('#recipeFeedback').tmpl({
+              name: data.Recipe.perfumeName,
+              description: data.Recipe.description,
+              feeling: data.info,
+              coverPhoto: data.Recipe.coverPhoto,
+              coverPhoto2: '/assets/labfnp/img/recipe-default-cover.'+ data.Recipe.id % 7 + '.jpg',
+              hashId: data.Recipe.hashId,
+            });
+            $('#scentNote').append(recipeFeedback);
           });
-          $('#scentNote').append(recipeFeedback);
-        });
+        }
+
       }
     }
     var failCatch = function(e) {

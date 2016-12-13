@@ -160,9 +160,11 @@
           }else{
 						if (row.PaymentType === '到店購買') {
 							return '<td><span class="textbreak">到店購買</span></td>'
+						} else if (row.PaymentType === '免費活動'){
+							return '<td></td>';
 						} else {
-							return '<td><span class="textbreak">訂單尚未成立</span></td>';
-						}
+              return '<td><span class="textbreak">訂單尚未成立</span></td>';
+            }
           }
         }
       },

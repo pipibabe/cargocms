@@ -1,7 +1,7 @@
 module.exports = {
 
   'get /api/labfnp/recipe/findForLab': 'api/labfnp/RecipeController.findForLab',
-  'get /api/labfnp/recipe': 'api/labfnp/RecipeController.find',
+  // 'get /api/labfnp/recipe': 'api/labfnp/RecipeController.find',
   'post /api/labfnp/recipe': 'api/labfnp/RecipeController.create',
   'get /api/labfnp/recipe/new': 'api/labfnp/RecipeController.topNew',
   'get /api/labfnp/recipe/:id': 'api/labfnp/RecipeController.findOne',
@@ -11,11 +11,11 @@ module.exports = {
   'get /api/labfnp/recipe/:id/feelings': 'api/labfnp/RecipeController.feelings',
 
   'get /api/labfnp/user/feeling': 'api/labfnp/FeelingController.findByUser',
-  'get /api/labfnp/feeling': 'api/labfnp/FeelingController.find',
-  'get /api/labfnp/feeling/:id': 'api/labfnp/FeelingController.findOne',
-  'post /api/labfnp/feeling': 'api/labfnp/FeelingController.create',
-  'put /api/labfnp/feeling/:id': 'api/labfnp/FeelingController.update',
-  'delete /api/labfnp/feeling/:id': 'api/labfnp/FeelingController.destroy',
+  'get /api/admin/labfnp/feeling': 'api/admin/labfnp/FeelingController.find',
+  'get /api/admin/labfnp/feeling/:id': 'api/admin/labfnp/FeelingController.findOne',
+  'post /api/admin/labfnp/feeling': 'api/admin/labfnp/FeelingController.create',
+  'put /api/admin/labfnp/feeling/:id': 'api/admin/labfnp/FeelingController.update',
+  'delete /api/admin/labfnp/feeling/:id': 'api/admin/labfnp/FeelingController.destroy',
 
   'get /api/labfnp/recipe/like/:id': 'api/labfnp/RecipeController.like',
   'get /api/labfnp/recipe/unlike/:id': 'api/labfnp/RecipeController.unlike',
@@ -33,13 +33,19 @@ module.exports = {
   'delete /api/admin/labfnp/scentfeedback/:id': 'api/admin/labfnp/ScentFeedbackController.destroy',
   'put /api/admin/labfnp/feedbackCheck/:id': 'api/admin/labfnp/ScentFeedbackController.feedbackCheck',
 
+  'get /api/admin/labfnp/recipe/export': 'api/admin/labfnp/RecipeController.export',
+  'get /api/admin/labfnp/recipe':     'api/admin/labfnp/RecipeController.find',
+  'get /api/admin/labfnp/recipe/:id': 'api/admin/labfnp/RecipeController.findOne',
+  'post /api/admin/labfnp/recipe':    'api/admin/labfnp/RecipeController.create',
+  'put /api/admin/labfnp/recipe/:id':     'api/admin/labfnp/RecipeController.update',
+  'delete /api/admin/labfnp/recipe/:id':  'api/admin/labfnp/RecipeController.destroy',
+
   // 這裡先相容舊版 api
   'post /api/allpay/paid':        'api/admin/labfnp/RecipeController.paid',
   'post /api/allpay/paymentinfo': 'api/admin/labfnp/RecipeController.paymentinfo',
   //
   'post /api/recipe/paid':        'api/admin/labfnp/RecipeController.paid',
   'post /api/recipe/paymentinfo': 'api/admin/labfnp/RecipeController.paymentinfo',
-  'get /api/admin/labfnp/recipe/export': 'api/admin/labfnp/RecipeController.export',
 
   'put /api/admin/shipping/:id': 'api/admin/labfnp/RecipeOrderController.shippingUpdate',
   'put /api/admin/labfnp/recipeorder/status/:id': 'api/admin/labfnp/RecipeOrderController.updateProductionStatus',

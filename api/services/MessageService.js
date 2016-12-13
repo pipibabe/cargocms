@@ -289,15 +289,16 @@ module.exports = {
     }
   },
 
-  checkNewEmail: ({username, api, email}) => {
+  checkNewEmail: ({username, api, email, type}) => {
     try {
-      let forgotPasswordTemplete = sails.config.mail.templete.checkNewEmail;
-      let mailSendConfig = {...forgotPasswordTemplete, to: email};
+      let checkEmailTemplete = sails.config.mail.templete.checkNewEmail;
+      let mailSendConfig = {...checkEmailTemplete, to: email};
       let DOMAIN_HOST = sails.config.appUrl;
       const url = `${DOMAIN_HOST}${api}`
 
       mailSendConfig.subject = sprintf(mailSendConfig.subject, { username });
       mailSendConfig.html = sprintf(mailSendConfig.html, {
+        type,
         username,
         url,
         storeName: 'LFP',
