@@ -1,6 +1,6 @@
 import {mockAdmin, unMockAdmin} from "../../../../util/adminAuthHelper.js"
 
-describe.only('about admin api ProductDescription Controller operation.', function() {
+describe('about admin api ProductDescription Controller operation.', function() {
   describe('about ProductDescription Controller operation.', function() {
 
     let productDescription, product, image;
