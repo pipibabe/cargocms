@@ -99,37 +99,37 @@
         <b class="tooltip tooltip-bottom-right">price</b></label>
     </section>
     <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
-      <label class="label">point</label>
-      <label class="input state-disabled">
-        <input type="text" name="point" placeholder="" v-model="data.item.point" disabled>
-        <b class="tooltip tooltip-bottom-right">point</b></label>
-      </label>
-    </section>
-  </div>
-
-  <div class="row">
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
       <label class="label">weight</label>
       <label class="input state-disabled">
         <input type="number" name="weight" placeholder="" v-model="data.item.weight" disabled>
         <b class="tooltip tooltip-bottom-right">weight</b></label>
       </label>
     </section>
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <!-- <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <label class="label">point</label>
+      <label class="input state-disabled">
+        <input type="text" name="point" placeholder="" v-model="data.item.point" disabled>
+        <b class="tooltip tooltip-bottom-right">point</b></label>
+      </label>
+    </section> -->
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">length</label>
       <label class="input state-disabled">
         <input type="number" name="length" placeholder="" v-model="data.item.length" disabled>
         <b class="tooltip tooltip-bottom-right">length</b></label>
       </label>
     </section>
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">width</label>
       <label class="input state-disabled">
         <input type="number" name="width" placeholder="" v-model="data.item.width" disabled>
         <b class="tooltip tooltip-bottom-right">width</b></label>
       </label>
     </section>
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">height</label>
       <label class="input state-disabled">
         <input type="number" name="height" placeholder="" v-model="data.item.height" disabled>
@@ -139,37 +139,37 @@
   </div>
 
   <div class="row">
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">subtract</label>
       <label class="input state-disabled">
         <input type="text" name="subtract" placeholder="" v-model="data.item.subtract" disabled>
         <b class="tooltip tooltip-bottom-right">subtract</b></label>
       </label>
     </section>
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">minimum</label>
       <label class="input state-disabled">
         <input type="number" name="minimum" placeholder="" v-model="data.item.minimum" disabled>
         <b class="tooltip tooltip-bottom-right">minimum</b></label>
       </label>
     </section>
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">sortOrder</label>
       <label class="input state-disabled">
         <input type="number" name="sortOrder" placeholder="" v-model="data.item.sortOrder" disabled>
         <b class="tooltip tooltip-bottom-right">sortOrder</b></label>
       </label>
     </section>
-    <section class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">publish</label>
       <label class="input state-disabled">
         <input type="text" name="publish" placeholder="" v-model="data.item.publish" disabled>
         <b class="tooltip tooltip-bottom-right">publish</b></label>
       </label>
     </section>
-  </div>
-
-  <div class="row notForCreate">
     <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">viewed</label>
       <label class="input state-disabled">
@@ -177,6 +177,9 @@
         <b class="tooltip tooltip-bottom-right">viewed</b></label>
       </label>
     </section>
+  </div>
+
+  <div class="row notForCreate">
     <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">createdAt</label>
       <label class="input state-disabled">
@@ -189,6 +192,13 @@
       <label class="input state-disabled">
         <input type="text" name="updatedAt" placeholder="" v-model="data.item.updatedAt" disabled>
         <b class="tooltip tooltip-bottom-right">updatedAt</b></label>
+      </label>
+    </section>
+    <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <label class="label">deletedAt</label>
+      <label class="input state-disabled">
+        <input type="text" name="deletedAt" placeholder="" v-model="data.item.deletedAt" disabled>
+        <b class="tooltip tooltip-bottom-right">deletedAt</b></label>
       </label>
     </section>
   </div>
