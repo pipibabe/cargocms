@@ -193,7 +193,7 @@
 		$('#loadavg2').attr('data-percent', loadavg2).children('span').text(loadavg2);
 		$('#loadavg3').attr('data-percent', loadavg3).children('span').text(loadavg3);
 
-    $('#totalmem').text(data.totalmem);
+    $('#totalmem').text((data.totalmem).toFixed(2));
     $('#freemem').text((data.freemem).toFixed(2));
     $('#resident-set-size').text(memoryToMB(data.residentSet.rss));
     $('#heap').text(memoryToMB(data.residentSet.heapTotal));

@@ -11,12 +11,25 @@
 <script id="orderList" type="text/x-jquery-tmpl">
   <style>
     th.center {text-align:center}
+
+    .accordion-toggle td:first-child:after {
+      content: "\f078"; /* fa-chevron-down */
+      font-family: 'FontAwesome';
+      right: 0;
+    }
+
+    tr[aria-expanded="true"] > td:first-child:after{
+      font-family: 'FontAwesome';
+      content: "\f077"; /* fa-chevron-up */
+    }
+
   </style>
   <div class="well">
   <h2>配方訂購項目</h2>
   <table class="table">
   	<thead>
   		<tr>
+        <th></th>
         <th>訂單編號</th>
   			<th class="hidden-sm">訂購商品</th>
         <th class="center hidden-sm">收件人</th>
@@ -28,15 +41,16 @@
   	<tbody>
       {{each data}}
   			<tr data-toggle="collapse" data-target="#${MerchantTradeNo}" class="accordion-toggle collapsed" aria-expanded="false">
+          <td width="5%"></td>
           <td width="20%">${MerchantTradeNo}</td>
           <td width="20%" class="hidden-sm">${RecipeOrder.Recipe.perfumeName}</td>
-          <td width="20%" class="hidden-sm" align="center">${RecipeOrder.recipient}</td>
+          <td width="15%" class="hidden-sm" align="center">${RecipeOrder.recipient}</td>
   				<td width="20%" align="center">${RecipeOrder.productionStatusDesc}</td>
           <td width="20%" class="hidden-sm" align="center">${RecipeOrder.trackingNumber}</td>
           <td width="20%" align="center"><a href="/recipe/done?t=${MerchantTradeNo}" class="btn-u btn-u-brown btn-u-xs">詳細</a></td>
   			</tr>
         <tr>
-            <td colspan="6" class="hiddenRow no-padding">
+            <td colspan="7" class="hiddenRow no-padding">
               <div class="margin-bottom-20 margin-top-20 margin-right-10 margin-left-10 collapse" id="${MerchantTradeNo}" aria-expanded="false" style="height: 0px;">
                 {{if RecipeOrder.trackingNumber}}
                   <div class="margin-bottom-10">

@@ -21,4 +21,14 @@ module.exports = {
     'editPofile': ['nocache'],
     'validateEmail': [],
   },
+  'api/admin/labfnp/RecipeController': {
+    'find': ['passport', 'sessionAuth', 'isAdmin'],
+    'findOne': ['passport', 'sessionAuth', 'isAdmin'],
+    'create': ['passport', 'sessionAuth', 'isAdmin'],
+    'update': ['passport', 'sessionAuth', 'isAdmin'],
+    'destroy': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  'api/admin/labfnp/FeelingController': {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  }
 }

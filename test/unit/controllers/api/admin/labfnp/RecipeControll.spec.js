@@ -1,4 +1,6 @@
 var sinon = require('sinon');
+import {mockAdmin, unMockAdmin} from "../../../../../util/adminAuthHelper.js"
+
 describe('about admin api recipe Controller operation.', function() {
 
   const serialize = (obj, prefix) => {
@@ -17,13 +19,11 @@ describe('about admin api recipe Controller operation.', function() {
   let recipe;
   before(async (done) => {
     try {
+      await mockAdmin();
       let user = await User.create({
         username: 'JohnGettingCSV',
         email: 'JohnGettingCSV@gmail.com',
         password: ''
-      });
-      sinon.stub(AuthService, 'getSessionUser', (req) => {
-        return user.toJSON();
       });
       recipe = await Recipe.create({
         formula:[
@@ -43,8 +43,8 @@ describe('about admin api recipe Controller operation.', function() {
     }
   });
 
-  after((done) => {
-    AuthService.getSessionUser.restore();
+  after(async (done) => {
+    await unMockAdmin();
     done();
   });
 

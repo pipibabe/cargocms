@@ -38,7 +38,7 @@ module.exports = {
     }
   },
   associations: function() {
-    // OptionDescription.belongsTo(Option);
+    OptionDescription.belongsTo(Option);
   },
   options: {
     classMethods: {

@@ -76,7 +76,7 @@ appMain.disableAllpay = function(){
 appMain.DataTableInitComplete = function() {
   var api = this.api();
 
-  $(".widget-body-toolbar").removeClass("hidden"); 
+  $(".widget-body-toolbar").removeClass("hidden");
 
   this.yadcf([
     {        
@@ -191,6 +191,8 @@ appMain.DataTableInitComplete = function() {
 
   //隱藏新增按鈕
   $('#ToolTables_main-table_2').hide();
+
+  $('.loading-wrapper').removeClass('active');
 }
 
 appMain.customSearch = function() {

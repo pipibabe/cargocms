@@ -107,7 +107,7 @@ describe('about LikeRecipe Controller operation.', function() {
     }
   });
 
-  it('Recipe feelings create should be success.', async (done) => {
+  it.skip('Recipe feelings create should be success.', async (done) => {
     try {
       const res = await request(sails.hooks.http.app)
       .post(`/api/labfnp/recipe/feedback`)
@@ -141,7 +141,7 @@ describe('about LikeRecipe Controller operation.', function() {
   });
 
 
-  it('Recipe update should be success.', async (done) => {
+  it.skip('Recipe update should be success.', async (done) => {
     try {
       const res = await request(sails.hooks.http.app)
       .put(`/api/labfnp/recipe/${recipe.id}`)

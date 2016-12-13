@@ -1,5 +1,5 @@
 var sinon = require('sinon');
-describe('about Event Controller operation.', function() {
+describe.skip('about Event Controller operation.', function() {
 
   let event, event2, user;
   before(async (done) => {

@@ -39,9 +39,9 @@ module.exports = {
     }
   },
   associations: function() {
-    // OptionValue.belongsTo(Option);
     OptionValue.hasOne(ProductOptionValue);
     OptionValue.hasOne(OptionValueDescription);
+    OptionValue.belongsTo(Option);
   },
   options: {
     classMethods: {

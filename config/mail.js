@@ -128,7 +128,7 @@ var defaultConfig = {
       html: `
       <br />Hi %(username)s:
       <br />
-      <br />我們接收到您的 email 修改申請, 請點擊下方的確認修改按鈕，以套用新的 email 設定。
+      <br />我們接收到您的 email %(type)s申請, 請點擊下方的確認按鈕，以套用 email 設定。
       <br /><a href='%(url)s'>Click Me</a>
       <br />
       <br />若無法點擊連結，請複製下方連結至瀏覽器中
