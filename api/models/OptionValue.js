@@ -17,7 +17,7 @@ module.exports = {
     },
   },
   associations: function() {
-    // OptionValue.belongsTo(Option);
+    OptionValue.belongsTo(Option);
     OptionValue.hasOne(ProductOptionValue);
     OptionValue.hasOne(OptionValueDescription);
   },
