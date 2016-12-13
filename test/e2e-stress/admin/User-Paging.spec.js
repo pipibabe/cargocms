@@ -1,6 +1,6 @@
 require("../../bootstrap.test.js")
 let user = require('../../../config/init/fakeusers');
-import {login, logout, startLogging} from "../../util/e2eHelper.js"
+import {login, logout, startLogging, stopLogging} from "../../util/e2eHelper.js"
 
 describe('test browser admin user page', function() {
   this.timeout(10000000);
@@ -8,12 +8,12 @@ describe('test browser admin user page', function() {
   before(async (done)=>{
     try {
       // add fake user data
-      await user.init("user-paging");
+      await user.init();
 
       console.log("=== admin login ===");
       await login("admin");
       // 開啟分頁之後，PID會變化...
-      startLogging();
+      startLogging("user-paging-");
       done();
     } catch (e) {
       done(e);

@@ -29,8 +29,6 @@ let self = module.exports = {
     }
   },
 
-  loggingTimer: {},
-
   startLogging: (prefix) => {
     ps.lookup({
       // TODO: support other browser than chrome
@@ -48,9 +46,8 @@ let self = module.exports = {
   },
 
   stopLogging: () => {
-    sails.log("stop loging memory");
     clearInterval(self.loggingTimer);
-  }
+  },
 
   log: async (pidList,prefix) => {
     let excelField = [];
@@ -103,7 +100,7 @@ let self = module.exports = {
     fs.appendFile(file,JSONString , "utf8");
   },
 
-  writeHeader: (pidList) => {
+  writeHeader: (pidList,prefix) => {
     let file = self.getLogFolder() + prefix + sails.config.e2eClientLog.MEMORY;
     let fieldString = "";
     pidList.forEach(function(pid,pidIndex) {
@@ -119,7 +116,7 @@ let self = module.exports = {
     fs.appendFile(file, fieldString, "utf8");
   },
 
-  writeContent: (excelField) => {
+  writeContent: (excelField,prefix) => {
     let file = self.getLogFolder() + prefix + sails.config.e2eClientLog.MEMORY;
     let fieldString = "";
     excelField.forEach(function(field,fieldIndex) {
