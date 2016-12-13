@@ -4,30 +4,29 @@
 	<thead>
 		<tr>
 			<th width="8%" class="" data-hide="phone"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/> ID</th>
-      <th width="10%" class="" data-class="expand">模型</th>
-      <th width="" class="">SKU</th>
-      <th width="" class="">UPC</th>
-      <th width="" class="">EAN</th>
-      <th width="" class="">JAN</th>
-      <th width="" class="">ISBN</th>
-      <th width="" class="">MPN</th>
+      <th width="10%" class="" data-class="expand">model</th>
+      <th width="" class="" data-hide="always">SKU</th>
+      <th width="" class="" data-hide="always">UPC</th>
+      <th width="" class="" data-hide="always">EAN</th>
+      <th width="" class="" data-hide="always">JAN</th>
+      <th width="" class="" data-hide="always">ISBN</th>
+      <th width="" class="" data-hide="always">MPN</th>
       <th width="" class="">Location</th>
       <th width="" class="">quantity</th>
-      <th width="" class="">image</th>
+      <th width="" class="" data-hide="always">image</th>
       <th width="" class="">shipping</th>
       <th width="" class="">price</th>
 			<th width="" class="">points</th>
       <th width="" class="">dateAvailable</th>
-      <th width="" class="">weight</th>
-      <th width="" class="">length</th>
-      <th width="" class="">width</th>
-      <th width="" class="">height</th>
-      <th width="" class="">subtract</th>
+      <th width="" class="" data-hide="always">weight</th>
+      <th width="" class="" data-hide="always">length</th>
+      <th width="" class="" data-hide="always">width</th>
+      <th width="" class="" data-hide="always">height</th>
+      <th width="" class="" data-hide="always">subtract</th>
       <th width="" class="">minimum</th>
-      <th width="" class="">sortOrder</th>
+      <th width="" class="" data-hide="always">sortOrder</th>
       <th width="" class="">publish</th>
       <th width="" class="">viewed</th>
-      <th width="" class="">ImageId</th>
 			<th width="10%" data-hide="phone,tablet"></th>
 		</tr>
 	</thead>
@@ -58,7 +57,6 @@
       <td>{{ item.sortOrder }}</td>
       <td>{{ item.publish }}</td>
       <td>{{ item.viewed }}</td>
-			<td>{{ item.ImageId }}</td>
 			<td align="center" style="cursor: pointer;">
 				<div class="row">
 					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
