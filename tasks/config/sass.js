@@ -9,7 +9,14 @@ module.exports = function(grunt) {
           expand: true,
           cwd: "assets/styles/",
           src: ["importer.scss"],
-          dest: ".tmp/public/styles/",
+          dest: ".tmp/public/css/",
+          ext: ".css"
+        },
+        {
+          expand: true,
+          cwd: "assets-labfnp/sass/",
+          src: ["importer.scss"],
+          dest: ".tmp/public/css/labfnp/",
           ext: ".css"
         }
       ]

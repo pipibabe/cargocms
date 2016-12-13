@@ -5,6 +5,6 @@ module.exports = function (grunt) {
 		'linkAssetsBuild',
 		// 'clean:build',
 		'sass:dev',
-		'copy:build'
+		'copy:build',
 	]);
 };

@@ -57,7 +57,7 @@ export default class Allpay {
     return data;
   };
 
-  async createAndgetAllpayConfig({
+  async createAndgetAllpayConfigAsync({
     relatedKeyValue,
     MerchantTradeNo,
     tradeDesc,
@@ -98,6 +98,51 @@ export default class Allpay {
       config: this.genCheckMacValue(data),
       allpay
     }
+  }
+
+  createAndgetAllpayConfig({
+    relatedKeyValue,
+    MerchantTradeNo,
+    tradeDesc,
+    totalAmount,
+    paymentMethod,
+    itemArray,
+    clientBackURL,
+    returnURL,
+    paymentInfoURL,
+    transaction,
+  }) {
+    clientBackURL = clientBackURL || this.ClientBackURL;
+    returnURL = returnURL || this.ReturnURL;
+    paymentInfoURL = paymentInfoURL || this.PaymentInfoURL;
+    const ItemName = itemArray ? itemArray.join('#') : '';
+    const crc = sh.unique(`${MerchantTradeNo}${ItemName}${this.merchantID}`);
+    MerchantTradeNo = MerchantTradeNo + crc.substr(0, 3);
+
+    const data = {
+      MerchantID: this.merchantID,
+      MerchantTradeNo,
+      MerchantTradeDate: moment().format('YYYY/MM/DD HH:mm:ss'),
+      PaymentType: 'aio',
+      TotalAmount: totalAmount,
+      TradeDesc: tradeDesc || 'none.',
+      ItemName,
+      ReturnURL: this.resolve(this.domain, returnURL, true),
+      ChoosePayment: paymentMethod || 'ALL',
+      ClientBackURL: `${this.resolve(this.domain, clientBackURL, true)}?t=${MerchantTradeNo}`,
+      PaymentInfoURL: this.resolve(this.domain, this.PaymentInfoURL, true),
+    };
+    const config = this.genCheckMacValue(data)
+    return this.Allpay.create({
+      ...relatedKeyValue,
+      MerchantTradeNo: data.MerchantTradeNo,
+      PaymentType: data.PaymentType,
+    }, { transaction }).then(function(allpay) {
+      return {
+        config,
+        allpay
+      }
+    });
   }
 
   async paymentinfo(callBackData) {

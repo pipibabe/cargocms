@@ -2,6 +2,22 @@
   .hiddenRow {
     padding: 0 !important;
   }
+
+  .accordion-toggle td:first-child:after {
+    content: "\f078"; /* fa-chevron-down */
+    font-family: 'FontAwesome';
+    right: 0;
+  }
+
+  tr[aria-expanded="true"] > td:first-child:after{
+    font-family: 'FontAwesome';
+    content: "\f077"; /* fa-chevron-up */
+  }
+  
+  .ng-binding {
+    margin-top: 5px;
+    margin-left: 5px;
+  }
 </style>
 
 <div class="news-v3 bg-color-white margin-bottom-60">
@@ -16,12 +32,6 @@
     <% } %>
   <% } %>
   <div class="news-v3-in">
-    <ul class="list-inline posted-info">
-      <% if (data.UserId) { %>
-        <li>By <a href="#"><%= data.User.displayName %></a></li>
-      <% } %>
-      <li><%= data.createdDateTime.dateTime %></li>
-    </ul>
 
     <div class="row">
       <div class="blog-title col-md-8">
@@ -46,16 +56,21 @@
 				<table class="table">
 					<thead>
 						<tr>
+              <th></th>
 							<th>票券名稱</th>
 							<th class="hidden-sm">發售狀態</th>
 							<th>票價</th>
 							<th>訂購</th>
+
 						</tr>
 					</thead>
 					<tbody>
             <% data.Events.forEach(function(Event){ %>
   						<tr data-toggle="collapse" data-target="#event<%= Event.id %>" class="accordion-toggle">
-  							<td><%= Event.title %></td>
+                <td></td>
+                <td>
+                  <%= Event.title %>
+                </td>
   							<td><%= Event.signupCount + "/" + Event.limit %></td>
   							<td class="hidden-sm"><%= Event.price %></td>
                 <% if (Event.open){ %>
@@ -63,9 +78,10 @@
                 <% } else { %>
                   <td><a data-id="<%= Event.id %>" class="btn btn-warming btn-xs "><%= Event.status %></a></td>
                 <% } %>
-                </tr>
+
+              </tr>
               <tr>
-                  <td colspan="6" class="hiddenRow">
+                  <td colspan="5" class="hiddenRow">
                     <div class="accordian-body collapse" id="event<%= Event.id %>">
                       <div>
                           <b>票券名稱：</b>
@@ -89,7 +105,10 @@
                           <b>票券說明：</b>
                       </div>
                       <div ng-show="ticket.description" class="ng-binding">
-                          <%= Event.description %>
+                        <% var description = Event.description.replace(/[\r\n|\n]/g,"<br/>").split('<br/>');%>
+                        <% description.forEach(function( desc ){ %>
+                          <%= desc %><br/>
+                        <% }); %>
                       </div>
                     </div>
                   </td>

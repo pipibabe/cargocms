@@ -4,10 +4,7 @@ import axios from 'axios';
 
 exports.register = async (req, res, next) => {
 
-  const secret = sails.config.reCAPTCHA.secret;
-  const response = req.body['g-recaptcha-response'];
-  const recaptcha = await axios.get(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`);
-  if (!recaptcha.data.success) throw Error('請稍候再試');
+  await UtilsService.checkRecaptcha(req.body);
 
   var email, password, username;
   email = req.param('email');
@@ -71,6 +68,7 @@ exports.register = async (req, res, next) => {
       email: user.email,
       displayName: user.displayName,
       signToken: verificationEmailToken,
+      type: '註冊',
     });
     return next(null, user);
 

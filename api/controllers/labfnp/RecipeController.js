@@ -230,87 +230,138 @@ module.exports = {
 
   allpay: async function(req, res) {
     sails.log.warn('新建訂單傳入資料', req.body);
-    // const isolationLevel = sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE;
-    // const transaction = await sequelize.transaction({ isolationLevel, autocommit: false });
+    const { id } = req.params;
+    const user = AuthService.getSessionUser(req);
+    if (!user) return res.redirect('/login');
+
+    const { recipient, phone, address, paymentMethod } = req.body;
+    const { email, note, perfumeName, description, message, invoiceNo, token } = req.body;
+
     try {
-      const { id } = req.params;
-      const user = AuthService.getSessionUser(req);
-      if (!user) return res.redirect('/login');
-
-      const { recipient, phone, address, paymentMethod } = req.body;
-      const { email, note, perfumeName, description, message, invoiceNo, token } = req.body;
-
-      try {
-        let updateUserData = await User.findById(user.id);
-        let userNeedUpdate = false;
-        //update Phone
-        if( !updateUserData.phone1 && !updateUserData.phone2 ) {
-          updateUserData.phone1 = phone;
-          userNeedUpdate = true;
-        }
-        //update Email
-        if( !updateUserData.email ){
-          updateUserData.email = email;
-          userNeedUpdate = true;
-        }
-        if( userNeedUpdate ) {
-          updateUserData = await updateUserData.save().catch(sequelize.UniqueConstraintError, function(err) {
-            sails.log.error('Email 重複，不更新使用者帳號資訊')
-          });
-        };
-      } catch (e) {
-        sails.log.error('更新使用者失敗', e)
+      let updateUserData = await User.findById(user.id);
+      let userNeedUpdate = false;
+      //update Phone
+      if( !updateUserData.phone1 && !updateUserData.phone2 ) {
+        updateUserData.phone1 = phone;
+        userNeedUpdate = true;
       }
+      //update Email
+      if( !updateUserData.email ){
+        updateUserData.email = email;
+        userNeedUpdate = true;
+      }
+      if( userNeedUpdate ) {
+        updateUserData = await updateUserData.save().catch(sequelize.UniqueConstraintError, function(err) {
+          sails.log.error('Email 重複，不更新使用者帳號資訊')
+        });
+      };
+    } catch (e) {
+      sails.log.error('更新使用者失敗', e)
+    }
 
+    const isolationLevel = sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE;
+    let MerchantTradeNo = crypto.randomBytes(32).toString('hex').substr(0, 8);
 
-      let findOrder = await Allpay.find({
-        where: {
-          PaymentType: '到店購買',
-        },
-        include: {
-          model: RecipeOrder,
-          where: { token },
-        },
+    const findRepeatOrder = (transaction) => {
+      return new Promise(function(resolve, reject) {
+        Allpay.find({
+          where: {
+            PaymentType: '到店購買',
+          },
+          include: {
+            model: RecipeOrder,
+            where: { token },
+            include: [Recipe, User],
+          },
+        }, { transaction })
+        .then(function(findOrder) {
+          resolve(findOrder);
+        })
+        .catch(function(err) {
+          reject(err)
+        });
       });
+    }
+
+    const createOrder = (transaction) => {
+      return new Promise(function(resolve, reject) {
+        RecipeOrder.create({
+          UserId: user.id,
+          RecipeId: id,
+          recipient,
+          phone,
+          address,
+          email,
+          note,
+          invoiceNo,
+          token,
+          productionStatus: paymentMethod == 'gotoShop' ? 'PAID' : 'NEW',
+        }, { transaction })
+        .then(function(order) {
+          resolve(order);
+        }).catch(function(err) {
+          reject(err)
+        });
+      });
+    }
+
+    const createAndgetAllpayConfig = ({formatName, recipeOrder, transaction}) => {
+      return new Promise(function(resolve, reject) {
+        AllpayService.createAndgetAllpayConfig({
+          relatedKeyValue: {
+            RecipeOrderId: recipeOrder.id,
+          },
+          MerchantTradeNo,
+          tradeDesc: `配方名稱：${perfumeName} 100 ml, (備註：${message})`,
+          totalAmount: 1550,
+          paymentMethod: paymentMethod,
+          itemArray: formatName,
+          clientBackURL: '/recipe/done',
+          returnURL: '/api/recipe/paid',
+          paymentInfoURL: '/api/recipe/paymentinfo',
+          transaction,
+        }).then(function(allPayData) {
+          MerchantTradeNo = allPayData.allpay.MerchantTradeNo;
+          resolve(allPayData);
+        }).catch(function(err) {
+          reject(err)
+        });
+      });
+    }
+
+    const sendEmail = ({transaction, config}) => {
+      return new Promise(function(resolve, reject) {
+        Message.create(config, { transaction }).then(function(message) {
+          sails.log.warn('到店購買訂單建立完成 RecipeOrder 寄送 Email id:', message.id);
+          MessageService.sendMail(message);
+          resolve();
+        }).catch(function(err) {
+          reject(err)
+        });
+      });
+    }
+
+    let transaction, recipeOrder, allPayData;
+    const formatName = [perfumeName + ' 100 ml'];
+
+    return sequelize.transaction({ isolationLevel })
+    .then(function (t) {
+      transaction = t;
+      return findRepeatOrder(transaction);
+    })
+    .then(function(findOrder){
       if (findOrder && paymentMethod == 'gotoShop') {
-        return res.redirect(`/recipe/done?t=${findOrder.MerchantTradeNo}`);
+        transaction.rollback();
+        return res.redirect(`/recipe/done?t=${MerchantTradeNo}`);
       }
-
-      let recipeOrder = await RecipeOrder.create({
-        UserId: user.id,
-        RecipeId: id,
-        recipient,
-        phone,
-        address,
-        email,
-        note,
-        invoiceNo,
-        token,
-        productionStatus: paymentMethod == 'gotoShop' ? 'PAID' : 'NEW',
-      }).catch(sequelize.UniqueConstraintError, function(err) {
-        throw Error('此交易已失效，請重新下訂')
-      });
-
-      // recipeOrder = await RecipeOrder.findByIdHasJoin(recipeOrder.id);
-      // const formatName = recipeOrder.ItemNameArray.map((name) => {
-      //   return name + ' 100 ml';
-      // });
-      const formatName = [perfumeName + ' 100 ml'];
-      let MerchantTradeNo = crypto.randomBytes(32).toString('hex').substr(0, 8);
-      const allPayData = await AllpayService.createAndgetAllpayConfig({
-        relatedKeyValue: {
-          RecipeOrderId: recipeOrder.id,
-        },
-        MerchantTradeNo,
-        tradeDesc: `配方名稱：${perfumeName} 100 ml, (備註：${message})`,
-        totalAmount: 1550,
-        paymentMethod: paymentMethod,
-        itemArray: formatName,
-        clientBackURL: '/recipe/done',
-        returnURL: '/api/recipe/paid',
-        paymentInfoURL: '/api/recipe/paymentinfo',
-      });
-      MerchantTradeNo = allPayData.allpay.MerchantTradeNo;
+      return createOrder(transaction);
+    })
+    .then(function(data){
+      recipeOrder = data;
+      return createAndgetAllpayConfig({formatName, recipeOrder, transaction});
+    })
+    .then(function(data) {
+      allPayData = data;
       sails.log.warn('訂單建立 RecipeOrder',
         '收件人:', recipeOrder.recipient,
         'UserId:', recipeOrder.UserId,
@@ -321,54 +372,43 @@ module.exports = {
         '建立時間:', recipeOrder.createdAt,
         'AllpayId:', allPayData.allpay.id,
       );
-
       if (paymentMethod == 'gotoShop') {
-        allPayData.allpay.RtnMsg = '到店購買';
-        allPayData.allpay.ShouldTradeAmt = 1550;
-        allPayData.allpay.TradeAmt = 1550;
-        allPayData.allpay.PaymentType = '到店購買';
-        allPayData.allpay.PaymentDate = moment(new Date()).format("YYYY/MM/DD");
-        await allPayData.allpay.save();
-        // transaction.commit();
-
-
-        try {
-          recipeOrder = await RecipeOrder.findByIdHasJoin(recipeOrder.id);
-          let messageConfig = {};
-          messageConfig.serialNumber = MerchantTradeNo;
-          messageConfig.paymentTotalAmount = 1550;
-          messageConfig.productName = recipeOrder.Recipe.perfumeName + ' 100 ml';
-          messageConfig.email = recipeOrder.email;
-          messageConfig.username = recipeOrder.User.displayName;
-          messageConfig.shipmentUsername = recipeOrder.recipient;
-          messageConfig.shipmentAddress = recipeOrder.address;
-          messageConfig.note = recipeOrder.note;
-          messageConfig.phone = recipeOrder.phone;
-          messageConfig.invoiceNo = recipeOrder.invoiceNo;
-          messageConfig = await MessageService.orderToShopConfirm(messageConfig);
-          const message = await Message.create(messageConfig);
-          await MessageService.sendMail(message);
-          sails.log.warn('到店購買訂單建立完成 RecipeOrder 寄送 Email id:', message.id);
-        } catch (e) {
-          sails.log.error('寄信失敗', e)
-        }
-
+        let messageConfig = {};
+        messageConfig.serialNumber = MerchantTradeNo;
+        messageConfig.paymentTotalAmount = 1550;
+        messageConfig.productName = perfumeName + ' 100 ml';
+        messageConfig.email = recipeOrder.email;
+        messageConfig.username = user.displayName;
+        messageConfig.shipmentUsername = recipeOrder.recipient;
+        messageConfig.shipmentAddress = recipeOrder.address;
+        messageConfig.note = recipeOrder.note;
+        messageConfig.phone = recipeOrder.phone;
+        messageConfig.invoiceNo = recipeOrder.invoiceNo;
+        const config = MessageService.orderToShopConfirm(messageConfig);
+        return sendEmail({transaction, config});
+      }
+    })
+    .then(function(){
+      transaction.commit();
+      if (paymentMethod == 'gotoShop') {
         return res.redirect(`/recipe/done?t=${MerchantTradeNo}`);
-
       } else {
         sails.log.warn('歐付寶訂單建立完成 RecipeOrder');
-        // transaction.commit();
         return res.view({
           AioCheckOut: AllpayService.getPostUrl(),
           ...allPayData.config
         });
       }
-    } catch (e) {
-      // transaction.rollback();
-      sails.log.error('訂單建立 RecipeOrder 失敗', e.toString());
-      req.flash('error', e.toString());
-      res.serverError(e, {redirect: '/recipe/order/' + req.query.hashId});
-    }
+    })
+    .catch(sequelize.UniqueConstraintError, function(e) {
+      throw Error('此交易已失效，請重新下訂')
+    })
+    .catch(function(err) {
+      sails.log.error('訂單建立 RecipeOrder 失敗', err.toString());
+      transaction.rollback();
+      req.flash('error', err.toString());
+      return res.serverError(err, {redirect: '/recipe/order/' + req.query.hashId});
+    });
   },
 
   done: async (req, res) => {

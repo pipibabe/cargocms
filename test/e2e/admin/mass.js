@@ -2,7 +2,7 @@ require("../../bootstrap.test.js")
 let user = require('../../../config/init/fakeusers');
 import {login, logout, startLogging} from "../../util/e2eHelper.js"
 
-describe('test browser admin pages', function() {
+describe.skip('test browser admin pages', function() {
   this.timeout(10000000);
 
   before(async (done)=>{
