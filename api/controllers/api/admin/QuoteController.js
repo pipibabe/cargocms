@@ -44,7 +44,12 @@ module.exports = {
 
   create: async (req, res) => {
     try {
-      const data = req.body;
+      let data = req.body;
+
+      if(!data.img) {
+        data.img = null;
+      }
+
       const item = await Quote.create(data);
       let message = 'Create success.';
       res.ok({ message, data: { item } } );

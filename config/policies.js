@@ -50,7 +50,7 @@ var defaultConfig = {
   'api/admin/AllpayController': {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
-  "api/admin/AllpayController": {
+  "api/admin/EventAllpayController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
   "api/admin/ContactController": {
@@ -79,13 +79,22 @@ var defaultConfig = {
   "api/admin/PostController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
-  "api/admin/SloganController": {
+  "api/admin/QuoteController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
   "api/admin/UserController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
   "UtilsController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  "api/admin/labfnp/ScentFeedbackController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  "api/admin/labfnp/ScentController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  "api/admin/labfnp/ScentNoteController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
 

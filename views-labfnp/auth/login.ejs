@@ -74,7 +74,16 @@
           <input type="password" placeholder="Password" value="<%= data.user.password %>" id="password" name="password" class="form-control">
         </div>
 
+        <% if (data.errors === 'Error.Passport.BadUserPassword') { %>
+          <div class="margin-top-20 alert alert-warning" role="alert">帳號或密碼錯誤！</div>
+        <% } else if(data.errors === 'Error.Order.Need.Login') { %>
+          <div class="margin-top-20 alert alert-warning" role="alert">訂購需為本站會員，請先登入帳號或註冊</div>
+        <% } %>
 
+        <% var info = req.flash('info')[0]; %>
+        <% if (info) { %>
+          <div class="margin-top-20 alert alert-warning" role="alert"><%= info %></div>
+        <% } %>
 
         <div class="row margin-top-20">
           <div class="col-md-6 checkbox">
@@ -88,20 +97,11 @@
             <button id="submit-button" class="btn-u pull-right" type="submit"><%= __('login') %></button>
           </div>
         </div>
-        <% if (data.errors === 'Error.Passport.BadUserPassword') { %>
-          <div class="alert alert-warning" role="alert"><%= __('login.bad_user_password') %></div>
-        <% } else if(data.errors === 'Error.Order.Need.Login') { %>
-          <div class="alert alert-warning" role="alert"><%= __('login.need_login') %></div>
-        <% } %>
         <hr>
 
         <h4><%= __('login.forget_password_title') %></h4>
         <p><%- __('login.forget_password_content', `<a class="color-green" href="/forgot">${__('login.forget_password_link')}</a>`) %></p>
 
-        <% var info = req.flash('info')[0]; %>
-        <% if (info) { %>
-          <div class="alert alert-warning" role="alert"><%= info %></div>
-        <% } %>
       </form>
     </div>
   </div><!--/row-->

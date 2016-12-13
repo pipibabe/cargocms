@@ -6,10 +6,7 @@ module.exports = {
       const { name, email, phone, subject, content } = req.body;
 
 
-      const secret = sails.config.reCAPTCHA.secret;
-      const response = req.body['g-recaptcha-response'];
-      const recaptcha = await axios.get(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`);
-      if (!recaptcha.data.success) throw Error('請稍候再試');
+      await UtilsService.checkRecaptcha(req.body);
 
       await Contact.create({ name, email, phone, subject, content, success: true });
 

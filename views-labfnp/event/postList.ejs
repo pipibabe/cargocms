@@ -31,18 +31,6 @@
     <% } %>
 
     <div class="news-v3-in">
-      <ul class="list-inline posted-info">
-        <% if (post.UserId) { %>
-          <li>
-            <i class="fa fa-user"></i>
-            <a href="#"><%= post.User.displayName %></a>
-          </li>
-        <% } %>
-        <li>
-          <i class="fa fa-clock-o"></i>
-          <%=: post.createdDateTime.dateTime %>
-        </li>
-      </ul>
 
       <div class="blog-title">
         <h2>
