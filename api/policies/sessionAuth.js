@@ -14,12 +14,12 @@ module.exports = async function(req, res, next) {
   const user = AuthService.getSessionUser(req);
   console.log("req.session", user);
   if (sails.config.offAuth || user) {
-    const noEmail = !user.email;
-    if (noEmail || user.email === '') {
-      sails.log.warn('使用者登入沒有 Email');
-      req.flash('info', '請補齊 Email 資料');
-      return res.redirect('/edit/me');
-    }
+    // const noEmail = !user.email;
+    // if (noEmail || user.email === '') {
+    //   sails.log.warn('使用者登入沒有 Email');
+    //   req.flash('info', '請補齊 Email 資料');
+    //   return res.redirect('/edit/me');
+    // }
 
     if (sails.config.verificationEmail && user.verificationEmailToken) {
       const modelUser = await User.findById(user.id);

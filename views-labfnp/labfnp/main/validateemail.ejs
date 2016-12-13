@@ -16,8 +16,14 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="error-v1">
-				<span class="error-v1-title"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
-				<span>驗證成功!!</span>
+				<span class="error-v1-title">
+          <% if( data.valid ){ %>
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          <% } else { %>
+            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          <% } %>
+        </span>
+				<span><%= data.message %></span>
 				<a class="btn-u btn-bordered btn-gray" href="/">返回首頁</a>
 			</div>
 		</div>

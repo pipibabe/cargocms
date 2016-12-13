@@ -1,3 +1,4 @@
+import {mockAdmin, unMockAdmin} from "../../../../util/adminAuthHelper.js"
 describe('about admin api Feeling Controller operation.', function() {
   describe('create ,update, delete a feeling with scent.', () => {
     let feeling, feeling2;
@@ -42,11 +43,18 @@ describe('about admin api Feeling Controller operation.', function() {
           "score": "1",
         });
 
+        await mockAdmin();
         done();
       } catch (e) {
         done(e);
       }
 
+    });
+
+    after(async (done) => {
+      await unMockAdmin();
+      // AuthService.getSessionUser.restore();
+      done();
     });
 
     it('Create a new Feeling with title 木質, scentName BJ4.', async (done) => {
@@ -56,7 +64,9 @@ describe('about admin api Feeling Controller operation.', function() {
           scentName: "BJ4"
         };
         const res = await request(sails.hooks.http.app)
-        .post(`/api/labfnp/feeling`).send(data);
+        .post(`/api/admin/labfnp/feeling`).send(data);
+
+        console.log(res);
 
         let result = await Feeling.findOne({
           where: {
@@ -81,7 +91,7 @@ describe('about admin api Feeling Controller operation.', function() {
         }
         // update feeling2 , 木質 > 爆炸的味道
         const res = await request(sails.hooks.http.app)
-        .put(`/api/labfnp/feeling/${feeling2.id}`).send(data);
+        .put(`/api/admin/labfnp/feeling/${feeling2.id}`).send(data);
 
         // 木質 totalRepeat should -1 ,equal 22
         let result = await Feeling.findOne({
@@ -115,7 +125,7 @@ describe('about admin api Feeling Controller operation.', function() {
         }
         // update feeling2 爆炸的味道 score 1 >> 87
         const res = await request(sails.hooks.http.app)
-        .put(`/api/labfnp/feeling/${feeling2.id}`).send(data);
+        .put(`/api/admin/labfnp/feeling/${feeling2.id}`).send(data);
 
         //  C4 爆炸的味道 score should updated to 87
         let result = await Feeling.findById(feeling2.id);
@@ -140,7 +150,7 @@ describe('about admin api Feeling Controller operation.', function() {
     it('delete a Feeling title 木質, scentName BU2.', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .delete(`/api/labfnp/feeling/${feeling.id}`);
+        .delete(`/api/admin/labfnp/feeling/${feeling.id}`);
 
         sails.log.info(JSON.stringify(res.body, null, 2));
         res.status.should.be.eq(200);

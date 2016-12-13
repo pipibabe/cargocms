@@ -335,7 +335,10 @@ appMain.DataTableInitComplete = function() {
   //隱藏新增按鈕
   $('#ToolTables_main-table_2').hide();
 
+  $('.loading-wrapper').removeClass('active');
 }
+
+
 appMain.customSaveParams = function(data) {
   data['productionStatus'] = $('#productionStatus').val() || 'PAID';
 }

@@ -216,6 +216,7 @@ var postApp = new Vue({
       } else return cb();
     },
     loadItems: function (cb) {
+      $(".loading-wrapper").addClass('active');
       window.onbeforeunload = null;
       $.get('/api/admin/post', ajaxSuccess);
 
@@ -322,6 +323,9 @@ var postApp = new Vue({
          responsiveHelper_datatable_tabletools.respond();
        },
        "order": [[ 0, 'desc' ]],
+       "initComplete": function(){
+         $('.loading-wrapper').removeClass('active');
+       }
      });
 
      // selection
@@ -400,6 +404,7 @@ var postApp = new Vue({
           ['height', ['height']],
           ['table', ['table']],
           // ['insert', ['link', 'picture', 'hr']],
+          ['insert', ['picture']],
           ['view', ['fullscreen', 'codeview', 'help']]
         ]
       });

@@ -12,7 +12,7 @@ node {
 
       if(BRANCH_NAME == "release-labfnp"){
         deploy = true;
-        skiptest = true;
+        // skiptest = true;
         preview = false;
       } else {
         timeout(time:10, unit:'SECONDS') {
@@ -61,8 +61,8 @@ node {
 
       stage 'test project'
       sh "npm run test-ci"
-      step([$class: 'JUnitResultArchiver', testResults: 'test-results.xml'])
-      step([$class: 'CloverPublisher', cloverReportDir: 'coverage', cloverReportFileName: 'clover.xml'])
+      // step([$class: 'JUnitResultArchiver', testResults: 'test-results.xml'])
+      // step([$class: 'CloverPublisher', cloverReportDir: 'coverage', cloverReportFileName: 'clover.xml'])
       sh "npm run test-e2e-docker"
     }
 

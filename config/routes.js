@@ -114,6 +114,10 @@ var defaultConfig = {
   'put /api/admin/product/:id': 'api/admin/ProductController.update',
   'delete /api/admin/product/:id': 'api/admin/ProductController.destroy',
 
+  'get /api/admin/labfnp/scent':  'api/admin/labfnp/ScentController.find',
+  'get /api/admin/labfnp/scentnote':  'api/admin/labfnp/ScentNoteController.find',
+
+
   //----- Event -----
   'get /events/:name': 'EventController.show',
 
