@@ -73,7 +73,7 @@
     <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">ImageId</label>
       <label class="input state-disabled">
-        <input type="text" name="image" placeholder="" v-model="data.item.ImageId" disabled>
+        <input type="text" name="ImageId" placeholder="" v-model="data.item.ImageId" disabled>
         <b class="tooltip tooltip-bottom-right">ImageId</b></label>
     </section>
     <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -196,12 +196,39 @@
 </fieldset>
 <script>
 var formRules = {
+  model : {
+    required : true
+  },
   ImageId : {
-    required : '請給予 ImageId'
+    required : true
+  },
+  sku : {
+    required : true
+  },
+  upc : {
+    required : true
+  },
+  ean : {
+    required : true
+  },
+  jan : {
+    required : true
+  },
+  isbn : {
+    required : true
+  },
+  mpn : {
+    required : true
+  },
+  location : {
+    required : true
   },
 }
 
 // Messages for form validation
 var formMessages = {
+  ImageId : {
+    required : '請給予 ImageId'
+  },
 }
 </script>
