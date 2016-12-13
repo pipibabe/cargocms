@@ -1,6 +1,122 @@
 
 module.exports = {
 
+  find: async (req, res) => {
+    try {
+      const { query } = req;
+      const { serverSidePaging } = query;
+      const modelName = req.options.controller.split("/").reverse()[0];
+      let result;
+      if (serverSidePaging) {
+        result = await PagingService.process({query, modelName});
+      } else {
+        const items = await sails.models[modelName].findAll();
+        result = { data: { items } };
+      }
+      res.ok(result);
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
+
+  findOne: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const currentUser = AuthService.getSessionUser(req);
+      const isAdmin = AuthService.isAdmin(req);
+      let { recipe } =  await RecipeService.loadRecipe(id, currentUser, isAdmin);
+      sails.log.info('backend get recipe =>', recipe);
+      res.ok({
+        message: 'Get recipe success.',
+        data: {item: recipe},
+      });
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
+
+  create: async (req, res) => {
+    const data = req.body;
+    try {
+      const loginedUser = AuthService.getSessionUser(req);
+      if (loginedUser) {
+        data.UserId = loginedUser.id;
+      }
+      sails.log.info('backend create recipe controller=>', data);
+      const recipe = await RecipeService.create(data);
+      await RecipeService.createUserFeeling({
+        formula: data.formula,
+        userId: loginedUser.id
+      });
+
+      if (data.feedback && data.feedback.length > 0) {
+        await RecipeFeedback.create({
+          feeling: data.feedback,
+          UserId: loginedUser.id,
+          RecipeId: recipe.id,
+        });
+      }
+      req.flash('info', 'Info.New.Recipe');
+      res.ok({
+        message: 'Create recipe success.',
+        data: recipe,
+      });
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
+
+  update: async (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+    try {
+      sails.log.info('backend update recipe controller id=>', id);
+      sails.log.info('backend update recipe controller data=>', data);
+      const user = AuthService.getSessionUser(req);
+
+      const recipe = await RecipeService.update({
+        id: id,
+        ...data,
+      });
+
+      await RecipeFeedback.update({
+        feeling: data.feedback
+      },{
+        where: { UserId: user.id, RecipeId: id }
+      });
+
+      await RecipeService.updateUserFeeling({
+        formula: data.formula,
+        userId: user.id,
+      });
+
+      res.ok({
+        message: 'Update recipe success.',
+        data: recipe,
+      });
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
+
+  destroy: async (req, res) => {
+    const { id } = req.params;
+    try {
+      sails.log.info('backend delete recipe controller=>', id);
+      const userId = AuthService.getSessionUser(req).id;
+      const recipe = await Recipe.deleteById(id);
+      res.ok({
+        message: 'Delete recipe success.',
+        data: {
+          userId
+        },
+
+      });
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
+
   paid: async (req, res) => {
     try {
       const data = req.body;

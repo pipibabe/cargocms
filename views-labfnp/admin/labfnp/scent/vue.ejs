@@ -67,7 +67,7 @@ var scentApp = new Vue({
     },
     update: function (event) {
       $.ajax({
-        url: '/api/labfnp/scent/' + scentAppModel.data.item.id,
+        url: '/api/admin/labfnp/scent/' + scentAppModel.data.item.id,
         type: 'PUT',
         dataType: 'json',
         data: scentAppModel.data.item,
@@ -90,7 +90,7 @@ var scentApp = new Vue({
     },
     loadItem: function (cb) {
       window.onbeforeunload = null;
-      $.get('/api/labfnp/scent/' + scentAppModel.data.item.id, ajaxSuccess);
+      $.get('/api/admin/labfnp/scent/' + scentAppModel.data.item.id, ajaxSuccess);
 
       function ajaxSuccess(result) {
         console.log("loadItem result.data=>", result.data);
@@ -211,8 +211,9 @@ var scentApp = new Vue({
       } else return cb();
     },
     loadItems: function (cb) {
+      $(".loading-wrapper").addClass('active');
       window.onbeforeunload = null;
-      $.get('/api/labfnp/scent', ajaxSuccess);
+      $.get('/api/admin/labfnp/scent', ajaxSuccess);
 
       function ajaxSuccess(result) {
         console.log(result);
@@ -325,6 +326,9 @@ var scentApp = new Vue({
        },
        "drawCallback" : function(oSettings) {
          responsiveHelper_datatable_tabletools.respond();
+       },
+       "initComplete": function(){
+         $('.loading-wrapper').removeClass('active');
        }
      });
 
@@ -367,7 +371,7 @@ var scentApp = new Vue({
       function(ButtonPressed) {
         if (ButtonPressed ==='刪除') {
           $.ajax({
-            url: '/api/labfnp/scent/' + scentAppModel.data.item.id,
+            url: '/api/admin/labfnp/scent/' + scentAppModel.data.item.id,
             type: 'DELETE',
             dataType: 'json',
             xhrFields: {

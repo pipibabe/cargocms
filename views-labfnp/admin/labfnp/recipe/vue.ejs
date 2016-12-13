@@ -5,7 +5,7 @@ var COMMON = {
 };
 
 var itemBeforeEdit = {};
-var prefix = '';
+var prefix = 'admin/';
 var modelName = "labfnp/recipe";
 var appModel = {
 	modelName: modelName,
@@ -16,7 +16,7 @@ var appModel = {
     	DROPS_MIN: 1,
     },
 		link: {
-			API_LIST_SCENT: '/api/labfnp/scent',
+			API_LIST_SCENT: '/api/admin/labfnp/scent',
 		},
 		status: {
 			itemBeforeEdit: {},
@@ -421,7 +421,10 @@ appMain.renderTable = function () {
 				appMain.edit(id)
 			})
 			responsiveHelper_datatable_tabletools.respond();
-		}
+		},
+    "initComplete": function(){
+      $('.loading-wrapper').removeClass('active');
+    }
 	};
 
 	if (serverSidePaging) {

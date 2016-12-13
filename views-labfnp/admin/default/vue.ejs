@@ -147,6 +147,7 @@ var defaultVueMathod = {
 		} else return cb();
 	},
 	loadItems: function (cb) {
+    $(".loading-wrapper").addClass('active');
 		window.onbeforeunload = null;
 		if (serverSidePaging) {
 			if (typeof cb !== 'undefined') setTimeout(cb, 0);
@@ -341,11 +342,14 @@ var defaultVueMathod = {
 			defaultTableConfig.ajax = ajax;
 		}
 
-
-
 		if (appModel.data.option.defaultSort) {
 			defaultTableConfig.order = appModel.data.option.defaultSort
 		}
+
+    defaultTableConfig.initComplete = function(){
+      $('.loading-wrapper').removeClass('active');
+    }
+
 		if (appMain.DataTableInitComplete) {
 			defaultTableConfig.initComplete = appMain.DataTableInitComplete
 		}

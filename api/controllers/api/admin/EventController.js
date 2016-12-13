@@ -18,6 +18,10 @@ module.exports = {
         });
         if (parseInt(allpay.RtnCode, 10) === 1) {
           eventOrder.productionStatus = 'PAID';
+
+          let event = await Event.findById(eventOrder.EventId);
+          event.signupCount = Number(event.signupCount) + 1;
+          await event.save();
         }
         await eventOrder.save();
         messageConfig.email = eventOrder.email;

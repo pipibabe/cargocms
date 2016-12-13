@@ -45,7 +45,7 @@ var scentNoteApp = new Vue({
     },
     save: function (event) {
       $.ajax({
-        url: '/api/labfnp/scentnote',
+        url: '/api/admin/labfnp/scentnote',
         type: 'POST',
         dataType: 'json',
         data: scentNoteAppModel.data.item,
@@ -67,7 +67,7 @@ var scentNoteApp = new Vue({
     },
     update: function (event) {
       $.ajax({
-        url: '/api/labfnp/scentnote/' + scentNoteAppModel.data.item.id,
+        url: '/api/admin/labfnp/scentnote/' + scentNoteAppModel.data.item.id,
         type: 'PUT',
         dataType: 'json',
         data: scentNoteAppModel.data.item,
@@ -90,7 +90,7 @@ var scentNoteApp = new Vue({
     },
     loadItem: function (cb) {
       window.onbeforeunload = null;
-      $.get('/api/labfnp/scentnote/' + scentNoteAppModel.data.item.id, ajaxSuccess);
+      $.get('/api/admin/labfnp/scentnote/' + scentNoteAppModel.data.item.id, ajaxSuccess);
 
       function ajaxSuccess(result) {
         console.log("loadItem result.data=>", result.data);
@@ -211,8 +211,9 @@ var scentNoteApp = new Vue({
       } else return cb();
     },
     loadItems: function (cb) {
+      $(".loading-wrapper").addClass('active');
       window.onbeforeunload = null;
-      $.get('/api/labfnp/scentnote', ajaxSuccess);
+      $.get('/api/admin/labfnp/scentnote', ajaxSuccess);
 
       function ajaxSuccess(result) {
         console.log(result);
@@ -316,6 +317,9 @@ var scentNoteApp = new Vue({
        },
        "drawCallback" : function(oSettings) {
          responsiveHelper_datatable_tabletools.respond();
+       },
+       "initComplete": function(){
+         $('.loading-wrapper').removeClass('active');
        }
      });
 
@@ -358,7 +362,7 @@ var scentNoteApp = new Vue({
       function(ButtonPressed) {
         if (ButtonPressed ==='刪除') {
           $.ajax({
-            url: '/api/labfnp/scentnote/' + scentNoteAppModel.data.item.id,
+            url: '/api/admin/labfnp/scentnote/' + scentNoteAppModel.data.item.id,
             type: 'DELETE',
             dataType: 'json',
             xhrFields: {

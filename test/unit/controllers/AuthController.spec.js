@@ -15,10 +15,10 @@ describe('about Auth Controller operation.', function() {
 
       let {email} = newUser;
       let checkUser = await User.findOne({
-        where: {email},
+        where: { email },
         include: Passport
       });
-
+      console.log(checkUser);
       checkUser.email.should.be.equal(newUser.email);
       result.status.should.be.equal(302);
 
