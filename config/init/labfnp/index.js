@@ -15,6 +15,7 @@ module.exports.init = async () => {
       { icon: 'wrench', href: '#', title: '資料維護', sequence: 1},
       { icon: 'puzzle-piece', href: '#', title: '實驗室', sequence: 2},
       { icon: 'product-hunt', href: '#', title: '產品管理', sequence: 3},
+      { icon: 'file-text', href: '#', title: '訂單管理', sequence: 4},
 
       { href: '/admin/user', title: '會員資料', sequence: 20, ParentMenuItemId: 2},
       { href: '/admin/post', title: '內容資料', sequence: 30, ParentMenuItemId: 2},
@@ -34,6 +35,8 @@ module.exports.init = async () => {
       { href: '/admin/mock', title: '隨機資料表', sequence: 20, ParentMenuItemId: 3},
 
       { href: '/admin/product', title: '產品', sequence: 20, ParentMenuItemId: 4},
+
+      { href: '/admin/order', title: '訂單', sequence: 20, ParentMenuItemId: 5},
 
     ]
 
