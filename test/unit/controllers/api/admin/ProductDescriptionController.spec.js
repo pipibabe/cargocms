@@ -57,6 +57,15 @@ describe('about admin api ProductDescription Controller operation.', function() 
       }
     });
 
+    after(async (done)=>{
+      try {
+        await unMockAdmin();
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
+
     it('Product Description find All', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
