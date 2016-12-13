@@ -27,6 +27,8 @@
       <th width="" class="" data-hide="always">sortOrder</th>
       <th width="" class="">publish</th>
       <th width="" class="">viewed</th>
+      <th width="" class="" data-hide="always">createdAt</th>
+      <th width="" class="" data-hide="always">updatedAt</th>
 			<th width="10%" data-hide="phone,tablet"></th>
 		</tr>
 	</thead>
@@ -57,6 +59,8 @@
       <td>{{ item.sortOrder }}</td>
       <td>{{ item.publish }}</td>
       <td>{{ item.viewed }}</td>
+      <td>{{ item.createdAt }}</td>
+      <td>{{ item.updatedAt }}</td>
 			<td align="center" style="cursor: pointer;">
 				<div class="row">
 					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
@@ -101,6 +105,8 @@
       { "data": "sortOrder"},
       { "data": "publish"},
       { "data": "viewed"},
+      { "data": "createdAt"},
+      { "data": "updatedAt"},
 			{ "data": null }
 		]
 
@@ -110,8 +116,22 @@
         "targets": 'no-sort',
         "orderable": false,
       },
+      {
+        "searchable": false,
+        "targets": 24,
+        "render": function (data, type, row) {
+          return '<td>' + row.createdDateTime.dateTime + '</td>';
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 25,
+        "render": function (data, type, row) {
+          return '<td>' + row.updatedDateTime.dateTime + '</td>';
+        }
+      },
 			{
-				"targets"  : 24,
+				"targets"  : 26,
 				"orderable": false,
 				"searchable": false,
 				"render": function ( data, type, row ) {
