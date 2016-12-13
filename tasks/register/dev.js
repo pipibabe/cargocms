@@ -1,10 +1,11 @@
 module.exports = function (grunt) {
-	grunt.registerTask('build', [
+	grunt.registerTask('dev', [
 		'bower:dev',
 		'compileAssets',
 		'linkAssetsBuild',
 		// 'clean:build',
 		'sass:dev',
 		'copy:build',
+		'watch:assets'
 	]);
 };

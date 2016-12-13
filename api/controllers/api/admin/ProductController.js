@@ -1,15 +1,14 @@
 module.exports = {
-
   find: async (req, res) => {
     try {
       const { query } = req;
       const { serverSidePaging } = query;
-      const ProductName = req.options.controller.split("/").reverse()[0];
+      const modelName = req.options.controller.split("/").reverse()[0];
       let result;
       if (serverSidePaging) {
-        result = await PagingService.process({query, ProductName});
+        result = await PagingService.process({query, modelName});
       } else {
-        const items = await sails.Products[ProductName].findAll();
+        const items = await sails.models[modelName].findAll();
         result = { data: { items } };
       }
       res.ok(result);
