@@ -43,6 +43,11 @@ module.exports = {
     try {
       const { id } = req.params;
       const data = req.body;
+
+      if(!data.deletedAt){
+        data.deletedAt = null;
+      }
+      
       const message = 'Update success.';
       const item = await ProductDescription.update(data ,{
         where: { id, },
