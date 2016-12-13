@@ -1,0 +1,138 @@
+
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+	<thead>
+		<tr>
+			<th width="8%" class="" data-hide="phone"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/> ID</th>
+      <th width="10%" class="" data-class="expand">模型</th>
+      <th width="" class="">SKU</th>
+      <th width="" class="">UPC</th>
+      <th width="" class="">EAN</th>
+      <th width="" class="">JAN</th>
+      <th width="" class="">ISBN</th>
+      <th width="" class="">MPN</th>
+      <th width="" class="">Location</th>
+      <th width="" class="">quantity</th>
+      <th width="" class="">image</th>
+      <th width="" class="">shipping</th>
+      <th width="" class="">price</th>
+			<th width="" class="">points</th>
+      <th width="" class="">dateAvailable</th>
+      <th width="" class="">weight</th>
+      <th width="" class="">length</th>
+      <th width="" class="">width</th>
+      <th width="" class="">height</th>
+      <th width="" class="">subtract</th>
+      <th width="" class="">minimum</th>
+      <th width="" class="">sortOrder</th>
+      <th width="" class="">publish</th>
+      <th width="" class="">viewed</th>
+      <th width="" class="">ImageId</th>
+			<th width="10%" data-hide="phone,tablet"></th>
+		</tr>
+	</thead>
+	<!-- client only -->
+	<tbody>
+		<tr v-for="item in data.items">
+      <td>{{ item.id }}</td>
+			<td><a href="/admin/#/admin/{{modelName}}/show/{{item.id}}">{{ item.model }}</a></td>
+			<td>{{item.sku }}</td>
+      <td>{{ item.upc }}</td>
+      <td>{{ item.ean }}</td>
+      <td>{{ item.jan }}</td>
+      <td>{{ item.isbn }}</td>
+      <td>{{ item.mpn }}</td>
+      <td>{{ item.location }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.image }}</td>
+      <td>{{ item.shipping }}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.points }}</td>
+      <td>{{ item.dateAvailable }}</td>
+      <td>{{ item.weight }}</td>
+      <td>{{ item.length }}</td>
+      <td>{{ item.width }}</td>
+      <td>{{ item.height }}</td>
+      <td>{{ item.subtract }}</td>
+      <td>{{ item.minimum }}</td>
+      <td>{{ item.sortOrder }}</td>
+      <td>{{ item.publish }}</td>
+      <td>{{ item.viewed }}</td>
+			<td>{{ item.ImageId }}</td>
+			<td align="center" style="cursor: pointer;">
+				<div class="row">
+					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
+						<i class="fa-fw fa fa-eye text-muted" />
+					</a>
+					<a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+						<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+					</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+ </table>
+
+
+<script type="text/javascript">
+	var pagefunction = function() {
+
+		// server only
+		var columns = [
+      { "data": "id" },
+      { "data": "model"},
+      { "data": "sku"},
+      { "data": "upc"},
+      { "data": "ean"},
+      { "data": "jan"},
+      { "data": "isbn"},
+      { "data": "mpn"},
+      { "data": "location"},
+      { "data": "quantity"},
+      { "data": "image"},
+      { "data": "shipping"},
+      { "data": "price"},
+      { "data": "points"},
+      { "data": "dateAvailable"},
+      { "data": "weight"},
+      { "data": "length"},
+      { "data": "width"},
+      { "data": "height"},
+      { "data": "subtract"},
+      { "data": "minimum"},
+      { "data": "sortOrder"},
+      { "data": "publish"},
+      { "data": "viewed"},
+			{ "data": null }
+		]
+
+		// server only
+		var columnDefs = [
+      {
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+			{
+				"targets"  : 24,
+				"orderable": false,
+				"searchable": false,
+				"render": function ( data, type, row ) {
+					var colBody =
+					'<div class="row-action-buttons hidden-xs hidden-sm">'+
+						'<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-eye text-muted" />'+
+						'</a>'+
+						'<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+						'</a>'+
+					'</div>';
+					return colBody;
+				}
+			},
+		]
+		var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+		<%- include vue.ejs %>
+		appMain.$mount("#main-index");
+		appMain.loadItems(appMain.renderTable);
+	};
+</script>
