@@ -107,7 +107,12 @@ var defaultConfig = {
   'get /api/admin/facebook/feed':        'api/admin/facebook/FeedController.find',
   'get /api/admin/facebook/import':        'api/admin/facebook/FeedController.import',
   'put /api/admin/facebook/update':        'api/admin/facebook/FeedController.update',
-
+  
+  'get /api/admin/product': 'api/admin/ProductController.find',
+  'get /api/admin/product/:id': 'api/admin/ProductController.findOne',
+  'post /api/admin/product': 'api/admin/ProductController.create',
+  'put /api/admin/product/:id': 'api/admin/ProductController.update',
+  'delete /api/admin/product/:id': 'api/admin/ProductController.destroy',
 
   //----- Event -----
   'get /events/:name': 'EventController.show',
