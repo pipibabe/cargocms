@@ -10,7 +10,7 @@ describe('test browser admin pages', function() {
       console.log("=== admin login ===");
       await login("admin");
       // 開啟分頁之後，PID會變化...
-      startLogging();
+      startLogging("-menu-switch-");
       done();
     } catch (e) {
       done(e);
@@ -19,6 +19,7 @@ describe('test browser admin pages', function() {
   after(async (done)=>{
     try {
       await logout();
+      clearInterval();
       done();
     } catch (e) {
       done(e);

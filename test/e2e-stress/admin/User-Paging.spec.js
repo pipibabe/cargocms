@@ -8,7 +8,7 @@ describe('test browser admin user page', function() {
   before(async (done)=>{
     try {
       // add fake user data
-      await user.init();
+      await user.init("user-paging");
 
       console.log("=== admin login ===");
       await login("admin");
@@ -22,6 +22,7 @@ describe('test browser admin user page', function() {
   after(async (done)=>{
     try {
       await logout();
+      stopLogging();
       done();
     } catch (e) {
       done(e);
