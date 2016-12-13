@@ -1,7 +1,7 @@
 var sinon = require('sinon');
 import {mockAdmin, unMockAdmin} from "../../../../util/adminAuthHelper.js"
 
-describe.only('about Product Controller operations.', function() {
+describe('about Product Controller operations.', function() {
   let image, product1, product2, product3;
 
   before(async (done) => {
