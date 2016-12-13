@@ -1,0 +1,70 @@
+var COMMON = {
+  DOUBLE_CLICK_TIME_PERIOD: 250,
+  DEFAULT_INDEX: -1,
+  DEFAULT_AVATAR: "/assets/admin/img/avatars/default.png",
+};
+
+var itemBeforeEdit = {};
+var prefix = 'admin/';
+var modelName = "product";
+var appModel = {
+  modelName: modelName,
+  prefix: prefix,
+  data: {
+    item: {
+      name: '',
+      tag: '',
+      description: '',
+      metaTitle: '',
+      metaKeyword: '',
+      model: '',
+      sku: '',
+      upc: '',
+      ean: '',
+      isbn: '',
+      mpn: '',
+      location: '',
+      quantity: '',
+      image: '',
+      price: '',
+      point: '',
+      dataAvailable: '',
+      weight: '',
+      length: '',
+      width: '',
+      height: '',
+      minimum: '',
+      sortOrder: '',
+      publish: '',
+      viewed: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+    items: [],
+    option: {}
+  },
+  view: {
+    table: {
+      selectIndex: COMMON.DEFAULT_INDEX,
+    },
+  }
+}
+
+/* TABLETOOLS */
+
+<%- include ../default/vue.ejs %>
+// 需要新增函式可以對 appMain 進行定義，如：
+// appMain.log = function () {console.log("123")}
+appMain.hide_Total_Score =  function (){
+  $(".notForCreate").hide();
+}
+
+appMain.disable_TotalRepeat_ScentName = function () {
+  $("input[name=totalRepeat]").attr("disabled", true);
+  $("input[name=scentName]").attr("disabled", true);
+
+  // totalRepeat label add disable class
+  $(".notForCreate > section:nth-child(1) > label:nth-child(2)").addClass("state-disabled");
+  // ScentName label add disabled class
+  $("#main-form > fieldset > section:nth-child(2) > label.input").addClass("state-disabled");
+}
