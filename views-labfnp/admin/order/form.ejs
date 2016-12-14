@@ -225,17 +225,20 @@
     </section>
   </div>
 
-  <div class="row hide">
-    <section class="col col-lg-3 col-xs-3">
+  <hr/>
+  <br/>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">Allpay ID</label>
-      <label class="input state-disabled fn-edit-disabled">
+      <label class="input state-disabled">
         <input type="text" name="AllpayId" placeholder="" v-model="data.item.AllpayId" disabled>
         <b class="tooltip tooltip-bottom-right">Allpay ID</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">User ID</label>
-      <label class="input state-disabled fn-edit-disabled">
+      <label class="input state-disabled">
         <input type="text" name="UserId" placeholder="" v-model="data.item.UserId" disabled>
         <b class="tooltip tooltip-bottom-right">User ID</b></label>
     </section>
@@ -257,7 +260,8 @@ var formRules = {
     required: true
   },
   email: {
-    required: true
+    required: true,
+    email: true,
   },
   telephone: {
     required: true
