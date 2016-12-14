@@ -25,11 +25,12 @@
       <th width="" class="" data-hide="always"> 運送方式</th>
       <th width="" class="" data-hide="always"> 運送代碼</th>
       <th width="" class="" data-hide="phone"> 附註</th>
-      <th width="" class="" data-hide="phone,tablet"> 總數</th>
+      <th width="" class="" data-hide="phone,tablet"> 總價</th>
       <th width="" class=""> 追蹤編號</th>
       <th width="" class="" data-hide="always"> IP</th>
       <th width="" class="" data-hide="always"> ForwardedIP</th>
       <th width="" class="" data-hide="always"> userAgent</th>
+      <th width="" class="" data-hide="always"> 建立時間</th>
 			<th width="" class="" data-hide="phone,tablet"></th>
 		</tr>
 	</thead>
@@ -63,6 +64,7 @@
       <td>{{ item.ip }}</td>
       <td>{{ item.forwardedIp }}</td>
       <td>{{ item.userAgent }}</td>
+      <td>{{ item.createdDateTime.dateTime }}</td>
 			<td align="center" style="cursor: pointer;">
 				<div class="row">
 					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
@@ -110,6 +112,7 @@
       { "data": "ip" },
       { "data": "forwardedIp" },
       { "data": "userAgent" },
+      { "data": "createdAt"},
 			{ "data": null }
 		]
 
@@ -126,8 +129,15 @@
           return '<td>' + row.lastname + row.firstname + '</td>';
         }
       },
+      {
+        "searchable": true,
+        "targets": 27,
+        "render": function (data, type, row) {
+          return '<td>' + row.createdDateTime.dateTime + '</td>';
+        }
+      },
 			{
-				"targets"  : 27,
+				"targets"  : 28,
 				"orderable": false,
 				"searchable": false,
 				"render": function ( data, type, row ) {
