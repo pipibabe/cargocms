@@ -58,3 +58,8 @@ var appModel = {
 <%- include ../default/vue.ejs %>
 // 需要新增函式可以對 appMain 進行定義，如：
 // appMain.log = function () {console.log("123")}
+
+appMain.editDisabled = function(){
+  $('label.fn-edit-disabled > input').attr('disabled', true);
+  $('label.fn-edit-disabled').addClass('state-disabled');
+}
