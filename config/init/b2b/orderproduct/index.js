@@ -4,9 +4,34 @@ module.exports.init = async () => {
     const isDropMode = sails.config.models.migrate == 'drop';
 
     if (isDevMode && isDropMode) {
+      const product = await Product.create({
+        model: "小小魚",
+        sku: "ABC1234",
+        upc: "512345678900",
+        ean: "0012345678905",
+        jan: "4534567890126",
+        isbn: "9788175257665",
+        mpn: "XYZ876A1B2C3",
+        location: "Test location",
+        quantity: 999,
+        image: "",
+        shipping: true,
+        price: 100,
+        points: 200,
+        dateAvailable: "2017-01-01",
+        weight: 30,
+        length: 30,
+        width: 10,
+        height: 5,
+        subtract: true,
+        minimum: 1,
+        sortOrder: 0,
+        publish: true,
+        viewed: 777,
+      });
       const allpay = await Allpay.create({
-        "TradeNo": "0000000000000000",
-        "MerchantTradeNo": "a948749b",
+        "TradeNo": "0000000000000001",
+        "MerchantTradeNo": "d342436b",
         "RtnCode": 1,
         "RtnMsg": "付款成功",
         "PaymentDate": "2017-01-10 16:11:59",
@@ -25,22 +50,22 @@ module.exports.init = async () => {
         "MerchantTradeDate": null,
       });
       const user = await User.create({
-        username: 'testOrder',
-        email: 'testOrder@example.com',
+        username: 'testOrderProduct',
+        email: 'testOrderProduct@example.com',
         firstName: '歐德',
-        lastName: '泰'
-      })
+        lastName: '皮'
+      });
       const order = await Order.create({
-        "invoiceNo": 98765432,
+        "invoiceNo": 13145200,
         "invoicePrefix": "HI",
         "firstname": "歐德",
-        "lastname": "泰",
+        "lastname": "皮",
         "email": "testOrder@example.com",
         "telephone": "0987654321",
         "fax": "0412345678",
         "customField": "",
         "paymentFirstname": "歐德",
-        "paymentLastname": "泰",
+        "paymentLastname": "皮",
         "paymentCompany": "",
         "paymentAddress1": "台灣城市的某個街道隨機號",
         "paymentAddress2": "",
@@ -55,7 +80,7 @@ module.exports.init = async () => {
         "paymentMethod": "ATM",
         "paymentCode": "808080808080",
         "shippingFirstname": "歐德",
-        "shippingLastname": "泰",
+        "shippingLastname": "皮",
         "shippingCompany": "",
         "shippingAddress1": "台灣城市的某個街道隨機號",
         "shippingAddress2": "",
@@ -70,10 +95,10 @@ module.exports.init = async () => {
         "shippingMethod": "郵局遞送",
         "shippingCode": "123456789009876",
         "comment": "no comment",
-        "total": 123456,
+        "total": 654321,
         "commission": 0,
         "marketingId": 0,
-        "tracking": "確認訂單",
+        "tracking": "確定訂單",
         "languageId": 0,
         "ip": "",
         "forwardedIp": "",
@@ -81,6 +106,17 @@ module.exports.init = async () => {
         "acceptLanguage": "",
         "AllpayId": allpay.id,
         "UserId": user.id,
+      });
+
+      const orderProduct = await OrderProduct.create({
+        name: '小小魚',
+        model: '深海魚',
+        quantity: 22,
+        price: 1000,
+        total: 22000,
+        tax: 1100,
+        OrderId: order.id,
+        ProductId: product.id,
       });
     }
   } catch (e) {
