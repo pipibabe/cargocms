@@ -95,4 +95,20 @@ describe('about Category & CategoryDescription & Prodct model operations.', func
       done(e);
     }
   });
+
+  it('create Category and set Product should success.', async (done) => {
+    try {
+      const c1 = await Category.create(categoryData1);
+      await product.setCategories(c1);
+
+      const findProduct = await Product.find({
+          where: { id: product.id },
+          include: Category
+      });
+      findProduct.Categories[0].id.should.be.eq(c1.id);
+      done();
+    } catch (e) {
+      done(e);
+    }
+  });
 });
