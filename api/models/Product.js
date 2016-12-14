@@ -202,6 +202,10 @@ module.exports = {
     Product.hasMany(ProductOptionValue);
     Product.hasMany(ProductImage);
     Product.belongsTo(Image);
+
+    Product.belongsToMany(Category, {
+      through: 'ProductCategory',
+    });
   },
   options: {
     paranoid: true,
