@@ -119,6 +119,12 @@ var defaultConfig = {
   'put /api/admin/order/:id': 'api/admin/OrderController.update',
   'delete /api/admin/order/:id': 'api/admin/OrderController.destroy',
 
+  'get /api/admin/orderproduct': 'api/admin/OrderProductController.find',
+  'get /api/admin/orderproduct/:id': 'api/admin/OrderProductController.findOne',
+  'post /api/admin/orderproduct': 'api/admin/OrderProductController.create',
+  'put /api/admin/orderproduct/:id': 'api/admin/OrderProductController.update',
+  'delete /api/admin/orderproduct/:id': 'api/admin/OrderProductController.destroy',
+
   //----- Event -----
   'get /events/:name': 'EventController.show',
 
