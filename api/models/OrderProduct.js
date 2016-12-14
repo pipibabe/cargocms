@@ -35,6 +35,7 @@ module.exports = {
   },
   associations: () => {
     OrderProduct.belongsTo(Product);
+    OrderProduct.belongsTo(Order);
   },
   options: {
     classMethods: {},
