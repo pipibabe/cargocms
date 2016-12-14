@@ -1,3 +1,5 @@
+
+
 <fieldset>
 
   <div class="row">
@@ -161,14 +163,24 @@
       </label>
     </section>
   </div>
-
   <div class="row">
     <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">publish</label>
-      <label class="input state-disabled">
-        <input type="text" name="publish" placeholder="" v-model="data.item.publish" disabled>
+      <label class="input state-disabled switch"></label>
+      <span class="input-group-addon">
+        <span class="onoffswitch">
+          <input type="checkbox" name="publish" class="onoffswitch-checkbox" v-model="data.item.publish" disabled="disabled" id="publish">
+          <label class="onoffswitch-label" for="publish">
+            <span
+              class="onoffswitch-inner"
+              data-swchon-text="On"
+              data-swchoff-text="Off"></span>
+            <span class="onoffswitch-switch"></span>
+          </label>
+        </span>
+      </span>
         <b class="tooltip tooltip-bottom-right">publish</b></label>
-      </label>
+
     </section>
     <section class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
       <label class="label">viewed</label>
