@@ -92,12 +92,12 @@ module.exports.init = async () => {
         ProductOptionId: productOption.id
       });
 
-      let optionDescription = OptionDescription.create({
+      let optionDescription = await OptionDescription.create({
         name: 'textarea',
         OptionId: option.id
       });
 
-      let optionValueDescription = OptionValueDescription.create({
+      let optionValueDescription = await OptionValueDescription.create({
         name: 'Large',
         OptionId: option.id,
         OptionValueId: optionValue.id
