@@ -31,8 +31,34 @@ module.exports = {
   create: async (req, res) => {
     try {
       const data = req.body;
-      const item = await Order.create(data);
+
+      data.customField = '';
+      data.paymentCompany = '';
+      data.paymentAddress2 = '';
+      data.paymentCountry = '';
+      data.paymentCountryId = 0;
+      data.paymentZone = '';
+      data.paymentZoneId = 0;
+      data.paymentAddressFormat = '';
+      data.paymentCustomField = '';
+      data.shippingCompany = '';
+      data.shippingAddress2 = '';
+      data.shippingCountry = '';
+      data.shippingCountryId = 0;
+      data.shippingZone = '';
+      data.shippingZoneId = 0;
+      data.shippingAddressFormat = '';
+      data.shippingCustomField = '';
+      data.commission = 0.0;
+      data.marketingId = 0;
+      data.languageId = 0;
+      data.ip = '';
+      data.forwardedIp = '';
+      data.userAgent = '';
+      data.acceptLanguage = '';
+
       const message = 'Create success.';
+      const item = await Order.create(data);
       res.ok({ message, data: { item } });
     } catch (e) {
       res.serverError(e);
@@ -43,6 +69,32 @@ module.exports = {
     try {
       const { id } = req.params;
       const data = req.body;
+
+      data.customField = '';
+      data.paymentCompany = '';
+      data.paymentAddress2 = '';
+      data.paymentCountry = '';
+      data.paymentCountryId = 0;
+      data.paymentZone = '';
+      data.paymentZoneId = 0;
+      data.paymentAddressFormat = '';
+      data.paymentCustomField = '';
+      data.shippingCompany = '';
+      data.shippingAddress2 = '';
+      data.shippingCountry = '';
+      data.shippingCountryId = 0;
+      data.shippingZone = '';
+      data.shippingZoneId = 0;
+      data.shippingAddressFormat = '';
+      data.shippingCustomField = '';
+      data.commission = 0.0;
+      data.marketingId = 0;
+      data.languageId = 0;
+      data.ip = '';
+      data.forwardedIp = '';
+      data.userAgent = '';
+      data.acceptLanguage = '';
+
       const message = 'Update success.';
       const item = await Order.update(data ,{
         where: { id, },
