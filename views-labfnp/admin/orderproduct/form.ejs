@@ -1,0 +1,144 @@
+<fieldset>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">訂單 ID</label>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="id" placeholder="" v-model="data.item.id" disabled>
+        <b class="tooltip tooltip-bottom-right">訂單 ID</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">名稱</label>
+      <label class="input state-disabled">
+        <input type="text" name="name" placeholder="" v-model="data.item.name" disabled>
+        <b class="tooltip tooltip-bottom-right">名稱</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">模型</label>
+      <label class="input state-disabled">
+        <input type="text" name="model" placeholder="" v-model="data.item.model" disabled>
+        <b class="tooltip tooltip-bottom-right">模型</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">數量</label>
+      <label class="input state-disabled">
+        <input type="text" name="quantity" placeholder="" v-model="data.item.quantity" disabled>
+        <b class="tooltip tooltip-bottom-right">數量</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">價格</label>
+      <label class="input state-disabled">
+        <input class="Order" type="text" name="price" placeholder="" v-model="data.item.price" disabled>
+        <b class="tooltip tooltip-bottom-right">價格</b></label>
+    </section>
+
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">總價</label>
+      <label class="input state-disabled">
+        <input type="text" name="total" placeholder="" v-model="data.item.total" disabled>
+        <b class="tooltip tooltip-bottom-right">總數</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">稅額</label>
+      <label class="input state-disabled">
+        <input type="text" name="tax" placeholder="" v-model="data.item.tax" disabled>
+        <b class="tooltip tooltip-bottom-right">稅額</b></label>
+    </section>
+  </div>
+
+  <br/>
+  <hr style="border-width: 2px;"/>
+  <br/>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">產品 ID</label>
+      <label class="input state-disabled">
+        <input type="text" name="ProductId" placeholder="" v-model="data.item.ProductId" disabled>
+        <b class="tooltip tooltip-bottom-right">產品 ID</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">訂單 ID</label>
+      <label class="input state-disabled">
+        <input type="text" name="OrderId" placeholder="" v-model="data.item.OrderId" disabled>
+        <b class="tooltip tooltip-bottom-right">訂單 ID</b></label>
+    </section>
+  </div>
+
+</fieldset>
+<script>
+var formRules = {
+  id:{
+    required: true
+  },
+  name:{
+    required: true
+  },
+  model:{
+    required: true
+  },
+  quantity:{
+    required: true
+  },
+  price:{
+    required: true
+  },
+  total:{
+    required: true
+  },
+  tax:{
+    required: true
+  },
+  // reward:{
+  //   required: true
+  // },
+  OrderId:{
+    required: true
+  },
+  ProductId:{
+    required: true
+  },
+}
+
+// Messages for form validation
+var formMessages = {
+  name:{
+    required: "請給予名稱"
+  },
+  model:{
+    required: "請給予模組名稱"
+  },
+  quantity:{
+    required: "請給予數量"
+  },
+  price:{
+    required: "請給予價格"
+  },
+  total:{
+    required: "請給予總價"
+  },
+  tax:{
+    required: "請給予稅額"
+  },
+  // reward:{
+  //   required: "請給予獎勵點數"
+  // },
+  OrderId:{
+    required: "請給予訂單 ID"
+  },
+  ProductId:{
+    required: "請給予產品 ID"
+  },
+}
+</script>
