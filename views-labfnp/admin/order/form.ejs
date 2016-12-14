@@ -1,28 +1,44 @@
 <fieldset>
 
   <div class="row">
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-4 col-xs-4">
       <label class="label">訂單 ID</label>
       <label class="input state-disabled fn-edit-disabled">
         <input type="text" name="id" placeholder="" v-model="data.item.id" disabled>
         <b class="tooltip tooltip-bottom-right">訂單 ID</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">訂購名字</label>
+      <label class="input state-disabled">
+        <input type="text" name="firstname" placeholder="" v-model="data.item.firstname" disabled>
+        <b class="tooltip tooltip-bottom-right">名字</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">訂購姓氏</label>
+      <label class="input state-disabled">
+        <input type="text" name="lastname" placeholder="" v-model="data.item.lastname" disabled>
+        <b class="tooltip tooltip-bottom-right">姓氏</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
       <label class="label">發票開頭</label>
       <label class="input state-disabled">
         <input type="text" name="invoicePrefix" placeholder="" v-model="data.item.invoicePrefix" disabled>
         <b class="tooltip tooltip-bottom-right">發票開頭</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-4 col-xs-4">
       <label class="label">發票號碼</label>
       <label class="input state-disabled">
         <input class="Order" type="text" name="invoiceNo" placeholder="" v-model="data.item.invoiceNo" disabled>
         <b class="tooltip tooltip-bottom-right">發票號碼</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-4 col-xs-4">
       <label class="label">總價</label>
       <label class="input state-disabled">
         <input type="text" name="total" placeholder="" v-model="data.item.total" disabled>
@@ -32,38 +48,21 @@
   </div>
 
   <div class="row">
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">訂購名字</label>
-      <label class="input state-disabled">
-        <input type="text" name="firstname" placeholder="" v-model="data.item.firstname" disabled>
-        <b class="tooltip tooltip-bottom-right">名字</b></label>
-    </section>
-
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">訂購姓氏</label>
-      <label class="input state-disabled">
-        <input type="text" name="lastname" placeholder="" v-model="data.item.lastname" disabled>
-        <b class="tooltip tooltip-bottom-right">姓氏</b></label>
-    </section>
-
-  </div>
-
-  <div class="row">
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-4 col-xs-4">
       <label class="label">電子郵件</label>
       <label class="input state-disabled">
         <input type="text" name="email" placeholder="" v-model="data.item.email" disabled>
         <b class="tooltip tooltip-bottom-right">電子郵件</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-4 col-xs-4">
       <label class="label">電話</label>
       <label class="input state-disabled">
         <input type="text" name="telephone" placeholder="" v-model="data.item.telephone" disabled>
         <b class="tooltip tooltip-bottom-right">電話</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-4 col-xs-4">
       <label class="label">傳真</label>
       <label class="input state-disabled">
         <input type="text" name="fax" placeholder="" v-model="data.item.fax" disabled>
@@ -118,7 +117,7 @@
         <b class="tooltip tooltip-bottom-right">付款城市</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">付款地址</label>
       <label class="input state-disabled">
         <input type="text" name="paymentAddress1" placeholder="" v-model="data.item.paymentAddress1" disabled>
@@ -173,7 +172,7 @@
         <b class="tooltip tooltip-bottom-right">運送城市</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">運送地址</label>
       <label class="input state-disabled">
         <input type="text" name="shippingAddress1" placeholder="" v-model="data.item.shippingAddress1" disabled>
@@ -184,41 +183,61 @@
 
   <div class="row">
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">附註</label>
       <label class="input state-disabled">
         <input type="text" name="comment" placeholder="" v-model="data.item.comment" disabled>
         <b class="tooltip tooltip-bottom-right">附註</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">追蹤代碼</label>
       <label class="input state-disabled">
         <input type="text" name="tracking" placeholder="" v-model="data.item.tracking" disabled>
         <b class="tooltip tooltip-bottom-right">追蹤代碼</b></label>
     </section>
+
   </div>
 
   <div class="row">
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">User Agent</label>
-      <label class="input state-disabled fn-edit-disabled">
-        <input type="text" name="userAgent" placeholder="" v-model="data.item.userAgent" disabled>
-        <b class="tooltip tooltip-bottom-right">User Agent</b></label>
-    </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">IP</label>
       <label class="input state-disabled fn-edit-disabled">
         <input type="text" name="ip" placeholder="" v-model="data.item.ip" disabled>
         <b class="tooltip tooltip-bottom-right">IP</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
+    <section class="col col-lg-6 col-xs-6">
       <label class="label">Forwarded IP</label>
       <label class="input state-disabled fn-edit-disabled">
         <input type="text" name="forwardedIp" placeholder="" v-model="data.item.forwardedIp" disabled>
         <b class="tooltip tooltip-bottom-right">Forwarded IP</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-12 col-xs-12">
+      <label class="label">User Agent</label>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="userAgent" placeholder="" v-model="data.item.userAgent" disabled>
+        <b class="tooltip tooltip-bottom-right">User Agent</b></label>
+    </section>
+  </div>
+
+  <div class="row hide">
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">Allpay ID</label>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="AllpayId" placeholder="" v-model="data.item.AllpayId" disabled>
+        <b class="tooltip tooltip-bottom-right">Allpay ID</b></label>
+    </section>
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">User ID</label>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="UserId" placeholder="" v-model="data.item.UserId" disabled>
+        <b class="tooltip tooltip-bottom-right">User ID</b></label>
     </section>
   </div>
 
