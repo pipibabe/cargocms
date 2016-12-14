@@ -2,108 +2,127 @@
 
   <div class="row">
     <section class="col col-lg-3 col-xs-3">
-      <label class="label">發票號碼</label>
-      <label class="input state-disabled">
-        <input class="Order" type="text" name="invoiceNo" placeholder="發票號碼" v-model="data.item.invoiceNo" disabled>
-        <b class="tooltip tooltip-bottom-right">發票號碼</b></label>
+      <label class="label">訂單 ID</label>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="id" placeholder="" v-model="data.item.id" disabled>
+        <b class="tooltip tooltip-bottom-right">訂單 ID</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
-      <label class="label">invoicePrefix</label>
+      <label class="label">發票開頭</label>
       <label class="input state-disabled">
-        <input type="text" name="invoicePrefix" placeholder="RtnMsg" v-model="data.item.invoicePrefix" disabled>
+        <input type="text" name="invoicePrefix" placeholder="" v-model="data.item.invoicePrefix" disabled>
         <b class="tooltip tooltip-bottom-right">發票開頭</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
-      <label class="label">名字</label>
+      <label class="label">發票號碼</label>
       <label class="input state-disabled">
-        <input type="text" name="firstname" placeholder="firstname" v-model="data.item.firstname" disabled>
+        <input class="Order" type="text" name="invoiceNo" placeholder="" v-model="data.item.invoiceNo" disabled>
+        <b class="tooltip tooltip-bottom-right">發票號碼</b></label>
+    </section>
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">總價</label>
+      <label class="input state-disabled">
+        <input type="text" name="total" placeholder="" v-model="data.item.total" disabled>
+        <b class="tooltip tooltip-bottom-right">總數</b></label>
+    </section>
+
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">訂購名字</label>
+      <label class="input state-disabled">
+        <input type="text" name="firstname" placeholder="" v-model="data.item.firstname" disabled>
         <b class="tooltip tooltip-bottom-right">名字</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
-      <label class="label">姓氏</label>
+      <label class="label">訂購姓氏</label>
       <label class="input state-disabled">
-        <input type="text" name="lastname" placeholder="lastname" v-model="data.item.lastname" disabled>
+        <input type="text" name="lastname" placeholder="" v-model="data.item.lastname" disabled>
         <b class="tooltip tooltip-bottom-right">姓氏</b></label>
     </section>
-  </dvi>
+
+  </div>
 
   <div class="row">
     <section class="col col-lg-3 col-xs-3">
       <label class="label">電子郵件</label>
       <label class="input state-disabled">
-        <input type="text" name="email" placeholder="email" v-model="data.item.email" disabled>
+        <input type="text" name="email" placeholder="" v-model="data.item.email" disabled>
         <b class="tooltip tooltip-bottom-right">電子郵件</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">電話</label>
       <label class="input state-disabled">
-        <input type="text" name="telephone" placeholder="telephone" v-model="data.item.telephone" disabled>
+        <input type="text" name="telephone" placeholder="" v-model="data.item.telephone" disabled>
         <b class="tooltip tooltip-bottom-right">電話</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">傳真</label>
       <label class="input state-disabled">
-        <input type="text" name="fax" placeholder="fax" v-model="data.item.fax" disabled>
+        <input type="text" name="fax" placeholder="" v-model="data.item.fax" disabled>
         <b class="tooltip tooltip-bottom-right">傳真</b></label>
     </section>
-
   </div>
 
   <div class="row">
     <section class="col col-lg-3 col-xs-3">
       <label class="label">付款名字</label>
       <label class="input state-disabled">
-        <input type="text" name="paymentFirstname" placeholder="paymentFirstname" v-model="data.item.paymentFirstname" disabled>
+        <input type="text" name="paymentFirstname" placeholder="" v-model="data.item.paymentFirstname" disabled>
         <b class="tooltip tooltip-bottom-right">付款名字</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">付款姓氏</label>
       <label class="input state-disabled">
-        <input type="text" name="paymentLastname" placeholder="paymentLastname" v-model="data.item.paymentLastname" disabled>
+        <input type="text" name="paymentLastname" placeholder="" v-model="data.item.paymentLastname" disabled>
         <b class="tooltip tooltip-bottom-right">付款姓氏</b></label>
-    </section>
-
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">付款地址</label>
-      <label class="input state-disabled">
-        <input type="text" name="paymentAddress1" placeholder="paymentAddress1" v-model="data.item.paymentAddress1" disabled>
-        <b class="tooltip tooltip-bottom-right">付款地址</b></label>
-    </section>
-
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">付款城市</label>
-      <label class="input state-disabled">
-        <input type="text" name="paymentCity" placeholder="paymentCity" v-model="data.item.paymentCity" disabled>
-        <b class="tooltip tooltip-bottom-right">付款城市</b></label>
-    </section>
-  </div>
-
-  <div class="row">
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">付款郵遞區號</label>
-      <label class="input state-disabled">
-        <input type="text" name="paymentPostcode" placeholder="paymentPostcode" v-model="data.item.paymentPostcode" disabled>
-        <b class="tooltip tooltip-bottom-right">付款郵遞區號</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">付款方式</label>
       <label class="input state-disabled">
-        <input type="text" name="paymentMethod" placeholder="paymentMethod" v-model="data.item.paymentMethod" disabled>
+        <input type="text" name="paymentMethod" placeholder="" v-model="data.item.paymentMethod" disabled>
         <b class="tooltip tooltip-bottom-right">付款方式</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">付款代碼</label>
       <label class="input state-disabled">
-        <input type="text" name="paymentCode" placeholder="paymentCode" v-model="data.item.paymentCode" disabled>
+        <input type="text" name="paymentCode" placeholder="" v-model="data.item.paymentCode" disabled>
         <b class="tooltip tooltip-bottom-right">付款代碼</b></label>
+    </section>
+
+
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">付款郵遞區號</label>
+      <label class="input state-disabled">
+        <input type="text" name="paymentPostcode" placeholder="" v-model="data.item.paymentPostcode" disabled>
+        <b class="tooltip tooltip-bottom-right">付款郵遞區號</b></label>
+    </section>
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">付款城市</label>
+      <label class="input state-disabled">
+        <input type="text" name="paymentCity" placeholder="" v-model="data.item.paymentCity" disabled>
+        <b class="tooltip tooltip-bottom-right">付款城市</b></label>
+    </section>
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">付款地址</label>
+      <label class="input state-disabled">
+        <input type="text" name="paymentAddress1" placeholder="" v-model="data.item.paymentAddress1" disabled>
+        <b class="tooltip tooltip-bottom-right">付款地址</b></label>
     </section>
 
   </div>
@@ -112,100 +131,95 @@
     <section class="col col-lg-3 col-xs-3">
       <label class="label">運送名字</label>
       <label class="input state-disabled">
-        <input type="text" name="shippingFirstname" placeholder="shippingFirstname" v-model="data.item.shippingFirstname" disabled>
+        <input type="text" name="shippingFirstname" placeholder="" v-model="data.item.shippingFirstname" disabled>
         <b class="tooltip tooltip-bottom-right">運送名字</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">運送姓氏</label>
       <label class="input state-disabled">
-        <input type="text" name="shippingLastname" placeholder="shippingLastname" v-model="data.item.shippingLastname" disabled>
+        <input type="text" name="shippingLastname" placeholder="" v-model="data.item.shippingLastname" disabled>
         <b class="tooltip tooltip-bottom-right">運送姓氏</b></label>
-    </section>
-
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">運送地址</label>
-      <label class="input state-disabled">
-        <input type="text" name="shippingAddress1" placeholder="shippingAddress1" v-model="data.item.shippingAddress1" disabled>
-        <b class="tooltip tooltip-bottom-right">運送地址</b></label>
-    </section>
-
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">運送城市</label>
-      <label class="input state-disabled">
-        <input type="text" name="shippingCity" placeholder="shippingCity" v-model="data.item.shippingCity" disabled>
-        <b class="tooltip tooltip-bottom-right">運送城市</b></label>
-    </section>
-  </div>
-
-  <div class="row">
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">運送郵遞區號</label>
-      <label class="input state-disabled">
-        <input type="text" name="shippingPostcode" placeholder="shippingPostcode" v-model="data.item.shippingPostcode" disabled>
-        <b class="tooltip tooltip-bottom-right">運送郵遞區號</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">運送方式</label>
       <label class="input state-disabled">
-        <input type="text" name="shippingMethod" placeholder="shippingMethod" v-model="data.item.shippingMethod" disabled>
+        <input type="text" name="shippingMethod" placeholder="" v-model="data.item.shippingMethod" disabled>
         <b class="tooltip tooltip-bottom-right">運送方式</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">運送代碼</label>
       <label class="input state-disabled">
-        <input type="text" name="shippingCode" placeholder="shippingCode" v-model="data.item.shippingCode" disabled>
+        <input type="text" name="shippingCode" placeholder="" v-model="data.item.shippingCode" disabled>
         <b class="tooltip tooltip-bottom-right">運送代碼</b></label>
     </section>
 
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">附註</label>
-      <label class="input state-disabled">
-        <input type="text" name="comment" placeholder="comment" v-model="data.item.comment" disabled>
-        <b class="tooltip tooltip-bottom-right">附註</b></label>
-    </section>
   </div>
 
   <div class="row">
     <section class="col col-lg-3 col-xs-3">
-      <label class="label">總數</label>
+      <label class="label">運送郵遞區號</label>
       <label class="input state-disabled">
-        <input type="text" name="total" placeholder="total" v-model="data.item.total" disabled>
-        <b class="tooltip tooltip-bottom-right">總數</b></label>
+        <input type="text" name="shippingPostcode" placeholder="" v-model="data.item.shippingPostcode" disabled>
+        <b class="tooltip tooltip-bottom-right">運送郵遞區號</b></label>
+    </section>
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">運送城市</label>
+      <label class="input state-disabled">
+        <input type="text" name="shippingCity" placeholder="" v-model="data.item.shippingCity" disabled>
+        <b class="tooltip tooltip-bottom-right">運送城市</b></label>
+    </section>
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">運送地址</label>
+      <label class="input state-disabled">
+        <input type="text" name="shippingAddress1" placeholder="" v-model="data.item.shippingAddress1" disabled>
+        <b class="tooltip tooltip-bottom-right">運送地址</b></label>
+    </section>
+
+  </div>
+
+  <div class="row">
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">附註</label>
+      <label class="input state-disabled">
+        <input type="text" name="comment" placeholder="" v-model="data.item.comment" disabled>
+        <b class="tooltip tooltip-bottom-right">附註</b></label>
     </section>
 
     <section class="col col-lg-3 col-xs-3">
       <label class="label">追蹤代碼</label>
       <label class="input state-disabled">
-        <input type="text" name="tracking" placeholder="tracking" v-model="data.item.tracking" disabled>
+        <input type="text" name="tracking" placeholder="" v-model="data.item.tracking" disabled>
         <b class="tooltip tooltip-bottom-right">追蹤代碼</b></label>
-    </section>
-
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">IP</label>
-      <label class="input state-disabled">
-        <input type="text" name="ip" placeholder="ip" v-model="data.item.ip" disabled>
-        <b class="tooltip tooltip-bottom-right">IP</b></label>
-    </section>
-
-    <section class="col col-lg-3 col-xs-3">
-      <label class="label">Forwarded IP</label>
-      <label class="input state-disabled">
-        <input type="text" name="forwardedIp" placeholder="forwardedIp" v-model="data.item.forwardedIp" disabled>
-        <b class="tooltip tooltip-bottom-right">Forwarded IP</b></label>
     </section>
   </div>
 
   <div class="row">
     <section class="col col-lg-3 col-xs-3">
       <label class="label">User Agent</label>
-      <label class="input state-disabled">
-        <input type="text" name="userAgent" placeholder="userAgent" v-model="data.item.userAgent" disabled>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="userAgent" placeholder="" v-model="data.item.userAgent" disabled>
         <b class="tooltip tooltip-bottom-right">User Agent</b></label>
     </section>
 
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">IP</label>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="ip" placeholder="" v-model="data.item.ip" disabled>
+        <b class="tooltip tooltip-bottom-right">IP</b></label>
+    </section>
+
+    <section class="col col-lg-3 col-xs-3">
+      <label class="label">Forwarded IP</label>
+      <label class="input state-disabled fn-edit-disabled">
+        <input type="text" name="forwardedIp" placeholder="" v-model="data.item.forwardedIp" disabled>
+        <b class="tooltip tooltip-bottom-right">Forwarded IP</b></label>
+    </section>
   </div>
 
 </fieldset>
