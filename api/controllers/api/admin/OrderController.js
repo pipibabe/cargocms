@@ -90,9 +90,9 @@ module.exports = {
       data.commission = 0.0;
       data.marketingId = 0;
       data.languageId = 0;
-      data.ip = '';
-      data.forwardedIp = '';
-      data.userAgent = '';
+      // data.ip = '';
+      // data.forwardedIp = '';
+      // data.userAgent = '';
       data.acceptLanguage = '';
 
       const message = 'Update success.';
