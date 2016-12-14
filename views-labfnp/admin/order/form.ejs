@@ -225,7 +225,8 @@
     </section>
   </div>
 
-  <hr/>
+  <br/>
+  <hr style="border-width: 2px;"/>
   <br/>
 
   <div class="row">
@@ -320,6 +321,12 @@ var formRules = {
   tracking: {
     required: true
   },
+  AllpayId: {
+    required: true
+  },
+  UserId: {
+    required: true
+  }
 }
 
 // Messages for form validation
@@ -396,6 +403,13 @@ var formMessages = {
   },
   tracking: {
     required: "請給予追蹤代碼"
+  },
+
+  AllpayId: {
+    required: "請給予支付ID"
+  },
+  UserId: {
+    required: "請給予會員ID"
   },
 }
 </script>
