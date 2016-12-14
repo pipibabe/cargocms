@@ -23,13 +23,13 @@
       <th width="" class="" data-hide="always"> 運送城市</th>
       <th width="" class="" data-hide="always"> 運送郵遞區號</th>
       <th width="" class="" data-hide="always"> 運送方式</th>
+      <th width="" class="" data-hide="always"> 運送代碼</th>
       <th width="" class="" data-hide="phone"> 附註</th>
       <th width="" class="" data-hide="phone,tablet"> 總數</th>
       <th width="" class=""> 追蹤編號</th>
       <th width="" class="" data-hide="always"> IP</th>
       <th width="" class="" data-hide="always"> ForwardedIP</th>
       <th width="" class="" data-hide="always"> userAgent</th>
-      <th width="" class=""> 訂購產品ID</th>
 			<th width="" class="" data-hide="phone,tablet"></th>
 		</tr>
 	</thead>
@@ -39,8 +39,7 @@
       <td>{{ item.id }}</td>
       <td>{{ item.invoiceNo }}</td>
       <td>{{ item.invoicePrefix }}</td>
-      <td>{{ item.firstname }}</td>
-      <td>{{ item.lastname }}</td>
+      <td>{{ item.lastname + item.firstname }}</td>
       <td>{{ item.email }}</td>
       <td>{{ item.telephone }}</td>
       <td>{{ item.fax }}</td>
@@ -64,7 +63,6 @@
       <td>{{ item.ip }}</td>
       <td>{{ item.forwardedIp }}</td>
       <td>{{ item.userAgent }}</td>
-      <td>{{ item.OrderProductId }}</td>
 			<td align="center" style="cursor: pointer;">
 				<div class="row">
 					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
@@ -125,7 +123,7 @@
         "searchable": true,
         "targets": 3,
         "render": function (data, type, row) {
-          return '<td>' + row.firstname + row.lastname + '</td>';
+          return '<td>' + row.lastname + row.firstname + '</td>';
         }
       },
 			{
@@ -138,9 +136,9 @@
 						'<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
 							'<i class="fa-fw fa fa-eye text-muted" />'+
 						'</a>'+
-						// '<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
-						// 	'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
-						// '</a>'+
+						'<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+						'</a>'+
 					'</div>';
 					return colBody;
 				}
