@@ -279,7 +279,7 @@ module.exports = {
   associations: () => {
     Order.hasOne(OrderStatus);
     Order.hasOne(OrderOption);
-    Order.hasOne(OrderProduct);
+    Order.hasMany(OrderProduct);
     Order.belongsTo(Allpay);
     Order.belongsTo(User);
   },
