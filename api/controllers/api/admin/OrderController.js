@@ -108,7 +108,7 @@ module.exports = {
   destroy: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await Order.deleteById(id);
+      const item = await Order.destroy({ where: { id } });
       const message = 'Delete success.';
       res.ok({ message, data: { item } });
     } catch (e) {
