@@ -3,7 +3,7 @@ import productCreateHelper from "../../../util/productCreateHelper.js"
 describe('about Order controllers', () => {
 
   let product1, product2, product3 , user;
-  before('', async function(done){
+  before(async function(done){
     try{
       user = await User.create({
         username: 'buyer',
@@ -33,7 +33,7 @@ describe('about Order controllers', () => {
     }
   });
 
-  it('User Order some Products.', async (done) => {
+  it('User shopping car Order some Products.', async (done) => {
     try{
       const orderData = {
         products:[product1.id, product2.id, product3.id],
