@@ -87,6 +87,7 @@
     "clean-e2e-custom": "test -d \"$E2E_LOGGER_FOLDER\" && rm $E2E_LOGGER_FOLDER/{memory.xls,PID.json} || exit 0",
     "clean-stress": "rm -rf test/stress/${STRESS_TAG}/output_client test/stress/${STRESS_TAG}/output_serverMemory.xls; mkdir -p test/stress/${STRESS_TAG}/output_client",
     "build": "npm i && node_modules/grunt-cli/bin/grunt build",
+    "build:prod": "npm run build && cd react-app-ship && npm run deploy:prod",
     "start": "node app.js",
     "dev": "grunt dev & node app.js",
     "preview": "make preview",
