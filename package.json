@@ -89,6 +89,7 @@
     "build": "npm i && node_modules/grunt-cli/bin/grunt build",
     "build:prod": "npm run build && cd react-app-ship && npm run deploy:prod",
     "start": "node app.js",
+    "start:ship": "cd react-app-ship && npm run dev",
     "dev": "grunt dev & node app.js",
     "preview": "make preview",
     "pm2-start": "pm2 start -f app.js --name 'cargocms'",
