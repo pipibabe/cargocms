@@ -43,6 +43,20 @@
       <b class="tooltip tooltip-bottom-right">請輸入稅額</b></label>
     </section>
 
+    <section>
+      <label class="label">訂單產品 ID</label>
+      <label class="input state-disabled">
+      <input type="text" name="OrderProductId" placeholder="" v-model="data.item.OrderProductId" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入訂單產品 ID</b></label>
+    </section>
+
+    <section>
+      <label class="label">供應商運送訂單 ID</label>
+      <label class="input state-disabled">
+      <input type="text" name="SupplierShipOrderId" placeholder="" v-model="data.item.SupplierShipOrderId" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入供應商運送訂單 ID</b></label>
+    </section>
+
 
 </fieldset>
 <script>
@@ -73,6 +87,14 @@ var formRules = {
   tax: {
     required: true,
     number: true
+  },
+
+  OrderProductId: {
+    required: true,
+  },
+
+  SupplierShipOrderId: {
+    required: true,
   }
 }
 var formMessages = {
@@ -102,6 +124,16 @@ var formMessages = {
   tax: {
     required: "請給予稅額",
     number: "請輸入數字"
+  },
+
+  OrderProductId: {
+    required: "請給予訂單產品 ID",
+    digits: "請輸入整數"
+  },
+
+  SupplierShipOrderId: {
+    required: "請給予供應商運送訂單 ID",
+    digits: "請輸入整數"
   }
 }
 </script>
