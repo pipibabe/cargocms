@@ -322,10 +322,12 @@ var formRules = {
     required: true
   },
   AllpayId: {
-    required: true
+    required: true,
+    digits: true
   },
   UserId: {
-    required: true
+    required: true,
+    digits: true
   }
 }
 
@@ -406,10 +408,12 @@ var formMessages = {
   },
 
   AllpayId: {
-    required: "請給予支付ID"
+    required: "請給予支付ID",
+    digits: "請輸入整數"
   },
   UserId: {
-    required: "請給予會員ID"
+    required: "請給予會員ID",
+    digits: "請輸入整數"
   },
 }
 </script>
