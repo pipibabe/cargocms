@@ -34,7 +34,7 @@
           稅額
         </th>
 
-
+        <!--
         <th data-hide="" class="no-sort">
           產品訂單 ID
         </th>
@@ -43,7 +43,7 @@
         <th data-hide="" class="no-sort">
           供應商運送訂單 ID
         </th>
-
+        -->
       <th width="80" data-hide="phone,tablet"></th>
     </tr>
   </thead>
@@ -62,11 +62,11 @@
         <td>{{ item.total}}</td>
 
         <td>{{ item.tax}}</td>
-
+        <!--
         <td>{{ item.OrderProductId}}</td>
 
         <td>{{ item.SupplierShipOrderId}}</td>
-
+        -->
       <td align="center" style="cursor: pointer;">
         <div class="row">
           <a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
@@ -99,9 +99,9 @@
 
       { "data": "tax" },
 
-      { "data": "OrderProductId" },
-
-      { "data": "SupplierShipOrderId" },
+      // { "data": "OrderProductId" },
+      //
+      // { "data": "SupplierShipOrderId" },
 
       { "data": null },
     ]
@@ -109,20 +109,8 @@
     // server only
     var columnDefs = [
 
-
-
-
-
-
-
-
-
-
-
-
-
       {
-        "targets"  : 8,
+        "targets"  : 6,
         "orderable": false,
         "searchable": false,
         "render": function ( data, type, row ) {
