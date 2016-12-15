@@ -123,6 +123,13 @@ var defaultConfig = {
   'get /api/admin/labfnp/scent':  'api/admin/labfnp/ScentController.find',
   'get /api/admin/labfnp/scentnote':  'api/admin/labfnp/ScentNoteController.find',
 
+  'get /api/admin/suppliershiporder': 'api/admin/SuppliershiporderController.find',
+  'get /api/admin/suppliershiporder/:id': 'api/admin/SuppliershiporderController.findOne',
+  'post /api/admin/suppliershiporder': 'api/admin/SuppliershiporderController.create',
+  'put /api/admin/suppliershiporder/:id': 'api/admin/SuppliershiporderController.update',
+  'delete /api/admin/suppliershiporder/:id': 'api/admin/SuppliershiporderController.destroy',
+
+
 
   //----- Event -----
   'get /events/:name': 'EventController.show',
