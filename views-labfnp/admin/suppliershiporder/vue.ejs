@@ -1,231 +1,77 @@
 var COMMON = {
-  DOUBLE_CLICK_TIME_PERIOD: 250,
-  DEFAULT_INDEX: -1,
-  DEFAULT_AVATAR: "/assets/admin/img/avatars/default.png",
+	DOUBLE_CLICK_TIME_PERIOD: 250,
+	DEFAULT_INDEX: -1,
+	DEFAULT_AVATAR: "/assets/admin/img/avatars/default.png",
 };
 
 var itemBeforeEdit = {};
 var prefix = 'admin/';
 var modelName = "suppliershiporder";
 var appModel = {
-  modelName: modelName,
-  prefix: prefix,
-  data: {
-    item: {
-      
-        
-          id: '',
-        
-      
-        
-          invoiceNo: '',
-        
-      
-        
-          invoicePrefix: '',
-        
-      
-        
-          firstname: '',
-        
-      
-        
-          lastname: '',
-        
-      
-        
-          mail: '',
-        
-      
-        
-          telephone: '',
-        
-      
-        
-          fax: '',
-        
-      
-        
-          customField: '',
-        
-      
-        
-          paymentFirstname: '',
-        
-      
-        
-          paymentLastname: '',
-        
-      
-        
-          paymentCompany: '',
-        
-      
-        
-          paymentAddress1: '',
-        
-      
-        
-          paymentAddress2: '',
-        
-      
-        
-          paymentCity: '',
-        
-      
-        
-          paymentPostcode: '',
-        
-      
-        
-          paymentCountry: '',
-        
-      
-        
-          paymentCountryId: '',
-        
-      
-        
-          paymentZone: '',
-        
-      
-        
-          paymentZoneId: '',
-        
-      
-        
-          paymentAddressFormat: '',
-        
-      
-        
-          paymentCustomField: '',
-        
-      
-        
-          paymentMethod: '',
-        
-      
-        
-          paymentCode: '',
-        
-      
-        
-          shippingFirstname: '',
-        
-      
-        
-          shippingLastname: '',
-        
-      
-        
-          shippingCompany: '',
-        
-      
-        
-          shippingAddress1: '',
-        
-      
-        
-          shippingAddress2: '',
-        
-      
-        
-          shippingCity: '',
-        
-      
-        
-          shippingPostcode: '',
-        
-      
-        
-          shippingCountry: '',
-        
-      
-        
-          shippingCountryId: '',
-        
-      
-        
-          shippingZone: '',
-        
-      
-        
-          shippingZoneId: '',
-        
-      
-        
-          shippingAddressFormat: '',
-        
-      
-        
-          shippingCustomField: '',
-        
-      
-        
-          shippingMethod: '',
-        
-      
-        
-          shippingCode: '',
-        
-      
-        
-          comment: '',
-        
-      
-        
-          total: '',
-        
-      
-        
-          commission: '',
-        
-      
-        
-          tracking: '',
-        
-      
-        
-          ip: '',
-        
-      
-        
-          forwardedIp: '',
-        
-      
-        
-          userAgent: '',
-        
-      
-        
-          acceptLanguage: '',
-        
-      
-        
-          createdAt: '',
-        
-      
-        
-          updatedAt: '',
-        
-      
-        
-          AllpayId: '',
-        
-      
-        
-          UserId: '',
-        
-      
+	modelName: modelName,
+	prefix: prefix,
+	data: {
+		item: {
+			id: '',
+			invoiceNo: '',
+			invoicePrefix: '',
+			firstname: '',
+			lastname: '',
+			mail: '',
+			telephone: '',
+			fax: '',
+			customField: '',
+			paymentFirstname: '',
+			paymentLastname: '',
+			paymentCompany: '',
+			paymentAddress1: '',
+			paymentAddress2: '',
+			paymentCity: '',
+			paymentPostcode: '',
+			paymentCountry: '',
+			paymentCountryId: '',
+			paymentZone: '',
+			paymentZoneId: '',
+			paymentAddressFormat: '',
+			paymentCustomField: '',
+			paymentMethod: '',
+			paymentCode: '',
+			shippingFirstname: '',
+			shippingLastname: '',
+			shippingCompany: '',
+			shippingAddress1: '',
+			shippingAddress2: '',
+			shippingCity: '',
+			shippingPostcode: '',
+			shippingCountry: '',
+			shippingCountryId: '',
+			shippingZone: '',
+			shippingZoneId: '',
+			shippingAddressFormat: '',
+			shippingCustomField: '',
+			shippingMethod: '',
+			shippingCode: '',
+			comment: '',
+			total: '',
+			commission: '',
+			tracking: '',
+			ip: '',
+			forwardedIp: '',
+			userAgent: '',
+			acceptLanguage: '',
+			createdAt: '',
+			updatedAt: '',
+			OrderId: '',
+			SupplierId: ''
     },
-    items: [],
-    option: {}
-  },
-  view: {
-    table: {
-      selectIndex: COMMON.DEFAULT_INDEX,
-    },
-  }
+		items: [],
+		option: {}
+	},
+	view: {
+		table: {
+			selectIndex: COMMON.DEFAULT_INDEX,
+		},
+	}
 }
 
 /* TABLETOOLS */
