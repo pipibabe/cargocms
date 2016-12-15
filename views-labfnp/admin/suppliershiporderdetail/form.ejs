@@ -1,51 +1,107 @@
 <fieldset>
 
-  
+
     <section>
       <label class="label">名稱</label>
       <label class="input state-disabled">
       <input type="text" name="name" placeholder="" v-model="data.item.name" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入名稱</b></label>
     </section>
-  
+
     <section>
       <label class="label">型號</label>
       <label class="input state-disabled">
       <input type="text" name="model" placeholder="" v-model="data.item.model" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入型號</b></label>
     </section>
-  
+
     <section>
       <label class="label">數量</label>
       <label class="input state-disabled">
       <input type="text" name="quantity" placeholder="" v-model="data.item.quantity" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入數量</b></label>
     </section>
-  
+
     <section>
       <label class="label">價格</label>
       <label class="input state-disabled">
       <input type="text" name="price" placeholder="" v-model="data.item.price" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入價格</b></label>
     </section>
-  
+
     <section>
       <label class="label">總價</label>
       <label class="input state-disabled">
       <input type="text" name="total" placeholder="" v-model="data.item.total" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入總價</b></label>
     </section>
-  
+
     <section>
       <label class="label">稅額</label>
       <label class="input state-disabled">
       <input type="text" name="tax" placeholder="" v-model="data.item.tax" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入稅額</b></label>
     </section>
-  
+
 
 </fieldset>
 <script>
-var formRules = {}
-var formMessages = {}
+var formRules = {
+  name: {
+    required: true
+  },
+
+  model: {
+    required: true
+  },
+
+  quantity: {
+    required: true,
+    digits: true
+  },
+
+  price: {
+    required: true,
+    number: true
+  },
+
+  total: {
+    required: true,
+    number: true
+  },
+
+  tax: {
+    required: true,
+    number: true
+  }
+}
+var formMessages = {
+  name: {
+    required: "請給予名稱"
+  },
+
+  model: {
+    required: "請給予型號"
+  },
+
+  quantity: {
+    required: "請給予數量",
+    digits: "請輸入整數"
+  },
+
+  price: {
+    required: "請給予價格",
+    number: "請輸入數字"
+  },
+
+  total: {
+    required: "請給予總價",
+    number: "請輸入數字"
+  },
+
+  tax: {
+    required: "請給予稅額",
+    number: "請輸入數字"
+  }
+}
 </script>
