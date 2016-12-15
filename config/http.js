@@ -108,12 +108,13 @@ module.exports.http = {
       }
 
       if (isDir && dirName === 'assets') {
-
         app.use('/assets/', express.static(dirName, {maxAge}));
       }
     }
-    console.log("=== ship ===");
-    app.use('/ship', express.static('react-app-ship/build', {maxAge}));
+    // console.log("=== ship ===");
+    // app.use('/ship', express.static('react-app-ship/dist', {maxAge}));
+
+
 
   },
   middleware: {

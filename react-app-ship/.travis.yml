@@ -1,27 +1,22 @@
+sudo: false
 language: node_js
-
 node_js:
-  - 6
-  - 5
-  - 4
-
-script: npm run build
-
-install:
-  - npm i -g npm@latest
-  - npm install
-
-before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-
-notifications:
-  email:
-    on_failure: change
-
-after_success: 'npm run coveralls'
+  - "5.0"
 
 cache:
   directories:
     - node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run lint
+  - npm run flow:check
+  - npm run test
+  - NODE_ENV=development npm run deploy
+  - NODE_ENV=staging npm run deploy
+  - NODE_ENV=production npm run deploy
+
+after_success:
+  - npm run codecov
