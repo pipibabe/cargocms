@@ -24,9 +24,9 @@ module.exports = {
       sortOrder: 0,
       publish: true,
       viewed: 678,
-      ImageId: image.id,
+      ImageId: null,
     };
 
-    await Product.create(data);
+    return await Product.create(data);
   },
 }
