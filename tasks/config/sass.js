@@ -18,6 +18,13 @@ module.exports = function(grunt) {
           src: ["importer.scss"],
           dest: ".tmp/public/css/labfnp/",
           ext: ".css"
+        },
+        {
+          expand: true,
+          cwd: "assets-ship/sass/",
+          src: ["importer.scss"],
+          dest: ".tmp/public/css/ship/",
+          ext: ".css"
         }
       ]
     }

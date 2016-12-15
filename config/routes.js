@@ -134,6 +134,10 @@ var defaultConfig = {
   '/admin':           'AdminController.index',
   '/admin/config.js': 'AdminController.config',
 
+  //----- Ship -----
+  '/ship':            'ShipController.index',
+  '/ship/login':      'ShipController.login',
+
   //----- AuthController -----
   'get /login': 'AuthController.login',
   'get /logout': 'AuthController.logout',
