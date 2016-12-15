@@ -1,4 +1,4 @@
-describe("traffic test", function() {
+describe.skip("traffic test", function() {
   this.timeout(10000000);
   const fs = require('fs');
   const spawn = require('child_process').spawn;
@@ -11,7 +11,7 @@ describe("traffic test", function() {
   let baseURL;
   before(function(done) {
     baseURL = "http://localhost:"+sails.config.port+"/";
-    setTimeout(function(){ 
+    setTimeout(function(){
       done();
     }, 10000);
   });
