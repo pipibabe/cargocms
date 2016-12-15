@@ -81,9 +81,6 @@
 </fieldset>
 <script>
 var formRules = {
-  id:{
-    required: true
-  },
   name:{
     required: true
   },
@@ -91,16 +88,20 @@ var formRules = {
     required: true
   },
   quantity:{
-    required: true
+    required: true,
+    digits: true
   },
   price:{
-    required: true
+    required: true,
+    number: true
   },
   total:{
-    required: true
+    required: true,
+    number: true
   },
   tax:{
-    required: true
+    required: true,
+    number: true
   },
   // reward:{
   //   required: true
@@ -122,16 +123,20 @@ var formMessages = {
     required: "請給予模型名稱"
   },
   quantity:{
-    required: "請給予數量"
+    required: "請給予數量",
+    digits: "請輸入整數"
   },
   price:{
-    required: "請給予價格"
+    required: "請給予價格",
+    number: "請輸入數字"
   },
   total:{
-    required: "請給予總價"
+    required: "請給予總價",
+    number: "請輸入數字"
   },
   tax:{
-    required: "請給予稅額"
+    required: "請給予稅額",
+    number: "請輸入數字"
   },
   // reward:{
   //   required: "請給予獎勵點數"
