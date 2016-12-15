@@ -1,6 +1,6 @@
 import productCreateHelper from "../../../util/productCreateHelper.js"
 
-describe('about Order controllers', () => {
+describe.only('about Order controllers', () => {
 
   let product1, product2, product3 , user;
   before(async function(done){
@@ -15,12 +15,6 @@ describe('about Order controllers', () => {
         phone2: '0900-000-000',
         address: '西區台灣大道二段2號16F-1',
         address2: '台中市',
-      }).then(function(user) {
-        Passport.create({
-          provider: 'local',
-          password: 'user',
-          UserId: user.id
-        });
       });
 
       product1 = await productCreateHelper.create('Product A');
@@ -36,7 +30,7 @@ describe('about Order controllers', () => {
   it('User shopping car Order some Products.', async (done) => {
     try{
       const orderData = {
-        products:[product1.id, product2.id, product3.id],
+        products:[ product1.id, product2.id, product3.id],
         user: user.id,
         telephone: '04-22019020',
         fax: '',
@@ -64,19 +58,20 @@ describe('about Order controllers', () => {
       const res = await request(sails.hooks.http.app)
       .post(`/api/order`).send( orderData );
 
+      res.status.should.be.eq(200);
+
       const order = await Order.findOne({
         where: {
-          id: res.body.data.itme.id
+          id: res.body.data.item.id
         }
       });
 
       const orderProduct = await OrderProduct.findAll({
         where: {
-          OrderId: res.body.data.itme.id
+          OrderId: res.body.data.item.id
         }
       });
 
-      res.status.should.be.eq(200);
       order.tracking.should.be.equal('確認');
       orderProduct.length.should.be.equal(3);
 
