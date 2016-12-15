@@ -263,7 +263,11 @@ module.exports = {
 			}
 		}
 	},
-	associations: () => {},
+	associations: () => {
+		SupplierShipOrder.hasMany(SupplierShipOrderDetail);
+		SupplierShipOrder.belongsTo(Supplier);
+		SupplierShipOrder.belongsTo(Order);
+	},
 	options: {
 		classMethods: {},
 		instanceMethods: {},
