@@ -112,6 +112,9 @@ module.exports.http = {
         app.use('/assets/', express.static(dirName, {maxAge}));
       }
     }
+    console.log("=== ship ===");
+    app.use('/ship', express.static('react-app-ship/build', {maxAge}));
+
   },
   middleware: {
     order: [
