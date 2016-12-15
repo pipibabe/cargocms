@@ -2,15 +2,6 @@ import moment from 'moment';
 
 module.exports = {
   attributes: {
-    image: {
-      type: Sequelize.STRING(255),
-      defaultValue: null
-    },
-    // parentId: {
-    //   type: Sequelize.INTEGER(11),
-    //   allowNull: false,
-    //   defaultValue: 0
-    // },
     top: {
       type:  Sequelize.INTEGER(1),
       allowNull: false,
@@ -50,6 +41,7 @@ module.exports = {
     },
   },
   associations: function() {
+    Category.belongsTo(Image);
     Category.belongsToMany(Product, {
       through: 'ProductCategory',
     });
