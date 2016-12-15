@@ -54,3 +54,23 @@ var appModel = {
 <%- include ../default/vue.ejs %>
 // 需要新增函式可以對 appMain 進行定義，如：
 // appMain.log = function () {console.log("123")}
+appMain.enableText = function () {
+  $('textarea').attr('disabled', false);
+}
+
+appMain.enableSelect = function () {
+	$('select').attr('disabled', false);
+	$('.select').removeClass('state-disabled');
+
+  // totalRepeat label add disable class
+  $(".notForCreate > section:nth-child(1) > label:nth-child(2)").addClass("state-disabled");
+  // ScentName label add disabled class
+  $("#main-form > fieldset > section:nth-child(2) > label.input").addClass("state-disabled");
+
+  $("input[name=totalRepeat]").attr("disabled", true);
+  $("input[name=scentName]").attr("disabled", true);
+
+  $('.onoffswitch-checkbox').attr('disabled', false);
+
+  $('.notForCreate').hide();
+}
