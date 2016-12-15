@@ -50,6 +50,12 @@ var defaultConfig = {
   'put /api/admin/quote/:id': 'api/admin/QuoteController.update',
   'delete /api/admin/quote/:id': 'api/admin/QuoteController.destroy',
 
+  'get /api/admin/rolemenuitem': 'api/admin/RoleMenuItemController.find',
+  'get /api/admin/rolemenuitem/:id': 'api/admin/RoleMenuItemController.findOne',
+  'post /api/admin/rolemenuitem': 'api/admin/RoleMenuItemController.create',
+  'put /api/admin/rolemenuitem/:id': 'api/admin/RoleMenuItemController.update',
+  'delete /api/admin/rolemenuitem/:id': 'api/admin/RoleMenuItemController.destroy',
+
   'post /api/admin/allpay/find':  'api/admin/AllpayController.find',
   'post /api/admin/allpay/export': 'api/admin/AllpayController.export',
   'post /api/admin/allpay/exportSend': 'api/admin/AllpayController.exportSend',
@@ -68,6 +74,7 @@ var defaultConfig = {
   'post /api/admin/message':       'api/admin/MessageController.create',
   'put /api/admin/message/:id':    'api/admin/MessageController.update',
   'delete /api/admin/message/:id': 'api/admin/MessageController.destroy',
+
 
   'post /api/user/follow/:id':    'api/UserController.follow',
   'post /api/user/unfollow/:id':  'api/UserController.unfollow',
