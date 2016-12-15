@@ -1,135 +1,106 @@
-
 <!-- client -->
 <table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
   <thead>
     <tr>
-
-
-        <th data-hide="" class="no-sort">
-          名稱
-        </th>
-
-
-        <th data-hide="" class="no-sort">
-          型號
-        </th>
-
-
-        <th data-hide="" class="no-sort">
-          數量
-        </th>
-
-
-        <th data-hide="" class="no-sort">
-          價格
-        </th>
-
-
-        <th data-hide="" class="no-sort">
-          總價
-        </th>
-
-
-        <th data-hide="" class="no-sort">
-          稅額
-        </th>
-
-        <!--
-        <th data-hide="" class="no-sort">
-          產品訂單 ID
-        </th>
-
-
-        <th data-hide="" class="no-sort">
-          供應商運送訂單 ID
-        </th>
-        -->
+      <th data-hide="" class="no-sort" data-class="expand">
+        名稱
+      </th>
+      <th data-hide="" class="no-sort">
+        型號
+      </th>
+      <th data-hide="" class="no-sort">
+        數量
+      </th>
+      <th data-hide="" class="no-sort">
+        價格
+      </th>
+      <th data-hide="" class="no-sort">
+        總價
+      </th>
+      <th data-hide="" class="no-sort">
+        稅額
+      </th>
+      <th data-hide="" class="no-sort">
+        產品訂單 ID
+      </th>
+      <th data-hide="" class="no-sort">
+        供應商運送訂單 ID
+      </th>
       <th width="80" data-hide="phone,tablet"></th>
     </tr>
   </thead>
   <!-- client only -->
   <tbody>
     <tr v-for="item in data.items">
-
-        <td>{{ item.name}}</td>
-
-        <td>{{ item.model}}</td>
-
-        <td>{{ item.quantity}}</td>
-
-        <td>{{ item.price}}</td>
-
-        <td>{{ item.total}}</td>
-
-        <td>{{ item.tax}}</td>
-        <!--
-        <td>{{ item.OrderProductId}}</td>
-
-        <td>{{ item.SupplierShipOrderId}}</td>
-        -->
+      <td>{{ item.name}}</td>
+      <td>{{ item.model}}</td>
+      <td>{{ item.quantity}}</td>
+      <td>{{ item.price}}</td>
+      <td>{{ item.total}}</td>
+      <td>{{ item.tax}}</td>
+      <td>{{ item.OrderProductId}}</td>
+      <td>{{ item.SupplierShipOrderId}}</td>
       <td align="center" style="cursor: pointer;">
         <div class="row">
           <a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
             <i class="fa-fw fa fa-eye text-muted" />
           </a>
           <a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
-            <i class="fa-fw fa fa-pencil-square-o text-muted"/>
+            <i class="fa-fw fa fa-pencil-square-o text-muted" />
           </a>
         </div>
       </td>
     </tr>
   </tbody>
- </table>
-
-
+</table>
 <script type="text/javascript">
-  var pagefunction = function() {
-
-    // server only
-    var columns = [
-      { "data": "name" },
-
-      { "data": "model" },
-
-      { "data": "quantity" },
-
-      { "data": "price" },
-
-      { "data": "total" },
-
-      { "data": "tax" },
-
-      // { "data": "OrderProductId" },
-      //
-      // { "data": "SupplierShipOrderId" },
-
-      { "data": null },
-    ]
-
-    // server only
+  var pagefunction = function() { // server only
+    var columns = [{
+        "data": "name"
+      }, {
+        "data": "model"
+      }, {
+        "data": "quantity"
+      }, {
+        "data": "price"
+      }, {
+        "data": "total"
+      }, {
+        "data": "tax"
+      }, {
+        "data": "OrderProductId"
+      }, {
+        "data": "SupplierShipOrderId"
+      }, {
+        "data": null
+      }, ] // server only
     var columnDefs = [
-
       {
-        "targets"  : 6,
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+      {
+        "targets": 8,
         "orderable": false,
         "searchable": false,
-        "render": function ( data, type, row ) {
+        "render": function(data, type, row) {
           var colBody =
-          '<div class="row-action-buttons hidden-xs hidden-sm">'+
-          '<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
-          '<i class="fa-fw fa fa-eye text-muted" />'+
-          '</a>'+
-          '<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
-          '<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
-          '</a>'+
-          '</div>';
+            '<div class="row-action-buttons hidden-xs hidden-sm">' +
+            '<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="' + row.id + '">' +
+            '<i class="fa-fw fa fa-eye text-muted" />' +
+            '</a>' +
+            '<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="' + row.id + '">' +
+            '<i class="fa-fw fa fa-pencil-square-o text-muted"/>' +
+            '</a>' +
+            '</div>';
           return colBody;
         }
       },
-    ]
+    ];
     var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
     <%- include vue.ejs %>
     appMain.$mount("#main-index");
     appMain.loadItems(appMain.renderTable);
+
   };
 </script>
