@@ -33,6 +33,7 @@ module.exports.init = async () => {
       { href: '/admin/mock', title: '隨機資料表', sequence: 20, ParentMenuItemId: 3},
 
       { href: '/admin/product', title: '產品', sequence: 20, ParentMenuItemId: 4},
+      { href: '/admin/productdescription', title: '產品描述', sequence: 30, ParentMenuItemId: 4},
 
     ]
 

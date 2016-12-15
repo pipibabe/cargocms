@@ -114,6 +114,12 @@ var defaultConfig = {
   'put /api/admin/product/:id': 'api/admin/ProductController.update',
   'delete /api/admin/product/:id': 'api/admin/ProductController.destroy',
 
+  'get /api/admin/productdescription':      'api/admin/ProductDescriptionController.find',
+  'get /api/admin/productdescription/:id':  'api/admin/ProductDescriptionController.findOne',
+  'post /api/admin/productdescription':      'api/admin/ProductDescriptionController.create',
+  'put /api/admin/productdescription/:id':  'api/admin/ProductDescriptionController.update',
+  'delete /api/admin/productdescription/:id':  'api/admin/ProductDescriptionController.destroy',
+
   'get /api/admin/labfnp/scent':  'api/admin/labfnp/ScentController.find',
   'get /api/admin/labfnp/scentnote':  'api/admin/labfnp/ScentNoteController.find',
 
