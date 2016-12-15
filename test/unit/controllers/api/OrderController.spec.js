@@ -31,7 +31,7 @@ describe.only('about Order controllers', () => {
     try{
       const orderData = {
         products:[ product1.id, product2.id, product3.id],
-        user: user.id,
+        UserId: user.id,
         telephone: '04-22019020',
         fax: '',
         email: 'buyer@gmail.com',
