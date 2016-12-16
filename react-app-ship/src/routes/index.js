@@ -8,9 +8,11 @@ import { Route, IndexRoute } from 'react-router'
 // your current file is.
 import CoreLayout from 'layouts/CoreLayout/CoreLayout'
 import HomeView from 'views/HomeView/HomeView'
+import MaterialUi from 'views/MaterialUi/MaterialUi'
 
 export default (store) => (
-  <Route path='/ship/index' component={CoreLayout}>
+  <Route path='/ship' component={CoreLayout}>
     <IndexRoute component={HomeView} />
+    <Route path='MaterialUi' component={MaterialUi} />
   </Route>
 )
