@@ -154,7 +154,7 @@ var defaultConfig = {
   'get /admin/facebook/:controller/:action/:id?': {},
 
   //----- robots ---
-  'get /robots.txt': 'RobotsControźller.robots',
+  'get /robots.txt': 'RobotsController.robots',
 
   //---- mobile ----
   'get /m': '/',
