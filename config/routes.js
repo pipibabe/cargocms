@@ -154,7 +154,7 @@ var defaultConfig = {
   'get /admin/facebook/:controller/:action/:id?': {},
 
   //----- robots ---
-  'get /robots.txt': 'RobotsController.robots',
+  'get /robots.txt': 'RobotsControźller.robots',
 
   //---- mobile ----
   'get /m': '/',
@@ -162,8 +162,14 @@ var defaultConfig = {
 };
 
 module.exports.routes = {
+
+
   '/': {
     view: 'index'
+  },
+  'get /ship/*': function(req, res, next) {
+    console.log("=== ship path ==="+sails.config.appPath + '/react-app-ship/dist/index.html');
+    res.sendfile(sails.config.appPath + '/react-app-ship/dist/index.html');
   },
   ...customConfig,
   ...defaultConfig,
