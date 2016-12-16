@@ -1,4 +1,4 @@
-import productCreateHelper from "../../../util/productCreateHelper.js"
+import createHelper from "../../../util/createHelper.js"
 
 describe.only('about Order controllers', () => {
 
@@ -17,9 +17,9 @@ describe.only('about Order controllers', () => {
         address2: '台中市',
       });
 
-      product1 = await productCreateHelper.create('Product A');
-      product2 = await productCreateHelper.create('Product B');
-      product3 = await productCreateHelper.create('Product C');
+      product1 = await createHelper.product('Product A');
+      product2 = await createHelper.product('Product B');
+      product3 = await createHelper.product('Product C');
 
       done();
     } catch (e) {

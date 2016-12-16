@@ -119,6 +119,8 @@ var defaultConfig = {
 
   'post /api/order': 'api/OrderController.createOrder',
 
+  'post /api/admin/order/conform/:id：': 'api/admin/OrderController.conform',
+
   //----- Event -----
   'get /events/:name': 'EventController.show',
 
