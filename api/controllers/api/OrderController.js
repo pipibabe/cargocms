@@ -3,35 +3,62 @@ module.exports = {
     try{
       let data = req.body;
       const products = data.products;
-      const orderUser = data.user;
-      
+
       // data remove products
       delete data.products;
       //ignore columns
-      data.customField = '',
-      data.paymentCompany = '',
-      data.paymentAddress2 = '',
-      data.paymentCountry = '',
-      data.paymentCountryId = 0,
-      data.paymentZone = '',
-      data.paymentZoneId = 0,
-      data.paymentAddressFormat = '',
-      data.paymentCustomField = '',
-      data.shippingCompany = '',
-      data.shippingAddress2 = '',
-      data.shippingCountry = '',
-      data.shippingCountryId = 0,
-      data.shippingZone = '',
-      data.shippingZoneId = 0,
-      data.shippingAddressFormat = '',
-      data.shippingCustomField = '',
-      data.commission = 0.0000,
-      data.marketingId = 0,
-      data.languageId = 0,
-      data.acceptLanguage = '',
+      data.customField = '';
+      data.paymentCompany = '';
+      data.paymentAddress2 = '';
+      data.paymentCountry = '';
+      data.paymentCountryId = 0;
+      data.paymentZone = '';
+      data.paymentZoneId = 0;
+      data.paymentAddressFormat = '';
+      data.paymentCustomField = '';
+      data.shippingCompany = '';
+      data.shippingAddress2 = '';
+      data.shippingCountry = '';
+      data.shippingCountryId = 0;
+      data.shippingZone = '';
+      data.shippingZoneId = 0;
+      data.shippingAddressFormat = '';
+      data.shippingCustomField = '';
+      data.commission = 0.0000;
+      data.marketingId = 0;
+      data.languageId = 0;
+      data.acceptLanguage = '';
 
-      const order = await Order.create();
+      const user = await User.findById(data.UserId);
+      data.firstname = user.firstName;
+      data.lastname  = user.lastName;
 
+      const order = await Order.create(data);
+      sails.log.info("new Order Create", order);
+
+      for(let p of products){
+        let product = await Product.find({
+          where: {
+            id: p.id,
+          },
+          include: ProductDescription
+        });
+        await OrderProduct.create({
+          ProductId: product.id,
+          name: product.ProductDescription.name,
+          model: product.model,
+          quantity: p.quantity,
+          price: product.price,
+          total: (product.price * p.quantity),
+          tax: (product.price * p.quantity) * 0.05,
+          reward: 0
+        });
+      }
+      const message = 'Order create success';
+      res.ok({
+        message: message,
+        data: order
+      });
     } catch (e) {
       res.serverError(e);
     }
