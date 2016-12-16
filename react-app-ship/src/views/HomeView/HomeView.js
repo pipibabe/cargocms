@@ -43,7 +43,8 @@ export class HomeView extends React.Component {
         <h2>
           Sample Countcxcxcer:
           {' '}
-          <span className={classes['counter--green']}>{this.props.counter}</span>
+          <span
+            className={classes['counter--green']}>{this.props.counter}</span>
         </h2>
         <button className='btn btn-default' onClick={this.props.increment}>
           Increment
