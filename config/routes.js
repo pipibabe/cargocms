@@ -119,7 +119,11 @@ var defaultConfig = {
 
   'post /api/order': 'api/OrderController.createOrder',
 
-  'post /api/admin/order/conform/:id：': 'api/admin/OrderController.conform',
+  'post /api/admin/order/conform/:id': 'api/admin/OrderController.conform',
+
+  'put /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.status',
+
+  'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.status',
 
   //----- Event -----
   'get /events/:name': 'EventController.show',

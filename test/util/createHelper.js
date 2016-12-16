@@ -98,5 +98,31 @@ module.exports = {
     } catch (e) {
       throw e;
     }
-  }
+  },
+
+  supplierShipOrder: async(orderId, supplierIdArray) => {
+    try {
+      let data = {
+        // TODO: supplierProduct data
+      }
+      throw Error('尚未實作 supplier order Help')
+      return await SupplierShipOrder.create(data);
+    } catch (e) {
+      throw e;
+    }
+  },
+
+  supplierShipOrderDescription: async(supplierShipOrderId, orderProductId) => {
+    try {
+      let data = {
+        // TODO: supplierShipOrderDescription data
+      }
+      throw Error('尚未實作 supplier ShipOrder Description Help');
+      return await SupplierShipOrderDescription.create(data);
+    } catch (e) {
+      throw e;
+    }
+  },
+
+
 }
