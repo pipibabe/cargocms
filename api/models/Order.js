@@ -245,14 +245,6 @@ module.exports = {
       type: Sequelize.STRING(255),
       allowNull: false,
     },
-    dateAdded: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    },
-    dateModified: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    }
   },
   associations: () => {
     Order.hasOne(OrderStatus);

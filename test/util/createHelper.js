@@ -1,6 +1,12 @@
 module.exports = {
   product: async function(name){
-    let data = {
+    const image = await Image.create({
+      filePath: `/uploads/product_${name}.jpg`,
+      type: 'image/jpeg',
+      storage: 'local'
+    });
+
+    const productData = {
       model: name,
       sku: "ABC1234",
       upc: "512345678900",
@@ -24,9 +30,24 @@ module.exports = {
       sortOrder: 0,
       publish: true,
       viewed: 678,
-      ImageId: null,
+      ImageId: image.id,
     };
-    return await Product.create(data);
+
+    const product = await Product.create(productData);
+
+    const productDescData = {
+      ProductId: product.id,
+      name: `Full name of ${name}`,
+      description: `Description of ${name}` ,
+      tag: 'meow',
+      title: 'The Product Title',
+      metaTitle: 'ProductMetaTitle',
+      metaDescription:'ProductMetaDescription',
+      metaKeyword: 'ProductMetaKeyWord',
+    }
+    await ProductDescription.create(productDescData);
+
+    return product;
   },
 
   order: async (userId) => {

@@ -30,8 +30,17 @@ describe.only('about Order controllers', () => {
   it('User shopping car Order some Products.', async (done) => {
     try{
       const orderData = {
-        products:[ product1.id, product2.id, product3.id],
-        user: user.id,
+        products:[ {
+          id: product1.id,
+          quantity: 3,
+        }, {
+          id: product2.id,
+          quantity: 2,
+        }, {
+          id: product3.id,
+          quantity: 5,
+        }],
+        UserId: user.id,
         telephone: '04-22019020',
         fax: '',
         email: 'buyer@gmail.com',
@@ -52,7 +61,10 @@ describe.only('about Order controllers', () => {
         shippingPostcode: '402',
         shippingMethod: '低溫宅配',
         shippingCode: 'ship123456',
-
+        ip: '',
+        forwardedIp: '',
+        userAgent: '',
+        comment: '這是一個訂購測試'
       };
 
       const res = await request(sails.hooks.http.app)
