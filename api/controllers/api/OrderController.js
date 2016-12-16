@@ -52,7 +52,7 @@ module.exports = {
           price: product.price,
           total: (product.price * p.quantity),
           tax: (product.price * p.quantity) * 0.05,
-          reward: 0
+          // reward: 0
         });
       }
       const message = 'Order create success';

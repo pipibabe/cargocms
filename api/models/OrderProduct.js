@@ -28,10 +28,10 @@ module.exports = {
       defaultValue: '0.0000',
       allowNull: false,
     },
-    reward: {
-      type: Sequelize.INTEGER(8),
-      allowNull: false,
-    },
+    // reward: {
+    //   type: Sequelize.INTEGER(8),
+    //   allowNull: false,
+    // },
   },
   associations: () => {
     OrderProduct.belongsTo(Product);
