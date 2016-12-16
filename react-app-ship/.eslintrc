@@ -59,6 +59,10 @@
     "object-curly-spacing": [
       2,
       "always"
+    ],
+    "react/jsx-boolean-value": [
+      1,
+      "always"
     ]
   }
 }
