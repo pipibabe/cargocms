@@ -23,6 +23,11 @@
     "__BASENAME__": false
   },
   "rules": {
+    "react/jsx-filename-extension": [
+      1, {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
     "key-spacing": [
       2, {
         "singleLine": {
@@ -31,7 +36,7 @@
         },
         "multiLine": {
           "align": "colon",
-          "beforeColon": true,
+          "beforeColon": false,
           "afterColon": true
         }
       }
