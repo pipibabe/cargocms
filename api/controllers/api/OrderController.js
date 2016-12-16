@@ -45,6 +45,7 @@ module.exports = {
         });
         await OrderProduct.create({
           ProductId: product.id,
+          OrderId: order.id,
           name: product.ProductDescription.name,
           model: product.model,
           quantity: p.quantity,
@@ -57,7 +58,9 @@ module.exports = {
       const message = 'Order create success';
       res.ok({
         message: message,
-        data: order
+        data: {
+          item: order
+        }
       });
     } catch (e) {
       res.serverError(e);
