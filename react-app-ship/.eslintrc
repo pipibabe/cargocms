@@ -49,7 +49,7 @@
     ],
     "semi": [
       2,
-      "never"
+      "always"
     ],
     "object-curly-spacing": [
       2,
