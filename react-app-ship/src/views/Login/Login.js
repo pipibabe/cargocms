@@ -2,8 +2,9 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { increment, doubleAsync } from '../../redux/modules/counter'
-import DuckImage from './Duck.jpg'
-import classes from './HomeView.scss'
+import Crab from './crab.png'
+import FishLogo from './fish logo.png'
+import classes from './Login.scss'
 
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
@@ -31,27 +32,35 @@ export class HomeView extends React.Component {
 
   render () {
     return (
-      <div className='container text-center'>
-        <div className='row'>
-          <div className='col-xs-2 col-xs-offset-5'>
-            <img className={classes.duck}
-              src={DuckImage}
-              alt='This isdfsdfsdfdck, because Redux.' />
-          </div>
+      <div className='login-container' >
+      <div className="login-form">
+        <div className="login-form-body">
+          <h1>出貨管理</h1>
+          <img className="crab" src={Crab} alt="" />
+          <form>
+            <label>帳號</label>
+            <input type="text" placeholder="Username" className="form-control margin-bottom-20" />
+            <label>密碼</label>
+            <input type="text" placeholder="Password" className="form-control" />
+            <a className="forget-password" href="#">忘記密碼？</a>
+            <button type="button" className="btn login-btn">登入系統</button>
+          </form>
         </div>
-        <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>
-          Sample Countcxcxcer:
-          {' '}
-          <span className={classes['counter--green']}>{this.props.counter}</span>
-        </h2>
-        <button className='btn btn-default' onClick={this.props.increment}>
-          Increment
-        </button>
-        {' '}
-        <button className='btn btn-default' onClick={this.props.doubleAsync}>
-          Double (Async)
-        </button>
+        <div className="login-form-footer">
+          <div className="login-contact">
+            <img src={FishLogo} />
+            <div className="login-contact-info">
+              <h1>雲端漁場服務專線</h1>
+              <p>
+                <a href="#">(05)0000-0000</a>
+              </p>
+            </div>
+          </div>
+          <a href="#" className="facebook-btn" >
+            <i className="fa fa-facebook" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
       </div>
     )
   }
