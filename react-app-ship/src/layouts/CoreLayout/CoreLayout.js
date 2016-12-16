@@ -1,5 +1,9 @@
-import React, { PropTypes } from 'react'
-import '../../styles/core.scss'
+import React, { PropTypes } from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { deepOrange500 } from 'material-ui/styles/colors';
+import AppDrawer from './AppDrawer';
+import '../../styles/core.scss';
 
 // Note: Stateless/function components *will not* hot reload!
 // react-transform *only* works on component classes.
@@ -11,17 +15,25 @@ import '../../styles/core.scss'
 // CoreLayout is a pure function of its props, so we can
 // define it with a plain javascript function...
 function CoreLayout({ children }) {
+  const muiTheme = getMuiTheme({
+    palette: {
+      accent1Color: deepOrange500,
+    },
+  });
   return (
-    <div className='page-container'>
-      <div className='view-container'>
-        {children}
+    <MuiThemeProvider muiTheme={muiTheme}>
+      <div className='page-container'>
+        <div className='view-container'>
+          <AppDrawer />
+          {children}
+        </div>
       </div>
-    </div>
-  )
+    </MuiThemeProvider>
+  );
 }
 
 CoreLayout.propTypes = {
-  children : PropTypes.element,
-}
+  children: PropTypes.element,
+};
 
-export default CoreLayout
+export default CoreLayout;
