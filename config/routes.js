@@ -162,8 +162,14 @@ var defaultConfig = {
 };
 
 module.exports.routes = {
+
+
   '/': {
     view: 'index'
+  },
+  'get /ship/*': function(req, res, next) {
+    console.log("=== ship path ==="+sails.config.appPath + '/react-app-ship/dist/index.html');
+    res.sendfile(sails.config.appPath + '/react-app-ship/dist/index.html');
   },
   ...customConfig,
   ...defaultConfig,
