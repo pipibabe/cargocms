@@ -9,7 +9,9 @@ import {
   MenuItem,
   Divider,
 } from 'material-ui';
+import MainToolbar from './MainToolbar';
 import classes from './AppDrawer.scss';
+
 // import { increment, doubleAsync } from '../../redux/modules/counter';
 
 // @connect(
@@ -22,6 +24,10 @@ import classes from './AppDrawer.scss';
 const styles = {
   drawer: {
     marginTop: 72,
+    backgroundColor: '#F2F2F2',
+  },
+  appBar: {
+    backgroundColor: '#2D3743',
   },
 };
 
@@ -50,10 +56,13 @@ export default class AppDrawer extends React.Component {
     return (
       <div>
         <AppBar
-          title='Title'
+          title='雲端漁場出貨管理系統'
           iconClassNameRight='muidocs-icon-navigation-expand-more'
           onLeftIconButtonTouchTap={this.handleToggle}
-        />
+          style={styles.appBar}
+        >
+          <MainToolbar />
+        </AppBar>
         <Drawer
           containerStyle={styles.drawer}
           className={classes.drawer}
