@@ -1,5 +1,6 @@
 module.exports = {
 
+
   find: async (req, res) => {
     try {
       const { query } = req;
