@@ -231,12 +231,7 @@ module.exports = {
 			allowNull: false
 		},
 
-		createdAt: {
-			type: Sequelize.STRING,
-			allowNull: false
-		},
-
-		updatedAt: {
+		status: {
 			type: Sequelize.STRING,
 			allowNull: false
 		},
