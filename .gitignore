@@ -122,8 +122,8 @@ www
 assets/bower
 coverage
 test-results.xml
-test/e2e/PID.json
-test/e2e/memory.xls
+test/e2e-stress/*PID.json
+test/e2e-stress/*memory.xls
 test/stress/output_client/
 test/stress/output_serverMemory.xls
 test/stress/*.txt

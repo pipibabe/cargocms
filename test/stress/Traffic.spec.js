@@ -1,4 +1,4 @@
-describe.skip("traffic test", function() {
+describe("traffic test", function() {
   this.timeout(10000000);
   const fs = require('fs');
   const spawn = require('child_process').spawn;

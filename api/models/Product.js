@@ -202,6 +202,10 @@ module.exports = {
     Product.hasMany(ProductOptionValue);
     Product.hasMany(ProductImage);
     Product.belongsTo(Image);
+
+    Product.belongsToMany(Category, {
+      through: 'ProductCategory',
+    });
   },
   options: {
     paranoid: true,
@@ -209,6 +213,43 @@ module.exports = {
       deleteById: async (id) => {
         try {
           return await Product.destroy({ where: { id } });
+        } catch (e) {
+          sails.log.error(e);
+          throw e;
+        }
+      },
+      findByIdHasJoin: async ({id}) => {
+        try {
+          const include = [
+            ProductTag,
+            ProductDescription,
+            ProductImage,
+            Image,
+            {
+              model: ProductOption,
+              include: {
+                model: Option,
+                include: [ OptionDescription, {
+                    model: OptionValue,
+                    include: OptionValueDescription
+                  }
+                ]
+              }
+            }, {
+              model: ProductOptionValue,
+              include: [{
+                  model: Option,
+                  include: OptionDescription
+                }, {
+                  model : OptionValue,
+                  include: OptionValueDescription
+                }]
+            }
+          ];
+          return await Product.findOne({
+            where: { id },
+            include: include
+          });
         } catch (e) {
           sails.log.error(e);
           throw e;

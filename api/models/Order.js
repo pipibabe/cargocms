@@ -280,6 +280,9 @@ module.exports = {
     Order.hasOne(OrderStatus);
     Order.hasOne(OrderOption);
     Order.hasMany(OrderProduct);
+
+    Order.hasMany(SupplierShipOrder);
+
     Order.belongsTo(Allpay);
     Order.belongsTo(User);
   },

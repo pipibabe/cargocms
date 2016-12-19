@@ -102,6 +102,43 @@ module.exports.init = async () => {
         OptionId: option.id,
         OptionValueId: optionValue.id
       });
+
+      const initCategory1 = await Category.create({
+        image: "catalog/demo/macbook_pro_1.jpg",
+        top: 1,
+        column: 2,
+        sortOrder: 1,
+        status: 1,
+      });
+
+      const initCategory2 = await Category.create({
+        image: "catalog/demo/macbook_pro_2.jpg",
+        ParentId: initCategory1.id,
+        top: 2,
+        column: 2,
+        sortOrder: 2,
+        status: 1,
+      });
+
+      const initCategoryDesc1 = await CategoryDescription.create({
+        name: 'Category1',
+        description: 'test desc 1',
+        metaTitle: 'meta title 1',
+        metaDescription: 'meta desc 1',
+        metaKeyword: 'meta,keyword,test,1',
+        CategoryId: initCategory1.id
+      });
+
+      const initCategoryDesc2 = await CategoryDescription.create({
+        name: 'Category2',
+        description: 'test desc 2',
+        metaTitle: 'meta title 2',
+        metaDescription: 'meta desc 2',
+        metaKeyword: 'meta,keyword,test,2',
+        CategoryId: initCategory2.id
+      });
+
+      await product.setCategories(initCategory1);
     }
 
   } catch (e) {
