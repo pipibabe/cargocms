@@ -2,14 +2,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import {
   AppBar,
   Drawer,
-  MenuItem,
-  Divider,
 } from 'material-ui';
 import MainToolbar from './MainToolbar';
+import DrawerMenuItems from './DrawerMenuItems';
 import classes from './AppDrawer.scss';
 
 // import { increment, doubleAsync } from '../../redux/modules/counter';
@@ -22,22 +20,34 @@ import classes from './AppDrawer.scss';
 //   }, dispatch),
 // )
 const styles = {
-  drawer: {
-    marginTop: 72,
-    backgroundColor: '#F2F2F2',
-  },
   appBar: {
     backgroundColor: '#2D3743',
+  },
+  contentContainer: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  drawer: {
+  },
+  drawerContainer: {
+    marginTop: 10,
+    backgroundColor: '#F2F2F2',
+    position: 'relative',
+  },
+  content: {
+    width: '100%',
   },
 };
 
 export default class AppDrawer extends React.Component {
-  static PropTypes = {
-
+  static propTypes = {
+    content: PropTypes.object,
   };
 
   static defaultProps = {
-
+    content: '',
   };
 
   constructor(props) {
@@ -45,6 +55,7 @@ export default class AppDrawer extends React.Component {
     injectTapEventPlugin();
     this.state = {
       open: true,
+      drawerWidth: 150,
     };
   }
 
@@ -53,8 +64,15 @@ export default class AppDrawer extends React.Component {
   });
 
   render() {
+    const drawerWidth = this.state.drawerWidth;
+    const drawerContainerStyle = styles.drawerContainer;
+    if (this.state.open) {
+      drawerContainerStyle.width = drawerWidth;
+    } else {
+      drawerContainerStyle.width = 0;
+    }
     return (
-      <div>
+      <div className=''>
         <AppBar
           title='雲端漁場出貨管理系統'
           iconClassNameRight='muidocs-icon-navigation-expand-more'
@@ -63,20 +81,22 @@ export default class AppDrawer extends React.Component {
         >
           <MainToolbar />
         </AppBar>
-        <Drawer
-          containerStyle={styles.drawer}
-          className={classes.drawer}
-          zDepth={0}
-          open={this.state.open}
-        >
-          <MenuItem>出貨總管</MenuItem>
-          <MenuItem>未出貨</MenuItem>
-          <MenuItem>已出貨</MenuItem>
-          <MenuItem>顯示所有紀錄</MenuItem>
-          <Divider />
-          <MenuItem>我的帳號</MenuItem>
-          <MenuItem>聯繫雲端漁場</MenuItem>
-        </Drawer>
+        <div style={styles.contentContainer}>
+          <Drawer
+            style={styles.drawer}
+            containerStyle={drawerContainerStyle}
+            className={classes.drawer}
+            zDepth={0}
+            open={this.state.open}
+            width={drawerWidth}
+            docked={true}
+          >
+            <DrawerMenuItems />
+          </Drawer>
+          <div style={styles.content}>
+            {this.props.content}
+          </div>
+        </div>
       </div>
     );
   }
