@@ -18,11 +18,11 @@ describe.only('about admin Order controllers', () => {
       });
 
       product1 = await createHelper.product();
-      supplier1 = await createHelper.supplier();
+      supplier1 = await createHelper.supplier('壹陸捌活海產');
       await createHelper.supplierProduct(supplier1.id, product1.id);
 
       product2 = await createHelper.product();
-      supplier2 = await createHelper.supplier();
+      supplier2 = await createHelper.supplier('活跳跳海產');
       await createHelper.supplierProduct(supplier2.id, product2.id);
 
       order = await createHelper.order(user.id);
@@ -66,29 +66,29 @@ describe.only('about admin Order controllers', () => {
         .post(`/api/admin/order/confirm/${order.id}`);
         res.status.should.be.eq(200);
 
-        const supplierOrder1 = await SupplierOrder.findOne({
+        const supplierShipOrder1 = await SupplierShipOrder.findOne({
           where: {
             OrderId: order.id,
             SupplierId: supplier1.id
           }
         });
-        supplierOrder1.id.shoubld.be.not.null;
+        (supplierOrder1 !== null).should.be.true;
 
-        const supplierOrder2 = await SupplierOrder.findOne({
+        const supplierShipOrder2 = await SupplierShipOrder.findOne({
           where: {
             OrderId: order.id,
             SupplierId: supplier2.id
           }
         });
-        supplierOrder2.id.shoubld.be.not.null;
+        (supplierOrder2 !== null).should.be.true;
 
-        const supplierOrderDescription = await SupplierOrderDescription.find({
+        const supplierShipOrderDescription = await SupplierShipOrderDescription.find({
           where: {
-            SupplierOrderId: supplierOrder1.id
+            SupplierShipOrderId: supplierShipOrder1.id
           }
         });
-        supplierOrderDescription.length.should.be.eq(1);
-        (supplierOrderDescription.toJSON())[0].OrderProductId.should.eq(orderProduct1.id)
+        supplierShipOrderDescription.length.should.be.eq(1);
+        (supplierShipOrderDescription.toJSON())[0].OrderProductId.should.eq(orderProduct1.id)
         done();
       } catch (e) {
         done(e);
