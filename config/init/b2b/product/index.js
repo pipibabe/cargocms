@@ -4,25 +4,36 @@ module.exports.init = async () => {
     const isDropMode = sails.config.models.migrate == 'drop';
 
     if (isDevMode && isDropMode) {
-      let image = await Image.create({
-        filePath: 'http://www.labfnp.com/modules/core/img/update1.jpg',
+
+      const image1 = await Image.create({
+        filePath: 'uploads/product_image_1.jpg',
         type: 'image/jpeg',
-        storage: 'url',
+        storage: 'local',
+      });
+      const image2 = await Image.create({
+        filePath: 'uploads/product_image_2.jpg',
+        type: 'image/jpeg',
+        storage: 'local',
+      });
+      const image3 = await Image.create({
+        filePath: 'uploads/product_image_3.jpg',
+        type: 'image/jpeg',
+        storage: 'local',
       });
 
-      let product = await Product.create({
-          model: "Product 1",
+      let product1 = await Product.create({
+          model: "鮮甜飽滿無毒益菌蝦",
           sku: "ABC1234",
           upc: "512345678900",
           ean: "0012345678905",
           jan: "4534567890126",
           isbn: "9788175257665",
           mpn: "XYZ876A1B2C3",
-          location: "Test location",
-          quantity: 939,
-          image: "catalog/demo/htc_touch_hd_1.jpg",
+          location: "台中市清水區",
+          quantity: 200,
+          image: "catalog/demo/168_seafood_Shrimp.jpg",
           shipping: true,
-          price: 100,
+          price: 599,
           points: 200,
           dateAvailable: "2017-01-01",
           weight: 146.4,
@@ -34,28 +45,29 @@ module.exports.init = async () => {
           sortOrder: 0,
           publish: true,
           viewed: 12321,
-          ImageId: image.id,
+          ImageId: image1.id,
+          SupplierId: 1,
         });
 
       let productDescription = await ProductDescription.create({
-          name: "HTC Touch HD",
-          description: "Happy Telephone Company",
-          tag: "HTC",
-          metaTitle: "HTC Touch HD",
-          metaDescription: "HTC Touch HD",
-          metaKeyword: "HTC Touch",
-          ProductId: product.id
+          name: "鮮甜飽滿無毒益菌蝦",
+          description: "鮮甜飽滿無毒益菌蝦",
+          tag: "蝦",
+          metaTitle: "鮮甜飽滿無毒益菌蝦",
+          metaDescription: "H鮮甜飽滿無毒益菌蝦",
+          metaKeyword: "鮮甜飽滿無毒益菌蝦",
+          ProductId: product1.id
         });
 
       let productTag = await ProductTag.create({
-        tag: "Product Tag Test",
-        ProductId: product.id
+        tag: "蝦",
+        ProductId: product1.id
       });
 
       let productImage = await ProductImage.create({
         ProductId: product.id,
         ImageId: image.id,
-        image: "catalog/demo/macbook_pro_3.jpg",
+        image: "catalog/demo/168_seafood_Shrimp.jpg",
         sortOrder: 0
       });
 
@@ -65,22 +77,22 @@ module.exports.init = async () => {
       });
 
       let optionValue = await OptionValue.create({
-        image:"test/option_image.jpg",
+        image:"catalog/option/option_image.jpg",
         sortOrder: 4,
         OptionId: option.id
       });
 
       let productOption = await ProductOption.create({
-        value: 'product option test',
+        value: '超低溫冷藏',
         required: true,
         OptionId: option.id,
-        ProductId: product.id
+        ProductId: product1.id
       });
 
       let productOptionValue = await ProductOptionValue.create({
         quantity: 100,
         subtract: true,
-        price: 100,
+        price: 150,
         pricePrefix: "+",
         points: 0,
         pointsPrefix: "+",
@@ -104,7 +116,7 @@ module.exports.init = async () => {
       });
 
       const initCategory1 = await Category.create({
-        image: "catalog/demo/macbook_pro_1.jpg",
+        image: "catalog/demo/168_seafood_Shrimp1.jpg",
         top: 1,
         column: 2,
         sortOrder: 1,
@@ -112,7 +124,7 @@ module.exports.init = async () => {
       });
 
       const initCategory2 = await Category.create({
-        image: "catalog/demo/macbook_pro_2.jpg",
+        image: "catalog/demo/168_seafood_Shrimp2.jpg",
         ParentId: initCategory1.id,
         top: 2,
         column: 2,
