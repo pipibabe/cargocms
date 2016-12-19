@@ -24,8 +24,7 @@ function CoreLayout({ children }) {
     <MuiThemeProvider muiTheme={muiTheme}>
       <div className='page-container'>
         <div className='view-container'>
-          <AppDrawer />
-          {children}
+          <AppDrawer content={children} />
         </div>
       </div>
     </MuiThemeProvider>
