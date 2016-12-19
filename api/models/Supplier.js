@@ -28,6 +28,7 @@ module.exports = {
 	},
 	associations: () => {
     Supplier.hasMany(SupplierShipOrder);
+    Supplier.hasMany(Product);
   },
 	options: {
 		classMethods: {},
