@@ -10,16 +10,6 @@ module.exports.init = async () => {
         type: 'image/jpeg',
         storage: 'local',
       });
-      const image2 = await Image.create({
-        filePath: 'uploads/product_image_2.jpg',
-        type: 'image/jpeg',
-        storage: 'local',
-      });
-      const image3 = await Image.create({
-        filePath: 'uploads/product_image_3.jpg',
-        type: 'image/jpeg',
-        storage: 'local',
-      });
 
       let product1 = await Product.create({
           model: "鮮甜飽滿無毒益菌蝦",
