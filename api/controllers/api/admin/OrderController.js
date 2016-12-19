@@ -114,5 +114,51 @@ module.exports = {
     } catch (e) {
       res.serverError(e);
     }
-  }
+  },
+
+  confirm: async (req, res) => {
+    try{
+      const { id } = req.params;
+      let order = await Order.findById(id);
+      order.tracking = "確認訂單";
+      await order.save();
+
+      const orderProducts = await OrderProduct.find({
+        where:{
+          OrderId: id
+        },
+        include:[ Order, Product]
+      });
+
+      let orderInfo = {...order};
+      delete orderInfo.id;
+
+      for( let p of orderProduct){
+
+        let supplierShipOrder = await SupplierShipOrder.create({
+          OrderId: id,
+          SupplierId: p.Product.SupplierId,
+          ...orderInfo
+        });
+
+        let supplierShipOrderDescription = await SupplierShipOrderDescription.create({
+          SupplierShipOrderId: supplierShipOrder.id,
+          OrderProductId: p.id,
+          name: p.name,
+          model: p.model,
+          quantity: p.quantity,
+          price: p.price,
+          total: p.total,
+          tax: p.tax,
+          status: 'NEW',
+        });
+
+      }
+
+      const item = order;
+      res.ok({ message, data: { item } });
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
 }
