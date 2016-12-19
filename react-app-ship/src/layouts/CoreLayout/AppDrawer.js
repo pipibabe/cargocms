@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import {
   AppBar,
   Drawer,
@@ -24,12 +25,13 @@ const styles = {
     backgroundColor: '#2D3743',
   },
   contentContainer: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    // flex: 1,
+    // display: 'flex',
+    // flexDirection: 'row',
+    // justifyContent: 'flex-start',
   },
   drawer: {
+    position: 'fixed',
   },
   drawerContainer: {
     marginTop: 10,
@@ -37,7 +39,8 @@ const styles = {
     position: 'relative',
   },
   content: {
-    width: '100%',
+    paddingLeft: 10,
+    position: 'relative',
   },
 };
 
@@ -65,11 +68,13 @@ export default class AppDrawer extends React.Component {
 
   render() {
     const drawerWidth = this.state.drawerWidth;
-    const drawerContainerStyle = styles.drawerContainer;
+    const contentStyle = styles.content;
     if (this.state.open) {
-      drawerContainerStyle.width = drawerWidth;
+      contentStyle.width = `calc(100% - ${drawerWidth})`;
+      contentStyle.margin = `0px ${drawerWidth}px 0px ${drawerWidth}px`;
     } else {
-      drawerContainerStyle.width = 0;
+      contentStyle.width = '80%';
+      contentStyle.margin = '0 auto';
     }
     return (
       <div className=''>
@@ -81,19 +86,19 @@ export default class AppDrawer extends React.Component {
         >
           <MainToolbar />
         </AppBar>
-        <div style={styles.contentContainer}>
+        <div className='' style={styles.contentContainer}>
           <Drawer
             style={styles.drawer}
-            containerStyle={drawerContainerStyle}
+            containerStyle={styles.drawerContainer}
             className={classes.drawer}
             zDepth={0}
             open={this.state.open}
-            width={drawerWidth}
+            width={this.state.drawerWidth}
             docked={true}
           >
             <DrawerMenuItems />
           </Drawer>
-          <div style={styles.content}>
+          <div className='text-center' style={contentStyle}>
             {this.props.content}
           </div>
         </div>
