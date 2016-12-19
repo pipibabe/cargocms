@@ -121,8 +121,10 @@ var defaultConfig = {
 
   'post /api/admin/order/conform/:id': 'api/admin/OrderController.conform',
 
+  'post  /api/admin/suppliershiporder/all': 'api/admin/SupplierShipOrderController.find',
   'put /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.status',
 
+  'post  /api/admin/suppliershiporderdescription/all': 'api/admin/SupplierShipOrderDescriptionController.find',
   'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.status',
 
   //----- Event -----

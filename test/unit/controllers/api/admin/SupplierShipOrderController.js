@@ -40,6 +40,16 @@ describe.only('about admin Supplier Ship Order controllers', () => {
     it('should 403', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
+        .post(`/api/admin/suppliershiporder/all`);
+        res.status.should.be.eq(403);
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
+    it('should 403', async (done) => {
+      try{
+        const res = await request(sails.hooks.http.app)
         .put(`/api/admin/suppliershiporder/${supplierShipOrder1.id}`)
         .send({
           status: 'conform',
@@ -61,6 +71,27 @@ describe.only('about admin Supplier Ship Order controllers', () => {
     after(async (done) => {
       await unMockAdmin();
       done();
+    });
+
+    it('admin get Supplier Ship Order shoubld success.', async(done) => {
+      try {
+        const res = await request(sails.hooks.http.app)
+        .post(`/api/admin/suppliershiporder/all`)
+        .send({
+          startDate: '1900/01/01',
+          endDate: '3000/01/01',
+          columns:[
+             { data: 'id', name: '', "searchable": "true"},
+          ],
+          order: [ { column: '0', dir: 'asc' } ],
+          search: { value: '', regex: 'false' },
+          _: '1470989140227'
+        });
+        res.status.should.be.eq(200);
+        done()
+      } catch (e) {
+        done(e)
+      }
     });
 
     it('admin update status Supplier Ship Order shoubld success.', async (done) => {
