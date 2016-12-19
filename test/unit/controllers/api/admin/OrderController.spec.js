@@ -17,11 +17,11 @@ describe.only('about admin Order controllers', () => {
         address2: '台中市',
       });
 
-      product1 = await createHelper.product();
+      product1 = await createHelper.product('鮮甜飽滿無毒益菌蝦');
       supplier1 = await createHelper.supplier('壹陸捌活海產');
       await createHelper.supplierProduct(supplier1.id, product1.id);
 
-      product2 = await createHelper.product();
+      product2 = await createHelper.product('澎湖帝王級野生超大明蝦');
       supplier2 = await createHelper.supplier('活跳跳海產');
       await createHelper.supplierProduct(supplier2.id, product2.id);
 
@@ -40,7 +40,7 @@ describe.only('about admin Order controllers', () => {
     it('should 403', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .post(`/api/admin/order/conform/${order.id}`);
+        .post(`/api/admin/order/confirm/${order.id}`);
         res.status.should.be.eq(403);
         done();
       } catch (e) {
@@ -72,7 +72,7 @@ describe.only('about admin Order controllers', () => {
             SupplierId: supplier1.id
           }
         });
-        (supplierOrder1 !== null).should.be.true;
+        (supplierShipOrder1 !== null).should.be.true;
 
         const supplierShipOrder2 = await SupplierShipOrder.findOne({
           where: {
@@ -80,15 +80,15 @@ describe.only('about admin Order controllers', () => {
             SupplierId: supplier2.id
           }
         });
-        (supplierOrder2 !== null).should.be.true;
+        (supplierShipOrder2 !== null).should.be.true;
 
-        const supplierShipOrderDescription = await SupplierShipOrderDescription.find({
+        const supplierShipOrderDescription = await SupplierShipOrderDescription.findAll({
           where: {
             SupplierShipOrderId: supplierShipOrder1.id
           }
         });
         supplierShipOrderDescription.length.should.be.eq(1);
-        (supplierShipOrderDescription.toJSON())[0].OrderProductId.should.eq(orderProduct1.id)
+        supplierShipOrderDescription[0].OrderProductId.should.eq(orderProduct1.id)
         done();
       } catch (e) {
         done(e);
