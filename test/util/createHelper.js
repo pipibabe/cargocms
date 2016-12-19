@@ -54,6 +54,8 @@ module.exports = {
     try {
       const data = {
         UserId: userId,
+        invoiceNo: '12345678',
+        invoicePrefix: 'GH',
         customField: '',
         paymentCompany: '',
         paymentAddress2: '',
@@ -78,6 +80,27 @@ module.exports = {
         forwardedIp: '',
         userAgent: '',
         acceptLanguage: '',
+        firstname:'大明',
+        lastname:'王',
+        email:'user@example.com',
+        telephone:'04 0000-0000',
+        fax:'04 0000-0001',
+        paymentFirstname:'',
+        paymentLastname:'',
+        paymentAddress1:'',
+        paymentCity:'',
+        paymentPostcode:'',
+        paymentMethod:'',
+        paymentCode:'',
+        shippingFirstname:'',
+        shippingLastname:'',
+        shippingAddress1:'',
+        shippingCity:'',
+        shippingPostcode:'',
+        shippingMethod:'',
+        shippingCode:'',
+        comment:'',
+        tracking: '客戶訂購'
       }
       return await Order.create(data);
     } catch (e) {
@@ -129,10 +152,8 @@ module.exports = {
 
   supplierProduct: async(supplierId, productId) => {
     try {
-      let data = {
-        // TODO: supplierProduct data
-      }
-      const product = Product.findById(productId);
+
+      const product = await Product.findById(productId);
       product.SupplierId = supplierId;
       await product.save();
 
