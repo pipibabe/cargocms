@@ -27,8 +27,8 @@ describe.only('about admin Order controllers', () => {
 
       order = await createHelper.order(user.id);
 
-      orderProduct1 = await createHelper.orderProduct(order.id, product1.id);
-      orderProduct2 = await createHelper.orderProduct(order.id, product2.id);
+      orderProduct1 = await createHelper.orderProduct(order.id, product1.id, 2);
+      orderProduct2 = await createHelper.orderProduct(order.id, product2.id, 5);
 
       done();
     } catch (e) {
@@ -63,7 +63,7 @@ describe.only('about admin Order controllers', () => {
     it('admin conform Order to Supplier shoubld success.', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .post(`/api/admin/order/conform/${order.id}`);
+        .post(`/api/admin/order/confirm/${order.id}`);
         res.status.should.be.eq(200);
 
         const supplierOrder1 = await SupplierOrder.findOne({
