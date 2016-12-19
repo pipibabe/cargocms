@@ -31,14 +31,16 @@ const styles = {
     // justifyContent: 'flex-start',
   },
   drawer: {
+    zIndex: 2,
     position: 'fixed',
   },
   drawerContainer: {
     marginTop: 10,
     backgroundColor: '#F2F2F2',
-    position: 'relative',
+    // position: 'relative',
   },
   content: {
+    zIndex: 1,
     paddingLeft: 10,
     position: 'relative',
   },
@@ -59,7 +61,32 @@ export default class AppDrawer extends React.Component {
     this.state = {
       open: true,
       drawerWidth: 150,
+      width: 0,
+      height: 0,
     };
+  }
+
+  componentWillMount = () => {
+    this.updateDimensions();
+  }
+
+  componentDidMount = () => {
+    window.addEventListener('resize', this.updateDimensions);
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    const w = window;
+    const d = document;
+    const documentElement = d.documentElement;
+    const body = d.getElementsByTagName('body')[0];
+    const width = w.innerWidth || documentElement.clientWidth || body.clientWidth;
+    const height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
+
+    this.setState({ width, height });
   }
 
   handleToggle = () => this.setState({
@@ -67,15 +94,19 @@ export default class AppDrawer extends React.Component {
   });
 
   render() {
+    const isMobile = this.state.width < 768;
     const drawerWidth = this.state.drawerWidth;
-    const contentStyle = styles.content;
-    if (this.state.open) {
-      contentStyle.width = `calc(100% - ${drawerWidth})`;
-      contentStyle.margin = `0px ${drawerWidth}px 0px ${drawerWidth}px`;
+
+    if (this.state.open && !isMobile) {
+      styles.content.width = `calc(100% - ${drawerWidth}px)`;
+      styles.content.margin = `0px ${drawerWidth}px 0px ${drawerWidth}px`;
     } else {
-      contentStyle.width = '80%';
-      contentStyle.margin = '0 auto';
+      styles.content.width = '95%';
+      styles.content.margin = '0 auto';
     }
+    const zDepth = isMobile ? 2 : 0;
+
+    styles.drawerContainer.position = isMobile ? 'fixed' : 'relative';
     return (
       <div className=''>
         <AppBar
@@ -90,15 +121,15 @@ export default class AppDrawer extends React.Component {
           <Drawer
             style={styles.drawer}
             containerStyle={styles.drawerContainer}
-            className={classes.drawer}
-            zDepth={0}
+            className={classes['.drawer']}
+            zDepth={zDepth}
             open={this.state.open}
             width={this.state.drawerWidth}
-            docked={true}
+            docked={!isMobile}
           >
             <DrawerMenuItems />
           </Drawer>
-          <div className='text-center' style={contentStyle}>
+          <div className='text-center' style={styles.content}>
             {this.props.content}
           </div>
         </div>
