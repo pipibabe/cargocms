@@ -155,11 +155,11 @@ var defaultConfig = {
   'put /api/admin/supplier/:id': 'api/admin/SupplierController.update',
   'delete /api/admin/supplier/:id': 'api/admin/SupplierController.destroy',
 
-  'get /api/admin/suppliershiporderdetail': 'api/admin/SupplierShipOrderDetailController.find',
-  'get /api/admin/suppliershiporderdetail/:id': 'api/admin/SupplierShipOrderDetailController.findOne',
-  'post /api/admin/suppliershiporderdetail': 'api/admin/SupplierShipOrderDetailController.create',
-  'put /api/admin/suppliershiporderdetail/:id': 'api/admin/SupplierShipOrderDetailController.update',
-  'delete /api/admin/suppliershiporderdetail/:id': 'api/admin/SupplierShipOrderDetailController.destroy',
+  'get /api/admin/suppliershiporderdescription': 'api/admin/SupplierShipOrderDescriptionController.find',
+  'get /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.findOne',
+  'post /api/admin/suppliershiporderdescription': 'api/admin/SupplierShipOrderDescriptionController.create',
+  'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.update',
+  'delete /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.destroy',
 
 
   //----- Event -----

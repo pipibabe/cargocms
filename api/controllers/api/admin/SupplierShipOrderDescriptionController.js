@@ -24,7 +24,7 @@ module.exports = {
   findOne: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await SupplierShipOrderDetail.findOne({
+      const item = await SupplierShipOrderDescription.findOne({
         where:{
           id
         },
@@ -39,7 +39,7 @@ module.exports = {
   create: async (req, res) => {
     try {
       let data = req.body;
-      const item = await SupplierShipOrderDetail.create(data);
+      const item = await SupplierShipOrderDescription.create(data);
       let message = 'Create success.';
       res.ok({ message, data: { item } } );
     } catch (e) {
@@ -52,7 +52,7 @@ module.exports = {
       const { id } = req.params;
       const data = req.body;
       const message = 'Update success.';
-      const item = await SupplierShipOrderDetail.update(data ,{
+      const item = await SupplierShipOrderDescription.update(data ,{
         where: { id, },
       });
       res.ok({ message, data: { item } });
@@ -64,7 +64,7 @@ module.exports = {
   destroy: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await SupplierShipOrderDetail.destroy({ where: { id } });
+      const item = await SupplierShipOrderDescription.destroy({ where: { id } });
       let message = 'Delete success';
       res.ok({message, data: {item}});
     } catch (e) {
