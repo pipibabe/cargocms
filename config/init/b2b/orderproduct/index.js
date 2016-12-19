@@ -4,31 +4,13 @@ module.exports.init = async () => {
     const isDropMode = sails.config.models.migrate == 'drop';
 
     if (isDevMode && isDropMode) {
-      const product = await Product.create({
-        model: "小小魚",
-        sku: "ABC1234",
-        upc: "512345678900",
-        ean: "0012345678905",
-        jan: "4534567890126",
-        isbn: "9788175257665",
-        mpn: "XYZ876A1B2C3",
-        location: "Test location",
-        quantity: 999,
-        image: "",
-        shipping: true,
-        price: 100,
-        points: 200,
-        dateAvailable: "2017-01-01",
-        weight: 30,
-        length: 30,
-        width: 10,
-        height: 5,
-        subtract: true,
-        minimum: 1,
-        sortOrder: 0,
-        publish: true,
-        viewed: 777,
+      const product = await Product.findById(1);
+      const productDescription = await ProductDescription.findOne({
+        where: {
+          ProductId: product.id
+        }
       });
+
       const allpay = await Allpay.create({
         "TradeNo": "0000000000000001",
         "MerchantTradeNo": "d342436b",
@@ -109,12 +91,12 @@ module.exports.init = async () => {
       });
 
       const orderProduct = await OrderProduct.create({
-        name: '小小魚',
-        model: '深海魚',
+        name: productDescription.name,
+        model: product.model,
         quantity: 22,
-        price: 1000,
-        total: 22000,
-        tax: 1100,
+        price: product.price,
+        total: product.price * 22,
+        tax: (product.price * 22) * 0.05,
         OrderId: order.id,
         ProductId: product.id,
       });

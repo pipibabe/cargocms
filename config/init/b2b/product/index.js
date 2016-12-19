@@ -5,13 +5,13 @@ module.exports.init = async () => {
 
     if (isDevMode && isDropMode) {
 
-      const image1 = await Image.create({
+      const image = await Image.create({
         filePath: 'uploads/product_image_1.jpg',
         type: 'image/jpeg',
         storage: 'local',
       });
 
-      let product1 = await Product.create({
+      let product = await Product.create({
           model: "鮮甜飽滿無毒益菌蝦",
           sku: "ABC1234",
           upc: "512345678900",
@@ -35,7 +35,7 @@ module.exports.init = async () => {
           sortOrder: 0,
           publish: true,
           viewed: 12321,
-          ImageId: image1.id,
+          ImageId: image.id,
           SupplierId: 1,
         });
 
@@ -46,12 +46,12 @@ module.exports.init = async () => {
           metaTitle: "鮮甜飽滿無毒益菌蝦",
           metaDescription: "H鮮甜飽滿無毒益菌蝦",
           metaKeyword: "鮮甜飽滿無毒益菌蝦",
-          ProductId: product1.id
+          ProductId: product.id
         });
 
       let productTag = await ProductTag.create({
         tag: "蝦",
-        ProductId: product1.id
+        ProductId: product.id
       });
 
       let productImage = await ProductImage.create({
@@ -76,7 +76,7 @@ module.exports.init = async () => {
         value: '超低溫冷藏',
         required: true,
         OptionId: option.id,
-        ProductId: product1.id
+        ProductId: product.id
       });
 
       let productOptionValue = await ProductOptionValue.create({
