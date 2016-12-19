@@ -85,37 +85,58 @@ module.exports = {
     }
   },
 
-  orderProduct: async (orderId, productId) => {
+  orderProduct: async (orderId, productId, quantity) => {
     try {
+      const product = await Product.find({
+        where: {
+          id: productId
+        },
+        include: ProductDescription
+      });
+
       let data = {
-        // TODO: orderProduct data
+        name: product.ProductDescription.name,
+        model: product.model,
+        quantity: quantity,
+        price: product.price,
+        total: product.price * quantity,
+        tax: (product.price * quantity) * 0.05,
+        OrderId: orderId,
+        ProductId: productId
       }
-      throw Error('尚未實作 orderProduct Help')
+
       return await OrderProduct.create(data);
     } catch (e) {
       throw e;
     }
   },
 
-  supplier: async (productId) => {
+  supplier: async (name) => {
     try {
       let data = {
-        // TODO: supplier data
-      }
-      throw Error('尚未實作 supplier Help')
+        name: name,
+        email: 'seafood@example.com',
+        telephone: '(04)-2201-1688',
+        fax: '(04)-2201-1168',
+        address: '台中市清水區北提路'
+      };
+
       return await Supplier.create(data);
     } catch (e) {
       throw e;
     }
   },
 
-  supplierProduct: async() => {
+  supplierProduct: async(supplierId, productId) => {
     try {
       let data = {
         // TODO: supplierProduct data
       }
-      throw Error('尚未實作 supplier Product Help')
-      return await SupplierProduct.create(data);
+      const product = Product.findById(productId);
+      product.SupplierId = supplierId;
+      await product.save();
+
+      return product;
     } catch (e) {
       throw e;
     }
