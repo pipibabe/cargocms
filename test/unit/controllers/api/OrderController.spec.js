@@ -1,6 +1,6 @@
 import createHelper from "../../../util/createHelper.js"
 
-describe.only('about Order controllers', () => {
+describe('about Order controllers', () => {
 
   let product1, product2, product3 , user;
   before(async function(done){
