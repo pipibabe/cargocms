@@ -1,7 +1,7 @@
 import createHelper from "../../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../../util/adminAuthHelper.js"
 
-describe.only('about admin Supplier Ship Order Description controllers', () => {
+describe('about admin Supplier Ship Order Description controllers', () => {
   let product1, product2, user, order, supplier;
   let supplier2,  orderProduct1, orderProduct2, supplierShipOrder;
   let supplierShipOrderDescription1, supplierShipOrderDescription2;
@@ -69,7 +69,7 @@ describe.only('about admin Supplier Ship Order Description controllers', () => {
     it('admin update status Supplier Ship Order Description shoubld success.', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription1.id}`);
+        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription1.id}`)
         .send({
           status: 'finish',
         });
@@ -88,7 +88,7 @@ describe.only('about admin Supplier Ship Order Description controllers', () => {
       try{
 
         const finishShipOrderDescription1 = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription1.id}`);
+        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription1.id}`)
         .send({
           status: 'finish',
         });
@@ -97,7 +97,7 @@ describe.only('about admin Supplier Ship Order Description controllers', () => {
         checkShipOrderDescription1.status.should.be.eq('finish');
 
         const finishShipOrderDescription2 = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription2.id}`);
+        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription2.id}`)
         .send({
           status: 'finish',
         });
