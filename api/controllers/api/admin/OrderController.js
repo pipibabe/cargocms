@@ -123,7 +123,7 @@ module.exports = {
       order.tracking = "確認訂單";
       await order.save();
 
-      const orderProducts = await OrderProduct.find({
+      const orderProducts = await OrderProduct.findAll({
         where:{
           OrderId: id
         },
@@ -133,12 +133,58 @@ module.exports = {
       let orderInfo = {...order};
       delete orderInfo.id;
 
-      for( let p of orderProduct){
+      for( let p of orderProducts ){
 
         let supplierShipOrder = await SupplierShipOrder.create({
           OrderId: id,
           SupplierId: p.Product.SupplierId,
-          ...orderInfo
+          invoiceNo: order.invoiceNo,
+          invoicePrefix: order.invoicePrefix,
+          firstname: order.firstname,
+          lastname: order.lastname,
+          email: order.email,
+          telephone: order.telephone,
+          fax: order.fax,
+          customField: order.customField,
+          paymentFirstname: order.paymentFirstname,
+          paymentLastname: order.paymentLastname,
+          paymentCompany: order.paymentCompany,
+          paymentAddress1: order.paymentAddress1,
+          paymentAddress2: order.paymentAddress2,
+          paymentCity: order.paymentCity,
+          paymentPostcode: order.paymentPostcode,
+          paymentCountry: order.paymentCountry,
+          paymentCountryId: order.paymentCountryId,
+          paymentZone: order.paymentZone,
+          paymentZoneId: order.paymentZoneId,
+          paymentAddressFormat: order.paymentAddressFormat,
+          paymentCustomField: order.paymentCustomField,
+          paymentMethod: order.paymentMethod,
+          paymentCode: order.paymentCode,
+          shippingFirstname: order.shippingFirstname,
+          shippingLastname: order.shippingLastname,
+          shippingCompany: order.shippingCompany,
+          shippingAddress1: order.shippingAddress1,
+          shippingAddress2: order.shippingAddress2,
+          shippingCity: order.shippingCity,
+          shippingPostcode: order.shippingPostcode,
+          shippingCountry: order.shippingCountry,
+          shippingCountryId: order.shippingCountryId,
+          shippingZone: order.shippingZone,
+          shippingZoneId: order.shippingZoneId,
+          shippingAddressFormat: order.shippingAddressFormat,
+          shippingCustomField: order.shippingCustomField,
+          shippingMethod: order.shippingMethod,
+          shippingCode: order.shippingCode,
+          comment: order.comment,
+          total: order.total,
+          commission: order.commission,
+          tracking: order.tracking,
+          ip: order.ip,
+          forwardedIp: order.forwardedIp,
+          userAgent: order.userAgent,
+          acceptLanguage: order.acceptLanguage,
+          status: '確定訂單',
         });
 
         let supplierShipOrderDescription = await SupplierShipOrderDescription.create({
@@ -154,7 +200,7 @@ module.exports = {
         });
 
       }
-
+      const message = 'Success Confirm Order';
       const item = order;
       res.ok({ message, data: { item } });
     } catch (e) {
