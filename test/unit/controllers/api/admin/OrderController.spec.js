@@ -65,17 +65,30 @@ describe.only('about admin Order controllers', () => {
         const res = await request(sails.hooks.http.app)
         .post(`/api/admin/order/conform/${order.id}`);
         res.status.should.be.eq(200);
-        res.body.data.item.OrderId.should.be.eq(order.id);
-        res.body.data.item.OrderId.should.be.eq(supplier.id);
+
+        const supplierOrder1 = await SupplierOrder.findOne({
+          where: {
+            OrderId: order.id,
+            SupplierId: supplier1.id
+          }
+        });
+        supplierOrder1.id.shoubld.be.not.null
+
+        const supplierOrder2 = await SupplierOrder.findOne({
+          where: {
+            OrderId: order.id,
+            SupplierId: supplier2.id
+          }
+        });
+        supplierOrder2.id.shoubld.be.not.null
 
         const supplierOrderDescription = await SupplierOrderDescription.find({
           where: {
-            orderId: order.id
+            SupplierOrderId: supplierOrder1.id
           }
         });
-        supplierOrderDescription.length.should.be.eq(2);
+        supplierOrderDescription.length.should.be.eq(1);
         (supplierOrderDescription.toJSON())[0].OrderProductId.should.eq(orderProduct1.id)
-        (supplierOrderDescription.toJSON())[1].OrderProductId.should.eq(orderProduct2.id)
         done();
       } catch (e) {
         done(e);
