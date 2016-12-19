@@ -123,6 +123,12 @@ var defaultConfig = {
   'get /api/admin/labfnp/scent':  'api/admin/labfnp/ScentController.find',
   'get /api/admin/labfnp/scentnote':  'api/admin/labfnp/ScentNoteController.find',
 
+  'get /api/admin/suppliershiporder': 'api/admin/SupplierShipOrderController.find',
+  'get /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.findOne',
+  'post /api/admin/suppliershiporder': 'api/admin/SupplierShipOrderController.create',
+  'put /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.update',
+  'delete /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.destroy',
+
   'get /api/admin/supplier': 'api/admin/SupplierController.find',
   'get /api/admin/supplier/:id': 'api/admin/SupplierController.findOne',
   'post /api/admin/supplier': 'api/admin/SupplierController.create',
@@ -174,8 +180,14 @@ var defaultConfig = {
 };
 
 module.exports.routes = {
+
+
   '/': {
     view: 'index'
+  },
+  'get /ship/*': function(req, res, next) {
+    console.log("=== ship path ==="+sails.config.appPath + '/react-app-ship/dist/index.html');
+    res.sendfile(sails.config.appPath + '/react-app-ship/dist/index.html');
   },
   ...customConfig,
   ...defaultConfig,

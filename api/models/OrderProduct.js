@@ -34,6 +34,7 @@ module.exports = {
     },
   },
   associations: () => {
+    OrderProduct.hasOne(SupplierShipOrderDetail);
     OrderProduct.belongsTo(Product);
   },
   options: {

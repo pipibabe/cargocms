@@ -29,23 +29,27 @@ let self = module.exports = {
     }
   },
 
-  startLogging: () => {
+  startLogging: (prefix) => {
     ps.lookup({
       // TODO: support other browser than chrome
       command: 'chrome$',
       arguments: '',
     }, function(err, resultList) {
       const pidList = resultList.map(function(process) {return process.pid});
-      self.writePID(resultList);
-      self.writeHeader(pidList);
+      self.writePID(resultList,prefix);
+      self.writeHeader(pidList,prefix);
 
-      setInterval(function() {
-        self.log(pidList);
+      self.loggingTimer = setInterval(function() {
+        self.log(pidList,prefix);
       },1000);
     });
   },
 
-  log: async (pidList) => {
+  stopLogging: () => {
+    clearInterval(self.loggingTimer);
+  },
+
+  log: async (pidList,prefix) => {
     let excelField = [];
     let totalMemory = 0;
     let totalCPU = 0;
@@ -78,7 +82,7 @@ let self = module.exports = {
 
     excelField.push(totalMemory);
     excelField.push(totalCPU);
-    self.writeContent(excelField);
+    self.writeContent(excelField,prefix);
   },
 
   getLogFolder: () => {
@@ -89,15 +93,15 @@ let self = module.exports = {
     }
   },
 
-  writePID: (pid) => {
-    let file = self.getLogFolder() + sails.config.e2eClientLog.PID;
+  writePID: (pid,prefix) => {
+    let file = self.getLogFolder() + prefix + sails.config.e2eClientLog.PID;
     let JSONString = JSON.stringify(pid);
 
     fs.appendFile(file,JSONString , "utf8");
   },
 
-  writeHeader: (pidList) => {
-    let file = self.getLogFolder() + sails.config.e2eClientLog.MEMORY;
+  writeHeader: (pidList,prefix) => {
+    let file = self.getLogFolder() + prefix + sails.config.e2eClientLog.MEMORY;
     let fieldString = "";
     pidList.forEach(function(pid,pidIndex) {
       if (pidIndex!=0) {
@@ -112,8 +116,8 @@ let self = module.exports = {
     fs.appendFile(file, fieldString, "utf8");
   },
 
-  writeContent: (excelField) => {
-    let file = self.getLogFolder() + sails.config.e2eClientLog.MEMORY;
+  writeContent: (excelField,prefix) => {
+    let file = self.getLogFolder() + prefix + sails.config.e2eClientLog.MEMORY;
     let fieldString = "";
     excelField.forEach(function(field,fieldIndex) {
       if (fieldIndex!=0) {

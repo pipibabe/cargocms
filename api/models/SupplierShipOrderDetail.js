@@ -36,12 +36,14 @@ module.exports = {
         allowNull: false,
         defaultValue: 'NEW'
       },
-
+	},
+	associations: () => {
+    SupplierShipOrderDetail.belongsTo(SupplierShipOrder);
+    SupplierShipOrderDetail.belongsTo(OrderProduct);
   },
-  associations: () => {},
-  options: {
-    classMethods: {},
-    instanceMethods: {},
-    hooks: {}
-  }
+	options: {
+		classMethods: {},
+		instanceMethods: {},
+		hooks: {}
+	}
 };
