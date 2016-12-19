@@ -17,15 +17,6 @@ module.exports = {
     }
   },
 
-  // find: async (req, res) => {
-  //   try {
-  //     const items = await Product.findAll();
-  //     res.ok({ data: { items } });
-  //   } catch (e) {
-  //     res.serverError(e);
-  //   }
-  // },
-
   findOne: async (req, res) => {
     try {
       const { id } = req.params;
@@ -51,9 +42,11 @@ module.exports = {
     try {
       const { id } = req.params;
       const data = req.body;
-      if (data.deletedAt === '') {
+
+      if(!data.deletedAt){
         data.deletedAt = null;
       }
+      
       const message = 'Update success.';
       const item = await Product.update(data ,{
         where: { id, },

@@ -245,11 +245,45 @@ module.exports = {
       type: Sequelize.STRING(255),
       allowNull: false,
     },
+
+    // dateAdded: {
+    //   type: Sequelize.DATE,
+    //   allowNull: false,
+    // },
+    // dateModified: {
+    //   type: Sequelize.DATE,
+    //   allowNull: false,
+    // },
+
+    createdDateTime:{
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          return UtilsService.DataTimeFormat(this.getDataValue('createdAt'));
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
+    },
+
+    updatedDateTime:{
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          return UtilsService.DataTimeFormat(this.getDataValue('updatedAt'));
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
+    }
   },
   associations: () => {
     Order.hasOne(OrderStatus);
     Order.hasOne(OrderOption);
-    Order.hasOne(OrderProduct);
+    Order.hasMany(OrderProduct);
+
+    Order.hasMany(SupplierShipOrder);
+
     Order.belongsTo(Allpay);
     Order.belongsTo(User);
   },

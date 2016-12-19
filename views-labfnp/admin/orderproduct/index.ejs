@@ -1,0 +1,104 @@
+
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+	<thead>
+		<tr>
+      <th width="" class=""> ID</th>
+      <th width="" class="" data-class="expand"><i class="fa fa-fw text-muted fa-hashtag"/> 名稱</th>
+      <th width="" class="" data-hide="phone"> 模型</th>
+      <th width="" class=""> 數量</th>
+      <th width="" class="" data-hide="phone"> 價格</th>
+      <th width="" class="" data-hide="phone,tablet"> 總價</th>
+      <th width="" class=""> 稅額</th>
+      <!-- <th width="" class="" data-hide="always"> Reward</th> -->
+      <th width="" class="" data-hide="always"> 建立時間</th>
+      <th width="" class="" data-hide="always"> 訂單 ID</th>
+      <th width="" class="" data-hide="always"> 產品 ID</th>
+			<th width="" class="" data-hide="phone,tablet"></th>
+		</tr>
+	</thead>
+	<!-- client only -->
+	<tbody>
+		<tr v-for="item in data.items">
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.model }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.total }}</td>
+      <td>{{ item.tax }}</td>
+      <!-- <td>{{ item.reward }}</td> -->
+      <td>{{ item.createdAt }}</td>
+      <td>{{ item.OrderId }}</td>
+      <td>{{ item.ProductId }}</td>
+			<td align="center" style="cursor: pointer;">
+				<div class="row">
+					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
+						<i class="fa-fw fa fa-eye text-muted" />
+					</a>
+					<a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+						<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+					</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+ </table>
+
+
+<script type="text/javascript">
+	var pagefunction = function() {
+
+		// server only
+		var columns = [
+      { "data": "id" },
+      { "data": "name" },
+      { "data": "model" },
+      { "data": "quantity" },
+      { "data": "price" },
+      { "data": "total" },
+      { "data": "tax" },
+      // { "data": "reward" },
+      { "data": "createdAt" },
+      { "data": "OrderId" },
+      { "data": "ProductId" },
+			{ "data": null }
+		]
+
+		// server only
+		var columnDefs = [
+      {
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+      {
+        "searchable": true,
+        "targets": 7,
+        "render": function (data, type, row) {
+          return '<td>' + row.createdDateTime.dateTime + '</td>';
+        }
+      },
+			{
+				"targets"  : 10,
+				"orderable": false,
+				"searchable": false,
+				"render": function ( data, type, row ) {
+					var colBody =
+					'<div class="row-action-buttons hidden-xs hidden-sm">'+
+						'<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-eye text-muted" />'+
+						'</a>'+
+						'<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+						'</a>'+
+					'</div>';
+					return colBody;
+				}
+			},
+		]
+		var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+		<%- include vue.ejs %>
+		appMain.$mount("#main-index");
+		appMain.loadItems(appMain.renderTable);
+	};
+</script>

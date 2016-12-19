@@ -91,6 +91,7 @@ var defaultConfig = {
   "UtilsController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
+
   "api/admin/labfnp/ScentFeedbackController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
@@ -101,7 +102,24 @@ var defaultConfig = {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
 
+  "api/admin/ProductDescriptionController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+
   "api/admin/ProductController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  "api/admin/SupplierController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  "api/admin/SupplierShipOrderController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+  "api/admin/SupplierShipOrderDetailController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+
+  "api/admin/OrderController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
 
