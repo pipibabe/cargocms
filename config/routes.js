@@ -123,6 +123,24 @@ var defaultConfig = {
   'get /api/admin/labfnp/scent':  'api/admin/labfnp/ScentController.find',
   'get /api/admin/labfnp/scentnote':  'api/admin/labfnp/ScentNoteController.find',
 
+  'get /api/admin/suppliershiporder': 'api/admin/SupplierShipOrderController.find',
+  'get /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.findOne',
+  'post /api/admin/suppliershiporder': 'api/admin/SupplierShipOrderController.create',
+  'put /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.update',
+  'delete /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.destroy',
+
+  'get /api/admin/supplier': 'api/admin/SupplierController.find',
+  'get /api/admin/supplier/:id': 'api/admin/SupplierController.findOne',
+  'post /api/admin/supplier': 'api/admin/SupplierController.create',
+  'put /api/admin/supplier/:id': 'api/admin/SupplierController.update',
+  'delete /api/admin/supplier/:id': 'api/admin/SupplierController.destroy',
+
+  'get /api/admin/suppliershiporderdetail': 'api/admin/SupplierShipOrderDetailController.find',
+  'get /api/admin/suppliershiporderdetail/:id': 'api/admin/SupplierShipOrderDetailController.findOne',
+  'post /api/admin/suppliershiporderdetail': 'api/admin/SupplierShipOrderDetailController.create',
+  'put /api/admin/suppliershiporderdetail/:id': 'api/admin/SupplierShipOrderDetailController.update',
+  'delete /api/admin/suppliershiporderdetail/:id': 'api/admin/SupplierShipOrderDetailController.destroy',
+
 
   //----- Event -----
   'get /events/:name': 'EventController.show',
