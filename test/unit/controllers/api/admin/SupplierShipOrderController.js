@@ -40,7 +40,7 @@ describe.only('about admin Supplier Ship Order controllers', () => {
     it('should 403', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrder1.id}`)
+        .put(`/api/admin/suppliershiporder/${supplierShipOrder1.id}`)
         .send({
           status: 'conform',
         });
@@ -66,7 +66,7 @@ describe.only('about admin Supplier Ship Order controllers', () => {
     it('admin update status Supplier Ship Order shoubld success.', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrder1.id}`)
+        .put(`/api/admin/suppliershiporder/${supplierShipOrder1.id}`)
         .send({
           status: 'conform',
         });

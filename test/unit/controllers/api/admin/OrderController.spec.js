@@ -72,7 +72,7 @@ describe.only('about admin Order controllers', () => {
             SupplierId: supplier1.id
           }
         });
-        supplierOrder1.id.shoubld.be.not.null
+        supplierOrder1.id.shoubld.be.not.null;
 
         const supplierOrder2 = await SupplierOrder.findOne({
           where: {
@@ -80,7 +80,7 @@ describe.only('about admin Order controllers', () => {
             SupplierId: supplier2.id
           }
         });
-        supplierOrder2.id.shoubld.be.not.null
+        supplierOrder2.id.shoubld.be.not.null;
 
         const supplierOrderDescription = await SupplierOrderDescription.find({
           where: {

@@ -29,6 +29,7 @@ describe.only('about admin Supplier Ship Order Description controllers', () => {
       orderProduct1 = await createHelper.orderProduct(order.id, product1.id);
       orderProduct2 = await createHelper.orderProduct(order.id, product2.id);
       supplierShipOrder = await createHelper.supplierShipOrder(order.id, supplier.id);
+
       supplierShipOrderDescription1 = await createHelper.supplierShipOrderDescription(supplierShipOrder.id, orderProduct1.id);
       supplierShipOrderDescription2 = await createHelper.supplierShipOrderDescription(supplierShipOrder.id, orderProduct2.id);
 
@@ -96,7 +97,7 @@ describe.only('about admin Supplier Ship Order Description controllers', () => {
         checkShipOrderDescription1.status.should.be.eq('finish');
 
         const finishShipOrderDescription2 = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription1.id}`);
+        .put(`/api/admin/suppliershiporderdescription/${supplierShipOrderDescription2.id}`);
         .send({
           status: 'finish',
         });
