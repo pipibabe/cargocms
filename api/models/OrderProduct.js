@@ -28,14 +28,37 @@ module.exports = {
       defaultValue: '0.0000',
       allowNull: false,
     },
-    reward: {
-      type: Sequelize.INTEGER(8),
-      allowNull: false,
+    // reward: {
+    //   type: Sequelize.INTEGER(8),
+    //   allowNull: false,
+    // },
+
+    createdDateTime:{
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          return UtilsService.DataTimeFormat(this.getDataValue('createdAt'));
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
     },
+
+    updatedDateTime:{
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          return UtilsService.DataTimeFormat(this.getDataValue('updatedAt'));
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
+    }
   },
   associations: () => {
     OrderProduct.hasOne(SupplierShipOrderDetail);
     OrderProduct.belongsTo(Product);
+    OrderProduct.belongsTo(Order);
   },
   options: {
     classMethods: {},

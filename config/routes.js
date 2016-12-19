@@ -123,6 +123,19 @@ var defaultConfig = {
   'get /api/admin/labfnp/scent':  'api/admin/labfnp/ScentController.find',
   'get /api/admin/labfnp/scentnote':  'api/admin/labfnp/ScentNoteController.find',
 
+
+  'get /api/admin/order': 'api/admin/OrderController.find',
+  'get /api/admin/order/:id': 'api/admin/OrderController.findOne',
+  'post /api/admin/order': 'api/admin/OrderController.create',
+  'put /api/admin/order/:id': 'api/admin/OrderController.update',
+  'delete /api/admin/order/:id': 'api/admin/OrderController.destroy',
+
+  'get /api/admin/orderproduct': 'api/admin/OrderProductController.find',
+  'get /api/admin/orderproduct/:id': 'api/admin/OrderProductController.findOne',
+  'post /api/admin/orderproduct': 'api/admin/OrderProductController.create',
+  'put /api/admin/orderproduct/:id': 'api/admin/OrderProductController.update',
+  'delete /api/admin/orderproduct/:id': 'api/admin/OrderProductController.destroy',
+
   'get /api/admin/suppliershiporder': 'api/admin/SupplierShipOrderController.find',
   'get /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.findOne',
   'post /api/admin/suppliershiporder': 'api/admin/SupplierShipOrderController.create',

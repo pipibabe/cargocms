@@ -18,6 +18,7 @@ module.exports.init = async () => {
       { icon: 'file-text', href: '#', title: '訂單管理', sequence: 4},
       { icon: 'truck', href: '#', title: '供應商', sequence: 5},
 
+
       { href: '/admin/user', title: '會員資料', sequence: 20, ParentMenuItemId: 2},
       { href: '/admin/post', title: '內容資料', sequence: 30, ParentMenuItemId: 2},
       { href: '/admin/event', title: '活動票券', sequence: 40, ParentMenuItemId: 2},
@@ -40,9 +41,14 @@ module.exports.init = async () => {
       { href: '/admin/order', title: '訂單', sequence: 20, ParentMenuItemId: 5},
       { href: '/admin/orderproduct', title: '產品訂單', sequence: 30, ParentMenuItemId: 5},
 
+
+      { href: '/admin/order', title: '訂單', sequence: 20, ParentMenuItemId: 5},
+      { href: '/admin/orderproduct', title: '產品訂單', sequence: 30, ParentMenuItemId: 5},
+
       { href: '/admin/supplier', title: '供應商清單', sequence: 20, ParentMenuItemId: 6},
       { href: '/admin/suppliershiporder', title: '供應商出貨訂單', sequence: 30, ParentMenuItemId: 6},
       { href: '/admin/suppliershiporderdetail', title: '供應商詳細出貨訂單', sequence: 40, ParentMenuItemId: 6},
+
     ]
 
     let title = newMenuItems.map(item => item.title)
