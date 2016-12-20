@@ -32,7 +32,7 @@ const styles = {
   title: {
     padding: 0,
     color: '#fff',
-  }
+  },
 };
 
 export default class MainToolbar extends React.Component {

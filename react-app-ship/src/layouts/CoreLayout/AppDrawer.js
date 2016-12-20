@@ -121,7 +121,7 @@ export default class AppDrawer extends React.Component {
           <Drawer
             style={styles.drawer}
             containerStyle={styles.drawerContainer}
-            className={classes['.drawer']}
+            className='drawer'
             zDepth={zDepth}
             open={this.state.open}
             width={this.state.drawerWidth}
