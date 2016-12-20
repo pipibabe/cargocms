@@ -35,7 +35,7 @@
   transform: translateY(2px);
 }
 .product .product-img-wrapper {
-  padding: 0 1em 0 0;
+  padding: 0 0 0 0;
 }
 .product .product-content {
   padding: 0 2em;
@@ -194,6 +194,19 @@
   right: 0;
   transform: translateY(50%);
 }
+.product-img-wrapper .img-thumbnail {
+  margin: 0 !important;
+}
+.watermark-wrapper {
+  margin: 1em 0em 3em 1em;
+  margin-top: 1.3em;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  position: relative;
+}
 .product-img-wrapper .watermark {
-  transform: translateX(7px);
+  width: 100%;
+  width: calc(100% - 11px);
+  height: 100%;
+  height: calc(100% - 9px);
 }
