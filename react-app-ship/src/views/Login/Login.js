@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { increment, doubleAsync } from '../../redux/modules/counter'
 import Crab from './crab.png'
 import FishLogo from './fish logo.png'
-import classes from './Login.scss'
+import classes from './_style.scss'
 
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
