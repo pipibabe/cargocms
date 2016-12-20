@@ -183,7 +183,7 @@ module.exports = {
     }
   },
 
-  supplierShipOrderDescription: async(supplierShipOrderId, orderProductId) => {
+  supplierShipOrderDescription: async(supplierShipOrderId, orderProductId, status) => {
     try {
       let orderProduct = await OrderProduct.findById(orderProductId);
       orderProduct = orderProduct.toJSON();
@@ -191,7 +191,7 @@ module.exports = {
         ...orderProduct,
         SupplierShipOrderId: supplierShipOrderId,
         OrderProductId: orderProductId,
-        status: 'NEW',
+        status: status || 'NEW',
       }
       delete data.id;
       delete data.createdAt;

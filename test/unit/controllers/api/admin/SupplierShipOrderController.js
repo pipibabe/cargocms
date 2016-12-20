@@ -115,6 +115,55 @@ describe.only('about admin Supplier Ship Order controllers', () => {
       }
     });
 
+    it('admin CANCELLED Supplier Ship Order desc cancel too.', async (done) => {
+      try{
+        const res = await request(sails.hooks.http.app)
+        .put(`/api/admin/suppliershiporder/status/${supplierShipOrder1.id}`)
+        .send({
+          status: 'CANCELLED',
+        });
+        res.status.should.be.eq(200);
+
+        const checkSupplierShipOrder = await SupplierShipOrder.findById(supplierShipOrder1.id);
+        checkSupplierShipOrder.status.should.be.eq('CANCELLED');
+
+        const checkSupplierShipOrderDescription = await SupplierShipOrderDescription.findById(supplierShipOrderDescription1.id);
+        checkSupplierShipOrderDescription.status.should.be.eq('CANCELLED');
+
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
+
+    describe('當有商品揀貨完成，將不可 CANCELLED', () => {
+
+      before(async(done) => {
+        try {
+          let order2 = await createHelper.order(user.id);
+          orderProduct1 = await createHelper.orderProduct(order2.id, product1.id, 3);
+          supplierShipOrder1 = await createHelper.supplierShipOrder(order2.id, supplier1.id);
+          supplierShipOrderDescription1 = await createHelper.supplierShipOrderDescription(supplierShipOrder1.id, orderProduct1.id, 'COMPLETED');
+          done()
+        } catch (e) {
+          done(e)
+        }
+      })
+
+      it('無法更改狀態', async(done) => {
+        try {
+          const res = await request(sails.hooks.http.app)
+          .put(`/api/admin/suppliershiporder/status/${supplierShipOrder1.id}`)
+          .send({
+            status: 'CANCELLED',
+          });
+          res.status.should.be.eq(500);
+          done()
+        } catch (e) {
+          done(e)
+        }
+      })
+    });
 
   });
 

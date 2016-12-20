@@ -83,7 +83,17 @@ module.exports = {
           SupplierShipOrderId: id
         }
       });
-      console.log(findSupplierShipOrderDescription);
+
+      let checkSupplierShipOrderDescriptionHasCOMPLETED = await SupplierShipOrderDescription.findAll({
+        where: {
+          SupplierShipOrderId: id,
+          status: 'COMPLETED',
+        }
+      });
+      if (checkSupplierShipOrderDescriptionHasCOMPLETED.length > 0) {
+        throw Error('已有商品揀貨完成，不能取消訂單');
+      }
+
       let supplierShipOrderDescriptionIdArray = findSupplierShipOrderDescription.map((desc) => {
         desc = desc.toJSON();
         return desc.id;
@@ -101,10 +111,10 @@ module.exports = {
         });
       }
 
-      const updateSupplierShipOrderDescriptionStatus = (transaction) => {
+      const updateSupplierShipOrderDescriptionStatus = (status, transaction) => {
         return new Promise(function(resolve, reject) {
           SupplierShipOrderDescription.update({
-            status: 'PROCESSING'
+            status
           }, {
             where: {
               id: supplierShipOrderDescriptionIdArray
@@ -127,7 +137,16 @@ module.exports = {
         return updateSupplierShipOrderStatus(transaction)
       })
       .then(function() {
-        return updateSupplierShipOrderDescriptionStatus(transaction);
+        switch (status) {
+          case 'RECEIVED':
+            return updateSupplierShipOrderDescriptionStatus('PROCESSING', transaction);
+            break;
+          case 'CANCELLED':
+            return updateSupplierShipOrderDescriptionStatus('CANCELLED', transaction);
+            break;
+          default:
+            return updateSupplierShipOrderDescriptionStatus('NEW', transaction);
+        }
       })
       .then(function(){
         transaction.commit();
