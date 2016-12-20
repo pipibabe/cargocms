@@ -1,7 +1,7 @@
 import createHelper from "../../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../../util/adminAuthHelper.js"
 
-describe.only('about admin Supplier Ship Order controllers', () => {
+describe('about admin Supplier Ship Order controllers', () => {
   let product1, product2, user, order, supplier1;
   let supplier2,  orderProduct1, orderProduct2, supplierShipOrder1, supplierShipOrder2;
   let supplierShipOrderDescription1;
@@ -50,7 +50,7 @@ describe.only('about admin Supplier Ship Order controllers', () => {
     it('should 403', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporder/${supplierShipOrder1.id}`)
+        .put(`/api/admin/suppliershiporder/status/${supplierShipOrder1.id}`)
         .send({
           status: 'conform',
         });
