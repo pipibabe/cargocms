@@ -26,19 +26,6 @@
         "extensions": [".js", ".jsx"]
       }
     ],
-    "key-spacing": [
-      2, {
-        "singleLine": {
-          "beforeColon": false,
-          "afterColon": true
-        },
-        "multiLine": {
-          "align": "colon",
-          "beforeColon": false,
-          "afterColon": true
-        }
-      }
-    ],
     "babel/generator-star-spacing": 1,
     "generator-star-spacing": 0,
     "jsx-quotes": [
@@ -62,6 +49,18 @@
       1,
       "always"
     ],
-    "forbid-prop-types": 0
+    "key-spacing": [
+      1, {
+        "singleLine": {
+          "beforeColon": false,
+          "afterColon": true
+        },
+        "multiLine": {
+          "beforeColon": false,
+          "afterColon": true
+        }
+      }
+    ],
+    "react/forbid-prop-types": [0, {}]
   }
 }
