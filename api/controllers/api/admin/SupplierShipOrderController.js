@@ -8,7 +8,7 @@ module.exports = {
       const modelName = req.options.controller.split("/").reverse()[0];
       let result;
       if (serverSidePaging) {
-        const include = [];
+        const include = [ 'SupplierShipOrderDescription' ];
         result = await PagingService.process({ query, modelName, include });
       } else {
         const items = await sails.models[modelName].findAll({
