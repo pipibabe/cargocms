@@ -6,8 +6,8 @@ describe('about admin Order controllers', () => {
   before(async function(done){
     try{
       user = await User.create({
-        username: 'buyer',
-        email: 'conformBuyer@example.com',
+        username: 'orderBuyer',
+        email: 'orderBuyer@example.com',
         firstName: '劉',
         lastName: '廠商',
         birthday: new Date(),

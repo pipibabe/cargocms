@@ -8,8 +8,8 @@ describe('about admin Supplier Ship Order Description controllers', () => {
   before(async function(done){
     try{
       user = await User.create({
-        username: 'buyer',
-        email: 'conformBuyer@example.com',
+        username: 'SupplierShipBuyer',
+        email: 'SupplierShipBuyer@example.com',
         firstName: '劉',
         lastName: '廠商',
         birthday: new Date(),

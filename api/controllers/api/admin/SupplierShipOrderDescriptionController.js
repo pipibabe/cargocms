@@ -95,6 +95,7 @@ module.exports = {
         return new Promise(function(resolve, reject) {
           SupplierShipOrderDescription.findAll({
             where: {
+              SupplierShipOrderId: supplierShipOrderDescription.SupplierShipOrderId,
               status: {
                 $in: ['NEW', 'PROCESSING']
               }
