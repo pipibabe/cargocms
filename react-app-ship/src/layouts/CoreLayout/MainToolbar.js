@@ -14,7 +14,7 @@ import {
   MenuItem,
 } from 'material-ui';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import classes from './MainToolbar.scss';
+import classes from './_style.scss';
 
 const styles = {
   toolbar: {

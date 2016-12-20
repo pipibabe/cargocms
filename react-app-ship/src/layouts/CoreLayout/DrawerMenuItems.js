@@ -7,7 +7,7 @@ import {
   MenuItem,
   Divider,
 } from 'material-ui';
-// import classes from './DrawerMenuItems.scss';
+import classes from './_style.scss';
 
 const styles = {
   drawer: {

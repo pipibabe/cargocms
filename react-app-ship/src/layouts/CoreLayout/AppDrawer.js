@@ -9,7 +9,7 @@ import {
 } from 'material-ui';
 import MainToolbar from './MainToolbar';
 import DrawerMenuItems from './DrawerMenuItems';
-import classes from './AppDrawer.scss';
+import classes from './_style.scss';
 
 // import { increment, doubleAsync } from '../../redux/modules/counter';
 
