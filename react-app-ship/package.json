@@ -79,6 +79,7 @@
   "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.15.3",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.3.17",
     "babel-loader": "^6.2.0",
@@ -110,6 +111,7 @@
     "material-ui": "^0.16.5",
     "node-sass": "^3.3.3",
     "postcss-loader": "^0.8.0",
+    "radium": "^0.18.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^4.0.0",
