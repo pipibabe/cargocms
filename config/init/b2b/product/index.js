@@ -11,6 +11,14 @@ module.exports.init = async () => {
         storage: 'local',
       });
 
+      const supplier = await Supplier.create({
+        name: '壹陸捌活海產',
+        email: '168_seafood@gmail.com',
+        telephone: '(04)-2201-1688',
+        fax: '(04)-2201-1168',
+        address: '台中市清水區北提路'
+      });
+
       let product = await Product.create({
           model: "鮮甜飽滿無毒益菌蝦",
           sku: "ABC1234",
@@ -36,7 +44,7 @@ module.exports.init = async () => {
           publish: true,
           viewed: 12321,
           ImageId: image.id,
-          SupplierId: 1,
+          SupplierId:  supplier.id,
         });
 
       let productDescription = await ProductDescription.create({

@@ -128,10 +128,10 @@ var defaultConfig = {
   'post /api/admin/order/confirm/:id': 'api/admin/OrderController.confirm',
 
   'post  /api/admin/suppliershiporder/all': 'api/admin/SupplierShipOrderController.find',
-  'put /api/admin/suppliershiporder/:id': 'api/admin/SupplierShipOrderController.status',
+  'put /api/admin/suppliershiporder/status/:id': 'api/admin/SupplierShipOrderController.status',
 
   'post  /api/admin/suppliershiporderdescription/all': 'api/admin/SupplierShipOrderDescriptionController.find',
-  'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.status',
+  'put /api/admin/suppliershiporderdescription/status/:id': 'api/admin/SupplierShipOrderDescriptionController.status',
 
   'get /api/admin/order': 'api/admin/OrderController.find',
   'get /api/admin/order/:id': 'api/admin/OrderController.findOne',

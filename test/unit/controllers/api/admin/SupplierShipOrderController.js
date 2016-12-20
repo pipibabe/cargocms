@@ -1,7 +1,7 @@
 import createHelper from "../../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../../util/adminAuthHelper.js"
 
-describe('about admin Supplier Ship Order controllers', () => {
+describe.only('about admin Supplier Ship Order controllers', () => {
   let product1, product2, user, order, supplier1;
   let supplier2,  orderProduct1, orderProduct2, supplierShipOrder1, supplierShipOrder2;
   let supplierShipOrderDescription1;
@@ -21,10 +21,10 @@ describe('about admin Supplier Ship Order controllers', () => {
 
       order = await createHelper.order(user.id);
 
-      product1 = await createHelper.product();
-      supplier1 = await createHelper.supplier();
+      product1 = await createHelper.product('毒刺水母涼拌海蜇皮');
+      supplier1 = await createHelper.supplier('火箭隊');
       await createHelper.supplierProduct(supplier1.id, product1.id);
-      orderProduct1 = await createHelper.orderProduct(order.id, product1.id);
+      orderProduct1 = await createHelper.orderProduct(order.id, product1.id, 3);
       supplierShipOrder1 = await createHelper.supplierShipOrder(order.id, supplier1.id);
       supplierShipOrderDescription1 = await createHelper.supplierShipOrderDescription(supplierShipOrder1.id, orderProduct1.id);
 
@@ -97,17 +97,17 @@ describe('about admin Supplier Ship Order controllers', () => {
     it('admin update status Supplier Ship Order shoubld success.', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporder/${supplierShipOrder1.id}`)
+        .put(`/api/admin/suppliershiporder/status/${supplierShipOrder1.id}`)
         .send({
-          status: 'conform',
+          status: 'RECEIVED',
         });
         res.status.should.be.eq(200);
 
         const checkSupplierShipOrder = await SupplierShipOrder.findById(supplierShipOrder1.id);
-        checkSupplierShipOrder.status.should.be.eq('conform');
+        checkSupplierShipOrder.status.should.be.eq('RECEIVED');
 
-        const checkSupplierShipOrderDescription = await ShipOrderDescription.findById(supplierShipOrderDescription1.id);
-        checkSupplierShipOrderDescription.status.shoubld.be.eq('processing');
+        const checkSupplierShipOrderDescription = await SupplierShipOrderDescription.findById(supplierShipOrderDescription1.id);
+        checkSupplierShipOrderDescription.status.should.be.eq('PROCESSING');
 
         done();
       } catch (e) {

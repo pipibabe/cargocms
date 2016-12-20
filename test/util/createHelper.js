@@ -163,12 +163,20 @@ module.exports = {
     }
   },
 
-  supplierShipOrder: async(orderId, supplierIdArray) => {
+  supplierShipOrder: async(orderId, supplierId) => {
     try {
+      let order = await Order.findById(orderId);
+      order = order.toJSON();
       let data = {
-        // TODO: supplierProduct data
+        ...order,
+        OrderId: orderId,
+        SupplierId: supplierId,
+        status: 'NEW',
       }
-      throw Error('尚未實作 supplier order Help')
+      console.log(data);
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
       return await SupplierShipOrder.create(data);
     } catch (e) {
       throw e;
@@ -177,10 +185,17 @@ module.exports = {
 
   supplierShipOrderDescription: async(supplierShipOrderId, orderProductId) => {
     try {
+      let orderProduct = await OrderProduct.findById(orderProductId);
+      orderProduct = orderProduct.toJSON();
       let data = {
-        // TODO: supplierShipOrderDescription data
+        ...orderProduct,
+        SupplierShipOrderId: supplierShipOrderId,
+        OrderProductId: orderProductId,
+        status: 'NEW',
       }
-      throw Error('尚未實作 supplier ShipOrder Description Help');
+      delete data.id;
+      delete data.createdAt;
+      delete data.updatedAt;
       return await SupplierShipOrderDescription.create(data);
     } catch (e) {
       throw e;

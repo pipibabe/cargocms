@@ -124,7 +124,7 @@ describe('about admin Supplier Ship Order Description controllers', () => {
           status: 'finish',
         });
         finishShipOrderDescription1.status.should.be.eq(200);
-        const checkShipOrderDescription1 = await ShipOrderDescription.findById(supplierShipOrderDescription1.id);
+        const checkShipOrderDescription1 = await SupplierShipOrderDescription.findById(supplierShipOrderDescription1.id);
         checkShipOrderDescription1.status.should.be.eq('finish');
 
         const finishShipOrderDescription2 = await request(sails.hooks.http.app)
@@ -133,7 +133,7 @@ describe('about admin Supplier Ship Order Description controllers', () => {
           status: 'finish',
         });
         finishShipOrderDescription2.status.should.be.eq(200);
-        const checkShipOrderDescription2 = await ShipOrderDescription.findById(supplierShipOrderDescription2.id);
+        const checkShipOrderDescription2 = await SupplierShipOrderDescription.findById(supplierShipOrderDescription2.id);
         checkShipOrderDescription2.status.should.be.eq('finish');
 
         const checkSupplierShipOrder = await SupplierShipOrder.findById(supplierShipOrder.id);

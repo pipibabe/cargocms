@@ -71,5 +71,76 @@ module.exports = {
     } catch (e) {
       res.serverError(e);
     }
-  }
+  },
+
+  status: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+
+      let findSupplierShipOrderDescription = await SupplierShipOrderDescription.findAll({
+        where: {
+          SupplierShipOrderId: id
+        }
+      });
+      console.log(findSupplierShipOrderDescription);
+      let supplierShipOrderDescriptionIdArray = findSupplierShipOrderDescription.map((desc) => {
+        desc = desc.toJSON();
+        return desc.id;
+      })
+
+      const updateSupplierShipOrderStatus = (transaction) => {
+        return new Promise(function(resolve, reject) {
+          SupplierShipOrder.update({ status },{ where: { id }}, { transaction })
+          .then(function(updateSupplierShipOrder) {
+            resolve(updateSupplierShipOrder);
+          })
+          .catch(function(err) {
+            reject(err)
+          });
+        });
+      }
+
+      const updateSupplierShipOrderDescriptionStatus = (transaction) => {
+        return new Promise(function(resolve, reject) {
+          SupplierShipOrderDescription.update({
+            status: 'PROCESSING'
+          }, {
+            where: {
+              id: supplierShipOrderDescriptionIdArray
+            }
+          }, {transaction})
+          .then(function(updateSupplierShipOrder) {
+            resolve(updateSupplierShipOrder);
+          })
+          .catch(function(err) {
+            reject(err)
+          });
+        });
+      }
+
+      const isolationLevel = sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE;
+      let transaction;
+      return sequelize.transaction({ isolationLevel })
+      .then(function (t) {
+        transaction = t;
+        return updateSupplierShipOrderStatus(transaction)
+      })
+      .then(function() {
+        return updateSupplierShipOrderDescriptionStatus(transaction);
+      })
+      .then(function(){
+        transaction.commit();
+        let message = 'update status success';
+        return res.ok({ message });
+      })
+      .catch(function(err) {
+        sails.log.error('更新狀態失敗', err.toString());
+        transaction.rollback();
+        return res.serverError(err);
+      });
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
 }
