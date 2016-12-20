@@ -67,6 +67,7 @@
     "sails-hook-autoreload": "^0.13.2",
     "sails-hook-sequelize": "^1.0.1",
     "sails-service-mailer": "^3.2.1",
+    "shorthash": "0.0.2",
     "shortid": "^2.2.6",
     "skipper-s3": "^0.5.6",
     "sprintf-js": "^1.0.3",

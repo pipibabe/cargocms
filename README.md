@@ -8,19 +8,19 @@ Mac
 ```
 brew install imagemagick
 brew install graphicsmagick
+gem install sass compass
+npm -g install babel-cli
+npm install
 ```
 
 Linux
 ```
 apt-get install graphicsmagick imagemagick
-```
-
-```
 gem install sass compass
 npm -g install babel-cli
-
 npm install
 ```
+
 
 Run
 ----
