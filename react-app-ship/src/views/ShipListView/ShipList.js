@@ -1,14 +1,10 @@
+import axios from 'axios';
 import React, { PropTypes } from 'react';
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardText,
-} from 'material-ui/Card';
 import AutoComplete from 'material-ui/AutoComplete';
 import FontIcon from 'material-ui/FontIcon';
 import { FlatButton } from 'material-ui';
-// import ShipCard from './ShipCard';
+import ShipCard from './ShipCard';
+import classes from './_style.scss'
 
 const styles = {
   iconSearch: {
@@ -27,47 +23,53 @@ const styles = {
     fontSize: 0,
   },
   listContainer: {
-
+    width: '90%',
+    margin: '0 auto',
   },
 };
 
 export default class ShipList extends React.Component {
   static defaultProps = {
-    data: [],
+    data: {},
   };
 
   static propTypes = {
-    data: React.PropTypes.array,
+    data: PropTypes.object,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      dataSource: [],
+      dataSource: {},
     };
+    this.handelGetJsonFromServer();
   }
 
-  handleUpdateInput = (value) => {
-    this.setState({
-      dataSource: [
-        value,
-        value + value,
-        value + value + value,
-      ],
+  handelGetJsonFromServer = () => {
+    const api = '/api/admin/suppliershiporder/all';
+    axios.post(api)
+    .then((response) => {
+      console.log(`response=>${JSON.stringify(response.data)}`);
+      this.setState({
+        dataSource: response.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  };
+  }
 
   render() {
-    const fruit = [
-      'Apple', 'Apricot', 'Avocado',
-      'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry',
-      'Boysenberry', 'Blood Orange',
-      'Cantaloupe', 'Currant', 'Cherry', 'Cherimoya', 'Cloudberry',
-      'Coconut', 'Cranberry', 'Clementine',
-      'Damson', 'Date', 'Dragonfruit', 'Durian',
-      'Elderberry',
-      'Feijoa', 'Fig',
-    ];
+    const items = this.state.dataSource.data.items;
+    const autoCompleteTitle = [];
+    for (const item of items) {
+      autoCompleteTitle.push(item.displayName);
+      autoCompleteTitle.push(item.invoicePrefix + item.invoiceNo);
+      autoCompleteTitle.push(item.email);
+      autoCompleteTitle.push(item.telephone);
+      autoCompleteTitle.push(item.paymentAddress1);
+      autoCompleteTitle.push(item.paymentCity);
+    }
 
     return (
       <div className='container text-center' >
@@ -82,16 +84,23 @@ export default class ShipList extends React.Component {
             <AutoComplete
               floatingLabelText='輸入關鍵字搜尋出貨記錄'
               filter={AutoComplete.fuzzyFilter}
-              dataSource={fruit}
+              dataSource={autoCompleteTitle}
               maxSearchResults={5}
               // hintText='輸入以查詢'
               fullWidth={true}
             />
-            <div className='col-xs-1'></div>
+            <div className='col-xs-1'>{}</div>
           </div>
         </div>
         <div className='row' style={styles.listContainer}>
-
+          {
+            this.state.dataSource.data.items.map(item => (
+              <ShipCard
+                key={item.id}
+                {...item}
+              />
+            ))
+          }
         </div>
       </div>
     );

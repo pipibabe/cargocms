@@ -3,9 +3,9 @@ import {
   Card,
   CardText,
 } from 'material-ui/Card';
-// import classes from './Card.scss'
+import classes from './_style.scss'
 
-const classes = {
+const styles = {
   title: {
     width: '25%',
     height: '70px',
@@ -36,28 +36,28 @@ const classes = {
     float: 'left',
     padding: 10,
     lineHeight: '50px',
-  }
-}
+  },
+};
 
 export default class ShipCard extends React.Component {
-   static defaultProps = {
-    id: 0,
+  static defaultProps = {
     orderNum: 'S1111222233334444',
     orderDate: '2015/12/12',
     title: '一六八活海產(04)-0000-0000',
     desc: '鮮甜飽滿無毒益菌蝦(3) + 巨無霸完美天使紅蟹(2)',
     price: '2,050',
     status: '新訂單',
+    style: null,
   };
 
-   static propTypes = {
-    id: PropTypes.number,
+  static propTypes = {
     orderNum: PropTypes.string,
     orderDate: PropTypes.string,
     title: PropTypes.string,
     desc: PropTypes.string,
     price: PropTypes.string,
     status: PropTypes.string,
+    style: PropTypes.object,
   };
 
   constructor(props, context) {
@@ -71,20 +71,23 @@ export default class ShipCard extends React.Component {
     const { orderNum, orderDate, title, desc, price, status } = this.props;
     const { open } = this.state;
     return (
-      <Card expanded={this.state.open} onClick={() => { this.setState({ open: !open }) }}>
+      <Card
+        expanded={this.state.open}
+        onClick={() => { this.setState({ open: !open }); }}
+      >
         <div>
-          <div style={classes.title}>
+          <div style={styles.title}>
             <div>{orderNum}</div>
             <div>建立於 {orderDate}</div>
           </div>
-          <div style={classes.desc}>
-            <div style={classes.descTitle}>{title}</div>
+          <div style={styles.desc}>
+            <div style={styles.descTitle}>{title}</div>
             <div>{desc}</div>
           </div>
-          <div style={classes.price}>
+          <div style={styles.price}>
             <div>${price}</div>
           </div>
-          <div style={classes.status}>
+          <div style={styles.status}>
             <div>{status}</div>
           </div>
         </div>
