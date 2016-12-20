@@ -59,7 +59,7 @@ module.exports = {
     key: 'AIzaSyBSPvypkv-HnFRsC0ZFDvinPMPlEC59Ous'
   },
   e2eClientLog: {
-    folder: "test/e2e/",
+    folder: "test/e2e-stress/",
     PID: "PID.json",
     MEMORY: "memory.xls"
   }

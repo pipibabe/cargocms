@@ -85,15 +85,15 @@ module.exports.bootstrap = async (cb) => {
 
     if (environment !== 'test') {
       // 自動掃描 init 底下的 module 資料夾後執行資料初始化
-      fs.readdir('./config/init/', function(err, files) {
-        for (var i in files) {
-          let dirName = files[i];
+      fs.readdir('./config/init/', async function(err, files) {
+        for (var i of files) {
+          let dirName = i;
           let isDir = fs.statSync('./config/init/' + dirName).isDirectory();
           if (isDir) {
             let hasIndexFile = fs.statSync('./config/init/' + dirName + '/index.js').isFile();
 
             try {
-              require('./init/' + dirName).init();
+              await require('./init/' + dirName).init();
             }
             catch (e) {
               sails.log.error(e);
@@ -104,7 +104,7 @@ module.exports.bootstrap = async (cb) => {
     } else {
       // 測試時需要初始化的 module
       try {
-        require(`${__dirname}/init/allpay`).init();
+        await require(`${__dirname}/init/allpay`).init();
       }
       catch (e) {
         sails.log.error(e);
