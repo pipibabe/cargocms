@@ -17,14 +17,17 @@ const styles = {
     marginRight: 5,
     paddingTop: 10,
     right: '-70%',
-    fontSize: 28,
+    fontSize: 14,
   },
-  searchbarContainer: {
+  iconContainer: {
     marginRight: 40,
-    verticalAlign: 'middle',
     height: 72,
+    verticalAlign: 'middle',
     lineHeight: '72px',
     fontSize: 0,
+  },
+  listContainer: {
+
   },
 };
 
@@ -67,13 +70,15 @@ export default class ShipList extends React.Component {
     ];
 
     return (
-      <div className='text-center' >
-        <div className='row' style={styles.searchbarContainer}>
-          <div className='col-xs-11'>
+      <div className='container text-center' >
+        <div className='row' style={styles.iconContainer}>
+          <div className='col-xs-1'>
             <FontIcon
               className='material-icons'
               style={styles.iconSearch}
             >search</FontIcon>
+          </div>
+          <div className='col-xs-10'>
             <AutoComplete
               floatingLabelText='輸入關鍵字搜尋出貨記錄'
               filter={AutoComplete.fuzzyFilter}
@@ -82,7 +87,11 @@ export default class ShipList extends React.Component {
               // hintText='輸入以查詢'
               fullWidth={true}
             />
+            <div className='col-xs-1'></div>
           </div>
+        </div>
+        <div className='row' style={styles.listContainer}>
+
         </div>
       </div>
     );

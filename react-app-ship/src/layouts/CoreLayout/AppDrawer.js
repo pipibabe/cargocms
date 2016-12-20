@@ -23,6 +23,7 @@ import classes from './AppDrawer.scss';
 const styles = {
   appBar: {
     backgroundColor: '#2D3743',
+    fontSize: 12,
   },
   contentContainer: {
     // flex: 1,
@@ -85,7 +86,6 @@ export default class AppDrawer extends React.Component {
     const body = d.getElementsByTagName('body')[0];
     const width = w.innerWidth || documentElement.clientWidth || body.clientWidth;
     const height = w.innerHeight || documentElement.clientHeight || body.clientHeight;
-
     this.setState({ width, height });
   }
 
@@ -105,13 +105,13 @@ export default class AppDrawer extends React.Component {
       styles.content.margin = '0 auto';
     }
     const zDepth = isMobile ? 2 : 0;
+    const titleText = isMobile ? '出貨管理系統' : '雲端漁場出貨管理系統';
 
     styles.drawerContainer.position = isMobile ? 'fixed' : 'relative';
     return (
       <div className=''>
         <AppBar
-          title='雲端漁場出貨管理系統'
-          iconClassNameRight='muidocs-icon-navigation-expand-more'
+          title={titleText}
           onLeftIconButtonTouchTap={this.handleToggle}
           style={styles.appBar}
         >
