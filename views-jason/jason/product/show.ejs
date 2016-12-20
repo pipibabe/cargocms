@@ -172,8 +172,8 @@ jQuery(document).ready(function() {
   });
 
   $('.watermark').each(function(i, e){
-    var w = $(e).closest('a').find('img:not(.watermark)').width();
-    var h = $(e).closest('a').find('img:not(.watermark)').height();
+    var w = $(e).closest('.swiper-slide').find('img:not(.watermark)').width();
+    var h = $(e).closest('.swiper-slide').find('img:not(.watermark)').height();
     $(e).css({
       width: w,
       height: h,
