@@ -3,29 +3,44 @@ Cargo CMS
 
 Installation
 -------------
+1. Please install [NVM](https://github.com/creationix/nvm) first, in order to get NPM.
 
-Mac
-```
-brew install imagemagick
-brew install graphicsmagick
-gem install sass compass
-npm -g install babel-cli
-npm install
-```
+  ```
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+  ```
+  
+2. Then install Node: 
 
-Linux
-```
-apt-get install graphicsmagick imagemagick
-gem install sass compass
-npm -g install babel-cli
-npm install
-```
+  ```
+  nvm install 6.9.1
+  ```
+
+- Mac
+  
+  ```
+  brew install imagemagick
+  brew install graphicsmagick
+  brew install ruby
+  gem install sass compass
+  npm -g install babel-cli
+  npm install
+  ```
+
+- Linux
+  
+  ```
+  apt-get install ruby graphicsmagick imagemagick
+  gem install sass compass
+  npm -g install babel-cli
+  npm install
+  ```
 
 
 Run
 ----
 
 ```
+// after CSS style file changes
 npm run build
 
 npm start
@@ -46,6 +61,8 @@ References
 * [react-admin](https://github.com/marmelab/react-admin)
 * [AdminLTE - Free Premium Admin control Panel Theme](https://github.com/almasaeed2010/AdminLTE)
 * [StrapUI](http://www.strapui.com/)
+* [creationix/nvm: Node Version Manager - Simple bash script to manage multiple active node.js versions](https://github.com/creationix/nvm)
+* [安裝 Ruby](https://www.ruby-lang.org/zh_tw/documentation/installation/)
 
 Issues
 ------
@@ -77,14 +94,14 @@ cors.origin: 'http://cargo.trunksys.com, https://cargo.trunksys.com',
 ### Controller
 
 ```
-// 標準前台功能
+// 標準前台 route 對應功能
 controllers/*Controller.js
+
+// 後台功能 route 對應功能
+controllers/admin/*Controller.js
 
 // 標準 API 功能
 controllers/api/*Controller.js
-
-// 後台功能
-controllers/admin/*Controller.js
 
 // 站台專屬客製前台功能以 labfnp 為例
 controllers/labfnp/*Controller.js
