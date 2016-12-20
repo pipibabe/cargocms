@@ -9,10 +9,13 @@ Installation
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
   ```
   
-2. Then install Node: 
+2. Then install Node by following commands: 
 
   ```
-  nvm install 6.9.1
+  nvm install v6.9.1
+  
+  // set this version to default
+  nvm alias default 6.9.1
   ```
 
 - Mac
