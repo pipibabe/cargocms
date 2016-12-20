@@ -56,7 +56,10 @@
               <div class="post-swiper-container">
                 <div class="swiper-wrapper">
                   <% for (image of partImages) { %>
-                    <a href="<%= image.url%>" data-lightbox="products" class="swiper-slide" style="background-image: url('<%= image.url%>')"><img class="watermark" src="/assets/jason/images/watermark.png"></a>
+                    <a href="<%= image.url%>" data-lightbox="products" class="swiper-slide">
+                      <img src="<%= image.url%>" alt="" />
+                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png"></a>
+                    </a>
                   <% } %>
                 </div>
                 <!-- 如果需要分页器 -->
@@ -69,7 +72,10 @@
                   for (var i = 0; i < partImages.length; i++) {
                     var image = partImages[i];
                   %>
-                    <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"><img class="watermark" src="/assets/jason/images/watermark.png"></div>
+                    <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>">
+                      <img src="<%= image.url%>" alt="" />
+                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                    </div>
                   <% } %>
                 </div>
                 <!-- 如果需要分页器 -->
@@ -161,6 +167,16 @@ jQuery(document).ready(function() {
 
   $('.thumbnail-swiper-container .swiper-slide').click(function (){
     postSwiper.slideTo($(this).data('idx'));
+  });
+
+  $('.watermark').each(function(i, e){
+    var w = $(e).closest('a').find('img:not(.watermark)').width();
+    var h = $(e).closest('a').find('img:not(.watermark)').height();
+    $(e).css({
+      width: w,
+      height: h,
+      opacity: 1,
+    })
   });
 });
 `); %>
