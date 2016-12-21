@@ -1,18 +1,17 @@
 module.exports = {
 
-
   find: async (req, res) => {
     try {
       const { query } = req;
       const { serverSidePaging } = query;
       const modelName = req.options.controller.split("/").reverse()[0];
       let result;
+      const include = [ SupplierShipOrderDescription, Supplier ];
       if (serverSidePaging) {
-        const include = [ 'SupplierShipOrderDescription' ];
         result = await PagingService.process({ query, modelName, include });
       } else {
         const items = await sails.models[modelName].findAll({
-          include: []
+          include
         });
         result = { data: { items } };
       }
