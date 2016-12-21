@@ -95,6 +95,7 @@ export default class ShipList extends React.Component {
           </div>
         </div>
         <div className='row' style={styles.listContainer}>
+          <div className='shipCardSeparater'>{}</div>
           {
             this.state.dataSource.data.items.map(item => (
               <ShipCard

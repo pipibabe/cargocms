@@ -1,151 +1,164 @@
 import React, { PropTypes } from 'react';
-import {
-  Card,
-  CardText,
-  CardHeader,
-  CardActions,
-} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
-  card: {
-    height: '72px',
-    lineHeight: '72px',
+  newOrder: {
+    backgroundColor: '#4990E2',
+    color: '#fff',
   },
-  cardBody: {
-    position: '',
+  shipped: {
+    backgroundColor: '#F9F9F9',
+    color: '#000',
   },
-  title: {
-    width: '25%',
-    height: '70px',
-    float: 'left',
-    padding: 10,
-  },
-  desc: {
-    width: '50%',
-    height: '70px',
-    float: 'left',
-    padding: 10,
-    textAlign: 'left',
-  },
-  descTitle: {
-    fontSize: '15px',
-  },
-  price: {
-    width: '10%',
-    height: '70px',
-    float: 'left',
-    padding: 10,
-    textAlign: 'center',
-    lineHeight: '50px',
-  },
-  status: {
-    width: '15%',
-    height: '70px',
-    float: 'left',
-    padding: 10,
-    lineHeight: '50px',
+  preparing: {
+    backgroundColor: '#F6A623',
+    color: '#fff',
   },
 };
-
-export default class ShipCard extends React.Component {
+export default class ShipCardBody extends React.Component {
   static defaultProps = {
-    orderNum: 'S1111222233334444',
-    orderDate: '2015/12/12',
-    title: '一六八活海產(04)-0000-0000',
-    desc: '鮮甜飽滿無毒益菌蝦(3) + 巨無霸完美天使紅蟹(2)',
-    price: '2,050',
-    status: '新訂單',
-    style: null,
+    isExpend: false,
+    invoiceNum: 'S1111222233334444',
+    orderDetail: [
+      {
+        id: 3,
+        name: '鮮甜飽滿無毒益菌蝦',
+        model: '鮮甜飽滿無毒益菌蝦',
+        quantity: 22,
+        price: 599,
+        total: 13178,
+        tax: 658.9,
+        status: 'NEW',
+        OrderProductId: 1,
+        SupplierShipOrderId: 3,
+      },
+    ],
+    orderDate: {
+      createdAt: '2016/12/12',
+      updatedAt: '2016/12/12',
+    },
+    orderSupplier: {
+      id: 1,
+      name: '壹陸捌活海產',
+      email: '168_seafood@gmail.com',
+      telephone: '(04)-2201-1688',
+      fax: '(04)-2201-1168',
+      address: '台中市清水區北提路',
+    },
+    total: '9912',
+    status: '確定訂單',
   };
 
   static propTypes = {
-    orderNum: PropTypes.string,
-    orderDate: PropTypes.string,
-    title: PropTypes.string,
-    desc: PropTypes.string,
-    price: PropTypes.string,
+    isExpend: PropTypes.bool,
+    invoiceNum: PropTypes.string,
+    orderDetail: PropTypes.array,
+    orderDate: PropTypes.object,
+    orderSupplier: PropTypes.object,
+    total: PropTypes.number,
     status: PropTypes.string,
-    style: PropTypes.object,
   };
 
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      open: false,
-    };
-    console.log('props=>'+JSON.stringify(props));
+  }
+
+  handleBtnShipping = (event) => {
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    alert('finish shipping!');
+  }
+
+  handleBtnPrint = (event) => {
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
+    alert('print!');
   }
 
   render() {
-    const { orderNum, orderDate, title, desc, price, status } = this.props;
-    const { open } = this.state;
-    return (
-      <Card>
-        <CardHeader
-          title="Without Avatar"
-          subtitle="Subtitle"
-          actAsExpander={true}
-          showExpandableButton={true}
-        />
-        <div className='cardBody' style={styles.cardBody}>
-          <div style={styles.title}>
-            <div>{orderNum}</div>
-            <div>建立於 {orderDate}</div>
+    let stateColor = {};
+    switch (this.props.status) {
+      case '新訂單':
+        stateColor = styles.newOrder;
+        break;
+      case '已出貨':
+        stateColor = styles.shipped;
+        break;
+      case '備貨中':
+        stateColor = styles.preparing;
+        break;
+      default:
+        stateColor = styles.newOrder;
+    }
+    const expendedCardBody = (
+      <div className='cardbody-expened'>
+        <div className='order-invoice-expened'>
+          <div className='title'>
+            {this.props.invoiceNum}
           </div>
-          <div style={styles.desc}>
-            <div style={styles.descTitle}>{title}</div>
-            <div>{desc}</div>
+          <div className='sub-title'>
+            建立於 {this.props.orderDate.createdAt}
           </div>
-          <div style={styles.price}>
-            <div>${price}</div>
-          </div>
-          <div style={styles.status}>
-            <div>{status}</div>
+          <div className='sub-title'>
+            更新於 {this.props.orderDate.updatedAt}
           </div>
         </div>
-        // <CardActions>
-        //   <FlatButton label="Action1" />
-        //   <FlatButton label="Action2" />
-        // </CardActions>
-        <CardText expandable={true}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-        </CardText>
-      </Card>
-      // {/* <Card
-      //   expanded={this.state.open}
-      //   onClick={() => { this.setState({ open: !open }); }}
-      //   style={styles.card}
-      // >
-      //   <CardActions>
-      //     <div className='cardBody' style={styles.cardBody}>
-      //       <div style={styles.title}>
-      //         <div>{orderNum}</div>
-      //         <div>建立於 {orderDate}</div>
-      //       </div>
-      //       <div style={styles.desc}>
-      //         <div style={styles.descTitle}>{title}</div>
-      //         <div>{desc}</div>
-      //       </div>
-      //       <div style={styles.price}>
-      //         <div>${price}</div>
-      //       </div>
-      //       <div style={styles.status}>
-      //         <div>{status}</div>
-      //       </div>
-      //     </div>
-      //   </CardActions>
-      //   <CardText expandable={true}>
-      //     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      //     Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-      //     Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-      //     Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-      //   </CardText>
-      // </Card> */}
+        <div className='order-content'>
+          <div className='main-title'>
+            <FlatButton
+              ref={(c) => { this.btnShipping = c; }}
+              className='btn-shipping'
+              label='完成配送'
+              onClick={this.handleBtnShipping}
+            />
+            <FlatButton
+              ref={(c) => { this.btnPrint = c; }}
+              className='btn-print'
+              label='列印出貨單'
+              onClick={this.handleBtnPrint}
+            />
+          </div>
+        </div>
+      </div>
     );
-  }
 
+    const normalCardBody = (
+      <div className='cardbody'>
+        <div className='order-invoice'>
+          <div className='title'>
+            {this.props.invoiceNum}
+          </div>
+          <div className='sub-title'>
+            更新於 {this.props.orderDate.updatedAt}
+          </div>
+        </div>
+        <div className='order-content'>
+          <div className='title'>
+            {this.props.orderSupplier.name} {this.props.orderSupplier.telephone}
+          </div>
+          <div className='sub-title'>
+            {
+              this.props.orderDetail.map(item => (
+                `${item.name}(${item.quantity}),`
+              ))
+            }
+          </div>
+        </div>
+        <div className='order-price'>
+          <div className='main-title'>
+            ${this.props.total}
+          </div>
+        </div>
+        <div
+          className='order-status'
+          style={stateColor}
+        >
+          <div className='main-title'>
+            {this.props.status}
+          </div>
+        </div>
+      </div>
+    );
+    return this.props.isExpend ? expendedCardBody : normalCardBody;
+  }
 }
