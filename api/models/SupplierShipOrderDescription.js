@@ -38,8 +38,8 @@ module.exports = {
       },
 	},
 	associations: () => {
-    SupplierShipOrderDetail.belongsTo(SupplierShipOrder);
-    SupplierShipOrderDetail.belongsTo(OrderProduct);
+    SupplierShipOrderDescription.belongsTo(SupplierShipOrder);
+    SupplierShipOrderDescription.belongsTo(OrderProduct);
   },
 	options: {
 		classMethods: {},

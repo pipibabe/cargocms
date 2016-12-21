@@ -54,9 +54,10 @@ module.exports = {
         }
       }
     }
+
   },
   associations: () => {
-    OrderProduct.hasOne(SupplierShipOrderDetail);
+    OrderProduct.hasOne(SupplierShipOrderDescription);
     OrderProduct.belongsTo(Product);
     OrderProduct.belongsTo(Order);
   },

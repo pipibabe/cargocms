@@ -201,10 +201,10 @@ module.exports = {
       type: Sequelize.DECIMAL(15, 4),
       allowNull: false,
     },
-    marketingId: {
-      type: Sequelize.INTEGER(11),
-      allowNull: false,
-    },
+    // marketingId: {
+    //   type: Sequelize.INTEGER(11),
+    //   allowNull: false,
+    // },
     tracking: {
       type: Sequelize.STRING(64),
       allowNull: false,
@@ -245,6 +245,7 @@ module.exports = {
       type: Sequelize.STRING(255),
       allowNull: false,
     },
+
     // dateAdded: {
     //   type: Sequelize.DATE,
     //   allowNull: false,

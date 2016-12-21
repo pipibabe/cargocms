@@ -62,7 +62,7 @@
       <td>{{ item.invoiceNo}}</td>
       <td>{{ item.invoicePrefix}}</td>
       <td>{{ item.lastname + item.firstname}}</td>
-      <td>{{ item.mail}}</td>
+      <td>{{ item.email}}</td>
       <td>{{ item.telephone}}</td>
       <td>{{ item.fax}}</td>
       <td>{{ item.customField}}</td>
@@ -124,7 +124,7 @@
         { "data": "invoiceNo" },
         { "data": "invoicePrefix" },
         { "data": null },
-        { "data": "mail" },
+        { "data": "email" },
         { "data": "telephone" },
         { "data": "fax" },
         { "data": "customField" },
@@ -178,6 +178,13 @@
       {
         "targets": 'no-sort',
         "orderable": false,
+      },
+      {
+        "targets": 3,
+        "searchable": false,
+        "render": function(data, type, row) {
+          return '<td>' + data.lastname + data.firstname + '</td>'
+        }
       },
       {
       "targets": 50,

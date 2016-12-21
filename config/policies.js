@@ -115,7 +115,7 @@ var defaultConfig = {
   "api/admin/SupplierShipOrderController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
-  "api/admin/SupplierShipOrderDetailController": {
+  "api/admin/SupplierShipOrderDescriptionController": {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
 

@@ -1,6 +1,5 @@
 module.exports = {
 
-
   find: async (req, res) => {
     try {
       const { query } = req;
@@ -25,7 +24,7 @@ module.exports = {
   findOne: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await SupplierShipOrder.findOne({
+      const item = await SupplierShipOrderDescription.findOne({
         where:{
           id
         },
@@ -40,7 +39,7 @@ module.exports = {
   create: async (req, res) => {
     try {
       let data = req.body;
-      const item = await SupplierShipOrder.create(data);
+      const item = await SupplierShipOrderDescription.create(data);
       let message = 'Create success.';
       res.ok({ message, data: { item } } );
     } catch (e) {
@@ -53,7 +52,7 @@ module.exports = {
       const { id } = req.params;
       const data = req.body;
       const message = 'Update success.';
-      const item = await SupplierShipOrder.update(data ,{
+      const item = await SupplierShipOrderDescription.update(data ,{
         where: { id, },
       });
       res.ok({ message, data: { item } });
@@ -65,7 +64,7 @@ module.exports = {
   destroy: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await SupplierShipOrder.destroy({ where: { id } });
+      const item = await SupplierShipOrderDescription.destroy({ where: { id } });
       let message = 'Delete success';
       res.ok({message, data: {item}});
     } catch (e) {
@@ -78,30 +77,11 @@ module.exports = {
       const { id } = req.params;
       const { status } = req.body;
 
-      let findSupplierShipOrderDescription = await SupplierShipOrderDescription.findAll({
-        where: {
-          SupplierShipOrderId: id
-        }
-      });
+      const supplierShipOrderDescription = await SupplierShipOrderDescription.findById(id);
 
-      let checkSupplierShipOrderDescriptionHasCOMPLETED = await SupplierShipOrderDescription.findAll({
-        where: {
-          SupplierShipOrderId: id,
-          status: 'COMPLETED',
-        }
-      });
-      if (checkSupplierShipOrderDescriptionHasCOMPLETED.length > 0) {
-        throw Error('已有商品揀貨完成，不能取消訂單');
-      }
-
-      let supplierShipOrderDescriptionIdArray = findSupplierShipOrderDescription.map((desc) => {
-        desc = desc.toJSON();
-        return desc.id;
-      })
-
-      const updateSupplierShipOrderStatus = (transaction) => {
+      const updateSupplierShipOrderDescriptionStatus = (transaction) => {
         return new Promise(function(resolve, reject) {
-          SupplierShipOrder.update({ status },{ where: { id }}, { transaction })
+          SupplierShipOrderDescription.update({ status },{ where: { id }}, { transaction })
           .then(function(updateSupplierShipOrder) {
             resolve(updateSupplierShipOrder);
           })
@@ -111,15 +91,34 @@ module.exports = {
         });
       }
 
-      const updateSupplierShipOrderDescriptionStatus = (status, transaction) => {
+      const checkNotCompletedShipOrder = (transaction) => {
         return new Promise(function(resolve, reject) {
-          SupplierShipOrderDescription.update({
-            status
-          }, {
+          SupplierShipOrderDescription.findAll({
             where: {
-              id: supplierShipOrderDescriptionIdArray
+              SupplierShipOrderId: supplierShipOrderDescription.SupplierShipOrderId,
+              status: {
+                $in: ['NEW', 'PROCESSING']
+              }
             }
-          }, {transaction})
+          })
+          .then(function(supplierShipOrderDescription) {
+            resolve(supplierShipOrderDescription);
+          })
+          .catch(function(err) {
+            reject(err)
+          });
+        });
+      }
+
+      const updateSupplierShipOrderStatus = (status, transaction) => {
+        return new Promise(function(resolve, reject) {
+        SupplierShipOrder.update({
+          status
+        }, {
+          where: {
+            id: supplierShipOrderDescription.SupplierShipOrderId
+          }
+        }, {transaction})
           .then(function(updateSupplierShipOrder) {
             resolve(updateSupplierShipOrder);
           })
@@ -132,20 +131,16 @@ module.exports = {
       const isolationLevel = sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE;
       let transaction;
       return sequelize.transaction({ isolationLevel })
-      .then(function (t) {
+      .then(function(t) {
         transaction = t;
-        return updateSupplierShipOrderStatus(transaction)
+        return updateSupplierShipOrderDescriptionStatus(transaction)
       })
       .then(function() {
-        switch (status) {
-          case 'RECEIVED':
-            return updateSupplierShipOrderDescriptionStatus('PROCESSING', transaction);
-            break;
-          case 'CANCELLED':
-            return updateSupplierShipOrderDescriptionStatus('CANCELLED', transaction);
-            break;
-          default:
-            return updateSupplierShipOrderDescriptionStatus('NEW', transaction);
+        return checkNotCompletedShipOrder(transaction)
+      })
+      .then(function(supplierShipOrderDescription) {
+        if (supplierShipOrderDescription.length <= 0) {
+          return updateSupplierShipOrderStatus('COMPLETED', transaction)
         }
       })
       .then(function(){
