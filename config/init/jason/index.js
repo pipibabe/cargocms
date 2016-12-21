@@ -18,6 +18,7 @@ module.exports.init = async () => {
       { icon: 'wrench', href: '#', title: '配件管理', sequence: 2},
       { icon: 'briefcase', href: '#', title: '工程實績管理', sequence: 3},
       { icon: 'commenting-o', href: '/admin/contact', title: '聯繫訊息', sequence: 4},
+      { icon: 'picture-o', href: '/admin/banner', title: '首頁圖片', sequence: 5},
       // { icon: 'puzzle-piece', href: '#', title: '實驗室', sequence: 2},
 
       // { href: '/admin/user', title: '會員資料', sequence: 20, ParentMenuItemId: 2},
