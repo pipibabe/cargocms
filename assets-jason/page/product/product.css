@@ -218,3 +218,20 @@
   height: 100%;
   height: calc(100% - 9px);
 }
+.watermark-text {
+  position: absolute;
+  top: 11px;
+  left: 8px;
+  color: #165a92;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-shadow: 0 5px 5px #929292;
+}
+.watermark-text.sub-text {
+  bottom: 11px;
+  top: auto;
+  color: #000000;
+  font-size: 8px;
+  font-weight: 400;
+  text-shadow: 0 0 2px #505050;
+}
