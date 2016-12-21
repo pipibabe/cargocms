@@ -120,7 +120,7 @@ module.exports = {
     try{
       const { id } = req.params;
       let order = await Order.findById(id);
-      order.tracking = "確認訂單";
+      order.tracking = "CONFIRM";
       await order.save();
 
       const orderProducts = await OrderProduct.findAll({
@@ -184,7 +184,7 @@ module.exports = {
           forwardedIp: order.forwardedIp,
           userAgent: order.userAgent,
           acceptLanguage: order.acceptLanguage,
-          status: '確定訂單',
+          status: 'NEW',
         });
 
         let supplierShipOrderDescription = await SupplierShipOrderDescription.create({

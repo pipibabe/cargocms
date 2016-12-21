@@ -260,7 +260,7 @@ module.exports = {
     }
 
     const isolationLevel = sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE;
-    const MerchantTradeNo = crypto.randomBytes(32).toString('hex').substr(0, 8);
+    let MerchantTradeNo = crypto.randomBytes(32).toString('hex').substr(0, 8);
 
     const findRepeatOrder = (transaction) => {
       return new Promise(function(resolve, reject) {
@@ -321,6 +321,7 @@ module.exports = {
           paymentInfoURL: '/api/recipe/paymentinfo',
           transaction,
         }).then(function(allPayData) {
+          MerchantTradeNo = allPayData.allpay.MerchantTradeNo;
           resolve(allPayData);
         }).catch(function(err) {
           reject(err)
