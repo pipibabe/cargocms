@@ -9,7 +9,6 @@ import {
 } from 'material-ui';
 import MainToolbar from './MainToolbar';
 import DrawerMenuItems from './DrawerMenuItems';
-import classes from './_style.scss';
 
 // import { increment, doubleAsync } from '../../redux/modules/counter';
 
@@ -129,7 +128,7 @@ export default class AppDrawer extends React.Component {
           >
             <DrawerMenuItems />
           </Drawer>
-          <div className='text-center' style={styles.content}>
+          <div className='' style={styles.content}>
             {this.props.content}
           </div>
         </div>
