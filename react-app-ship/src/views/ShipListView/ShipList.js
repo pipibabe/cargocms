@@ -15,7 +15,7 @@ const styles = {
     right: '-70%',
     fontSize: 14,
   },
-  iconContainer: {
+  searchBarContainer: {
     marginRight: 40,
     height: 72,
     verticalAlign: 'middle',
@@ -71,9 +71,11 @@ export default class ShipList extends React.Component {
       autoCompleteTitle.push(item.paymentCity);
     }
 
+    console.log('classes=>'+JSON.stringify(classes));
+
     return (
-      <div className='container text-center' >
-        <div className='row' style={styles.iconContainer}>
+      <div className='container' >
+        <div className='row' style={styles.searchBarContainer}>
           <div className='col-xs-1'>
             <FontIcon
               className='material-icons'
