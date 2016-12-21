@@ -61,19 +61,19 @@ module.exports.init = async () => {
           acceptLanguage: order.acceptLanguage,
           status: '確定訂單',
         });
-      }
 
-      let supplierShipOrderDescription = await SupplierShipOrderDescription.create({
-        SupplierShipOrderId: supplierShipOrder.id,
-        OrderProductId: orderProduct.id,
-        name: orderProduct.name,
-        model: orderProduct.model,
-        quantity: orderProduct.quantity,
-        price: orderProduct.price,
-        total: orderProduct.total,
-        tax: orderProduct.tax,
-        status: 'NEW',
-      });
+        let supplierShipOrderDescription = await SupplierShipOrderDescription.create({
+          SupplierShipOrderId: supplierShipOrder.id,
+          OrderProductId: orderProduct.id,
+          name: orderProduct.name,
+          model: orderProduct.model,
+          quantity: orderProduct.quantity,
+          price: orderProduct.price,
+          total: orderProduct.total,
+          tax: orderProduct.tax,
+          status: 'NEW',
+        });
+      }
     }
   } catch (e) {
     console.error(e);
