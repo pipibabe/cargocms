@@ -236,3 +236,8 @@
   font-weight: 400;
   text-shadow: 0 0 2px #505050;
 }
+@media (max-width: 767px){
+  .watermark-text {
+    font-size: 1em;
+  }
+}
