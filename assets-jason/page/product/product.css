@@ -200,7 +200,7 @@
   bottom: 50%;
   left: 0;
   right: 0;
-  transform: translateY(50%);
+  top: 0;
 }
 .product-img-wrapper .img-thumbnail {
   margin: 0 !important;
@@ -217,6 +217,7 @@
   width: calc(100% - 11px);
   height: 100%;
   height: calc(100% - 9px);
+  top: 4.5px;
 }
 .watermark-text {
   position: absolute;
