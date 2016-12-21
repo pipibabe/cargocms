@@ -1,0 +1,101 @@
+<section id="image-create" class="">
+
+    <%- include template.ejs %>
+    <h3>圖片ㄧ</h3>
+    <img src="/uploads/banner/1" height="200" style="margin: 20px" />
+    <div id="fine-uploader-validation1"></div>
+    <h3>圖片二</h3>
+    <img src="/uploads/banner/2" height="200" style="margin: 20px" />
+    <div id="fine-uploader-validation2"></div>
+    <h3>圖片三</h3>
+    <img src="/uploads/banner/3" height="200" style="margin: 20px" />
+    <div id="fine-uploader-validation3"></div>
+    <h3>圖片四</h3>
+    <img src="/uploads/banner/4" height="200" style="margin: 20px" />
+    <div id="fine-uploader-validation4"></div>
+    <h3>圖片五</h3>
+    <img src="/uploads/banner/5" height="200" style="margin: 20px" />
+    <div id="fine-uploader-validation5"></div>
+
+</section>
+
+<script type="text/javascript">
+	pageSetUp();
+  var uploadImageAppModel = {
+    itemLimit: 1,
+    onError: function(){},
+    onComplete: function(){},
+    onDeleteComplete: function(){},
+  }
+
+  var uploadImageApp = new Vue({
+    data: uploadImageAppModel,
+    methods: {
+      updateModel: function(key, value) {
+        uploadImageAppModel[key] = value;
+      },
+      setup: function(data) {
+        var restrictedUploader = new qq.FineUploader({
+          element: document.getElementById("fine-uploader-validation" + data.index),
+          template: 'qq-template-validation',
+          autoUpload: true,
+          request: {
+            endpoint: '/api/admin/upload/banner/' + data.index,
+            inputName: 'uploadPic'
+          },
+          deleteFile: {
+            enabled: true,
+            endpoint: '/api/admin/upload',
+          },
+          thumbnails: {
+            placeholders: {
+              waitingPath: '/source/placeholders/waiting-generic.png',
+              notAvailablePath: '/source/placeholders/not_available-generic.png'
+            }
+          },
+          validation: {
+            allowedExtensions: ['jpeg', 'jpg', 'png'],
+            itemLimit: uploadImageAppModel.itemLimit,
+            sizeLimit: 10240 * 1024 // 50 kB = 50 * 1024 bytes
+          },
+          callbacks: {
+            onError: function(id, name, isError) {
+              uploadImageAppModel.onError(id, name, isError);
+            },
+            onComplete: function(id, name, response) {
+              console.log(id, name, response);
+              uploadImageAppModel.onComplete(id, name, response);
+            },
+            onDeleteComplete: function(id, name, response) {
+              console.log(id, name, response);
+              uploadImageAppModel.onDeleteComplete(id, name, response);
+            },
+          },
+          showMessage: function(message) {
+            messageApp.show({desc: message, type: 'error'});
+          },
+          messages: {
+            emptyError: '{file} 檔案是空的, 請選擇其他檔案',
+            maxHeightImageError: '圖片高度太高',
+            maxWidthImageError: '圖片寬度太寬',
+            minHeightImageError: '圖片不夠高',
+            minWidthImageError: '圖片不夠寬',
+            minSizeError: '{file} 檔案過小，最小檔案大小為 {minSizeLimit}',
+            noFilesError: '請選擇檔案',
+            onLeave: '該檔案正在上傳，如果你離開現在的上傳將被取消。',
+            retryFailTooManyItemsError: '重試失敗 - 您已經達到您的檔案限制。',
+            sizeError: '{file} 檔案過大，最大檔案大小為 {sizeLimit}.',
+            tooManyItemsError: '選擇太多檔案, 檔案限制數量為: {itemLimit}',
+            typeError: '{file} 不支援此檔案, 請選擇: {extensions}.',
+            unsupportedBrowserIos8Safari: '不可恢復的錯誤 - 這個瀏覽器不允許任何形式的文件上傳，由於iOS8上的Safari嚴重錯誤，請使用iOS8上的Chrome直到蘋果修復了這些問題。',
+          }
+        });
+        // qq(document.getElementById("trigger-upload")).attach("click", function() {
+        //   restrictedUploader.uploadStoredFiles();
+        // });
+      },
+    },
+  });
+
+	uploadImageApp.$mount("#image-create");
+</script>

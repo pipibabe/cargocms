@@ -1,19 +1,34 @@
 <% LayoutUtils.addScripts('/assets/simple/js/plugin/swiper/swiper.jquery.min.js'); %>
 <% LayoutUtils.addStylesheets('/assets/simple/js/plugin/swiper/swiper.min.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/css/banner.css'); %>
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-      <% for(var i = 1;i<=3;i++) {%>
-        <div class="swiper-slide" style="background-image:url(/assets/jason/images/banner-swiper/<%= i %>.jpg)">
-          <div class="slogan">
-            <p>專業團隊 責任施工 品質打造 服務熱誠</p>
-            <h3>諮詢/設計/安裝/保養/維修</h3>
+<div class="swiper">
+  <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <% for(var i = 5;i<=6;i++) {%>
+          <div class="swiper-slide" style="background-image:url(/assets/jason/images/banner-swiper/<%= i %>.jpg)">
+            <div class="bg-text">
+              <p>
+                <span>EX</span>CELLENT
+              </p>
+              <p>
+                <span>HIGH</span> QUALITY
+              </p>
+              <p>
+                <span>SE</span>RVICE
+              </p>
+            </div>
+            <div class="slogan">
+              <h3>
+                諮詢<span>/</span>設計<span>/</span>安裝<span>/</span>保養<span>/</span>維修
+                <p>專業團隊 責任施工 品質打造 服務熱誠</p>
+              </h3>
+            </div>
           </div>
-        </div>
-      <% } %>
-    </div>
-    <!-- 如果需要分页器 -->
-    <div class="swiper-pagination"></div>
+        <% } %>
+      </div>
+  </div>
+  <!-- 如果需要分页器 -->
+  <div class="swiper-pagination"></div>
 </div>
 
 <% LayoutUtils.addScriptBlock(`

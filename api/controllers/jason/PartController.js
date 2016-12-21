@@ -21,11 +21,11 @@ module.exports = {
       for (let value of pageData.posts) {
         let images = await Image.findAll({
           where: {
-            PartId: value.Part.id
+            PartId: value.id
           },
-          order: 'sequence'
+          order: ['sequence', ['id', 'DESC']],
         });
-        value.Part.Images = images;
+        value.Images = images;
       }
       return res.view({
         partGroups,
@@ -44,30 +44,49 @@ module.exports = {
   show: async function(req, res) {
     try {
       const partId = req.params.partId;
-      const part = await Post.findOne({
+      const part = await Part.findOne({
         where: {
           id: partId,
         },
-        include: [{
-          model: Part,
-          include: [{
+        include: [
+          {
             model: File,
             order: 'sequence'
-          }]
-        }],
+          },
+          Post,
+        ],
       });
+      part.content = part.Post.content;
       const partImages = await Image.findAll({
         where: {
-          PartId: part.Part.id,
+          PartId: part.id,
         },
         order: 'sequence',
+      });
+      const nextPart = await await Part.findOne({
+        where: {
+          id: {
+            $lt: partId,
+          },
+        },
+        order: 'id DESC',
+      });
+      const prevPart = await await Part.findOne({
+        where: {
+          id: {
+            $gt: partId,
+          },
+        },
+        order: 'id',
       });
       const partGroups = await Group.findWithType('part');
 
       return res.view({
-        part: part.Part,
+        part,
         partImages,
         partGroups,
+        nextPart,
+        prevPart,
       });
     }
     catch (e) {

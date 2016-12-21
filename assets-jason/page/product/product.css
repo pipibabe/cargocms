@@ -35,7 +35,7 @@
   transform: translateY(2px);
 }
 .product .product-img-wrapper {
-  padding: 0 1em 0 0;
+  padding: 0 0 0 0;
 }
 .product .product-content {
   padding: 0 2em;
@@ -50,11 +50,6 @@
   text-align: center;
   font-size: 1.5em;
   color: #d0d0d0;
-}
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
-  background-color: #cdddea;
-  border-color: #c3d4e2;
-  box-shadow: 0 1px 1px #bfd4e4 inset;
 }
 @media (min-width: 1200px){
   .product .product-content {
@@ -87,6 +82,14 @@
   border-radius: 2px;
   box-shadow: 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.12) inset;
+  padding: 2px;
+}
+.post-swiper-container div.swiper-wrapper img,
+.thumbnail-swiper-container div.swiper-wrapper img {
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
 }
 .thumbnail-swiper-container {
   width: 100%;
@@ -144,6 +147,16 @@
 .product-info-list span, .product-info-list p {
   color: #646a6f;
 }
+.product-info-list li label {
+  float: left;
+}
+.product-info-list li span {
+  margin-left: 45px;
+  display: block;
+  padding: 0;
+  transform: translateY(-2.5px);
+  margin-bottom: 4px;
+}
 .product-intro {
   margin-top: 3.5em;
 }
@@ -162,8 +175,46 @@
   border-top: 2px solid #FFC107;
   margin: 11px auto 1.2em;
 }
+.product-pagination {
+  margin-top: 1.8em;
+  text-align: center;
+  overflow: auto;
+}
 @media (max-width: 767px){
   .col-md-6.img-content {
     padding-right: 15px;
   }
+  .product-pagination .btn:first-child {
+    float: left;
+  }
+  .product-pagination .btn:nth-child(2) {
+    float: right;
+  }
+}
+.watermark {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0 auto !important;
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(50%);
+}
+.product-img-wrapper .img-thumbnail {
+  margin: 0 !important;
+}
+.watermark-wrapper {
+  margin: 1em 0em 3em 1em;
+  margin-top: 1.3em;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  position: relative;
+}
+.product-img-wrapper .watermark {
+  width: 100%;
+  width: calc(100% - 11px);
+  height: 100%;
+  height: calc(100% - 9px);
 }

@@ -121,6 +121,34 @@ module.exports = {
         }
       }
     },
+    fileId: {
+      type: Sequelize.VIRTUAL,
+      get: function() {
+        try {
+          let thisFiles = this.getDataValue('Files') || '';
+          if(thisFiles){
+            thisFiles = thisFiles[0].id;
+          }
+          return thisFiles;
+        } catch (e) {
+          sails.log.error(e);
+        }
+      }
+    },
+    fileName: {
+      type: Sequelize.VIRTUAL,
+      get: function() {
+        try {
+          let thisFiles = this.getDataValue('Files') || '';
+          if(thisFiles){
+            thisFiles = thisFiles[0].note;
+          }
+          return thisFiles;
+        } catch (e) {
+          sails.log.error(e);
+        }
+      }
+    },
     postType: {
       type: Sequelize.VIRTUAL,
       get: function() {

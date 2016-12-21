@@ -1,5 +1,14 @@
+<% LayoutUtils.addMeta({ property:"og:image:url", content: SocialService.getShareUrl() + encodeURI(productImages[0].url) }); %>
+<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/png" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:width", content:"500" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:height", content:"500" }); %>
+<% LayoutUtils.addMeta({ property:"og:title", content: product.title }); %>
+<% LayoutUtils.addMeta({ property:"og:description", content:"捷陞專業自動門 - 產品介紹" }); %>
+
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
+<% LayoutUtils.addStylesheets('/assets/jason/plugins/lightbox/lightbox.min.css'); %>
+<% LayoutUtils.addScripts('/assets/jason/plugins/lightbox/lightbox.min.js'); %>
 
 <div class="container body">
 
@@ -43,31 +52,39 @@
             </ul>
           </div>
           <div class="col-md-6 col-md-pull-6 img-content">
-            <div class="post-swiper-container">
-              <div class="swiper-wrapper">
-                <% for (image of productImages) { %>
-                  <div class="swiper-slide" style="background-image: url('<%= image.url%>')"></div>
-                <% } %>
+            <% if (productImages) { %>
+              <div class="post-swiper-container">
+                <div class="swiper-wrapper">
+                  <% for (image of productImages) { %>
+                    <a href="<%= image.url%>" data-lightbox="products" class="swiper-slide">
+                      <img src="<%= image.url%>" alt="" />
+                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png"></a>
+                    </a>
+                  <% } %>
+                </div>
+                <!-- 如果需要分页器 -->
+                <!-- <div class="swiper-pagination"></div> -->
               </div>
-              <!-- 如果需要分页器 -->
-              <!-- <div class="swiper-pagination"></div> -->
-            </div>
 
-            <div class="thumbnail-swiper-container">
-              <div class="swiper-wrapper">
-                <%
-                for (var i = 0; i < productImages.length; i++) {
-                  var image = productImages[i];
-                %>
-                  <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>" style="background-image: url('<%= image.url%>')"></div>
-                <% } %>
+              <div class="thumbnail-swiper-container">
+                <div class="swiper-wrapper">
+                  <%
+                  for (var i = 0; i < productImages.length; i++) {
+                    var image = productImages[i];
+                  %>
+                    <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>">
+                      <img src="<%= image.url%>" alt="" />
+                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                    </div>
+                  <% } %>
+                </div>
+                <!-- 如果需要分页器 -->
+                <!-- <div class="swiper-pagination"></div> -->
+                <!-- 如果需要导航按钮 -->
+                <!-- <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div> -->
               </div>
-              <!-- 如果需要分页器 -->
-              <!-- <div class="swiper-pagination"></div> -->
-              <!-- 如果需要导航按钮 -->
-              <!-- <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div> -->
-            </div>
+            <% } %>
           </div>
         </div>
 
@@ -78,24 +95,43 @@
           </div>
         <% } %>
 
+        <div class="product-pagination">
+          <% if(prevProduct) { %>
+            <a class="btn btn-default" href="/product/show/<%= prevProduct.id %>" role="button">上一頁</a>
+          <% } else { %>
+            <a disabled="disabled" class="btn btn-default" role="button">上一頁</a>
+          <% } %>
+          <% if(nextProduct) { %>
+            <a class="btn btn-default" href="/product/show/<%= nextProduct.id %>" role="button">下一頁</a>
+          <% } else { %>
+            <a disabled="disabled" class="btn btn-default" role="button">下一頁</a>
+          <% } %>
+        </div>
+
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9">
       <div class="side-menu" id="sticker">
-        <h3>
-          產品介紹
-          <small>Product</small>
-        </h3>
-        <div class="list-group">
-          <a href="/product/group/0/page/1" class="list-group-item">全部產品</a>
+        <ul class="list-group">
+          <li>
+            <h3 class="list-group-item list-group-item-title">
+              產品介紹
+              <small>Product</small>
+            </h3>
+          </li>
+          <li><a href="/product/group/0/page/1" class="list-group-item">全部產品</a></li>
           <% for(var group of productGroups) { %>
-            <a href="/product/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+            <li>
+              <a href="/product/group/<%= group.id %>/page/1" class="list-group-item"><%= group.title %></a>
+            </li>
           <% } %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>
+
+  <% include ../../partials/footer.ejs %>
 
 </div>
 
@@ -103,7 +139,7 @@
 var postSwiper, postThumbSwiper;
 jQuery(document).ready(function() {
   postSwiper = new Swiper ('.post-swiper-container', {
-    // spaceBetween: 30,
+    spaceBetween: 3,
     speed: 250,
     grabCursor: true,
 
@@ -133,6 +169,16 @@ jQuery(document).ready(function() {
 
   $('.thumbnail-swiper-container .swiper-slide').click(function (){
     postSwiper.slideTo($(this).data('idx'));
+  });
+
+  $('.watermark').each(function(i, e){
+    var w = $(e).closest('.swiper-slide').find('img:not(.watermark)').width();
+    var h = $(e).closest('.swiper-slide').find('img:not(.watermark)').height();
+    $(e).css({
+      width: w,
+      height: h,
+      opacity: 1,
+    })
   });
 });
 `); %>

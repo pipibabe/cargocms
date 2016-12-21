@@ -1,3 +1,11 @@
+<% LayoutUtils.addMeta({ property:"og:image:url", content: SocialService.getShareUrl() + "/assets/jason/images/map.jpg" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/png" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:width", content:"553" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:height", content:"457" }); %>
+<% LayoutUtils.addMeta({ property:"og:title", content:"捷陞專業自動門" }); %>
+<% LayoutUtils.addMeta({ property:"og:description", content:"聯絡我們" }); %>
+<% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
+
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/contact/contact.css'); %>
 <% LayoutUtils.addScripts('/assets/simple/js/plugin/validation.js'); %>
@@ -25,7 +33,7 @@
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">電話</label>
-            <input type="number" name="phone" class="form-control">
+            <input type="tel" name="phone" class="form-control">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">內容</label>
@@ -49,7 +57,7 @@
             <p>
               您可將您的意見或問題寄給我們的技術人員。
             </p>
-            <a href="mailto:autodoor@ms95.url.com.tw">autodoor@ms95.url.com.tw</a>
+            <a style="word-break: break-all;font-size: 1.6em;" href="mailto:autodoor@ms95.url.com.tw">autodoor@ms95.url.com.tw</a>
           </div>
         </div>
         <div class="row contact-info">
@@ -73,7 +81,7 @@
             <p>
               假如您需要以傳真方式與我們連絡，請註明您的姓名連絡資料及相關事項
             </p>
-            <a href="tel:+886422467161">(04)2246-7160</a>
+            <a href="tel:+886422467392">(04)2246-7392</a>
           </div>
         </div>
         <div class="row contact-info">
@@ -85,26 +93,34 @@
             <p>
               假如您需要以郵局郵寄方式與我們連絡，請將相關資料郵寄至下列地址：
             </p>
-            <span style="color: #337ab7;">郵遞區號：406-68 台中市北屯區修齊巷23號 捷陞專業自動門工程行</span>
+            <span style="color: #337ab7;font-size: 1.3em;">郵遞區號：406 台中市北屯區修齊街156號 捷陞專業自動門工程行</span>
           </div>
         </div>
 
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9">
       <div class="side-menu" id="sticker">
-        <h3>
-          聯絡我們
-          <small>Contact Us</small>
-        </h3>
-        <div class="list-group">
-          <a data-link="contactForm" href="/product/group/0/page/1" class="list-group-item">聯絡表單</a>
-          <a data-link="contactInfo" href="/product/group/0/page/1" class="list-group-item">聯絡方式</a>
-        </div>
+        <ul class="list-group">
+          <li>
+            <h3 class="list-group-item list-group-item-title">
+              聯絡我們
+              <small>Contact Us</small>
+            </h3>
+          </li>
+          <li>
+            <a data-link="contactForm" href="/product/group/0/page/1" class="list-group-item">聯絡表單</a>
+          </li>
+          <li>
+            <a data-link="contactInfo" href="/product/group/0/page/1" class="list-group-item">聯絡方式</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+
+  <% include ../../partials/footer.ejs %>
 
 </div>
 
@@ -118,7 +134,7 @@ jQuery(document).ready(function() {
     swal('傳送成功', '我們將會處理您的訊息', 'success')
   }
 
-  $('.side-menu div a').click(function(e){
+  $('.side-menu li a').click(function(e){
     e.preventDefault();
     $('html, body').animate({
       scrollTop: $('#'+$(this).data('link')).offset().top - 55
@@ -136,7 +152,6 @@ jQuery(document).ready(function() {
       },
       phone: {
         required: true,
-        number: true,
       },
       content: {
         required: true
@@ -153,7 +168,6 @@ jQuery(document).ready(function() {
       },
       phone: {
         required: "請輸入電話",
-        number: "請輸入有效電話",
       },
       content: {
         required: "請輸入內容"

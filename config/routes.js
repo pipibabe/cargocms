@@ -27,7 +27,9 @@ var defaultConfig = {
   'get /api/admin/mock': "api/admin/MockController.find",
 
   'post /api/admin/upload': 'api/admin/ImageController.upload',
+  'post /api/admin/upload/banner/:id': 'api/admin/ImageController.uploadBanner',
   'delete /api/admin/upload/:id': 'api/admin/ImageController.destroy',
+
 
   'get /api/admin/user': 'api/admin/UserController.find',
   'get /api/admin/user/:id': 'api/admin/UserController.findOne',

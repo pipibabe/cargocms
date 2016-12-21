@@ -39,6 +39,8 @@ module.exports = {
           include: Group
         }, {
           model: Image,
+        }, {
+          model: File,
         }]
       });
       res.ok({ data: { item } });
@@ -77,6 +79,12 @@ module.exports = {
       await Image.update({ PartId: item.part.id }, {
         where: { id: image.ids }
       });
+
+      if(data.fileId) {
+        await File.update({ PartId: item.part.id }, {
+          where: { id: data.fileId }
+        });
+      }
 
       const message = 'Create success.';
       res.ok({ message, data: { item } });
@@ -119,7 +127,9 @@ module.exports = {
         where: { id }
       });
       item.post = await Post.update(post ,{
-        where: { id }
+        where: {
+          id: data.PostId,
+        }
       })
       await Image.update({ PartId: null }, {
         where: { id: { $notIn: image.ids }, PartId: id}
@@ -127,6 +137,17 @@ module.exports = {
       await Image.update({ PartId: id }, {
         where: { id: image.ids }
       });
+
+      if(data.fileId === '') {
+        await File.update({ PartId: null }, {
+          where: { PartId: id }
+        });
+      } else {
+        await File.update({ PartId: id }, {
+          where: { id : data.fileId }
+        });
+      }
+
       const message = 'Update success.';
       res.ok({ message, data: { item } });
     } catch (e) {

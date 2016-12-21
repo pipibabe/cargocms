@@ -6,13 +6,14 @@
 <!-- jQuery Plugins -->
 <script type="text/javascript" src="/js/jquery.unveil.js"></script>
 <script type="text/javascript" src="/assets/unify/plugins/jquery-validate/jquery.validate.min.js"></script>
+<script src="/assets/unify/plugins/back-to-top.js"></script>
 
 <!-- JS Implementing Plugins -->
-<script type="text/javascript" src="/assets/unify/plugins/back-to-top.js"></script>
+<!-- <script type="text/javascript" src="/assets/unify/plugins/back-to-top.js"></script>
 <script type="text/javascript" src="/assets/unify/plugins/smoothScroll.js"></script>
 <script type="text/javascript" src="/assets/unify/plugins/jquery.parallax.js"></script>
 <script type="text/javascript" src="/assets/unify/plugins/masonry/jquery.masonry.min.js"></script>
-<script type="text/javascript" src="/assets/unify/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="/assets/unify/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script> -->
 
 <!--[if lt IE 9]>
 <script src="unify/plugins/respond.js"></script>
@@ -31,4 +32,31 @@
 <%- LayoutUtils.getScriptBlock() %>
 </script>
 
-<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+<script>
+$(function (){
+  $('.product-img-wrapper, .swiper-wrapper').on('contextmenu',function () {return false;})
+  if ($('#back-to-top').length) {
+    var scrollTrigger = 100, // px
+        backToTop = function () {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > scrollTrigger) {
+                $('#back-to-top').addClass('show');
+            } else {
+                $('#back-to-top').removeClass('show');
+            }
+        };
+    backToTop();
+    $(window).on('scroll', function () {
+        backToTop();
+    });
+    $('#back-to-top').on('click', function (e) {
+        e.preventDefault();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    });
+  }
+});
+</script>
+
+<!-- <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>  -->

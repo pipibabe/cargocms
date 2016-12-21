@@ -21,11 +21,11 @@ module.exports = {
       for (let value of pageData.posts) {
         let images = await Image.findAll({
           where: {
-            ProductId: value.Product.id
+            ProductId: value.id
           },
-          order: 'sequence'
+          order: ['sequence', ['id', 'DESC']],
         });
-        value.Product.Images = images;
+        value.Images = images;
       }
       return res.view({
         productGroups,
@@ -44,30 +44,49 @@ module.exports = {
   show: async function(req, res) {
     try {
       const productId = req.params.productId;
-      const product = await Post.findOne({
+      const product = await Product.findOne({
         where: {
           id: productId,
         },
-        include: [{
-          model: Product,
-          include: [{
+        include: [
+          {
             model: File,
             order: 'sequence'
-          }]
-        }],
+          },
+          Post,
+        ],
       });
+      product.content = product.Post.content;
       const productImages = await Image.findAll({
         where: {
-          ProductId: product.Product.id,
+          ProductId: product.id,
         },
-        order: 'sequence',
+        order: ['sequence', ['id', 'DESC']],
+      });
+      const nextProduct = await await Product.findOne({
+        where: {
+          id: {
+            $lt: productId,
+          },
+        },
+        order: 'id DESC',
+      });
+      const prevProduct = await await Product.findOne({
+        where: {
+          id: {
+            $gt: productId,
+          },
+        },
+        order: 'id',
       });
       const productGroups = await Group.findWithType('product');
 
       return res.view({
-        product: product.Product,
+        product,
         productImages,
         productGroups,
+        prevProduct,
+        nextProduct,
       });
     }
     catch (e) {

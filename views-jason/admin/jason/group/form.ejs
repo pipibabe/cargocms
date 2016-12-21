@@ -1,0 +1,44 @@
+<fieldset>
+
+  <h3 class="text-center">配件分類<h3>
+  <hr style="border: 1px solid #a9a9a9;"/>
+  <br/>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6 col-xs-6">
+      <label class="label">名稱</label>
+      <label class="input state-disabled">
+        <input type="text" name="title" placeholder="分類名稱" v-model="data.item.title" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入分類名稱</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6 col-xs-6">
+      <label class="label">排序</label>
+      <label class="input state-disabled">
+        <input type="number" name="sequence" placeholder="" v-model="data.item.sequence" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入排序數字</b></label>
+    </section>
+  </div>
+
+</fieldset>
+<script>
+var groupQuery = '<%= data.group %>';
+
+var formRules = {
+  title: {
+    required: true
+  },
+  sequence: {
+    required: true
+  }
+}
+
+// Messages for form validation
+var formMessages = {
+  title: {
+    required: "請輸入名稱"
+  },
+  sequence: {
+    required: "輸入排序"
+  }
+}
+</script>

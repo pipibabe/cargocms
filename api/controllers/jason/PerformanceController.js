@@ -26,11 +26,11 @@ module.exports = {
       for (let value of pageData.posts) {
         let images = await Image.findAll({
           where: {
-            PerformanceId: value.Performance.id
+            PerformanceId: value.id
           },
-          order: 'sequence'
+          order: ['sequence', ['id', 'DESC']],
         });
-        value.Performance.Images = images;
+        value.Images = images;
       }
       return res.view({
         performanceGroups,
@@ -50,26 +50,65 @@ module.exports = {
   show: async function(req, res) {
     try {
       const performanceId = req.params.performanceId;
-      const performance = await Post.findOne({
+      const performance = await Performance.findOne({
         where: {
           id: performanceId,
         },
-        include: [{
-          model: Performance,
-        }],
+        include: [
+          Post,
+        ],
       });
+      performance.content = performance.Post.content;
       const performanceImages = await Image.findAll({
         where: {
-          PerformanceId: performance.Performance.id,
+          PerformanceId: performance.id,
         },
-        order: 'sequence',
+        order: ['sequence', ['id', 'DESC']],
+      });
+      const nextPerformance = await await Performance.findOne({
+        where: {
+          id: {
+            $lt: performanceId,
+          },
+        },
+        include: [{
+          model: Post,
+          required: true,
+          include: [{
+            model: Group,
+            where: {
+              title: '實例照片'
+            }
+          }]
+        }],
+        order: 'id DESC',
+      });
+      const prevPerformance = await await Performance.findOne({
+        where: {
+          id: {
+            $gt: performanceId,
+          },
+        },
+        include: [{
+          model: Post,
+          required: true,
+          include: [{
+            model: Group,
+            where: {
+              title: '實例照片'
+            }
+          }]
+        }],
+        order: 'id',
       });
       const performanceGroups = await Group.findWithType('performance');
 
       return res.view({
-        performance: performance.Performance,
+        performance,
         performanceImages,
         performanceGroups,
+        nextPerformance,
+        prevPerformance,
       });
     }
     catch (e) {

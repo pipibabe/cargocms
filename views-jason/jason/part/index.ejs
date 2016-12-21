@@ -1,3 +1,10 @@
+<% LayoutUtils.addMeta({ property:"og:image:url", content: SocialService.getShareUrl() + "/assets/jason/images/map.jpg" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/png" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:width", content:"553" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:height", content:"457" }); %>
+<% LayoutUtils.addMeta({ property:"og:title", content:"捷陞專業自動門" }); %>
+<% LayoutUtils.addMeta({ property:"og:description", content:"週邊配件" }); %>
+
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
 
@@ -21,17 +28,20 @@
         <% for (var item of posts) { %>
           <a class="product row" href="/part/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
-              <img class="img-thumbnail" src="<%= item.Part.Images[0] ? item.Part.Images[0].url:'' %>" alt="產品圖" />
+              <div class="watermark-wrapper">
+                <img class="watermark" src="/assets/jason/images/watermark.png">
+                <img alt="<%= item.title %>" class="img-thumbnail" src="<%= item.Images[0] ? item.Images[0].url:'/assets/jason/images/j1-1.png' %>" alt="產品圖" />
+              </div>
             </div>
             <div class="col-xs-9 product-content">
-              <h1><%= item.Part.title %></h1>
-              <% if (item.Part.modelName) { %>
-                <small><%= item.Part.modelName %></small>
+              <h1><%= item.title %></h1>
+              <% if (item.modelName) { %>
+                <small><%= item.modelName %></small>
               <% } %>
 
-              <% if (item.Part.introduction) { %>
+              <% if (item.introduction) { %>
                 <p>
-                  <%= item.Part.introduction %>
+                  <%= item.introduction %>
                 </p>
               <% } %>
             </div>
@@ -70,20 +80,24 @@
       </article>
     </div>
 
-    <div class="col-md-3 col-md-pull-9" style="padding-right:2.5em;">
+    <div class="col-md-3 col-md-pull-9">
       <div class="side-menu" id="sticker">
-        <h3>
-          週邊配件
-          <small>Parts</small>
-        </h3>
-        <div class="list-group">
-          <a href="/part/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'active':'' %>">全部配件</a>
+        <ul class="list-group">
+          <li>
+            <h3 class="list-group-item list-group-item-title">
+              週邊配件
+              <small>Parts</small>
+            </h3>
+          </li>
+          <li><a href="/part/group/0/page/1" class="list-group-item <%= (0 == req.params.groupId)?'act':'' %>">全部配件</a></li>
           <% for(var group of partGroups) { %>
-            <a href="/part/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'active':'' %>"><%= group.title %></a>
+            <li><a href="/part/group/<%= group.id %>/page/1" class="list-group-item <%= (group.id == req.params.groupId)?'act':'' %>"><%= group.title %></a></li>
           <% } %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>
+
+  <% include ../../partials/footer.ejs %>
 
 </div>
