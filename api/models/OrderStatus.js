@@ -6,11 +6,13 @@ module.exports = {
       allowNull: false,
     },
     name:{
-      type: Sequelize.STRING(32),
+      type: Sequelize.ENUM('Processing','Shipped','Canceled','Complete','Denied','Reversal','Failed','Refunded','Reversed','Chargeback','Pending','Voided','Processed','Expired'),
       allowNull: false,
     },
   },
-  associations: () => {},
+  associations: () => {
+    OrderStatus.belongsTo(Order);
+  },
   options: {
     classMethods: {},
     instanceMethods: {},

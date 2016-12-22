@@ -275,6 +275,18 @@ module.exports = {
           sails.log.error(e);
         }
       }
+    },
+
+    status: {
+      type: Sequelize.STRING(32),
+      get: function () {
+        try {
+          const orderStatus = this.getDataValue('OrderStatus');
+          return orderStatus ? orderStatus.name: '';
+        } catch (e) {
+          sails.log.error(e);
+        }
+      }
     }
   },
   associations: () => {
