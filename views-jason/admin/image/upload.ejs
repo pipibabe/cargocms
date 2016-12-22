@@ -25,6 +25,12 @@
           element: document.getElementById("fine-uploader-validation"),
           template: 'qq-template-validation',
           autoUpload: true,
+          scaling: {
+            sendOriginal: false,
+            sizes: [
+              { maxSize: 800 }
+            ]
+          },
           request: {
             endpoint: '/api/admin/upload?type=image',
             inputName: 'uploadPic'
