@@ -7,8 +7,8 @@
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
-<% LayoutUtils.addStylesheets('/assets/jason/plugins/lightbox/lightbox.min.css'); %>
-<% LayoutUtils.addScripts('/assets/jason/plugins/lightbox/lightbox.min.js'); %>
+<% // LayoutUtils.addStylesheets('/assets/jason/plugins/lightbox/lightbox.min.css'); %>
+<% // LayoutUtils.addScripts('/assets/jason/plugins/lightbox/lightbox.min.js'); %>
 
 <div class="container body">
 
@@ -58,7 +58,13 @@
                   <% for (image of partImages) { %>
                     <a href="<%= image.url%>" data-lightbox="products" class="swiper-slide">
                       <img src="<%= image.url%>" alt="" />
-                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png"></a>
+                      <% if( new Date('2016-12-20') < new Date(part.createdAt) ) { %>
+                        <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                        <span style="opacity: 0;" class="watermark-text"><%= part.title %></span>
+                        <% if (part.modelName) { %>
+                          <span style="opacity: 0;" class="watermark-text sub-text"><%= part.modelName %></span>
+                        <% } %>
+                      <% } %>
                     </a>
                   <% } %>
                 </div>
@@ -74,7 +80,9 @@
                   %>
                     <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>">
                       <img src="<%= image.url%>" alt="" />
-                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                      <% if( new Date('2016-12-20') < new Date(part.createdAt) ) { %>
+                        <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                      <% } %>
                     </div>
                   <% } %>
                 </div>
@@ -129,6 +137,10 @@
     </div>
   </div>
 
+  <% var product = part; %>
+
+  <% include ../../lib/lightbox.ejs %>
+
   <% include ../../partials/footer.ejs %>
 
 </div>
@@ -146,6 +158,9 @@ jQuery(document).ready(function() {
     onSlideChangeStart: function(swiper){
       $('.thumbnail-swiper-container .swiper-slide').removeClass('active');
       $('.thumbnail-swiper-container .swiper-slide:nth-child(' + (swiper.activeIndex+1) + ')').addClass('active');
+    },
+    onImagesReady: function() {
+      watermarkPreprocess();
     }
   })
 
@@ -169,14 +184,38 @@ jQuery(document).ready(function() {
     postSwiper.slideTo($(this).data('idx'));
   });
 
-  $('.watermark').each(function(i, e){
-    var w = $(e).closest('.swiper-slide').find('img:not(.watermark)').width();
-    var h = $(e).closest('.swiper-slide').find('img:not(.watermark)').height();
-    $(e).css({
-      width: w,
-      height: h,
-      opacity: 1,
-    })
-  });
+  function watermarkPreprocess() {
+    $('.watermark').each(function(i, e){
+      var w = $(e).closest('.swiper-slide').find('img:not(.watermark)').width();
+      var h = $(e).closest('.swiper-slide').find('img:not(.watermark)').height();
+      $(e).css({
+        width: w,
+        height: h,
+        opacity: 1,
+      })
+    });
+    $('.watermark-text').each(function(i, e){
+      var left = $(e).closest('.swiper-slide').find('img:not(.watermark)').css('margin-left');
+      var top = $(e).closest('.swiper-slide').find('img:not(.watermark)').css('margin-top');
+      var h = $(e).closest('.swiper-slide').find('img:not(.watermark)').height();
+      if ($(e).hasClass('sub-text')) {
+        $(e).css({
+          top: parseFloat(h) - 85,
+          left: 'auto',
+          right: parseFloat(left) + 10,
+          opacity: 1,
+        });
+      } else {
+        $(e).css({
+          top: parseFloat(top) + 38,
+          left: parseFloat(left) + 8,
+          opacity: 1,
+        });
+      }
+    });
+  }
+
+  $( window ).resize(watermarkPreprocess);
+
 });
 `); %>
