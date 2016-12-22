@@ -1,18 +1,32 @@
 <style>
 [name=login-page]{
-  width: 35%;
+  width: 300px;
   padding: 20px;
   position: relative;
-  top: 100px;
-  left: 60%;
+  top: -250px;
+  left: calc(80% - 150px);
   border-width: 3px;
   border-style: solid;
   border-color: #4FC3F7;
-  background-color: #757575;
+  background-color: #9E9E9E;
+  z-index: 100;
 }
 
 .margin-top-10 {
   margin-top: 10px;
+}
+
+a.btn-facebook-inversed {
+  background-color: #444;
+  color:#F5F5F5;
+}
+
+#submit-button , #regist-button{
+  color: #F5F5F5;
+  background-color: #757575;
+}
+#submit-button:hover , #regist-button:hover {
+  background-color: #444;
 }
 
 </style>
@@ -21,8 +35,8 @@
   <div class="social-login">
     <ul class="list-unstyled">
       <li>
-        <a class="btn rounded btn-block btn-lg margin-bottom-20 btn-github" href="/auth/facebook">
-          <i class="fa fa-facebook"></i> Sign in with Facebook
+        <a class="btn rounded btn-block btn-lg margin-bottom-20 btn-github btn-facebook-inversed" href="/auth/facebook">
+          <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
         </a>
       </li>
     </ul>
