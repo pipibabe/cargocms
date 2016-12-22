@@ -200,14 +200,14 @@ jQuery(document).ready(function() {
       var h = $(e).closest('.swiper-slide').find('img:not(.watermark)').height();
       if ($(e).hasClass('sub-text')) {
         $(e).css({
-          top: parseFloat(h) - 85,
+          top: parseFloat(h) - 20,
           left: 'auto',
           right: parseFloat(left) + 10,
           opacity: 1,
         });
       } else {
         $(e).css({
-          top: parseFloat(top) + 38,
+          top: parseFloat(top) + 6,
           left: parseFloat(left) + 8,
           opacity: 1,
         });

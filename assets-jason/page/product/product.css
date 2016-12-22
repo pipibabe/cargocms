@@ -251,7 +251,7 @@
 }
 .product-watermark-text {
   position: absolute;
-  top: 22px;
+  top: 6px;
   left: 8px;
   color: #165a92;
   font-size: 8px;
@@ -259,7 +259,7 @@
   text-shadow: 0 5px 5px #929292;
 }
 .product-watermark-text.sub-text {
-  bottom: 30px;
+  bottom: 6px;
   top: auto;
   left: auto;
   right: 6px;
