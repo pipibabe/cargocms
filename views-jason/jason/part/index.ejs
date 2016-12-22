@@ -29,7 +29,9 @@
           <a class="product row" href="/part/show/<%= item.id %>">
             <div class="col-xs-3 product-img-wrapper">
               <div class="watermark-wrapper">
-                <img class="watermark" src="/assets/jason/images/watermark.png">
+                <% if( new Date('2016-12-20') < new Date(item.createdAt) ) { %>
+                  <img class="watermark" src="/assets/jason/images/watermark.png">
+                <% } %>
                 <img alt="<%= item.title %>" class="img-thumbnail" src="<%= item.Images[0] ? item.Images[0].url:'/assets/jason/images/j1-1.png' %>" alt="產品圖" />
               </div>
             </div>
