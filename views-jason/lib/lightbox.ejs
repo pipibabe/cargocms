@@ -1,0 +1,66 @@
+<div class="lightbox-mask">
+  <img src="" alt="" />
+  <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+  <span style="opacity: 1;" class="lightbox-watermark-text"><%= product.title %></span>
+  <% if (product.modelName) { %>
+    <span style="opacity: 1;" class="lightbox-watermark-text sub-text"><%= product.modelName %></span>
+  <% } %>
+</div>
+<% LayoutUtils.addStylesheets('/assets/jason/css/lightbox.css'); %>
+<% LayoutUtils.addScriptBlock(`
+  $(function() {
+    function resetWatermarkSize() {
+      var w = $('.lightbox-mask img:not(.watermark)').width();
+      var h = $('.lightbox-mask img:not(.watermark)').height();
+      $('.lightbox-mask .watermark').css({
+        width: w,
+        height: h,
+        opacity: 1,
+      });
+    }
+
+    function settingWatermarkPosition() {
+      var top = $('.lightbox-mask img:not(.watermark)').css('margin-top');
+      var left = $('.lightbox-mask img:not(.watermark)').css('margin-left');
+      var h = $('.lightbox-mask img:not(.watermark)').height();
+      $('.lightbox-watermark-text:not(.sub-text)').css({
+        top: parseFloat(top) + 75,
+        left: parseFloat(left) + 15,
+      })
+      $('.lightbox-watermark-text.sub-text').css({
+        top: parseFloat(top) + parseFloat(h) - 180,
+        right: parseFloat(left) + 20,
+        left: 'auto',
+      })
+      if (window.matchMedia("(max-width: 767px)").matches) {
+        $('.lightbox-watermark-text:not(.sub-text)').css({
+          top: parseFloat(top) + 38,
+          left: parseFloat(left) + 8,
+        })
+        $('.lightbox-watermark-text.sub-text').css({
+          top: parseFloat(top) + parseFloat(h) - 38,
+          right: parseFloat(left) + 10,
+          left: 'auto',
+        })
+      }
+    }
+
+    $( window ).resize(function() {
+      resetWatermarkSize();
+      settingWatermarkPosition();
+    });
+
+    $('a[data-lightbox]').click(function(e) {
+      e.preventDefault();
+      $('.lightbox-mask img:not(.watermark)').attr('src', $(this).attr('href'));
+      resetWatermarkSize();
+      settingWatermarkPosition();
+      $('.lightbox-mask').addClass('open');
+    });
+
+    $('.lightbox-mask').click(function(e) {
+      $('.lightbox-mask').removeClass('open');
+    });
+
+  });
+`); %>

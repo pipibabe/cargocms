@@ -7,8 +7,8 @@
 
 <% LayoutUtils.addStylesheets('/assets/jason/page/index/index.css'); %>
 <% LayoutUtils.addStylesheets('/assets/jason/page/product/product.css'); %>
-<% LayoutUtils.addStylesheets('/assets/jason/plugins/lightbox/lightbox.min.css'); %>
-<% LayoutUtils.addScripts('/assets/jason/plugins/lightbox/lightbox.min.js'); %>
+<% // LayoutUtils.addStylesheets('/assets/jason/plugins/lightbox/lightbox.min.css'); %>
+<% // LayoutUtils.addScripts('/assets/jason/plugins/lightbox/lightbox.min.js'); %>
 
 <div class="container body">
 
@@ -135,6 +135,8 @@
     </div>
   </div>
 
+  <% include ../../lib/lightbox.ejs %>
+
   <% include ../../partials/footer.ejs %>
 
 </div>
@@ -194,15 +196,15 @@ jQuery(document).ready(function() {
       var h = $(e).closest('.swiper-slide').find('img:not(.watermark)').height();
       if ($(e).hasClass('sub-text')) {
         $(e).css({
-          top: parseInt(h) - 85,
+          top: parseFloat(h) - 85,
           left: 'auto',
-          right: parseInt(left) + 10,
+          right: parseFloat(left) + 10,
           opacity: 1,
         });
       } else {
         $(e).css({
-          top: parseInt(top) + 38,
-          left: parseInt(left) + 13,
+          top: parseFloat(top) + 38,
+          left: parseFloat(left) + 8,
           opacity: 1,
         });
       }
