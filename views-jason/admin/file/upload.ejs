@@ -42,7 +42,7 @@
           validation: {
             // allowedExtensions: ['jpeg', 'jpg', 'png'],
             itemLimit: uploadFileAppModel.itemLimit,
-            sizeLimit: 10240 * 1024 // 50 kB = 50 * 1024 bytes
+            sizeLimit: 10 * 10240 * 1024 // 50 kB = 50 * 1024 bytes
           },
           callbacks: {
             onError: function(id, name, isError) {
