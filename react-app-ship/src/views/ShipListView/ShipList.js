@@ -1,7 +1,11 @@
 import axios from 'axios';
 import React, { PropTypes } from 'react';
-import AutoComplete from 'material-ui/AutoComplete';
-import FontIcon from 'material-ui/FontIcon';
+import {
+  FontIcon,
+  Snackbar,
+  AutoComplete,
+} from 'material-ui';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ShipCard from './ShipCard';
 import classes from './_style.scss'
 
@@ -21,7 +25,7 @@ const styles = {
     lineHeight: '72px',
     fontSize: 0,
   },
-  listContainer: {
+  cardListContainer: {
     width: '90%',
     margin: '0 auto',
   },
@@ -39,11 +43,11 @@ export default class ShipList extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      dataSource: {},
+      dataSource: [],
+      snackbarOpen: false,
+      snackbarMsg: '',
     };
     this.handelGetJsonFromServer();
-
-    console.log('classes=>' + JSON.stringify(classes));
   }
 
   handelGetJsonFromServer = () => {
@@ -55,22 +59,38 @@ export default class ShipList extends React.Component {
       });
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
+      this.handleSnackbarMessage(error);
+    });
+  }
+
+  handleSnackbarMessage = (msg) => {
+    this.setState({
+      snackbarOpen: true,
+      snackbarMsg: msg,
+    });
+  }
+
+  handleSnackbarClose = () => {
+    this.setState({
+      snackbarOpen: false,
     });
   }
 
   render() {
-    const items = this.state.dataSource.data.items;
+    const dataSource = this.state.dataSource;
     const autoCompleteTitle = [];
-    items.map((item) => {
-      autoCompleteTitle.push(item.displayName);
-      autoCompleteTitle.push(item.invoicePrefix + item.invoiceNo);
-      autoCompleteTitle.push(item.email);
-      autoCompleteTitle.push(item.telephone);
-      autoCompleteTitle.push(item.paymentAddress1);
-      autoCompleteTitle.push(item.paymentCity);
-      return item;
-    });
+    if (typeof dataSource.data === 'object') {
+      dataSource.data.items.map((item) => {
+        autoCompleteTitle.push(item.displayName);
+        autoCompleteTitle.push(item.invoicePrefix + item.invoiceNo);
+        autoCompleteTitle.push(item.email);
+        autoCompleteTitle.push(item.telephone);
+        autoCompleteTitle.push(item.paymentAddress1);
+        autoCompleteTitle.push(item.paymentCity);
+        return item;
+      });
+    }
 
     return (
       <div className='container' >
@@ -93,17 +113,30 @@ export default class ShipList extends React.Component {
             <div className='col-xs-1'>{}</div>
           </div>
         </div>
-        <div className='row' style={styles.listContainer}>
+        <div className='row' style={styles.cardListContainer}>
           <div className='shipCardSeparater'>{}</div>
-          {
-            this.state.dataSource.data.items.map(item => (
-              <ShipCard
-                key={item.id}
-                {...item}
-              />
-            ))
-          }
+          <ReactCSSTransitionGroup
+            transitionName='cardlist'
+            transitionEnterTimeout={800}
+            transitionLeaveTimeout={300}
+          >
+            {
+              typeof dataSource.data === 'object' ? this.state.dataSource.data.items.map(item => (
+                <ShipCard
+                  toast={this.handleSnackbarMessage}
+                  key={item.id}
+                  {...item}
+                />
+              )) : null
+            }
+          </ReactCSSTransitionGroup>
         </div>
+        <Snackbar
+          open={this.state.snackbarOpen}
+          message={this.state.snackbarMsg}
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackbarClose}
+        />
       </div>
     );
   }

@@ -4,7 +4,6 @@ import {
   Stepper,
   StepLabel,
 } from 'material-ui/Stepper';
-import WarningIcon from 'material-ui/svg-icons/alert/warning';
 import {
   blue400,
   orange400,

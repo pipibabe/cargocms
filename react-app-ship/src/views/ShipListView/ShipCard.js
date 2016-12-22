@@ -8,11 +8,9 @@ import {
 import ShipCardBody from './ShipCardBody';
 import ShipCardDetail from './ShipCardDetail';
 
-const styles = {
-};
-
 export default class ShipCard extends React.Component {
   static defaultProps = {
+    toast: null,
     invoiceNo: 1111222233334444,
     invoicePrefix: 'S',
     displayName: '潘仔',
@@ -84,6 +82,7 @@ export default class ShipCard extends React.Component {
   };
 
   static propTypes = {
+    toast: PropTypes.func,
     invoiceNo: PropTypes.number,
     invoicePrefix: PropTypes.string,
     displayName: PropTypes.string,
@@ -164,6 +163,8 @@ export default class ShipCard extends React.Component {
         onClick={this.handleCardExpend}
       >
         <ShipCardBody
+          // toast func
+          toast={this.props.toast}
           isExpend={cardBody.isExpend}
           invoiceNum={cardBody.invoiceNum}
           orderDesc={cardBody.desc}
@@ -175,6 +176,8 @@ export default class ShipCard extends React.Component {
         <CardActions>{}</CardActions>
         <CardText expandable={true}>
           <ShipCardDetail
+            // toast func
+            toast={this.props.toast}
             // same as cardBody
             isExpend={cardBody.isExpend}
             invoiceNum={cardBody.invoiceNum}

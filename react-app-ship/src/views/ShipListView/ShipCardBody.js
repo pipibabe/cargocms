@@ -1,18 +1,20 @@
 import React, { PropTypes } from 'react';
+import {
+  Snackbar,
+} from 'material-ui';
 import CardBodyNormal from './CardBodyNormal';
 import CardBodyExpend from './CardBodyExpend';
 import DialogPrint from './DialogPrint';
 import DialogShip from './DialogShip';
-import {
-  Snackbar,
-} from 'material-ui';
 
 export default class ShipCardBody extends React.Component {
   static defaultProps = {
+    toast: null,
     isExpend: false,
   };
 
   static propTypes = {
+    toast: PropTypes.func,
     isExpend: PropTypes.bool,
   };
 
@@ -21,27 +23,12 @@ export default class ShipCardBody extends React.Component {
     this.state = {
       dialogShipOpen: false,
       dialogPrintOpen: false,
-      snackbarOpen: false,
-      snackbarMsg: '',
     };
   }
 
   stopPropagation = (event) => {
     event.stopPropagation();
     event.nativeEvent.stopImmediatePropagation();
-  }
-
-  handleSnackbarMessage = (msg) => {
-    this.setState({
-      snackbarOpen: true,
-      snackbarMsg: msg,
-    });
-  }
-
-  handleSnackbarClose = () => {
-    this.setState({
-      snackbarOpen: false,
-    });
   }
 
   handleDialogShipOpen = (event) => {
@@ -54,7 +41,7 @@ export default class ShipCardBody extends React.Component {
 
   handleDialogShipClose = () => {
     this.setState({ dialogShipOpen: false });
-    this.handleSnackbarMessage('操作成功！');
+    this.props.toast('操作成功！');
   }
 
   handleDialogPrintOpen = (event) => {
@@ -67,7 +54,7 @@ export default class ShipCardBody extends React.Component {
 
   handleDialogPrintClose = () => {
     this.setState({ dialogPrintOpen: false });
-    this.handleSnackbarMessage('操作成功！');
+    this.props.toast('操作成功！');
   }
 
   render() {
@@ -86,18 +73,14 @@ export default class ShipCardBody extends React.Component {
           modal={false}
           close={this.handleDialogShipClose}
           open={this.state.dialogShipOpen}
+          toast={this.props.toast}
         />
         <DialogPrint
           title='提示'
           modal={false}
           close={this.handleDialogPrintClose}
           open={this.state.dialogPrintOpen}
-        />
-        <Snackbar
-          open={this.state.snackbarOpen}
-          message={this.state.snackbarMsg}
-          autoHideDuration={4000}
-          onRequestClose={this.handleSnackbarClose}
+          toast={this.props.toast}
         />
       </div>
     );

@@ -6,6 +6,7 @@ import {
 import ShipCardStepper from './ShipCardStepper';
 
 const defaultProps = {
+  toast: null,
   isExpend: false,
   invoiceNum: 'S1111222233334444',
   orderDetail: [
@@ -45,6 +46,7 @@ const defaultProps = {
 };
 
 const propTypes = {
+  toast: PropTypes.func,
   isExpend: PropTypes.bool,
   invoiceNum: PropTypes.string,
   orderDetail: PropTypes.array,
@@ -63,7 +65,7 @@ const propTypes = {
 
 function ShipCardDetail(props) {
   return (
-    <div className='cardDeatil'>
+    <div className='card-deatil'>
       <div className='row'>
         <div className='col-xs-4 text-left'>
           <span className='title'>{props.orderSupplier.name}</span>
