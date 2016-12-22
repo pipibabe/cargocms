@@ -6,7 +6,7 @@ module.exports = {
       allowNull: false,
     },
     name:{
-      type: Sequelize.ENUM('Processing','Shipped','Canceled','Complete','Denied','Reversal','Failed','Refunded','Reversed','Chargeback','Pending','Voided','Processed','Expired'),
+      type: Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','CANCELED','COMPLETE','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
       allowNull: false,
     },
   },
