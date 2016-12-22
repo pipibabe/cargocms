@@ -60,7 +60,7 @@ export default class AppDrawer extends React.Component {
     injectTapEventPlugin();
     this.state = {
       open: true,
-      drawerWidth: 150,
+      drawerWidth: 200,
       width: 0,
       height: 0,
     };
