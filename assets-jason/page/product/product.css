@@ -275,7 +275,8 @@
 }
 @media (max-width: 449px){
   .product-watermark-text {
-    top: 6px;
+    top: 11px;
     font-size: 5px;
+    text-shadow: 0 0 2px #505050;
   }
 }
