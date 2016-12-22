@@ -1,7 +1,7 @@
 
 module.exports = {
   attributes: {
-    language_id:{
+    languageId:{
       type: Sequelize.INTEGER(11),
       allowNull: false,
     },
