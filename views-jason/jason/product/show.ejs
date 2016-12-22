@@ -58,10 +58,12 @@
                   <% for (image of productImages) { %>
                     <a href="<%= image.url%>" data-lightbox="products" class="swiper-slide">
                       <img src="<%= image.url%>" alt="" />
-                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
-                      <span style="opacity: 0;" class="watermark-text"><%= product.title %></span>
-                      <% if (product.modelName) { %>
-                        <span style="opacity: 0;" class="watermark-text sub-text"><%= product.modelName %></span>
+                      <% if( new Date('2016-12-20') < new Date(product.createdAt) ) { %>
+                        <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                        <span style="opacity: 0;" class="watermark-text"><%= product.title %></span>
+                        <% if (product.modelName) { %>
+                          <span style="opacity: 0;" class="watermark-text sub-text"><%= product.modelName %></span>
+                        <% } %>
                       <% } %>
                     </a>
                   <% } %>
@@ -78,7 +80,9 @@
                   %>
                     <div class="swiper-slide <%= (i==0)?'active':'' %>" data-idx="<%= i %>">
                       <img src="<%= image.url%>" alt="" />
-                      <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                      <% if( new Date('2016-12-20') < new Date(product.createdAt) ) { %>
+                        <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+                      <% } %>
                     </div>
                   <% } %>
                 </div>

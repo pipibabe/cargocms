@@ -1,9 +1,11 @@
 <div class="lightbox-mask">
   <img src="" alt="" />
-  <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
-  <span style="opacity: 1;" class="lightbox-watermark-text"><%= product.title %></span>
-  <% if (product.modelName) { %>
-    <span style="opacity: 1;" class="lightbox-watermark-text sub-text"><%= product.modelName %></span>
+  <% if( new Date('2016-12-20') < new Date(product.createdAt) ) { %>
+    <img style="opacity: 0;" class="watermark" src="/assets/jason/images/watermark.png">
+    <span style="opacity: 1;" class="lightbox-watermark-text"><%= product.title %></span>
+    <% if (product.modelName) { %>
+      <span style="opacity: 1;" class="lightbox-watermark-text sub-text"><%= product.modelName %></span>
+    <% } %>
   <% } %>
 </div>
 <% LayoutUtils.addStylesheets('/assets/jason/css/lightbox.css'); %>
