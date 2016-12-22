@@ -113,6 +113,10 @@ var defaultVueMathod = {
 			}
 			itemBeforeEdit = JSON.stringify(appModel.data.item);
 			if (typeof cb !== 'undefined') setTimeout(cb, 0);
+
+      if(appModel.data.item.title == '實例照片'){
+        $('footer > btn-danger').hide();
+      }
 		}; // end ajaxSuccess
 
 		$.get('/api/' + prefix + modelName + '/' + appModel.data.item.id, ajaxSuccess);
@@ -167,6 +171,7 @@ var defaultVueMathod = {
 		} else return cb();
 	},
 	loadItems: function (cb) {
+    $(".loading-wrapper").addClass('active');
 		window.onbeforeunload = null;
 		if (serverSidePaging) {
 			if (typeof cb !== 'undefined') setTimeout(cb, 0);
@@ -345,9 +350,10 @@ var defaultVueMathod = {
 		if (appModel.data.option.defaultSort) {
 			defaultTableConfig.order = appModel.data.option.defaultSort
 		}
-		if (appMain.DataTableInitComplete) {
-			defaultTableConfig.initComplete = appMain.DataTableInitComplete
-		}
+
+    defaultTableConfig.initComplete = function(){
+      $('.loading-wrapper').removeClass('active');
+    }
 
 		defaultTable = $('#main-table').dataTable(defaultTableConfig);
 
