@@ -26,21 +26,21 @@
       var left = $('.lightbox-mask img:not(.watermark)').css('margin-left');
       var h = $('.lightbox-mask img:not(.watermark)').height();
       $('.lightbox-watermark-text:not(.sub-text)').css({
-        top: parseFloat(top) + 75,
+        top: parseFloat(top) + 10,
         left: parseFloat(left) + 15,
       })
       $('.lightbox-watermark-text.sub-text').css({
-        top: parseFloat(top) + parseFloat(h) - 180,
+        top: parseFloat(top) + parseFloat(h) - 30,
         right: parseFloat(left) + 20,
         left: 'auto',
       })
       if (window.matchMedia("(max-width: 767px)").matches) {
         $('.lightbox-watermark-text:not(.sub-text)').css({
-          top: parseFloat(top) + 38,
+          top: parseFloat(top) + 10,
           left: parseFloat(left) + 8,
         })
         $('.lightbox-watermark-text.sub-text').css({
-          top: parseFloat(top) + parseFloat(h) - 38,
+          top: parseFloat(top) + parseFloat(h) - 20,
           right: parseFloat(left) + 10,
           left: 'auto',
         })
