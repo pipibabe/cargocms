@@ -1,0 +1,46 @@
+<style>
+[name=login-page]{
+  width: 35%;
+  padding: 20px;
+  position: relative;
+  top: 100px;
+  left: 60%;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #4FC3F7;
+  background-color: #757575;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+</style>
+<div name="login-page">
+
+  <div class="social-login">
+    <ul class="list-unstyled">
+      <li>
+        <a class="btn rounded btn-block btn-lg margin-bottom-20 btn-github" href="/auth/facebook">
+          <i class="fa fa-facebook"></i> Sign in with Facebook
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="margin-top-20">
+    <input type="text" placeholder="帳號" value="" id="identifier" name="identifier" class="form-control">
+  </div>
+  <div class="margin-top-10">
+    <input type="password" placeholder="密碼" value="" id="password" name="password" class="form-control">
+  </div>
+  <div class="row margin-top-10">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <button id="submit-button" class="rounded btn btn-lg btn-block" type="submit">登入</button>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      <button id="regist-button" class="rounded btn btn-lg btn-block" type="submit">註冊</button>
+    </div>
+  </div>
+
+</div>
