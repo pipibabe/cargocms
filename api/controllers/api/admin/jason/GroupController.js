@@ -82,6 +82,10 @@ module.exports = {
   destroy: async (req, res) => {
     try {
       const { id } = req.params;
+      const group = Group.findById(id);
+      if( group.title === '實例照片'){
+        throw Error('實例照片無法刪除');
+      }
       const item = await Group.deleteById(id);
       const message = 'Delete success.';
       res.ok({ message, data: { item } });
