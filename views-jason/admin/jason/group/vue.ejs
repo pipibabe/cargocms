@@ -113,6 +113,10 @@ var defaultVueMathod = {
 			}
 			itemBeforeEdit = JSON.stringify(appModel.data.item);
 			if (typeof cb !== 'undefined') setTimeout(cb, 0);
+
+      if(appModel.data.item.title == '實例照片'){
+        $('footer > btn-danger').hide();
+      }
 		}; // end ajaxSuccess
 
 		$.get('/api/' + prefix + modelName + '/' + appModel.data.item.id, ajaxSuccess);
