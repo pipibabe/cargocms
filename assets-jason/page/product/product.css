@@ -13,9 +13,10 @@
   border-bottom: 1px dashed #e2e2e2;
 }
 .product h1 {
-  font-size: 1.4em;
+  font-size: 1.3em;
   margin-bottom: 8px;
   color: #0055a0;
+  font-family: "微軟正黑體";
 }
 .product small {
   display: block;
