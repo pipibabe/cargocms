@@ -3,8 +3,14 @@
 }
 
 .card {
-  z-index: 1300000000;
-  // height: 71px;
+  .cardbody-wrapper + div {
+    padding: 0 !important;
+  }
+
+  .cardbody-wrapper:hover {
+    background-color: rgba(#bebebe, 0.1);
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 30px 0 rgba(0, 0, 0, 0.198)!important;
+  }
 }
 
 .cardbody {
@@ -37,6 +43,7 @@
   }
 
   div.order-status {
+    z-index: 5;
     width: 15%;
     height: 100%;
     float: right;
@@ -46,10 +53,6 @@
     background-color: '#4990E2';
     border-bottom: 1px solid #CCCCCC;
   }
-}
-
-.cardbody + div {
-  padding: 0 !important;
 }
 
 .cardbody > div > .title {
@@ -70,7 +73,9 @@
 //
 
 .cardbody-expened {
-  height: 71px;
+  height: 90px;
+  background-color: rgba(#bebebe, 0.3);
+  padding-top: 5px;
 
   div.order-invoice-expened {
     width: 25%;

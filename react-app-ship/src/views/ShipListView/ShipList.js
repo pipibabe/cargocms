@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { PropTypes } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import FontIcon from 'material-ui/FontIcon';
-import { FlatButton } from 'material-ui';
 import ShipCard from './ShipCard';
 import classes from './_style.scss'
 
@@ -43,13 +42,14 @@ export default class ShipList extends React.Component {
       dataSource: {},
     };
     this.handelGetJsonFromServer();
+
+    console.log('classes=>' + JSON.stringify(classes));
   }
 
   handelGetJsonFromServer = () => {
     const api = '/api/admin/suppliershiporder/all';
     axios.post(api)
     .then((response) => {
-      console.log(`response=>${JSON.stringify(response.data)}`);
       this.setState({
         dataSource: response.data,
       });
@@ -62,16 +62,15 @@ export default class ShipList extends React.Component {
   render() {
     const items = this.state.dataSource.data.items;
     const autoCompleteTitle = [];
-    for (const item of items) {
+    items.map((item) => {
       autoCompleteTitle.push(item.displayName);
       autoCompleteTitle.push(item.invoicePrefix + item.invoiceNo);
       autoCompleteTitle.push(item.email);
       autoCompleteTitle.push(item.telephone);
       autoCompleteTitle.push(item.paymentAddress1);
       autoCompleteTitle.push(item.paymentCity);
-    }
-
-    console.log('classes=>'+JSON.stringify(classes));
+      return item;
+    });
 
     return (
       <div className='container' >
