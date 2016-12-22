@@ -236,6 +236,26 @@
   font-weight: 400;
   text-shadow: 0 0 2px #505050;
 }
+.product-watermark-text {
+  position: absolute;
+  top: 22px;
+  left: 8px;
+  color: #165a92;
+  font-size: 8px;
+  font-weight: 600;
+  text-shadow: 0 5px 5px #929292;
+}
+.product-watermark-text.sub-text {
+  bottom: 30px;
+  top: auto;
+  left: auto;
+  right: 6px;
+  color: #000000;
+  font-size: 3px;
+  font-weight: 100;
+  text-shadow: 0 0 2px #505050;
+  display: none;
+}
 @media (max-width: 767px){
   .watermark-text {
     font-size: 1em;
