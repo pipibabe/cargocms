@@ -278,12 +278,12 @@ module.exports = {
     },
 
     status: {
-      type: Sequelize.STRING(32),
-      get: function () {
-        try {
-          const orderStatus = this.getDataValue('OrderStatus');
-          return orderStatus ? orderStatus.name: '';
-        } catch (e) {
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          const status = this.getDataValue('OrderStatus');
+          return status ? status.name : '';
+        } catch(e){
           sails.log.error(e);
         }
       }
