@@ -10,7 +10,10 @@ import {
 } from 'material-ui';
 import MainToolbar from './MainToolbar';
 import DrawerMenuItems from './DrawerMenuItems';
-import { showToast } from '../../redux/modules/toast';
+import {
+  showToast,
+  closeToast,
+} from '../../redux/modules/toast';
 
 const styles = {
   appBar: {
@@ -46,11 +49,12 @@ const styles = {
   }),
   dispatch => bindActionCreators({
     showToast,
+    closeToast,
   }, dispatch),
-)
-export default class AppDrawer extends React.Component {
+) export default class AppDrawer extends React.Component {
   static propTypes = {
     showToast: PropTypes.func,
+    closeToast: PropTypes.func,
     content: PropTypes.object,
     toastMsg: PropTypes.string,
     toastOpen: PropTypes.bool,
@@ -58,6 +62,7 @@ export default class AppDrawer extends React.Component {
 
   static defaultProps = {
     showToast: null,
+    closeToast: null,
     content: '',
     toastMsg: '',
     toastOpen: false,
@@ -130,6 +135,7 @@ export default class AppDrawer extends React.Component {
     const titleText = isMobile ? '出貨管理系統' : '雲端漁場出貨管理系統';
 
     styles.drawerContainer.position = isMobile ? 'fixed' : 'relative';
+    console.log('this.props.toastOpen=>', this.props.toastOpen);
     return (
       <div className=''>
         <AppBar
@@ -158,7 +164,7 @@ export default class AppDrawer extends React.Component {
             open={this.props.toastOpen}
             message={this.props.toastMsg}
             autoHideDuration={4000}
-            onRequestClose={this.handleSnackbarClose}
+            onRequestClose={this.props.closeToast}
           />
         </div>
       </div>

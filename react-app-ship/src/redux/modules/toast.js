@@ -3,6 +3,7 @@
 // Constants
 // ------------------------------------
 export const SHOW_TOAST = 'SHOW_TOAST';
+export const CLOSE_TOAST = 'CLOSE_TOAST';
 
 // ------------------------------------
 // Actions
@@ -17,6 +18,14 @@ export function showToast(
   };
 }
 
+export function closeToast() {
+  return {
+    type: CLOSE_TOAST,
+    toastOpen: false,
+    toastMsg: '',
+  };
+}
+
 export const actions = {
   showToast,
 };
@@ -26,6 +35,11 @@ export const actions = {
 // ------------------------------------
 export const ACTION_HANDLERS = {
   [SHOW_TOAST]: (state = {}, action) => ({
+    ...state,
+    toastOpen: action.toastOpen,
+    toastMsg: action.toastMsg,
+  }),
+  [CLOSE_TOAST]: (state = {}, action) => ({
     ...state,
     toastOpen: action.toastOpen,
     toastMsg: action.toastMsg,
