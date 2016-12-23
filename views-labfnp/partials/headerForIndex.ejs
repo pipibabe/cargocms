@@ -1,0 +1,31 @@
+<style>
+  body {
+    padding-top: 0;
+  }
+</style>
+
+<nav class="navbar navbar-default native-hide navbar-index-transparent">
+  <% include nav.inc.ejs %>
+</nav>
+
+<nav class="navbar navbar-default navbar-fixed-top native-hide navbar-index nav-hide">
+  <% include nav.inc.ejs %>
+</nav>
+
+<% LayoutUtils.addScriptBlock(`
+  $(function () {
+    function setHeaderClass() {
+      if ($(this).scrollTop() > 50) {
+        $('.navbar-index-transparent').addClass('nav-hide');
+        $('.navbar-index').removeClass('nav-hide');
+      } else {
+        $('.navbar-index-transparent').removeClass('nav-hide');
+        $('.navbar-index').addClass('nav-hide');
+      }
+    }
+    setHeaderClass()
+    $(window).scroll(setHeaderClass);
+  });
+`); %>
+
+<% include headerScript.inc.ejs %>

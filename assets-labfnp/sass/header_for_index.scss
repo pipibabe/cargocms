@@ -1,9 +1,13 @@
-body {
-  padding-top: 0;
-}
-.navbar.navbar-default.navbar-index.transparent {
+.navbar.navbar-default.navbar-index-transparent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: transparent;
   border-color: transparent;
+  &.nav-hide {
+    opacity: 0;
+  }
   .header {
     background-color: transparent;
     border-color: transparent;
@@ -15,5 +19,12 @@ body {
         color: white;
       }
     }
+  }
+}
+.navbar.navbar-default.navbar-index {
+  transition: 0.2s all ease-in-out;
+  &.nav-hide {
+    opacity: 0;
+    transform: translateY(-45px);
   }
 }

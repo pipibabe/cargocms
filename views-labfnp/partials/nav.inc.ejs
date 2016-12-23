@@ -1,4 +1,3 @@
-<nav class="navbar navbar-default navbar-fixed-top native-hide navbar-index transparent">
 <!--=== Header ===-->
 <div class="header">
   <div class="container">
@@ -64,7 +63,7 @@
           <% } %>
           <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" href="/login<%= loginBackUrl %>">登入</a></li>
         <% } else { %>
-          <li><a id="logout-link" href="#" >登出</a></li>
+          <li><a id="logout-link" class="logout-link" href="#" >登出</a></li>
           <li class="topbar-devider"></li>
           <li class="<%= (req.path=='/me')?'active':'' %>" >
             <a href="/me">
@@ -80,49 +79,3 @@
   </div><!--/navbar-collapse-->
 </div>
 <!--=== End Header ===-->
-</nav>
-
-<% LayoutUtils.addScriptBlock(`
-  $(function () {
-    function setHeaderClass() {
-      if ($(this).scrollTop() > 30) {
-        $('.navbar-index').removeClass('transparent');
-      } else {
-        $('.navbar-index').addClass('transparent');
-      }
-    }
-    setHeaderClass()
-    $(window).scroll(setHeaderClass);
-  });
-`); %>
-
-<% LayoutUtils.addScriptBlock(`
-  $('#logout-link').click(function(){
-    swal({
-      title: '確認',
-      text: '您確定要登出了嗎？',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: "#e6caa8",
-      confirmButtonText: "登出",
-      cancelButtonText: "取消",
-      closeOnConfirm: true,
-      closeOnCancel: true,
-    },function(isConform){
-      if(isConform){
-        open('/logout', '_self');
-      }else{
-        swal.close();
-      }
-    });
-  });
-
-
-  $(':not(.navbar-responsive-collapse)').on('click',function(event) {
-    $('.navbar-responsive-collapse').collapse('hide');
-  });
-
-  $(':not(.navbar-responsive-collapse)').on('tap', function(event) {
-    $('.navbar-responsive-collapse').collapse('hide');
-  });
-`); %>
