@@ -4,7 +4,7 @@
   <div class="container">
     <!-- Logo -->
     <a class="logo" href="/">
-      <img src="/assets/labfnp/img/logo-text-light.png" alt="Logo">
+      <img src="/assets/favicon.ico" alt="Logo">
 
       <!--<h1>LFP</h1>-->
     </a>
@@ -32,26 +32,6 @@
         <li class="<%= (req.path=='/')?'active':'' %>">
           <a href="/">首頁</a>
         </li>
-        <li class="<%= (req.path.startsWith('/lab') || req.path.startsWith('/recipe') )?'active':'' %>">
-          <a href="/lab">實驗室</a>
-        </li>
-        <li class="<%= (req.path.startsWith('/wall'))?'active':'' %>">
-          <a href="/wall">近期動態</a>
-        </li>
-        <li class="<%= (req.path.startsWith('/blog'))?'active':'' %>">
-          <a href="/blog">網誌</a>
-        </li>
-        <li class="<%= (req.path.startsWith('/event'))?'active':'' %>">
-          <a href="/event">活動</a>
-        </li>
-        <li class="base active">
-          <a>1</a>
-        </li>
-        <!--
-        <li class="<%= (req.path=='/shop')?'active':'' %>">
-          <a href="/shop">活動報名</a>
-        </li>
-        -->
         <% if (!req.session.authenticated) { %>
           <li class="<%= (req.path=='/register')?'active':'' %>"><a href="/register">註冊</a></li>
           <li class="topbar-devider"></li>
@@ -72,9 +52,6 @@
             </a>
           </li>
         <% } %>
-        <li class="<%= (req.path.startsWith('/contact'))?'active':'' %> hidden-lg hidden-md hidden-sm">
-          <a href="/contact">聯絡我們</a>
-        </li>
       </ul>
     </div><!--/end container-->
   </div><!--/navbar-collapse-->
