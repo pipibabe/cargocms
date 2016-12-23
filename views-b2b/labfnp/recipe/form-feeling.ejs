@@ -1,0 +1,95 @@
+
+<% LayoutUtils.addStylesheets('/assets/labfnp/css/chosen/chosen.css'); %>
+<% LayoutUtils.addStylesheets('/assets/labfnp/css/tagging.css'); %>
+
+<style media="screen">
+  a.chosen-single.chosen-default {
+    background-color: white;
+    border-radius: 0px 0px 0px 0px;
+    -moz-border-radius: 0px 0px 0px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    border: 1px solid #bbb;
+    height: 33px;
+    background: white;
+    margin-bottom: 10px;
+    padding-top: 1%;
+  }
+  .label-feeling {
+    margin-top: 20px;
+  }
+</style>
+
+
+
+<fieldset>
+  <% recipe.formula.forEach(function(formula, index) { %>
+    <div class="row">
+      <section class="col col-6">
+        <% if (index === 0) { %>
+          <label class="label">感覺</label>
+        <% } else { %>
+          <div class="hidden-md hidden-lg hidden-sm"><hr /></div>
+          <label class="label label-feeling hidden-md hidden-lg hidden-sm">感覺 <%= index %></label>
+        <% } %>
+        <label class="select">
+          <select class="feeling-dropdown chosen-select" data-placeholder="選擇一種你喜歡的感覺" data-index="<%= formula.index %>">
+            <option>選擇一種你喜歡的感覺</option>
+            <% feelings.forEach(function(feeling) { %>
+              <option value="<%= feeling %>" <%= formula.feeling === feeling?'selected':'' %> ><%= feeling %></option>
+            <% }); %>
+          </select>
+        </label>
+      </section>
+      <section class="col col-4">
+        <% if (index === 0) { %>
+          <label class="label">所選之香味分子</label>
+        <% } else { %>
+          <label class="label hidden-md hidden-lg hidden-sm">所選之香味分子</label>
+        <% } %>
+        <label class="select">
+          <select name="formulaScents[<%= formula.index %>]" class="scents-dropdown" data-placeholder="選擇一個香味分子" data-index="<%= formula.index %>">
+            <option value="">選擇分子</option>
+            <% scents.forEach(function(scent) { %>
+              <option
+                <%= formula.scentName === scent.name ?'selected':'' %>
+                value="<%= scent.name %>"
+                data-feelings="<%= JSON.stringify(scent.feelings) %>"
+                data-color="<%= scent.color %>"
+                data-title="<%= scent.title %>"
+                data-description="<%= scent.description %>"
+                style="display: none;"
+              >
+                <%= scent.name %>
+              </option>
+            <% }); %>
+          </select>
+          <i />
+        </label>
+      </section>
+      <section class="col col-2">
+        <% if (index === 0) { %>
+          <label class="label">滴數</label>
+        <% } else { %>
+          <label class="label hidden-md hidden-lg hidden-sm">滴數</label>
+        <% } %>
+        <label class="input">
+          <input type="number" name="formulaDrops[<%= formula.index %>]" value="<%= formula.drops %>" class="scents-drops" data-index="<%= formula.index %>">
+        </label>
+      </section>
+    </div>
+    <div class="row hidden scent-detail" data-index="<%= formula.index %>">
+      <div class="col-md-12">
+        <div id="scent-content" class="funny-boxes bg-color-white">
+          <h2 id="scent-title">AAA</h2>
+          <p id="scent-description">BBB</p>
+          <div class="tags" >
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% }); %>
+</fieldset>
+
+<% LayoutUtils.addScripts('/assets/labfnp/lib/chosen/chosen.jquery.min.js'); %>
+<% LayoutUtils.addScripts('/assets/labfnp/page/recipe/form-feeling.js'); %>

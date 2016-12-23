@@ -1,0 +1,162 @@
+
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+	<thead>
+		<tr>
+      <th width="" class="" data-hide="always"> ID</th>
+			<th width="" class="" data-hide="always">發票</th>
+      <th width="" class="" data-hide="always"> 發票開頭</th>
+      <th width="" class="" data-class="expand"><i class="fa fa-fw text-muted fa-hashtag"/> 姓名</th>
+      <th width="" class="" data-hide="phone"> 郵件</th>
+      <th width="" class=""> 電話</th>
+      <th width="" class="" data-hide="always"> 傳真</th>
+      <th width="" class="" data-hide="always"> 付款名</th>
+      <th width="" class="" data-hide="always"> 付款姓</th>
+      <th width="" class="" data-hide="always"> 地址</th>
+      <th width="" class="" data-hide="always"> 城市</th>
+      <th width="" class="" data-hide="always"> 郵遞區號</th>
+      <th width="" class="" data-hide="always"> 付款方式</th>
+      <th width="" class="" data-hide="always"> 付款代碼</th>
+      <th width="" class="" data-hide="always"> 運送名</th>
+      <th width="" class="" data-hide="always"> 運送姓</th>
+      <th width="" class="" data-hide="always"> 運送地址</th>
+      <th width="" class="" data-hide="always"> 運送城市</th>
+      <th width="" class="" data-hide="always"> 運送郵遞區號</th>
+      <th width="" class="" data-hide="always"> 運送方式</th>
+      <th width="" class="" data-hide="always"> 運送代碼</th>
+      <th width="" class="" data-hide="phone"> 附註</th>
+      <th width="" class="" data-hide="phone,tablet"> 總價</th>
+      <th width="" class=""> 追蹤狀態</th>
+      <th width="" class="" data-hide="always"> IP</th>
+      <th width="" class="" data-hide="always"> ForwardedIP</th>
+      <th width="" class="" data-hide="always"> userAgent</th>
+      <th width="" class="" data-hide="always"> 建立時間</th>
+			<th width="" class="" data-hide="phone,tablet"></th>
+		</tr>
+	</thead>
+	<!-- client only -->
+	<tbody>
+		<tr v-for="item in data.items">
+      <td>{{ item.id }}</td>
+      <td>{{ item.invoiceNo }}</td>
+      <td>{{ item.invoicePrefix }}</td>
+      <td>{{ item.lastname + item.firstname }}</td>
+      <td>{{ item.email }}</td>
+      <td>{{ item.telephone }}</td>
+      <td>{{ item.fax }}</td>
+      <td>{{ item.paymentFirstname }}</td>
+      <td>{{ item.paymentLastname }}</td>
+      <td>{{ item.paymentAddress1 }}</td>
+      <td>{{ item.paymentCity }}</td>
+      <td>{{ item.paymentPostcode }}</td>
+      <td>{{ item.paymentMethod }}</td>
+      <td>{{ item.paymentCode }}</td>
+      <td>{{ item.shippingFirstname }}</td>
+      <td>{{ item.shippingLastname }}</td>
+      <td>{{ item.shippingAddress1 }}</td>
+      <td>{{ item.shippingCity }}</td>
+      <td>{{ item.shippingPostcode }}</td>
+      <td>{{ item.shippingMethod }}</td>
+      <td>{{ item.shippingCode }}</td>
+      <td>{{ item.comment }}</td>
+      <td>{{ item.total }}</td>
+      <td>{{ item.tracking }}</td>
+      <td>{{ item.ip }}</td>
+      <td>{{ item.forwardedIp }}</td>
+      <td>{{ item.userAgent }}</td>
+      <td>{{ item.createdDateTime.dateTime }}</td>
+			<td align="center" style="cursor: pointer;">
+				<div class="row">
+					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
+						<i class="fa-fw fa fa-eye text-muted" />
+					</a>
+					<a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+						<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+					</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+ </table>
+
+
+<script type="text/javascript">
+	var pagefunction = function() {
+
+		// server only
+		var columns = [
+      { "data": "id" },
+      { "data": "invoiceNo" },
+      { "data": "invoicePrefix" },
+      { "data": null},
+      { "data": "email" },
+      { "data": "telephone" },
+      { "data": "fax" },
+      { "data": "paymentFirstname" },
+      { "data": "paymentLastname" },
+      { "data": "paymentAddress1" },
+      { "data": "paymentCity" },
+      { "data": "paymentPostcode" },
+      { "data": "paymentMethod" },
+      { "data": "paymentCode" },
+      { "data": "shippingFirstname" },
+      { "data": "shippingLastname" },
+      { "data": "shippingAddress1" },
+      { "data": "shippingCity" },
+      { "data": "shippingPostcode" },
+      { "data": "shippingMethod" },
+      { "data": "shippingCode" },
+      { "data": "comment" },
+      { "data": "total" },
+      { "data": "tracking" },
+      { "data": "ip" },
+      { "data": "forwardedIp" },
+      { "data": "userAgent" },
+      { "data": "createdAt"},
+			{ "data": null }
+		]
+
+		// server only
+		var columnDefs = [
+      {
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+      {
+        "searchable": true,
+        "targets": 3,
+        "render": function (data, type, row) {
+          return '<td>' + row.lastname + row.firstname + '</td>';
+        }
+      },
+      {
+        "searchable": true,
+        "targets": 27,
+        "render": function (data, type, row) {
+          return '<td>' + row.createdDateTime.dateTime + '</td>';
+        }
+      },
+			{
+				"targets"  : 28,
+				"orderable": false,
+				"searchable": false,
+				"render": function ( data, type, row ) {
+					var colBody =
+					'<div class="row-action-buttons hidden-xs hidden-sm">'+
+						'<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-eye text-muted" />'+
+						'</a>'+
+						'<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+						'</a>'+
+					'</div>';
+					return colBody;
+				}
+			},
+		]
+		var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+		<%- include vue.ejs %>
+		appMain.$mount("#main-index");
+		appMain.loadItems(appMain.renderTable);
+	};
+</script>

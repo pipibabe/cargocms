@@ -1,0 +1,192 @@
+
+<!-- widget grid -->
+<section id="main-index" class="">
+
+	<!-- row -->
+	<div class="row">
+
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-darken" id="main-table-widget" data-widget-editbutton="false" style="display: none;">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+
+        <header>
+          <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+          <h2>香調管理</h2>
+        </header>
+
+				<!-- widget div-->
+				<div>
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+            <!-- end messageBox div -->
+						<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+							<thead>
+								<tr>
+									<th width="10%" class="" data-class="expand"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/> ID</th>
+									<th width="15%" class="" >分類</th>
+									<th width="15%" class="" ><i class="fa fa-fw fa-sticky-note text-muted hidden-sm hidden-xs"/> 名稱</th>
+									<th width="10%" class="" ><i class="fa fa-fw fa-sticky-note-o text-muted hidden-sm hidden-xs"/> 名稱2</th>
+									<th width="10%" class="" >顏色</th>
+									<th width="40%"class="" data-hide="phone,tablet">描述</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="scentNote in data.items" v-on:click="selection($index)" >
+									<td>{{ scentNote.id }}</a></td>
+									<td>{{ scentNote.notes }}</td>
+									<td>{{ scentNote.title }}</td>
+									<td>{{ scentNote.title2 }}</td>
+									<td ><span class="color" style="background: {{ scentNote.color }};">{{ scentNote.color }}</span></td>
+									<td>{{ scentNote.description }}</td>
+									<!-- <td align="center" style="cursor: pointer;">
+                    <div class="row">
+                      <a class="btn btn-default btn-xs" role="button" v-on:click="show(scentNote.id)">
+                        <i class="fa-fw fa fa-eye text-muted" />
+                      </a>
+                      <a class="btn btn-default btn-xs" role="button" v-on:click="edit(scentNote.id)">
+      									<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+                      </a>
+                    </div>
+									</td> -->
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- WIDGET END -->
+
+	</div>
+
+	<!-- end row -->
+
+	<!-- end row -->
+
+</section>
+<!-- end widget grid -->
+<script type="text/javascript">
+
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 *
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("/assets/admin/js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 *
+	 */
+
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+
+	var pagefunction = function() {
+		//console.log("cleared");
+
+		/* // DOM Position key index //
+
+			l - Length changing (dropdown)
+			f - Filtering input (search)
+			t - The Table! (datatable)
+			i - Information (records)
+			p - Pagination (paging)
+			r - pRocessing
+			< and > - div elements
+			<"#id" and > - div with an id
+			<"class" and > - div with a class
+			<"#id.class" and > - div with an id and class
+
+			Also see: http://legacy.datatables.net/usage/features
+		*/
+
+		<%- include vue.ejs %>
+		scentNoteApp.$mount("#main-index");
+		scentNoteApp.loadItems(scentNoteApp.renderTable);
+
+	};
+
+	// load related plugins
+
+	loadScript("/assets/admin/js/plugin/datatables/jquery.dataTables.min.js", function(){
+		loadScript("/assets/admin/js/plugin/datatables/dataTables.colVis.min.js", function(){
+			loadScript("/assets/admin/js/plugin/datatables/dataTables.tableTools.min.js", function(){
+				loadScript("/assets/admin/js/plugin/datatables/dataTables.bootstrap.min.js", function(){
+					loadScript("/assets/admin/js/plugin/datatable-responsive/datatables.responsive.min.js", pagefunction)
+				});
+			});
+		});
+	});
+
+	var pagedestroy = function() {
+		scentNoteApp = null;
+		scentNoteAppModel = null;
+		$("#main-table").remove();
+		if (debugState) {
+			console.log("✔ main-table unbind");
+		}
+	}
+
+</script>

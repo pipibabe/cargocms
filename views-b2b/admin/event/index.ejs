@@ -1,0 +1,119 @@
+<style type="text/css">
+.table {
+  table-layout:fixed;
+}
+
+.textbreak {
+  word-break: break-all;
+}
+
+.textOver {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[v-cloak] { display:none; }
+
+</style>
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+	<thead>
+		<tr>
+			<th width="5%" class="" data-hide="phone"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/>ID</th>
+			<th width="15%" class="" data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-sm hidden-xs"/>票券名稱</th>
+      <th width="15%" class="" data-hide="phone">描述</th>
+      <th width="6%" class="">價格</th>
+      <th width="5%" class="">數量</th>
+      <th width="5%" class="">已售</th>
+      <th width="10%" class="" data-hide="phone">開賣時間</th>
+      <th width="10%" class="" data-hide="phone">截止時間</th>
+      <th width="10%" class="" data-hide="phone">活動開始</th>
+			<th width="10%" class="" data-hide="phone">活動結束</th>
+			<th width="78px" class="" data-hide="phone,tablet"></th>
+		</tr>
+	</thead>
+	<!-- client only -->
+	<tbody>
+		<tr v-for="item in data.items">
+			<td v-cloak>{{ item.id }}</td>
+			<td v-cloak><a href="/admin/#/admin/{{modelName}}/show/{{item.id}}">{{ item.title }}</a></td>
+      <td v-cloak>{{ item.description }}</td>
+      <td v-cloak>{{ item.price }}</td>
+      <td v-cloak>{{ item.limit }}</td>
+      <td v-cloak>{{ item.signupCount }}</td>
+      <td v-cloak>{{ item.sellStartDate }}</td>
+      <td v-cloak>{{ item.sellEndDate }}</td>
+      <td v-cloak>{{ item.eventStartDate }}</td>
+			<td v-cloak>{{ item.eventEndDate }}</td>
+
+			<td v-cloak align="center" style="cursor: pointer;">
+				<div class="row">
+					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
+						<i class="fa-fw fa fa-eye text-muted" />
+					</a>
+					<a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+						<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+					</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+ </table>
+
+
+<script type="text/javascript">
+	var pagefunction = function() {
+
+		// server only
+		var columns = [
+			{ "data": "id" },
+			{ "data": "title" },
+      { "data": "description" },
+      { "data": "price" },
+      { "data": "limit" },
+      { "data": "signupCount" },
+      { "data": "sellStartDate" },
+      { "data": "sellEndDate" },
+      { "data": "eventStartDate" },
+			{ "data": "eventEndDate" },
+			{ "data": null }
+		]
+
+		// server only
+		var columnDefs = [
+      {
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+			{
+        "searchable": false,
+        "targets": 2,
+        "render": function(data, type, row) {
+          return '<td><p class="textOver">' + data +'</p></td>';
+        }
+      },
+			{
+				"targets"  : 10,
+				"orderable": false,
+				"searchable": false,
+				"render": function ( data, type, row ) {
+					var colBody =
+					'<div class="row-action-buttons hidden-xs hidden-sm">'+
+						'<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-eye text-muted" />'+
+						'</a>'+
+						'<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+						'</a>'+
+					'</div>';
+					return colBody;
+				}
+			},
+		]
+		var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+		<%- include vue.ejs %>
+		appMain.$mount("#main-index");
+		appMain.loadItems(appMain.renderTable);
+	};
+</script>

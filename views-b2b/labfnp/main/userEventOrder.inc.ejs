@@ -1,0 +1,112 @@
+
+<script id="eventOrderList" type="text/x-jquery-tmpl">
+  <style>
+    th.center {text-align:center}
+  </style>
+  <div class="well">
+  <h2>票券訂購項目</h2>
+  <table class="table order-event-table">
+  	<thead>
+  		<tr>
+        <th></th>
+        <th class="hidden-sm">訂單編號</th>
+  			<th class="center">訂購票券</th>
+        <th class="center hidden-sm">參加者</th>
+  			<th class="center hidden-sm">訂單狀態</th>
+        <th class="center"></th>
+  		</tr>
+  	</thead>
+  	<tbody>
+      {{each data}}
+  			<tr data-toggle="collapse" data-target="#${MerchantTradeNo}" class="accordion-toggle collapsed" aria-expanded="false">
+          <td width="5%"></td>
+          <td width="20%" class="hidden-sm">${MerchantTradeNo}</td>
+          <td width="30%" class="text-overflow" align="center">${EventOrder.Event.title}</td>
+          <td width="15%" class="hidden-sm" align="center">${EventOrder.recipient}</td>
+  				<td width="20%" class="hidden-sm" align="center">${EventOrder.productionStatusDesc}</td>
+          <td width="10%" align="center"><a href="/event/done?t=${MerchantTradeNo}" class="btn-u btn-u-brown btn-u-xs">詳細</a></td>
+  			</tr>
+        <tr>
+            <td colspan="6" class="hiddenRow no-padding">
+              <div class="margin-bottom-20 margin-top-20 margin-right-10 margin-left-10 collapse" id="${MerchantTradeNo}" aria-expanded="false" style="height: 0px;">
+                <div class="margin-bottom-10 hidden-lg hidden-md">
+                <b>訂單編號:</b>
+                <p class="ng-binding">
+                  ${MerchantTradeNo}
+                </p>
+                </div>
+                <div class="margin-bottom-10 hidden-lg hidden-md">
+                <b>訂單狀態:</b>
+                <p class="ng-binding">
+                  ${EventOrder.productionStatusDesc}
+                </p>
+                </div>
+                <div class="margin-bottom-10">
+                <b>活動名稱:</b>
+                <p class="ng-binding">
+                  ${EventOrder.Event.Post.title}
+                </p>
+                </div>
+                <div class="margin-bottom-10">
+                <b>售票時間:</b>
+                <p class="ng-binding">
+                  ${EventOrder.Event.sellStartDate} ~ ${EventOrder.Event.sellEndDate}
+                </p>
+                </div>
+                <div class="margin-bottom-10">
+                <b>有效時間:</b>
+                <p class="ng-binding">
+                  ${EventOrder.Event.eventStartDate} ～ ${EventOrder.Event.eventEndDate}
+                </p>
+                </div>
+                <div class="margin-bottom-10">
+                  <b>Email:</b>
+                  <p class="ng-binding">
+                    ${Email}
+                  </p>
+                </div>
+                <div class="margin-bottom-10">
+                  <b>聯絡電話:</b>
+                  <p class="ng-binding">
+                    ${EventOrder.phone}
+                  </p>
+                </div>
+                <div class="margin-bottom-10">
+                  <b>備註:</b>
+                  <p class="ng-binding">
+                    ${EventOrder.note}
+                  </p>
+                </div>
+                <div class="margin-bottom-10">
+                  <b>訂購日期:</b>
+                  <p class="ng-binding">
+                    ${createdDateTime.dateTime}
+                  </p>
+                </div>
+              </div>
+            </td>
+        </tr>
+      {{/each}}
+  	</tbody>
+  </table>
+
+  </div>
+</script>
+
+<% LayoutUtils.addScriptBlock(`
+    var loadEventOrder = function() {
+      var successCatch = function(e) {
+        if(e.data.item.length > 0 ){
+          var data = e.data.item;
+          var eventOrderList = $('#eventOrderList').tmpl({
+            data: data,
+          });
+          $('#order').append(eventOrderList);
+        }
+      }
+      var failCatch = function(e) {
+        console.log(e);
+      }
+      $.get('/api/labfnp/eventOrder').done(successCatch).fail(failCatch);
+    }
+`); %>

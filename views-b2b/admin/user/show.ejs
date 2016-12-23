@@ -1,0 +1,274 @@
+<!-- Bread crumbs -->
+<div class="row">
+  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h1 class="page-title txt-color-blueDark">
+      <i class="fa-fw fa fa-pencil-square-o"></i>
+      資料維護
+      <span>&gt; 會員</span>
+    </h1>
+  </div>
+</div>
+<!-- END Bread crumbs -->
+
+<!-- vue section -->
+<section id="main-show">
+  <input type="text" name="id" id="id" v-model="data.item.id" hidden="hidden" value="<%= req.params.id %>">
+
+  <!-- row -->
+  <div class="row" style="padding-top: 50px;">
+    <div class="col-sm-12">
+      <div class="well-sm">
+        <div class="row center-block">
+          <div class="col-sm-12 col-md-12">
+            <div class="well well-light well-sm no-margin no-padding">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div id="myCarousel" class="carousel fade profile-carousel">
+                    <div class="air air-bottom-right padding-10">
+                      <a href="/admin/#/admin/{{modelName}}" class="btn btn-default">
+                        返回
+                      </a>
+                      <a href="/admin/#/admin/{{modelName}}/edit/{{data.item.id}}" class="btn btn-default">
+                        編輯
+                      </a>
+                    </div>
+                    <!-- end row -->
+                  </div>
+
+                  <!-- body -->
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div class="col-sm-3 profile-pic">
+                        <img :src="data.item.avatar" class="img-thumbnail" alt="" />
+                        <!-- <div class="padding-10">
+                        <h4 class="font-md"><strong>1,543</strong>
+                        <br>
+                        <small>Followers</small></h4>
+                        <br>
+                        <h4 class="font-md"><strong>419</strong>
+                        <br>
+                        <small>Connections</small></h4>
+                      </div> -->
+                      <!-- <div class="row hidden-xs">
+                      <div class="col-sm-4 col-md-offset-8 text-left">
+                      <label class="text-left">
+                      <h4 class="font-md"><strong>權限</strong></h4>
+                    </label>
+                    <label class="checkbox state-disabled text-left">
+                    <input type="checkbox" id="admin" value="admin" v-model="data.item.rolesArray" disabled>管理員
+                  </label>
+                </div>
+              </div> -->
+            </div>
+            <div class="col-sm-6">
+              <section>
+                <h1>{{ data.item.firstName }} <span class="semi-bold">{{ data.item.lastName }}</span>
+                  <br>
+                  <small>{{ data.item.username }}</small>
+                </h1>
+
+                <hr class="visible-xs-*">
+
+                <ul class="list-unstyled">
+                  <li>
+                    <p class="text-muted">
+                      <i class="fa fa-envelope"></i>
+                      <a href="mailto:{{ data.item.email }}">
+                        {{ data.item.email }}
+                      </a>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-muted">
+                      <i class="fa fa-facebook-official"></i>
+                      <span class="txt-color-darken">
+                        {{data.item.facebookId}}
+                      </span>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-muted">
+                      <i class="fa fa-birthday-cake"></i>
+                      <span class="txt-color-darken">
+                        {{data.item.birthday}}
+                      </span>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-muted">
+                      <i class="fa fa-phone"></i>
+                      <span class="txt-color-darken">
+                        {{data.item.phone1}}
+                      </span>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-muted">
+                      <i class="fa fa-phone"></i>
+                      <span class="txt-color-darken">
+                        {{data.item.phone2}}
+                      </span>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-muted">
+                      <i class="fa fa-map-marker"></i>
+                      <span class="txt-color-darken">
+                        {{data.item.address}}
+                      </span>
+                    </p>
+                  </li>
+                  <li>
+                    <p class="text-muted">
+                      <i class="fa fa-map-marker"></i>
+                      <span class="txt-color-darken">
+                        {{data.item.address2}}
+                      </span>
+                    </p>
+                  </li>
+                </ul>
+
+                <hr>
+
+                <ul class="list-unstyled">
+                  <li v-show="data.item.lastLogin">
+                    <p class="text-muted">
+                      <i class="fa fa-clock-o"></i>
+                      <span class="txt-color-darken">
+                        最後登入時間
+                      </span>
+                      <pre>{{ data.item.lastLogin }}</pre>
+                    </p>
+                  </li>
+                  <li v-show="!data.item.lastLogin">
+                    <p class="text-muted">
+                      <i class="fa fa-info"></i>
+                      <span class="txt-color-darken">
+                        此帳號從未登入系統
+                      </span>
+                    </p>
+                  </li>
+                  <li v-show="data.item.userAgent">
+                    <p class="text-muted">
+                      <i class="fa fa-internet-explorer"></i>
+                      <span class="txt-color-darken">
+                        瀏覽器資訊
+                      </span>
+                    </p>
+                    <pre style="white-space: pre-wrap;word-break: normal;">{{ data.item.userAgent }}</pre>
+                  </li>
+                  <li v-show="data.item.lastLoginIP">
+                    <p class="text-muted">
+                      <i class="fa fa-bug"></i>
+                      <span class="txt-color-darken">
+                        最後連線 IP 位址
+                      </span>
+                      <pre>{{ data.item.lastLoginIP }}</pre>
+                    </p>
+                  </li>
+                  <li v-show="data.item.lastLoginLat">
+                    <p class="text-muted">
+                      <i class="fa fa-bug"></i>
+                      <span class="txt-color-darken">
+                        地理位置
+                      </span>
+                      <pre>{{ data.item.lastLoginLat }},{{ data.item.lastLoginLng }}</pre>
+                      <img :src="'https://maps.googleapis.com/maps/api/staticmap?center='+data.item.lastLoginLat+','+data.item.lastLoginLng+'&amp;zoom=14&amp;size=400x300&amp;scale=2&amp;maptype=hybrid&amp;markers=color:red%7Clabel:S%7C'+data.item.lastLoginLat+','+data.item.lastLoginLng+'&amp;key=AIzaSyBiwSQUTr6brsJoPHcliZ3TVFYgYf7ulbw'" alt="" width="400" height="300" class="img-responsive img-rounded"/>
+                    </p>
+                  </li>
+                </ul>
+
+                <hr />
+
+                <ul class="list-unstyled">
+                  <li class="visible-xs-*">
+                    <p class="text-muted">
+                      <i class="fa fa-group"></i>&nbsp;&nbsp;<span class="txt-color-darken">權限</span>
+                    </p>
+                    <ul class="list-unstyled" style="padding-left:50px">
+                      <li>
+                        <label class="checkbox state-disabled">
+                          <input type="checkbox" id="admin" value="admin" class="disabled" v-model="data.item.rolesArray" disabled>
+                          <i></i>管理員</label>
+                        </li>
+                        <li>
+                          <label class="checkbox state-disabled">
+                            <input type="checkbox" id="user" value="user" class="disabled" v-model="data.item.rolesArray" disabled>
+                            <i></i>使用者</label>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </section>
+                </div>
+              </div>
+              <!-- end row -->
+            </div>
+
+            <!-- SCRIPTS ON PAGE EVENT -->
+            <script type="text/javascript">
+            var pagefunction = function() {
+              <%- include vue.ejs %>
+              appMain.$mount("#main-show");
+              appMain.loadItem();
+            };
+            </script>
+            <!-- end body -->
+
+          </div>
+          <!-- end row -->
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+</div>
+</div>
+<!-- end row -->
+
+</section>
+
+<script type="text/javascript">
+/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+*
+* pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+*
+* // activate tooltips
+* $("[rel=tooltip]").tooltip();
+*
+* // activate popovers
+* $("[rel=popover]").popover();
+*
+* // activate popovers with hover states
+* $("[rel=popover-hover]").popover({ trigger: "hover" });
+*
+* // activate inline charts
+* runAllCharts();
+*
+* // setup widgets
+* setup_widgets_desktop();
+*
+* // run form elements
+* runAllForms();
+*
+********************************
+*
+* pageSetUp() is needed whenever you load a page.
+* It initializes and checks for all basic elements of the page
+* and makes rendering easier.
+*
+*/
+
+pageSetUp();
+
+// var pagedestroy = function() {
+// $(window).unload(function() {
+//   return "Handler for .unload() called.";
+// });
+// }
+
+// end pagefunction
+
+// Load form valisation dependency
+loadScript("/assets/admin/js/plugin/jquery-form/jquery-form.min.js", pagefunction);
+</script>

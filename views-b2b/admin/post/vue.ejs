@@ -1,0 +1,469 @@
+var COMMON = {
+  DOUBLE_CLICK_TIME_PERIOD: 250,
+  DEFAULT_INDEX: -1,
+  DEFAULT_AVATAR: "img/avatars/default.png",
+};
+
+var itemBeforeEdit = {};
+var postAppModel = {
+  data: {
+    item: {
+      title: '',
+      content: '',
+      cover: '',
+      coverUrl: '',
+      url: '',
+      abstract: '',
+      tags: [],
+      TagsArray: [],
+      coverType: 'img',
+      eventId: [{id: 0}],
+    },
+    items: [],
+    option: {
+      originCoverType: '',
+      originCoverUrl: '',
+      allevent: []
+    }
+  },
+  view: {
+    table: {
+      selectIndex: COMMON.DEFAULT_INDEX,
+    },
+  }
+}
+
+var postApp = new Vue({
+  data: postAppModel,
+  methods: {
+    cancel: function (event) {
+      postApp.onLeavePageEdit(function() {
+        location.href = '/admin/#/admin/post';
+      });
+    },
+    save: function (event) {
+      postAppModel.data.item.TagsArray = $('#tagsinput').tagsinput('items');
+      postAppModel.data.item.content = $('.summernote').summernote('code');
+      $.ajax({
+        url: '/api/admin/post',
+        type: 'POST',
+        dataType: 'json',
+        data: postAppModel.data.item,
+        xhrFields: {
+          withCredentials: true,
+        },
+        success: ajaxSuccess,
+        error: ajaxError,
+      });
+
+      function ajaxSuccess(result) {
+        var reload = $('#post-form').data('reload') || false;
+  			if (reload) {
+          location.href = '/admin/#/admin/post/edit/' + result.data.id;
+        } else {
+          location.href = '/admin/#/admin/post';
+        }
+        messageApp.show({desc: '新增內容成功！', type: 'success'});
+      } // end ajaxSuccess
+
+      function ajaxError(result) {
+        messageApp.show({desc: '新增資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+      }
+    },
+    update: function (event) {
+      postAppModel.data.item.TagsArray = $('#tagsinput').tagsinput('items');
+      postAppModel.data.item.content = $('.summernote').summernote('code');
+      $.ajax({
+        url: '/api/admin/post/' + postAppModel.data.item.id,
+        type: 'PUT',
+        dataType: 'json',
+        data: postAppModel.data.item,
+        xhrFields: {
+          withCredentials: true,
+        },
+        success: ajaxSuccess,
+        error: ajaxError,
+      });
+
+      function ajaxSuccess(result) {
+        var reload = $('#post-form').data('reload') || false;
+  			if (reload) {
+          location.reload();
+        } else {
+          location.href = '/admin/#/admin/post';
+        }
+        messageApp.show({desc: '更新內容資料成功！', type: 'success'});
+      } // end ajaxSuccess
+
+      function ajaxError(result) {
+        console.log(result);
+        messageApp.show({desc: '更新資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+      }
+    },
+    loadItem: function (cb) {
+      window.onbeforeunload = null;
+      $.get('/api/admin/post/' + postAppModel.data.item.id, ajaxSuccess);
+
+      function ajaxSuccess(result) {
+        console.log("loadItem result.data=>", result.data);
+        if (result.success) {
+          postAppModel.data.item = result.data;
+          if (result.data.eventId.length > 0){
+            postAppModel.data.item.eventId = result.data.eventId;
+          } else {
+            postAppModel.data.item.eventId = [{id: 0}]
+          }
+          postAppModel.data.option.originCoverType = result.data.coverType;
+          postAppModel.data.option.originCoverUrl = result.data.coverUrl;
+        }
+        if (typeof cb !== 'undefined') setTimeout(cb, 0);
+        console.log("loadItem postAppModel.data.item=>", postAppModel.data.item);
+      } // end ajaxSuccess
+    },
+    setupForm: function(type) {
+      uploadImageApp.updateModel('itemLimit', 1);
+      uploadImageApp.updateModel('onComplete', function(id, name, response){
+        postAppModel.data.item.cover = response.data.id;
+        postAppModel.data.item.coverUrl = response.data.url;
+      })
+      uploadImageApp.updateModel('onDeleteComplete', function(id, name, response){
+        console.log(id, name, response);
+        postAppModel.data.item.cover = null;
+        postAppModel.data.item.coverUrl = '';
+      })
+      uploadImageApp.setup();
+      $('#tagsinput').tagsinput({
+        tagClass: 'tagsInputLabel',
+      });
+      if(type == 'create') {
+        postApp.newSummernote();
+      }
+      var registerForm = $("#post-form");
+      registerForm.validate({
+
+        // Rules for form validation
+        rules : {
+          title : {
+            required : true
+          },
+          abstract: {
+            required : true
+          }
+        },
+
+        // Messages for form validation
+        messages : {
+          title : {
+            required : '請輸入標題'
+          },
+          abstract: {
+            required : '請輸入描述'
+          }
+        },
+
+        // Do not change code below
+        errorPlacement : function(error, element) {
+          error.insertAfter(element.parent());
+        },
+
+        submitHandler: function(form) {
+          if (type == 'create') {
+            postApp.save();
+            return false;
+          } else if(type == 'edit') {
+            postApp.update();
+            return false;
+          }
+        }
+      });
+      $('#wid-id-4').fadeIn();
+    },
+    isPageEditDataModified: function() {
+      var itemBeforeLeave = JSON.stringify(postAppModel.data.item);
+      var isDataModified = itemBeforeEdit !== itemBeforeLeave;
+      if (!isDataModified) window.onbeforeunload = null;
+      return isDataModified;
+    },
+    onEnterPageEdit: function() {
+      postAppModel.data.item.TagsArray.forEach(function(tag){
+        $('#tagsinput').tagsinput('add', tag);
+      })
+      itemBeforeEdit = JSON.stringify(postAppModel.data.item);
+      console.log("itemBeforeEdit=>", JSON.parse(itemBeforeEdit));
+      window.onbeforeunload = function(e) {
+        if (postApp.isPageEditDataModified()) {
+          var message = '您已經修改過資料，是否確定要放棄本次的修改？';
+          e.returnValue = message;
+          return message;
+        }
+      };
+    },
+    onLeavePageEdit: function(cb) {
+      if (postApp.isPageEditDataModified()) {
+        var msgInfo = {
+          title: '注意',
+          content: '您已經修改過資料，是否確定要放棄本次的修改？',
+          btnArray: ['放棄', '取消'],
+        };
+        var action = function(ButtonPressed) {
+          if (ButtonPressed === '放棄') {
+            setTimeout(function() {
+              return cb();
+            }, 500);
+          }
+        };
+        messageApp.confirm(msgInfo, action);
+      } else return cb();
+    },
+    loadItems: function (cb) {
+      $(".loading-wrapper").addClass('active');
+      window.onbeforeunload = null;
+      $.get('/api/admin/post', ajaxSuccess);
+
+      function ajaxSuccess(result) {
+        postAppModel.data.items = result.data.items;
+        if (typeof cb !== 'undefined') setTimeout(cb, 0);
+      } // end ajaxSuccess
+    },
+    renderTable: function() {
+      /* BASIC ;*/
+     var responsiveHelper_post_table = undefined;
+     var responsiveHelper_datatable_fixed_column = undefined;
+     var responsiveHelper_datatable_col_reorder = undefined;
+     var responsiveHelper_datatable_tabletools = undefined;
+
+     var breakpointDefinition = {
+       tablet : 1024,
+       phone : 480
+     };
+     /* TABLETOOLS */
+     var table = $('#main-table').dataTable({
+       // Tabletools options:
+       //   https://datatables.net/extensions/tabletools/button_options
+       "sDom": "<'dt-toolbar'<'row'r<'col-xs-12 col-md-7 col-sm-7'f><'col-xs-12 col-md-4 col-sm-4'T><'col-md-1 col-sm-1 hidden-xs'l>>>" +
+           "t"+
+           "<'dt-toolbar-footer'<'row'<'col-md-6 col-xs-12 hidden-xs'i><'col-md-6 col-xs-12'p>>>",
+       "oLanguage": {
+          "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+          "sInfo": "顯示 _START_ 到 _END_ 總共 _TOTAL_ 筆紀錄",
+         	"sInfoPostFix":  "",
+         	"sInfoEmpty":    "顯示第 0 至 0 項結果，共 0 項",
+         	"sInfoFiltered": "(從 _MAX_ 項結果中過濾)",
+         	"sProcessing":   "處理中...",
+         	"sLoadingRecords": "載入中...",
+         	"sLengthMenu": "_MENU_",
+         	"sZeroRecords":  "沒有符合的結果",
+         	"oPaginate": {
+         		"sFirst":    "第一頁",
+            "sPrevious": "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+            "sNext":     "<i class='fa fa-chevron-right' aria-hidden='true'></i>",
+         		"sLast":     "最後一頁"
+         	},
+         	"sAria": {
+         		"sortAscending":  ": 升冪排列",
+         		"sortDescending": ": 降冪排列"
+         	}
+       },
+      "columnDefs": [
+        {
+          "targets"  : 'no-sort',
+          "orderable": false,
+        },
+      ],
+       "oTableTools": {
+         "aButtons": [
+           {
+             "sExtends": "text",
+             "sButtonText": "檢視",
+             "fnClick": function ( nButton, oConfig, oFlash ) {
+               var isSelected = postAppModel.view.table.selectIndex !== COMMON.DEFAULT_INDEX;
+               if (isSelected) {
+                 var index = postAppModel.view.table.selectIndex;
+                 var postId = postAppModel.data.items[index].id;
+                 location.href = '/admin/#/admin/post/show/' + postId;
+               } else {
+                 messageApp.show({desc: '請選擇內容', type: 'warning'});
+               }
+             }
+           },
+           {
+             "sExtends": "text",
+             "sButtonText": "新增",
+             "fnClick": function ( nButton, oConfig, oFlash ) {
+               location.href = '/admin/#/admin/post/create';
+             }
+           },
+           {
+             "sExtends": "text",
+             "sButtonText": "編輯",
+             "fnClick": function ( nButton, oConfig, oFlash ) {
+               var isSelected = postAppModel.view.table.selectIndex !== COMMON.DEFAULT_INDEX;
+               if (isSelected) {
+                 var index = postAppModel.view.table.selectIndex;
+                 var postId = postAppModel.data.items[index].id;
+                 location.href = '/admin/#/admin/post/edit/' + postId;
+               } else {
+                 messageApp.show({desc: '請選擇內容', type: 'warning'});
+               }
+             }
+           },
+         ]
+       },
+       "autoWidth" : true,
+       "preDrawCallback" : function() {
+         // Initialize the responsive datatables helper once.
+         if (!responsiveHelper_datatable_tabletools) {
+           responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#main-table'), breakpointDefinition);
+         }
+       },
+       "rowCallback" : function(nRow) {
+         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+       },
+       "drawCallback" : function(oSettings) {
+         responsiveHelper_datatable_tabletools.respond();
+       },
+       "order": [[ 0, 'desc' ]],
+       "initComplete": function(){
+         $('.loading-wrapper').removeClass('active');
+       }
+     });
+
+     // selection
+     table.on('click', 'tr', function () {
+       if ( $(this).hasClass('selected') ) {
+         $(this).removeClass('selected');
+       } else {
+         $('#main-table tbody tr').removeClass('selected');
+         $(this).addClass('selected');
+       }
+     });
+
+     $('#main-table-widget').fadeIn();
+    },
+    dblclick: function(index) {
+      var postId = postAppModel.data.items[index].id;
+      this.show(postId);
+    },
+    selection: function (index) {
+      if (index !== postAppModel.view.table.selectIndex) {
+        postAppModel.view.table.selectIndex = index;
+        console.log("postAppModel.view.table.selectIndex", postAppModel.view.table.selectIndex);
+      } else {
+        postAppModel.view.table.selectIndex = COMMON.DEFAULT_INDEX;
+      }
+    },
+    show: function (postId) {
+      location.href = '/admin/#/admin/post/show/' + postId;
+    },
+    edit: function (postId) {
+      location.href = '/admin/#/admin/post/edit/' + postId;
+    },
+    delete: function() {
+      messageApp.confirm({
+        title: '刪除',
+        content: '確認刪除此筆資料？',
+        btnArray: ['刪除', '取消'],
+      },
+      function(ButtonPressed) {
+        if (ButtonPressed ==='刪除') {
+          $.ajax({
+            url: '/api/admin/post/' + postAppModel.data.item.id,
+            type: 'DELETE',
+            dataType: 'json',
+            xhrFields: {
+              withCredentials: true
+            },
+            success: ajaxSuccess,
+            error: ajaxError,
+          });
+
+          function ajaxSuccess(result) {
+            postAppModel.view.table.selectIndex = COMMON.DEFAULT_INDEX;
+            messageApp.show({desc: `刪除資料成功！`, type: 'success'});
+            setTimeout(function() {
+              location.href = '/admin/#/admin/post';
+            }, 500);
+          } // end ajaxSuccess
+
+          function ajaxError(result) {
+            messageApp.show({desc: '刪除資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+          }
+        }
+      });
+    },
+    newSummernote: function() {
+      $('.summernote').summernote({
+        height: 300,
+        placeholder: '請輸入內容',
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'italic', 'underline', 'clear']],
+          ['fontname', ['fontname']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['height', ['height']],
+          ['table', ['table']],
+          // ['insert', ['link', 'picture', 'hr']],
+          ['insert', ['picture']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    },
+    selectOnChange: function() {
+      var originCoverType = postAppModel.data.option.originCoverType;
+      console.log(postAppModel.data.option);
+      console.log(originCoverType == postAppModel.data.item.coverType)
+      if (originCoverType == postAppModel.data.item.coverType) {
+        postAppModel.data.item.coverUrl = postAppModel.data.option.originCoverUrl;
+      } else {
+        postAppModel.data.item.coverUrl = '';
+      }
+    },
+    onEventAddClick: function() {
+      console.log(postAppModel.data.item.eventId);
+
+      postAppModel.data.item.eventId.push({id: 0});
+    },
+    onEventSubtractClick: function(index) {
+      console.log(postAppModel.data.item.eventId);
+      postAppModel.data.item.eventId.splice(index, 1);
+
+    },
+    loadEventItem: function (type) {
+      if (type == 'create') {
+        $.get('/api/admin/event/new', ajaxSuccess);
+      } else if(type == 'edit') {
+        $.get('/api/admin/event/new/' + postAppModel.data.item.id, ajaxSuccess);
+
+      }
+      function ajaxSuccess(result) {
+        console.log("loadItem result.data=>", result.data.items);
+        if (result.success) {
+          postAppModel.data.option.allevent = result.data.items;
+        }
+      } // end ajaxSuccess
+    },
+    onEventEdit: function (id) {
+      var url = '/admin/#/admin/event/edit/' + id + '?callback=/post/edit/' + postAppModel.data.item.id;
+      $('#post-form').data('reload', true);
+      postApp.onLeavePageEdit(function() {
+        location.href = url;
+      });
+    },
+    onCreateNewEvet: function() {
+      var url = '/admin/#/admin/event/create?callback=/post/edit/' + postAppModel.data.item.id;
+      $('#post-form').data('reload', true);
+      postApp.onLeavePageEdit(function() {
+        location.href = url;
+      });
+    }
+  },
+});
+
+Vue.directive('summernote', {
+  update: function (value) {
+    if (value !== '') {
+      setTimeout(postApp.newSummernote,0);
+    }
+  }
+})

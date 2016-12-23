@@ -1,0 +1,125 @@
+
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+	<thead>
+		<tr>
+			<th width="50" data-hide="phone">
+				<i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/>
+				ID
+			</th>
+
+			<th data-class="expand">name</th>
+			<th data-hide="always">描述</th>
+			<th data-hide="always">訊息</th>
+			<th data-hide="phone,tablet">內容</th>
+			<th width="100" class="" >類型</th>
+			<th data-hide="always">連結</th>
+			<th data-hide="always">來源</th>
+			<th width="150" data-hide="phone,tablet">建立時間</th>
+			<th width="80" data-hide="phone,tablet">狀態</th>
+		</tr>
+	</thead>
+	<!-- client only -->
+	<tbody>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	var pagefunction = function() {
+
+		// server only
+		var columns = [
+			{ "data": "id" },
+			{ "data": "name" },
+			{ "data": "description" },
+			{ "data": "message" },
+			{ "data": "story" },
+			{ "data": "type" },
+			{ "data": "link" },
+			{ "data": "sourceId" },
+			{ "data": "createdTime" },
+			{ "data": "publish" }
+		]
+
+		// server only
+		var columnDefs = [
+      {
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+			{
+				"targets"  : 9,
+				"orderable": false,
+				"searchable": false,
+				"render": function ( data, type, row ) {
+					var checked = ""
+					if (row.publish) {
+						checked = "checked";
+					}
+					var colBody =
+					'<div class="row-action-buttons hidden-xs hidden-sm">'+
+						'<input type="checkbox" data-id="'+row.id+'" name="publish" '+checked+'>'+
+					'</div>';
+					return colBody;
+				}
+			},
+		]
+		var tableButtons = [
+			{
+				"sExtends": "text",
+				"sButtonText": "重新匯入",
+				"fnClick": function (nButton, oConfig, oFlash) {
+					var that = this;
+					$.ajax({
+						url: "/api/admin/facebook/import",
+						method: "get",
+						dataType: 'json',
+						cache: false
+					}).done(function (result) {
+						messageApp.show({
+							desc: '匯入完成',
+							type: 'success'
+						});
+						defaultTable.api().ajax.reload()
+
+					});
+				}
+			}
+		];
+
+		var tableDrawCallback = function(){
+			$("[name='publish']").bootstrapSwitch();
+			$("[name='publish']").on('switchChange.bootstrapSwitch', function(event, state) {
+				var id = $(this).data("id")
+
+				var publish = state;
+
+				$.ajax({
+					url: "/api/admin/facebook/feed/update/"+id,
+					method: "put",
+					dataType: 'json',
+					cache: false,
+					data:{
+						publish: publish
+					}
+
+				}).done(function (result) {
+					messageApp.show({
+						desc: result.message,
+						type: 'success'
+					});
+				});
+			});
+
+		}
+
+
+
+		var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+		var supportDblclickShow = false;
+		<%- include vue.ejs %>
+		appMain.$mount("#main-index");
+		appMain.loadItems(appMain.renderTable);
+
+	};
+</script>

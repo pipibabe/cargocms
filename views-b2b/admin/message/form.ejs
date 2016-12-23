@@ -1,0 +1,125 @@
+<fieldset>
+
+  <div class="row">
+    <section class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="input state-disabled">發送方式</label>
+      <label class="select state-disabled">
+        <select name="sendBy" v-model="data.item.sendBy" disabled>
+          <option value="email">Email</option>
+          <option value="sms">SMS</option>
+        </select><i></i>
+      </label>
+    </section>
+
+    <section class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="input state-disabled">類型</label>
+      <label class="select state-disabled">
+        <select name="type" v-model="data.item.type" disabled>
+          <option value="greeting">問候</option>
+          <option value="orderConfirm">訂單確認</option>
+          <option value="paymentConfirm">付款確認</option>
+          <option value="deliveryConfirm">寄送確認</option>
+          <!-- <option value="orderSync"></option> -->
+        </select><i></i>
+      </label>
+    </section>
+
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="input state-disabled">寄件人
+        <input type="text" name="from" placeholder="寄件人" v-model="data.item.from" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入寄件人</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+      <label class="input state-disabled">收件人
+        <input type="text" name="to" placeholder="收件人" v-model="data.item.to" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入收件人</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="input state-disabled">發送成功</label>
+        <label class="select state-disabled">
+          <select name="success" v-model="data.item.success" disabled>
+            <option value="1">True</option>
+            <option value="0">False</option>
+          </select><i></i>
+        </label>
+    </section>
+
+    <section class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <label class="input state-disabled">異常訊息
+        <input type="text" name="error" placeholder="異常訊息" v-model="data.item.error" disabled>
+        <b class="tooltip tooltip-bottom-right">請輸入異常訊息</b></label>
+    </section>
+  </div>
+
+  <section>
+    <label class="input state-disabled">主旨
+      <input type="text" name="subject" placeholder="主旨" v-model="data.item.subject" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入主旨</b></label>
+  </section>
+
+  <section>
+    <label class="input state-disabled">訊息內容
+      <textarea class="form-control" name="text" placeholder="" v-model="data.item.text" rows="8" disabled></textarea>
+      <b class="tooltip tooltip-bottom-right">請輸入訊息內容</b></label>
+  </section>
+
+  <section>
+    <label class="input state-disabled">Html
+      <textarea class="form-control" name="html" placeholder="" v-model="data.item.html" rows="8" disabled></textarea>
+      <b class="tooltip tooltip-bottom-right">請輸入html</b></label>
+  </section>
+
+
+
+</fieldset>
+<script>
+var formRules = {
+  sendBy: {
+    required: true
+  },
+  type: {
+    required: true
+  },
+  to: {
+    required: true
+  },
+  subject: {
+    required: true
+  },
+  text: {
+    required: true
+  },
+  success: {
+    required: true
+  },
+}
+
+// Messages for form validation
+var formMessages = {
+  sendBy : {
+    required : '請給予發送方式'
+  },
+  type: {
+    required: '請給予發送類別'
+  },
+  to: {
+    required: '請給予收件者'
+  },
+  subject: {
+    required: '請給予主旨'
+  },
+  text: {
+    required: '請給予發送內容'
+  },
+  success: {
+    required: '請給予是否成功'
+  },
+}
+</script>

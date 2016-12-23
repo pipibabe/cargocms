@@ -1,0 +1,244 @@
+<% LayoutUtils.addStylesheets('/assets/unify/css/pages/profile.css'); %>
+
+<style>
+  .cover-photo {
+    min-height: 150px;
+  }
+  .panel-heading {
+    padding-right: 0 !important;
+  }
+  .required {
+    color: red;
+  }
+  #submit {
+    width: 100%;
+  }
+  section {
+    padding-bottom: 10px;
+  }
+
+  #resendCheckEmail {
+    cursor: pointer;
+  }
+  #resendCheckEmail:hover {
+    background-color: #fcf8e3;
+  }
+  #resendCheckEmail:active {
+    background-color: #faebcc;
+  }
+
+</style>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/file-uploader/5.10.0/all.fine-uploader/fine-uploader-new.min.css">
+
+<div class="container content profile">
+  <input type="hidden" name="id" class="hidden" value="<%= user.id %>" disabled>
+
+  <!-- begin row -->
+  <div class="row">
+
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="panel-heading overflow-h">
+
+        <h2 class="pull-left">
+          <i class="fa fa-user" aria-hidden="true"></i>修改個人資料</h2>
+        <a href="/me" class="btn-u btn-u-dark pull-right">返回</a>
+
+      </div>
+
+      <!-- begin .profile-body -->
+      <div class="profile-body">
+
+        <div class="projects form-group" id="orderFormWrapper">
+          <div class="margin-bottom-20">
+            <img class="img-responsive img-bordered" src="<%= user.avatar %>" alt="" style="margin: auto; width: 100%;"/>
+            <% var info = req.flash('info')[0]; %>
+            <% if (info) { %>
+              <div class="alert alert-warning" role="alert"><%= info %></div>
+            <% } %>
+          </div>
+          <form class="userProfileForm" id="userProfileForm" action="/api/user/edit" method="post">
+
+            <section>
+              <label class="input">個人頭像
+                <span class="uploadLoaging hide"><i class="fa fa-spinner" aria-hidden="true"></i> 檔案上傳中</span>
+              </label>
+              <%- include ../../lib/fineuploader.ejs %>
+              <div id="fine-uploader-validation"></div>
+            </section>
+
+            <input type="hidden" name="id" value="<%= user.id %>">
+            <input type="hidden" name="username" value="<%= user.username %>">
+
+            <section class="col">
+              <div class="row">
+                <div class="col col-md-6">
+                  <label class="input" for="lastName">
+                    姓<span class="required">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-addon rounded-left">
+                      <i class="icon-tag color-blue"></i>
+                    </span>
+                    <input type="text" name="lastName" class="form-control rounded-right" placeholder="請輸入姓" value="<%= user.lastName %>" required>
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <label class="input" for="firstName">
+                    名<span class="required">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-addon rounded-left">
+                      <i class="icon-tag color-blue"></i>
+                    </span>
+                    <input type="text" name="firstName" class="form-control rounded-right" placeholder="請輸入名" value="<%= user.firstName %>" required>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <% if (user.verificationEmailToken) { %>
+              <section class="col">
+                <label class="input" for="password">
+                  電子信箱<span class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon rounded-left">
+                    <i class="icon-envelope color-blue"></i>
+                  </span>
+                  <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" class="form-control" placeholder="請輸入 Email" value="<%= user.email %>" required>
+                  <span class="btn input-group-addon rounded-right" id="resendCheckEmail">
+                    <div style="color: #8a6d3b;">重寄</div>
+                  </span>
+                </div>
+              </section>
+            <% } else { %>
+              <section class="col">
+                <label class="input" for="password">
+                  電子信箱<span class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon rounded-left">
+                    <i class="icon-envelope color-blue"></i>
+                  </span>
+                  <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" class="form-control rounded-right" placeholder="請輸入 Email" value="<%= user.email %>" required>
+                </div>
+              </section>
+            <% }%>
+
+            <section class="col">
+              <label class="input" for="birthday">
+                生日
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon rounded-left">
+                  <i class="fa fa-calendar color-blue"></i>
+                </span>
+                <input type="text" id="birthday" name="birthday" class="form-control rounded-right" placeholder="例: 1970-01-01" value="<%= user.birthday ? user.birthday : "" %>">
+              </div>
+            </section>
+
+            <section class="col">
+              <div class="row">
+                <div class="col col-md-6">
+                  <label class="input" for="phone1">
+                    手機
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-addon rounded-left">
+                      <i class="fa fa-phone color-blue"></i>
+                    </span>
+                    <input type="text" name="phone1" class="form-control rounded-right" placeholder="請輸入電話" value="<%= user.phone1 ? user.phone1: "" %>">
+                  </div>
+                </div>
+                <div class="col col-md-6">
+                  <label class="input" for="phone2">
+                    市話
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-addon rounded-left">
+                      <i class="fa fa-phone color-blue"></i>
+                    </span>
+                    <input type="text" name="phone2" class="form-control rounded-right" placeholder="請輸入電話" value="<%= user.phone2 ? user.phone2: "" %>">
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="col">
+              <label class="input" for="address">
+                收件地址
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon rounded-left">
+                  <i class="fa fa-location-arrow color-blue"></i>
+                </span>
+                <input type="text" name="address" class="form-control rounded-right" placeholder="請輸入地址" value="<%= user.address ? user.address: "" %>">
+              </div>
+            </section>
+
+            <!-- <section class="col">
+              <label class="input" for="address2">
+                住址2
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon rounded-left">
+                  <i class="fa fa-location-arrow color-blue"></i>
+                </span>
+                <input type="text" name="address2" class="form-control rounded-right" placeholder="請輸入地址" value="<%= user.address2 ? user.address2: "" %>">
+              </div>
+            </section> -->
+
+            <% if (!user.facebookId) { %>
+              <section class="col">
+                <label class="input" for="password">
+                  請輸入密碼
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon rounded-left">
+                    <i class="icon-lock color-blue"></i>
+                  </span>
+                  <input type="password" name="password" class="password form-control rounded-right" placeholder="輸入密碼" disabled>
+                </div>
+              </section>
+
+              <section class="col">
+                <label class="input" for="passwordConfirm">
+                  確認密碼
+                </label>
+                <div class="input-group margin-bottom-20">
+                  <span class="input-group-addon rounded-left">
+                    <i class="icon-lock color-blue"></i>
+                  </span>
+                  <input type="password" name="passwordConfirm" class="password form-control rounded-right" placeholder="請再輸入一次密碼" disabled>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" name="updatePwd" value="">勾選以啟用修改密碼</label>
+                </div>
+              </section>
+
+              <span class="">*如不打算變更密碼，請不要修改密碼欄位即可。</span>
+          <% } %>
+
+          </form>
+        </div>
+        <div class="text-center">
+          <button form="userProfileForm" id="submit" type="sumbit" class="btn-u btn-u-green" data-id="<%= user.id %>">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            確認修改
+          </button>
+        </div>
+
+      </div>
+      <!-- end .profile-body -->
+      <div class="text-center padding-bottom-5"></div>
+
+    </div>
+    <!-- end col -->
+
+  </div>
+  <!-- end row -->
+</div>
+<% LayoutUtils.addScripts('/assets/labfnp/page/profile/edit.js'); %>
+<% LayoutUtils.addScripts('/assets/admin/js/libs/fine-uploader.min.js'); %>
+<% LayoutUtils.addScripts('/assets/labfnp/lib/fineuploader.js'); %>

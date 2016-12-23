@@ -1,0 +1,257 @@
+<% LayoutUtils.addStylesheets('/assets/unify/css/pages/profile.css'); %>
+<!--<div class="container">-->
+<!--</div>-->
+
+<style>
+  .cover-photo {
+    min-height: 150px;
+  }
+  .drops,
+  .scent {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+  }
+  .scent {
+    padding: 2px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+  }
+  .shareSticker {
+    max-width: 360px;
+    padding-top: 10px;
+  }
+  .rrssb-buttons a {
+    -webkit-filter: saturate(0.5);
+    -moz-filter: saturate(0.5);
+    -ms-filter: saturate(0.5);
+    -o-filter: saturate(0.5);
+    filter: saturate(0.5);
+  }
+  .rrssb-buttons a:hover {
+    -webkit-filter: saturate(1);
+    -moz-filter: saturate(1);
+    -ms-filter: saturate(1);
+    -o-filter: saturate(1);
+    filter: saturate(1);
+  }
+  .panel-heading {
+    padding-right: 0 !important;
+  }
+  .required {
+    color: red;
+  }
+  #submitOrder {
+    width: 100%;
+  }
+  section {
+    padding-bottom: 10px;
+  }
+
+  #gotoShop {
+    margin-top: 13px;
+    margin-left: 5px;
+  }
+  label.error {
+    color: red;
+  }
+  em.invalid {
+    color: #a94442;
+    font-weight: bolder;
+  }
+</style>
+
+<div class="container content profile">
+  <% var error = req.flash('error'); %>
+  <input type="hidden" name="id" class="hidden" value="<%= event.id %>" disabled>
+
+  <!-- begin row -->
+  <div class="row">
+
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="panel-heading overflow-h">
+
+        <h2 class="pull-left">
+          <i class="fa fa-shopping-cart " aria-hidden="true"></i>確認訂單</h2>
+        <a href="javascript:void(0)" onclick="window.history.back();return false;" class="btn-u btn-u-dark pull-right">返回</a>
+
+      </div>
+
+      <!-- begin .profile-body -->
+      <div class="profile-body">
+
+        <div class="projects">
+
+          <h2>
+            <span class="padding-5"><%= event.title %></span>
+          </h2>
+
+          <!--<ul class="list-unstyled list-inline blog-info-v2">
+            <li>
+              <i class="fa fa-user"></i>
+              <a class="color-green" href="#">
+                <%= event.authorName %>
+              </a>
+            </li>
+            <li>
+              <i class="fa fa-clock-o"></i>
+              <%=: event.createdAt | formatDate %>
+            </li>
+          </ul>
+          <hr/>-->
+
+          <!-- <label for="description">描述</label> -->
+          <ul class="list-unstyled list-inline description">
+            <li>
+              <% var description = event.description.replace(/[\r\n|\n]/g,"<br/>").split('<br/>');%>
+              <p class="padding-5">
+                <% description.forEach(function( desc ){ %>
+                  <%= desc %><br/>
+                <% }); %>
+              </p>
+            </li>
+            <li>
+              <p class="padding-5">價錢: <%= event.price === 0 ? '免費' : event.price %></p>
+            </li>
+          </ul>
+
+      </div>
+
+      <br/>
+
+      <div class="text-center">
+        <h3>
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          <label>聯絡資訊</label>
+        </h3>
+      </div>
+
+      <div class="projects form-group" id="orderFormWrapper">
+        <form class="orderForm" id="orderForm" action="/event/allpay/<%= event.id %>" method="post">
+          <input type="hidden" name="id" value="<%= event.id %>">
+          <input type="hidden" name="title" value="<%= event.title %>">
+          <input type="hidden" name="description" value="<%= event.description %>">
+          <input type="hidden" name="message" value="<%= event.message %>">
+
+          <section class="col">
+            <label for="reciverName">姓名<span class="required">*</span>
+            </label>
+            <input type="text" id="recipient" class="form-control" name="recipient" value="<%= user.displayName %>" placeholder="請輸入姓名..." required>
+          </section>
+
+          <section class="col">
+            <label for="phone">聯絡電話<span class="required">*</span>
+            </label>
+            <input type="tel" id="phone" class="form-control" name="phone" value="" placeholder="請輸入手機號碼或市話含區碼..." required>
+          </section>
+
+          <section class="col">
+            <label for="address">聯絡電子信箱<span class="required">*</span></label>
+            <input type="email" id="email" class="form-control" name="email" value="<%= user.email %>" placeholder="請輸入 Email..." required>
+          </section>
+
+          <section class="col">
+            <label for="address">地址
+            </label>
+            <input type="text" id="address" class="form-control" name="address" value="" placeholder="請輸入地址...">
+          </section>
+
+
+          <section class="col">
+            <label for="address">備註（選填）</label>
+            <input type="text" id="note" class="form-control" name="note" value="" placeholder="請輸入送件備註...">
+          </section>
+
+          <!--<section class="col">
+            <label for="invoiceNo">發票號碼</label>
+            <input type="text" id="invoiceNo" class="form-control" name="invoiceNo" value="" placeholder="請輸入發票號碼...">
+          </section>-->
+          <input type="hidden" name="token" value="<%= token %>">
+
+          <% if(event.price > 0)  {%>
+            <section class="col paymentMethod">
+              <label for="paymentMethod">付款方式<span class="required">*</span>
+              </label>
+              <select class="form-control" id="paymentMethod" class="form-control" name="paymentMethod" required>
+                <option value="Credit">信用卡</option>
+                <option value="ATM">ATM轉帳</option>
+                <!--<option value="gotoShop">現場付費</option>-->
+              </select>
+            </section>
+          <% } %>
+
+        </form>
+      </div>
+
+      <section class="col">
+        <% if (error.length > 0) { %>
+          <div class="margin-bottom-20 has-error" data-message="<%= error %>">
+            <label class="col-md-6 control-label" for="error">
+              <!--<span class="glyphicon glyphicon-remove"></span><%= error %>-->
+            </label>
+          </div>
+        <% } %>
+      </section>
+
+      <div class="text-center margin-top-20">
+        <button form="orderForm" id="submit-button" type="sumbit" class="btn-u btn-u-green" data-id="<%= event.id %>">
+          <i class="fa fa-check" aria-hidden="true"></i>
+          送出
+        </button>
+      </div>
+
+    </div>
+    <!-- end .profile-body -->
+    <div class="text-center padding-bottom-5"></div>
+
+  </div>
+  <!-- end col -->
+
+</div>
+<!-- end row -->
+</div>
+<% LayoutUtils.addScripts('/assets/labfnp/lib/formSubmitHelper.js'); %>
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $.fn.preventDoubleSubmission = function() {
+      $(this).on("submit", defaultFormSubmit);
+      return this;
+    }
+
+    $("#orderForm").validate({
+      rules: {
+        recipient: {
+          required: true
+        },
+        phone: {
+          required: true
+        },
+        email: {
+          required: true,
+          email: true
+        },
+
+      },
+      messages: {
+        recipient: {
+          required: "請輸入 收件人"
+        },
+        phone: {
+          required: "請輸入 收件人電話"
+        },
+        email: {
+          required: "請輸入 Email",
+          email: "請輸入正確格式Email"
+        },
+      }
+    });
+
+    $("#orderForm").preventDoubleSubmission();
+
+  });
+`); %>

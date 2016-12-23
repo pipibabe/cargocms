@@ -1,0 +1,282 @@
+<!-- common tags-->
+<% LayoutUtils.addMeta({ property:"author", content:recipe.authorName }); %>
+<% LayoutUtils.addMeta({ property:"description", content:recipe.description }); %>
+
+<!-- FB OG tags-->
+<% LayoutUtils.addMeta({ property:"og:title", content:"配方名稱：" + recipe.perfumeName + " | LFP: 香料香水實驗室，客製專屬香水"}); %>
+<% LayoutUtils.addMeta({ property:"og:description", content:recipe.description }); %>
+<% LayoutUtils.addMeta({ property:"og:image", content:SocialService.getShareUrl() + recipe.coverPhoto }); %>
+<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/jpeg" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:width", content:"1200" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:height", content:"630" }); %>
+<% LayoutUtils.addMeta({ property:"og:type", content:"article" }); %>
+<% LayoutUtils.addMeta({ property:"article:published_time", content:recipe.createdAtIso })  %>
+<% LayoutUtils.addMeta({ property:"article:modified_time", content:recipe.updatedAtIso }) %>
+<% LayoutUtils.addMeta({ property:"article:author", content:recipe.authorFbPage }); %>
+<% LayoutUtils.addMeta({ property:"article:section", content:"配方實驗室" }); %>
+<% LayoutUtils.addMeta({ property:"article:tag", content:"配方" }); %>
+<% LayoutUtils.addMeta({ property:"article:tag", content:"香水" }); %>
+<% LayoutUtils.addMeta({ property:"article:tag", content:"perfume" }); %>
+<% LayoutUtils.addMeta({ property:"article:tag", content:"LFP" }); %>
+<% LayoutUtils.addMeta({ property:"article:tag", content:"LabFnP" }); %>
+
+
+<% LayoutUtils.addStylesheets('/assets/unify/css/pages/profile.css'); %>
+<!--<div class="container">-->
+<!--<pre><%= JSON.stringify(recipe, null, 2) %></pre>-->
+<!--</div>-->
+
+<style>
+  .fbButton {
+    margin-top: 4px;
+  }
+
+  .btn-custom-like {
+    background-color: #f27365 !important;
+    color: #FFF !important;
+  }
+  .btn-custom-feedback {
+    background-color: #ae8d6a !important;
+    color: #FFF !important;
+  }
+  .btn-custom-order {
+    background-color: #48acf0 !important;
+    color: #FFF !important;
+  }
+
+  .btn-custom-like:hover {
+    background-color: #f06657 !important;
+  }
+  .btn-custom-feedback:hover {
+    background-color: #b08a63 !important;
+  }
+  .btn-custom-order:hover {
+    background-color: #3aa8f4 !important;
+  }
+
+</style>
+
+<div class="container content profile">
+  <input type="hidden" name="id" class="hidden" value="<%= recipe.id %>" disabled>
+
+  <% var socialData = social.data[0]; %>
+  <% var info = req.flash('info')[0] || null; %>
+  <% if(info === "Info.New.Recipe") { %>
+    <% var recipeShareUrl = encodeURI(socialData.url); %>
+    <a id="isNewRecipe" class="hidden" href="https://www.facebook.com/sharer.php?u=<%= recipeShareUrl %>&display=popup&ref=plugin&src=like&app_id=<%= SocialService.getFBAppId() %>"> New Recipe </a>
+  <% } %>
+
+  <!-- begin row -->
+  <div class="row">
+
+    <div class="col-md-8 col-md-offset-2">
+
+      <div class="panel-heading overflow-h">
+
+        <h2 class="pull-left hidden-xs">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>配方內容</h2>
+        <a href="/recipe/edit/<%= recipe.hashId %>?from=<%= recipe.createdBy%>"
+          class="btn-u btn-u-dark pull-right <%= editable?'':'hidden' %>">編輯</a>
+        <a href="/lab" class="btn-u btn-u-dark pull-right">返回實驗室</a>
+
+      </div>
+
+      <!-- begin .profile-body -->
+      <div class="profile-body">
+
+        <div class="easy-block-v1">
+          <div class="easy-block-v1-badge rgba-red"><%= recipe.label %></div>
+          <!--<img class="img-responsive cover-photo" src="http://loremflickr.com/640/480/perfume/all?<%= Math.random() * Date.now() %>" alt=""/>-->
+          <img class="img-responsive cover-photo" src="<%= recipe.coverPhoto %>" alt="" onerror="this.src='/assets/labfnp/img/recipe-default-cover.<%= recipe.id % 7 %>.jpg';"/>
+        </div>
+        <div class="projects">
+
+          <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-12">
+              <h2>
+                <span class="padding-5"><%= recipe.perfumeName %></span>
+              </h2>
+
+              <ul class="list-unstyled list-inline blog-info-v2">
+                <li>
+                  <i class="fa fa-user"></i>
+                  <a class="color-green" href="/me/<%= recipe.UserId %>">
+                    <%= recipe.authorName %>
+                  </a>
+                </li>
+                <li>
+                  <i class="fa fa-clock-o"></i>
+                  <%=: recipe.createdDateTime.date | formatDate %>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-md-7 col-sm-7 col-xs-12">
+              <div class="pull-right">
+                <button id="likeButton" class="btn-u btn-custom-like" data-id="<%= recipe.id %>" data-like="<%= recipe.currentUserLike %>">
+                  <i class="fa <%= recipe.currentUserLike ? 'fa-heart': 'fa-heart-o' %>" aria-hidden="true"></i>
+                  <%= recipe.UserLikeRecipes.length %>
+                  <span class="hidden-xs">收藏</span>
+                </button>
+
+                <% if(req.session.authenticated) { %>
+                  <a href="<%= `/recipe/feedback/${recipe.hashId}` %>" class="btn-u btn-custom-feedback">
+                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    <span class="hidden-xs">感覺回饋</span>
+                    <span class="hidden-lg hidden-md hidden-sm visable-xs">回饋</span>
+                  </a>
+                  <a href="<%= `/recipe/order/${recipe.hashId}` %>" id="orderButton" class="btn-u btn-custom-order" data-id="<%= recipe.hashId %>">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    訂購
+                  </a>
+                <% } else { %>
+                  <a href="#" class="btn-u btn-custom-feedback fn-signin-required">
+                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                    <span class="hidden-xs">感覺回饋</span>
+                    <span class="hidden-lg hidden-md hidden-sm visable-xs">回饋</span>
+                  </a>
+                  <a href="#" id="orderButton" class="btn-u btn-custom-order fn-signin-required" data-id="<%= recipe.hashId %>">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    訂購
+                  </a>
+                <% } %>
+
+                <div class="fbButton">
+                  <% include ../../lib/fbLikeShare.ejs %>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+          <hr/>
+
+          <div class="row">
+            <div id="wordCloudContainer" class="col col-md-12">
+              <div id="wordCloud" class="text-center" data-id="<%= recipe.id %>"></div>
+            </div>
+            <div class="col col-md-12">
+              <div id="pieChart" class="text-center"></div>
+            </div>
+          </div>
+
+          <!-- <label for="description">描述</label> -->
+          <ul class="list-unstyled list-inline description">
+            <li>
+              <p class="padding-5"><%= recipe.description %></p>
+            </li>
+          </ul>
+
+          <% if(recipe.message.length >0){ %>
+            <!-- <label for="message">備註</label>
+            <hr/>
+            <ul class="list-unstyled list-inline message">
+              <li>
+                <p class="padding-5"><%= recipe.message %></p>
+              </li>
+            </ul>-->
+          <% } %>
+
+          <!-- <label for="message">Facebook Comments</label> -->
+          <ul class="list-unstyled list-inline fb-comments">
+            <div id="fb-comments"></div>
+            <script>
+              (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.7";
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+            </script>
+          </ul>
+        </h4>
+      </div>
+      <% if(social.targets.length > 0){ %>
+        <div class="row shareSticker">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <% var socialData = social.data[0] %>
+            <%- include ../../lib/rrssbb.ejs %>
+          </div>
+        </div>
+      <% } %>
+      <!-- <div class="project-share">
+					<ul class="list-inline comment-list-v2 pull-left">
+						<li><i class="fa fa-eye"></i> <a href="#">25</a></li>
+						<li><i class="fa fa-comments"></i> <a href="#">32</a></li>
+						<li><i class="fa fa-retweet"></i> <a href="#">77</a></li>
+					</ul>
+					<ul class="list-inline star-vote pull-right">
+						<li><i class="color-green fa fa-star"></i></li>
+						<li><i class="color-green fa fa-star"></i></li>
+						<li><i class="color-green fa fa-star"></i></li>
+						<li><i class="color-green fa fa-star-half-o"></i></li>
+						<li><i class="color-green fa fa-star-o"></i></li>
+					</ul>
+				</div> -->
+
+    </div>
+    <!-- end .profile-body -->
+    <div class="text-center padding-bottom-5"></div>
+
+  </div>
+  <!-- end col -->
+
+</div>
+<!-- end row -->
+</div>
+<% LayoutUtils.addScripts ('/assets/admin/js/plugin/d3/d3.min.js'); %>
+<% LayoutUtils.addScripts ('/assets/admin/js/plugin/d3/d3pie.min.js'); %>
+<% LayoutUtils.addScripts('/assets/labfnp/lib/d3.layout.cloud.js'); %>
+<% LayoutUtils.addScripts('/assets/labfnp/page/wordCloud.js'); %>
+<% LayoutUtils.addScripts('/assets/labfnp/page/recipe/pieChart.js'); %>
+<% LayoutUtils.addScripts('/assets/labfnp/page/recipe/favorite.js'); %>
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+    if( $("#isNewRecipe").length > 0  && !isWebView){
+      swal({
+        type: "info",
+        title: "新配方",
+        text: "是否要在 F B 分享呢 ?",
+        showCancelButton: true,
+        confirmButtonText: "分享",
+        cancelButtonText: "暫時不要"
+      },
+      function(){
+        var url = $("#isNewRecipe").attr("href");
+        window.open( url, "_blank");
+      }
+     );
+   }
+
+   $(".fn-signin-required").on("click", function(event){
+     event.preventDefault();
+     swal({
+       title: '請先登入',
+       text: '此操作需為會員，請先進行登入。',
+       type: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: "#e6caa8",
+       confirmButtonText: "登入",
+       cancelButtonText: "註冊",
+       closeOnConfirm: false,
+       closeOnCancel: false,
+     },function(isConform){
+       if(isConform){
+         open('/login?url=/lab', '_self');
+       }else{
+         open('/register', '_self');
+       }
+     });
+     document.querySelector('.sweet-overlay').onclick = function(event) {
+       swal.close();
+     };
+     $(document).on('keydown', function(evt){
+       if(evt.keyCode == 27){
+         swal.close();
+       }
+     });
+   });
+
+  });
+`); %>

@@ -1,0 +1,59 @@
+<div class="container content">
+
+  <div class="row margin-bottom-40">
+
+    <% if (feed.fullPicture) { %>
+      <div class="col-md-5 col-md-offset-1">
+        <img src="<%= feed.fullPicture %>" alt="" class="img-responsive img-thumbnail" />
+      </div>
+    <% } %>
+
+    <div class="col-md-6">
+
+      <% if (feed.type=='link') { %>
+        <div class="margin-bottom-40">
+          <h2><%= feed.name %></h2>
+        </div>
+      <% } %>
+
+      <div class="margin-bottom-20">
+        <i class="fa fa-clock-o"></i>
+        <%= feed.createdDateTime.date %>
+      </div>
+
+      <div class="blog-content margin-bottom-20">
+
+        <% if (feed.message) { %>
+          <p class="feed-message margin-bottom-20"><%-: feed.message | linkifyjs | nl2br %></p>
+        <% } %>
+
+        <% if (feed.story) { %>
+          <p class="feed-story margin-bottom-20"><%-: feed.story | linkifyjs | nl2br %></p>
+        <% } %>
+
+        <% if (feed.description) { %>
+          <p class="feed-description margin-bottom-20"><%-: feed.description | linkifyjs | nl2br %></p>
+        <% } %>
+
+      </div>
+
+      <% if (feed.link) { %>
+        <a href="<%= feed.link %>" class="btn-u btn-u-brown" title="<%= feed.description %>" target="_blank">
+          前往粉絲頁貼文
+        </a>
+      <% } %>
+
+    </div>
+
+  </div>
+
+  <div class="text-center">
+
+    <a href="/wall" class="btn-u btn-u-dark-blue">
+      <!--<i class="fa fa-chevron-left" aria-hidden="true"></i>-->
+      所有最新動態
+    </a>
+
+  </div>
+
+</div>

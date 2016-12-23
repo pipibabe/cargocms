@@ -1,0 +1,290 @@
+<% LayoutUtils.addStylesheets('/assets/admin/css/smartadmin-default-index.css'); %>
+<style type="text/css">
+.table {
+  table-layout:fixed;
+}
+
+.textbreak {
+  word-break: break-all;
+}
+
+.textOver {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 700px) {
+    select.form-control {
+      padding: 2px 0px;
+      font-size: 1px;
+    }
+}
+
+[v-cloak] { display:none; }
+
+.btn.btn-default.btn-xs {
+  margin: 1px 1px 1px 1px;
+}
+
+.row-action-buttons {
+  cursor: pointer;
+  text-align: left;
+}
+.responsiveExpander {
+  padding-left: 24px !important;
+}
+
+</style>
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+	<thead>
+		<tr>
+			<th width="6%" data-hide="phone,tablet"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/> ID</th>
+			<th width="9%" data-class="expand">訂單編號</th>
+			<th width="12%" data-hide="phone"><i class="fa fa-fw text-muted hidden-sm hidden-xs"/> 金流交易編號 </th>
+      <th data-hide="always" class="hide">交易訊息</th>
+      <th width="9%" data-hide="always">付款時間</th>
+      <th width="8%" class="no-sort no-over" data-hide="always">付款方式</th>
+      <th width="5%" data-hide="always">金額</th>
+      <th data-hide="always" class="hide">付款帳號</th>
+      <th data-hide="always" class="hide">訂購票券</th>
+      <th width="11%" class="no-sort" data-hide="phone,tablet">活動名稱</th>
+      <th width="6%" class="no-sort">參加者</th>
+      <th width="7%" class="no-sort">訂單狀態</th>
+      <th class="hide" data-hide="always">訂購人</th>
+      <th class="hide" data-hide="always">Email</th>
+      <th class="hide" data-hide="always">電話</th>
+      <th class="hide" data-hide="always">住址</th>
+      <th width="9%" data-hide="phone,tablet">建立時間</th>
+			<th class="hide" data-hide="always">備註</th>
+      <th width="55px" data-hide="phone,tablet"></th>
+
+		</tr>
+	</thead>
+	<!-- client only -->
+	<tbody>
+		<tr v-for="item in data.items">
+      <td v-cloak>{{ item.id }}</td>
+			<td v-cloak><a href="/admin/#/admin/{{modelName}}/show/{{item.id}}">{{ item.TradeNo ? item.TradeNo:"訂單尚未成立" }}</a></td>
+      <td v-cloak>{{ item.MerchantTradeNo }}</td>
+			<td v-cloak>{{ item.RtnMsg }}</td>
+      <td v-cloak>{{ (item.PaymentDate == "Invalid date") ? "":item.PaymentDate }}</td>
+      <td v-cloak>{{ item.PaymentTypeDesc }} </td>
+      <td v-cloak>{{ item.invoiceNo }}</td>
+      <td v-cloak>{{ item.TradeAmt }} </td>
+      <td v-cloak>{{ item.vAccount }} </td>
+      <td v-cloak>{{ item.EventOrder.Event.title }} </td>
+      <td v-cloak>{{ item.UserName}} </td>
+      <td v-cloak>{{ item.EventOrder.Event.id}}<a href="/admin/#/admin/labfnp/event/show/{{item.RecipeOrder.Recipe.id}}"> <i class="fa fa-fw fa-external-link"></i> </a></td>
+      <td v-cloak>{{ item.EventOrder.productionStatusDesc}}</td>
+      <td v-cloak>{{ item.Email }} </td>
+      <td v-cloak>{{ item.Phone}} </td>
+      <td v-cloak>{{ item.Address }} </td>
+      <td v-cloak>{{ item.createdAt }} </td>
+      <td v-cloak>{{ item.note }} </td>
+      <td v-cloak>{{ item.recipient }} </td>
+			<td v-cloak align="center" style="cursor: pointer;">
+				<div class="row">
+					<a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
+						<i class="fa-fw fa fa-eye text-muted" />
+					</a>
+					<a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+						<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+					</a>
+          <a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+						<i class="fa-fw fa fa-keyboard-o text-muted"/>
+					</a>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+ </table>
+
+
+<script type="text/javascript">
+
+  var returnRecipeFormula = function(data, n){
+    if(data.RecipeOrder && data.RecipeOrder.Recipe){
+      if(data.RecipeOrder.Recipe.formula[n]){
+        return '<td>' + data.RecipeOrder.Recipe.formula[n].scent + ' , ' + data.RecipeOrder.Recipe.formula[n].drops + ' 滴' + '</td>';
+      }
+    }
+
+    return '<td></td>';
+  };
+
+	var pagefunction = function() {
+
+		// server only
+		var columns = [
+      { "data": "id" },  // row0
+      { "data": "MerchantTradeNo" },
+      { "data": "TradeNo"}, //TradeNo
+      { "data": "RtnMsg" },
+      { "data": "PaymentDate" }, //PaymentDate
+      { "data": "PaymentTypeDesc" },
+      { "data": "TradeAmt" },
+      { "data": "vAccount" },
+      { "data": "ItemNameArray" },
+      { "data": null }, // EventOrder.Event.Post.title
+      { "data": null }, // recipient
+      { "data": null }, // Select
+      { "data": "UserName" },
+      { "data": "Email" },
+      { "data": "Phone" },
+      { "data": "Address" },
+      { "data": "createdAt" }, //這裡調整要記得去 vue.js 改 defaultSort: [[ 16, 'desc' ]]
+      { "data": "Note" },
+      { "data": null }, // edit , show button
+    ]
+
+		// server only
+		var columnDefs = [
+      {
+        "targets": 'no-sort',
+        "orderable": false,
+      },
+			{
+				"searchable": true,
+				"targets": 1,
+        "render": function(data, type, row) {
+          return '<td><span class="textbreak">' + data + '</span></td>';
+        }
+			},
+      {
+        "targets": 2,
+        "render": function(data, type, row) {
+          if (data) {
+            return '<td><span class="textbreak">' + data +'</span></td>';
+          }else{
+						if (row.PaymentType === '到店購買') {
+							return '<td><span class="textbreak">到店購買</span></td>'
+						} else if (row.PaymentType === '免費活動'){
+							return '<td></td>';
+						} else {
+              return '<td><span class="textbreak">訂單尚未成立</span></td>';
+            }
+          }
+        }
+      },
+      {
+        "targets": 4,
+				"searchable": false,
+        "render": function(data, type, row) {
+          if (data !== "Invalid date") {
+            return '<td>' + data +'</td>';
+          }else{
+            return '<td></td>';
+          }
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 5,
+        "render": function(data, type, row) {
+          var data = data || ""
+          return '<td><p class="textOver">' + data +'</p></td>';
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 8
+      },
+      {
+        "searchable": false,
+        "targets": 9,
+        "render": function(data, type, row) {
+          if(data.EventOrder && data.EventOrder.Event && data.EventOrder.Event.Post){
+            return '<td><p class="textOver">' + data.EventOrder.Event.Post.title + '</p></td>';
+          }
+          return '<td></td>';
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 10,
+        "render": function(data, type, row) {
+          if(data.EventOrder){
+            return '<td>' + data.EventOrder.recipient + '</td>';
+          }
+          return '<td></td>';
+        }
+      },
+			{
+        "searchable": false,
+        "targets": 11,
+        "render": function (data, type, row) {
+          // return '<td>' + data.RecipeOrder.productionStatusDesc + '</td>';
+          if(row.EventOrder){
+            var productionStatus =  row.EventOrder.productionStatus;
+  					return '<select class="form-control input-xs" data-id="'+ row.EventOrderId +'" data-allpayId="'+ row.id +'"  name="updateProductionStatus">' +
+            '<option value="NEW" '+ (productionStatus == 'NEW' ? 'selected' : '') + '>NEW</option>' +
+  	          '<option value="PENDING" '+ (productionStatus == 'PENDING' ? 'selected' : '') + '>待建立</option>' +
+  	          '<option value="SUBMITTED" '+ (productionStatus == 'SUBMITTED' ? 'selected' : '') +' >下訂單</option>' +
+  	          '<option value="PAID" '+ (productionStatus == 'PAID' ? 'selected' : '') +'>已付款</option>' +
+  	          '<option value="PROCESSING"'+ (productionStatus == 'PROCESSING' ? 'selected' : '') +' >製作中</option>' +
+  	          '<option value="CANCELLED"'+ (productionStatus == 'CANCELLED' ? 'selected' : '') +' >取消</option>' +
+  	          '<option value="SHIPPED"'+ (productionStatus == 'SHIPPED' ? 'selected' : '') +' >已寄出</option>' +
+  	          '<option value="DELIVERED"'+ (productionStatus == 'DELIVERED' ? 'selected' : '') +' >已交付</option>' +
+  	          '<option value="COMPLETED"'+ (productionStatus == 'COMPLETED' ? 'selected' : '') +' >完成</option>' +
+  	        '</select>'
+          }
+          return '<select></select>';
+
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 12,
+        "render": function(data, type, row) {
+          return '<td>' + data +'</td>';
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 13
+      },
+      {
+        "searchable": false,
+        "targets": 14
+      },
+      {
+        "searchable": false,
+        "targets": 15
+      },
+      {
+        "searchable": false,
+        "targets": 16,
+        "render": function ( data, type, row ) {
+          return '<td>'+ row.createdDateTime.dateTime +'</td>'
+        }
+      },
+      {
+        "searchable": false,
+        "targets": 17
+      },
+			{
+				"targets"  : 18,
+				"orderable": false,
+				"searchable": false,
+				"render": function ( data, type, row ) {
+					var colBody =
+					'<div class="row-action-buttons hidden-xs hidden-sm">'+
+						'<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-eye text-muted" />'+
+						'</a>'+
+						'<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+							'<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+						'</a>'+
+					'</div>';
+					return colBody;
+				}
+			},
+		]
+		var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+		<%- include vue.ejs %>
+		appMain.$mount("#main-index");
+		appMain.loadItems(appMain.renderTable);
+	};
+</script>
