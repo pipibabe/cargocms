@@ -133,6 +133,7 @@
     border-top: 1px solid gray;
     padding-top: 20px;
     padding-left: 20px;
+    animation: 0.2s slidein ease-in-out backwards;
 
     p {
       margin: 15px 0;
@@ -208,3 +209,14 @@
   transition: opacity 300ms ease-in;
 }
 // animations-end
+@keyframes slidein {
+  from {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  to {
+    height: 400px;
+    overflow: hidden;
+  }
+}
