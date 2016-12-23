@@ -1,6 +1,5 @@
 /* @flow */
 import React, { PropTypes } from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import {
   Toolbar,
   ToolbarGroup,
@@ -46,7 +45,6 @@ export default class MainToolbar extends React.Component {
 
   constructor(props) {
     super(props);
-    // injectTapEventPlugin();
     this.state = {
       value: 3,
       width: 0,
