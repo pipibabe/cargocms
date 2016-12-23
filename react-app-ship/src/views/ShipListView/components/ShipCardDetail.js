@@ -1,8 +1,4 @@
 import React, { PropTypes } from 'react';
-import {
-  CardText,
-  CardActions,
-} from 'material-ui/Card';
 import ShipCardStepper from './ShipCardStepper';
 
 const defaultProps = {

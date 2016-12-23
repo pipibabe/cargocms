@@ -6,7 +6,7 @@ import {
   CardActions,
 } from 'material-ui/Card';
 import ShipCardBody from './ShipCardBody';
-import ShipCardDetail from './ShipCardDetail';
+import ShipCardDetail from '../components/ShipCardDetail';
 
 export default class ShipCard extends React.Component {
   static defaultProps = {

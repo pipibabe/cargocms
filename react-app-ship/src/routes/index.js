@@ -10,7 +10,7 @@ import CoreLayout from 'layouts/CoreLayout/CoreLayout';
 import HomeView from 'views/HomeView/HomeView';
 import Login from 'views/Login/Login';
 import MaterialUi from 'views/MaterialUi/MaterialUi';
-import ShipList from 'views/ShipListView/ShipList';
+import ShipList from 'views/ShipListView';
 
 export default (store) => (
   <Route path='/'>

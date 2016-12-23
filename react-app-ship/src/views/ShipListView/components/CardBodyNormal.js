@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import CardStateColor from './CardStateColor';
+import CardStateColor from '../CardStateColor';
 
 const defaultProps = {
   invoiceNum: 'S1111222233334444',

@@ -1,11 +1,8 @@
 import React, { PropTypes } from 'react';
-import {
-  Snackbar,
-} from 'material-ui';
-import CardBodyNormal from './CardBodyNormal';
-import CardBodyExpend from './CardBodyExpend';
-import DialogPrint from './DialogPrint';
-import DialogShip from './DialogShip';
+import CardBodyNormal from '../components/CardBodyNormal';
+import CardBodyExpend from '../components/CardBodyExpend';
+import DialogPrint from '../components/DialogPrint';
+import DialogShip from '../components/DialogShip';
 
 export default class ShipCardBody extends React.Component {
   static defaultProps = {
