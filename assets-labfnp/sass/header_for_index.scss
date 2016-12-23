@@ -1,30 +1,52 @@
-.navbar.navbar-default.navbar-index-transparent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: transparent;
-  border-color: transparent;
-  &.nav-hide {
-    opacity: 0;
+.navbar.navbar-default.navbar-index {
+  display: none;
+}
+
+@media screen and (max-width: 991px ){
+  .navbar.navbar-default.navbar-index-transparent {
+    top: 0;
+    border-width: 0 0 1px;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
   }
-  .header {
+}
+
+@media screen and (min-width: 992px ){
+
+  .navbar.navbar-default.navbar-index-transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: transparent;
     border-color: transparent;
-    .navbar-nav li{
-      &:not(:nth-child(9)) {
-        visibility: hidden;
-      }
-      a {
-        color: white;
+    &.nav-hide {
+      opacity: 0;
+    }
+    .header {
+      background-color: transparent;
+      border-color: transparent;
+      .navbar-nav li{
+        &:not(:nth-child(9)) {
+          visibility: hidden;
+        }
+        a {
+          color: white;
+        }
       }
     }
   }
-}
-.navbar.navbar-default.navbar-index {
-  transition: 0.2s all ease-in-out;
-  &.nav-hide {
-    opacity: 0;
-    transform: translateY(-45px);
+
+  .navbar.navbar-default.navbar-index {
+    display: block;
+    transition: 0.2s all ease-in-out;
+    &.nav-hide {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-45px);
+    }
   }
+
 }
