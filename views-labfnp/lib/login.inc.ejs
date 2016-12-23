@@ -1,5 +1,5 @@
 <style>
-[name=login-page]{
+#login-page{
   width: 300px;
   padding: 20px;
   position: relative;
@@ -9,7 +9,6 @@
   border-style: solid;
   border-color: #4FC3F7;
   background-color: #9E9E9E;
-  z-index: 100;
 }
 
 .margin-top-10 {
@@ -29,8 +28,18 @@ a.btn-facebook-inversed {
   background-color: #444;
 }
 
+#login-btn {
+  position: absolute;
+  top: 30px;
+  right: 25px;
+}
+
 </style>
-<div name="login-page">
+<div id="login-btn">
+  <button class="btn btn-lg btn-default">登入</button>
+</div>
+
+<div id="login-page" class="hide">
   <form class="reg-page" method="post" action="/auth/local">
     <div class="social-login">
       <ul class="list-unstyled">
@@ -98,6 +107,14 @@ a.btn-facebook-inversed {
     });
 
 
+    $('#login-btn').click(function(){
 
+      if( $('#login-page.hide').length > 0 ){
+        $('#login-page').removeClass('hide');
+      } else {
+        $('#login-page').addClass('hide');
+      }
+
+    })
   });
 `); %>
