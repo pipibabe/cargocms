@@ -7,7 +7,7 @@ import {
 } from 'material-ui';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ShipCard from './ShipCard';
-import classes from '../_style.scss'
+import classes from '../_style.scss';
 
 const styles = {
   iconSearch: {

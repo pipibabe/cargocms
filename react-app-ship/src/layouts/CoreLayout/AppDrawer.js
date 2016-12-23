@@ -51,31 +51,29 @@ const styles = {
 export default class AppDrawer extends React.Component {
   static propTypes = {
     showToast: PropTypes.func,
+    content: PropTypes.object,
     toastMsg: PropTypes.string,
     toastOpen: PropTypes.bool,
-    content: PropTypes.object,
   };
 
   static defaultProps = {
     showToast: null,
+    content: '',
     toastMsg: '',
     toastOpen: false,
-    content: '',
   };
 
   constructor(props) {
     super(props);
     injectTapEventPlugin();
     this.state = {
-      open: true,
+      drawerOpen: true,
       drawerWidth: 200,
       width: 0,
       height: 0,
-      snackbarOpen: props.toastOpen,
-      snackbarMsg: props.toastMsg,
+      // toastOpen: props.toastOpen,
+      // toastMsg: props.toastMsg,
     };
-
-    console.log(`toastOpen=>${props.toastOpen}`);
   }
 
   componentWillMount = () => {
@@ -88,12 +86,12 @@ export default class AppDrawer extends React.Component {
 
   componentWillReceiveProps = (nextProps) => {
     if (nextProps !== this.props) {
-      this.setState({
-        toastMsg: nextProps.toastMsg,
-        toastOpen: nextProps.toastOpen,
-      });
+      // this.setState({
+      //   toastMsg: nextProps.toastMsg,
+      //   toastOpen: nextProps.toastOpen,
+      // });
     }
-    console.log(`nextProps==>${nextProps}`);
+    console.log('nextProps==>', nextProps);
   }
 
   componentWillUnmount = () => {
@@ -113,7 +111,7 @@ export default class AppDrawer extends React.Component {
   handleToggle = () => {
     this.props.showToast('!!!!!!!!!!!');
     this.setState({
-      open: !this.state.open,
+      drawerOpen: !this.state.drawerOpen,
     });
   };
 
@@ -147,7 +145,7 @@ export default class AppDrawer extends React.Component {
             containerStyle={styles.drawerContainer}
             className='drawer'
             zDepth={zDepth}
-            open={this.state.open}
+            open={this.state.drawerOpen}
             width={this.state.drawerWidth}
             docked={!isMobile}
           >
@@ -157,8 +155,8 @@ export default class AppDrawer extends React.Component {
             {this.props.content}
           </div>
           <Snackbar
-            open={this.state.snackbarOpen}
-            message={this.state.snackbarMsg}
+            open={this.props.toastOpen}
+            message={this.props.toastMsg}
             autoHideDuration={4000}
             onRequestClose={this.handleSnackbarClose}
           />

@@ -25,13 +25,11 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 export const ACTION_HANDLERS = {
-  [SHOW_TOAST]: (state = {}, action) => {
-    return {
-      ...state,
-      toastOpen: action.toastOpen,
-      toastMsg: action.toastMsg,
-    };
-  },
+  [SHOW_TOAST]: (state = {}, action) => ({
+    ...state,
+    toastOpen: action.toastOpen,
+    toastMsg: action.toastMsg,
+  }),
 };
 
 // ------------------------------------
