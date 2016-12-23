@@ -100,7 +100,9 @@ p.lead {
 <div class="interactive-slider-v2">
   <div class="container">
     <img src="/assets/labfnp/img/lfp-logo-hero-bg.png" alt="LFP: Laboratory of Fragrance &amp; Perfume - 我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水" class="img-responsive animated zoomIn" />
-    <% include lib/login.inc.ejs %>
+    <% if (!req.session.authenticated) { %>
+      <% include lib/login.inc.ejs %>
+    <% } %>
     <!--
     <h1>Laboratory of Fragrance &amp; Perfume</h1>
     -->
