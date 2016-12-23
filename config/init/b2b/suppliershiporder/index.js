@@ -9,7 +9,7 @@ module.exports.init = async () => {
       let product = await Product.findById(orderProduct.ProductId);
 
       const j = [0, 1, 2];
-      for(const i in j) {
+      for(const i of j) {
         let supplierShipOrder = await SupplierShipOrder.create({
           OrderId: order.id,
           SupplierId: product.SupplierId,
