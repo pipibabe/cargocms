@@ -79,17 +79,10 @@ export default class ShipList extends React.Component {
 
   render() {
     const dataSource = this.state.dataSource;
-    const autoCompleteTitle = [];
+    let autoCompleteTitle = [];
     if (typeof dataSource.data === 'object') {
-      dataSource.data.items.map((item) => {
-        autoCompleteTitle.push(item.displayName);
-        autoCompleteTitle.push(item.invoicePrefix + item.invoiceNo);
-        autoCompleteTitle.push(item.email);
-        autoCompleteTitle.push(item.telephone);
-        autoCompleteTitle.push(item.paymentAddress1);
-        autoCompleteTitle.push(item.paymentCity);
-        return item;
-      });
+      autoCompleteTitle =
+        dataSource.data.items.map(item => item);
     }
 
     return (
