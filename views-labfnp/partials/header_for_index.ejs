@@ -1,0 +1,128 @@
+<nav class="navbar navbar-default navbar-fixed-top native-hide navbar-index transparent">
+<!--=== Header ===-->
+<div class="header">
+  <div class="container">
+    <!-- Logo -->
+    <a class="logo" href="/">
+      <img src="/assets/labfnp/img/logo-text-light.png" alt="Logo">
+
+      <!--<h1>LFP</h1>-->
+    </a>
+    <!-- End Logo -->
+
+    <!-- Topbar -->
+    <!-- <div class="topbar">
+      <ul class="loginbar pull-right">
+      </ul>
+    </div> -->
+    <!-- End Topbar -->
+
+    <!-- Toggle get grouped for better mobile display -->
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="fa fa-bars"></span>
+    </button>
+    <!-- End Toggle -->
+  </div><!--/end container-->
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li class="<%= (req.path=='/')?'active':'' %>">
+          <a href="/">首頁</a>
+        </li>
+        <li class="<%= (req.path.startsWith('/lab') || req.path.startsWith('/recipe') )?'active':'' %>">
+          <a href="/lab">實驗室</a>
+        </li>
+        <li class="<%= (req.path.startsWith('/wall'))?'active':'' %>">
+          <a href="/wall">近期動態</a>
+        </li>
+        <li class="<%= (req.path.startsWith('/blog'))?'active':'' %>">
+          <a href="/blog">網誌</a>
+        </li>
+        <li class="<%= (req.path.startsWith('/event'))?'active':'' %>">
+          <a href="/event">活動</a>
+        </li>
+        <li class="base active">
+          <a>1</a>
+        </li>
+        <!--
+        <li class="<%= (req.path=='/shop')?'active':'' %>">
+          <a href="/shop">活動報名</a>
+        </li>
+        -->
+        <% if (!req.session.authenticated) { %>
+          <li class="<%= (req.path=='/register')?'active':'' %>"><a href="/register">註冊</a></li>
+          <li class="topbar-devider"></li>
+
+          <% var loginBackUrl = req.url;%>
+          <% if(loginBackUrl === '/register' || loginBackUrl === '/') { %>
+          <%   loginBackUrl = '' %>
+          <% } else { %>
+          <%   loginBackUrl = '?url=' + loginBackUrl %>
+          <% } %>
+          <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" href="/login<%= loginBackUrl %>">登入</a></li>
+        <% } else { %>
+          <li><a id="logout-link" href="#" >登出</a></li>
+          <li class="topbar-devider"></li>
+          <li class="<%= (req.path=='/me')?'active':'' %>" >
+            <a href="/me">
+              <%= req.session.passport.user.displayName %>
+            </a>
+          </li>
+        <% } %>
+        <li class="<%= (req.path.startsWith('/contact'))?'active':'' %> hidden-lg hidden-md hidden-sm">
+          <a href="/contact">聯絡我們</a>
+        </li>
+      </ul>
+    </div><!--/end container-->
+  </div><!--/navbar-collapse-->
+</div>
+<!--=== End Header ===-->
+</nav>
+
+<% LayoutUtils.addScriptBlock(`
+  $(function () {
+    function setHeaderClass() {
+      if ($(this).scrollTop() > 30) {
+        $('.navbar-index').removeClass('transparent');
+      } else {
+        $('.navbar-index').addClass('transparent');
+      }
+    }
+    setHeaderClass()
+    $(window).scroll(setHeaderClass);
+  });
+`); %>
+
+<% LayoutUtils.addScriptBlock(`
+  $('#logout-link').click(function(){
+    swal({
+      title: '確認',
+      text: '您確定要登出了嗎？',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: "#e6caa8",
+      confirmButtonText: "登出",
+      cancelButtonText: "取消",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+    },function(isConform){
+      if(isConform){
+        open('/logout', '_self');
+      }else{
+        swal.close();
+      }
+    });
+  });
+
+
+  $(':not(.navbar-responsive-collapse)').on('click',function(event) {
+    $('.navbar-responsive-collapse').collapse('hide');
+  });
+
+  $(':not(.navbar-responsive-collapse)').on('tap', function(event) {
+    $('.navbar-responsive-collapse').collapse('hide');
+  });
+`); %>

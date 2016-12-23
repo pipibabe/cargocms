@@ -52,7 +52,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div class="wrapper">
 
-  <% include partials/header.ejs %>
+  <% if(req.path === '/') { %>
+    <% include partials/header_for_index.ejs %>
+  <% } else { %>
+    <% include partials/header.ejs %>
+  <% } %>
 
   <%- body -%>
 
