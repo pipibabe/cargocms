@@ -112,7 +112,6 @@ export default class AppDrawer extends React.Component {
 
   handleToggle = () => {
     this.props.showToast('!!!!!!!!!!!');
-    console.log(`showToast==>${this.props.showToast}`);
     this.setState({
       open: !this.state.open,
     });
