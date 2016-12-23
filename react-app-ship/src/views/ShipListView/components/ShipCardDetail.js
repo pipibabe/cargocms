@@ -48,7 +48,7 @@ const propTypes = {
   orderDetail: PropTypes.array,
   orderDate: PropTypes.object,
   orderSupplier: PropTypes.object,
-  total: PropTypes.string,
+  total: PropTypes.number,
   status: PropTypes.string,
   //
   paymentMethod: PropTypes.string,
