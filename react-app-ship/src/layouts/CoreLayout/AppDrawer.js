@@ -6,19 +6,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import {
   AppBar,
   Drawer,
+  Snackbar,
 } from 'material-ui';
 import MainToolbar from './MainToolbar';
 import DrawerMenuItems from './DrawerMenuItems';
+import { showToast } from '../../redux/modules/toast';
 
-// import { increment, doubleAsync } from '../../redux/modules/counter';
-
-// @connect(
-//   state => ({
-//     counter: state.counter,
-//   }),
-//   dispatch => bindActionCreators({
-//   }, dispatch),
-// )
 const styles = {
   appBar: {
     backgroundColor: '#2D3743',
@@ -46,12 +39,27 @@ const styles = {
   },
 };
 
+@connect(
+  state => ({
+    toastMsg: state.toastMsg,
+    toastOpen: state.toastOpen,
+  }),
+  dispatch => bindActionCreators({
+    showToast,
+  }, dispatch),
+)
 export default class AppDrawer extends React.Component {
   static propTypes = {
+    showToast: PropTypes.func,
+    toastMsg: PropTypes.string,
+    toastOpen: PropTypes.bool,
     content: PropTypes.object,
   };
 
   static defaultProps = {
+    showToast: null,
+    toastMsg: '',
+    toastOpen: false,
     content: '',
   };
 
@@ -63,7 +71,11 @@ export default class AppDrawer extends React.Component {
       drawerWidth: 200,
       width: 0,
       height: 0,
+      snackbarOpen: props.toastOpen,
+      snackbarMsg: props.toastMsg,
     };
+
+    console.log(`toastOpen=>${props.toastOpen}`);
   }
 
   componentWillMount = () => {
@@ -72,6 +84,16 @@ export default class AppDrawer extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener('resize', this.updateDimensions);
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps !== this.props) {
+      this.setState({
+        toastMsg: nextProps.toastMsg,
+        toastOpen: nextProps.toastOpen,
+      });
+    }
+    console.log(`nextProps==>${nextProps}`);
   }
 
   componentWillUnmount = () => {
@@ -88,9 +110,13 @@ export default class AppDrawer extends React.Component {
     this.setState({ width, height });
   }
 
-  handleToggle = () => this.setState({
-    open: !this.state.open,
-  });
+  handleToggle = () => {
+    this.props.showToast('!!!!!!!!!!!');
+    console.log(`showToast==>${this.props.showToast}`);
+    this.setState({
+      open: !this.state.open,
+    });
+  };
 
   render() {
     const isMobile = this.state.width < 768;
@@ -131,17 +157,14 @@ export default class AppDrawer extends React.Component {
           <div className='' style={styles.content}>
             {this.props.content}
           </div>
+          <Snackbar
+            open={this.state.snackbarOpen}
+            message={this.state.snackbarMsg}
+            autoHideDuration={4000}
+            onRequestClose={this.handleSnackbarClose}
+          />
         </div>
       </div>
     );
   }
 }
-
-// const mapStateToProps = (state) => ({
-//   counter: state.counter
-// })
-//
-// export default connect(mapStateToProps, {
-//   increment: () => increment(1),
-//   doubleAsync
-// })(AppDrawer)
