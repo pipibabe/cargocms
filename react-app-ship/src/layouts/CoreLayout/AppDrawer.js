@@ -44,8 +44,7 @@ const styles = {
 
 @connect(
   state => ({
-    toastMsg: state.toastMsg,
-    toastOpen: state.toastOpen,
+    toast: state.toast,
   }),
   dispatch => bindActionCreators({
     showToast,
@@ -53,19 +52,17 @@ const styles = {
   }, dispatch),
 ) export default class AppDrawer extends React.Component {
   static propTypes = {
+    content: PropTypes.object,
     showToast: PropTypes.func,
     closeToast: PropTypes.func,
-    content: PropTypes.object,
-    toastMsg: PropTypes.string,
-    toastOpen: PropTypes.bool,
+    toast: PropTypes.object,
   };
 
   static defaultProps = {
     showToast: null,
     closeToast: null,
+    toast: {},
     content: '',
-    toastMsg: '',
-    toastOpen: false,
   };
 
   constructor(props) {
@@ -76,8 +73,6 @@ const styles = {
       drawerWidth: 200,
       width: 0,
       height: 0,
-      // toastOpen: props.toastOpen,
-      // toastMsg: props.toastMsg,
     };
   }
 
@@ -89,15 +84,7 @@ const styles = {
     window.addEventListener('resize', this.updateDimensions);
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps !== this.props) {
-      // this.setState({
-      //   toastMsg: nextProps.toastMsg,
-      //   toastOpen: nextProps.toastOpen,
-      // });
-    }
-    console.log('nextProps==>', nextProps);
-  }
+  componentWillReceiveProps = (nextProps) => {}
 
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.updateDimensions);
@@ -135,7 +122,6 @@ const styles = {
     const titleText = isMobile ? '出貨管理系統' : '雲端漁場出貨管理系統';
 
     styles.drawerContainer.position = isMobile ? 'fixed' : 'relative';
-    console.log('this.props.toastOpen=>', this.props.toastOpen);
     return (
       <div className=''>
         <AppBar
@@ -161,8 +147,8 @@ const styles = {
             {this.props.content}
           </div>
           <Snackbar
-            open={this.props.toastOpen}
-            message={this.props.toastMsg}
+            open={this.props.toast.open}
+            message={this.props.toast.msg}
             autoHideDuration={4000}
             onRequestClose={this.props.closeToast}
           />

@@ -9,20 +9,20 @@ export const CLOSE_TOAST = 'CLOSE_TOAST';
 // Actions
 // ------------------------------------
 export function showToast(
-  toastMsg = '',
+  msg = '',
 ) {
   return {
     type: SHOW_TOAST,
-    toastOpen: true,
-    toastMsg,
+    open: true,
+    msg,
   };
 }
 
 export function closeToast() {
   return {
     type: CLOSE_TOAST,
-    toastOpen: false,
-    toastMsg: '',
+    open: false,
+    msg: '',
   };
 }
 
@@ -36,13 +36,13 @@ export const actions = {
 export const ACTION_HANDLERS = {
   [SHOW_TOAST]: (state = {}, action) => ({
     ...state,
-    toastOpen: action.toastOpen,
-    toastMsg: action.toastMsg,
+    open: action.open,
+    msg: action.msg,
   }),
   [CLOSE_TOAST]: (state = {}, action) => ({
     ...state,
-    toastOpen: action.toastOpen,
-    toastMsg: action.toastMsg,
+    open: action.open,
+    msg: action.msg,
   }),
 };
 
@@ -50,8 +50,8 @@ export const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  toastMsg: '',
-  toastOpen: false,
+  msg: '',
+  open: false,
 };
 
 export default function toastReducer(state = initialState, action) {

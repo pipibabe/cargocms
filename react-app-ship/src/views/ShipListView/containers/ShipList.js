@@ -1,11 +1,16 @@
 import axios from 'axios';
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   FontIcon,
-  Snackbar,
   AutoComplete,
 } from 'material-ui';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {
+  showToast,
+  closeToast,
+} from '../../../redux/modules/toast';
 import ShipCard from './ShipCard';
 import classes from '../_style.scss';
 
@@ -31,21 +36,29 @@ const styles = {
   },
 };
 
-export default class ShipList extends React.Component {
+@connect(
+  state => ({
+    toast: state.toast,
+  }),
+  dispatch => bindActionCreators({
+    showToast,
+  }, dispatch),
+) export default class ShipList extends React.Component {
   static defaultProps = {
     data: {},
+    showToast: null,
   };
 
   static propTypes = {
     data: PropTypes.object,
+    showToast: PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
       dataSource: [],
-      snackbarOpen: false,
-      snackbarMsg: '',
+      showToast: props.showToast,
     };
     this.handelGetJsonFromServer();
   }
@@ -59,21 +72,7 @@ export default class ShipList extends React.Component {
       });
     })
     .catch((error) => {
-      // console.log(error);
-      this.handleSnackbarMessage(error);
-    });
-  }
-
-  handleSnackbarMessage = (msg) => {
-    this.setState({
-      snackbarOpen: true,
-      snackbarMsg: msg,
-    });
-  }
-
-  handleSnackbarClose = () => {
-    this.setState({
-      snackbarOpen: false,
+      this.props.showToast('你是否尚未登入後台系統？ Error=>', error);
     });
   }
 
@@ -122,7 +121,7 @@ export default class ShipList extends React.Component {
             {
               typeof dataSource.data === 'object' ? this.state.dataSource.data.items.map(item => (
                 <ShipCard
-                  toast={this.handleSnackbarMessage}
+                  toast={this.state.showToast}
                   key={item.id}
                   {...item}
                 />
@@ -130,12 +129,6 @@ export default class ShipList extends React.Component {
             }
           </ReactCSSTransitionGroup>
         </div>
-        <Snackbar
-          open={this.state.snackbarOpen}
-          message={this.state.snackbarMsg}
-          autoHideDuration={4000}
-          onRequestClose={this.handleSnackbarClose}
-        />
       </div>
     );
   }

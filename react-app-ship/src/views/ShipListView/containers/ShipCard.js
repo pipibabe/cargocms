@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import {
   Card,
   CardText,
-  CardHeader,
   CardActions,
 } from 'material-ui/Card';
 import ShipCardBody from './ShipCardBody';
