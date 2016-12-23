@@ -60,12 +60,12 @@ p.lead {
 
 .feature-slogan {
   position: relative;
-  top: -100px;
+  top: -90px;
 }
 
 @media (max-width: 543px) {
   .feature-slogan {
-    top: -65px;
+    top: -35px;
   }
 }
 
@@ -99,7 +99,7 @@ p.lead {
 <!-- Interactive Slider v2 -->
 <div class="interactive-slider-v2">
   <div class="container">
-    <img src="/assets/labfnp/img/lfp-logo-hero-bg.png" alt="LFP: Laboratory of Fragrance &amp; Perfume - 我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水" class="img-responsive animated zoomIn" />
+    <img style="max-width: 580px;width: 100%;margin: 90px auto 0;" src="/assets/labfnp/img/lfp-logo-hero-bg.png" alt="LFP: Laboratory of Fragrance &amp; Perfume - 我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水" class="img-responsive animated zoomIn" />
     <!--
     <h1>Laboratory of Fragrance &amp; Perfume</h1>
     -->
@@ -107,7 +107,7 @@ p.lead {
       <p>我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水</p>
     </div>
 
-    <div class="feature-buttons">
+    <div class="feature-buttons" style="display: none;">
       <% if (req.session.authenticated) { %>
         <a href="/lab" class="btn-u rounded">
           <i class="fa fa-flask fa-fw"></i>
