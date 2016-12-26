@@ -123,6 +123,18 @@ var defaultConfig = {
     '*': ['passport', 'sessionAuth', 'isAdmin'],
   },
 
+  "api/admin/OrderPaymentController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+
+  "api/admin/OrderPaymentStatusController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+
+  "api/admin/OrderPaymentHistoryController": {
+    '*': ['passport', 'sessionAuth', 'isAdmin'],
+  },
+
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *
