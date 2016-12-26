@@ -1,0 +1,76 @@
+.b2b-login {
+  margin: 1em 0;
+  padding: 2em 0 2.6em;
+  input {
+    border-radius: 0;
+    box-shadow: none;
+    border: #868686 solid 2px;
+  }
+  .btn-gray {
+    border-radius: 0;
+    background: grey;
+    color: rgba(255, 255, 255, 0.88);
+  }
+}
+.b2b-side-nav + div > .b2b-content.b2b-content-header {
+  padding-top: 2em;
+  padding-bottom: 1.6em;
+  background: white;
+}
+.b2b-side-nav + div > .b2b-content.b2b-content-body {
+  padding-top: 3em;
+  padding-bottom: 1.6em;
+  background: #e6e6e6;
+}
+.product {
+  @media (max-width: 1200px) {
+    padding: 20px 13px;
+  }
+  padding: 30px 25px;
+  .product-img {
+    width: 100%;
+    height: 145px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.28);
+    border: 2px solid white;
+    @media (max-width: 767px) {
+      height: 260px;
+    }
+    @media (max-width: 410px) {
+      height: 210px;
+    }
+  }
+  &.product-promotion {
+    .product-price {
+      span {
+        color: #e61616;
+        font-weight: 600;
+      }
+    }
+    .promotion-label {
+      visibility: visible;
+    }
+  }
+  .product-price {
+    margin: 3px 0;
+    span {
+      font-size: 1.6em;
+      margin-right: 4px;
+    }
+  }
+  .promotion-label {
+    visibility: hidden;
+    font-size: 0.8em;
+    background: #e61616;
+    color: rgba(255, 255, 255, 0.94);
+    padding: 3px;
+    border-radius: 2px;
+    margin: 3px 0;
+  }
+  h1 {
+    font-size: 1.3em;
+    margin-bottom: 7px;
+  }
+}
