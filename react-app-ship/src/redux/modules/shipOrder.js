@@ -1,52 +1,70 @@
 /* @flow */
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT';
+import { postData } from '../utils/fetchApi';
+import { showToast } from './toast';
+// ------------------------------------
+// Constants
+// ------------------------------------
+export const GET_SHIP_LIST = 'GET_SHIP_LIST';
+export const FETCH_SHIP_LIST_API = 'FETCH_SHIP_LIST_API';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-// NOTE: "Action" is a Flow interface defined in https://github.com/TechnologyAdvice/flow-interfaces
-// If you're unfamiliar with Flow, you are completely welcome to avoid annotating your code, but
-// if you'd like to learn more you can check out: flowtype.org.
-// DOUBLE NOTE: there is currently a bug with babel-eslint where a `space-infix-ops` error is
-// incorrectly thrown when using arrow functions, hence the oddity.
-export function increment(value: number = 1): Action {
+
+export function deliverShipListData(data) {
+  console.log('data=>', data);
   return {
-    type: COUNTER_INCREMENT,
-    payload: value,
+    type: GET_SHIP_LIST,
+    list: data,
   };
 }
 
-// This is a thunk, meaning it is a function that immediately
-// returns a function for lazy evaluation. It is incredibly useful for
-// creating async actions, especially when combined with redux-thunk!
-// NOTE: This is solely for demonstration purposes. In a real application,
-// you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
-// reducer take care of this logic.
-export const doubleAsync = (): Function => (dispatch: Function, getState: Function): Promise => new Promise((resolve: Function): void => {
-  setTimeout(() => {
-    dispatch(increment(getState().counter));
-    resolve();
-  }, 200);
-});
+export function fetchShipListData() {
+  return async(dispatch, getState)=> {
+    const api = '/api/admin/suppliershiporder/all';
+    const fetchResult = await postData(api);
+    let result = '';
+    // success
+    if (fetchResult.status) {
+      dispatch(deliverShipListData(fetchResult.data.data));
+      dispatch(showToast('載入完成'));
+    } else {
+      // error
+      if (fetchResult.response) {
+        result = fetchResult.response.statusText;
+      } else {
+        result = fetchResult.message;
+      }
+      dispatch(showToast(result));
+    }
+    // console.log('fetchResult=>', fetchResult);
+    // console.log('result=>', result);
+  };
+}
 
 export const actions = {
-  increment,
-  doubleAsync,
+  deliverShipListData,
+  fetchShipListData,
 };
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
-const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state: number, action: {payload: number}): number => state + action.payload,
+export const ACTION_HANDLERS = {
+  [GET_SHIP_LIST]: (state = {}, action) => ({
+    ...state,
+    list: action.list,
+  }),
 };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0;
-export default function counterReducer(state: number = initialState, action: Action): number {
-  const handler = ACTION_HANDLERS[action.type];
+const initialState = {
+  list: {},
+};
 
+export default function shipOrderReducer(state = initialState, action) {
+  const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state;
 }

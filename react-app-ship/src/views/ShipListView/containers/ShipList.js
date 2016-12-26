@@ -7,12 +7,13 @@ import {
   AutoComplete,
 } from 'material-ui';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {
-  showToast,
-  closeToast,
-} from '../../../redux/modules/toast';
+import Lang from 'lodash/Lang';
 import ShipCard from './ShipCard';
 import classes from '../_style.scss';
+import {
+  showToast,
+} from '../../../redux/modules/toast';
+import { fetchShipListData } from '../../../redux/modules/shipOrder';
 
 const styles = {
   iconSearch: {
@@ -38,49 +39,54 @@ const styles = {
 
 @connect(
   state => ({
+    shipOrder: state.shipOrder,
     toast: state.toast,
   }),
   dispatch => bindActionCreators({
     showToast,
+    fetchShipListData,
   }, dispatch),
 ) export default class ShipList extends React.Component {
   static defaultProps = {
-    data: {},
+    shipOrder: {},
     showToast: null,
+    fetchShipListData: null,
   };
 
   static propTypes = {
-    data: PropTypes.object,
+    shipOrder: PropTypes.object,
     showToast: PropTypes.func,
+    fetchShipListData: PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
-      dataSource: [],
-      showToast: props.showToast,
     };
-    this.handelGetJsonFromServer();
+    // this.handelGetJsonFromServer();
+    this.props.fetchShipListData();
   }
 
-  handelGetJsonFromServer = () => {
-    const api = '/api/admin/suppliershiporder/all';
-    axios.post(api)
-    .then((response) => {
-      this.setState({
-        dataSource: response.data,
-      });
-    })
-    .catch((error) => {
-      this.props.showToast('你是否尚未登入後台系統？ Error=>', error);
-    });
-  }
+  // handelGetJsonFromServer = () => {
+  //   const api = '/api/admin/suppliershiporder/all';
+  //   axios.post(api)
+  //   .then((response) => {
+  //     this.setState({
+  //       dataSource: response.data,
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     this.props.showToast('你是否尚未登入後台系統？ Error=>', error);
+  //   });
+  // }
 
   render() {
-    const dataSource = this.state.dataSource;
+    const dataSource = this.props.shipOrder.list;
+    console.log('dataSource=>', dataSource);
+    const isNoData = Lang.isEmpty(dataSource);
     const autoCompleteTitle = [];
-    if (typeof dataSource.data === 'object') {
-      for (const item of dataSource.data.items) {
+    if (!isNoData) {
+      for (const item of dataSource.items) {
         autoCompleteTitle.push(item.displayName);
         autoCompleteTitle.push(item.invoicePrefix + item.invoiceNo);
         autoCompleteTitle.push(item.email);
@@ -88,8 +94,10 @@ const styles = {
         autoCompleteTitle.push(item.paymentAddress1);
         autoCompleteTitle.push(item.paymentCity);
       }
+      if (Lang.isEmpty(dataSource.items)) {
+        this.props.showToast('沒有資料');
+      }
     }
-
     return (
       <div className='container' >
         <div className='row' style={styles.searchBarContainer}>
@@ -119,18 +127,18 @@ const styles = {
             transitionLeaveTimeout={300}
           >
             {
-              typeof dataSource.data === 'object' ? this.state.dataSource.data.items.map(item => (
-                <ShipCard
-                  toast={this.state.showToast}
-                  key={item.id}
-                  {...item}
-                />
-              )) : null
+              !isNoData ?
+                dataSource.items.map(item => (
+                  <ShipCard
+                    toast={this.props.showToast}
+                    key={item.id}
+                    {...item}
+                  />
+                )) : null
             }
           </ReactCSSTransitionGroup>
         </div>
       </div>
     );
   }
-
 }
