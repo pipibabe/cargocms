@@ -6,6 +6,11 @@
   height: 100%;
   top: 0;
   left: 0;
+  /*background-color: rgba(0,0,0,0.6);*/
+}
+#login-blackcontent {
+  width: 100%;
+  height: 100%;
   background-color: rgba(0,0,0,0.6);
 }
 
@@ -54,6 +59,7 @@ a.btn-facebook-inversed {
   <button class="btn btn-lg btn-default">登入</button>
 </div>-->
 <div id="login-content" style="display: none;">
+  <div id="login-blackcontent"></div>
   <div id="login-page" >
     <form class="reg-page" method="post" action="/auth/local">
       <div class="social-login">
@@ -77,7 +83,10 @@ a.btn-facebook-inversed {
           <button id="submit-button" class="rounded btn btn-lg btn-block" type="submit">登入</button>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-6">
-          <button id="regist-button" class="rounded btn btn-lg btn-block" type="submit">註冊</button>
+          <!-- <button id="regist-button" class="rounded btn btn-lg btn-block" type="submit">註冊</button> -->
+          <a id="submit-button" class="rounded btn btn-lg btn-block" href="/register">
+            <span>註冊</span>
+          </a>
         </div>
       </div>
     </form>
@@ -89,8 +98,8 @@ a.btn-facebook-inversed {
     $('.login-btn').click(function(){
       $('#login-content').fadeIn();
     });
-    $('#login-content').click(function(){
-      $(this).fadeOut();
+    $('#login-blackcontent').click(function(){
+      $('#login-content').fadeOut();
     });
     $(".reg-page").validate({
       rules: {
