@@ -169,6 +169,11 @@ var defaultConfig = {
   'put /api/admin/orderpayment/:id': 'api/admin/OrderPaymentController.update',
   'delete /api/admin/orderpayment/:id': 'api/admin/OrderPaymentController.destroy',
 
+  'get /api/admin/orderpaymentstatus': 'api/admin/OrderPaymentStatusController.find',
+  'get /api/admin/orderpaymentstatus/:id': 'api/admin/OrderPaymentStatusController.findOne',
+  'post /api/admin/orderpaymentstatus': 'api/admin/OrderPaymentStatusController.create',
+  'put /api/admin/orderpaymentstatus/:id': 'api/admin/OrderPaymentStatusController.update',
+  'delete /api/admin/orderpaymentstatus/:id': 'api/admin/OrderPaymentStatusController.destroy',
 
 
   //----- Event -----
