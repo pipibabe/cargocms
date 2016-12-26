@@ -103,7 +103,7 @@ const styles = {
   }
 
   handleToggle = () => {
-    this.props.showToast('!!!!!!!!!!!');
+    this.props.showToast('你切換了 Drawer');
     this.setState({
       drawerOpen: !this.state.drawerOpen,
     });
