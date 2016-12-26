@@ -1,41 +1,41 @@
 module.exports = {
   attributes: {
-    
+
       status: {
         type: Sequelize.STRING(32),
         allowNull: false,
-        
-        
+
+
       },
-  
+
       comment: {
         type: Sequelize.STRING,
         allowNull: false,
-        
-        
+
+
       },
-  
+
       notify: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        
-        
+
+
       },
-  
-      OrderPaymentId: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        
-        
-      },
-  
-      OrderPaymentStatusId: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        
-        
-      },
-  
+
+      // OrderPaymentId: {
+      //   type: Sequelize.INTEGER(11),
+      //   allowNull: false,
+      //
+      //
+      // },
+      //
+      // OrderPaymentStatusId: {
+      //   type: Sequelize.INTEGER(11),
+      //   allowNull: false,
+      //
+      //
+      // },
+
 
     createdDateTime:{
       type: Sequelize.VIRTUAL,
