@@ -1,0 +1,46 @@
+
+{
+    "controllerBasePath": "/api/controllers",
+    "dest": "export",
+    "models": [{
+        "name": "supplier", // 駝峰的話要用_分格開來
+        "crud": true,
+        "fields": [{
+            "name": "name",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "名稱"
+            }
+        }, {
+            "name": "email",
+            "type": "String",
+            "length": "96",
+            "layout": {
+              "label": "電子郵件"
+            }
+        }, {
+            "name": "telephone",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "電話"
+            }
+        }, {
+            "name": "fax",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "傳真"
+            }
+        }, {
+            "name": "address",
+            "type": "String",
+            "length": "255",
+            "layout": {
+              "label": "地址"
+            }
+        }
+      ]
+    }]
+}
