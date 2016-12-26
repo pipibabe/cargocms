@@ -2,7 +2,7 @@ module.exports = {
   attributes: {
 
       name: {
-        Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','CANCELED','COMPLETE','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
+        type: Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','CANCELED','COMPLETE','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
         allowNull: false,
 
 
@@ -38,7 +38,11 @@ module.exports = {
       }
     }
   },
-  associations: () => {},
+  associations: () => {
+    OrderPaymentStatus.hasMany(OrderPayment);
+    OrderPaymentStatus.hasMany(OrderPaymentHistory);
+
+  },
   options: {
     classMethods: {},
     instanceMethods: {},

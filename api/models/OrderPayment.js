@@ -143,7 +143,10 @@ module.exports = {
       }
     }
   },
-  associations: () => {},
+  associations: () => {
+    OrderPayment.belongsTo(OrderPaymentStatus);
+    OrderPayment.hasMany(OrderPaymentHistory);
+  },
   options: {
     classMethods: {},
     instanceMethods: {},

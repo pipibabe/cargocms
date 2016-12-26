@@ -59,7 +59,10 @@ module.exports = {
       }
     }
   },
-  associations: () => {},
+  associations: () => {
+    OrderPaymentHistory.belongsTo(OrderPayment);
+    OrderPaymentHistory.belongsTo(OrderPaymentStatus);
+  },
   options: {
     classMethods: {},
     instanceMethods: {},
