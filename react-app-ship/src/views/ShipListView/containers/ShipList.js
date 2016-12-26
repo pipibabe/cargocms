@@ -1,3 +1,4 @@
+/* @flow */
 import axios from 'axios';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
@@ -7,13 +8,16 @@ import {
   AutoComplete,
 } from 'material-ui';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import Lang from 'lodash/Lang';
+import Lang from 'lodash';
 import ShipCard from './ShipCard';
 import classes from '../_style.scss';
 import {
   showToast,
 } from '../../../redux/modules/toast';
-import { fetchShipListData } from '../../../redux/modules/shipOrder';
+import {
+  fetchShipListData,
+  fetchFindShipItem,
+} from '../../../redux/modules/shipOrder';
 
 const styles = {
   iconSearch: {
@@ -45,42 +49,53 @@ const styles = {
   dispatch => bindActionCreators({
     showToast,
     fetchShipListData,
+    fetchFindShipItem,
   }, dispatch),
 ) export default class ShipList extends React.Component {
   static defaultProps = {
     shipOrder: {},
     showToast: null,
     fetchShipListData: null,
+    fetchFindShipItem: null,
   };
 
   static propTypes = {
     shipOrder: PropTypes.object,
     showToast: PropTypes.func,
     fetchShipListData: PropTypes.func,
+    fetchFindShipItem: PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
     this.state = {
+      searchText: '',
     };
-    // this.handelGetJsonFromServer();
+  }
+
+  componentWillMount() {
     this.props.fetchShipListData();
   }
 
-  // handelGetJsonFromServer = () => {
-  //   const api = '/api/admin/suppliershiporder/all';
-  //   axios.post(api)
-  //   .then((response) => {
-  //     this.setState({
-  //       dataSource: response.data,
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     this.props.showToast('你是否尚未登入後台系統？ Error=>', error);
-  //   });
-  // }
+  handleSearchText = (
+    searchText: string,
+    dataSource: Array,
+    params: Object,
+  ) => {
+    console.log(`searchText=>${searchText}, params=>${params}`);
+    this.setState({
+      searchText,
+    });
+  }
+
+  handleSearchRequest = (chosenRequest: string, index: number) => {
+    console.log(`searchText=>${chosenRequest}, index=>${index}`);
+    this.props.showToast(`正在搜尋${this.state.searchText}...`);
+    this.props.fetchFindShipItem(this.state.searchText);
+  }
 
   render() {
+    console.log('searchText=>', this.state.searchText);
     const dataSource = this.props.shipOrder.list;
     console.log('dataSource=>', dataSource);
     const isNoData = Lang.isEmpty(dataSource);
@@ -115,6 +130,8 @@ const styles = {
               maxSearchResults={5}
               // hintText='輸入以查詢'
               fullWidth={true}
+              onUpdateInput={this.handleSearchText}
+              onKeyDown={this.handleSearchRequest}
             />
             <div className='col-xs-1'>{}</div>
           </div>
