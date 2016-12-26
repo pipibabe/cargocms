@@ -27,8 +27,10 @@ const styles = {
     // justifyContent: 'flex-start',
   },
   drawer: {
-    zIndex: 2,
+    paddingLeft: 15,
+    zIndex: 1,
     position: 'fixed',
+    width: 200,
   },
   drawerContainer: {
     marginTop: 10,
@@ -70,7 +72,7 @@ const styles = {
     injectTapEventPlugin();
     this.state = {
       drawerOpen: true,
-      drawerWidth: 200,
+      drawerWidth: 150,
       width: 0,
       height: 0,
     };
@@ -111,12 +113,16 @@ const styles = {
     const isMobile = this.state.width < 768;
     const drawerWidth = this.state.drawerWidth;
 
-    if (this.state.open && !isMobile) {
+    if (this.state.open || !isMobile) {
       styles.content.width = `calc(100% - ${drawerWidth}px)`;
       styles.content.margin = `0px ${drawerWidth}px 0px ${drawerWidth}px`;
+      styles.drawer.zIndex = 1;
+      styles.drawerContainer.paddingTop = 0;
     } else {
       styles.content.width = '95%';
       styles.content.margin = '0 auto';
+      styles.drawer.zIndex = 2;
+      styles.drawerContainer.paddingTop = 60;
     }
     const zDepth = isMobile ? 2 : 0;
     const titleText = isMobile ? '出貨管理系統' : '雲端漁場出貨管理系統';
