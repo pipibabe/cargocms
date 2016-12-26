@@ -13,6 +13,7 @@ import ShipCard from './ShipCard';
 import classes from '../_style.scss';
 import {
   showToast,
+  closeToast,
 } from '../../../redux/modules/toast';
 import {
   fetchShipListData,
@@ -41,6 +42,8 @@ const styles = {
   },
 };
 
+let inputDelayer = null;
+
 @connect(
   state => ({
     shipOrder: state.shipOrder,
@@ -48,6 +51,7 @@ const styles = {
   }),
   dispatch => bindActionCreators({
     showToast,
+    closeToast,
     fetchShipListData,
     fetchFindShipItem,
   }, dispatch),
@@ -55,6 +59,7 @@ const styles = {
   static defaultProps = {
     shipOrder: {},
     showToast: null,
+    closeToast: null,
     fetchShipListData: null,
     fetchFindShipItem: null,
   };
@@ -62,6 +67,7 @@ const styles = {
   static propTypes = {
     shipOrder: PropTypes.object,
     showToast: PropTypes.func,
+    closeToast: PropTypes.func,
     fetchShipListData: PropTypes.func,
     fetchFindShipItem: PropTypes.func,
   };
@@ -71,6 +77,7 @@ const styles = {
     this.state = {
       searchText: '',
     };
+    this.inputDelayer = inputDelayer;
   }
 
   componentWillMount() {
@@ -78,26 +85,42 @@ const styles = {
   }
 
   handleSearchText = (
-    searchText: string,
+    searchText: string = '',
     dataSource: Array,
     params: Object,
   ) => {
-    console.log(`searchText=>${searchText}, params=>${params}`);
+    // console.log(`searchText=>${searchText}, params=>${params}`);
     this.setState({
       searchText,
     });
+    const notNil = !Lang.isNil(searchText);
+    const notEmpty = !Lang.isEmpty(searchText);
+    
+    if (this.inputDelayer) {
+      this.props.fetchShipListData();
+    }
   }
 
   handleSearchRequest = (chosenRequest: string, index: number) => {
-    console.log(`searchText=>${chosenRequest}, index=>${index}`);
-    this.props.showToast(`正在搜尋${this.state.searchText}...`);
-    this.props.fetchFindShipItem(this.state.searchText);
+    this.props.closeToast();
+    const searchText = this.state.searchText;
+
+    if (!this.inputDelayer) {
+      this.inputDelayer = setTimeout(() => {
+        const notNil = !Lang.isNil(searchText);
+        const notEmpty = !Lang.isEmpty(searchText);
+        if (notNil && notEmpty) {
+          this.props.fetchFindShipItem(searchText);
+        } else {
+          this.props.fetchShipListData();
+        }
+        this.inputDelayer = null;
+      }, 800);
+    }
   }
 
   render() {
-    console.log('searchText=>', this.state.searchText);
     const dataSource = this.props.shipOrder.list;
-    console.log('dataSource=>', dataSource);
     const isNoData = Lang.isEmpty(dataSource);
     const autoCompleteTitle = [];
     if (!isNoData) {
