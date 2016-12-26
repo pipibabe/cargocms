@@ -83,12 +83,12 @@ p.lead {
 </style>
 
 <!-- Interactive Slider v2 -->
+<% if (!req.session.authenticated) { %>
+  <% include lib/login.inc.ejs %>
+<% } %>
 <div class="interactive-slider-v2">
   <div class="container">
     <img style="max-width: 580px;width: 100%;margin: 90px auto 0;" src="/assets/labfnp/img/lfp-logo-hero-bg.png" alt="LFP: Laboratory of Fragrance &amp; Perfume - 我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水" class="img-responsive animated zoomIn" />
-    <% if (!req.session.authenticated) { %>
-      <% include lib/login.inc.ejs %>
-    <% } %>
     <!--
     <h1>Laboratory of Fragrance &amp; Perfume</h1>
     -->

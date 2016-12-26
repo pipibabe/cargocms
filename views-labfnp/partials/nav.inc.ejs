@@ -61,7 +61,7 @@
           <% } else { %>
           <%   loginBackUrl = '?url=' + loginBackUrl %>
           <% } %>
-          <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" href="/login<%= loginBackUrl %>">登入</a></li>
+          <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" class="login-btn">登入</a></li>
         <% } else { %>
           <li><a id="logout-link" class="logout-link" href="#" >登出</a></li>
           <li class="topbar-devider"></li>
