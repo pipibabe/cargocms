@@ -4,6 +4,10 @@
   <thead>
     <tr>
 
+        <th data-hide=""
+        data-class="expand" class="no-sort">
+          ID
+        </th>
 
         <th data-hide=""
         data-class="" class="no-sort">
@@ -23,13 +27,13 @@
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           訂單付款資訊ID
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           訂單付款資訊狀態ID
         </th>
@@ -45,6 +49,8 @@
   <!-- client only -->
   <tbody>
     <tr v-for="item in data.items">
+
+        <td>{{ item.id}}</td>
 
         <td>{{ item.status}}</td>
 
@@ -78,6 +84,8 @@
 
     // server only
     var columns = [
+      { "data": "id" },
+
       { "data": "status" },
 
       { "data": "comment" },
@@ -97,13 +105,13 @@
     var columnDefs = [
       {
         "searchable": true,
-        "targets": 5,
+        "targets": 6,
         "render": function (data, type, row) {
           return '<td>' + row.createdDateTime.dateTime + '</td>';
         }
       },
       {
-        "targets"  : 6,
+        "targets"  : 7,
         "orderable": false,
         "searchable": false,
         "render": function ( data, type, row ) {
