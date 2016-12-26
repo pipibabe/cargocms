@@ -115,19 +115,21 @@
       item.id = "position-"+index;
       item.className = "selectItem";
       item.innerHTML = marker.title_NAVI;
-      console.log(marker.LatLng.lat(),marker.LatLng.lng() );
+      //console.log(marker.LatLng.lat(),marker.LatLng.lng() );
 
       // TODO:
       // 目前不管點項目，最後都會跑到台北的點，不曉得是變數被覆蓋還是怎樣……
-      var onclickAction = function() {
-        console.log(marker.LatLng.lat(),marker.LatLng.lng() );
-        //console.log(position)
-        //map.panTo(marker.pos);
+      var onclickAction = function(event) {
+        var index = event.target.id.split("-").pop();
+        //console.log(markers[index].LatLng.lat(),markers[index].LatLng.lng() );
+        map.panTo(markers[index].LatLng);
       }
       // document.getElementById("position-"+index).addEventListener("click",onclickAction);
       item.addEventListener("click",onclickAction);
       naviItem.appendChild(item)
     }
+    //google.maps.event.trigger(markerObjects[1], 'click');
+    return markers;
   }
 
   var markers = [
@@ -152,6 +154,9 @@
       }
     },
   ]
-  markerGenernator(markers,map);
+  var markerObjects = markerGenernator(markers,map);
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    map.panTo(markerObjects[0].LatLng);
+  });
 
 `); %>
