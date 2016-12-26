@@ -13,7 +13,7 @@ export const FIND_SHIP_ITEM = 'FIND_SHIP_ITEM';
 // Actions
 // ------------------------------------
 export function deliverShipListData(data) {
-  console.log('deliverShipListData=>', data);
+  // console.log('deliverShipListData=>', data);
   return {
     type: GET_SHIP_LIST,
     list: data,
@@ -42,7 +42,7 @@ export function fetchShipListData() {
 }
 
 export function deliverFindShipItem(searchText, data) {
-  console.log('deliverFindShipItem=>', data);
+  // console.log('deliverFindShipItem=>', data);
   return {
     type: FIND_SHIP_ITEM,
     list: data,
@@ -51,24 +51,34 @@ export function deliverFindShipItem(searchText, data) {
 }
 
 export function fetchFindShipItem(value) {
-  console.log('search value=>', value);
+  // console.log('search value=>', value);
   return async(dispatch, getState) => {
-    const api = '/api/admin/suppliershiporder/';
+    const api = '/api/admin/suppliershiporder/all';
     const query = {
+      serverSidePaging: true,
       startDate: '1900/01/01',
       endDate: '3000/01/01',
       columns:[
-        { data: 'displayName', searchable: true },
-        { data: 'email', searchable: true },
-        { data: 'telephone', searchable: true },
-        { data: 'paymentAddress1', searchable: true },
-        { data: 'paymentCity', searchable: true }
+        {
+        	"data": "invoiceNo",
+        	"searchable": 'true',
+          "findInclude": "true",
+        	"search": {
+        		"concat": ["invoicePrefix", "invoiceNo"]
+        	}
+        },
+        { data: 'firstname', searchable: 'true' },
+        { data: 'lastname', searchable: 'true' },
+        { data: 'email', searchable: 'true' },
+        { data: 'telephone', searchable: 'true' },
+        { data: 'paymentAddress1', searchable: 'true' },
+        { data: 'paymentCity', searchable: 'true' }
       ],
       order: [ { column: '0', dir: 'asc' } ],
       search: { value, regex: 'false' },
       _: '1470989140227'
     };
-    const fetchResult = await getData(api, query);
+    const fetchResult = await postData(api, query);
     let result = '';
     // success
     if (fetchResult.status) {
@@ -83,9 +93,9 @@ export function fetchFindShipItem(value) {
       }
       dispatch(showToast(result));
     }
-    console.log('data query=>', JSON.stringify(query));
-    console.log('fetchResult=>', fetchResult);
-    console.log('result=>', result);
+    // console.log('data query=>', JSON.stringify(query));
+    // console.log('fetchResult=>', fetchResult);
+    // console.log('result=>', result);
   };
 }
 
