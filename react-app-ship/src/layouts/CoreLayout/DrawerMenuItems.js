@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 import {
   Drawer,
   MenuItem,
@@ -35,13 +36,24 @@ export default class DrawerMenuItems extends React.Component {
   render() {
     return (
       <div>
-        <MenuItem>出貨總管</MenuItem>
-        <MenuItem>未出貨</MenuItem>
-        <MenuItem>已出貨</MenuItem>
-        <MenuItem>顯示所有紀錄</MenuItem>
-        <Divider />
-        <MenuItem>我的帳號</MenuItem>
-        <MenuItem>聯繫雲端漁場</MenuItem>
+        <Link to={'/ship'}>
+          <MenuItem >出貨總管</MenuItem>
+        </Link>
+        <Link to={'/HomeView'}>
+          <MenuItem>未出貨</MenuItem>
+        </Link>
+        <Link to={'/ship'}>
+          <MenuItem>已出貨</MenuItem>
+        </Link>
+        <Link to={'/ship/history'}>
+          <MenuItem>顯示所有紀錄</MenuItem>
+        </Link>
+        <Link to={'/ship/user'}>
+          <MenuItem>我的帳號</MenuItem>
+        </Link>
+        <Link to={'/contact'}>
+          <MenuItem>聯繫雲端漁場</MenuItem>
+        </Link>
       </div>
     );
   }

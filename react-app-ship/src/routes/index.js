@@ -12,15 +12,18 @@ import Login from 'views/Login/Login';
 import MaterialUi from 'views/MaterialUi/MaterialUi';
 import ShipList from 'views/ShipListView';
 
-export default store => (
+export default (store) => (
   <Route path='/'>
+    <IndexRoute component={Login} />
     <Route path='/ship/login' component={Login} />
     <Route path='/ship' component={CoreLayout}>
       <IndexRoute component={ShipList} />
-      {/* <Route path='index' component={ShipList} /> */}
-      <Route path='MaterialUi' component={MaterialUi} />
-      <Route path='HomeView' component={HomeView} />
-      <Route path='ShipList' component={ShipList} />
+      <Route path='/ship/history' component={ShipList} />
+      <Route path='/ship/user' component={ShipList} />
+    </Route>
+    <Route path='/contact' component={Login} />
+    <Route path='/HomeView' component={CoreLayout}>
+      <IndexRoute component={HomeView} />
     </Route>
   </Route>
 );
