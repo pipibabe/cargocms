@@ -34,6 +34,11 @@
           訂單付款資訊狀態ID
         </th>
 
+        <th data-hide=""
+        data-class="" class="no-sort">
+          建立時間
+        </th>
+
       <th width="80" data-hide="phone,tablet"></th>
     </tr>
   </thead>
@@ -50,6 +55,8 @@
         <td>{{ item.OrderPaymentId}}</td>
 
         <td>{{ item.OrderPaymentStatusId}}</td>
+
+        <td>{{ item.createdAt}}</td>
 
       <td align="center" style="cursor: pointer;">
         <div class="row">
@@ -91,25 +98,23 @@
 
           { "data": "OrderPaymentStatusId" },
 
+          { "data": "createdAt" },
+
 
         { "data": null },
     ]
 
     // server only
     var columnDefs = [
-
-
-
-
-
-
-
-
-
-
-
       {
-        "targets"  : 5,
+        "searchable": true,
+        "targets": 5,
+        "render": function (data, type, row) {
+          return '<td>' + row.createdDateTime.dateTime + '</td>';
+        }
+      },
+      {
+        "targets"  : 6,
         "orderable": false,
         "searchable": false,
         "render": function ( data, type, row ) {

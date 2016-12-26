@@ -12,30 +12,32 @@ var appModel = {
   prefix: prefix,
   data: {
     item: {
-      
-        
+
+
           status: '',
-        
-      
-        
+
+
+
           comment: '',
-        
-      
-        
+
+
+
           notify: '',
-        
-      
-        
+
+
+
           OrderPaymentId: '',
-        
-      
-        
+
+
+
           OrderPaymentStatusId: '',
-        
-      
+
+
     },
     items: [],
-    option: {}
+    option: {
+      defaultSort: [[ 0, 'desc' ]]
+    }
   },
   view: {
     table: {
