@@ -1,0 +1,120 @@
+<style>
+#login-page{
+  width: 300px;
+  padding: 20px;
+  position: relative;
+  top: -250px;
+  left: calc(80% - 150px);
+  border-width: 3px;
+  border-style: solid;
+  border-color: #4FC3F7;
+  background-color: #9E9E9E;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+a.btn-facebook-inversed {
+  background-color: #444;
+  color:#F5F5F5;
+}
+
+#submit-button , #regist-button{
+  color: #F5F5F5;
+  background-color: #757575;
+}
+#submit-button:hover , #regist-button:hover {
+  background-color: #444;
+}
+
+#login-btn {
+  position: absolute;
+  top: 30px;
+  right: 25px;
+}
+
+</style>
+<div id="login-btn">
+  <button class="btn btn-lg btn-default">登入</button>
+</div>
+
+<div id="login-page" class="hide">
+  <form class="reg-page" method="post" action="/auth/local">
+    <div class="social-login">
+      <ul class="list-unstyled">
+        <li>
+          <a class="btn rounded btn-block btn-lg margin-bottom-20 btn-github btn-facebook-inversed" href="/auth/facebook">
+            <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="margin-top-20">
+      <input type="text" placeholder="帳號" value="" id="identifier" name="identifier" class="form-control">
+    </div>
+    <div class="margin-top-10">
+      <input type="password" placeholder="密碼" value="" id="password" name="password" class="form-control">
+    </div>
+    <div class="row margin-top-10">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <button id="submit-button" class="rounded btn btn-lg btn-block" type="submit">登入</button>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <button id="regist-button" class="rounded btn btn-lg btn-block" type="submit">註冊</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $(".reg-page").validate({
+      rules: {
+        identifier: {
+          required: true
+        },
+        password: {
+          required: true
+        },
+
+      },
+      messages: {
+        identifier: {
+          required: "請輸入帳號"
+        },
+        password:{
+          required: "請輸入密碼"
+        },
+      },
+      highlight: function(element) {
+          $(element).closest('.form-group').addClass('has-error');
+      },
+      unhighlight: function(element) {
+          $(element).closest('.form-group').removeClass('has-error');
+      },
+      errorElement: 'span',
+      errorClass: 'help-block',
+      errorPlacement: function(error, element) {
+          if(element.parent('.input-group').length) {
+              error.insertAfter(element.parent());
+          } else {
+              error.insertAfter(element);
+          }
+      }
+    });
+
+
+    $('#login-btn').click(function(){
+
+      if( $('#login-page.hide').length > 0 ){
+        $('#login-page').removeClass('hide');
+      } else {
+        $('#login-page').addClass('hide');
+      }
+
+    })
+  });
+`); %>
