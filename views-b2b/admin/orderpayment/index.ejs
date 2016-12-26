@@ -10,11 +10,6 @@
           付款名字
         </th>
 
-        <th data-hide=""
-        data-class="" class="no-sort">
-          付款姓氏
-        </th>
-
 
         <th data-hide="always"
         data-class="" class="no-sort">
@@ -173,9 +168,7 @@
 
     // server only
     var columns = [
-        { "data": "paymentLastname" },
-
-        { "data": "paymentFirstname" },
+        { "data": null },
 
         { "data": "paymentCompany" },
 
@@ -216,13 +209,20 @@
     var columnDefs = [
       {
         "searchable": true,
-        "targets": 17,
+        "targets": 0,
+        "render": function (data, type, row) {
+          return '<td>' + row.paymentLastname + ' ' + row.paymentFirstname + '</td>';
+        }
+      },
+      {
+        "searchable": true,
+        "targets": 16,
         "render": function (data, type, row) {
           return '<td>' + row.createdDateTime.dateTime + '</td>';
         }
       },
       {
-        "targets"  : 18,
+        "targets"  : 17,
         "orderable": false,
         "searchable": false,
         "render": function ( data, type, row ) {
