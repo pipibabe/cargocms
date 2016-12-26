@@ -2,7 +2,7 @@ module.exports = {
   attributes: {
 
       status: {
-        type: Sequelize.STRING(32),
+        type: Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','CANCELED','COMPLETE','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
         allowNull: false,
 
 

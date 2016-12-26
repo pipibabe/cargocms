@@ -1,20 +1,20 @@
 module.exports = {
   attributes: {
-    
+
       name: {
-        type: Sequelize.STRING(32),
+        Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','CANCELED','COMPLETE','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
         allowNull: false,
-        
-        
+
+
       },
-  
+
       languageId: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
-        
-        
+
+
       },
-  
+
 
     createdDateTime:{
       type: Sequelize.VIRTUAL,
