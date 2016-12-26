@@ -1,0 +1,157 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= sails.config.google.key %>"></script>
+<style>
+  .selectNavi {
+    width: 230px;
+    position: absolute;
+    top: 75px;
+    left: 0px;
+  }
+  .selectItem {
+    width: 100%;
+    height: 50px;
+
+    color: #FFFFFF;
+    font-size: 20px;
+    font-style: normal;
+
+    line-height: 50px;
+    margin-bottom: 5px;
+    padding:0 5px 0 5px;
+    text-align: left;
+    display: inline-block;
+    background-color: #D8D8D8;
+  }
+  .selectItem.activate {
+    background-color: #9B9B9B;
+  }
+
+  .content {
+    position: relative;
+    cursor: pointer;
+    background-color: black;
+    height: 600px;
+    padding: 0;
+  }
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+  .info {
+    font-size: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 0 5px 0 5px;
+  }
+  p.infi {
+    color: #959595;
+  }
+
+</style>
+
+<div class="content">
+  <div id="map"></div>
+  <nav class="selectNavi nav nav-pills nav-stacked" id="map-nav">
+    <!--i class="selectItem activate">台中｜綠光計畫門市</i>
+    <i class="selectItem">台北｜松煙誠品專櫃</i>
+    <i class="selectItem">高雄｜博二門市</i-->
+  </nav>
+</div>
+
+<% LayoutUtils.addScriptBlock(`
+  // When the window has finished loading create our google map below
+  //google.maps.event.addDomListener(window, 'load', init);
+
+  // Basic options for a simple Google Map
+  // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+  var mapOptions = {
+    // How zoomed in you want the map to start at (always required)
+    zoom: 15,
+
+    // The latitude and longitude to center the map (always required)
+    center: new google.maps.LatLng(24.1475476, 120.6605335), 
+
+    // How you would like to style the map.
+    // This is where you would paste any style found on Snazzy Maps.
+    styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+  };
+
+  var mapElement = document.getElementById('map');
+  var map = new google.maps.Map(mapElement, mapOptions);
+
+  var markerGenernator = function(markers,map) {
+    var markerObjects = [];
+    var infowindowObjects = [];
+    var naviItem = document.getElementById("map-nav");
+    for (var index in markers) {
+      // genernator marker
+      var marker = markers[index];
+      marker.LatLng = new google.maps.LatLng(marker.position.latitude, marker.position.longitude);
+
+      markerObjects[index] = new google.maps.Marker({
+        position: marker.LatLng,
+        map: map,
+        title: marker.title,
+        label: marker.label
+      });
+
+      // genernator infoWindow
+      infowindowObjects[index] = new google.maps.InfoWindow({
+        content: '<div id="content">'+
+            '<h1 class="firstHeading">'+marker.title+'</h1>'+
+            '<div>'+marker.info+'</div>'+
+          '</div>'
+      });
+
+      // genernator event
+      markerObjects[index].addListener('click', function() {
+        infowindowObjects[index].open(map, markerObjects[index])
+      });
+      google.maps.event.trigger(markerObjects[index], 'click');
+
+      // genernator navi items
+      var item = document.createElement("i");
+      item.id = "position-"+index;
+      item.className = "selectItem";
+      item.innerHTML = marker.title_NAVI;
+      console.log(marker.LatLng.lat(),marker.LatLng.lng() );
+
+      // TODO:
+      // 目前不管點項目，最後都會跑到台北的點，不曉得是變數被覆蓋還是怎樣……
+      var onclickAction = function() {
+        console.log(marker.LatLng.lat(),marker.LatLng.lng() );
+        //console.log(position)
+        //map.panTo(marker.pos);
+      }
+      // document.getElementById("position-"+index).addEventListener("click",onclickAction);
+      item.addEventListener("click",onclickAction);
+      naviItem.appendChild(item)
+    }
+  }
+
+  var markers = [
+    {
+      title: 'LFP 台中綠光計畫門市',
+      title_NAVI: '台中｜綠光計畫門市',
+      label: 'L',
+      info: '地址：台中市西區中興一巷8號二樓C戶 綠光計畫<br />Tel: (04)2301-5682<br />營業時間：AM 00:00 ~ PM 00:00<br />',
+      position: {
+        latitude: 24.1475476,
+        longitude: 120.6605335
+      }
+    },
+    {
+      title: 'LFP 松煙誠品專櫃',
+      title_NAVI: '台北｜松煙誠品專櫃',
+      label: 'L',
+      info: '地址：台北市信義區菸廠路88號<br />Tel: (02)0000-0000<br />營業時間：AM 00:00 ~ PM 00:00<br />',
+      position: {
+        latitude: 25.0445662,
+        longitude: 121.559258
+      }
+    },
+  ]
+  markerGenernator(markers,map);
+
+`); %>
