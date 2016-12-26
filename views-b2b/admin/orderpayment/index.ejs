@@ -10,14 +10,13 @@
           付款名字
         </th>
 
-
         <th data-hide=""
         data-class="" class="no-sort">
           付款姓氏
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款單位
         </th>
@@ -29,7 +28,7 @@
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款地址2
         </th>
@@ -47,37 +46,37 @@
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款國家
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款國家ID
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款區域
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款區域ID
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款地址格式
         </th>
 
 
-        <th data-hide=""
+        <th data-hide="always"
         data-class="" class="no-sort">
           付款自訂欄位
         </th>
@@ -118,9 +117,9 @@
   <tbody>
     <tr v-for="item in data.items">
 
-        <td>{{ item.paymentFirstname}}</td>
+        <td>{{ item.paymentFirstname }}</td>
 
-        <td>{{ item.paymentLastname}}</td>
+        <td>{{ item.paymentLastname }}</td>
 
         <td>{{ item.paymentCompany}}</td>
 
@@ -174,76 +173,41 @@
 
     // server only
     var columns = [
+        { "data": "paymentLastname" },
 
+        { "data": "paymentFirstname" },
 
-          { "data": "paymentFirstname" },
+        { "data": "paymentCompany" },
 
+        { "data": "paymentAddress1" },
 
+        { "data": "paymentAddress2" },
 
-          { "data": "paymentLastname" },
+        { "data": "paymentCity" },
 
+        { "data": "paymentPostcode" },
 
+        { "data": "paymentCountry" },
 
-          { "data": "paymentCompany" },
+        { "data": "paymentCountryId" },
 
+        { "data": "paymentZone" },
 
+        { "data": "paymentZoneId" },
 
-          { "data": "paymentAddress1" },
+        { "data": "paymentAddressFormat" },
 
+        { "data": "paymentCustomField" },
 
+        { "data": "paymentMethod" },
 
-          { "data": "paymentAddress2" },
+        { "data": "paymentCode" },
 
+        { "data": "status" },
 
+        { "data": "OrderPaymentStatusId" },
 
-          { "data": "paymentCity" },
-
-
-
-          { "data": "paymentPostcode" },
-
-
-
-          { "data": "paymentCountry" },
-
-
-
-          { "data": "paymentCountryId" },
-
-
-
-          { "data": "paymentZone" },
-
-
-
-          { "data": "paymentZoneId" },
-
-
-
-          { "data": "paymentAddressFormat" },
-
-
-
-          { "data": "paymentCustomField" },
-
-
-
-          { "data": "paymentMethod" },
-
-
-
-          { "data": "paymentCode" },
-
-
-
-          { "data": "status" },
-
-
-
-          { "data": "OrderPaymentStatusId" },
-
-          { "data": "createdAt" },
-
+        { "data": "createdAt" },
 
         { "data": null },
     ]
