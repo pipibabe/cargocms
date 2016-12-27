@@ -1,9 +1,7 @@
 module.exports = {
-  find: async ({start, length, category, supplier}) => {
+  find: async ({start, length, category, supplier, limit}) => {
     try{
-      const product = await Product.findAll({
-        offset: Number(start),
-        limit: Number(length),
+      let query = {
         include: [
           {
             model:Supplier,
@@ -17,7 +15,14 @@ module.exports = {
             }
           }
         ]
-      });
+      };
+
+      if ( limit === 'true'){
+        query.offset = Number(start);
+        query.limit = Number(length);
+      }
+      
+      const product = await Product.findAll(query);
 
       return product;
 
