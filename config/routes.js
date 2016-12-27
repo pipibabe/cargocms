@@ -207,6 +207,9 @@ module.exports.routes = {
   '/': {
     view: 'index'
   },
+  '/order': {
+    view: 'b2b/order/index'
+  },
   'get /ship/*': function(req, res, next) {
     console.log("=== ship path ==="+sails.config.appPath + '/react-app-ship/dist/index.html');
     res.sendfile(sails.config.appPath + '/react-app-ship/dist/index.html');
