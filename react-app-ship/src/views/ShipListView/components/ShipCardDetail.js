@@ -33,6 +33,8 @@ const defaultProps = {
   },
   total: '9912',
   status: '確定訂單',
+  //
+  telephone: '0987654321',
   paymentMethod: 'ATM',
   shippingName: '潘子',
   shippingAddress: '403 taichung 台灣城市的某個街道隨機號',
@@ -51,6 +53,7 @@ const propTypes = {
   total: PropTypes.number,
   status: PropTypes.string,
   //
+  telephone: PropTypes.string,
   paymentMethod: PropTypes.string,
   shippingName: PropTypes.string,
   shippingAddress: PropTypes.string,
@@ -66,8 +69,12 @@ function ShipCardDetail(props) {
         <div className='col-xs-4 text-left'>
           <span className='title'>{props.orderSupplier.name}</span>
           <p />
+          <span className='title-label'>收件姓名</span><br />
+          <span className='sub-title'>{props.shippingName}</span>
+          <p />
+
           <span className='title-label'>電話</span><br />
-          <span className='sub-title'>{props.orderSupplier.telephone}</span>
+          <span className='sub-title'>{props.telephone}</span>
           <p />
 
           <span className='title-label'>寄送方式</span><br />
@@ -80,6 +87,10 @@ function ShipCardDetail(props) {
 
           <span className='title-label'>收件地址</span><br />
           <span className='sub-title'>{props.shippingAddress}</span>
+          <p />
+
+          <span className='title-label'>備註</span><br />
+          <span className='sub-title'>{props.comment}</span>
           <p />
         </div>
         <div className='col-xs-8 text-left'>

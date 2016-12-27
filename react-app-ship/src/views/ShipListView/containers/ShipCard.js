@@ -37,6 +37,7 @@ export default class ShipCard extends React.Component {
         SupplierShipOrderId: 3,
       },
     ],
+    telephone: '0987654321',
     email: 'testOrder@example.com',
     paymentCompany: '',
     paymentAddress1: '台灣城市的某個街道隨機號',
@@ -88,6 +89,7 @@ export default class ShipCard extends React.Component {
     createdDateTime: PropTypes.object,
     updatedDateTime: PropTypes.object,
     SupplierShipOrderDescriptions: PropTypes.array,
+    telephone: PropTypes.string,
     email: PropTypes.string,
     paymentCompany: PropTypes.string,
     paymentAddress1: PropTypes.string,
@@ -150,6 +152,7 @@ export default class ShipCard extends React.Component {
       status: this.props.status,
     };
     const cardDetail = {
+      telephone: this.props.telephone,
       shippingName: this.props.shippingLastname + this.props.shippingFirstname,
       shippingAddress: `${this.props.shippingPostcode} ${this.props.shippingCity}${this.props.shippingAddress1}`,
       tracking: this.props.tracking,
@@ -186,6 +189,7 @@ export default class ShipCard extends React.Component {
             orderSupplier={cardBody.orderSupplier}
             status={cardBody.status}
             // for CardDetail
+            telephone={cardDetail.telephone}
             paymentMethod={cardDetail.paymentMethod}
             shippingName={cardDetail.shippingName}
             shippingAddress={cardDetail.shippingAddress}
