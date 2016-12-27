@@ -13,7 +13,6 @@ export const FIND_SHIP_ITEM = 'FIND_SHIP_ITEM';
 // Actions
 // ------------------------------------
 export function deliverShipListData(data) {
-  // console.log('deliverShipListData=>', data);
   return {
     type: GET_SHIP_LIST,
     list: data,
@@ -28,7 +27,11 @@ export function fetchShipListData() {
     // success
     if (fetchResult.status) {
       dispatch(deliverShipListData(fetchResult.data.data));
-      dispatch(showToast('載入完成'));
+      if (fetchResult.data.data.items.length > 0) {
+        dispatch(showToast('載入完成'));
+      } else {
+        dispatch(showToast('沒有資料'));
+      }
     } else {
       // error
       if (fetchResult.response) {
@@ -51,14 +54,16 @@ export function deliverFindShipItem(searchText, data) {
 }
 
 export function fetchFindShipItem(value) {
-  // console.log('search value=>', value);
   return async(dispatch, getState) => {
     const api = '/api/admin/suppliershiporder/all';
     const query = {
       serverSidePaging: true,
       startDate: '1900/01/01',
       endDate: '3000/01/01',
-      columns:[
+      columns:[{
+      		"data": "id",
+      		"searchable": true
+      	},
         {
         	"data": "invoiceNo",
         	"searchable": 'true',
@@ -67,14 +72,22 @@ export function fetchFindShipItem(value) {
         		"concat": ["invoicePrefix", "invoiceNo"]
         	}
         },
-        { data: 'firstname', searchable: 'true' },
-        { data: 'lastname', searchable: 'true' },
+        {
+        	"data": "lastname",
+        	"searchable": 'true',
+          "findInclude": "true",
+        	"search": {
+        		"concat": ["lastname", "firstname"]
+        	}
+        },
         { data: 'email', searchable: 'true' },
         { data: 'telephone', searchable: 'true' },
         { data: 'paymentAddress1', searchable: 'true' },
         { data: 'paymentCity', searchable: 'true' }
       ],
       order: [ { column: '0', dir: 'asc' } ],
+      start: 0,
+      length: 999999,
       search: { value, regex: 'false' },
       _: '1470989140227'
     };
@@ -82,8 +95,12 @@ export function fetchFindShipItem(value) {
     let result = '';
     // success
     if (fetchResult.status) {
-      dispatch(deliverFindShipItem(value, fetchResult.data.data));
-      dispatch(showToast('載入完成'));
+      dispatch(deliverFindShipItem(value, { items: fetchResult.data.data }));
+      if (fetchResult.data.data.length > 0) {
+        dispatch(showToast('載入完成'));
+      } else {
+        dispatch(showToast('沒有資料'));
+      }
     } else {
       // error
       if (fetchResult.response) {
@@ -93,9 +110,6 @@ export function fetchFindShipItem(value) {
       }
       dispatch(showToast(result));
     }
-    // console.log('data query=>', JSON.stringify(query));
-    // console.log('fetchResult=>', fetchResult);
-    // console.log('result=>', result);
   };
 }
 

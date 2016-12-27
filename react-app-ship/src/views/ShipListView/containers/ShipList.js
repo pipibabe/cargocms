@@ -1,5 +1,4 @@
 /* @flow */
-import axios from 'axios';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,7 +9,7 @@ import {
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Lang from 'lodash';
 import ShipCard from './ShipCard';
-import classes from '../_style.scss';
+import '../_style.scss';
 import {
   showToast,
   closeToast,
@@ -42,7 +41,8 @@ const styles = {
   },
 };
 
-let inputDelayer = null;
+const searchTextBuffer = '';
+const inputDelayer = null;
 
 @connect(
   state => ({
@@ -75,52 +75,63 @@ let inputDelayer = null;
   constructor(props, context) {
     super(props, context);
     this.state = {
-      searchText: '',
+      dataSource: props.shipOrder.list,
     };
     this.inputDelayer = inputDelayer;
+    this.searchTextBuffer = searchTextBuffer;
   }
 
   componentWillMount() {
     this.props.fetchShipListData();
   }
 
-  handleSearchText = (
-    searchText: string = '',
-    dataSource: Array,
-    params: Object,
-  ) => {
-    // console.log(`searchText=>${searchText}, params=>${params}`);
-    this.setState({
-      searchText,
-    });
-    const notNil = !Lang.isNil(searchText);
-    const notEmpty = !Lang.isEmpty(searchText);
-    
-    if (this.inputDelayer) {
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props !== nextProps || this.state !== nextState;
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps !== this.props) {
+      // check list data equal
+      if (nextProps.shipOrder.list !== this.state.dataSource) {
+        this.setState({
+          dataSource: nextProps.shipOrder.list,
+        });
+      }
+    }
+  }
+
+  handleUpdateInput = (searchText) => {
+    const nil = Lang.isNil(searchText);
+    const empty = Lang.isEmpty(searchText);
+    if (nil || empty) {
+      clearTimeout(this.inputDelayer);
+      this.inputDelayer = null;
       this.props.fetchShipListData();
     }
   }
 
   handleSearchRequest = (chosenRequest: string, index: number) => {
-    this.props.closeToast();
-    const searchText = this.state.searchText;
+    this.handleSearch(chosenRequest);
+  }
 
+  handleSearch = (searchText) => {
     if (!this.inputDelayer) {
       this.inputDelayer = setTimeout(() => {
-        const notNil = !Lang.isNil(searchText);
-        const notEmpty = !Lang.isEmpty(searchText);
-        if (notNil && notEmpty) {
+        const nil = Lang.isNil(searchText);
+        const empty = Lang.isEmpty(searchText);
+        if (!nil && !empty) {
           this.props.fetchFindShipItem(searchText);
         } else {
           this.props.fetchShipListData();
         }
+        clearTimeout(this.inputDelayer);
         this.inputDelayer = null;
-      }, 800);
+      }, 300);
     }
   }
 
   render() {
-    const dataSource = this.props.shipOrder.list;
+    const dataSource = this.state.dataSource;
     const isNoData = Lang.isEmpty(dataSource);
     const autoCompleteTitle = [];
     if (!isNoData) {
@@ -131,9 +142,6 @@ let inputDelayer = null;
         autoCompleteTitle.push(item.telephone);
         autoCompleteTitle.push(item.paymentAddress1);
         autoCompleteTitle.push(item.paymentCity);
-      }
-      if (Lang.isEmpty(dataSource.items)) {
-        this.props.showToast('沒有資料');
       }
     }
     return (
@@ -153,8 +161,8 @@ let inputDelayer = null;
               maxSearchResults={5}
               // hintText='輸入以查詢'
               fullWidth={true}
-              onUpdateInput={this.handleSearchText}
-              onKeyDown={this.handleSearchRequest}
+              onUpdateInput={this.handleUpdateInput}
+              onNewRequest={this.handleSearchRequest}
             />
             <div className='col-xs-1'>{}</div>
           </div>
