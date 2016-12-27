@@ -3,7 +3,7 @@
   <div class="container">
     <!-- Logo -->
     <a class="logo" href="/">
-      <img src="/assets/mvp/main/admin/img/logo.png" alt="Logo">
+      <img src="/assets/labfnp/img/logo-text-light.png" alt="Logo">
 
       <!--<h1>LFP</h1>-->
     </a>
@@ -31,6 +31,18 @@
         <li class="<%= (req.path=='/')?'active':'' %>">
           <a href="/">首頁</a>
         </li>
+        <li class="<%= (req.path.startsWith('/lab') || req.path.startsWith('/recipe') )?'active':'' %>">
+          <a href="/lab">實驗室</a>
+        </li>
+        <li class="<%= (req.path.startsWith('/wall'))?'active':'' %>">
+          <a href="/wall">近期動態</a>
+        </li>
+        <li class="<%= (req.path.startsWith('/blog'))?'active':'' %>">
+          <a href="/blog">網誌</a>
+        </li>
+        <li class="<%= (req.path.startsWith('/event'))?'active':'' %>">
+          <a href="/event">活動</a>
+        </li>
         <li class="base active">
           <a>1</a>
         </li>
@@ -42,9 +54,16 @@
         <% if (!req.session.authenticated) { %>
           <li class="<%= (req.path=='/register')?'active':'' %>"><a href="/register">註冊</a></li>
           <li class="topbar-devider"></li>
-          <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" class="login-btn" >登入</a></li>
+
+          <% var loginBackUrl = req.url;%>
+          <% if(loginBackUrl === '/register' || loginBackUrl === '/') { %>
+          <%   loginBackUrl = '' %>
+          <% } else { %>
+          <%   loginBackUrl = '?url=' + loginBackUrl %>
+          <% } %>
+          <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" class="login-btn">登入</a></li>
         <% } else { %>
-          <li><a id="logout-link">登出</a></li>
+          <li><a id="logout-link" class="logout-link" href="#" >登出</a></li>
           <li class="topbar-devider"></li>
           <li class="<%= (req.path=='/me')?'active':'' %>" >
             <a href="/me">
@@ -52,30 +71,11 @@
             </a>
           </li>
         <% } %>
+        <li class="<%= (req.path.startsWith('/contact'))?'active':'' %> hidden-lg hidden-md hidden-sm">
+          <a href="/contact">聯絡我們</a>
+        </li>
       </ul>
     </div><!--/end container-->
   </div><!--/navbar-collapse-->
 </div>
 <!--=== End Header ===-->
-
-<% LayoutUtils.addScriptBlock(`
-  $('#logout-link').click(function(){
-    swal({
-      title: '確認',
-      text: '您確定要登出了嗎？',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: "#e6caa8",
-      confirmButtonText: "登出",
-      cancelButtonText: "取消",
-      closeOnConfirm: true,
-      closeOnCancel: true,
-    },function(isConform){
-      if(isConform){
-        open('/logout', '_self');
-      }else{
-        swal.close();
-      }
-    });
-  });
-`); %>

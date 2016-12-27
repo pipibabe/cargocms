@@ -58,193 +58,193 @@ describe.skip('about Recipe Controller operation.', function() {
           token,
         })
       );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
-      repetOrder.push(request(sails.hooks.http.app)
-        .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
-        .send({
-          id: 1,
-          perfumeName: 'love',
-          description: 'this is love',
-          message: 'test',
-          recipient: 'admin',
-          phone: '0900000000',
-          address: 'taiwan',
-          email: 'admin@example.com',
-          note: 1,
-          paymentMethod: 'gotoShop',
-          invoiceNo: 'LB-12345678',
-          token,
-        })
-      );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
+      // repetOrder.push(request(sails.hooks.http.app)
+      //   .post(`/recipe/allpay/${recipe.id}?hashId=${recipe.hashId}`)
+      //   .send({
+      //     id: 1,
+      //     perfumeName: 'love',
+      //     description: 'this is love',
+      //     message: 'test',
+      //     recipient: 'admin',
+      //     phone: '0900000000',
+      //     address: 'taiwan',
+      //     email: 'admin@example.com',
+      //     note: 1,
+      //     paymentMethod: 'gotoShop',
+      //     invoiceNo: 'LB-12345678',
+      //     token,
+      //   })
+      // );
       const result = await Promise.all(repetOrder);
       // sails.log.debug(result[0].status,result[1].status);
       sails.log.debug(result[0].status);
