@@ -17,14 +17,10 @@ import {
 
 const styles = {
   appBar: {
-    backgroundColor: '#2D3743',
     fontSize: 12,
+    backgroundColor: '#2D3743',
   },
   contentContainer: {
-    // flex: 1,
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'flex-start',
   },
   drawer: {
     paddingLeft: 15,
@@ -35,7 +31,6 @@ const styles = {
   drawerContainer: {
     marginTop: 10,
     backgroundColor: '#F2F2F2',
-    // position: 'relative',
   },
   content: {
     zIndex: 1,
@@ -131,6 +126,7 @@ const styles = {
     return (
       <div className=''>
         <AppBar
+          className='appBar'
           title={titleText}
           onLeftIconButtonTouchTap={this.handleToggle}
           style={styles.appBar}
@@ -141,7 +137,7 @@ const styles = {
           <Drawer
             style={styles.drawer}
             containerStyle={styles.drawerContainer}
-            className='drawer'
+            className='drawerContainer'
             zDepth={zDepth}
             open={this.state.drawerOpen}
             width={this.state.drawerWidth}
