@@ -32,55 +32,43 @@ describe('about Order controllers', () => {
     }
   });
 
-  it('User shopping car Order some Products.', async (done) => {
+  it('payment fail', async (done) => {
     try{
-      const orderData = {
-        products:[ {
-          id: product1.id,
-          quantity: 3,
-        }, {
-          id: product2.id,
-          quantity: 2,
-        }, {
-          id: product3.id,
-          quantity: 5,
-        }],
-        UserId: user.id,
+      const paymentData = {
+
       };
 
       const res = await request(sails.hooks.http.app)
-      .post(`/api/order`).send( orderData );
+      .post(`/api/payment`).send( paymentData );
 
       res.status.should.be.eq(200);
+      res.body.itme.status.should.be.eq(paymentData.);
 
-      const order = await Order.findOne({
-        where: {
-          id: res.body.data.item.id
-        }
-      });
-
-      const orderProduct = await OrderProduct.findAll({
-        where: {
-          OrderId: res.body.data.item.id
-        }
-      });
-
-      orderProduct.length.should.be.equal(3);
-
-      const orderPayment = await OrderPayment.findOne({
-        where: {
-          id: order.OrderPaymentId
-        }
-      });
-      orderPayment.statue.should.be.eq('NEW');
-
-      const orderPaymentHistory = await OrderPaymentHistory.findAll({
-        where: {
-          OrderPaymentId: orderPayment.id,
-        },
-      });
+      const orderPaymentHistory = await OrderPaymentHistory.findAll();
       orderPaymentHistory.length.should.be.eq(1);
 
+      done();
+    } catch (e) {
+      done(e);
+    }
+
+  });
+
+  it('payment success', async (done) => {
+    try{
+      const paymentData = {
+
+        status: 'COMPLETE',
+      };
+
+      const res = await request(sails.hooks.http.app)
+      .post(`/api/payment`).send( paymentData );
+
+      res.status.should.be.eq(200);
+      res.body.itme.status.should.be.eq(paymentData.status);
+
+      const orderPaymentHistory = await OrderPaymentHistory.findAll();
+      orderPaymentHistory.length.should.be.eq(2);
 
       done();
     } catch (e) {
