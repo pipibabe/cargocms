@@ -1,6 +1,6 @@
 import createHelper from "../../../util/createHelper.js"
 
-describe('about Order controllers', () => {
+describe.skip('about Order controllers', () => {
 
   let product1, product2, product3 , user;
   before(async function(done){
@@ -20,6 +20,9 @@ describe('about Order controllers', () => {
       product1 = await createHelper.product('Product A');
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
+
+      order = await createHelper.order([product1.id, product2.id, product3.id]);
+
 
       done();
     } catch (e) {
@@ -41,30 +44,6 @@ describe('about Order controllers', () => {
           quantity: 5,
         }],
         UserId: user.id,
-        telephone: '04-22019020',
-        fax: '',
-        email: 'buyer@gmail.com',
-        tracking: '確認',
-        invoiceNo: '87654321',
-        invoicePrefix: 'TS',
-        paymentFirstname: '珮門',
-        paymentLastname: '葉',
-        paymentAddress1: '西區台灣大道二段2號16F-1',
-        paymentCity: '台中市',
-        paymentPostcode: '402',
-        paymentMethod: 'ATM轉帳',
-        paymentCode: 'pay123456',
-        shippingFirstname: '拜爾',
-        shippingLastname: '劉',
-        shippingAddress1: '西區台灣大道二段2號16F-1',
-        shippingCity: '台中市',
-        shippingPostcode: '402',
-        shippingMethod: '低溫宅配',
-        shippingCode: 'ship123456',
-        ip: '',
-        forwardedIp: '',
-        userAgent: '',
-        comment: '這是一個訂購測試'
       };
 
       const res = await request(sails.hooks.http.app)
@@ -84,8 +63,22 @@ describe('about Order controllers', () => {
         }
       });
 
-      order.tracking.should.be.equal('確認');
       orderProduct.length.should.be.equal(3);
+
+      const orderPayment = await OrderPayment.findOne({
+        where: {
+          id: order.OrderPaymentId
+        }
+      });
+      orderPayment.statue.should.be.eq('NEW');
+
+      const orderPaymentHistory = await OrderPaymentHistory.findAll({
+        where: {
+          OrderPaymentId: orderPayment.id,
+        },
+      });
+      orderPaymentHistory.length.should.be.eq(1);
+
 
       done();
     } catch (e) {
