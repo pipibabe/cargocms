@@ -107,10 +107,15 @@ module.exports = {
       },
 
       status: {
-        type: Sequelize.STRING(32),
-        allowNull: false,
-
-
+        type: Sequelize.VIRTUAL,
+        get: function(){
+          try{
+            const status = this.getDataValue('OrderPaymentStatus');
+            return status ? status.name : '';
+          } catch (e) {
+            sails.log.error(e);
+          }
+        }
       },
 
       // OrderPaymentStatusId: {
