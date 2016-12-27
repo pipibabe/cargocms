@@ -36,6 +36,11 @@
     }
   }
   .b2b-bill-info {
-    
+    td {
+      text-align: right;
+      &:first-child {
+        padding: 0 75px 0 0;
+      }
+    }
   }
 }
