@@ -42,7 +42,7 @@ describe('about Order controllers', () => {
       .post(`/api/payment`).send( paymentData );
 
       res.status.should.be.eq(200);
-      res.body.itme.status.should.be.eq(paymentData.);
+      res.body.itme.status.should.be.eq('NEW');
 
       const orderPaymentHistory = await OrderPaymentHistory.findAll();
       orderPaymentHistory.length.should.be.eq(1);
