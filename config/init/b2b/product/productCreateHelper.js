@@ -14,7 +14,7 @@ module.exports = {
       address: '台中市清水區北提路'
     });
 
-    const productData = {
+    let productData = {
       model: name,
       sku: "ABC1234",
       upc: "512345678900",
@@ -42,7 +42,7 @@ module.exports = {
       SupplierId:  supplier.id,
     };
 
-    const product = await Product.create(productData);
+    let product = await Product.create(productData);
 
     let productDescription = await ProductDescription.create({
         name: `${name}`,
@@ -128,6 +128,77 @@ module.exports = {
     });
 
     await product.setCategories(initCategory);
+
+
+    productData.model = `${name} 超二代`;
+    product = await Product.create(productData);
+    await product.setCategories(initCategory);
+
+    productDescription = await ProductDescription.create({
+        name: `${name}`,
+        description: `${name}`,
+        tag: `${categoryType}`,
+        metaTitle: `${categoryType}`,
+        metaDescription: `${categoryType}`,
+        metaKeyword: `${categoryType}, ${categoryEng}`,
+        ProductId: product.id
+      });
+
+    productTag = await ProductTag.create({
+      tag: `${categoryType}`,
+      ProductId: product.id
+    });
+
+    productImage = await ProductImage.create({
+      ProductId: product.id,
+      ImageId: image.id,
+      image: `catalog/demo/168_seafood_${categoryEng}.jpg`,
+      sortOrder: 0
+    });
+
+    option = await Option.create({
+      type: 'textarea',
+      sortOrder: 5,
+    });
+
+    optionValue = await OptionValue.create({
+      image:"catalog/option/option_image.jpg",
+      sortOrder: 4,
+      OptionId: option.id
+    });
+
+    productOption = await ProductOption.create({
+      value: '超低溫冷藏',
+      required: true,
+      OptionId: option.id,
+      ProductId: product.id
+    });
+
+    productOptionValue = await ProductOptionValue.create({
+      quantity: 100,
+      subtract: true,
+      price: 150,
+      pricePrefix: "+",
+      points: 0,
+      pointsPrefix: "+",
+      weight: 1.00000,
+      weightPrefix: "+",
+      OptionId: option.id,
+      OptionValueId: optionValue.id,
+      ProductId: product.id,
+      ProductOptionId: productOption.id
+    });
+
+    optionDescription = await OptionDescription.create({
+      name: 'textarea',
+      OptionId: option.id
+    });
+
+    optionValueDescription = await OptionValueDescription.create({
+      name: 'Large',
+      OptionId: option.id,
+      OptionValueId: optionValue.id
+    });
 
     return product;
   },
