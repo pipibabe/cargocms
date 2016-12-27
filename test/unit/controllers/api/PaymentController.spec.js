@@ -3,13 +3,14 @@ import createHelper from "../../../util/createHelper.js"
 describe('about Order controllers', () => {
 
   let product1, product2, product3 , user;
+  let order, orderStatus;
   before(async function(done){
     try{
       user = await User.create({
-        username: 'buyer',
-        email: 'buyer@example.com',
-        firstName: '劉',
-        lastName: '拜爾',
+        username: 'payment',
+        email: 'payment@example.com',
+        firstName: '張',
+        lastName: '拍敏',
         birthday: new Date(),
         phone1: '(04)2201-9020',
         phone2: '0900-000-000',
@@ -20,6 +21,10 @@ describe('about Order controllers', () => {
       product1 = await createHelper.product('Product A');
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
+
+      orderStatus = await createHelper.orderStatus('NEW');
+      order = await createHelper.order([product1.id, product2.id, product3.id], orderStatus.id);
+
 
       done();
     } catch (e) {

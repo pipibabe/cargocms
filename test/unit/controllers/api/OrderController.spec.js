@@ -21,6 +21,9 @@ describe('about Order controllers', () => {
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
 
+      order = await createHelper.order([product1.id, product2.id, product3.id]);
+
+
       done();
     } catch (e) {
       done(e);
