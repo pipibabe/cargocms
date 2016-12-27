@@ -27,7 +27,3 @@ export default (store) => (
     </Route>
   </Route>
 );
-
-//
-// export default (store) => (
-//   <Route path='/ship' component={CoreLayout}>
