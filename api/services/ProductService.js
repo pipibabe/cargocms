@@ -1,27 +1,32 @@
 module.exports = {
-  find: async ({start, length, category, supplier, limit}) => {
+  find: async ({start, length, categoryId, supplierId, limit}) => {
     try{
+
       let query = {
         include: [
           {
-            model:Supplier,
-            where: {
-              id: supplier
-            }
-          }, {
             model: Category,
             where: {
-              id: category
+              id: categoryId
             }
           }
         ]
       };
 
+      if(supplierId){
+        query.include.push({
+          model: Supplier,
+          where: {
+            id: supplierId
+          }
+        });
+      }
+
       if ( limit === 'true'){
         query.offset = Number(start);
         query.limit = Number(length);
       }
-      
+
       const product = await Product.findAll(query);
 
       return product;
