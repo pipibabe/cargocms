@@ -1,0 +1,29 @@
+<!-- CSS Page Style -->
+<link rel="stylesheet" href="/assets/unify/css/pages/page_404_error.css">
+
+<style>
+  .btn-u {
+  	margin: 1.3em 5px;
+  }
+  .btn-gray{
+  	background-color: gray;
+  }
+</style>
+
+<!--=== Content Part ===-->
+<div class="container content">
+	<!--Error Block-->
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="error-v1">
+				<span class="error-v1-title">403</span>
+				<span>您沒有足夠權限瀏覽此網頁。</span>
+				<p><%= data.message ? data.message : '您要求瀏覽的網頁無法存取！'%></p>
+				<a class="btn-u btn-bordered btn-gray" href="/">返回首頁</a>
+				<a class="btn-u btn-bordered" href="/login">立即登入</a>
+			</div>
+		</div>
+	</div>
+	<!--End Error Block-->
+</div>
+<!--=== End Content Part ===-->

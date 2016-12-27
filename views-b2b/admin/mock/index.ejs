@@ -1,0 +1,171 @@
+<!-- widget grid -->
+<section id="mock-index" class="">
+
+	<!-- row -->
+	<div class="row">
+
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-darken" id="mock-table-widget" data-widget-editbutton="false" style="display: none;">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+
+        <header>
+          <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+          <h2>{{data.title}}</h2>
+        </header>
+
+				<!-- widget div-->
+				<div>
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+            <!-- end messageBox div -->
+						<table id="mock-table" class="table table-striped table-bordered table-hover" width="100%">
+							<thead>
+								<tr>
+									<th class="" v-for="col in data.cols">{{col.name}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in data.items" v-on:click="selection($index)" v-on:dblclick="dblclick($index)">
+									<td v-for="col in data.cols">{{{ item[col.key] }}}</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- WIDGET END -->
+
+	</div>
+
+	<!-- end row -->
+
+	<!-- end row -->
+
+</section>
+<!-- end widget grid -->
+<script type="text/javascript">
+
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 *
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("/assets/admin/js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 *
+	 */
+
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+
+	var pagefunction = function() {
+		//console.log("cleared");
+
+		/* // DOM Position key index //
+
+			l - Length changing (dropdown)
+			f - Filtering input (search)
+			t - The Table! (datatable)
+			i - Information (records)
+			p - Pagination (paging)
+			r - pRocessing
+			< and > - div elements
+			<"#id" and > - div with an id
+			<"class" and > - div with a class
+			<"#id.class" and > - div with an id and class
+
+			Also see: http://legacy.datatables.net/usage/features
+		*/
+
+		<%- include vue.ejs %>
+		userApp.$mount("#mock-index");
+		userApp.loadItems(userApp.renderTable);
+
+	};
+
+	// load related plugins
+
+	loadScript("/assets/admin/js/plugin/datatables/jquery.dataTables.min.js", function(){
+		loadScript("/assets/admin/js/plugin/datatables/dataTables.colVis.min.js", function(){
+			loadScript("/assets/admin/js/plugin/datatables/dataTables.tableTools.min.js", function(){
+				loadScript("/assets/admin/js/plugin/datatables/dataTables.bootstrap.min.js", function(){
+					loadScript("/assets/admin/js/plugin/datatable-responsive/datatables.responsive.min.js", pagefunction)
+				});
+			});
+		});
+	});
+
+	var pagedestroy = function() {
+		userApp = null;
+		userAppModel = null;
+		$("#mock-table").remove();
+		if (debugState) {
+			console.log("✔ mock-table unbind");
+		}
+	}
+
+</script>

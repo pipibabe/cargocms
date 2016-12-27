@@ -1,0 +1,62 @@
+<fieldset>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">會員</label>
+      <label class="input state-disabled">
+        <input type="text" name="userName" placeholder="" v-model="data.item.userName" disabled>
+        <b class="tooltip tooltip-bottom-right">會員</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">回饋時間</label>
+      <label class="input state-disabled">
+        <input type="text" name="UserId" placeholder="" v-model="data.item.createdDateTime.dateTime" disabled>
+        <b class="tooltip tooltip-bottom-right">會員</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">香調</label>
+      <label class="input state-disabled">
+        <input type="text" name="scentName" placeholder="" v-model="data.item.scentName" disabled>
+        <b class="tooltip tooltip-bottom-right">香調</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">回饋內容</label>
+      <label class="input state-disabled">
+        <input type="text" name="feeling" placeholder="" v-model="data.item.feeling" disabled>
+        <b class="tooltip tooltip-bottom-right">回饋內容</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">已確認</label>
+      <label class="input state-disabled">
+        <select class="form-control" v-model="data.item.feedbackCheck" disabled>
+          <option value="0" selected>No</option>
+          <option value="1">Yes</option>
+        </select> <i></i> </label>
+    </section>
+  </div>
+
+
+</fieldset>
+<script>
+var formRules = {
+  feeling: {
+    required: true
+  },
+}
+
+// Messages for form validation
+var formMessages = {
+  feeling : {
+    required : '請給予香調回饋內容'
+  },
+
+}
+</script>

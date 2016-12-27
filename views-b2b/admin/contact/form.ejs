@@ -1,0 +1,77 @@
+<fieldset>
+
+  <section>
+    <label class="input state-disabled">時間
+      <input type="text" name="createdDateTime" placeholder="時間" v-model="data.item.createdDateTime.dateTime" disabled>
+      <b class="tooltip tooltip-bottom-right">時間</b></label>
+  </section>
+
+  <section>
+    <label class="input state-disabled">姓名
+      <input type="text" name="name" placeholder="姓名" v-model="data.item.name" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入姓名</b></label>
+  </section>
+
+  <section>
+    <label class="input state-disabled">Email
+      <input type="text" name="emal" placeholder="Email" v-model="data.item.email" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入Email</b></label>
+  </section>
+
+  <section>
+    <label class="input state-disabled">行動電話
+      <input type="text" name="phone" placeholder="行動電話" v-model="data.item.phone" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入行動電話</b></label>
+  </section>
+
+  <section>
+    <label class="input state-disabled">聯繫主旨
+      <input type="text" name="subject" placeholder="聯繫主旨" v-model="data.item.subject" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入聯繫主旨</b></label>
+  </section>
+
+  <section>
+    <label class="input state-disabled">聯繫內容
+      <textarea class="form-control" name="content" placeholder="聯繫內容" v-model="data.item.content" rows="20"  disabled></textarea>
+      <b class="tooltip tooltip-bottom-right">請輸入聯繫內容</b></label>
+  </section>
+
+</fieldset>
+<script>
+var formRules = {
+  name: {
+    required: true
+  },
+  email: {
+    required: true
+  },
+  phone: {
+    required: true
+  },
+  subject: {
+    required: true
+  },
+  content: {
+    required: true
+  },
+}
+
+// Messages for form validation
+var formMessages = {
+  name: {
+    required: '請給予姓名'
+  },
+  email: {
+    required: '請給予Email'
+  },
+  phone: {
+    required: '請給予行動電話'
+  },
+  subject: {
+    required: '請給予聯繫主旨'
+  },
+  content: {
+    required: '請給予聯繫內容'
+  },
+}
+</script>

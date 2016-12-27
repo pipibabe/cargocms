@@ -1,0 +1,152 @@
+<fieldset>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">票券名稱</label>
+      <label class="input state-disabled">
+        <input type="text" name="title" placeholder="請輸入票券名稱" v-model="data.item.title" disabled>
+        <b class="tooltip tooltip-bottom-right">票券名稱</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">價格</label>
+      <label class="input state-disabled">
+        <input type="number" name="price" placeholder="請輸入價格 例：1688" v-model="data.item.price" disabled>
+        <b class="tooltip tooltip-bottom-right">價格</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">票券數量</label>
+      <label class="input state-disabled">
+        <input type="number" name="limit" placeholder="請輸入票的數量 例：20" v-model="data.item.limit" disabled>
+        <b class="tooltip tooltip-bottom-right">票券數量</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">已售數量</label>
+      <label class="input state-disabled">
+        <input type="number" name="signupCount" placeholder="請輸入已售數量 例：10" v-model="data.item.signupCount" disabled>
+        <b class="tooltip tooltip-bottom-right">已售數量</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">開賣時間</label>
+      <div class="input-group">
+        <input class="form-control" name="sellStartDate" type="text" placeholder="From" v-model="data.item.sellStartDate" disabled>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">截止時間</label>
+      <div class="input-group">
+        <input class="form-control" name="sellEndDate" type="text" placeholder="to" v-model="data.item.sellEndDate"  disabled>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">活動開始時間</label>
+      <div class="input-group">
+        <input class="form-control" name="eventStartDate" type="text" placeholder="From" v-model="data.item.eventStartDate" disabled>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6 col-xs-">
+      <label class="label">活動結束時間</label>
+      <div class="input-group">
+        <input class="form-control" name="eventEndDate" type="text" placeholder="to" v-model="data.item.eventEndDate" disabled>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+    </section>
+  </div>
+
+  <section>
+    <label class="label">描述</label>
+    <label class="input state-disabled">
+      <textarea class="form-control" name="description" placeholder="請輸入活動票券詳細說明" v-model="data.item.description" rows="10" disabled></textarea>
+      <b class="tooltip tooltip-bottom-right">描述</b></label>
+  </section>
+
+</fieldset>
+
+<script>
+
+$.validator.addMethod("LaterStartSell", function (value, element) {
+  var sellStart = new Date($("input[name='sellStartDate']").val());
+  var sellEnd = new Date($("input[name='sellEndDate']").val());
+  return this.optional(element) || (sellStart < sellEnd);
+});
+
+$.validator.addMethod("LaterStartEvent", function (value, element) {
+  var eventStart = new Date($("input[name='eventStartDate']").val());
+  var eventEnd = new Date($("input[name='eventEndDate']").val());
+  return this.optional(element) || (eventStart < eventEnd);
+});
+
+var formRules = {
+  title : {
+    required : true
+  },
+  price : {
+    required : true
+  },
+  limit : {
+    required : true
+  },
+  signupCount : {
+    required : true
+  },
+  sellStartDate : {
+    required : true,
+  },
+  sellEndDate : {
+    required : true,
+    LaterStartSell: true
+  },
+  eventStartDate : {
+    required : true
+  },
+  eventEndDate : {
+    required : true,
+    LaterStartEvent: true
+  }
+}
+
+// Messages for form validation
+var formMessages = {
+  title : {
+    required : "請輸入票的名稱"
+  },
+  price : {
+    required : "請輸入價格"
+  },
+  limit : {
+    required : "請輸入票券數量"
+  },
+  signupCount : {
+    required : "請輸入已售出數量"
+  },
+  sellStartDate : {
+    required : "請輸入開賣時間"
+  },
+  sellEndDate : {
+    required : "請輸入結束販賣時間",
+    LaterStartSell: "請輸入開賣時間之後的時間"
+  },
+  eventStartDate : {
+    required : "請輸入活動開始時間"
+  },
+  eventEndDate : {
+    required : "請輸入活動結束時間",
+    LaterStartEvent: "請輸入活動開始之後的日期時間"
+  },
+}
+
+</script>

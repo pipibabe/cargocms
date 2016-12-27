@@ -1,0 +1,286 @@
+<fieldset>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">訂單狀態</label>
+      <label class="select state-disabled">
+        <select v-model="data.item.RecipeOrder.productionStatus" disabled>
+          <option value="NEW" selected>NEW</option>
+          <option value="PENDING">待建立</option>
+          <option value="SUBMITTED">下訂單</option>
+          <option value="PAID">已付款</option>
+          <option value="PROCESSING">製作中</option>
+          <option value="CANCELLED">取消</option>
+          <option value="SHIPPED">已寄出</option>
+          <option value="DELIVERED">已交付</option>
+          <option value="COMPLETED">完成</option>
+        </select> <i></i> </label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">交易編號</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="TradeNo" placeholder="TradeNo" v-model="data.item.TradeNo" disabled>
+        <b class="tooltip tooltip-bottom-right">TradeNo</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">廠商交易編號</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="MerchantTradeNo" placeholder="MerchantTradeNo" v-model="data.item.MerchantTradeNo" disabled>
+        <b class="tooltip tooltip-bottom-right">MerchantTradeNo</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">交易代碼</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="RtnCode" placeholder="RtnCode" v-model="data.item.RtnCode" disabled>
+        <b class="tooltip tooltip-bottom-right">RtnCode</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">交易訊息</label>
+      <label class="input state-disabled allpaydisabled allpaydisabled">
+        <input class="allpay" type="text" name="RtnMsg" placeholder="RtnMsg" v-model="data.item.RtnMsg" disabled>
+        <b class="tooltip tooltip-bottom-right">RtnMsg</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">付款方式</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="PaymentType" placeholder="PaymentType" v-model="data.item.PaymentType" disabled>
+        <b class="tooltip tooltip-bottom-right">PaymentType</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">應收款項</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="ShouldTradeAmt" placeholder="ShouldTradeAmt" v-model="data.item.ShouldTradeAmt" disabled>
+        <b class="tooltip tooltip-bottom-right">ShouldTradeAmt</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">付款金額</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="TradeAmt" placeholder="TradeAmt" v-model="data.item.TradeAmt" disabled>
+        <b class="tooltip tooltip-bottom-right">TradeAmt</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">銀行代碼</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="BankCode" placeholder="BankCode" v-model="data.item.BankCode" disabled>
+        <b class="tooltip tooltip-bottom-right">BankCode</b></label>
+    </section>
+
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">付款帳號</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="vAccount" placeholder="vAccount" v-model="data.item.vAccount" disabled>
+        <b class="tooltip tooltip-bottom-right">vAccount</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">支付交易編號</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="PaymentNo" placeholder="PaymentNo" v-model="data.item.PaymentNo" disabled>
+        <b class="tooltip tooltip-bottom-right">PaymentNo</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">Barcode1</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="Barcode1" placeholder="Barcode1" v-model="data.item.Barcode1" disabled>
+        <b class="tooltip tooltip-bottom-right">Barcode1</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">Barcode2</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="Barcode2" placeholder="Barcode2" v-model="data.item.Barcode2" disabled>
+        <b class="tooltip tooltip-bottom-right">Barcode2</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">Barcode3</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="Barcode3" placeholder="Barcode3" v-model="data.item.Barcode3" disabled>
+        <b class="tooltip tooltip-bottom-right">Barcode3</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">CheckMacValue</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="CheckMacValue" placeholder="CheckMacValue" v-model="data.item.CheckMacValue" disabled>
+        <b class="tooltip tooltip-bottom-right">CheckMacValue</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">交易日期</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="TradeDate" placeholder="PaymentDate" v-model="data.item.TradeDate" disabled>
+        <b class="tooltip tooltip-bottom-right">TradeDate</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">付款時間</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="PaymentDate" placeholder="PaymentDate" v-model="data.item.PaymentDate" disabled>
+        <b class="tooltip tooltip-bottom-right">PaymentDate</b></label>
+    </section>
+
+    <section class="col col-lg-4 col-xs-4">
+      <label class="label">交易期限</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="ExpireDate" placeholder="ExpireDate" v-model="data.item.ExpireDate" disabled>
+        <b class="tooltip tooltip-bottom-right">ExpireDate</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6 col-xs-6">
+      <label class="label">訂單成立時間</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="MerchantTradeDate" placeholder="MerchantTradeDate" v-model="data.item.MerchantTradeDate" disabled>
+        <b class="tooltip tooltip-bottom-right">MerchantTradeDate</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">配方訂單ID</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="RecipeOrderId" placeholder="RecipeOrderId" v-model="data.item.RecipeOrderId" disabled>
+        <b class="tooltip tooltip-bottom-right">RecipeOrderId</b></label>
+    </section>
+  </div>
+  <div class="row hidden">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">Created At</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="createdDateTime" placeholder="createdDateTime" v-model="data.item.createdDateTime.dateTime" disabled>
+        <b class="tooltip tooltip-bottom-right">createdDateTime</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">Updated At</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="updatedDateTime" placeholder="updatedDateTime" v-model="data.item.updatedDateTime.dateTime" disabled>
+        <b class="tooltip tooltip-bottom-right">updatedDateTime</b></label>
+    </section>
+  </div>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">配方名稱</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="ItemNameArray" placeholder="ItemNameArray" v-model="data.item.ItemNameArray" disabled>
+        <b class="tooltip tooltip-bottom-right">ItemNameArray</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">訂購人</label>
+      <label class="input state-disabled allpaydisabled">
+        <input class="allpay" type="text" name="UserName" placeholder="UserName" v-model="data.item.UserName" disabled>
+        <b class="tooltip tooltip-bottom-right">UserName</b></label>
+    </section>
+  </div>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">收件人</label>
+      <label class="input state-disabled">
+        <input type="text" name="Recipient" placeholder="Recipient" v-model="data.item.Recipient" disabled>
+        <b class="tooltip tooltip-bottom-right">Recipient</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">Email</label>
+      <label class="input state-disabled">
+        <input type="text" name="Email" placeholder="Email" v-model="data.item.Email" disabled>
+        <b class="tooltip tooltip-bottom-right">Email</b></label>
+    </section>
+  </div>
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">電話</label>
+      <label class="input state-disabled">
+        <input type="text" name="Phone" placeholder="Phone" v-model="data.item.Phone" disabled>
+        <b class="tooltip tooltip-bottom-right">Phone</b></label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">地址</label>
+      <label class="input state-disabled">
+        <input type="text" name="Address" placeholder="Address" v-model="data.item.Address" disabled>
+        <b class="tooltip tooltip-bottom-right">Address</b></label>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">運送物流</label>
+      <label class="select state-disabled">
+        <select v-model="data.item.shipping" disabled>
+          <option value="HCT" selected>新竹物流</option>
+        </select> <i></i> </label>
+    </section>
+
+    <section class="col col-lg-6 col-xs-6">
+      <label class="label">物流編號</label>
+      <label class="input state-disabled">
+        <input type="text" name="trackingNumber" placeholder="物流編號" v-model="data.item.trackingNumber" disabled>
+        <b class="tooltip tooltip-bottom-right">Address</b></label>
+    </section>
+  </div>
+
+  <section>
+    <label class="label">備註</label>
+    <label class="input state-disabled">
+      <textarea class="form-control" name="Note" placeholder="請輸入備註" v-model="data.item.Note" rows="5" disabled></textarea>
+      <b class="tooltip tooltip-bottom-right">備註</b></label>
+  </section>
+
+</fieldset>
+
+<script>
+var formRules = {
+  Recipient : {
+    required : true
+  },
+  Email : {
+    required : true,
+    email : true
+  },
+  Phone : {
+    required : true
+  },
+  Address : {
+    required : true
+  },
+}
+
+  // Messages for form validation
+var formMessages = {
+  Recipient : {
+    required : '請輸入收件者'
+  },
+  Email : {
+    required : '請輸入電子郵件',
+    email : '請確認輸入的 Email 格式'
+  },
+  Phone : {
+    required : '請輸入電話號碼'
+  },
+  Address : {
+    required : '請輸入地址'
+  },
+}
+</script>

@@ -1,0 +1,238 @@
+
+<!-- widget grid -->
+<section id="main-index" class="">
+
+	<!-- row -->
+	<div class="row">
+
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-darken" id="main-table-widget" data-widget-editbutton="false" style="display: none;">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+
+        <header>
+          <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+          <h2>內容管理</h2>
+        </header>
+
+				<!-- widget div-->
+				<div>
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+            <!-- end messageBox div -->
+						<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+							<thead>
+								<tr>
+									<th width="10%" class="" data-hide="phone"><i class="fa fa-fw text-muted fa-hashtag hidden-sm hidden-xs"/> ID</th>
+									<th class="35%" data-class="expand"><i class="fa fa-fw fa-sticky-note text-muted hidden-sm hidden-xs"/> 標題</th>
+									<th class="10%" data-class="expand"><i class="fa fa-fw fa-sticky-note text-muted hidden-sm hidden-xs"/> 類型</th>
+									<!-- <th class="" data-hide="phone" data-class="expand">簡述</th> -->
+									<th width="15%" class="" ><i class="fa fa-fw fa-clock-o text-muted hidden-sm hidden-xs"/> 更新日期</th>
+									<th width="25%" class="" ><i class="fa fa-fw fa-tags text-muted hidden-sm hidden-xs"/> 標籤</th>
+									<!-- <th class="" data-hide="phone,tablet">內容</th> -->
+									<!-- <th class="" data-hide="phone,tablet">封面</th> -->
+                  <!-- <th class="" data-hide="phone,tablet">網址</th> -->
+									<th width="10%" class="" data-hide="phone,tablet">狀態</th>
+									<th width="10%" class="no-sort" data-hide="phone,tablet"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="post in data.items" v-on:click="selection($index)" v-on:dblclick="dblclick($index)">
+									<td>{{ post.id }}</td>
+									<td><a href="/admin/#/admin/post/show/{{post.id}}">{{ post.title }}</a></td>
+									<!-- <td class="col-xs-8 col-sm-8 col-md-8 col-lg-8">{{ post.abstract }}</td> -->
+									<td>{{ post.typeDesc }}</td>
+									<td>{{ post.updatedDateTime.dateTime }}</td>
+									<td><a v-for="tag in post.TagsArray" style="margin-right: 10px; margin-top: 10px;"> {{ tag }}</a></td>
+									<!-- <td>{{ post.content }}</td> -->
+									<!-- <td>{{ post.cover }}</td> -->
+                  <!-- <td>{{ post.url }}</td> -->
+                  <td>
+                    <div class="row-action-buttons hidden-xs hidden-sm">
+                      <input type="checkbox" data-id="{{ post.id }}" name="publish" checked="{{ post.publish }}">
+                    </div>
+                  </td>
+									<td align="center" style="cursor: pointer;">
+                    <div class="row">
+                      <a class="btn btn-default btn-xs" role="button" v-on:click="show(post.id)">
+                        <i class="fa-fw fa fa-eye text-muted" />
+                      </a>
+                      <a class="btn btn-default btn-xs" role="button" v-on:click="edit(post.id)">
+      									<i class="fa-fw fa fa-pencil-square-o text-muted"/>
+                      </a>
+                    </div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- WIDGET END -->
+
+	</div>
+
+	<!-- end row -->
+
+	<!-- end row -->
+
+</section>
+<!-- end widget grid -->
+<script type="text/javascript">
+
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 *
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("/assets/admin/js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 *
+	 */
+
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+
+	var pagefunction = function() {
+		//console.log("cleared");
+
+		/* // DOM Position key index //
+
+			l - Length changing (dropdown)
+			f - Filtering input (search)
+			t - The Table! (datatable)
+			i - Information (records)
+			p - Pagination (paging)
+			r - pRocessing
+			< and > - div elements
+			<"#id" and > - div with an id
+			<"class" and > - div with a class
+			<"#id.class" and > - div with an id and class
+
+			Also see: http://legacy.datatables.net/usage/features
+		*/
+
+    <%- include vue.ejs %>
+    postApp.$mount("#main-index");
+    postApp.loadItems( function(){
+      postApp.renderTable();
+
+      $("input[name='publish']").bootstrapSwitch();
+
+      //偵測表格，下方table_info，變動時，重新將 publish 套用 bootstrapSwitch
+      $("#main-table_info").on("DOMSubtreeModified", function(event){
+        $("input[name='publish']").each(function(index , value){
+          console.log(value);
+          $(value).bootstrapSwitch();
+        })
+      });
+
+      $("#main-table").on('switchChange.bootstrapSwitch',"input[name='publish']",function(event ,state) {
+        var id = $(this).data("id")
+        var publish = $(this).prop("checked");
+
+        $.ajax({
+          url: "/api/admin/post/changePublish/"+id,
+          method: "put",
+          dataType: 'json',
+          cache: false,
+          data:{
+            publish: publish
+          }
+        }).done(function (result) {
+          messageApp.show({
+            desc: result.message,
+            type: 'success'
+          });
+        });
+      });
+
+    });
+
+	};
+
+	// load related plugins
+
+	loadScript("/assets/admin/js/plugin/datatables/jquery.dataTables.min.js", function(){
+		loadScript("/assets/admin/js/plugin/datatables/dataTables.colVis.min.js", function(){
+			loadScript("/assets/admin/js/plugin/datatables/dataTables.tableTools.min.js", function(){
+				loadScript("/assets/admin/js/plugin/datatables/dataTables.bootstrap.min.js", function(){
+					loadScript("/assets/admin/js/plugin/datatable-responsive/datatables.responsive.min.js", pagefunction)
+				});
+			});
+		});
+	});
+
+	var pagedestroy = function() {
+		postApp = null;
+		postAppModel = null;
+		$("#main-table").remove();
+		if (debugState) {
+			console.log("✔ main-table unbind");
+		}
+	}
+
+</script>

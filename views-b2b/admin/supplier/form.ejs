@@ -1,0 +1,80 @@
+<fieldset>
+
+
+    <section>
+      <label class="label">名稱</label>
+      <label class="input state-disabled">
+      <input type="text" name="name" placeholder="" v-model="data.item.name" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入名稱</b></label>
+    </section>
+
+    <section>
+      <label class="label">電子郵件</label>
+      <label class="input state-disabled">
+      <input type="text" name="email" placeholder="" v-model="data.item.email" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入電子郵件</b></label>
+    </section>
+
+    <section>
+      <label class="label">電話</label>
+      <label class="input state-disabled">
+      <input type="text" name="telephone" placeholder="" v-model="data.item.telephone" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入電話</b></label>
+    </section>
+
+    <section>
+      <label class="label">傳真</label>
+      <label class="input state-disabled">
+      <input type="text" name="fax" placeholder="" v-model="data.item.fax" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入傳真</b></label>
+    </section>
+
+    <section>
+      <label class="label">地址</label>
+      <label class="input state-disabled">
+      <input type="text" name="address" placeholder="" v-model="data.item.address" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入地址</b></label>
+    </section>
+
+
+</fieldset>
+<script>
+  var formRules = {
+    name : {
+      required : true
+    },
+    Email : {
+      required : true,
+      email : true
+    },
+    telephone : {
+      required : true
+    },
+    fax : {
+      required : true
+    },
+    address : {
+      required : true
+    },
+  }
+
+    // Messages for form validation
+  var formMessages = {
+    name : {
+      required : "請給予名稱"
+    },
+    Email : {
+      required : "請給予電子郵件",
+      email : "請輸入正確電子郵件格式"
+    },
+    telephone : {
+      required : "請給予電話"
+    },
+    fax : {
+      required : "請給予傳真"
+    },
+    address : {
+      required : "請給予地址"
+    },
+  }
+</script>

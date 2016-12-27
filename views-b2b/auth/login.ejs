@@ -1,0 +1,111 @@
+<!--=== Content Part ===-->
+<div class="container content">
+  <div class="row">
+    <div class="login-block col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <form class="reg-page" method="post" action="/auth/local?url=<%= data.url %>">
+        <!--
+        <div class="reg-header">
+          <h2>使用 Facebook 帳號登入</h2>
+        </div>
+        -->
+
+        <div class="social-login">
+          <ul class="list-unstyled">
+            <li>
+              <a class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20" href="/auth/facebook">
+                <i class="fa fa-facebook"></i> <%= __('login.facebook') %>
+              </a>
+            </li>
+          </ul>
+          <div class="or rounded-x">Or</div>
+        </div>
+
+        <div class="reg-header">
+          <h2><%= __('login.title') %></h2>
+        </div>
+
+        <div class="input-group margin-top-20">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input type="text" placeholder="Username" value="<%= data.user.identifier %>" id="identifier" name="identifier" class="form-control">
+        </div>
+        <div class="input-group margin-top-20">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="password" placeholder="Password" value="<%= data.user.password %>" id="password" name="password" class="form-control">
+        </div>
+
+        <% if (data.errors === 'Error.Passport.BadUserPassword') { %>
+          <div class="margin-top-20 alert alert-warning" role="alert">帳號或密碼錯誤！</div>
+        <% } else if(data.errors === 'Error.Order.Need.Login') { %>
+          <div class="margin-top-20 alert alert-warning" role="alert">訂購需為本站會員，請先登入帳號或註冊</div>
+        <% } %>
+
+        <% var info = req.flash('info')[0]; %>
+        <% if (info) { %>
+          <div class="margin-top-20 alert alert-warning" role="alert"><%= info %></div>
+        <% } %>
+
+        <div class="row margin-top-20">
+          <div class="col-md-6 checkbox">
+            <!--<label><input type="checkbox"> 保持登入狀態</label>-->
+
+            <div class="margin-top-20">
+              <%= __('login.no_account') %><a href="/register"><%= __('login.go_register') %></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <button id="submit-button" class="btn-u pull-right" type="submit"><%= __('login') %></button>
+          </div>
+        </div>
+        <hr>
+
+        <h4><%= __('login.forget_password_title') %></h4>
+        <p><%- __('login.forget_password_content', `<a class="color-green" href="/forgot">${__('login.forget_password_link')}</a>`) %></p>
+
+      </form>
+    </div>
+  </div><!--/row-->
+</div><!--/container-->
+
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $(".reg-page").validate({
+      rules: {
+        identifier: {
+          required: true
+        },
+        password: {
+          required: true
+        },
+
+      },
+      messages: {
+        identifier: {
+          required: "${__('login.invalid.username.empty')}"
+        },
+        password:{
+          required: "${__('login.invalid.password.empty')}"
+        },
+      },
+      highlight: function(element) {
+          $(element).closest('.form-group').addClass('has-error');
+      },
+      unhighlight: function(element) {
+          $(element).closest('.form-group').removeClass('has-error');
+      },
+      errorElement: 'span',
+      errorClass: 'help-block',
+      errorPlacement: function(error, element) {
+          if(element.parent('.input-group').length) {
+              error.insertAfter(element.parent());
+          } else {
+              error.insertAfter(element);
+          }
+      }
+    });
+
+
+
+  });
+`); %>
+<!--=== End Content Part ===-->
