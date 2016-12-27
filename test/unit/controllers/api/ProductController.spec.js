@@ -114,9 +114,9 @@ describe('about Product Controller operations.', function() {
   it('find Product', async (done) => {
     try {
       const res = await request(sails.hooks.http.app)
-      .get(`/api/product?start=0&length=10&category=${category1.id}&supplier=${supplier1.id}&limit=false`);
+      .get(`/api/product?start=0&length=10&category=${category1.id}&limit=false`);
       res.status.should.be.eq(200);
-      res.body.data.items.length.should.be.eq(2);
+      res.body.data.items.length.should.be.eq(3);
       done();
     } catch (e) {
       done(e);
