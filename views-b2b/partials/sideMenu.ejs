@@ -29,6 +29,11 @@
     $('.b2b-side-nav').css({
       height: $('body').height(),
     })
+    $(window).resize(function(){
+      $('.b2b-side-nav').css({
+        height: $('body').height(),
+      })
+    });
     $('.b2b-side-nav-btn').click(function(){
       $('.b2b-side-nav, .b2b-side-nav-mask').addClass('open');
     });
