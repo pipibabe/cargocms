@@ -34,7 +34,39 @@ module.exports = {
       data.firstname = user.firstName;
       data.lastname  = user.lastName;
 
-      const order = await Order.create(data);
+      const orderPaymentStatus = await OrderPaymentStatus.findOne({where: {name: 'NEW'}});
+
+      const orderPayment = await OrderPayment.create({
+        paymentFirstname: data.paymentFirstname,
+        paymentLastname: data.paymentLastname,
+        paymentCompany: data.paymentCompany,
+        paymentAddress1: data.paymentAddress1,
+        paymentAddress2: data.paymentAddress2,
+        paymentCity: data.paymentCity,
+        paymentPostcode: data.paymentPostcode,
+        paymentCountry: data.paymentCountry,
+        paymentCountryId: data.paymentCountryId,
+        paymentZone: data.paymentZone,
+        paymentZoneId: data.paymentZoneId,
+        paymentAddressFormat: data.paymentAddressFormat,
+        paymentCustomField: data.paymentCustomField,
+        paymentMethod: data.paymentMethod,
+        paymentCode: data.paymentCode,
+        OrderPaymentStatusId: orderPaymentStatus.id
+      });
+
+      await OrderPaymentHistory.create({
+        status: orderPaymentStatus.name,
+        comment: 'create new Order',
+        notify: true,
+        OrderPaymentId: orderPayment.id,
+        OrderPaymentStatusId: orderPaymentStatus.id
+      });
+
+      const order = await Order.create({
+        ...data,
+        OrderPaymentId: orderPayment.id
+      });
       sails.log.info("new Order Create", order);
 
       for(let p of products){
