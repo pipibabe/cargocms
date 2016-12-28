@@ -209,6 +209,7 @@ module.exports.routes = {
     controller: 'b2b/ProductController',
     action: 'index'
   },
+  'get /product': 'b2b/ProductController.index',
 
   'get /ship/*': function(req, res, next) {
     console.log("=== ship path ==="+sails.config.appPath + '/react-app-ship/dist/index.html');
