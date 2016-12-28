@@ -60,7 +60,7 @@
 	<div class="row b2b-content b2b-content-body">
 
     <% for(var p = 0, len = data.items.length; p < len; p++) { %>
-      <div class="col-sm-4 col-md-3 product product-promotion">
+      <div class="col-sm-4 col-md-3 product product-promotion" data-id="<%= data.items[p].id %>">
         <div class="product-img" style="background-image: url('<%= data.items[p].image%>');"></div>
         <h1><%= data.items[p].model %></h1>
         <span class="promotion-label">限量優惠</span>
