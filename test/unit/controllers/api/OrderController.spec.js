@@ -102,6 +102,7 @@ describe.only('about Order controllers', () => {
       res.status.should.be.eq(200);
       console.log("res.body.data.item.invoiceNo =>",res.body.data.item.invoiceNo);
       res.body.data.item.invoiceNo.should.be.eq(87654321);
+      res.body.data.product.length.should.be.eq(3);
 
       done();
     } catch (e) {

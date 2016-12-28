@@ -72,11 +72,17 @@ module.exports = {
       const orderId = req.params.id;
       const order = await Order.findById(orderId);
 
+      const orderProduct = await OrderProduct.findAll({
+        where: {
+          OrderId: order.id
+        }
+      })
       const message = 'get Order info success';
       res.ok({
         message,
         data: {
-          item: order
+          item: order,
+          product: orderProduct
         }
       })
     } catch(e) {
