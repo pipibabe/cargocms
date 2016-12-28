@@ -215,6 +215,7 @@ module.exports.routes = {
   '/order/form': {
     view: 'b2b/order/form'
   },
+  
   '/order': {
     view: 'b2b/order/index'
   },
