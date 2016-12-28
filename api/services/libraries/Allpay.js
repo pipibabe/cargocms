@@ -67,6 +67,11 @@ export default class Allpay {
     clientBackURL,
     returnURL,
     paymentInfoURL,
+    RtnMsg,
+    ShouldTradeAmt,
+    TradeAmt,
+    PaymentType,
+    PaymentDate,
     transaction,
   }) {
     clientBackURL = clientBackURL || this.ClientBackURL;
@@ -90,6 +95,11 @@ export default class Allpay {
       PaymentInfoURL: this.resolve(this.domain, this.PaymentInfoURL, true),
     };
     let allpay = await this.Allpay.create({
+      RtnMsg,
+      ShouldTradeAmt,
+      TradeAmt,
+      PaymentType,
+      PaymentDate,
       ...relatedKeyValue,
       MerchantTradeNo: data.MerchantTradeNo,
       PaymentType: data.PaymentType,
@@ -110,6 +120,11 @@ export default class Allpay {
     clientBackURL,
     returnURL,
     paymentInfoURL,
+    RtnMsg,
+    ShouldTradeAmt,
+    TradeAmt,
+    PaymentType,
+    PaymentDate,
     transaction,
   }) {
     clientBackURL = clientBackURL || this.ClientBackURL;
@@ -123,7 +138,7 @@ export default class Allpay {
       MerchantID: this.merchantID,
       MerchantTradeNo,
       MerchantTradeDate: moment().format('YYYY/MM/DD HH:mm:ss'),
-      PaymentType: 'aio',
+      PaymentType: PaymentType || 'aio',
       TotalAmount: totalAmount,
       TradeDesc: tradeDesc || 'none.',
       ItemName,
@@ -134,6 +149,10 @@ export default class Allpay {
     };
     const config = this.genCheckMacValue(data)
     return this.Allpay.create({
+      RtnMsg,
+      ShouldTradeAmt,
+      TradeAmt,
+      PaymentDate,
       ...relatedKeyValue,
       MerchantTradeNo: data.MerchantTradeNo,
       PaymentType: data.PaymentType,

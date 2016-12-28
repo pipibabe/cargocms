@@ -61,5 +61,54 @@ module.exports = {
     } catch (e) {
       res.serverError(e);
     }
-  }
+  },
+
+  exportFeedback: async (req, res) => {
+    try {
+      let { options, body } = req;
+      let query = body;
+      sails.log.info('export Secnt Feedback', query);
+      const modelName = options.controller.split("/").reverse()[0];
+      const include = [Scent, User];
+      const content = await ExportService.query({ query, modelName, include });
+
+      const columns = [
+        { caption: "香調", type: "string"},
+        { caption: "回饋內容", type: "string"},
+        { caption: "會員", type: "string"},
+        { caption: "回饋時間", type: "string"},
+        { caption: "已確認", type: "string"},
+
+      ]
+
+      const format = (items) => {
+        let result = [];
+        for (let data of items) {
+          let formatted = [
+            data.scentName,
+            data.feeling,
+            data.userName,
+            data.createdDateTime.dateTime,
+            data.feedbackCheck ? 'Yes':'No'
+          ]
+
+          result.push(formatted);
+        };
+        return result;
+      }
+
+      const result = await ExportService.exportExcel({
+        fileName: `香調回饋資料`,
+        content,
+        format,
+        columns,
+      });
+      res.ok({
+        message: 'Get Excel export success.',
+        data: result.fileName,
+      })
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
 }

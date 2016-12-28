@@ -42,11 +42,10 @@ Installation
 Run
 ----
 
-```
-// after CSS style file changes
-npm run build
 
-npm start
+```
+npm run build && npm start
+
 ```
 
 Ports

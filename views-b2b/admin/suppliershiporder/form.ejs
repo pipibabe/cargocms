@@ -1,11 +1,10 @@
 <fieldset>
 
-
-  <section>
+  <section class="fn-create-hide">
     <label class="label">id</label>
-    <label class="input state-disabled">
+    <label class="input state-disabled fn-edit-disabled">
       <input type="text" name="id" placeholder="" v-model="data.item.id" disabled>
-      <b class="tooltip tooltip-bottom-right">請輸入id</b></label>
+      <b class="tooltip tooltip-bottom-right">出貨單id</b></label>
   </section>
 
   <section>
@@ -39,7 +38,7 @@
   <section>
     <label class="label">信箱</label>
     <label class="input state-disabled">
-      <input type="text" name="mail" placeholder="" v-model="data.item.mail" disabled>
+      <input type="text" name="email" placeholder="" v-model="data.item.email" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入信箱</b></label>
   </section>
 
@@ -296,29 +295,36 @@
   </section>
 
   <section>
-    <label class="label">追蹤狀態</label>
+    <label class="label">追蹤</label>
     <label class="input state-disabled">
       <input type="text" name="tracking" placeholder="" v-model="data.item.tracking" disabled>
-      <b class="tooltip tooltip-bottom-right">請輸入追蹤狀態</b></label>
+      <b class="tooltip tooltip-bottom-right">請輸入追蹤</b></label>
+  </section>
+
+  <section>
+    <label class="label">狀態</label>
+    <label class="input state-disabled">
+      <input type="text" name="status" placeholder="" v-model="data.item.status" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入狀態</b></label>
   </section>
 
   <section>
     <label class="label">IP</label>
-    <label class="input state-disabled">
+    <label class="input state-disabled fn-edit-disabled">
       <input type="text" name="ip" placeholder="" v-model="data.item.ip" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入IP</b></label>
   </section>
 
   <section>
     <label class="label">ForwardedIP</label>
-    <label class="input state-disabled">
+    <label class="input state-disabled fn-edit-disabled">
       <input type="text" name="forwardedIp" placeholder="" v-model="data.item.forwardedIp" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入ForwardedIP</b></label>
   </section>
 
   <section>
     <label class="label">userAgent</label>
-    <label class="input state-disabled">
+    <label class="input state-disabled fn-edit-disabled">
       <input type="text" name="userAgent" placeholder="" v-model="data.item.userAgent" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入userAgent</b></label>
   </section>
@@ -332,14 +338,14 @@
 
   <section>
     <label class="label">建立時間</label>
-    <label class="input state-disabled">
+    <label class="input state-disabled fn-edit-disabled">
       <input type="text" name="createdAt" placeholder="" v-model="data.item.createdAt" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入建立時間</b></label>
   </section>
 
   <section>
     <label class="label">更新時間</label>
-    <label class="input state-disabled">
+    <label class="input state-disabled fn-edit-disabled">
       <input type="text" name="updatedAt" placeholder="" v-model="data.item.updatedAt" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入更新時間</b></label>
   </section>
