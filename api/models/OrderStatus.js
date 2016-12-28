@@ -1,16 +1,18 @@
 
 module.exports = {
   attributes: {
-    language_id:{
+    languageId:{
       type: Sequelize.INTEGER(11),
       allowNull: false,
     },
     name:{
-      type: Sequelize.STRING(32),
+      type: Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','CANCELED','COMPLETE','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
       allowNull: false,
     },
   },
-  associations: () => {},
+  associations: () => {
+    OrderStatus.belongsTo(Order);
+  },
   options: {
     classMethods: {},
     instanceMethods: {},

@@ -1,4 +1,5 @@
 import createHelper from "../../../util/createHelper.js"
+import { mockAdmin, unMockAdmin } from "../../../util/adminAuthHelper.js"
 
 describe.only('about Order controllers', () => {
 
@@ -17,6 +18,8 @@ describe.only('about Order controllers', () => {
         address2: '台中市',
       });
 
+      await mockAdmin();
+
       product1 = await createHelper.product('Product A');
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
@@ -25,6 +28,11 @@ describe.only('about Order controllers', () => {
     } catch (e) {
       done(e);
     }
+  });
+
+  after(async (done) => {
+    await unMockAdmin();
+    done();
   });
 
   it('User shopping car Order some Products.', async (done) => {
@@ -40,7 +48,6 @@ describe.only('about Order controllers', () => {
           id: product3.id,
           quantity: 5,
         }],
-        UserId: user.id,
         telephone: '04-22019020',
         fax: '',
         email: 'buyer@gmail.com',
@@ -84,8 +91,22 @@ describe.only('about Order controllers', () => {
         }
       });
 
-      order.tracking.should.be.equal('確認');
       orderProduct.length.should.be.equal(3);
+
+      const orderPayment = await OrderPayment.findOne({
+        where: {
+          id: order.OrderPaymentId
+        }
+      });
+      orderPayment.statue.should.be.eq('NEW');
+
+      const orderPaymentHistory = await OrderPaymentHistory.findAll({
+        where: {
+          OrderPaymentId: orderPayment.id,
+        },
+      });
+      orderPaymentHistory.length.should.be.eq(1);
+
 
       done();
     } catch (e) {
