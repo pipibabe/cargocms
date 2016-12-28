@@ -65,5 +65,22 @@ module.exports = {
     } catch (e) {
       res.serverError(e);
     }
+  },
+
+  getOrderInfo: async (req, res) => {
+    try{
+      const orderId = req.params.id;
+      const order = await Order.findById(orderId);
+
+      const message = 'get Order info success';
+      res.ok({
+        message,
+        data: {
+          item: order
+        }
+      })
+    } catch(e) {
+      res.serverError(e);
+    }
   }
 }

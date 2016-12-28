@@ -1,6 +1,6 @@
 import createHelper from "../../../util/createHelper.js"
 
-describe('about Order controllers', () => {
+describe.only('about Order controllers', () => {
 
   let product1, product2, product3 , user;
   before(async function(done){
@@ -92,5 +92,20 @@ describe('about Order controllers', () => {
       done(e);
     }
 
+  });
+
+  it('Order Controller get Order Info data', async(done) => {
+    try{
+      const res = await request(sails.hooks.http.app)
+      .get(`/checkorder/1`);
+
+      res.status.should.be.eq(200);
+      console.log("res.body.data.item.invoiceNo =>",res.body.data.item.invoiceNo);
+      res.body.data.item.invoiceNo.should.be.eq(87654321);
+
+      done();
+    } catch (e) {
+      done(e);
+    }
   });
 });

@@ -163,6 +163,7 @@ var defaultConfig = {
   'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.update',
   'delete /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.destroy',
 
+  'get /checkorder/:id': 'api/OrderController.getOrderInfo',
 
   //----- Event -----
   'get /events/:name': 'EventController.show',
