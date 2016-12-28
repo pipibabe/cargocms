@@ -1,7 +1,7 @@
 import createHelper from "../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../util/adminAuthHelper.js"
 
-describe.only('about Order controllers', () => {
+describe('about Order controllers', () => {
 
   let product1, product2, product3 , user;
   before(async function(done){
