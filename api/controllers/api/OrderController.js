@@ -3,6 +3,7 @@ module.exports = {
     try{
       let data = req.body;
       const products = data.products;
+      const loginUser = AuthService.getSessionUser(req);
 
       // data remove products
       delete data.products;
@@ -29,7 +30,7 @@ module.exports = {
       data.languageId = 0;
       data.acceptLanguage = '';
 
-      const user = await User.findById(data.UserId);
+      const user = await User.findById(loginUser.id);
       data.firstname = user.firstName;
       data.lastname  = user.lastName;
 
