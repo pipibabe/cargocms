@@ -202,31 +202,50 @@ module.exports = {
     }
   },
 
-  orderStatus: async() => {},
+  orderStatus: async( status ) => {
+    try{
+      const orderStatus = await OrderStatus.create({
+        languageId: 0,
+        name: status
+      })
+      return orderStatus;
+    } catch (e) {
+      throw e;
+    }
+  },
 
   supplierCategory: async( categoryName ) => {
-    const category = await Category.create({
-      top: 1,
-      column: 1,
-      sortOrder: 1,
-      status: true,
-    });
+    try{
+      const category = await Category.create({
+        top: 1,
+        column: 1,
+        sortOrder: 1,
+        status: true,
+      });
 
-    const categoryDesc = await CategoryDescription.create({
-      CategoryId: category.id,
-      name: categoryName,
-      description: `${categoryName} Description`,
-      metaTitle: `${categoryName}`,
-      metaKeyword: `${categoryName}`,
-      metaDescription: `${categoryName}`
-    });
+      const categoryDesc = await CategoryDescription.create({
+        CategoryId: category.id,
+        name: categoryName,
+        description: `${categoryName} Description`,
+        metaTitle: `${categoryName}`,
+        metaKeyword: `${categoryName}`,
+        metaDescription: `${categoryName}`
+      });
 
-    return category;
+      return category;
+    } catch (e) {
+      throw e;
+    }
+
   },
 
   supplierProductCategory: async ( categoryId ,productId ) => {
-    const product = await Product.findById( productId );
-    const category = await Category.findById( categoryId );
-    await product.setCategories(category);
+    try{
+      const product = await Product.findById( productId );
+      const category = await Category.findById( categoryId );
+      await product.setCategories(category);
+    } catch (e) {
+      throw e;
+    }
   }
 }
