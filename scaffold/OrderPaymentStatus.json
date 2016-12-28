@@ -1,0 +1,26 @@
+/* SAMPLE */
+// Do exactly on this pattern!
+
+{
+    "controllerBasePath": "/api/controllers",
+    "dest": "export",
+    "models": [{
+        "name": "order_payment_status", // 駝峰的話要用_分格開來
+        "crud": true,
+        "fields": [{
+            "name": "name",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "狀態"
+            }
+        }, {
+            "name": "languageId",
+            "type": "Int",
+            "length": "11",
+            "layout": {
+              "label": "語系ID"
+            }
+        }]
+    }]
+}

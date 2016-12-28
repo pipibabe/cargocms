@@ -163,6 +163,24 @@ var defaultConfig = {
   'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.update',
   'delete /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.destroy',
 
+  'get /api/admin/orderpayment': 'api/admin/OrderPaymentController.find',
+  'get /api/admin/orderpayment/:id': 'api/admin/OrderPaymentController.findOne',
+  'post /api/admin/orderpayment': 'api/admin/OrderPaymentController.create',
+  'put /api/admin/orderpayment/:id': 'api/admin/OrderPaymentController.update',
+  'delete /api/admin/orderpayment/:id': 'api/admin/OrderPaymentController.destroy',
+
+  'get /api/admin/orderpaymentstatus': 'api/admin/OrderPaymentStatusController.find',
+  'get /api/admin/orderpaymentstatus/:id': 'api/admin/OrderPaymentStatusController.findOne',
+  'post /api/admin/orderpaymentstatus': 'api/admin/OrderPaymentStatusController.create',
+  'put /api/admin/orderpaymentstatus/:id': 'api/admin/OrderPaymentStatusController.update',
+  'delete /api/admin/orderpaymentstatus/:id': 'api/admin/OrderPaymentStatusController.destroy',
+
+  'get /api/admin/orderpaymenthistory': 'api/admin/OrderPaymentHistoryController.find',
+  'get /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.findOne',
+  'post /api/admin/orderpaymenthistory': 'api/admin/OrderPaymentHistoryController.create',
+  'put /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.update',
+  'delete /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.destroy',
+
   'get /api/product': 'api/ProductController.find',
 
   //----- Event -----
