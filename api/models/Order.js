@@ -275,6 +275,18 @@ module.exports = {
           sails.log.error(e);
         }
       }
+    },
+
+    status: {
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          const status = this.getDataValue('OrderStatus');
+          return status ? status.name : '';
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
     }
   },
   associations: () => {
