@@ -19,12 +19,9 @@ module.exports = {
         include: CategoryDescription
       });
 
-      categorys = categorys.map(function( category ){
-        return category.CategoryDescription.name;
-      });
-
-      console.log("Product Controller ==>", result);
-      console.log("Product Controller categorys==>", categorys);
+      // categorys = categorys.map(function( category ){
+      //   return category.CategoryDescription.name;
+      // });
 
       res.view('index',
         {
