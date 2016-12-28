@@ -1,0 +1,53 @@
+
+{
+    "controllerBasePath": "/api/controllers",
+    "dest": "export",
+    "models": [{
+        "name": "supplier_ship_order_detail", // 駝峰的話要用_分格開來
+        "crud": true,
+        "fields": [{
+            "name": "name",
+            "type": "String",
+            "length": "255",
+            "layout": {
+              "label": "名稱"
+            }
+        }, {
+            "name": "model",
+            "type": "String",
+            "length": "64",
+            "layout": {
+              "label": "型號"
+            }
+        }, {
+            "name": "quantity",
+            "type": "Int",
+            "length": "4",
+            "layout": {
+              "label": "數量"
+            }
+        }, {
+            "name": "price",
+            "type": "Decimal",
+            "length": "15,4",
+            "layout": {
+              "label": "價格"
+            }
+        }, {
+            "name": "total",
+            "type": "Decimal",
+            "length": "15,4",
+            "layout": {
+              "label": "總價"
+            }
+        }, {
+            "name": "tax",
+            "type": "Decimal",
+            "length": "15,4",
+            "layout": {
+              "label": "稅額"
+            }
+        }
+      ]
+    }]
+}

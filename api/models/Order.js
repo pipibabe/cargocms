@@ -290,7 +290,10 @@ module.exports = {
     }
   },
   associations: () => {
-    Order.hasOne(OrderStatus);
+    // Order.hasOne(OrderStatus);
+    OrderStatus.hasOne(Order);
+    Order.belongsTo(OrderStatus);
+
     Order.hasOne(OrderOption);
     Order.hasMany(OrderProduct);
 

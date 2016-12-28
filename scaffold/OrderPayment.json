@@ -1,0 +1,129 @@
+/* SAMPLE */
+// Do exactly on this pattern!
+
+{
+    "controllerBasePath": "/api/controllers",
+    "dest": "export",
+    "models": [{
+        "name": "order_payment", // 駝峰的話要用_分格開來
+        "crud": true,
+        "fields": [{
+            "name": "paymentFirstname",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "付款名字"
+            }
+        }, {
+            "name": "paymentLastname",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "付款姓氏"
+            }
+        }, {
+            "name": "paymentCompany",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "付款單位"
+            }
+        }, {
+            "name": "paymentAddress1",
+            "type": "String",
+            "length": "128",
+            "layout": {
+              "label": "付款地址1"
+            }
+        }, {
+            "name": "paymentAddress2",
+            "type": "String",
+            "length": "128",
+            "layout": {
+              "label": "付款地址2"
+            }
+        }, {
+            "name": "paymentCity",
+            "type": "String",
+            "length": "128",
+            "layout": {
+              "label": "付款城市"
+            }
+        }, {
+            "name": "paymentPostcode",
+            "type": "String",
+            "length": "10",
+            "layout": {
+              "label": "付款郵遞區號"
+            }
+        }, {
+            "name": "paymentCountry",
+            "type": "String",
+            "length": "128",
+            "layout": {
+              "label": "付款國家"
+            }
+        }, {
+            "name": "paymentCountryId",
+            "type": "Int",
+            "length": "11",
+            "layout": {
+              "label": "付款國家ID"
+            }
+        }, {
+            "name": "paymentZone",
+            "type": "String",
+            "length": "128",
+            "layout": {
+              "label": "付款區域"
+            }
+        }, {
+            "name": "paymentZoneId",
+            "type": "Int",
+            "length": "11",
+            "layout": {
+              "label": "付款區域ID"
+            }
+        }, {
+            "name": "paymentAddressFormat",
+            "type": "Text",
+            "layout": {
+              "label": "付款地址格式"
+            }
+        }, {
+            "name": "paymentCustomField",
+            "type": "Text",
+            "layout": {
+              "label": "付款自訂欄位"
+            }
+        }, {
+            "name": "paymentMethod",
+            "type": "String",
+            "length": "128",
+            "layout": {
+              "label": "付款方式"
+            }
+        }, {
+            "name": "paymentCode",
+            "type": "String",
+            "length": "128",
+            "layout": {
+              "label": "付款代碼"
+            }
+        }, {
+            "name": "status",
+            "type": "String",
+            "length": "32",
+            "layout": {
+              "label": "付款狀態"
+            }
+        }, {
+            "name": "OrderStatusId",
+            "type": "Int",
+            "length": "11",
+            "layout": {
+              "label": "訂單狀態ID"
+            }
+        }]
+    }]
+}
