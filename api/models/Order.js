@@ -300,6 +300,8 @@ module.exports = {
 
     Order.belongsTo(Allpay);
     Order.belongsTo(User);
+
+    Order.belongsTo(OrderPayment);
   },
   options: {
     classMethods: {},

@@ -151,6 +151,7 @@ module.exports = {
   associations: () => {
     OrderPayment.belongsTo(OrderPaymentStatus);
     OrderPayment.hasMany(OrderPaymentHistory);
+    OrderPayment.hasOne(Order);
   },
   options: {
     classMethods: {},
