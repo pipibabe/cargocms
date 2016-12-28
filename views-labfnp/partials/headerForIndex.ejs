@@ -1,0 +1,139 @@
+<style>
+  @media screen and (min-width: 992px ){
+    body {
+      padding-top: 0;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-default native-hide navbar-index-transparent">
+  <% include nav.inc.ejs %>
+</nav>
+
+<nav class="navbar navbar-default navbar-fixed-top native-hide navbar-index nav-hide">
+  <% include nav.inc.ejs %>
+</nav>
+
+<% LayoutUtils.addScriptBlock(`
+  $(function () {
+    function setHeaderClass() {
+      if ($(this).scrollTop() > 50) {
+        $('.navbar-index-transparent').addClass('nav-hide');
+        $('.navbar-index').removeClass('nav-hide');
+      } else {
+        $('.navbar-index-transparent').removeClass('nav-hide');
+        $('.navbar-index').addClass('nav-hide');
+      }
+    }
+    setHeaderClass()
+    $(window).scroll(setHeaderClass);
+  });
+`); %>
+
+<% include headerScript.inc.ejs %>
+
+<style>
+.navbar.navbar-default.navbar-index {
+  display: none;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar.navbar-default.navbar-index-transparent {
+    top: 0;
+    border-width: 0 0 1px;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+}
+@media screen and (min-width: 992px) {
+  .navbar.navbar-default.navbar-index-transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .navbar.navbar-default.navbar-index-transparent.nav-hide {
+    opacity: 0;
+  }
+  .navbar.navbar-default.navbar-index-transparent .header {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .navbar.navbar-default.navbar-index-transparent .header .navbar-nav li:not(:nth-child(9)) {
+    visibility: hidden;
+  }
+  .navbar.navbar-default.navbar-index-transparent .header .navbar-nav li a {
+    color: white;
+  }
+
+  .navbar.navbar-default.navbar-index {
+    display: block;
+    transition: 0.2s all ease-in-out;
+  }
+  .navbar.navbar-default.navbar-index.nav-hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-45px);
+  }
+}
+
+
+/* original scss
+.navbar.navbar-default.navbar-index {
+  display: none;
+}
+
+@media screen and (max-width: 991px ){
+  .navbar.navbar-default.navbar-index-transparent {
+    top: 0;
+    border-width: 0 0 1px;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+}
+
+@media screen and (min-width: 992px ){
+
+  .navbar.navbar-default.navbar-index-transparent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    border-color: transparent;
+    &.nav-hide {
+      opacity: 0;
+    }
+    .header {
+      background-color: transparent;
+      border-color: transparent;
+      .navbar-nav li{
+        &:not(:nth-child(9)) {
+          visibility: hidden;
+        }
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .navbar.navbar-default.navbar-index {
+    display: block;
+    transition: 0.2s all ease-in-out;
+    &.nav-hide {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-45px);
+    }
+  }
+
+}
+*/
+</style>

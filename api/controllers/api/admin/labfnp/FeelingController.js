@@ -111,4 +111,48 @@ module.exports = {
     }
   },
 
+  exportFeeling: async (req, res) => {
+    try {
+      let { options, body } = req;
+      let query = body;
+      sails.log.info('export', query);
+      const modelName = options.controller.split("/").reverse()[0];
+      const content = await ExportService.query({ query, modelName });
+
+      const columns = [
+        { caption: "感覺", type: "string"},
+        { caption: "香味分子", type: "string"},
+        { caption: "Total Repeat", type: "string"},
+        { caption: "Score", type: "string"}
+      ]
+
+      const format = (items) => {
+        let result = [];
+        for (let data of items) {
+          let formatted = [
+            data.title,
+            data.scentName,
+            data.totalRepeat,
+            data.score
+          ]
+
+          result.push(formatted);
+        };
+        return result;
+      }
+
+      const result = await ExportService.exportExcel({
+        fileName: `感覺 Feeling 資料`,
+        content,
+        format,
+        columns,
+      });
+      res.ok({
+        message: 'Get Excel export success.',
+        data: result.fileName,
+      })
+    } catch (e) {
+      res.serverError(e);
+    }
+  },
 }

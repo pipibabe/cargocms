@@ -10,6 +10,7 @@ module.exports = {
 
   'get /api/labfnp/recipe/:id/feelings': 'api/labfnp/RecipeController.feelings',
 
+  'post /api/admin/labfnp/feeling/exportFeeling': 'api/admin/labfnp/FeelingController.exportFeeling',
   'get /api/labfnp/user/feeling': 'api/labfnp/FeelingController.findByUser',
   'get /api/admin/labfnp/feeling': 'api/admin/labfnp/FeelingController.find',
   'get /api/admin/labfnp/feeling/:id': 'api/admin/labfnp/FeelingController.findOne',
@@ -28,6 +29,7 @@ module.exports = {
   'get /api/labfnp/scent': 'api/labfnp/ScentController.find',
   'get /api/labfnp/scentnote': 'api/labfnp/ScentNoteController.find',
 
+  'post /api/admin/labfnp/scentfeedback/exportFeedback': 'api/admin/labfnp/ScentFeedbackController.exportFeedback',
   'get /api/admin/labfnp/scentfeedback': 'api/admin/labfnp/ScentFeedbackController.find',
   'get /api/admin/labfnp/scentfeedback/:id': 'api/admin/labfnp/ScentFeedbackController.findOne',
   'delete /api/admin/labfnp/scentfeedback/:id': 'api/admin/labfnp/ScentFeedbackController.destroy',
