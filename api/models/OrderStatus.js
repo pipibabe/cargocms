@@ -11,7 +11,7 @@ module.exports = {
     },
   },
   associations: () => {
-    OrderStatus.belongsTo(Order);
+    OrderStatus.hasOne(Order);
   },
   options: {
     classMethods: {},
