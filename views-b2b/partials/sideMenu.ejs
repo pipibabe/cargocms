@@ -9,10 +9,16 @@
   <h1 class="logo-text">雲端<br>漁場</h1>
   <span class="decoration-text">熱門分類</span>
   <ul class="b2b-side-nav-list">
-    <li><a class='active' href="#"><%= data.categorys[0] %></a></li>
-
-    <% for(var i = 1; i < data.categorys.length; i++) { %>
-      <li><a href="#"><%= data.categorys[i] %></a></li>
+    <% var regx = /category=([0-9]+)&/gi; %>
+    <% var category = regx.exec( req.url ); %>
+    <% for(var i = 0; i < data.categorys.length; i++) { %>
+      <% if( req.url === '/' && data.categorys[i].id  === 1 ){ %>
+        <li><a class="active" href="product?start=0&length=10&category=<%= data.categorys[i].id %>&limit=false"><%= data.categorys[i].CategoryDescription.name %></a></li>
+      <% } else if ( category && category[1] == data.categorys[i].id ) { %>
+        <li><a class="active" href="product?start=0&length=10&category=<%= data.categorys[i].id %>&limit=false"><%= data.categorys[i].CategoryDescription.name %></a></li>
+      <% } else { %>
+        <li><a href="product?start=0&length=10&category=<%= data.categorys[i].id %>&limit=false"><%= data.categorys[i].CategoryDescription.name %></a></li>
+      <% }%>
     <% } %>
   </ul>
 </aside>
