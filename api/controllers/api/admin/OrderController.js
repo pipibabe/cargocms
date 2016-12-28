@@ -7,9 +7,14 @@ module.exports = {
       const modelName = req.options.controller.split("/").reverse()[0];
       let result;
       if (serverSidePaging) {
-        result = await PagingService.process({query, modelName});
+        const include = {
+          model: OrderStatus
+        };
+        result = await PagingService.process({query, modelName, include});
       } else {
-        const items = await sails.models[modelName].findAll();
+        const items = await sails.models[modelName].findAll({
+          include: OrderStatus
+        });
         result = { data: { items } };
       }
       res.ok(result);
@@ -21,7 +26,12 @@ module.exports = {
   findOne: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await Order.findById(id);
+      const item = await Order.findOne({
+        where: {
+          id: id
+        },
+        include: OrderStatus
+      });
       res.ok({ data: { item } });
     } catch (e) {
       res.serverError(e);

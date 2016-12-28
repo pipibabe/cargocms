@@ -11,64 +11,53 @@
   padding: 0 0;
   background-image: url(/assets/labfnp/img/intro-bg.jpg);
 }
-
 .interactive-slider-v2 img {
 }
-
 .interactive-slider-v2:after {
   background: linear-gradient(to bottom, rgba(0,0,0,.5) 5%, rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%);
 }
-
 .purchase span {
   font-family: 'Noto Sans TC', sans-serif;
   line-height: 150%;
   font-size: 22px;
   font-weight: 300;
 }
-
 .purchase p {
   font-family: 'Noto Sans TC', sans-serif;
   line-height: 150%;
   font-size: 16px;
   font-weight: 100;
 }
-
 .headline h2 {
   font-size: 26px;
   font-family: 'Noto Sans TC', sans-serif;
   /* font-family: 'cwTeXHei', sans-serif; */
   font-weight: 700;
 }
-
 p.lead {
   font-family: 'Noto Sans TC', sans-serif;
   line-height: 200%;
   font-size: 20px;
   font-weight: 300;
 }
-
 .testimonials-v3 .item > p {
   font-family: 'Noto Sans TC', sans-serif;
   font-weight: 300;
   font-size: 16px;
   line-height: 200%;
 }
-
 .purchase .btn-u {
   font-size: 18px;
 }
-
 .feature-slogan {
   position: relative;
-  top: -100px;
+  top: -90px;
 }
-
 @media (max-width: 543px) {
   .feature-slogan {
-    top: -65px;
+    top: -35px;
   }
 }
-
 .feature-slogan p {
   font-size: 24px;
   font-family: 'Noto Sans TC', serif;
@@ -76,12 +65,10 @@ p.lead {
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0,0,0,.5);
 }
-
 .feature-buttons {
   position: relative;
   top: -50px;
 }
-
 .feature-buttons .btn-u {
   font-size: 16px;
   color: #333;
@@ -89,7 +76,6 @@ p.lead {
   margin-right: 5px;
   margin-left: 5px;
 }
-
 .feature-buttons .btn-u:hover {
   background: rgba(255,255,255,1);
 }
@@ -97,9 +83,12 @@ p.lead {
 </style>
 
 <!-- Interactive Slider v2 -->
+<% if (!req.session.authenticated) { %>
+  <% include lib/login.inc.ejs %>
+<% } %>
 <div class="interactive-slider-v2">
   <div class="container">
-    <img src="/assets/labfnp/img/lfp-logo-hero-bg.png" alt="LFP: Laboratory of Fragrance &amp; Perfume - 我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水" class="img-responsive animated zoomIn" />
+    <img style="max-width: 580px;width: 100%;margin: 90px auto 0;" src="/assets/labfnp/img/lfp-logo-hero-bg.png" alt="LFP: Laboratory of Fragrance &amp; Perfume - 我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水" class="img-responsive animated zoomIn" />
     <!--
     <h1>Laboratory of Fragrance &amp; Perfume</h1>
     -->
@@ -107,7 +96,7 @@ p.lead {
       <p>我們提供香味分子、不同香調與課程，協助您創作專屬的個人香水</p>
     </div>
 
-    <div class="feature-buttons">
+    <div class="feature-buttons hidden">
       <% if (req.session.authenticated) { %>
         <a href="/lab" class="btn-u rounded">
           <i class="fa fa-flask fa-fw"></i>
@@ -127,6 +116,10 @@ p.lead {
   </div>
 </div>
 <!-- End Interactive Slider v2 -->
+
+<div class="container content-sm" style="padding-top: 20px;">
+  <% include ./labfnp/index/card.inc.ejs %>
+</div>
 
 <!--=== Purchase Block ===-->
 <div class="purchase">
@@ -269,6 +262,10 @@ p.lead {
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="container content-sm">
+  <% include lib/selectablemap.ejs %>
 </div>
 
 <% LayoutUtils.addScripts('/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>

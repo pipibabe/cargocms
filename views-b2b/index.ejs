@@ -11,8 +11,32 @@
 
 <!-- Interactive Slider v2 -->
 <div class="">
+  <% include lib/login.inc.ejs %>
 	<div class="row b2b-content b2b-content-header">
-		<div class="col-md-8">
+    <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <% if (!req.session.authenticated) { %>
+            <% var loginBackUrl = req.url;%>
+            <% if(loginBackUrl === '/register' || loginBackUrl === '/') { %>
+            <%   loginBackUrl = '' %>
+            <% } else { %>
+            <%   loginBackUrl = '?url=' + loginBackUrl %>
+            <% } %>
+            <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" class="login-btn">登入</a></li>
+          <% } else { %>
+            <li><a id="logout-link" class="logout-link" href="javascript: void(0)" >登出</a></li>
+            <li class="topbar-devider"></li>
+            <li class="<%= (req.path=='/me')?'active':'' %>" >
+              <a href="javascript: void(0)">
+                <%= req.session.passport.user.displayName %>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+  		</div>
+    </div>
+		<div class="col-md-12">
 			<h1 style="
 		    height: 161px;
 		    background: #efefef;
@@ -23,7 +47,7 @@
 		    color: #d6d6d6;
 		    text-transform: uppercase;">b2b</h1>
 		</div>
-		<div class="col-md-4">
+		<!--<div class="col-md-4">
 			<form class="b2b-login">
 			  <div class="form-group">
 			    <input class="form-control" placeholder="Email">
@@ -33,102 +57,25 @@
 			  </div>
 				<button type="button" class="btn btn-gray btn-lg btn-block">登入系統</button>
 			</form>
-		</div>
+		</div>-->
 	</div>
 	<div class="row b2b-content b2b-content-body">
-		<div class="col-sm-4 col-md-3 product">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-			<div class="form-group">
-				<label class="control-label">特級 $390/包:</label>
-				<input class="form-control" type="number" value="0" min="0" max="10" />
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3 product">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-			<div class="form-group">
-				<label class="control-label">特級 $390/包:</label>
-				<input class="form-control" type="number" value="0" min="0" max="10" />
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3 product product-promotion">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-			<div class="form-group">
-				<label class="control-label">特級 $390/包:</label>
-				<input class="form-control" type="number" value="0" min="0" max="10" />
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3 product">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-			<div class="form-group">
-				<label class="control-label">特級 $390/包:</label>
-				<input class="form-control" type="number" value="0" min="0" max="10" />
-			</div>
-		</div>
 
-		<div class="col-sm-4 col-md-3 product">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-			<div class="form-group">
-				<label class="control-label">特級 $390/包:</label>
-				<input class="form-control" type="number" value="0" min="0" max="10" />
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3 product">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-			<div class="form-group">
-				<label class="control-label">特級 $390/包:</label>
-				<input class="form-control" type="number" value="0" min="0" max="10" />
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3 product product-promotion">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-			<div class="form-group">
-				<label class="control-label">特級 $390/包:</label>
-				<input class="form-control" type="number" value="0" min="0" max="10" />
-			</div>
-		</div>
-		<div class="col-sm-4 col-md-3 product">
-			<div class="product-img" style="background-image: url('https://s3.fish123.com.tw/images/upload/b55e39088c08a80271c772a409324c28.jpg');"></div>
-			<h1>巨無霸完美天使紅蝦</h1>
-			<span class="promotion-label">限量優惠</span>
-			<p class="product-price">
-				<span>$260</span><small>起</small>
-			</p>
-		</div>
+    <% for(var p = 0, len = data.items.length; p < len; p++) { %>
+      <div class="col-sm-4 col-md-3 product product-promotion" data-id="<%= data.items[p].id %>">
+        <div class="product-img" style="background-image: url('<%= data.items[p].image%>');"></div>
+        <h1><%= data.items[p].model %></h1>
+        <span class="promotion-label">限量優惠</span>
+        <p class="product-price">
+  				<span><%= data.items[p].price %></span><small>起</small>
+  			</p>
+        <div class="form-group">
+  				<label class="control-label">特級 <%= data.items[p].price %>/包:</label>
+  				<input class="form-control" type="number" value="0" min="0" max="10" />
+  			</div>
+      </div>
+    <% } %>
+
 	</div>
 
 </div>
@@ -140,5 +87,25 @@ jQuery(document).ready(function() {
   // App.init();
 	// 	OwlCarousel.initOwlCarousel();
 	$('.product input[type="number"]').bootstrapNumber();
+
+  $('.logout-link').click(function(){
+    swal({
+      title: '確認',
+      text: '您確定要登出了嗎？',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: "#e6caa8",
+      confirmButtonText: "登出",
+      cancelButtonText: "取消",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+    },function(isConform){
+      if(isConform){
+        open('/logout', '_self');
+      }else{
+        swal.close();
+      }
+    });
+  });
 });
 `); %>

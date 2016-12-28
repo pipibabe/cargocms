@@ -81,6 +81,13 @@ module.exports.init = async () => {
         "acceptLanguage": "",
         "AllpayId": allpay.id,
         "UserId": user.id,
+        "status": "NEW"
+      });
+
+      await OrderStatus.create({
+        languageId: 0,
+        name: 'NEW',
+        OrderId: order.id
       });
     }
   } catch (e) {

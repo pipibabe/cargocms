@@ -42,7 +42,7 @@
         <% if (!req.session.authenticated) { %>
           <li class="<%= (req.path=='/register')?'active':'' %>"><a href="/register">註冊</a></li>
           <li class="topbar-devider"></li>
-          <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" href="/login">登入</a></li>
+          <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" class="login-btn" >登入</a></li>
         <% } else { %>
           <li><a id="logout-link">登出</a></li>
           <li class="topbar-devider"></li>

@@ -12,6 +12,9 @@
   ],
   "license": "MIT",
   "keywords": [],
+  "engines" : {
+    "node" : "^6.9.1"
+  },
   "dependencies": {
     "axios": "^0.14.0",
     "babel-plugin-syntax-async-functions": "^6.1.4",

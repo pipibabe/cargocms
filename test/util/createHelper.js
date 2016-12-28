@@ -202,5 +202,31 @@ module.exports = {
     }
   },
 
+  orderStatus: async() => {},
 
+  supplierCategory: async( categoryName ) => {
+    const category = await Category.create({
+      top: 1,
+      column: 1,
+      sortOrder: 1,
+      status: true,
+    });
+
+    const categoryDesc = await CategoryDescription.create({
+      CategoryId: category.id,
+      name: categoryName,
+      description: `${categoryName} Description`,
+      metaTitle: `${categoryName}`,
+      metaKeyword: `${categoryName}`,
+      metaDescription: `${categoryName}`
+    });
+
+    return category;
+  },
+
+  supplierProductCategory: async ( categoryId ,productId ) => {
+    const product = await Product.findById( productId );
+    const category = await Category.findById( categoryId );
+    await product.setCategories(category);
+  }
 }

@@ -34,7 +34,7 @@ var appModel = {
 // appMain.log = function () {console.log("123")}
 appMain.hide_Total_Score =  function (){
   $(".notForCreate").hide();
-}
+};
 
 appMain.disable_TotalRepeat_ScentName = function () {
   $("input[name=totalRepeat]").attr("disabled", true);
@@ -44,4 +44,47 @@ appMain.disable_TotalRepeat_ScentName = function () {
   $(".notForCreate > section:nth-child(1) > label:nth-child(2)").addClass("state-disabled");
   // ScentName label add disabled class
   $("#main-form > fieldset > section:nth-child(2) > label.input").addClass("state-disabled");
-}
+};
+
+appMain.DataTableInitComplete = function() {
+  var serialize = function(obj, prefix) {
+    var str = [];
+    for(var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+        str.push(typeof v == "object" ?
+          serialize(v, k) :
+          encodeURIComponent(k) + "=" + encodeURIComponent(v));
+      }
+    }
+    return str.join("&");
+  }
+
+
+  var exportBtn = '<a class="DTTT_button DTTT_button_text" id="ToolTables_main-table_custom_0" title="匯出" tabindex="0" aria-controls="main-table"><span>匯出</span></a>'
+  $(exportBtn).prependTo('.DTTT_container');
+
+  $('#ToolTables_main-table_custom_0').on('click', function() {
+    var download = function(url, data, id) {
+      $.post( url, data)
+      .done(function( result ) {
+        $('<iframe>', { id: id, src: '/api/admin/download?fileName=' + result.data }).hide().appendTo('body');
+      })
+      .fail(function( result ) {
+        console.log(result);
+      });
+    }
+
+    $.SmartMessageBox({
+      title : "匯出 感覺(Feeling) 資料",
+      buttons : "[取消][匯出資料]"
+    }, function(ButtonPress) {
+      if(ButtonPress === '匯出資料') {
+        download('/api/admin/' + modelName + '/exportFeeling', serialize(appModel.pagingQuery) , 'exportExcel');
+      }
+    });
+
+  });
+
+  $('.loading-wrapper').removeClass('active');
+};

@@ -256,7 +256,19 @@ module.exports = {
 					sails.log.error(e);
 				}
 			}
+		},
+
+		displayName: {
+			type: Sequelize.VIRTUAL,
+			get: function() {
+				try {
+					return this.getDataValue('lastname') + this.getDataValue('firstname');
+				} catch (e) {
+					sails.log.error(e);
+				}
+			}
 		}
+
 	},
 	associations: () => {
 		SupplierShipOrder.hasMany(SupplierShipOrderDescription);

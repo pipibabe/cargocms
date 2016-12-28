@@ -25,7 +25,7 @@ module.exports.init = async () => {
       { href: '/admin/labfnp/recipe', title: '配方資料', sequence: 50, ParentMenuItemId: 2},
       { href: '/admin/labfnp/scent', title: '香味分子', sequence: 60, ParentMenuItemId: 2},
       { href: '/admin/labfnp/scentnote', title: '香調', sequence: 70, ParentMenuItemId: 2},
-      // { href: '/admin/labfnp/scentfeedback', title: '香調回饋', sequence: 80, ParentMenuItemId: 2},
+      { href: '/admin/labfnp/scentfeedback', title: '香調回饋', sequence: 80, ParentMenuItemId: 2},
       { href: '/admin/labfnp/feeling', title: '感覺', sequence: 90, ParentMenuItemId: 2},
       { href: '/admin/quote', title: '箴言', sequence: 100, ParentMenuItemId: 2},
       { href: '/admin/allpay', title: '訂單', sequence: 110, ParentMenuItemId: 2},
@@ -37,10 +37,6 @@ module.exports.init = async () => {
 
       { href: '/admin/product', title: '產品', sequence: 20, ParentMenuItemId: 4},
       { href: '/admin/productdescription', title: '產品描述', sequence: 30, ParentMenuItemId: 4},
-
-      { href: '/admin/order', title: '訂單', sequence: 20, ParentMenuItemId: 5},
-      { href: '/admin/orderproduct', title: '產品訂單', sequence: 30, ParentMenuItemId: 5},
-
 
       { href: '/admin/order', title: '訂單', sequence: 20, ParentMenuItemId: 5},
       { href: '/admin/orderproduct', title: '產品訂單', sequence: 30, ParentMenuItemId: 5},
@@ -360,6 +356,28 @@ module.exports.init = async () => {
       phone: '0987654321',
     }
     await Contact.create(testContact);
+
+
+    const scentfeedbacks = [
+      {
+        feeling: '百香果香味',
+        feedbackCheck: false,
+        UserId: 1,
+        ScentId: 1,
+      }, {
+        feeling: '鳳梨香味',
+        feedbackCheck: false,
+        UserId: 1,
+        ScentId: 1,
+      }, {
+        feeling: '水蜜桃香味',
+        feedbackCheck: false,
+        UserId: 1,
+        ScentId: 1,
+      }
+    ];
+
+    await ScentFeedback.bulkCreate(scentfeedbacks);
 
   } catch (e) {
     console.error(e);

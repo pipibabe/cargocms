@@ -42,8 +42,47 @@ appMain.DataTableInitComplete = function() {
   $('#ToolTables_main-table_2').hide();
   // $('#ToolTables_main-table_3').hide();
 
+  var serialize = function(obj, prefix) {
+    var str = [];
+    for(var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+        str.push(typeof v == "object" ?
+          serialize(v, k) :
+          encodeURIComponent(k) + "=" + encodeURIComponent(v));
+      }
+    }
+    return str.join("&");
+  }
+
+  var exportBtn = '<a class="DTTT_button DTTT_button_text" id="ToolTables_main-table_custom_0" title="匯出" tabindex="0" aria-controls="main-table"><span>匯出</span></a>'
+  $(exportBtn).prependTo('.DTTT_container');
+
+  $('#ToolTables_main-table_custom_0').on('click', function() {
+    var download = function(url, data, id) {
+      $.post( url, data)
+      .done(function( result ) {
+        $('<iframe>', { id: id, src: '/api/admin/download?fileName=' + result.data }).hide().appendTo('body');
+      })
+      .fail(function( result ) {
+        console.log(result);
+      });
+    }
+
+    $.SmartMessageBox({
+      title : "匯出 香調回饋 資料",
+      buttons : "[取消][匯出資料]"
+    }, function(ButtonPress) {
+      if(ButtonPress === '匯出資料') {
+        download('/api/admin/' + modelName + '/exportFeedback', serialize(appModel.pagingQuery) , 'exportExcel');
+      }
+    });
+
+  });
+
   $('.loading-wrapper').removeClass('active');
 }
+
 appMain.hideSubmit = function() {
   $('button[type="submit"]').hide();
 }
