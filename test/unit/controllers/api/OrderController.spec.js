@@ -24,9 +24,6 @@ describe.skip('about Order controllers', () => {
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
 
-      order = await createHelper.order([product1.id, product2.id, product3.id]);
-
-
       done();
     } catch (e) {
       done(e);
@@ -51,7 +48,6 @@ describe.skip('about Order controllers', () => {
           id: product3.id,
           quantity: 5,
         }],
-        UserId: user.id,
       };
 
       const res = await request(sails.hooks.http.app)
