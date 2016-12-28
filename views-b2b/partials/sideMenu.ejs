@@ -9,17 +9,11 @@
   <h1 class="logo-text">雲端<br>漁場</h1>
   <span class="decoration-text">熱門分類</span>
   <ul class="b2b-side-nav-list">
-    <li><a href="#">海鮮製品</a></li>
-    <li><a class='active' href="#">貝殼干貝</a></li>
-    <li><a href="#">透抽小卷</a></li>
-    <li><a href="#">蝦類專區</a></li>
-    <li><a href="#">進口水產</a></li>
-    <li><a href="#">土魠魚</a></li>
-    <li><a href="#">虱目魚</a></li>
-    <li><a href="#">魚卵</a></li>
-    <li><a href="#">台灣水產</a></li>
-    <li><a href="#">日本海鮮</a></li>
-    <li><a href="#">生鮮肉品</a></li>
+    <li><a class='active' href="#"><%= data.categorys[0] %></a></li>
+
+    <% for(var i = 1; i < data.categorys.length; i++) { %>
+      <li><a href="#"><%= data.categorys[i] %></a></li>
+    <% } %>
   </ul>
 </aside>
 
