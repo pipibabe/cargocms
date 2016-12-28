@@ -110,7 +110,6 @@ describe.only('about Order controllers', () => {
 
       orderProduct.length.should.be.equal(3);
 
-      /*
       const orderPayment = await OrderPayment.findOne({
         where: {
           id: order.OrderPaymentId
@@ -124,8 +123,6 @@ describe.only('about Order controllers', () => {
         },
       });
       orderPaymentHistory.length.should.be.eq(1);
-      */
-
 
       done();
     } catch (e) {
