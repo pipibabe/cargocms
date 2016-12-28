@@ -1,4 +1,5 @@
 import createHelper from "../../../util/createHelper.js"
+import { mockAdmin, unMockAdmin } from "../../../util/adminAuthHelper.js"
 
 describe.skip('about Order controllers', () => {
 
@@ -17,17 +18,21 @@ describe.skip('about Order controllers', () => {
         address2: '台中市',
       });
 
+      await mockAdmin();
+
       product1 = await createHelper.product('Product A');
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
-
-      order = await createHelper.order([product1.id, product2.id, product3.id]);
-
 
       done();
     } catch (e) {
       done(e);
     }
+  });
+
+  after(async (done) => {
+    await unMockAdmin();
+    done();
   });
 
   it('User shopping car Order some Products.', async (done) => {
@@ -43,7 +48,6 @@ describe.skip('about Order controllers', () => {
           id: product3.id,
           quantity: 5,
         }],
-        UserId: user.id,
       };
 
       const res = await request(sails.hooks.http.app)
