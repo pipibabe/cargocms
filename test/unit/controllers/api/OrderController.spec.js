@@ -24,6 +24,60 @@ describe.only('about Order controllers', () => {
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
 
+      const orderPaymentStatusData = [
+        {
+          name:"NEW",
+          languageId:0
+        },{
+          name:"PAID",
+          languageId:0
+        },{
+          name:"PROCESSING",
+          languageId:0
+        },{
+          name:"SHIPPED",
+          languageId:0
+        },{
+          name:"CANCELED",
+          languageId:0
+        },{
+          name:"COMPLETE",
+          languageId:0
+        },{
+          name:"DENIED",
+          languageId:0
+        },{
+          name:"CANCELED REVERSAL",
+          languageId:0
+        },{
+          name:"FAILED",
+          languageId:0
+        },{
+          name:"REFUNDED",
+          languageId:0
+        },{
+          name:"REVERSED",
+          languageId:0
+        },{
+          name:"CHARGEBACK",
+          languageId:0
+        },{
+          name:"PENDING",
+          languageId:0
+        },{
+          name:"VOIDED",
+          languageId:0
+        },{
+          name:"PROCESSED",
+          languageId:0
+        },{
+          name:"EXPIRED",
+          languageId:0
+        }
+      ]
+
+      await OrderPaymentStatus.bulkCreate(orderPaymentStatusData);
+
       done();
     } catch (e) {
       done(e);
@@ -93,12 +147,14 @@ describe.only('about Order controllers', () => {
 
       orderProduct.length.should.be.equal(3);
 
+      console.log("order.OrderPaymentId ==>", order);
       const orderPayment = await OrderPayment.findOne({
         where: {
           id: order.OrderPaymentId
-        }
+        },
+        include: OrderPaymentStatus
       });
-      orderPayment.statue.should.be.eq('NEW');
+      orderPayment.status.should.be.eq('NEW');
 
       const orderPaymentHistory = await OrderPaymentHistory.findAll({
         where: {
@@ -121,7 +177,6 @@ describe.only('about Order controllers', () => {
       .get(`/checkorder/1`);
 
       res.status.should.be.eq(200);
-      console.log("res.body.data.item.invoiceNo =>",res.body.data.item.invoiceNo);
       res.body.data.item.invoiceNo.should.be.eq(87654321);
       res.body.data.product.length.should.be.eq(3);
 
