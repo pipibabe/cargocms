@@ -22,6 +22,10 @@ module.exports = {
       type: Sequelize.DECIMAL(15, 4),
       defaultValue: '0.0000',
       allowNull: false,
+      set: function() {
+        this.setDataValue
+        return this.setDataValue('total', this.getDataValue('quantity') * this.getDataValue('price'));
+      }
     },
     tax: {
       type: Sequelize.DECIMAL(15, 4),

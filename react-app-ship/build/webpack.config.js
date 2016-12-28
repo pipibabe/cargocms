@@ -136,7 +136,8 @@ webpackConfig.module.loaders = [{
               transform: 'react-transform-catch-errors',
               imports: ['react', 'redbox-react']
             }]
-          }]
+          }],
+          'transform-decorators-legacy'
         ]
       },
       production: {
