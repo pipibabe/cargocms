@@ -3,7 +3,7 @@
     <h1>填寫訂購單</h1>
   </div>
 </div>
-<div class="container b2b-order-form">
+<div class="container b2b-order-form" id="orderForm">
 	<div class="row" style="margin-top: 2em;">
     <div class="col-sm-4">
       <i class="fa fa-user info-icon" aria-hidden="true"></i>
@@ -92,24 +92,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>澎湖帝王級野生超大明蝦</td><td>260</td><td>1</td><td>260</td>
-      </tr>
-      <tr>
-        <td>澎湖帝王級野生超大明蝦</td><td>260</td><td>1</td><td>260</td>
+      <tr v-for="cart in carts">
+        <td>{{cart.name}}</td><td>{{cart.price}}</td><td>{{cart.number}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.number)}}</td>
       </tr>
     </tbody>
   </table>
 
   <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
     <tr>
-      <td>合計</td><td>1500</td>
+      <td>合計</td><td>{{priceSum}}</td>
     </tr>
     <tr>
-      <td>營業稅</td><td>75</td>
+      <td>營業稅</td><td>0</td>
     </tr>
     <tr>
-      <td>總計</td><td>1575</td>
+      <td>總計</td><td>{{priceSum}}</td>
     </tr>
   </table>
 

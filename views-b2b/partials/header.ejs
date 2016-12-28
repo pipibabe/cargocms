@@ -35,12 +35,10 @@
               <li><a id="logout-link" class="logout-link" href="javascript: void(0)" >登出</a></li>
             </ul>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="caret"></span></a>
+          <li class="dropdown" id="cart">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span v-text="carts.length" v-show="carts.length > 0" class="badge"></span><span class="caret"></span></a>
             <ul class="dropdown-menu b2b-cart">
-              <li><a href="#">巨無霸完美天使紅蝦<i class="fa fa-times" aria-hidden="true"></i></a></li>
-              <li><a href="#">巨無霸完美天使紅蝦<i class="fa fa-times" aria-hidden="true"></i></a></li>
-              <li><a href="#">巨無霸完美天使紅蝦<i class="fa fa-times" aria-hidden="true"></i></a></li>
+              <li v-for="cart in carts"><a href="#">{{cart.name}} * {{cart.number}}<i v-on:click="removeProduct(cart.id)" class="fa fa-times" aria-hidden="true"></i></a></li>
               <li role="separator" class="divider"></li>
               <li><a href="/order/form" class="btn btn-sm">結帳</a></li>
             </ul>
@@ -73,3 +71,4 @@
     });
   });
 `); %>
+<% LayoutUtils.addScripts('/assets/b2b/plugins/bootstrap-number-input.js', '/assets/b2b/js/cart.js'); %>
