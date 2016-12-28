@@ -1,4 +1,5 @@
 import createHelper from "../../../util/createHelper.js"
+import { mockAdmin, unMockAdmin } from "../../../util/adminAuthHelper.js"
 
 describe.skip('about Order controllers', () => {
 
@@ -17,6 +18,8 @@ describe.skip('about Order controllers', () => {
         address2: '台中市',
       });
 
+      await mockAdmin();
+
       product1 = await createHelper.product('Product A');
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
@@ -28,6 +31,11 @@ describe.skip('about Order controllers', () => {
     } catch (e) {
       done(e);
     }
+  });
+
+  after(async (done) => {
+    await unMockAdmin();
+    done();
   });
 
   it('User shopping car Order some Products.', async (done) => {
