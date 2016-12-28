@@ -163,6 +163,7 @@ var defaultConfig = {
   'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.update',
   'delete /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.destroy',
 
+  'get /api/product': 'api/ProductController.find',
 
   //----- Event -----
   'get /events/:name': 'EventController.show',
@@ -205,8 +206,11 @@ module.exports.routes = {
 
 
   '/': {
-    view: 'index'
+    controller: 'b2b/ProductController',
+    action: 'index'
   },
+  'get /product': 'b2b/ProductController.index',
+
   'get /ship/*': function(req, res, next) {
     console.log("=== ship path ==="+sails.config.appPath + '/react-app-ship/dist/index.html');
     res.sendfile(sails.config.appPath + '/react-app-ship/dist/index.html');

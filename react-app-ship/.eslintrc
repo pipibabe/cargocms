@@ -1,27 +1,67 @@
 {
-  "parser"  : "babel-eslint",
-  "extends" : [
-    "standard",
-    "standard-react"
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
   ],
-  "plugins" : [
-    "flow-vars"
+  "plugins": [
+    "babel",
+    "react",
+    "promise",
+    "jsx-a11y",
+    "import"
   ],
-  "env"     : {
-    "browser" : true
+  "env": {
+    "browser": true
   },
-  "globals" : {
-    "Action"       : false,
-    "__DEV__"      : false,
-    "__PROD__"     : false,
-    "__DEBUG__"    : false,
-    "__DEBUG_NEW_WINDOW__" : false,
-    "__BASENAME__" : false
+  "globals": {
+    "__DEV__": false,
+    "__PROD__": false,
+    "__DEBUG__": false,
+    "__COVERAGE__": false,
+    "__BASENAME__": false
   },
   "rules": {
-    "semi" : [2, "never"],
-    "max-len": [2, 120, 2],
-    "flow-vars/define-flow-type": 1,
-    "flow-vars/use-flow-type": 1
+    "react/jsx-filename-extension": [
+      1, {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "babel/generator-star-spacing": 1,
+    "generator-star-spacing": 0,
+    "jsx-quotes": [
+      2,
+      "prefer-single"
+    ],
+    "max-len": [
+      2,
+      120,
+      2
+    ],
+    "semi": [
+      2,
+      "always"
+    ],
+    "object-curly-spacing": [
+      2,
+      "always"
+    ],
+    "react/jsx-boolean-value": [
+      1,
+      "always"
+    ],
+    "key-spacing": [
+      1, {
+        "singleLine": {
+          "beforeColon": false,
+          "afterColon": true
+        },
+        "multiLine": {
+          "beforeColon": false,
+          "afterColon": true
+        }
+      }
+    ],
+    "react/forbid-prop-types": [0, {}],
+    "no-restricted-syntax": 0
   }
 }
