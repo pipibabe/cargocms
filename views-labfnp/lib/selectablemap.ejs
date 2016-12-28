@@ -53,9 +53,6 @@
 <div class="content">
   <div id="map"></div>
   <nav class="selectNavi nav nav-pills nav-stacked" id="map-nav">
-    <!--i class="selectItem activate">台中｜綠光計畫門市</i>
-    <i class="selectItem">台北｜松煙誠品專櫃</i>
-    <i class="selectItem">高雄｜博二門市</i-->
   </nav>
 </div>
 
@@ -117,8 +114,6 @@
       item.innerHTML = marker.title_NAVI;
       //console.log(marker.LatLng.lat(),marker.LatLng.lng() );
 
-      // TODO:
-      // 目前不管點項目，最後都會跑到台北的點，不曉得是變數被覆蓋還是怎樣……
       var onclickAction = function(event) {
         var index = event.target.id.split("-").pop();
         //console.log(markers[index].LatLng.lat(),markers[index].LatLng.lng() );
@@ -130,6 +125,27 @@
     }
     //google.maps.event.trigger(markerObjects[1], 'click');
     return markers;
+  }
+
+  function findCloserMarker(map,markers) {
+    if (!navigator.geolocation){
+      console.log("Geolocation is not supported by your browser");
+      return;
+    }
+
+    function success(position) {
+      var latitude  = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+      console.log(latitude, longitude);
+    }
+
+    function error() {
+      console.log("Unable to retrieve your location");
+    }
+
+    console.log("Locating ...");
+    navigator.geolocation.getCurrentPosition(success, error);
   }
 
   var markers = [
@@ -156,7 +172,9 @@
   ]
   var markerObjects = markerGenernator(markers,map);
   google.maps.event.addListenerOnce(map, 'idle', function(){
+    findCloserMarker(map,markers);
     map.panTo(markerObjects[0].LatLng);
   });
+
 
 `); %>
