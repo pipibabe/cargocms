@@ -3,113 +3,122 @@
     <h1>填寫訂購單</h1>
   </div>
 </div>
-<div class="container b2b-order-form" id="orderForm">
-	<div class="row" style="margin-top: 2em;">
-    <div class="col-sm-4">
-      <i class="fa fa-user info-icon" aria-hidden="true"></i>
-    </div>
-    <div class="col-sm-8">
-      <form>
+<form method='post' action='/order'>
+  <div class="container b2b-order-form" id="orderForm">
+  	<div class="row" style="margin-top: 2em;">
+      <div class="col-sm-4">
+        <i class="fa fa-user info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-8">
+        <% var loginUser = AuthService.getSessionUser(req);%>
         <h3>訂購人資訊</h3>
         <hr />
         <div class="form-group">
-          <label for="">訂購人姓名</label>
-          <input type="text" class="form-control">
+          <label for="">訂購人 姓氏</label>
+          <input name="lastname" type="text" class="form-control" value=<%= loginUser.firstName %>>
+        </div>
+        <div class="form-group">
+          <label for="">訂購人 名字</label>
+          <input name="firstname" type="text" class="form-control" value=<%= loginUser.lastName %>>
         </div>
         <div class="form-group">
           <label for="">電子郵件</label>
-          <input type="email" class="form-control">
-        </div>
-        <div class="row">
-          <div class="col-xs-6 form-group">
-            <label for="">縣市</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="col-xs-6 form-group">
-            <label for="">郵遞區號</label>
-            <input type="text" class="form-control">
-          </div>
+          <input name="email" type="email" class="form-control" value=<%= loginUser.email %>>
         </div>
         <div class="form-group">
-          <label for="">地址</label>
-          <input type="text" class="form-control">
+          <label for="telephone">聯絡電話</label>
+          <input name="telephone" type="text" class="form-control" value=<%= loginUser.phone1 %>>
         </div>
-        <div class="form-group">
-          <label for="">手機</label>
-          <input type="text" class="form-control">
-        </div>
-      </form>
-    </div>
-	</div>
 
-  <div class="row" style="margin-top: 2em;">
-    <div class="col-sm-4">
-      <i class="fa fa-truck info-icon" aria-hidden="true"></i>
-    </div>
-    <div class="col-sm-8">
-      <form>
-        <h3>收件人資訊</h3>
-        <hr />
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> 與訂購人相同請打勾
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="">收件人姓名</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="">電子郵件</label>
-          <input type="email" class="form-control">
-        </div>
-        <div class="row">
-          <div class="col-xs-6 form-group">
-            <label for="">縣市</label>
-            <input type="text" class="form-control">
+      </div>
+  	</div>
+
+    <div class="row" style="margin-top: 2em;">
+      <div class="col-sm-4">
+        <i class="fa fa-truck info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-8">
+
+          <h3>收件人資訊</h3>
+          <hr />
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> 與訂購人相同請打勾
+            </label>
           </div>
-          <div class="col-xs-6 form-group">
-            <label for="">郵遞區號</label>
-            <input type="text" class="form-control">
+          <div class="form-group">
+            <label for="">收件人 姓氏</label>
+            <input name="shippingLastname" type="text" class="form-control">
           </div>
-        </div>
-        <div class="form-group">
-          <label for="">地址</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="">手機</label>
-          <input type="text" class="form-control">
-        </div>
-      </form>
+          <div class="form-group">
+            <label for="">收件人 名字</label>
+            <input name="shippingFirstname" type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">電子郵件</label>
+            <input name="shippingEmail" type="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">聯絡電話</label>
+            <input name="shippingTelephone" type="text" class="form-control">
+          </div>
+
+          <h3>收件地址</h3>
+          <hr />
+          <div class="row">
+            <div class="col-xs-6 form-group">
+              <label for="">縣市</label>
+              <input name="shippingCity" type="text" class="form-control">
+            </div>
+            <div class="col-xs-6 form-group">
+              <label for="">郵遞區號</label>
+              <input name="shippingPostcode" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">地址</label>
+            <input name="shippingAddress1" type="text" class="form-control">
+          </div>
+
+          <hr />
+          <div class="form-group">
+            <label for="">選擇運送方式</label>
+            <select class="form-control" name="shippingMethod">
+              <option value="低溫宅配">低溫宅配</option>
+              <option value="集貨自取">集貨自取</option>
+            </select>
+          </div>
+
+      </div>
     </div>
+
+    <table class="table" style="margin-top: 3.2em;">
+      <thead>
+        <tr>
+          <th>品名</th><th>單價</th><th>數量</th><th>小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="cart in carts">
+          <td>{{cart.name}}</td><td>{{cart.price}}</td><td>{{cart.quantity}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.quantity)}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <input name="products" class="form-control" v-bind:value=JSON.stringify(carts)>
+
+    <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
+      <tr>
+        <td>合計</td><td>{{priceSum}}</td>
+      </tr>
+      <tr>
+        <td>營業稅</td><td>{{ Math.round(priceSum * 0.05)}}</td>
+      </tr>
+      <tr>
+        <td>總計</td><td>{{priceSum}}</td>
+      </tr>
+    </table>
+    <button class="btn btn-default btn-lg pull-right" type="submit" style="clear:right; display:inline-block; margin:1.6em 0 3em;">確認訂單</button>
   </div>
 
-  <table class="table" style="margin-top: 3.2em;">
-    <thead>
-      <tr>
-        <th>品名</th><th>單價</th><th>數量</th><th>小計</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="cart in carts">
-        <td>{{cart.name}}</td><td>{{cart.price}}</td><td>{{cart.number}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.number)}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
-    <tr>
-      <td>合計</td><td>{{priceSum}}</td>
-    </tr>
-    <tr>
-      <td>營業稅</td><td>0</td>
-    </tr>
-    <tr>
-      <td>總計</td><td>{{priceSum}}</td>
-    </tr>
-  </table>
-
-  <a href="/order" role="button" class="btn btn-default btn-lg pull-right" style="clear:right; display:inline-block; margin:1.6em 0 3em;">確認訂單</a>
-
-</div>
+</form>

@@ -184,7 +184,8 @@ var defaultConfig = {
 
   'get /api/product': 'api/ProductController.find',
 
-  'get /checkorder/:id': 'api/OrderController.getOrderInfo',
+  'get /orderinfo/:id': 'api/OrderController.getOrderInfo',
+  'post /order': 'api/OrderController.createOrder',
 
   //----- Event -----
   'get /events/:name': 'EventController.show',
@@ -235,10 +236,6 @@ module.exports.routes = {
 
   '/order/form': {
     view: 'b2b/order/form'
-  },
-  
-  '/order': {
-    view: 'b2b/order/index'
   },
 
   'get /ship/*': function(req, res, next) {

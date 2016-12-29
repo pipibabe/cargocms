@@ -5,7 +5,7 @@ function getProductInfo(productDom) {
     id: productDom.data('id'),
     name: productDom.find('> h1').text(),
     price: productDom.find('.product-price span').text(),
-    number: number,
+    quantity: number,
   };
   return product;
 }
@@ -95,7 +95,7 @@ var OrderForm = new Vue({
     priceSum: function () {
       var sum = 0;
       $(this.carts).each(function(index, el) {
-        sum += el.price * el.number;
+        sum += el.price * el.quantity;
       });
       return sum;
     }

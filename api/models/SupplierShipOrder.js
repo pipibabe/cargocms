@@ -2,7 +2,7 @@ module.exports = {
 	attributes: {
 
 		invoiceNo: {
-			type: Sequelize.INTEGER(11),
+			type: Sequelize.STRING(48),
 			allowNull: false
 		},
 
