@@ -1,6 +1,6 @@
 import createHelper from "../../../util/createHelper.js"
 
-describe.only('about PaymentController controllers', () => {
+describe('about PaymentController controllers', () => {
 
   let product1, product2, product3 , user;
   let order, orderStatus;
