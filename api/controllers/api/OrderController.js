@@ -22,7 +22,16 @@ module.exports = {
 
       const message = 'Order create success';
 
-      return res.redirect(`/orderinfo/${order.id}`);
+      res.ok({
+        message,
+        data: {
+          item: order,
+          product: orderProduct
+        },
+      }, {
+        redirect: `/orderinfo/${order.id}`,
+      });
+      // return res.redirect(`/orderinfo/${order.id}`);
 
     } catch (e) {
       res.serverError(e);
