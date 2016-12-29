@@ -12,19 +12,19 @@
       <table style="margin-top: 3.2em;">
         <tbody>
           <tr>
-            <td style="width: 6em;">客戶名稱：</td><td>珍好吃活海產</td>
+            <td style="width: 6em;">客戶名稱：</td><td><%= data.item.User.lastName + data.item.User.firstName %></td>
           </tr>
           <tr>
-            <td>購買人：</td><td>李小珍</td>
+            <td>購買人：</td><td><%= data.item.lastname + data.item.firstname %></td>
           </tr>
           <tr>
-            <td>會員級別：</td><td>商務 VIP</td>
+            <td>電子郵件：</td><td><%= data.item.email %></td>
           </tr>
           <tr>
-            <td>通訊地址：</td><td>403 台中市西區台灣大道二段9999號</td>
+            <td>通訊地址：</td><td><%= data.item.User.address %></td>
           </tr>
           <tr>
-            <td>電話：</td><td>0900-000-000</td>
+            <td>電話：</td><td><%= data.item.User.phone1 %></td>
           </tr>
         </tbody>
       </table>
@@ -39,19 +39,19 @@
       <table style="margin-top: 3.2em;">
         <tbody>
           <tr>
-            <td style="width: 6em;">運送方式：</td><td>低溫宅配</td>
+            <td style="width: 6em;">運送方式：</td><td><%= data.item.shippingMethod %></td>
           </tr>
           <tr>
-            <td>運費：</td><td>150元</td>
+            <td>運費：</td><td>免運費</td>
           </tr>
           <tr>
-            <td>收件地址：</td><td>403 台中市西區台灣大道二段9999號</td>
+            <td>收件地址：</td><td><%= data.item.shippingPostcode + ' ' + data.item.shippingAddress1 %></td>
           </tr>
           <tr>
-            <td>收件人：</td><td>張三封</td>
+            <td>收件人：</td><td><%= data.item.shippingLastname + ' ' + data.item.shippingFirstname %></td>
           </tr>
           <tr>
-            <td>聯絡電話：</td><td>(04)12345678</td>
+            <td>聯絡電話：</td><td><%= data.item.telephone %></td>
           </tr>
         </tbody>
       </table>
@@ -65,24 +65,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>澎湖帝王級野生超大明蝦</td><td>260</td><td>1</td><td>260</td>
-      </tr>
-      <tr>
-        <td>澎湖帝王級野生超大明蝦</td><td>260</td><td>1</td><td>260</td>
-      </tr>
+      <% var total = 0;%>
+      <% for(var i = 0, len = data.product.length; i < len; i++) { %>
+        <tr>
+          <td><%= data.product[i].model %></td><td><%= data.product[i].price %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].total %></td>
+        </tr>
+        <% total += data.product[i].total %>
+      <% } %>
     </tbody>
   </table>
 
   <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
     <tr>
-      <td>合計</td><td>1500</td>
+      <td>合計</td><td><%= total %></td>
     </tr>
     <tr>
-      <td>營業稅</td><td>75</td>
+      <td>營業稅</td><td><%= Math.round(total * 0.05) %></td>
     </tr>
     <tr>
-      <td>總計</td><td>1575</td>
+      <td>總計</td><td><%= total %></td>
     </tr>
   </table>
 
