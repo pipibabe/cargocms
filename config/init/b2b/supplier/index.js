@@ -11,6 +11,16 @@ module.exports.init = async () => {
       //   fax: '(04)-2201-1168',
       //   address: '台中市清水區北提路'
       // });
+
+      const supplier = await Supplier.findOne();
+      // supplier 關聯 admin 使用者
+      let supplierUser = await User.update({
+        SupplierId: supplier.id
+      },{
+        where: {
+          username: 'admin'
+        }
+      })
     }
   } catch (e) {
     console.error(e);
