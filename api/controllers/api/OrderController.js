@@ -3,6 +3,7 @@ module.exports = {
     try{
       let data = req.body;
       const loginUser = AuthService.getSessionUser(req);
+      data.UserId = loginUser.id;
 
       if( data.firstname !== loginUser.firstName || data.lastname  !== loginUser.lastName){
         data.firstname = loginUser.firstName;
@@ -31,7 +32,7 @@ module.exports = {
   getOrderInfo: async (req, res) => {
     try{
       const orderId = req.params.id;
-      const order = await Order.findById(orderId);
+      const order = await Order.findById(orderId,{ include: [ User , OrderStatus ]});
 
       const orderProduct = await OrderProduct.findAll({
         where: {
