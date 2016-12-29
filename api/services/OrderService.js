@@ -50,6 +50,11 @@ module.exports = {
         data.email = data.shippingEmail;
       }
 
+      const orderStatus = await OrderStatus.findOne({
+        where: { name:'NEW' }
+      });
+      data.OrderStatusId = orderStatus.id;
+
       console.log(data);
       console.log("=== make order");
       const order = await Order.create(data);
