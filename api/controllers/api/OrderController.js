@@ -34,6 +34,10 @@ module.exports = {
       const orderId = req.params.id;
       const order = await Order.findById(orderId,{ include: [ User , OrderStatus ]});
 
+      if(!order){
+        return res.notFound();
+      }
+
       const orderProduct = await OrderProduct.findAll({
         where: {
           OrderId: order.id
