@@ -25,22 +25,26 @@ export default class Login extends React.Component {
       open: false,
     };
   }
+
   enableButton = () => {
     this.setState({
       canSubmit: true,
       open: false,
     });
   }
+
   disableButton = () => {
     this.setState({
       canSubmit: false,
       open: true,
     });
   }
+
   submit = () => {
     // FIXME: 需要登入 api ，目前暫時用 form 表單
     document.querySelector('.login-form form').submit();
   }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -72,7 +76,7 @@ export default class Login extends React.Component {
                   className='form-control'
                   required={true}
                 />
-                <a className='forget-password' href='#'>忘記密碼？</a>
+                <a className='forget-password' href='#!'>忘記密碼？</a>
                 <button type='submit' disabled={!this.state.canSubmit} className='btn login-btn'>登入系統</button>
               </Formsy.Form>
             </div>
@@ -82,11 +86,11 @@ export default class Login extends React.Component {
                 <div className='login-contact-info'>
                   <h1>雲端漁場服務專線</h1>
                   <p>
-                    <a href='#'>(05)0000-0000</a>
+                    <a href='#!'>(05)0000-0000</a>
                   </p>
                 </div>
               </div>
-              <a href='#' className='facebook-btn' >
+              <a href='#!' className='facebook-btn' >
                 <i className='fa fa-facebook' aria-hidden='true' />
               </a>
             </div>
