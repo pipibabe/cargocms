@@ -38,7 +38,21 @@ function removeFromCart(productId) {
   localStorage.cart = JSON.stringify(cart);
 }
 
+function updateCartInput() {
+  $('.product .form-group input').val(0);
+  var cart = JSON.parse(localStorage.cart || '[]');
+  $(cart).each(function(index, el) {
+    var productDom = $('.product[data-id="' + el.id + '"]');
+    $('.form-group input', productDom).val(el.number);
+  });
+}
+
 $(function () {
+  updateCartInput();
+  $(window).on('modifyCart', function () {
+    updateCartInput();
+  });
+
   $('.product input[type="number"]').bootstrapNumber();
   $('.product .input-group input').change(function(event) {
     var product = getProductInfo($(this).closest('.product'));
@@ -58,8 +72,10 @@ var Cart = new Vue({
     carts: JSON.parse(localStorage.cart || '[]'),
   },
   methods: {
-    removeProduct: function (index) {
+    removeProduct: function (index, event) {
+      event.stopPropagation();
       removeFromCart(index);
+      $(window).trigger('modifyCart');
       this.carts = JSON.parse(localStorage.cart || '[]');
     },
   },
@@ -81,8 +97,12 @@ var OrderForm = new Vue({
       $(this.carts).each(function(index, el) {
         sum += el.price * el.number;
       });
-      console.log(sum);
       return sum;
     }
+  },
+  created: function () {
+    $(window).on('modifyCart', function () {
+      this.carts = JSON.parse(localStorage.cart || '[]');
+    }.bind(this));
   }
 });
