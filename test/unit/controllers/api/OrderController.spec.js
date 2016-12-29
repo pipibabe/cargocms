@@ -24,7 +24,7 @@ describe('about Order controllers', () => {
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
 
-      const orderPaymentStatusData = [
+      const orderStatusData = [
         {
           name:"NEW",
           languageId:0
@@ -76,7 +76,7 @@ describe('about Order controllers', () => {
         }
       ]
 
-      await OrderPaymentStatus.bulkCreate(orderPaymentStatusData);
+      await OrderStatus.bulkCreate(orderStatusData);
 
       done();
     } catch (e) {
@@ -91,71 +91,26 @@ describe('about Order controllers', () => {
 
   it('User shopping car Order some Products.', async (done) => {
     try{
-      const orderData = {
-        customField: '',
-        paymentCompany: '',
-        paymentAddress2: '',
-        paymentCountry: '',
-        paymentCountryId: 0,
-        paymentZone: '',
-        paymentZoneId: 0,
-        paymentAddressFormat: '',
-        paymentCustomField: '',
-        shippingCompany: '',
-        shippingAddress2: '',
-        shippingCountry: '',
-        shippingCountryId: 0,
-        shippingZone: '',
-        shippingZoneId: 0,
-        shippingAddressFormat: '',
-        shippingCustomField: '',
-        commission: 0.0000,
-        marketingId: 0,
-        languageId: 0,
-        email: '',
-        telephone: '',
-        fax: '',
-        paymentFirstname: '',
-        paymentLastname: '',
-        paymentAddress1: '',
-        paymentCity: '',
-        paymentPostcode: '',
-        paymentMethod: '',
-        paymentCode: '',
-        shippingFirstname: '',
-        shippingLastname: '',
-        shippingAddress1: '',
-        shippingCity: '',
-        shippingPostcode: '',
-        shippingMethod: '',
-        shippingCode: '',
-        comment: '',
-        tracking: '',
-        invoicePrefix: '',
-
-        products:[ {
+      let product = [
+        {
           id: product1.id,
           quantity: 3,
-        }, {
+        },{
           id: product2.id,
           quantity: 2,
-        }, {
+        },{
           id: product3.id,
           quantity: 5,
-        }],
+        }];
+      product = JSON.stringify(product);
+
+      const orderData = {
+        lastname: '劉',
+        firstname: '拜爾',
+        products: product,
         telephone: '04-22019020',
         fax: '',
         email: 'buyer@gmail.com',
-        tracking: '確認',
-        invoiceNo: '87654321',
-        invoicePrefix: 'TS',
-        paymentFirstname: '珮門',
-        paymentLastname: '葉',
-        paymentAddress1: '西區台灣大道二段2號16F-1',
-        paymentCity: '台中市',
-        paymentPostcode: '402',
-        paymentMethod: 'ATM轉帳',
-        paymentCode: 'pay123456',
         shippingFirstname: '拜爾',
         shippingLastname: '劉',
         shippingAddress1: '西區台灣大道二段2號16F-1',
@@ -170,7 +125,7 @@ describe('about Order controllers', () => {
       };
 
       const res = await request(sails.hooks.http.app)
-      .post(`/api/order`).send( orderData );
+      .post(`/api/order`).set('Accept', 'application/json').send( orderData );
 
       res.status.should.be.eq(200);
 
@@ -188,21 +143,20 @@ describe('about Order controllers', () => {
 
       orderProduct.length.should.be.equal(3);
 
-      console.log("order.OrderPaymentId ==>", order);
-      const orderPayment = await OrderPayment.findOne({
-        where: {
-          id: order.OrderPaymentId
-        },
-        include: OrderPaymentStatus
-      });
-      orderPayment.status.should.be.eq('NEW');
-
-      const orderPaymentHistory = await OrderPaymentHistory.findAll({
-        where: {
-          OrderPaymentId: orderPayment.id,
-        },
-      });
-      orderPaymentHistory.length.should.be.eq(1);
+      // const orderPayment = await OrderPayment.findOne({
+      //   where: {
+      //     id: order.OrderPaymentId
+      //   },
+      //   include: OrderPaymentStatus
+      // });
+      // orderPayment.status.should.be.eq('NEW');
+      //
+      // const orderPaymentHistory = await OrderPaymentHistory.findAll({
+      //   where: {
+      //     OrderPaymentId: orderPayment.id,
+      //   },
+      // });
+      // orderPaymentHistory.length.should.be.eq(1);
 
       done();
     } catch (e) {
@@ -217,7 +171,7 @@ describe('about Order controllers', () => {
       .get(`/orderinfo/1`);
 
       res.status.should.be.eq(200);
-      res.body.data.item.invoiceNo.should.be.eq(87654321);
+      res.body.data.item.invoiceNo.should.be.eq('87654321');
       res.body.data.product.length.should.be.eq(3);
 
       done();
