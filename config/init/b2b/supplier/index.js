@@ -12,15 +12,23 @@ module.exports.init = async () => {
       //   address: '台中市清水區北提路'
       // });
 
-      const supplier = await Supplier.findOne();
+      const supplier = await Supplier.findAll();
       // supplier 關聯 admin 使用者
-      let supplierUser = await User.update({
-        SupplierId: supplier.id
+      await User.update({
+        SupplierId: supplier[0].id
       },{
         where: {
           username: 'admin'
         }
-      })
+      });
+
+      await User.update({
+        SupplierId: supplier[1].id
+      },{
+        where: {
+          username: 'admin2'
+        }
+      });
     }
   } catch (e) {
     console.error(e);

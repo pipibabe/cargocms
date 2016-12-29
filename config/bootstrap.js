@@ -53,30 +53,58 @@ module.exports.bootstrap = async (cb) => {
       defaults: {authority: 'user'}
     });
 
-    User.findOrCreate({
+    let adminUser = await User.findOne({
       where: {
         username: 'admin'
-      },
-      defaults: {
+      }
+    });
+    if(adminUser === null){
+      adminUser = await User.create({
         username: 'admin',
         email: 'admin@example.com',
         firstName: '李仁',
         lastName: '管'
-      }
-    }).then(function(adminUsers) {
-      Passport.findOrCreate({
-        where: {
-          provider: 'local',
-          UserId: adminUsers[0].id
-        },
-        defaults: {
-          provider: 'local',
-          password: 'admin',
-          UserId: adminUsers[0].id
-        }
       });
-      adminUsers[0].addRole(adminRole[0]);
+    }
+    await Passport.findOrCreate({
+      where: {
+        provider: 'local',
+        UserId: adminUser.id
+      },
+      defaults: {
+        provider: 'local',
+        password: 'admin',
+        UserId: adminUser.id
+      }
     });
+    await adminUser.addRole(adminRole[0]);
+
+    //admin2
+    adminUser = await User.findOne({
+      where: {
+        username: 'admin2'
+      }
+    });
+    if(adminUser === null){
+      adminUser = await User.create({
+        username: 'admin2',
+        email: 'admin2@example.com',
+        firstName: '管理',
+        lastName: '員'
+      });
+    }
+    await Passport.findOrCreate({
+      where: {
+        provider: 'local',
+        UserId: adminUser.id
+      },
+      defaults: {
+        provider: 'local',
+        password: 'admin',
+        UserId: adminUser.id
+      }
+    });
+    await adminUser.addRole(adminRole[0]);
 
 
     /*
