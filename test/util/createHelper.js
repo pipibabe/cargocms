@@ -247,5 +247,74 @@ module.exports = {
     } catch (e) {
       throw e;
     }
+  },
+
+  multipleOrder: async( orderProduct, orderStatsId) => {
+    try{
+      const order = await Order.create({
+        invoiceNo: '99881234',
+        invoicePrefix: 'JK',
+        customField: '',
+        paymentCompany: '',
+        paymentAddress2: '',
+        paymentCountry: '',
+        paymentCountryId: 0,
+        paymentZone: '',
+        paymentZoneId: 0,
+        paymentAddressFormat: '',
+        paymentCustomField: '',
+        shippingCompany: '',
+        shippingAddress2: '',
+        shippingCountry: '',
+        shippingCountryId: 0,
+        shippingZone: '',
+        shippingZoneId: 0,
+        shippingAddressFormat: '',
+        shippingCustomField: '',
+        commission: 0.0,
+        marketingId: 0,
+        languageId: 0,
+        ip: '',
+        forwardedIp: '',
+        userAgent: '',
+        acceptLanguage: '',
+        firstname:'土豪',
+        lastname:'金',
+        email:'user@example.com',
+        telephone:'04 0000-0000',
+        fax:'04 0000-0001',
+        paymentFirstname:'',
+        paymentLastname:'',
+        paymentAddress1:'',
+        paymentCity:'',
+        paymentPostcode:'',
+        paymentMethod:'',
+        paymentCode:'',
+        shippingFirstname:'',
+        shippingLastname:'',
+        shippingAddress1:'',
+        shippingCity:'',
+        shippingPostcode:'',
+        shippingMethod:'',
+        shippingCode:'',
+        comment:'',
+        tracking: '客戶訂購'
+      });
+
+      for( let p of orderProduct ) {
+        let product = await Product.findById( p ,{ include:[ ProductDescription ]})
+        await OrderProduct.create({
+          name: product.ProductDescription.name,
+          model: product.model,
+          quantity: 8,
+          price: product.price,
+          total: product.price * 8,
+          tax: (product.price * 8 ) * 0.05
+        });
+      }
+
+    } catch (e) {
+      throw e;
+    }
   }
 }

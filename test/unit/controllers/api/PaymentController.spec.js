@@ -1,6 +1,6 @@
 import createHelper from "../../../util/createHelper.js"
 
-describe('about PaymentController controllers', () => {
+describe.only('about PaymentController controllers', () => {
 
   let product1, product2, product3 , user;
   let order, orderStatus;
@@ -23,7 +23,7 @@ describe('about PaymentController controllers', () => {
       product3 = await createHelper.product('Product C');
 
       orderStatus = await createHelper.orderStatus('NEW');
-      order = await createHelper.order([product1.id, product2.id, product3.id], orderStatus.id);
+      order = await createHelper.multipleOrder([product1.id, product2.id, product3.id], orderStatus.id);
 
 
       done();
