@@ -2,37 +2,11 @@ module.exports = {
   createOrder: async (req, res) => {
     try{
       let data = req.body;
-      const products = data.products;
       const loginUser = AuthService.getSessionUser(req);
+      const products = data.products;
 
       // data remove products
       delete data.products;
-      //ignore columns
-      data.customField = '';
-      data.paymentCompany = '';
-      data.paymentAddress2 = '';
-      data.paymentCountry = '';
-      data.paymentCountryId = 0;
-      data.paymentZone = '';
-      data.paymentZoneId = 0;
-      data.paymentAddressFormat = '';
-      data.paymentCustomField = '';
-      data.shippingCompany = '';
-      data.shippingAddress2 = '';
-      data.shippingCountry = '';
-      data.shippingCountryId = 0;
-      data.shippingZone = '';
-      data.shippingZoneId = 0;
-      data.shippingAddressFormat = '';
-      data.shippingCustomField = '';
-      data.commission = 0.0000;
-      data.marketingId = 0;
-      data.languageId = 0;
-      data.acceptLanguage = '';
-
-      const user = await User.findById(loginUser.id);
-      data.firstname = user.firstName;
-      data.lastname  = user.lastName;
 
       const orderPaymentStatus = await OrderPaymentStatus.findOne({where: {name: 'NEW'}});
 
@@ -63,10 +37,26 @@ module.exports = {
         OrderPaymentStatusId: orderPaymentStatus.id
       });
 
+      // some data can fetch from request
+      data.userAgent = req.header["user-agent"] || '';
+      data.ip = req.ip;
+      // not sure which should record
+      data.forwardedIp = req.headers["X-Real-IP"] || '';
+      // data.forwardedIp = req.headers["X-Forwarded-For"] || '';
+      data.acceptLanguage = req.header["accept-language"] || '';
+
+      console.log(data);
+
+      //const user = await User.findById(loginUser.id);
+      data.firstname = loginUser.firstName;
+      data.lastname  = loginUser.lastName;
+
+      console.log("=== make order");
       const order = await Order.create({
         ...data,
         OrderPaymentId: orderPayment.id
       });
+
       sails.log.info("new Order Create", order);
 
       for(let p of products){

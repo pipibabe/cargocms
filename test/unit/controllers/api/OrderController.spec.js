@@ -92,6 +92,47 @@ describe('about Order controllers', () => {
   it('User shopping car Order some Products.', async (done) => {
     try{
       const orderData = {
+        customField: '',
+        paymentCompany: '',
+        paymentAddress2: '',
+        paymentCountry: '',
+        paymentCountryId: 0,
+        paymentZone: '',
+        paymentZoneId: 0,
+        paymentAddressFormat: '',
+        paymentCustomField: '',
+        shippingCompany: '',
+        shippingAddress2: '',
+        shippingCountry: '',
+        shippingCountryId: 0,
+        shippingZone: '',
+        shippingZoneId: 0,
+        shippingAddressFormat: '',
+        shippingCustomField: '',
+        commission: 0.0000,
+        marketingId: 0,
+        languageId: 0,
+        email: '',
+        telephone: '',
+        fax: '',
+        paymentFirstname: '',
+        paymentLastname: '',
+        paymentAddress1: '',
+        paymentCity: '',
+        paymentPostcode: '',
+        paymentMethod: '',
+        paymentCode: '',
+        shippingFirstname: '',
+        shippingLastname: '',
+        shippingAddress1: '',
+        shippingCity: '',
+        shippingPostcode: '',
+        shippingMethod: '',
+        shippingCode: '',
+        comment: '',
+        tracking: '',
+        invoicePrefix: '',
+
         products:[ {
           id: product1.id,
           quantity: 3,
@@ -162,7 +203,6 @@ describe('about Order controllers', () => {
         },
       });
       orderPaymentHistory.length.should.be.eq(1);
-
 
       done();
     } catch (e) {
