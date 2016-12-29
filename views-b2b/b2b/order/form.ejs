@@ -1,0 +1,115 @@
+<div class="b2b-breadcrumbs">
+  <div class="container" style="max-width: 960px;">
+    <h1>填寫訂購單</h1>
+  </div>
+</div>
+<div class="container b2b-order-form" id="orderForm">
+	<div class="row" style="margin-top: 2em;">
+    <div class="col-sm-4">
+      <i class="fa fa-user info-icon" aria-hidden="true"></i>
+    </div>
+    <div class="col-sm-8">
+      <form>
+        <h3>訂購人資訊</h3>
+        <hr />
+        <div class="form-group">
+          <label for="">訂購人姓名</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">電子郵件</label>
+          <input type="email" class="form-control">
+        </div>
+        <div class="row">
+          <div class="col-xs-6 form-group">
+            <label for="">縣市</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-xs-6 form-group">
+            <label for="">郵遞區號</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">地址</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">手機</label>
+          <input type="text" class="form-control">
+        </div>
+      </form>
+    </div>
+	</div>
+
+  <div class="row" style="margin-top: 2em;">
+    <div class="col-sm-4">
+      <i class="fa fa-truck info-icon" aria-hidden="true"></i>
+    </div>
+    <div class="col-sm-8">
+      <form>
+        <h3>收件人資訊</h3>
+        <hr />
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> 與訂購人相同請打勾
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="">收件人姓名</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">電子郵件</label>
+          <input type="email" class="form-control">
+        </div>
+        <div class="row">
+          <div class="col-xs-6 form-group">
+            <label for="">縣市</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-xs-6 form-group">
+            <label for="">郵遞區號</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">地址</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="">手機</label>
+          <input type="text" class="form-control">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <table class="table" style="margin-top: 3.2em;">
+    <thead>
+      <tr>
+        <th>品名</th><th>單價</th><th>數量</th><th>小計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="cart in carts">
+        <td>{{cart.name}}</td><td>{{cart.price}}</td><td>{{cart.number}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.number)}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
+    <tr>
+      <td>合計</td><td>{{priceSum}}</td>
+    </tr>
+    <tr>
+      <td>營業稅</td><td>0</td>
+    </tr>
+    <tr>
+      <td>總計</td><td>{{priceSum}}</td>
+    </tr>
+  </table>
+
+  <a href="/order" role="button" class="btn btn-default btn-lg pull-right" style="clear:right; display:inline-block; margin:1.6em 0 3em;">確認訂單</a>
+
+</div>

@@ -1,0 +1,25 @@
+.b2b-navbar {
+  .b2b-cart {
+    li {
+      i {
+        margin-left: 6px;
+        padding: 5px;
+        &:hover {
+          color: #b71010;
+        }
+      }
+      a:hover {
+        background-color: transparent;
+      }
+      .btn {
+        margin: 5px 2em;
+        border-radius: 21px;
+        padding: 7px;
+        background: #efefef;
+        &:hover {
+          background-color: #f4f4f4;
+        }
+      }
+    }
+  }
+}

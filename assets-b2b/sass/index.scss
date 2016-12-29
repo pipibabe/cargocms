@@ -46,6 +46,9 @@
     @media (max-width: 410px) {
       height: 210px;
     }
+    @media (min-width: 1560px) {
+      height: 180px;
+    }
   }
   &.product-promotion {
     .product-price {
