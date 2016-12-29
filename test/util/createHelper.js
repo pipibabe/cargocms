@@ -309,7 +309,9 @@ module.exports = {
           quantity: 8,
           price: product.price,
           total: product.price * 8,
-          tax: (product.price * 8 ) * 0.05
+          tax: (product.price * 8 ) * 0.05,
+          OrderId: order.id,
+          ProductId: p
         });
       }
 
