@@ -174,7 +174,7 @@ describe('about Order controllers', () => {
   it('Order Controller get Order Info data', async(done) => {
     try{
       const res = await request(sails.hooks.http.app)
-      .get(`/checkorder/1`);
+      .get(`/orderinfo/1`);
 
       res.status.should.be.eq(200);
       res.body.data.item.invoiceNo.should.be.eq(87654321);
