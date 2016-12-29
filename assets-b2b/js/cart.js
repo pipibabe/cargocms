@@ -79,7 +79,7 @@ var OrderForm = new Vue({
     priceSum: function () {
       var sum = 0;
       $(this.carts).each(function(index, el) {
-        sum += el.price * el.number;
+        sum += el.price * el.quantity;
       });
       console.log(sum);
       return sum;
