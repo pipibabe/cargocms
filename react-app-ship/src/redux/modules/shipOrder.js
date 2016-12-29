@@ -1,6 +1,5 @@
 import {
   postData,
-  getData,
 } from '../utils/fetchApi';
 import { showToast } from './toast';
 // ------------------------------------
@@ -60,36 +59,36 @@ export function fetchFindShipItem(value) {
       serverSidePaging: true,
       startDate: '1900/01/01',
       endDate: '3000/01/01',
-      columns:[{
-      		"data": "id",
-      		"searchable": true
-      	},
-        {
-        	"data": "invoiceNo",
-        	"searchable": 'true',
-          "findInclude": "true",
-        	"search": {
-        		"concat": ["invoicePrefix", "invoiceNo"]
-        	}
+      columns: [{
+        data: 'id',
+        searchable: true,
+      },
+      {
+        data: 'invoiceNo',
+        searchable: 'true',
+        findInclude: 'true',
+        search: {
+          concat: ['invoicePrefix', 'invoiceNo'],
         },
-        {
-        	"data": "lastname",
-        	"searchable": 'true',
-          "findInclude": "true",
-        	"search": {
-        		"concat": ["lastname", "firstname"]
-        	}
+      },
+      {
+        data: 'lastname',
+        searchable: 'true',
+        findInclude: 'true',
+        search: {
+          concat: ['lastname', 'firstname'],
         },
+      },
         { data: 'email', searchable: 'true' },
         { data: 'telephone', searchable: 'true' },
         { data: 'paymentAddress1', searchable: 'true' },
-        { data: 'paymentCity', searchable: 'true' }
+        { data: 'paymentCity', searchable: 'true' },
       ],
-      order: [ { column: '0', dir: 'asc' } ],
+      order: [{ column: '0', dir: 'asc' }],
       start: 0,
       length: 999999,
       search: { value, regex: 'false' },
-      _: '1470989140227'
+      _: new Date().getTime(),
     };
     const fetchResult = await postData(api, query);
     let result = '';
