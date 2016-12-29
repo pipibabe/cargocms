@@ -8,7 +8,7 @@ export default (config) => ({
     options: {
       // koa-proxy options
       host: 'http://localhost:5001',
-      match: /^\/api\/.*/
+      match: /^\/(api|auth)\/.*/
     }
   }
 })

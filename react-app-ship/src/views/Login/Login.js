@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { increment, doubleAsync } from '../../redux/modules/counter';
 import Crab from './crab.png';
 import FishLogo from './fish logo.png';
+import Formsy from 'formsy-react';
+import FormsyInput from '../../components/FormsyInput';
+import axios from 'axios';
 import classes from './_style.scss';
 
 // We can use Flow (http://flowtype.org/) to type our component's props
@@ -28,23 +31,42 @@ export class Login extends React.Component {
     doubleAsync: PropTypes.func.isRequired,
     increment: PropTypes.func.isRequired,
   };
+  constructor() {
+    super();
+    this.state = {
+      canSubmit: false,
+    };
+  }
   props: Props;
-
+  enableButton() {
+    this.setState({
+      canSubmit: true,
+    });
+  }
+  disableButton() {
+    this.setState({
+      canSubmit: false,
+    });
+  }
+  submit() {
+    // FIXME: 需要登入 api ，目前暫時用 form 表單
+    document.querySelector('.login-form form').submit();
+  }
   render() {
     return (
-      <div className='login-container' >
+      <div className='login-container'>
         <div className='login-form'>
           <div className='login-form-body'>
             <h1>出貨管理</h1>
             <img className='crab' src={Crab} alt='crab' />
-            <form>
+            <Formsy.Form ref='form' method='post' action='/auth/local?url=/ship/' onValidSubmit={this.submit.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
               <label>帳號</label>
-              <input type='text' placeholder='Username' className='form-control margin-bottom-20' />
+              <FormsyInput name='identifier' placeholder='Username' className='form-control margin-bottom-20' required/>
               <label>密碼</label>
-              <input type='text' placeholder='Password' className='form-control' />
+              <FormsyInput type='password' name='password' placeholder='Password' className='form-control' required/>
               <a className='forget-password' href='#'>忘記密碼？</a>
-              <button type='button' className='btn login-btn'>登入系統</button>
-            </form>
+              <button type='submit' disabled={!this.state.canSubmit} className='btn login-btn'>登入系統</button>
+            </Formsy.Form>
           </div>
           <div className='login-form-footer'>
             <div className='login-contact'>
@@ -65,6 +87,7 @@ export class Login extends React.Component {
     );
   }
 }
+
 
 const mapStateToProps = state => ({
   counter: state.counter,
