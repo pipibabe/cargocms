@@ -146,6 +146,13 @@ var defaultConfig = {
   //---- mobile ----
   'get /m': '/',
   'get /mobile': '/',
+
+  //---- layout ----
+  'get /api/admin/position': 'api/admin/PositionController.find',
+  'get /api/admin/position/:id': 'api/admin/PositionController.findOne',
+  'post /api/admin/position': 'api/admin/PositionController.create',
+  'put /api/admin/position/:id': 'api/admin/PositionController.update',
+  'delete /api/admin/position/:id': 'api/admin/PositionController.destroy',
 };
 
 module.exports.routes = {
