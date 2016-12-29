@@ -163,6 +163,7 @@ var defaultConfig = {
   'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.update',
   'delete /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.destroy',
 
+
   'get /api/admin/orderpayment': 'api/admin/OrderPaymentController.find',
   'get /api/admin/orderpayment/:id': 'api/admin/OrderPaymentController.findOne',
   'post /api/admin/orderpayment': 'api/admin/OrderPaymentController.create',
@@ -182,6 +183,8 @@ var defaultConfig = {
   'delete /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.destroy',
 
   'get /api/product': 'api/ProductController.find',
+
+  'get /checkorder/:id': 'api/OrderController.getOrderInfo',
 
   //----- Event -----
   'get /events/:name': 'EventController.show',

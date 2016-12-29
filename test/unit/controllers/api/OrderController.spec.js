@@ -1,7 +1,7 @@
 import createHelper from "../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../util/adminAuthHelper.js"
 
-describe.skip('about Order controllers', () => {
+describe('about Order controllers', () => {
 
   let product1, product2, product3 , user;
   before(async function(done){
@@ -23,6 +23,60 @@ describe.skip('about Order controllers', () => {
       product1 = await createHelper.product('Product A');
       product2 = await createHelper.product('Product B');
       product3 = await createHelper.product('Product C');
+
+      const orderPaymentStatusData = [
+        {
+          name:"NEW",
+          languageId:0
+        },{
+          name:"PAID",
+          languageId:0
+        },{
+          name:"PROCESSING",
+          languageId:0
+        },{
+          name:"SHIPPED",
+          languageId:0
+        },{
+          name:"CANCELED",
+          languageId:0
+        },{
+          name:"COMPLETE",
+          languageId:0
+        },{
+          name:"DENIED",
+          languageId:0
+        },{
+          name:"CANCELED REVERSAL",
+          languageId:0
+        },{
+          name:"FAILED",
+          languageId:0
+        },{
+          name:"REFUNDED",
+          languageId:0
+        },{
+          name:"REVERSED",
+          languageId:0
+        },{
+          name:"CHARGEBACK",
+          languageId:0
+        },{
+          name:"PENDING",
+          languageId:0
+        },{
+          name:"VOIDED",
+          languageId:0
+        },{
+          name:"PROCESSED",
+          languageId:0
+        },{
+          name:"EXPIRED",
+          languageId:0
+        }
+      ]
+
+      await OrderPaymentStatus.bulkCreate(orderPaymentStatusData);
 
       done();
     } catch (e) {
@@ -48,6 +102,30 @@ describe.skip('about Order controllers', () => {
           id: product3.id,
           quantity: 5,
         }],
+        telephone: '04-22019020',
+        fax: '',
+        email: 'buyer@gmail.com',
+        tracking: '確認',
+        invoiceNo: '87654321',
+        invoicePrefix: 'TS',
+        paymentFirstname: '珮門',
+        paymentLastname: '葉',
+        paymentAddress1: '西區台灣大道二段2號16F-1',
+        paymentCity: '台中市',
+        paymentPostcode: '402',
+        paymentMethod: 'ATM轉帳',
+        paymentCode: 'pay123456',
+        shippingFirstname: '拜爾',
+        shippingLastname: '劉',
+        shippingAddress1: '西區台灣大道二段2號16F-1',
+        shippingCity: '台中市',
+        shippingPostcode: '402',
+        shippingMethod: '低溫宅配',
+        shippingCode: 'ship123456',
+        ip: '',
+        forwardedIp: '',
+        userAgent: '',
+        comment: '這是一個訂購測試'
       };
 
       const res = await request(sails.hooks.http.app)
@@ -69,12 +147,14 @@ describe.skip('about Order controllers', () => {
 
       orderProduct.length.should.be.equal(3);
 
+      console.log("order.OrderPaymentId ==>", order);
       const orderPayment = await OrderPayment.findOne({
         where: {
           id: order.OrderPaymentId
-        }
+        },
+        include: OrderPaymentStatus
       });
-      orderPayment.statue.should.be.eq('NEW');
+      orderPayment.status.should.be.eq('NEW');
 
       const orderPaymentHistory = await OrderPaymentHistory.findAll({
         where: {
@@ -89,5 +169,20 @@ describe.skip('about Order controllers', () => {
       done(e);
     }
 
+  });
+
+  it('Order Controller get Order Info data', async(done) => {
+    try{
+      const res = await request(sails.hooks.http.app)
+      .get(`/checkorder/1`);
+
+      res.status.should.be.eq(200);
+      res.body.data.item.invoiceNo.should.be.eq(87654321);
+      res.body.data.product.length.should.be.eq(3);
+
+      done();
+    } catch (e) {
+      done(e);
+    }
   });
 });

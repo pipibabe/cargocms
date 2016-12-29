@@ -291,7 +291,6 @@ module.exports = {
   },
   associations: () => {
     // Order.hasOne(OrderStatus);
-    OrderStatus.hasOne(Order);
     Order.belongsTo(OrderStatus);
 
     Order.hasOne(OrderOption);
@@ -301,6 +300,8 @@ module.exports = {
 
     Order.belongsTo(Allpay);
     Order.belongsTo(User);
+
+    Order.belongsTo(OrderPayment);
   },
   options: {
     classMethods: {},
