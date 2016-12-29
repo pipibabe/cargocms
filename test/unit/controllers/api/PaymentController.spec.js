@@ -23,7 +23,7 @@ describe('about PaymentController controllers', () => {
       product3 = await createHelper.product('Product C');
 
       orderStatus = await createHelper.orderStatus('NEW');
-      order = await createHelper.order([product1.id, product2.id, product3.id], orderStatus.id);
+      order = await createHelper.multipleOrder([product1.id, product2.id, product3.id], orderStatus.id);
 
 
       done();
