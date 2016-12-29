@@ -7,33 +7,12 @@
 <% LayoutUtils.addMeta({ property:"og:description", content:"" }); %>
 <% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
 
+<% include partials/sideMenu.ejs %>
+
 <!-- Interactive Slider v2 -->
 <div class="">
   <% include lib/login.inc.ejs %>
 	<div class="row b2b-content b2b-content-header">
-    <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <% if (!req.session.authenticated) { %>
-            <% var loginBackUrl = req.url;%>
-            <% if(loginBackUrl === '/register' || loginBackUrl === '/') { %>
-            <%   loginBackUrl = '' %>
-            <% } else { %>
-            <%   loginBackUrl = '?url=' + loginBackUrl %>
-            <% } %>
-            <li class="<%= (req.path=='/login')?'active':'' %>"><a id="login" class="login-btn">登入</a></li>
-          <% } else { %>
-            <li><a id="logout-link" class="logout-link" href="javascript: void(0)" >登出</a></li>
-            <li class="topbar-devider"></li>
-            <li class="<%= (req.path=='/me')?'active':'' %>" >
-              <a href="javascript: void(0)">
-                <%= req.session.passport.user.displayName %>
-              </a>
-            </li>
-          <% } %>
-        </ul>
-  		</div>
-    </div>
 		<div class="col-md-12">
 			<h1 style="
 		    height: 161px;
@@ -78,32 +57,8 @@
 
 </div>
 
-<% LayoutUtils.addScripts('/assets/b2b/plugins/bootstrap-number-input.js'); %>
 <% LayoutUtils.addScripts('/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
 <% LayoutUtils.addScriptBlock(`
-jQuery(document).ready(function() {
-  // App.init();
-	// 	OwlCarousel.initOwlCarousel();
-	$('.product input[type="number"]').bootstrapNumber();
-
-  $('.logout-link').click(function(){
-    swal({
-      title: '確認',
-      text: '您確定要登出了嗎？',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: "#e6caa8",
-      confirmButtonText: "登出",
-      cancelButtonText: "取消",
-      closeOnConfirm: true,
-      closeOnCancel: true,
-    },function(isConform){
-      if(isConform){
-        open('/logout', '_self');
-      }else{
-        swal.close();
-      }
-    });
-  });
-});
+// jQuery(document).ready(function() {
+// });
 `); %>
