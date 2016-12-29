@@ -5,7 +5,7 @@ function getProductInfo(productDom) {
     id: productDom.data('id'),
     name: productDom.find('> h1').text(),
     price: productDom.find('.product-price span').text(),
-    number: number,
+    quantity: number,
   };
   return product;
 }
