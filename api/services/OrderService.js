@@ -85,7 +85,7 @@ module.exports = {
       }
       sails.log.info("new OrderProduct Create", orderProduct);
 
-      return {order, orderProduct};
+      return { order, orderProduct };
 
     } catch (e) {
       res.serverError(e);
