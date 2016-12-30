@@ -14,6 +14,9 @@ import {
   showToast,
   closeToast,
 } from '../../redux/modules/toast';
+import {
+  fetchCurrentUserData,
+} from '../../redux/modules/user';
 
 const styles = {
   appBar: {
@@ -42,20 +45,24 @@ const styles = {
 @connect(
   state => ({
     toast: state.toast,
+    user: state.user,
   }),
   dispatch => bindActionCreators({
     showToast,
     closeToast,
+    fetchCurrentUserData,
   }, dispatch),
 ) export default class AppDrawer extends React.Component {
   static propTypes = {
-    content: PropTypes.object,
+    fetchCurrentUserData: PropTypes.func,
     showToast: PropTypes.func,
     closeToast: PropTypes.func,
     toast: PropTypes.object,
+    content: PropTypes.object,
   };
 
   static defaultProps = {
+    fetchCurrentUserData: null,
     showToast: null,
     closeToast: null,
     toast: {},
@@ -65,6 +72,7 @@ const styles = {
   constructor(props) {
     super(props);
     injectTapEventPlugin();
+    props.fetchCurrentUserData();
     this.state = {
       drawerOpen: true,
       drawerWidth: 150,
