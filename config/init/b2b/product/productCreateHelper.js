@@ -1,5 +1,5 @@
 module.exports = {
-  create: async function(name , supplierName, categoryType, categoryEng){
+  create: async function({name , supplierName, categoryType, categoryEng}){
 
     const initCategory = await Category.create({
       image: `catalog/demo/168_seafood_${categoryEng}.jpg`,
@@ -19,9 +19,9 @@ module.exports = {
     });
 
     const image = await Image.create({
-      filePath: `/uploads/product_${name}.jpg`,
+      filePath: `https://unsplash.it/400/320/?image=${ Math.floor(Math.random() * 1000 ) + 1}`,
       type: 'image/jpeg',
-      storage: 'local'
+      storage: 'url'
     });
 
     const supplier = await Supplier.create({
@@ -48,7 +48,7 @@ module.exports = {
         mpn: "XYZ876A1B2C3",
         location: "台中市清水區",
         quantity: 200,
-        image: `catalog/demo/168_seafood_${categoryEng}.jpg`,
+        image: `https://unsplash.it/400/320/?image=${ Math.floor(Math.random() * 1000 ) + 1}`,
         shipping: true,
         price: 599,
         points: 200,
