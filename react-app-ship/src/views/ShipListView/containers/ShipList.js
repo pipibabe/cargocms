@@ -41,13 +41,11 @@ const styles = {
   },
 };
 
-const searchTextBuffer = '';
-const inputDelayer = null;
-
 @connect(
   state => ({
     shipOrder: state.shipOrder,
     toast: state.toast,
+    user: state.user,
   }),
   dispatch => bindActionCreators({
     showToast,
@@ -58,6 +56,7 @@ const inputDelayer = null;
 ) export default class ShipList extends React.Component {
   static defaultProps = {
     shipOrder: {},
+    user: {},
     showToast: null,
     closeToast: null,
     fetchShipListData: null,
@@ -66,6 +65,7 @@ const inputDelayer = null;
 
   static propTypes = {
     shipOrder: PropTypes.object,
+    user: PropTypes.object,
     showToast: PropTypes.func,
     closeToast: PropTypes.func,
     fetchShipListData: PropTypes.func,
@@ -77,12 +77,23 @@ const inputDelayer = null;
     this.state = {
       dataSource: props.shipOrder.list,
     };
-    this.inputDelayer = inputDelayer;
-    this.searchTextBuffer = searchTextBuffer;
+    this.inputDelayer = null;
+    this.getDataDelayer = null;
+    this.searchTextBuffer = '';
+    this.getDataDelayer = () => {
+      setTimeout(() => {
+        if (!Lang.isEmpty(this.props.user.currentUser.Supplier)) {
+          this.props.fetchShipListData();
+          clearTimeout(this.getDataDelayer);
+        } else {
+          this.getDataDelayer();
+        }
+      }, 1500);
+    };
   }
 
   componentWillMount() {
-    this.props.fetchShipListData();
+    this.getDataDelayer();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -135,7 +146,7 @@ const inputDelayer = null;
     const isNoData = Lang.isEmpty(dataSource);
     const autoCompleteTitle = [];
     if (!isNoData) {
-      for (const item of dataSource.items) {
+      for (const item of dataSource) {
         autoCompleteTitle.push(item.displayName);
         autoCompleteTitle.push(item.invoicePrefix + item.invoiceNo);
         autoCompleteTitle.push(item.email);
@@ -176,7 +187,7 @@ const inputDelayer = null;
           >
             {
               !isNoData ?
-                dataSource.items.map(item => (
+                dataSource.map(item => (
                   <ShipCard
                     toast={this.props.showToast}
                     key={item.id}
