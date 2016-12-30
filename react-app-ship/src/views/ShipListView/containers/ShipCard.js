@@ -83,7 +83,7 @@ export default class ShipCard extends React.Component {
 
   static propTypes = {
     toast: PropTypes.func,
-    invoiceNo: PropTypes.number,
+    invoiceNo: PropTypes.string,
     invoicePrefix: PropTypes.string,
     displayName: PropTypes.string,
     createdDateTime: PropTypes.object,
@@ -141,7 +141,7 @@ export default class ShipCard extends React.Component {
   render() {
     const cardBody = {
       isExpend: this.state.open,
-      invoiceNum: this.props.invoicePrefix + this.props.invoiceNo,
+      invoiceCode: this.props.invoicePrefix + this.props.invoiceNo,
       orderDetail: this.props.SupplierShipOrderDescriptions,
       orderSupplier: this.props.Supplier,
       ordrDate: {
@@ -168,8 +168,8 @@ export default class ShipCard extends React.Component {
           // toast func
           toast={this.props.toast}
           isExpend={cardBody.isExpend}
-          invoiceNum={cardBody.invoiceNum}
-          orderDesc={cardBody.desc}
+          invoiceCode={cardBody.invoiceCode}
+          orderDetail={cardBody.orderDetail}
           orderDate={cardBody.ordrDate}
           total={cardBody.total}
           orderSupplier={cardBody.orderSupplier}
@@ -182,8 +182,8 @@ export default class ShipCard extends React.Component {
             toast={this.props.toast}
             // same as cardBody
             isExpend={cardBody.isExpend}
-            invoiceNum={cardBody.invoiceNum}
-            orderDesc={cardBody.desc}
+            invoiceCode={cardBody.invoiceCode}
+            orderDetail={cardBody.orderDetail}
             orderDate={cardBody.ordrDate}
             total={cardBody.total}
             orderSupplier={cardBody.orderSupplier}

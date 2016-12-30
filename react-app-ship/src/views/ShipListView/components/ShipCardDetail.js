@@ -4,7 +4,7 @@ import ShipCardStepper from './ShipCardStepper';
 const defaultProps = {
   toast: null,
   isExpend: false,
-  invoiceNum: 'S1111222233334444',
+  invoiceCode: 'S1111222233334444',
   orderDetail: [
     {
       id: 3,
@@ -46,7 +46,7 @@ const defaultProps = {
 const propTypes = {
   toast: PropTypes.func,
   isExpend: PropTypes.bool,
-  invoiceNum: PropTypes.string,
+  invoiceCode: PropTypes.string,
   orderDetail: PropTypes.array,
   orderDate: PropTypes.object,
   orderSupplier: PropTypes.object,
@@ -63,6 +63,7 @@ const propTypes = {
 };
 
 function ShipCardDetail(props) {
+  console.log('props.orderDetail=>', props.orderDetail);
   return (
     <div className='card-deatil'>
       <div className='row'>
