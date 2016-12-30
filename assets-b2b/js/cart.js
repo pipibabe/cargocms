@@ -43,7 +43,7 @@ function updateCartInput() {
   var cart = JSON.parse(localStorage.cart || '[]');
   $(cart).each(function(index, el) {
     var productDom = $('.product[data-id="' + el.id + '"]');
-    $('.form-group input', productDom).val(el.number);
+    $('.form-group input', productDom).val(el.quantity);
   });
 }
 

@@ -1,9 +1,15 @@
+<style type="text/css">
+  em.invalid{
+    color: #a94442;
+  }
+</style>
+
 <div class="b2b-breadcrumbs">
   <div class="container" style="max-width: 960px;">
     <h1>填寫訂購單</h1>
   </div>
 </div>
-<form method='post' action='/order'>
+<form id="order" method='post' action='/order'>
   <div class="container b2b-order-form" id="orderForm">
   	<div class="row" style="margin-top: 2em;">
       <div class="col-sm-4">
@@ -105,7 +111,7 @@
       </tbody>
     </table>
 
-    <input name="products" class="form-control" v-bind:value=JSON.stringify(carts)>
+    <input name="products" class="form-control hidden" v-bind:value=JSON.stringify(carts)>
 
     <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
       <tr>
@@ -122,3 +128,125 @@
   </div>
 
 </form>
+
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $.fn.preventDoubleSubmission = function() {
+      $(this).on('submit',function(e){
+        var $form = $(this);
+
+        if ($form.data('submitted') === true) {
+          e.preventDefault();
+        } else {
+          $form.data('submitted', true);
+
+          localStorage.cart = [];
+        }
+      });
+
+      return this;
+    };
+
+    $("[type=checkbox]").on('change', function(event){
+      if( $("[type=checkbox]").prop("checked") ){
+        $("[name=shippingLastname]").val( $("[name=lastname]").val() );
+        // $("[name=shippingLastname]").prop('disabled', true);
+        $("[name=shippingFirstname]").val( $("[name=firstname]").val() );
+        // $("[name=shippingFirstname]").prop('disabled', true);
+        $("[name=shippingEmail]").val( $("[name=email]").val() );
+        // $("[name=shippingEmail]").prop('disabled', true);
+        $("[name=shippingTelephone]").val( $("[name=telephone]").val() );
+        // $("[name=shippingTelephone]").prop('disabled', true);
+      } else {
+        $("[name=shippingLastname]").val('');
+        // $("[name=shippingLastname]").prop('disabled', false);
+        $("[name=shippingFirstname]").val('');
+        // $("[name=shippingFirstname]").prop('disabled', false);
+        $("[name=shippingEmail]").val('');
+        // $("[name=shippingEmail]").prop('disabled', false);
+        $("[name=shippingTelephone]").val('');
+        // $("[name=shippingTelephone]").prop('disabled', false);
+      }
+    });
+
+    $("#order").validate({
+      rules: {
+        firstname: {
+          required: true
+        },
+        lastname: {
+          required: true
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        telephone: {
+          required: true
+        },
+        shippingLastname: {
+          required: true
+        },
+        shippingFirstname: {
+          required: true
+        },
+        shippingEmail: {
+          required: true,
+          email: true
+        },
+        shippingTelephone: {
+          required: true
+        },
+        shippingCity: {
+          required: true
+        },
+        shippingPostcode: {
+          required: true
+        },
+        shippingAddress1: {
+          required: true
+        },
+      },
+      messages: {
+        firstname: {
+          required: "請輸入名字"
+        },
+        lastname: {
+          required: "請輸入姓氏"
+        },
+        email: {
+          required: "請輸入電子郵件",
+          email: "請輸入正確電子郵件格式"
+        },
+        telephone: {
+          required: "請輸入聯絡電話"
+        },
+        shippingLastname: {
+          required: "請輸入名字"
+        },
+        shippingFirstname: {
+          required: "請輸入姓氏"
+        },
+        shippingEmail: {
+          required: "請輸入電子郵件",
+          email: "請輸入正確電子郵件格式"
+        },
+        shippingTelephone: {
+          required: "請輸入聯絡電話"
+        },
+        shippingCity: {
+          required: "請輸入縣市"
+        },
+        shippingPostcode: {
+          required: "請輸入郵遞區號"
+        },
+        shippingAddress1: {
+          required: "請輸入地址"
+        },
+      }
+    });
+
+    $('form').preventDoubleSubmission();
+  });
+`); %>
