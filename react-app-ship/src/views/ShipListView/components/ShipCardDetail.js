@@ -4,7 +4,7 @@ import ShipCardStepper from './ShipCardStepper';
 const defaultProps = {
   toast: null,
   isExpend: false,
-  invoiceNum: 'S1111222233334444',
+  invoiceCode: 'S1111222233334444',
   orderDetail: [
     {
       id: 3,
@@ -46,7 +46,7 @@ const defaultProps = {
 const propTypes = {
   toast: PropTypes.func,
   isExpend: PropTypes.bool,
-  invoiceNum: PropTypes.string,
+  invoiceCode: PropTypes.string,
   orderDetail: PropTypes.array,
   orderDate: PropTypes.object,
   orderSupplier: PropTypes.object,
@@ -109,9 +109,12 @@ function ShipCardDetail(props) {
             }
           </div>
           <div className='price-wrapper text-left'>
-            <span className='title-label'>總計</span>
-            <br />
+            <span className='title-label'>總計</span><br />
             <span className='price'>＄{props.total}</span>
+            <p />
+
+            <span className='title-label'>發票號碼</span><br />
+            <span className='price'>{props.invoiceCode}</span>
             <p />
           </div>
         </div>
