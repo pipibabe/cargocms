@@ -8,6 +8,9 @@ module.exports = {
       data.comment = '';
       data.fax = '';
 
+      data.shippingLastname = data.shippingLastname || data.lastname;
+      data.shippingFirstname= data.shippingFirstname || data.firstname;
+
       // data remove products
       delete data.products;
       //ignore columns
@@ -55,7 +58,7 @@ module.exports = {
       });
       data.OrderStatusId = orderStatus.id;
 
-      console.log(data);
+      console.log("=== create data =>",data);
       console.log("=== make order");
       const order = await Order.create(data);
 
