@@ -1,5 +1,5 @@
 module.exports = {
-  create: async function(name , supplierName, categoryType, categoryEng){
+  create: async function(product , supplierName, categoryType, categoryEng){
 
     const initCategory = await Category.create({
       image: `catalog/demo/168_seafood_${categoryEng}.jpg`,
