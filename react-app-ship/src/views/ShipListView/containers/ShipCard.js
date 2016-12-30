@@ -178,7 +178,10 @@ export default class ShipCard extends React.Component {
           status={cardBody.status}
         />
         <CardActions>{}</CardActions>
-        <CardText expandable={true}>
+        <CardText
+          className='card-detail-wrapper'
+          expandable={true}
+        >
           <ShipCardDetail
             // toast func
             toast={this.props.toast}
