@@ -3,6 +3,18 @@ module.exports = {
     try{
       const products = JSON.parse(data.products);
 
+      let totalPrice = 0;
+      for(let p of products){
+        let product = await Product.find({
+          where: {
+            id: p.id,
+          },
+        });
+
+        totalPrice += Number(product.price) * Number( p.quantity );
+      }
+      data.total = totalPrice;
+
       data.tracking = '訂單建立';
       data.shippingCode = '';
       data.comment = '';
