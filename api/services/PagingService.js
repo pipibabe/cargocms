@@ -2,21 +2,27 @@ import FacebookHelper from './libraries/facebook/'
 
 module.exports = {
   process: async ({query, modelName, include}) => {
+    let findQuery = {};
     try {
-      const findQuery = FormatService.getQueryObj(query);
-
-      if (include){
+      if (query.where) {
+        findQuery = {
+          where: query.where,
+        };
+      } else {
+        findQuery = FormatService.getQueryObj(query);
+      }
+      if (include) {
         include = FormatService.getIncudeQueryObj({ include, query });
         findQuery.include = include;
       }
-      let result = await sails.models[modelName].findAndCountAll(findQuery)
-      let data = result.rows;
-      let recordsTotal = data.length
-      let recordsFiltered =  result.count
-      let draw = parseInt(query.draw) + 1
-      return {draw, recordsTotal, recordsFiltered, data};
+      const result = await sails.models[modelName].findAndCountAll(findQuery)
+      const data = result.rows;
+      const recordsTotal = data.length
+      const recordsFiltered = result.count;
+      const draw = parseInt(query.draw) + 1
+      return { draw, recordsTotal, recordsFiltered, data };
     } catch (e) {
       throw e;
     }
-  }
+  },
 }
