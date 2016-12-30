@@ -6,8 +6,8 @@ import orderProduct from './orderproduct/index.js';
 import orderPayment from './orderpayment/index.js';
 
 module.exports.init = async function(){
-  await supplier.init();
   await product.init();
+  await supplier.init();
   await order.init();
   await orderProduct.init();
   await supplierShipOrder.init();

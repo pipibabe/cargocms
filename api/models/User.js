@@ -192,6 +192,7 @@ module.exports = {
       }
     });
 
+    User.belongsTo(Supplier);
 
 
   },
