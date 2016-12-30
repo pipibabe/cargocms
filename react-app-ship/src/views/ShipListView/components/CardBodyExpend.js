@@ -6,6 +6,7 @@ import {
 const defaultProps = {};
 
 const propTypes = {
+  shipOrderId: PropTypes.number,
   invoiceCode: PropTypes.string,
   orderDetail: PropTypes.array,
   orderDate: PropTypes.object,
@@ -21,7 +22,8 @@ function CardBodyExpend(props) {
     <div className='cardbody-expened'>
       <div className='order-invoice-expened'>
         <div className='title'>
-          {props.invoiceCode}
+          {props.shipOrderId}
+          {props.invoiceCode.length > 1 ? (<span>({props.invoiceCode})</span>) : '' }
         </div>
         <div className='sub-title'>
           建立於 {props.orderDate.createdAt}

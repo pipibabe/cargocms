@@ -4,6 +4,7 @@ import CardStateColor from '../CardStateColor';
 const defaultProps = {};
 
 const propTypes = {
+  shipOrderId: PropTypes.number,
   invoiceCode: PropTypes.string,
   orderDetail: PropTypes.array,
   orderDate: PropTypes.object,
@@ -31,7 +32,8 @@ function CardBodyNormal(props) {
     <div className='cardbody'>
       <div className='order-invoice'>
         <div className='title'>
-          {props.invoiceCode}
+          {props.shipOrderId}
+          {props.invoiceCode.length > 1 ? (<span>({props.invoiceCode})</span>) : '' }
         </div>
         <div className='sub-title'>
           更新於 {props.orderDate.updatedAt}

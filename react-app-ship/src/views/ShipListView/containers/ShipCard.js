@@ -83,6 +83,7 @@ export default class ShipCard extends React.Component {
 
   static propTypes = {
     toast: PropTypes.func,
+    id: PropTypes.number,
     invoiceNo: PropTypes.string,
     invoicePrefix: PropTypes.string,
     displayName: PropTypes.string,
@@ -167,6 +168,7 @@ export default class ShipCard extends React.Component {
         <ShipCardBody
           // toast func
           toast={this.props.toast}
+          shipOrderId={this.props.id}
           isExpend={cardBody.isExpend}
           invoiceCode={cardBody.invoiceCode}
           orderDetail={cardBody.orderDetail}
@@ -181,6 +183,7 @@ export default class ShipCard extends React.Component {
             // toast func
             toast={this.props.toast}
             // same as cardBody
+            shipOrderId={this.props.id}
             isExpend={cardBody.isExpend}
             invoiceCode={cardBody.invoiceCode}
             orderDetail={cardBody.orderDetail}

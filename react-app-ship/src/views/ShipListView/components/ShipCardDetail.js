@@ -63,7 +63,6 @@ const propTypes = {
 };
 
 function ShipCardDetail(props) {
-  console.log('props.orderDetail=>', props.orderDetail);
   return (
     <div className='card-deatil'>
       <div className='row'>
@@ -110,9 +109,12 @@ function ShipCardDetail(props) {
             }
           </div>
           <div className='price-wrapper text-left'>
-            <span className='title-label'>總計</span>
-            <br />
+            <span className='title-label'>總計</span><br />
             <span className='price'>＄{props.total}</span>
+            <p />
+
+            <span className='title-label'>發票號碼</span><br />
+            <span className='price'>{props.invoiceCode}</span>
             <p />
           </div>
         </div>
