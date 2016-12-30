@@ -28,6 +28,7 @@ export function closeToast() {
 
 export const actions = {
   showToast,
+  closeToast,
 };
 
 // ------------------------------------
