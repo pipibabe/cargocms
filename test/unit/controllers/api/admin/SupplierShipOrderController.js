@@ -73,11 +73,33 @@ describe('about admin Supplier Ship Order controllers', () => {
       done();
     });
 
-    it('admin get Supplier Ship Order shoubld success.', async(done) => {
+    it.only('admin get Supplier Ship Order shoubld success.', async(done) => {
       try {
-        const res = await request(sails.hooks.http.app)
-        .post(`/api/admin/suppliershiporder/all`)
-        .send({
+        const query2 = {
+        	"serverSidePaging": "true",
+        	"startDate": "1900/01/01",
+        	"endDate": "3000/01/01",
+        	"columns": [{
+        		"data": "id",
+        		"searchable": true,
+        		"search": {
+        			"where": {
+        				"SupplierId": 1
+        			}
+        		}
+        	}],
+        	"order": [{
+        		"column": "0",
+        		"dir": "asc"
+        	}],
+        	"search": {
+        		"value": "",
+        		"regex": "false"
+        	},
+        	"length": 1000,
+        	"start": 0
+        };
+        const query = {
           startDate: '1900/01/01',
           endDate: '3000/01/01',
           columns:[
@@ -85,8 +107,14 @@ describe('about admin Supplier Ship Order controllers', () => {
           ],
           order: [ { column: '0', dir: 'asc' } ],
           search: { value: '', regex: 'false' },
+        	"length": 1000,
+        	"start": 0,
           _: '1470989140227'
-        });
+        };
+        const res = await request(sails.hooks.http.app)
+        .post(`/api/admin/suppliershiporder/all`)
+        .send(query2);
+        console.log('res=>', res);
         res.status.should.be.eq(200);
         done()
       } catch (e) {
