@@ -196,7 +196,7 @@
 
         { "data": "paymentCode" },
 
-        { "data": "status" },
+        { "data": "status", "searchable": "false" },
 
         { "data": "OrderPaymentStatusId" },
 
@@ -207,6 +207,13 @@
 
     // server only
     var columnDefs = [
+      {
+        "searchable": true,
+        "targets": 0,
+        "render": function (data, type, row) {
+          return '<td>' + row.paymentLastname + ' ' + row.paymentFirstname + '</td>';
+        }
+      },
       {
         "searchable": true,
         "targets": 0,
