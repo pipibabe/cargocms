@@ -29,6 +29,7 @@ var defaultConfig = {
   'post /api/admin/upload': 'api/admin/ImageController.upload',
   'delete /api/admin/upload/:id': 'api/admin/ImageController.destroy',
 
+  'get /api/admin/user/current': 'api/admin/UserController.findCurrentUser',
   'post /api/admin/user/exportBirthday': 'api/user/UserController.exportBirthday',
   'get /api/admin/user': 'api/admin/UserController.find',
   'get /api/admin/user/:id': 'api/admin/UserController.findOne',
