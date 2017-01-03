@@ -136,7 +136,7 @@
       $(this).on('submit',function(e){
         var $form = $(this);
 
-        if ($form.data('submitted') === true) {
+        if ($form.data('submitted') === true || !$(this).valid()) {
           e.preventDefault();
         } else {
           $form.data('submitted', true);
