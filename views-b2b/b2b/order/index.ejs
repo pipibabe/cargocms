@@ -4,59 +4,62 @@
   </div>
 </div>
 <div class="container b2b-order-form">
-	<div class="row" style="margin-top: 2em;">
-    <div class="col-sm-4">
-      <i class="fa fa-user info-icon" aria-hidden="true"></i>
-    </div>
-    <div class="col-sm-8">
-      <table style="margin-top: 3.2em;">
-        <tbody>
-          <tr>
-            <td style="width: 6em;">客戶名稱：</td><td><%= data.item.User.lastName + data.item.User.firstName %></td>
-          </tr>
-          <tr>
-            <td>購買人：</td><td><%= data.item.lastname + data.item.firstname %></td>
-          </tr>
-          <tr>
-            <td>電子郵件：</td><td><%= data.item.email %></td>
-          </tr>
-          <tr>
-            <td>通訊地址：</td><td><%= data.item.User.address %></td>
-          </tr>
-          <tr>
-            <td>電話：</td><td><%= data.item.User.phone1 %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-	</div>
+  <div class="row">
+    <div class="row col-md-6" style="margin-top: 2em;">
+      <div class="col-sm-4">
+        <i class="fa fa-user info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-8">
+        <table style="margin-top: 3.2em;">
+          <tbody>
+            <tr>
+              <td style="width: 6em;">客戶名稱：</td><td><%= data.item.User.lastName + data.item.User.firstName %></td>
+            </tr>
+            <tr>
+              <td>購買人：</td><td><%= data.item.lastname + data.item.firstname %></td>
+            </tr>
+            <tr>
+              <td>電子郵件：</td><td><%= data.item.email %></td>
+            </tr>
+            <tr>
+              <td>通訊地址：</td><td><%= data.item.User.address %></td>
+            </tr>
+            <tr>
+              <td>電話：</td><td><%= data.item.User.phone1 %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  	</div>
 
-  <div class="row" style="margin-top: 2em;">
-    <div class="col-sm-4">
-      <i class="fa fa-truck info-icon" aria-hidden="true"></i>
-    </div>
-    <div class="col-sm-8">
-      <table style="margin-top: 3.2em;">
-        <tbody>
-          <tr>
-            <td style="width: 6em;">運送方式：</td><td><%= data.item.shippingMethod %></td>
-          </tr>
-          <tr>
-            <td>運費：</td><td>免運費</td>
-          </tr>
-          <tr>
-            <td>收件地址：</td><td><%= data.item.shippingPostcode + ' ' + data.item.shippingAddress1 %></td>
-          </tr>
-          <tr>
-            <td>收件人：</td><td><%= data.item.shippingLastname + ' ' + data.item.shippingFirstname %></td>
-          </tr>
-          <tr>
-            <td>聯絡電話：</td><td><%= data.item.telephone %></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row col-md-6" style="margin-top: 2em;">
+      <div class="col-sm-4">
+        <i class="fa fa-truck info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-8">
+        <table style="margin-top: 3.2em;">
+          <tbody>
+            <tr>
+              <td style="width: 6em;">運送方式：</td><td><%= data.item.shippingMethod %></td>
+            </tr>
+            <tr>
+              <td>運費：</td><td>免運費</td>
+            </tr>
+            <tr>
+              <td>收件地址：</td><td><%= data.item.shippingPostcode + ' ' + data.item.shippingAddress1 %></td>
+            </tr>
+            <tr>
+              <td>收件人：</td><td><%= data.item.shippingLastname + ' ' + data.item.shippingFirstname %></td>
+            </tr>
+            <tr>
+              <td>聯絡電話：</td><td><%= data.item.telephone %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
 
   <table class="table" style="margin-top: 3.2em;">
     <thead>
