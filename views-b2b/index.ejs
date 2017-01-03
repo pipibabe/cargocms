@@ -46,9 +46,13 @@
         <p class="product-price">
   				<i class="fa fa-dollar"></i><span><%= data.items[p].price %></span><small>起</small>
   			</p>
-        <div class="form-group">
-  				<label class="control-label">特級 <%= data.items[p].price %>/包</label>
-  				<input class="form-control" type="number" value="0" min="0" max="10" />
+        <div class="form-group row">
+          <label class="control-label col-xs-12">特級 <%= data.items[p].price %> /包</label>
+          <label class="control-label col-xs-12"><%= data.items[p].weight %> 公克/包</label>
+
+          <label class="col-xs-4" style="font-size: 20px; padding: 0 0 0 15px;">訂購</label>
+          <input class="form-control col-xs-8" type="number" value="0" min="0" max="10" />
+
   			</div>
       </div>
     <% } %>
