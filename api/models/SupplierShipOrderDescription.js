@@ -39,7 +39,7 @@ module.exports = {
 	},
 	associations: () => {
     SupplierShipOrderDescription.belongsTo(SupplierShipOrder);
-    SupplierShipOrderDescription.belongsTo(OrderProduct);
+
   },
 	options: {
 		classMethods: {},
