@@ -287,7 +287,7 @@ module.exports = {
           sails.log.error(e);
         }
       }
-    }
+    },
 
     displayName: {
       type: Sequelize.VIRTUAL,
