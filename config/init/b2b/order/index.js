@@ -31,8 +31,7 @@ module.exports.init = async () => {
         lastName: '泰'
       })
 
-      const orderStatus = await OrderStatus.create({
-        languageId: 0,
+      const orderStatus = await OrderStatus.findOne({
         name: 'NEW',
       });
 
