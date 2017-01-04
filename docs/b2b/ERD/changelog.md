@@ -12,3 +12,5 @@
 - 新增 SupplierShipOrderProduct 資料表，與 SupplierShipOrder , Product 關聯  
   SupplierShipOrder 與 SupplierShipOrderProduct ( 1 : n )
   Product 與 SupplierShipOrderProduct ( 1 : n )
+- 修改 SupplierShipOrder 欄位 status 為 ENUM
+- 修改 Order 與 OrderStatus 關聯， OrderStatus 與 Order ( 1 : n )
