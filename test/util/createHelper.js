@@ -183,20 +183,20 @@ module.exports = {
     }
   },
 
-  supplierShipOrderDescription: async(supplierShipOrderId, orderProductId, status) => {
+  supplierShipOrderProduct: async(supplierShipOrderId, orderProductId, status) => {
     try {
       let orderProduct = await OrderProduct.findById(orderProductId);
       orderProduct = orderProduct.toJSON();
       let data = {
         ...orderProduct,
         SupplierShipOrderId: supplierShipOrderId,
-        OrderProductId: orderProductId,
         status: status || 'NEW',
       }
       delete data.id;
       delete data.createdAt;
       delete data.updatedAt;
-      return await SupplierShipOrderDescription.create(data);
+      console.log(data);
+      return await SupplierShipOrderProduct.create(data);
     } catch (e) {
       throw e;
     }
