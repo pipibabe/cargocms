@@ -36,6 +36,11 @@ module.exports = {
     //   type: Sequelize.INTEGER(8),
     //   allowNull: false,
     // },
+    status: {
+      type: Sequelize.ENUM("NEW", "PENDING", "RECEIVED", "REQUESTED", "SUBMITTED", "PAID", "PROCESSING", "CANCELLED", "SHIPPED", "DELIVERED", "COMPLETED"),
+      allowNull: false,
+      defaultValue: 'NEW'
+    },
 
     createdDateTime:{
       type: Sequelize.VIRTUAL,
