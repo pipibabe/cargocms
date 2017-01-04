@@ -232,8 +232,9 @@ module.exports = {
 		},
 
 		status: {
-			type: Sequelize.STRING,
-			allowNull: false
+      type: Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','DELIVERED','CANCELED','COMPLETE', 'SUBMITTED','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
+      allowNull: false,
+      defaultValue: 'NEW'
 		},
 
 		createdDateTime: {
