@@ -130,8 +130,8 @@ var defaultConfig = {
   'post  /api/admin/suppliershiporder/all': 'api/admin/SupplierShipOrderController.find',
   'put /api/admin/suppliershiporder/status/:id': 'api/admin/SupplierShipOrderController.status',
 
-  'post  /api/admin/suppliershiporderdescription/all': 'api/admin/SupplierShipOrderDescriptionController.find',
-  'put /api/admin/suppliershiporderdescription/status/:id': 'api/admin/SupplierShipOrderDescriptionController.status',
+  'post  /api/admin/suppliershiporderproduct/all': 'api/admin/SupplierShipOrderProductController.find',
+  'put /api/admin/suppliershiporderproduct/status/:id': 'api/admin/SupplierShipOrderProductController.status',
 
   'get /api/admin/order': 'api/admin/OrderController.find',
   'get /api/admin/order/:id': 'api/admin/OrderController.findOne',
@@ -157,11 +157,11 @@ var defaultConfig = {
   'put /api/admin/supplier/:id': 'api/admin/SupplierController.update',
   'delete /api/admin/supplier/:id': 'api/admin/SupplierController.destroy',
 
-  'get /api/admin/suppliershiporderdescription': 'api/admin/SupplierShipOrderDescriptionController.find',
-  'get /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.findOne',
-  'post /api/admin/suppliershiporderdescription': 'api/admin/SupplierShipOrderDescriptionController.create',
-  'put /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.update',
-  'delete /api/admin/suppliershiporderdescription/:id': 'api/admin/SupplierShipOrderDescriptionController.destroy',
+  'get /api/admin/suppliershiporderproduct': 'api/admin/SupplierShipOrderProductController.find',
+  'get /api/admin/suppliershiporderproduct/:id': 'api/admin/SupplierShipOrderProductController.findOne',
+  'post /api/admin/suppliershiporderproduct': 'api/admin/SupplierShipOrderProductController.create',
+  'put /api/admin/suppliershiporderproduct/:id': 'api/admin/SupplierShipOrderProductController.update',
+  'delete /api/admin/suppliershiporderproduct/:id': 'api/admin/SupplierShipOrderProductController.destroy',
 
 
   'get /api/admin/orderpayment': 'api/admin/OrderPaymentController.find',
