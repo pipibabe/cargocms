@@ -71,16 +71,12 @@
 
           <h3>收件地址</h3>
           <hr />
-          <div class="row">
-            <div class="col-xs-6 form-group">
-              <label for="">縣市</label>
-              <input name="shippingCity" type="text" class="form-control">
-            </div>
-            <div class="col-xs-6 form-group">
-              <label for="">郵遞區號</label>
-              <input name="shippingPostcode" type="text" class="form-control">
-            </div>
+          <div class="row" id="twzipcode">
+            <div class="col-xs-4 form-group" data-role="county" ></div>
+            <div class="col-xs-4 form-group" data-role="district" ></div>
+            <div class="col-xs-4 form-group" data-role="zipcode" ></div>
           </div>
+
           <div class="form-group">
             <label for="">地址</label>
             <input name="shippingAddress1" type="text" class="form-control">
@@ -129,7 +125,7 @@
 
 </form>
 
-<% LayoutUtils.addScripts('/assets/b2b/plugins/jquery.twzipcode.js'); %>
+<% LayoutUtils.addScripts('/assets/b2b/plugins/jquery.twzipcode.min.js'); %>
 <% LayoutUtils.addScriptBlock(`
   $(document).ready(function(){
 
@@ -137,7 +133,7 @@
       $(this).on('submit',function(e){
         var $form = $(this);
 
-        if ($form.data('submitted') === true) {
+        if ($form.data('submitted') === true || !$(this).valid()) {
           e.preventDefault();
         } else {
           $form.data('submitted', true);
@@ -148,6 +144,10 @@
 
       return this;
     };
+
+    $('#twzipcode').twzipcode({});
+    $('#twzipcode input').addClass('form-control');
+    $('#twzipcode select').addClass('form-control');
 
     $("[type=checkbox]").on('change', function(event){
       if( $("[type=checkbox]").prop("checked") ){
@@ -199,13 +199,16 @@
         shippingTelephone: {
           required: true
         },
-        shippingCity: {
-          required: true
-        },
-        shippingPostcode: {
-          required: true
-        },
         shippingAddress1: {
+          required: true
+        },
+        county: {
+          required: true
+        },
+        district: {
+          required: true
+        },
+        zipcode: {
           required: true
         },
       },
@@ -236,14 +239,17 @@
         shippingTelephone: {
           required: "請輸入聯絡電話"
         },
-        shippingCity: {
-          required: "請輸入縣市"
-        },
-        shippingPostcode: {
-          required: "請輸入郵遞區號"
-        },
         shippingAddress1: {
           required: "請輸入地址"
+        },
+        county: {
+          required: "請選擇縣市"
+        },
+        district: {
+          required: "請選擇區域"
+        },
+        zipcode: {
+          required: "請輸入郵遞區號"
         },
       }
     });
