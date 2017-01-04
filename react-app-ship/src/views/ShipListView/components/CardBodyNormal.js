@@ -16,13 +16,13 @@ const propTypes = {
 function CardBodyNormal(props) {
   let stateColor = {};
   switch (props.status) {
-    case '新訂單':
+    case 'NEW':
       stateColor = CardStateColor.newOrder;
       break;
-    case '已出貨':
+    case 'SHIPPED':
       stateColor = CardStateColor.shipped;
       break;
-    case '備貨中':
+    case 'PROCESSING':
       stateColor = CardStateColor.preparing;
       break;
     default:
