@@ -38,7 +38,7 @@ module.exports = {
       },
 	},
 	associations: () => {
-    SupplierShipOrderDescription.belongsTo(SupplierShipOrder);
+    // SupplierShipOrderDescription.belongsTo(SupplierShipOrder);
 
   },
 	options: {

@@ -271,7 +271,7 @@ module.exports = {
 
 	},
 	associations: () => {
-		SupplierShipOrder.hasMany(SupplierShipOrderDescription);
+		// SupplierShipOrder.hasMany(SupplierShipOrderDescription);
 		SupplierShipOrder.belongsTo(Supplier);
 		SupplierShipOrder.belongsTo(Order);
     SupplierShipOrder.hasMany(SupplierShipOrderProduct);
