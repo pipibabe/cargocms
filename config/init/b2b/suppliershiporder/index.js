@@ -59,7 +59,7 @@ module.exports.init = async () => {
           forwardedIp: order.forwardedIp,
           userAgent: order.userAgent,
           acceptLanguage: order.acceptLanguage,
-          status: '確定訂單',
+          status: 'NEW',
         });
 
         let supplierShipOrderDescription = await SupplierShipOrderDescription.create({
