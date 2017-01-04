@@ -56,7 +56,7 @@ module.exports.init = async () => {
         }
       ]
 
-      await OrderStatus.bulkCreate(orderPaymentStatusData);
+      await OrderStatus.bulkCreate(orderStatusData);
     }
   } catch (e) {
     console.error(e);
