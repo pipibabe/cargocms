@@ -50,9 +50,9 @@
 
   <div class="row">
     <section class="col col-lg-6 col-xs-6">
-      <label class="label">訂單產品 ID</label>
+      <label class="label">產品 ID</label>
       <label class="input state-disabled">
-      <input type="text" name="OrderProductId" placeholder="" v-model="data.item.OrderProductId" disabled>
+      <input type="text" name="ProductId" placeholder="" v-model="data.item.ProductId" disabled>
       <b class="tooltip tooltip-bottom-right">請輸入訂單產品 ID</b></label>
     </section>
 
@@ -96,7 +96,7 @@ var formRules = {
     number: true
   },
 
-  OrderProductId: {
+  ProductId: {
     required: true,
   },
 
@@ -133,7 +133,7 @@ var formMessages = {
     number: "請輸入數字"
   },
 
-  OrderProductId: {
+  ProductId: {
     required: "請給予訂單產品 ID",
     digits: "請輸入整數"
   },
