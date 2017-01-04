@@ -30,6 +30,12 @@ module.exports.init = async () => {
         firstName: '歐德',
         lastName: '泰'
       })
+
+      const orderStatus = await OrderStatus.create({
+        languageId: 0,
+        name: 'NEW',
+      });
+
       const order = await Order.create({
         "invoiceNo": 98765432,
         "invoicePrefix": "HI",
@@ -81,13 +87,7 @@ module.exports.init = async () => {
         "acceptLanguage": "",
         "AllpayId": allpay.id,
         "UserId": user.id,
-        "status": "NEW"
-      });
-
-      await OrderStatus.create({
-        languageId: 0,
-        name: 'NEW',
-        OrderId: order.id
+        "OrderStatusId": orderStatus.id
       });
     }
   } catch (e) {
