@@ -1,10 +1,10 @@
 import createHelper from "../../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../../util/adminAuthHelper.js"
 
-describe('about admin Supplier Ship Order Description controllers', () => {
+describe.only('about admin Supplier Ship Order Description controllers', () => {
   let product1, product2, user, order, supplier;
   let supplier2,  orderProduct1, orderProduct2, supplierShipOrder;
-  let supplierShipOrderDescription1, supplierShipOrderDescription2;
+  let supplierShipOrderProduct1, supplierShipOrderProduct2;
   before(async function(done){
     try{
       user = await User.create({
@@ -30,8 +30,8 @@ describe('about admin Supplier Ship Order Description controllers', () => {
       orderProduct2 = await createHelper.orderProduct(order.id, product2.id, 1);
       supplierShipOrder = await createHelper.supplierShipOrder(order.id, supplier.id);
 
-      supplierShipOrderDescription1 = await createHelper.supplierShipOrderDescription(supplierShipOrder.id, orderProduct1.id);
-      supplierShipOrderDescription2 = await createHelper.supplierShipOrderDescription(supplierShipOrder.id, orderProduct2.id);
+      supplierShipOrderProduct1 = await createHelper.supplierShipOrderProduct(supplierShipOrder.id, orderProduct1.id);
+      supplierShipOrderProduct2 = await createHelper.supplierShipOrderProduct(supplierShipOrder.id, orderProduct2.id);
 
       done();
     } catch (e) {
@@ -43,7 +43,7 @@ describe('about admin Supplier Ship Order Description controllers', () => {
     it('should 403', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .post(`/api/admin/suppliershiporderdescription/all`);
+        .post(`/api/admin/suppliershiporderproduct/all`);
         res.status.should.be.eq(403);
         done();
       } catch (e) {
@@ -53,7 +53,7 @@ describe('about admin Supplier Ship Order Description controllers', () => {
     it('should 403', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/status/${supplierShipOrderDescription1.id}`)
+        .put(`/api/admin/suppliershiporderproduct/status/${supplierShipOrderProduct1.id}`)
         .send({
           status: 'COMPLETED',
         });
@@ -76,10 +76,10 @@ describe('about admin Supplier Ship Order Description controllers', () => {
       done();
     });
 
-    it('admin get Supplier Ship Order Description shoubld success.', async(done) => {
+    it('admin get Supplier Ship Order Product shoubld success.', async(done) => {
       try {
         const res = await request(sails.hooks.http.app)
-        .post(`/api/admin/suppliershiporderdescription/all`)
+        .post(`/api/admin/suppliershiporderproduct/all`)
         .send({
           startDate: '1900/01/01',
           endDate: '3000/01/01',
@@ -97,18 +97,18 @@ describe('about admin Supplier Ship Order Description controllers', () => {
       }
     });
 
-    it('admin update status Supplier Ship Order Description shoubld success.', async (done) => {
+    it('admin update status Supplier Ship Order Product shoubld success.', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/status/${supplierShipOrderDescription1.id}`)
+        .put(`/api/admin/suppliershiporderproduct/status/${supplierShipOrderProduct1.id}`)
         .send({
           status: 'COMPLETED',
         });
         console.log(res);
         res.status.should.be.eq(200);
 
-        const checkShipOrderDescription = await SupplierShipOrderDescription.findById(supplierShipOrderDescription1.id);
-        checkShipOrderDescription.status.should.be.eq('COMPLETED');
+        const checkShipOrderProduct = await SupplierShipOrderProduct.findById(supplierShipOrderProduct1.id);
+        checkShipOrderProduct.status.should.be.eq('COMPLETED');
 
         done();
       } catch (e) {
@@ -119,23 +119,23 @@ describe('about admin Supplier Ship Order Description controllers', () => {
     it('finish pick product', async (done) => {
       try{
 
-        const finishShipOrderDescription1 = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/status/${supplierShipOrderDescription1.id}`)
+        const finishShipOrderProduct1 = await request(sails.hooks.http.app)
+        .put(`/api/admin/suppliershiporderproduct/status/${supplierShipOrderProduct1.id}`)
         .send({
           status: 'COMPLETED',
         });
-        finishShipOrderDescription1.status.should.be.eq(200);
-        const checkShipOrderDescription1 = await SupplierShipOrderDescription.findById(supplierShipOrderDescription1.id);
-        checkShipOrderDescription1.status.should.be.eq('COMPLETED');
+        finishShipOrderProduct1.status.should.be.eq(200);
+        const checkShipOrderProduct1 = await SupplierShipOrderProduct.findById(supplierShipOrderProduct1.id);
+        checkShipOrderProduct1.status.should.be.eq('COMPLETED');
 
-        const finishShipOrderDescription2 = await request(sails.hooks.http.app)
-        .put(`/api/admin/suppliershiporderdescription/status/${supplierShipOrderDescription2.id}`)
+        const finishShipOrderProduct2 = await request(sails.hooks.http.app)
+        .put(`/api/admin/suppliershiporderproduct/status/${supplierShipOrderProduct2.id}`)
         .send({
           status: 'COMPLETED',
         });
-        finishShipOrderDescription2.status.should.be.eq(200);
-        const checkShipOrderDescription2 = await SupplierShipOrderDescription.findById(supplierShipOrderDescription2.id);
-        checkShipOrderDescription2.status.should.be.eq('COMPLETED');
+        finishShipOrderProduct2.status.should.be.eq(200);
+        const checkShipOrderProduct2 = await SupplierShipOrderProduct.findById(supplierShipOrderProduct2.id);
+        checkShipOrderProduct2.status.should.be.eq('COMPLETED');
 
         const checkSupplierShipOrder = await SupplierShipOrder.findById(supplierShipOrder.id);
         checkSupplierShipOrder.status.should.be.eq('COMPLETED');
