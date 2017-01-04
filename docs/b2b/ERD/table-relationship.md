@@ -1,4 +1,4 @@
-## 20170103 修正 ERD table 關聯
+## 20170103 1220ERD2.mwb 修正 ERD table 關聯
 - Order, OrderStatus (1 : n) 修正為 (1 : 1)
 - Order, OrderOption (1 : n) 修正為 (1 : 1)
 - OrderProduct , SupplierShipOrderDescription (1 : n) 修正為 (1 : 1)
