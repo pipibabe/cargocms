@@ -57,6 +57,36 @@ module.exports = {
           sails.log.error(e);
         }
       }
+    },
+    totalMoney: {
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          let total = this.getDataValue('total');
+          if(!total){
+            return '';
+          }
+          return (total).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
+    },
+    priceMoney: {
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          let price = this.getDataValue('price');
+          if(!price){
+            return '';
+          }
+          return (price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
     }
 
   },
