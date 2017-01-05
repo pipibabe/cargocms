@@ -2,6 +2,9 @@
   em.invalid{
     color: #a94442;
   }
+  table.b2b-bill-info td:nth-child(2){
+    letter-spacing: 0.1em;
+  }
 </style>
 
 <div class="b2b-breadcrumbs">
@@ -113,15 +116,16 @@
 
     <input name="products" class="form-control hidden" v-bind:value=JSON.stringify(carts)>
 
-    <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
+    <hr style="border-top: 2px solid #eee"/>
+    <table class="b2b-bill-info pull-right">
       <tr>
-        <td>合計</td><td>{{priceSum}}</td>
+        <td>合計</td><td>{{(priceSum).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") }}</td>
       </tr>
       <tr>
-        <td>營業稅</td><td>{{ Math.round(priceSum * 0.05)}}</td>
+        <td>營業稅</td><td>{{ (Math.round(priceSum * 0.05).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))}}</td>
       </tr>
       <tr>
-        <td>總計</td><td>{{priceSum}}</td>
+        <td>總計</td><td>{{(priceSum).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</td>
       </tr>
     </table>
     <button class="btn btn-default btn-lg pull-right" type="submit" style="clear:right; display:inline-block; margin:1.6em 0 3em;">確認訂單</button>
