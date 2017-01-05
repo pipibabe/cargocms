@@ -62,9 +62,9 @@ module.exports.init = async () => {
           status: 'NEW',
         });
 
-        let supplierShipOrderDescription = await SupplierShipOrderDescription.create({
+        let supplierShipOrderDescription = await SupplierShipOrderProduct.create({
           SupplierShipOrderId: supplierShipOrder.id,
-          OrderProductId: orderProduct.id,
+          ProductId: orderProduct.id,
           name: orderProduct.name,
           model: orderProduct.model,
           quantity: orderProduct.quantity,
