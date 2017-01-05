@@ -81,7 +81,8 @@ module.exports = {
           if(!price){
             return '';
           }
-          return (price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+          const moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
+          return (price).toString().replace( moneyFormat , "$1,");
 
         } catch(e){
           sails.log.error(e);
