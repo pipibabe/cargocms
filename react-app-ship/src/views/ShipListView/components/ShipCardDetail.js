@@ -66,58 +66,111 @@ function ShipCardDetail(props) {
   return (
     <div className='card-deatil'>
       <div className='row'>
-        <div className='col-xs-4 text-left'>
-          <span className='title'>{props.orderSupplier.name}</span>
-          <p />
-          <span className='title-label'>收件姓名</span><br />
-          <span className='sub-title'>{props.shippingName}</span>
-          <p />
 
-          <span className='title-label'>電話</span><br />
-          <span className='sub-title'>{props.telephone}</span>
-          <p />
-
-          <span className='title-label'>寄送方式</span><br />
-          <span className='sub-title'>{props.shippingMethod}</span>
-          <p />
-
-          <span className='title-label'>付款方式</span><br />
-          <span className='sub-title'>{props.paymentMethod}</span>
-          <p />
-
-          <span className='title-label'>收件地址</span><br />
-          <span className='sub-title'>{props.shippingAddress}</span>
-          <p />
-
-          <span className='title-label'>備註</span><br />
-          <span className='sub-title'>{props.comment}</span>
-          <p />
-        </div>
-        <div className='col-xs-8 text-left'>
-          <span className='title text-left'>出貨明細</span>
-          <p />
-          <div className='item-list-wrapper'>
-            {
-              props.orderDetail.map((item, i) => (
-                <div className='row item-list' key={i}>
-                  <div className='item col-xs-4 text-left'>{item.name}</div>
-                  <div className='item col-xs-2 text-right'>x</div>
-                  <div className='item col-xs-3 text-left'>{item.quantity} 盒</div>
-                  <div className='item col-xs-3 text-left'>${item.price}</div>
-                </div>
-              ))
-            }
-          </div>
-          <div className='price-wrapper text-left'>
-            <span className='title-label'>總計</span><br />
-            <span className='price'>＄{props.total}</span>
+        <div className='col-xs-12 row'>
+          <div className='col-xs-6'>
+            <span className='title'>客戶資料</span>
             <p />
-
-            <span className='title-label'>發票號碼</span><br />
-            <span className='price'>{props.invoiceCode}</span>
+            <table>
+              <tr>
+                <th>發票號碼</th>
+                <td>{props.invoiceCode}</td>
+              </tr>
+              <tr>
+                <th>收件姓名</th>
+                <td>{props.shippingName}</td>
+              </tr>
+              <tr>
+                <th>電話</th>
+                <td>{props.telephone}</td>
+              </tr>
+              <tr>
+                <th>寄送方式</th>
+                <td>{props.shippingMethod}</td>
+              </tr>
+              <tr>
+                <th>付款方式</th>
+                <td>{props.paymentMethod}</td>
+              </tr>
+              <tr>
+                <th>收件地址</th>
+                <td>{props.shippingAddress}</td>
+              </tr>
+              <tr>
+                <th>備註</th>
+                <td>{props.comment}</td>
+              </tr>
+            </table>
+          </div>
+          <div className='col-xs-6'>
+            <span className='title'>{props.orderSupplier.name}</span>
             <p />
+            <table>
+              <tr>
+                <th>聯絡電話</th>
+                <td>{props.orderSupplier.telephone}</td>
+              </tr>
+              <tr>
+                <th>傳真</th>
+                <td>{props.orderSupplier.fax}</td>
+              </tr>
+              <tr>
+                <th>電子郵件</th>
+                <td>{props.orderSupplier.email}</td>
+              </tr>
+              <tr>
+                <th>地址</th>
+                <td>{props.orderSupplier.address}</td>
+              </tr>
+              <tr>
+                <th>統一編號</th>
+                <td></td>
+              </tr>
+            </table>
           </div>
         </div>
+
+        <div className='col-xs-12'>
+          <p/>
+          <h2 className='title text-center'>出貨明細</h2>
+        </div>
+        <div className='col-xs-12'>
+          <hr />
+        </div>
+
+        <div className='col-xs-12 item-list-wrapper'>
+          <table className='table' width='100%'>
+            <thead>
+              <tr>
+                <th>產品名稱</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>小記</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>總計：{props.total}</td>
+              </tr>
+            </tfoot>
+            <tbody>
+              {
+                props.orderDetail.map((item, i) => (
+                  <tr key={i}>
+                    <td>{item.name}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.price}</td>
+                    <td>{item.price * item.quantity}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
       </div>
       <ShipCardStepper />
     </div>
