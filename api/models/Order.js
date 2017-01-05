@@ -302,6 +302,22 @@ module.exports = {
           sails.log.error(e);
         }
       }
+    },
+    taxMoney: {
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          let total = this.getDataValue('total');
+          if(!total){
+            return '';
+          }
+          total = Math.round(total * 0.05);
+          return (total).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
     }
   },
   associations: () => {
