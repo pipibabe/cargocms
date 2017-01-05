@@ -65,25 +65,23 @@
       </tr>
     </thead>
     <tbody>
-      <% var total = 0;%>
       <% for(var i = 0, len = data.product.length; i < len; i++) { %>
         <tr>
-          <td><%= data.product[i].model %></td><td><%= data.product[i].price %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].total %></td>
+          <td><%= data.product[i].model %></td><td><%= data.product[i].priceMoney %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].totalMoney %></td>
         </tr>
-        <% total += data.product[i].total %>
       <% } %>
     </tbody>
   </table>
 
   <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
     <tr>
-      <td>合計</td><td><%= total %></td>
+      <td>合計</td><td><%= data.item.totalMoney %></td>
     </tr>
     <tr>
-      <td>營業稅</td><td><%= Math.round(total * 0.05) %></td>
+      <td>營業稅</td><td><%= Math.round(data.item.total * 0.05) %></td>
     </tr>
     <tr>
-      <td>總計</td><td><%= total %></td>
+      <td>總計</td><td><%= data.item.totalMoney %></td>
     </tr>
   </table>
 
