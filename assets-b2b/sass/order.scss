@@ -36,11 +36,19 @@
     }
   }
   .b2b-bill-info {
+    th {
+      text-align: right;
+      padding: 0 75px 0 0;
+    }
     td {
       text-align: right;
+      letter-spacing: 0.1em;
       &:first-child {
         padding: 0 75px 0 0;
       }
     }
   }
+}
+em.invalid{
+  color: #a94442;
 }
