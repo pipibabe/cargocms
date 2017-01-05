@@ -109,7 +109,7 @@
       </thead>
       <tbody>
         <tr v-for="cart in carts">
-          <td>{{cart.name}}</td><td>{{cart.price}}</td><td>{{cart.quantity}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.quantity)}}</td>
+          <td>{{cart.name}}</td><td>{{cart.price | moneyNum}}</td><td>{{cart.quantity}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.quantity) | moneyNum }}</td>
         </tr>
       </tbody>
     </table>
@@ -119,13 +119,13 @@
     <hr style="border-top: 2px solid #eee"/>
     <table class="b2b-bill-info pull-right">
       <tr>
-        <td>合計</td><td>{{(priceSum).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") }}</td>
+        <td>合計</td><td>{{priceSum | moneyNum}}</td>
       </tr>
       <tr>
-        <td>營業稅</td><td>{{ (Math.round(priceSum * 0.05).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"))}}</td>
+        <td>營業稅</td><td>{{ Math.round(priceSum * 0.05) | moneyNum }}</td>
       </tr>
       <tr>
-        <td>總計</td><td>{{(priceSum).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}</td>
+        <td>總計</td><td>{{priceSum | moneyNum}}</td>
       </tr>
     </table>
     <button class="btn btn-default btn-lg pull-right" type="submit" style="clear:right; display:inline-block; margin:1.6em 0 3em;">確認訂單</button>
