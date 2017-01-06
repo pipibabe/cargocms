@@ -1,0 +1,77 @@
+<% LayoutUtils.addMeta({ property:"og:image", content:SocialService.getShareUrl() + "/assets/labfnp/img/fb-og-image.jpg" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:url", content:SocialService.getShareUrl() + "/assets/labfnp/img/fb-og-image.jpg"  }); %>
+<% LayoutUtils.addMeta({ property:"og:image:type", content:"image/jpeg" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:width", content:"1200" }); %>
+<% LayoutUtils.addMeta({ property:"og:image:height", content:"630" }); %>
+<% LayoutUtils.addMeta({ property:"og:title", content:"" }); %>
+<% LayoutUtils.addMeta({ property:"og:description", content:"" }); %>
+<% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
+
+<% include partials/sideMenuForMobile.ejs %>
+<% include partials/sideMenu.ejs %>
+
+<!-- Interactive Slider v2 -->
+<div class="">
+  <% include lib/login.inc.ejs %>
+	<div class="row b2b-content b2b-content-header" style="
+    background: url(http://i.imgur.com/Z2K6d9T.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 13%;
+    margin-top: -20px;"
+  >
+		<div class="col-md-12">
+			<h1 style="
+      height: 161px;
+      background: rgba(255, 255, 255, 0);
+      margin: 35px 10px 37px;
+      /* text-align: center; */
+      line-height: 161px;
+      font-size: 7em;
+      color: #545454;
+      text-transform: uppercase;">b2b</h1>
+		</div>
+		<!--<div class="col-md-4">
+			<form class="b2b-login">
+			  <div class="form-group">
+			    <input class="form-control" placeholder="Email">
+			  </div>
+			  <div class="form-group">
+			    <input class="form-control" placeholder="Password">
+			  </div>
+				<button type="button" class="btn btn-gray btn-lg btn-block">登入系統</button>
+			</form>
+		</div>-->
+	</div>
+	<div class="row b2b-content b2b-content-body">
+
+    <% for(var p = 0, len = data.items.length; p < len; p++) { %>
+      <div class="col-sm-4 col-md-3 product" data-id="<%= data.items[p].id %>">
+        <div class="product-img" style="background-image: url('<%= data.items[p].image%>');"></div>
+        <h1><%= data.items[p].model %></h1>
+        <span class="promotion-label">限量優惠</span>
+        <p class="product-price">
+  				<i class="fa fa-dollar"></i><span><%= data.items[p].price %></span><small>起</small>
+  			</p>
+        <div class="form-group">
+          <div>
+            <label class="control-label">特級 <%= data.items[p].price %> /包</label>
+          </div>
+          <div>
+            <label class="control-label"><%= data.items[p].weight %> 公克/包</label>
+          </div>
+
+          <label style="float: left;margin: 9px 8px 0 0;font-size: 1.2em;">訂購</label>
+          <label style="float: right;margin: 9px 0 0 8px;font-size: 1.2em;">包</label>
+          <input class="form-control" type="number" value="0" min="0" max="10" />
+  			</div>
+      </div>
+    <% } %>
+
+	</div>
+
+</div>
+
+<% LayoutUtils.addScripts('/assets/unify/js/app.js', '/assets/unify/js/plugins/owl-carousel.js'); %>
+<% LayoutUtils.addScriptBlock(`
+`); %>

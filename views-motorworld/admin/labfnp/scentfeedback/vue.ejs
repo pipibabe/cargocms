@@ -1,0 +1,127 @@
+var COMMON = {
+  DOUBLE_CLICK_TIME_PERIOD: 250,
+  DEFAULT_INDEX: -1,
+  DEFAULT_AVATAR: "/assets/admin/img/avatars/default.png",
+};
+
+var itemBeforeEdit = {};
+var prefix = 'admin/';
+var modelName = "labfnp/scentfeedback";
+var appModel = {
+  modelName: modelName,
+  prefix: prefix,
+  data: {
+    item: {
+      id: '',
+      feeling: '',
+      createdAt: '',
+      createdDateTime: '',
+      UserId: '',
+      ScentId: '',
+      userName:'',
+      scentName: '',
+    },
+    items: [],
+    option: {
+      defaultSort: [[ 0, 'desc' ]]
+    }
+  },
+  view: {
+    table: {
+      selectIndex: COMMON.DEFAULT_INDEX,
+    },
+  }
+}
+
+/* TABLETOOLS */
+
+<%- include ../../default/vue.ejs %>
+// 需要新增函式可以對 appMain 進行定義，如：
+// appMain.log = function () {console.log("123")}
+appMain.DataTableInitComplete = function() {
+  $('#ToolTables_main-table_2').hide();
+  // $('#ToolTables_main-table_3').hide();
+
+  $('.loading-wrapper').removeClass('active');
+}
+appMain.hideSubmit = function() {
+  $('button[type="submit"]').hide();
+}
+
+appMain.customSearch = function() {
+  appModel.pagingQuery.columns.push({
+    data: 'scentName',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'Scent',
+      column: 'name',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'userName',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'User',
+      concat: ['lastName', 'firstName'],
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'userName',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'User',
+      concat: ['firstName', 'lastName'],
+    }
+  })
+}
+
+$("#main-table").delegate("[name='checkFeelButton']","click", function(e) {
+    var that = this;
+    var scent_name = $(that).attr("scent-data");
+    var scent_feeling = $(that).attr("scentFeeling-data");
+    var scent_feedbackId = $(that).attr("data-id");
+    $.SmartMessageBox({
+      title : "確認香調回饋",
+      buttons : "[確認][取消]"
+    }, function(ButtonPress) {
+         if(ButtonPress === "取消"){
+           return 0;
+         }
+
+         var ajaxSuccess = function (result) {
+           location.href = '/admin/#/admin/' + modelName;
+           messageApp.show({
+           desc: '更新香調感覺成功！',
+           type: 'success'
+           });
+         }; // end ajaxSuccess
+
+        var ajaxError = function (result) {
+          messageApp.show({
+            desc: '更新資料失敗！errorMessage: ' + result.responseJSON.message,
+            type: 'error'
+          });
+        };
+
+        //暫時 console 輸出資料，尚未確認回饋
+        console.log(`ScentName: ${scent_name} , ScentFeeling: ${scent_feeling}, ScentFeedbackID: ${scent_feedbackId}`);
+        $.ajax({
+          url: '/api/' + prefix + 'labfnp/feedbackcheck' + '/' + scent_feedbackId,
+          type: 'PUT',
+          dataType: 'json',
+          data: {scentName: scent_name, feeling: scent_feeling},
+          xhrFields: {
+          withCredentials: true,
+          },
+          success: ajaxSuccess,
+          error: ajaxError,
+        }).done(function(result){
+          defaultTable.api().ajax.reload(null, false);
+        });
+       }
+    );
+    e.preventDefault();
+});

@@ -228,8 +228,7 @@ module.exports.routes = {
 
 
   '/': {
-    controller: 'b2b/ProductController',
-    action: 'index'
+    view: 'index'
   },
 
   'get /product': 'b2b/ProductController.index',

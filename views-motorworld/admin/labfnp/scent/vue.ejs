@@ -1,0 +1,399 @@
+var COMMON = {
+  DOUBLE_CLICK_TIME_PERIOD: 250,
+  DEFAULT_INDEX: -1,
+  DEFAULT_AVATAR: "/assets/admin/img/avatars/default.png",
+};
+
+var itemBeforeEdit = {};
+var scentAppModel = {
+  data: {
+    item: {
+      avatar: '',
+      displayName: '',
+      scentname: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      Roles: [],
+      rolesArray: [],
+      Passports: [
+        {
+          password: ""
+        }
+      ]
+    },
+    items: [],
+    option: {
+      passwordConfirm: ''
+    }
+  },
+  view: {
+    table: {
+      selectIndex: COMMON.DEFAULT_INDEX,
+    },
+  }
+}
+
+var scentApp = new Vue({
+  data: scentAppModel,
+  methods: {
+    cancel: function (event) {
+      scentApp.onLeavePageEdit(function() {
+        location.href = '/admin/#/admin/labfnp/scent';
+      });
+    },
+    save: function (event) {
+      $.ajax({
+        url: '/api/labfnp/scent',
+        type: 'POST',
+        dataType: 'json',
+        data: scentAppModel.data.item,
+        xhrFields: {
+          withCredentials: true,
+        },
+        success: ajaxSuccess,
+        error: ajaxError,
+      });
+
+      function ajaxSuccess(result) {
+        location.href = '/admin/#/admin/labfnp/scent';
+        messageApp.show({desc: '新增會員成功！', type: 'success'});
+      } // end ajaxSuccess
+
+      function ajaxError(result) {
+        messageApp.show({desc: '新增資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+      }
+    },
+    update: function (event) {
+      $.ajax({
+        url: '/api/admin/labfnp/scent/' + scentAppModel.data.item.id,
+        type: 'PUT',
+        dataType: 'json',
+        data: scentAppModel.data.item,
+        xhrFields: {
+          withCredentials: true,
+        },
+        success: ajaxSuccess,
+        error: ajaxError,
+      });
+
+      function ajaxSuccess(result) {
+        location.href = '/admin/#/admin/labfnp/scent';
+        messageApp.show({desc: '更新會員資料成功！', type: 'success'});
+      } // end ajaxSuccess
+
+      function ajaxError(result) {
+        console.log(result);
+        messageApp.show({desc: '更新資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+      }
+    },
+    loadItem: function (cb) {
+      window.onbeforeunload = null;
+      $.get('/api/admin/labfnp/scent/' + scentAppModel.data.item.id, ajaxSuccess);
+
+      function ajaxSuccess(result) {
+        console.log("loadItem result.data=>", result.data);
+        if (result.success) {
+          scentAppModel.data.item = result.data;
+          scentAppModel.data.option.passwordConfirm = result.data.Passports[0].password;
+          var hasAvatar = typeof result.data.avatar === 'string';
+          if (!hasAvatar) {
+            scentAppModel.data.item.avatar = COMMON.DEFAULT_AVATAR;
+          }
+        }
+        if (typeof cb !== 'undefined') setTimeout(cb, 0);
+        console.log("loadItem scentAppModel.data.item=>", scentAppModel.data.item);
+      } // end ajaxSuccess
+    },
+    setupForm: function(type) {
+      var registerForm = $("#main-form");
+      registerForm.validate({
+
+        // Rules for form validation
+        rules : {
+          scentname : {
+            required : true
+          },
+          email : {
+            required : true,
+            email : true
+          },
+          firstname : {
+            required : true
+          },
+          lastname : {
+            required : true
+          },
+          password : {
+            required : true,
+            minlength : 3,
+          },
+          passwordConfirm : {
+            required : true,
+            minlength : 3,
+            equalTo : '#password'
+          },
+        },
+
+        // Messages for form validation
+        messages : {
+          scentname : {
+            required : '請輸入使用者帳號'
+          },
+          email : {
+            required : '請輸入 Email',
+            email : '請確認輸入的 Email 格式'
+          },
+          firstname : {
+            required : '請輸入使用者姓'
+          },
+          lastname : {
+            required : '請輸入使用者名'
+          },
+          password : {
+            required : '請輸入密碼'
+          },
+          passwordConfirm : {
+            required : '請再次輸入密碼以便確認',
+            equalTo : '請輸入相同的密碼'
+          },
+        },
+
+        // Do not change code below
+        errorPlacement : function(error, element) {
+          error.insertAfter(element.parent());
+        },
+
+        submitHandler: function(form) {
+          if (type == 'create') {
+            scentApp.save();
+            return false;
+          } else if(type == 'edit') {
+            scentApp.update();
+            return false;
+          }
+        }
+      });
+    },
+    isPageEditDataModified: function() {
+      var itemBeforeLeave = JSON.stringify(scentAppModel.data.item);
+      var isDataModified = itemBeforeEdit !== itemBeforeLeave;
+      if (!isDataModified) window.onbeforeunload = null;
+      return isDataModified;
+    },
+    onEnterPageEdit: function() {
+      itemBeforeEdit = JSON.stringify(scentAppModel.data.item);
+      console.log("itemBeforeEdit=>", JSON.parse(itemBeforeEdit));
+      window.onbeforeunload = function(e) {
+        if (this.isPageEditDataModified()) {
+          var message = '您已經修改過資料，是否確定要放棄本次的修改？';
+          e.returnValue = message;
+          return message;
+        }
+      };
+    },
+    onLeavePageEdit: function(cb) {
+      if (this.isPageEditDataModified()) {
+        var msgInfo = {
+          title: '注意',
+          content: '您已經修改過資料，是否確定要放棄本次的修改？',
+          btnArray: ['放棄', '取消'],
+        };
+        var action = function(ButtonPressed) {
+          if (ButtonPressed === '放棄') {
+            setTimeout(function() {
+              return cb();
+            }, 500);
+          }
+        };
+        messageApp.confirm(msgInfo, action);
+      } else return cb();
+    },
+    loadItems: function (cb) {
+      $(".loading-wrapper").addClass('active');
+      window.onbeforeunload = null;
+      $.get('/api/admin/labfnp/scent', ajaxSuccess);
+
+      function ajaxSuccess(result) {
+        console.log(result);
+        scentAppModel.data.items = result.data.items;
+        if (typeof cb !== 'undefined') setTimeout(cb, 0);
+      } // end ajaxSuccess
+    },
+    renderTable: function() {
+      /* BASIC ;*/
+     var responsiveHelper_scent_table = undefined;
+     var responsiveHelper_datatable_fixed_column = undefined;
+     var responsiveHelper_datatable_col_reorder = undefined;
+     var responsiveHelper_datatable_tabletools = undefined;
+
+     var breakpointDefinition = {
+       tablet : 1024,
+       phone : 480
+     };
+     /* TABLETOOLS */
+     var table = $('#main-table').dataTable({
+       // Tabletools options:
+       //   https://datatables.net/extensions/tabletools/button_options
+       "sDom": "<'dt-toolbar'<'row'r<'col-xs-12 col-md-7 col-sm-7'f><'col-xs-12 col-md-4 col-sm-4'T><'col-md-1 col-sm-1 hidden-xs'l>>>" +
+           "t"+
+           "<'dt-toolbar-footer'<'row'<'col-md-6 col-xs-12 hidden-xs'i><'col-md-6 col-xs-12'p>>>",
+       "oLanguage": {
+          "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>',
+          "sInfo": "顯示 _START_ 到 _END_ 總共 _TOTAL_ 筆紀錄",
+         	"sInfoPostFix":  "",
+         	"sInfoEmpty":    "顯示第 0 至 0 項結果，共 0 項",
+         	"sInfoFiltered": "(從 _MAX_ 項結果中過濾)",
+         	"sProcessing":   "處理中...",
+         	"sLoadingRecords": "載入中...",
+         	"sLengthMenu": "_MENU_",
+         	"sZeroRecords":  "沒有符合的結果",
+         	"oPaginate": {
+         		"sFirst":    "第一頁",
+         		"sPrevious": "<i class='fa fa-chevron-left' aria-hidden='true'></i>",
+         		"sNext":     "<i class='fa fa-chevron-right' aria-hidden='true'></i>",
+         		"sLast":     "最後一頁"
+         	},
+         	"sAria": {
+         		"sortAscending":  ": 升冪排列",
+         		"sortDescending": ": 降冪排列"
+         	}
+       },
+       "order": [[1, 'asc']],
+      "columnDefs": [
+        {
+          "targets"  : 'no-sort',
+          "orderable": false,
+        },
+        {
+          "targets"  : 4,
+          "width": "20%"
+        },
+        {
+          "targets": [ 1 ],
+          "visible": false
+        },
+      ],
+       "oTableTools": {
+         "aButtons": [
+          //  {
+          //    "sExtends": "text",
+          //    "sButtonText": "檢視",
+          //    "fnClick": function ( nButton, oConfig, oFlash ) {
+          //      var isSelected = scentAppModel.view.table.selectIndex !== COMMON.DEFAULT_INDEX;
+          //      if (isSelected) {
+          //        var index = scentAppModel.view.table.selectIndex;
+          //        var scentId = scentAppModel.data.items[index].id;
+          //        location.href = '/admin/#/admin/labfnp/scent/show/' + scentId;
+          //      } else {
+          //        messageApp.show({desc: '請選擇會員', type: 'warning'});
+          //      }
+          //    }
+          //  },
+          //  {
+          //    "sExtends": "text",
+          //    "sButtonText": "新增",
+          //    "fnClick": function ( nButton, oConfig, oFlash ) {
+          //      location.href = '/admin/#/admin/labfnp/scent/create';
+          //    }
+          //  },
+          //  {
+          //    "sExtends": "text",
+          //    "sButtonText": "編輯",
+          //    "fnClick": function ( nButton, oConfig, oFlash ) {
+          //      var isSelected = scentAppModel.view.table.selectIndex !== COMMON.DEFAULT_INDEX;
+          //      if (isSelected) {
+          //        var index = scentAppModel.view.table.selectIndex;
+          //        var scentId = scentAppModel.data.items[index].id;
+          //        location.href = '/admin/#/admin/labfnp/scent/edit/' + scentId;
+          //      } else {
+          //        messageApp.show({desc: '請選擇會員', type: 'warning'});
+          //      }
+          //    }
+          //  },
+         ]
+       },
+       "autoWidth" : true,
+       "preDrawCallback" : function() {
+         // Initialize the responsive datatables helper once.
+         if (!responsiveHelper_datatable_tabletools) {
+           responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#main-table'), breakpointDefinition);
+         }
+       },
+       "rowCallback" : function(nRow) {
+         responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+       },
+       "drawCallback" : function(oSettings) {
+         responsiveHelper_datatable_tabletools.respond();
+       },
+       "initComplete": function(){
+         $('.loading-wrapper').removeClass('active');
+       }
+     });
+
+     // selection
+     table.on('click', 'tr', function () {
+       if ( $(this).hasClass('selected') ) {
+         $(this).removeClass('selected');
+       } else {
+         $('#main-table tbody tr').removeClass('selected');
+         $(this).addClass('selected');
+       }
+     });
+
+     $('#main-table-widget').fadeIn();
+    },
+    dblclick: function(index) {
+      var scentId = scentAppModel.data.items[index].id;
+      this.show(scentId);
+    },
+    selection: function (index) {
+      if (index !== scentAppModel.view.table.selectIndex) {
+        scentAppModel.view.table.selectIndex = index;
+        console.log("scentAppModel.view.table.selectIndex", scentAppModel.view.table.selectIndex);
+      } else {
+        scentAppModel.view.table.selectIndex = COMMON.DEFAULT_INDEX;
+      }
+    },
+    show: function (scentId) {
+      location.href = '/admin/#/admin/labfnp/scent/show/' + scentId;
+    },
+    edit: function (scentId) {
+      location.href = '/admin/#/admin/labfnp/scent/edit/' + scentId;
+    },
+    delete: function() {
+      messageApp.confirm({
+        title: '刪除',
+        content: '確認刪除此筆資料？',
+        btnArray: ['刪除', '取消'],
+      },
+      function(ButtonPressed) {
+        if (ButtonPressed ==='刪除') {
+          $.ajax({
+            url: '/api/admin/labfnp/scent/' + scentAppModel.data.item.id,
+            type: 'DELETE',
+            dataType: 'json',
+            xhrFields: {
+              withCredentials: true
+            },
+            success: ajaxSuccess,
+            error: ajaxError,
+          });
+
+          function ajaxSuccess(result) {
+            scentAppModel.view.table.selectIndex = COMMON.DEFAULT_INDEX;
+            messageApp.show({desc: `刪除資料成功！`, type: 'success'});
+            setTimeout(function() {
+              location.href = '/admin/#/admin/labfnp/scent';
+            }, 500);
+          } // end ajaxSuccess
+
+          function ajaxError(result) {
+            messageApp.show({desc: '刪除資料失敗！errorMessage: ' + result.responseJSON.message, type: 'error'});
+          }
+        }
+      });
+    }
+  },
+});

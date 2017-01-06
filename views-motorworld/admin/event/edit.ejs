@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/assets/admin/css/bootstrap-datetimepicker.min.css" />
+
+<%- include form.ejs %>
+
+<!-- SCRIPTS ON PAGE EVENT -->
+<script type="text/javascript">
+
+	var pagefunction = function() {
+    
+		<%- include vue.ejs %>
+		appMain.$mount("#main-edit");
+		appMain.loadItem(function(){
+      appMain.onEnterPageEdit();
+      appMain.enableText();
+    });
+		appMain.setupForm("edit");
+    appMain.loadDateTimeScript();
+	};
+
+</script>

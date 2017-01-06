@@ -1,0 +1,63 @@
+<fieldset>
+
+  <section>
+    <label class="label">感覺</label>
+    <label class="input state-disabled">
+      <input type="text" name="title" placeholder="" v-model="data.item.title" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入感覺</b></label>
+  </section>
+
+  <section>
+    <label class="label">香味分子名稱</label>
+    <label class="input state-disabled">
+      <input type="scentName" name="scentName" placeholder="" v-model="data.item.scentName" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入香味分子名稱</b></label>
+  </section>
+
+  <div class="row notForCreate">
+    <section class="col col-xs-12 col-sm-6">
+      <label class="label">totalRepeat</label>
+      <label class="input state-disabled">
+        <input type="text" name="totalRepeat" placeholder="" v-model="data.item.totalRepeat" disabled>
+      </label>
+    </section>
+    <section class="col col-6">
+      <label class="label">score</label>
+      <label class="input state-disabled">
+        <input type="text" name="score" placeholder="" v-model="data.item.score" disabled>
+      </label>
+    </section>
+  </div>
+</fieldset>
+<script>
+var formRules = {
+  title : {
+    required : true
+  },
+  score : {
+    required : true
+  },
+  totalRepeat : {
+    required : true
+  },
+  scentName : {
+    required : true
+  },
+}
+
+// Messages for form validation
+var formMessages = {
+  title : {
+    required : '請輸入感覺'
+  },
+  scentName : {
+    required : '請給予香味分子名稱'
+  },
+  score : {
+    required : '請給予score'
+  },
+  totalRepeat : {
+    required :  '請輸入此感覺總共重複的次數'
+  },
+}
+</script>

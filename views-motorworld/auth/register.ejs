@@ -1,0 +1,270 @@
+<!-- CSS Page Style -->
+<link rel="stylesheet" href="/assets/unify/css/pages/page_log_reg_v1.css">
+<style type="text/css">
+.login-block .social-login {
+    margin-bottom: 70px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+.login-block .or {
+    position: relative;
+    border: 1px solid #eee;
+    width: 70px;
+    height: 70px;
+    top: 35px;
+    left: 50%;
+    margin-left: -35px;
+    text-transform: uppercase;
+    color: #333;
+    background: #fff;
+    line-height: 70px;
+    padding: 0 24px;
+    z-index: 1;
+}
+.rounded-x {
+    border-radius: 50% !important;
+}
+em.invalid{
+  color: #a94442;
+}
+
+@media screen and (max-width: 399px ){
+  #rc-imageselect, .g-recaptcha {
+    transform:scale(0.77);
+    -webkit-transform:scale(0.77);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
+}
+</style>
+
+<script src="https://www.google.com/recaptcha/api.js?hl=zh-TW" async defer></script>
+<!--=== Content Part ===-->
+<div class="container content">
+  <div class="row">
+    <div class="login-block col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <form id="registerForm" class="reg-page" method='post' action="/auth/local/register">
+
+        <div class="social-login">
+          <ul class="list-unstyled">
+            <li>
+              <a class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20" href="/auth/facebook">
+                <i class="fa fa-facebook"></i> <%= __('login.facebook') %>
+              </a>
+            </li>
+          </ul>
+          <div class="or rounded-x">Or</div>
+        </div>
+
+        <div class="reg-header">
+          <h2><%= __('register.title') %></h2>
+          <p><%- __('register.sec_title', `<a href="/login" class="color-green">${__('login')}</a>`) %></p>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label><%= __('register.label.last_name') %> <span class="color-red">*</span></label>
+            <input type="text" name="lastName" value="<%= data.user.lastName %>" class="form-control margin-bottom-20">
+          </div>
+          <div class="col-sm-6">
+            <label><%= __('register.label.first_name') %> <span class="color-red">*</span></label>
+            <input type="text" name="firstName" value="<%= data.user.firstName %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Email <span class="color-red">*</span></label>
+            <input type="text" name="email" value="<%= data.user.email %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <% var error = data.errors[0]; %>
+        <% if(error === 'email must be unique' ){ %>
+            <div class="alert alert-warning" role="alert">此 Email 已被註冊，請更換 Email</div>
+        <% }%>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <label><%= __('register.label.username') %> <span class="color-red">*</span></label>
+            <input type="text" name="username" value="<%= data.user.username %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <% if(error === 'username must be unique' ){ %>
+            <div class="alert alert-warning" role="alert">此帳號已被使用，請更換帳號</div>
+        <% }%>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label><%= __('register.label.password') %> <span class="color-red">*</span></label>
+            <input id="firstPassword" type="password" name="password" class="form-control margin-bottom-20">
+          </div>
+          <div class="col-sm-6">
+            <label><%= __('register.label.repeat_password') %> <span class="color-red">*</span></label>
+            <input type="password" name="passwordAgain" class="form-control margin-bottom-20">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <label><%= __('register.label.birthday') %> </label>
+            <input type="text" name="birthday" value="<%= data.user.birthday %>" class="form-control margin-bottom-20" placeholder="<%= __('register.placeholder.EX') %>1970-01-01">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <label><%= __('register.label.cell_phone') %> </label>
+            <input type="number" name="phone1" value="<%= data.user.phone1 %>" class="form-control margin-bottom-20">
+          </div>
+          <div class="col-sm-6">
+            <label><%= __('register.label.telephone') %> </label>
+            <input type="number" name="phone2" value="<%= data.user.phone2 %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <label><%= __('register.label.address') %> </label>
+            <input type="text" name="address" value="<%= data.user.address %>" class="form-control margin-bottom-20">
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-sm-12">
+            <label>住址2</label>
+            <input type="text" name="address2" value="<%= data.user.address2 %>" class="form-control margin-bottom-20">
+          </div>
+        </div> -->
+
+        <hr>
+
+        <div class="margin-top-20 g-recaptcha" data-sitekey="<%= data.reCAPTCHAKey %>"></div>
+
+        <div class="row margin-top-20">
+          <div class="col-lg-6 checkbox">
+            <label>
+              <input type="checkbox" name="agree">
+              <%- __('register.label.agree', `<a href="#" class="color-green" data-toggle="modal" data-target="#myModal">`, `</a>`) %>
+            </label>
+          </div>
+          <div class="col-lg-6 text-right">
+            <button id="submit-button" class="btn-u" type="submit"><%= __('register') %></button>
+          </div>
+        </div>
+
+        <% var error = req.flash('error')[0]; %>
+        <% if (error) { %>
+          <div class="alert alert-warning" role="alert"><%= error %></div>
+        <% } %>
+      </form>
+    </div>
+  </div>
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">會員服務條款</h4>
+      </div>
+      <div class="modal-body">
+        <div style="max-height: 400px; overflow-y: scroll">
+          <% include agreement.inc.ejs %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<% LayoutUtils.addScripts('/assets/labfnp/lib/formSubmitHelper.js'); %>
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $.fn.preventDoubleSubmission = function() {
+      $(this).on("submit", function(event) {
+        if (grecaptcha.getResponse() === "") {
+          swal('${__('warning')}', '${__('register.invalid.not_robot.not_check')}', 'warning');
+          return event.preventDefault();
+        }
+        defaultFormSubmit(event);
+      });
+      return this;
+    }
+
+    $('input[name="birthday"]').datepicker({
+      changeYear: true,
+      yearRange: "-100:+0",
+      dateFormat: 'yy-mm-dd',
+      prevText: '<i class="fa fa-angle-left"></i>',
+      nextText: '<i class="fa fa-angle-right"></i>'
+    });
+
+    $('html, body').keydown(function(e){
+      // press Esc to close modal
+      if (e.keyCode === 27) $('.modal-footer button')[0].click();
+    })
+
+    $("#registerForm").validate({
+      rules: {
+        firstName: {
+          required: true
+        },
+        lastName: {
+          required: true
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        username: {
+          required: true
+        },
+        password: {
+          required: true,
+          minlength: 6
+        },
+        passwordAgain: {
+          required: true,
+          minlength: 6,
+          equalTo: "#firstPassword"
+        },
+        agree: "required"
+
+      },
+      messages: {
+        firstName: {
+          required: "${__('register.invalid.first_name.empty')}"
+        },
+        lastName: {
+          required: "${__('register.invalid.last_name.empty')}"
+        },
+        email: {
+          required: "${__('register.invalid.email.empty')}",
+          email: "${__('register.invalid.email.format')}"
+        },
+        username:{
+          required: "${__('register.invalid.username.empty')}"
+        },
+        password: {
+          required: "${__('register.invalid.password.empty')}",
+          minlength: "${__('register.invalid.password.not_strong')}"
+        },
+        passwordAgain: {
+          required: "${__('register.invalid.password.empty')}",
+          minlength: "${__('register.invalid.password.not_strong')}",
+          equalTo: "${__('register.invalid.password.not_equal')}"
+        },
+        agree: "${__('register.invalid.not_agree')}"
+      }
+    });
+
+    $("#registerForm").preventDoubleSubmission();
+  });
+`); %>

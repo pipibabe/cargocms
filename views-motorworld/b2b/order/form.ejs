@@ -1,0 +1,255 @@
+
+<div class="b2b-breadcrumbs">
+  <div class="container" style="max-width: 960px;">
+    <h1>填寫訂購單</h1>
+  </div>
+</div>
+<form id="order" method='post' action='/order'>
+  <div class="container b2b-order-form" id="orderForm">
+  	<div class="row" style="margin-top: 2em;">
+      <div class="col-sm-4">
+        <i class="fa fa-user info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-8">
+        <% var loginUser = AuthService.getSessionUser(req);%>
+        <h3>訂購人資訊</h3>
+        <hr />
+        <div class="form-group">
+          <label for="">訂購人 姓氏</label>
+          <input name="lastname" type="text" class="form-control" value=<%= loginUser.lastName %>>
+        </div>
+        <div class="form-group">
+          <label for="">訂購人 名字</label>
+          <input name="firstname" type="text" class="form-control" value=<%= loginUser.firstName %>>
+        </div>
+        <div class="form-group">
+          <label for="">電子郵件</label>
+          <input name="email" type="email" class="form-control" value=<%= loginUser.email %>>
+        </div>
+        <div class="form-group">
+          <label for="telephone">聯絡電話</label>
+          <input name="telephone" type="text" class="form-control" value=<%= loginUser.phone1 %>>
+        </div>
+
+      </div>
+  	</div>
+
+    <div class="row" style="margin-top: 2em;">
+      <div class="col-sm-4">
+        <i class="fa fa-truck info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-8">
+
+          <h3>收件人資訊</h3>
+          <hr />
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> 與訂購人相同請打勾
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="">收件人 姓氏</label>
+            <input name="shippingLastname" type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">收件人 名字</label>
+            <input name="shippingFirstname" type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">電子郵件</label>
+            <input name="shippingEmail" type="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="">聯絡電話</label>
+            <input name="shippingTelephone" type="text" class="form-control">
+          </div>
+
+          <h3>收件地址</h3>
+          <hr />
+          <div class="row" id="twzipcode">
+            <div class="col-xs-4 form-group" data-role="county" ></div>
+            <div class="col-xs-4 form-group" data-role="district" ></div>
+            <div class="col-xs-4 form-group" data-role="zipcode" ></div>
+          </div>
+
+          <div class="form-group">
+            <label for="">地址</label>
+            <input name="shippingAddress1" type="text" class="form-control">
+          </div>
+
+          <hr />
+          <div class="form-group">
+            <label for="">選擇運送方式</label>
+            <select class="form-control" name="shippingMethod">
+              <option value="低溫宅配">低溫宅配</option>
+              <option value="集貨自取">集貨自取</option>
+            </select>
+          </div>
+
+      </div>
+    </div>
+
+    <table class="table" style="margin-top: 3.2em;">
+      <thead>
+        <tr>
+          <th>品名</th><th>單價</th><th>數量</th><th>小計</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="cart in carts">
+          <td>{{cart.name}}</td><td>{{cart.price | moneyNum}}</td><td>{{cart.quantity}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.quantity) | moneyNum }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <input name="products" class="form-control hidden" v-bind:value=JSON.stringify(carts)>
+
+    <hr style="border-top: 2px solid #eee"/>
+    <table class="b2b-bill-info pull-right">
+      <tr>
+        <th>合計</th><td>{{priceSum | moneyNum}}</td>
+      </tr>
+      <tr>
+        <th>營業稅</th><td>{{ Math.round(priceSum * 0.05) | moneyNum }}</td>
+      </tr>
+      <tr>
+        <th>總計</th><td>{{priceSum | moneyNum}}</td>
+      </tr>
+    </table>
+    <button class="btn btn-default btn-lg pull-right" type="submit" style="clear:right; display:inline-block; margin:1.6em 0 3em;">確認訂單</button>
+  </div>
+
+</form>
+
+<% LayoutUtils.addScripts('/assets/b2b/plugins/jquery.twzipcode.min.js'); %>
+<% LayoutUtils.addScriptBlock(`
+  $(document).ready(function(){
+
+    $.fn.preventDoubleSubmission = function() {
+      $(this).on('submit',function(e){
+        var $form = $(this);
+
+        if ($form.data('submitted') === true || !$(this).valid()) {
+          e.preventDefault();
+        } else {
+          $form.data('submitted', true);
+
+          localStorage.cart = [];
+        }
+      });
+
+      return this;
+    };
+
+    $('#twzipcode').twzipcode({});
+    $('#twzipcode input').addClass('form-control');
+    $('#twzipcode select').addClass('form-control');
+
+    $("[type=checkbox]").on('change', function(event){
+      if( $("[type=checkbox]").prop("checked") ){
+        $("[name=shippingLastname]").val( $("[name=lastname]").val() );
+        // $("[name=shippingLastname]").prop('disabled', true);
+        $("[name=shippingFirstname]").val( $("[name=firstname]").val() );
+        // $("[name=shippingFirstname]").prop('disabled', true);
+        $("[name=shippingEmail]").val( $("[name=email]").val() );
+        // $("[name=shippingEmail]").prop('disabled', true);
+        $("[name=shippingTelephone]").val( $("[name=telephone]").val() );
+        // $("[name=shippingTelephone]").prop('disabled', true);
+      } else {
+        $("[name=shippingLastname]").val('');
+        // $("[name=shippingLastname]").prop('disabled', false);
+        $("[name=shippingFirstname]").val('');
+        // $("[name=shippingFirstname]").prop('disabled', false);
+        $("[name=shippingEmail]").val('');
+        // $("[name=shippingEmail]").prop('disabled', false);
+        $("[name=shippingTelephone]").val('');
+        // $("[name=shippingTelephone]").prop('disabled', false);
+      }
+    });
+
+    $("#order").validate({
+      rules: {
+        firstname: {
+          required: true
+        },
+        lastname: {
+          required: true
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        telephone: {
+          required: true
+        },
+        shippingLastname: {
+          required: true
+        },
+        shippingFirstname: {
+          required: true
+        },
+        shippingEmail: {
+          required: true,
+          email: true
+        },
+        shippingTelephone: {
+          required: true
+        },
+        shippingAddress1: {
+          required: true
+        },
+        county: {
+          required: true
+        },
+        district: {
+          required: true
+        },
+        zipcode: {
+          required: true
+        },
+      },
+      messages: {
+        firstname: {
+          required: "請輸入名字"
+        },
+        lastname: {
+          required: "請輸入姓氏"
+        },
+        email: {
+          required: "請輸入電子郵件",
+          email: "請輸入正確電子郵件格式"
+        },
+        telephone: {
+          required: "請輸入聯絡電話"
+        },
+        shippingLastname: {
+          required: "請輸入名字"
+        },
+        shippingFirstname: {
+          required: "請輸入姓氏"
+        },
+        shippingEmail: {
+          required: "請輸入電子郵件",
+          email: "請輸入正確電子郵件格式"
+        },
+        shippingTelephone: {
+          required: "請輸入聯絡電話"
+        },
+        shippingAddress1: {
+          required: "請輸入地址"
+        },
+        county: {
+          required: "請選擇縣市"
+        },
+        district: {
+          required: "請選擇區域"
+        },
+        zipcode: {
+          required: "請輸入郵遞區號"
+        },
+      }
+    });
+
+    $('form').preventDoubleSubmission();
+  });
+`); %>

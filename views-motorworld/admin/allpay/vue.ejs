@@ -1,0 +1,474 @@
+var COMMON = {
+  DOUBLE_CLICK_TIME_PERIOD: 250,
+  DEFAULT_INDEX: -1,
+  DEFAULT_AVATAR: "/assets/admin/img/avatars/default.png",
+};
+
+var itemBeforeEdit = {};
+var prefix = 'admin/';
+var modelName = "allpay";
+var appModel = {
+  modelName: modelName,
+  prefix: prefix,
+  data: {
+    item:{
+      id: '',
+      TradeNo: '',
+      MerchantTradeNo: '',
+      RtnCode: '',
+      RtnMsg: '',
+      PaymentDate: '',
+      TradeDate: '',
+      PaymentType: '',
+      ShouldTradeAmt: '',
+      TradeAmt: '',
+      BankCode: '',
+      vAccount: '',
+      ExpireDate: '',
+      PaymentNo: '',
+      Barcode1: '',
+      Barcode2: '',
+      Barcode3: '',
+      CheckMacValue: '',
+      MerchantTradeDate: '',
+      createdAt: '',
+      updatedAt: '',
+      createdDateTime: '',
+      updatedDateTime: '',
+      RecipeOrderId: '',
+      ItemNameArray: '',
+      UserName: '',
+      Email: '',
+      Phone: '',
+      Address: '',
+      Note: '',
+    },
+    items: [],
+    option: {
+      exportCSV: false,
+      defaultSort: [[ 22, 'desc' ]],
+      ajax: {
+        method: 'post',
+        url: '/api/admin/allpay/find',
+      }
+    }
+  },
+  view: {
+    table: {
+      selectIndex: COMMON.DEFAULT_INDEX,
+    },
+  }
+}
+
+/* TABLETOOLS */
+
+<%- include ../default/vue.ejs %>
+// 需要新增函式可以對 appMain 進行定義，如：
+// appMain.log = function () {console.log("123")}
+appMain.enableText = function () {
+  $('textarea').attr('disabled', false);
+}
+
+appMain.disableAllpay = function(){
+  $('.allpay').attr('disabled', true);
+  $('.allpaydisabled').addClass('state-disabled');
+}
+
+appMain.setupFileUpload = function () {
+  uploadFileApp.updateModel('itemLimit', 1);
+  uploadFileApp.updateModel('targetElement', 'uploadExcel');
+  uploadFileApp.updateModel('uploadEndpoint', '/api/admin/allpay/import/trackingNumber');
+  uploadFileApp.updateModel('onComplete', function(index, name, response){
+    // appModel.data.item.fileId = response.data.id;
+    $('#uploadExcelFileName').val(response.data)
+    // console.log(index, name, response);
+  })
+  uploadFileApp.updateModel('onDeleteComplete', function(index, name, response){
+    console.log(index, name, response);
+  })
+  uploadFileApp.setup();
+}
+
+appMain.onFileDelete = function() {
+  appModel.data.item.fileId = "";
+}
+
+appMain.DataTableInitComplete = function() {
+  var api = this.api();
+
+  $(".widget-body-toolbar").removeClass("hidden");
+
+  this.yadcf([
+    {        
+      column_number: 3,
+      filter_type: "range_date",
+      filter_container_id: "external_filter_container",
+      date_format: 'yy/mm/dd',
+      filter_default_label: ['From', 'To']
+    },
+  ]);
+
+  var serialize = function(obj, prefix) {
+    var str = [];
+    for(var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+        str.push(typeof v == "object" ?
+          serialize(v, k) :
+          encodeURIComponent(k) + "=" + encodeURIComponent(v));
+      }
+    }
+    return str.join("&");
+  }
+
+  var importBtn = '<a class="DTTT_button DTTT_button_text" id="ToolTables_main-table_custom_1" title="匯入貨運編號" tabindex="0" aria-controls="main-table"><span>匯入</span></a>'
+  $(importBtn).prependTo('.DTTT_container');
+  $('#ToolTables_main-table_custom_1').on('click', function() {
+    $.SmartMessageBox({
+      title : "匯入",
+      content :'請選擇要匯入的物流 Excel，請確認 Ｃ 欄為交易編號、D 欄為運單號<br> <div id="uploadExcel"></div>' +
+      '<input type="hidden" id="uploadExcelFileName"></input>',
+      buttons : "[取消][確定]"
+    }, function(ButtonPress) {
+      if(ButtonPress === '確定') {
+        $.ajax({
+          url: '/api/admin/allpay/trackingNumber',
+          type: 'PUT',
+          data: {
+            fileName: $('#uploadExcelFileName').val(),
+          },
+          success: function(result) {
+            console.log(result);
+            messageApp.show({
+              desc: '更新資料成功！',
+              type: 'success'
+            });
+            var content = ''
+            if (result.data.notFound.length > 0) {
+              content += "交易編號: " + result.data.notFound.join(', ') + ' 未找到<br>';
+            }
+            if (result.data.updateError.length > 0) {
+              content += "交易編號: " + result.data.updateError.join(', ') + ' 更新失敗<br>';
+            }
+            if (content !== '') {
+              setTimeout(function(){
+                $.SmartMessageBox({
+                  title : "失敗交易編號",
+                  content : content,
+                  buttons : "[確認]"
+                });
+              }, 1000);
+            }
+            defaultTable.api().ajax.reload(null, false);
+          },
+          error: function(result) {
+            console.log('匯入失敗', result);
+            messageApp.show({
+              desc: '更新資料失敗！請確認 excel 格式',
+              type: 'error'
+            });
+          },
+        });
+      }
+    });
+    appMain.setupFileUpload();
+  });
+
+  var exportBtn = '<a class="DTTT_button DTTT_button_text" id="ToolTables_main-table_custom_0" title="匯出地址寄送表、配方製作表" tabindex="0" aria-controls="main-table"><span>匯出</span></a>'
+  $(exportBtn).prependTo('.DTTT_container');
+  $('#ToolTables_main-table_custom_0').on('click', function() {
+    var download = function(url, data, id) {
+      $.post( url, data)
+      .done(function( result ) {
+        $('<iframe>', { id: id, src: '/api/admin/download?fileName=' + result.data }).hide().appendTo('body');
+      })
+      .fail(function( result ) {
+        console.log(result);
+      });
+    }
+    $.SmartMessageBox({
+      title : "匯出",
+      content :'請選擇要匯出的資料表',
+      buttons : "[取消][匯出配方製作表][匯出地址寄送表][匯出兩種格式]"
+    }, function(ButtonPress) {
+      if(ButtonPress === '匯出配方製作表') {
+        // download('/api/admin/' + modelName + '/export', serialize(appModel.pagingQuery), 'export');
+        download('/api/admin/' + modelName + '/exportExcel', serialize(appModel.pagingQuery), 'exportExcel');
+      } else if (ButtonPress === '匯出地址寄送表') {
+        // download('/api/admin/' + modelName + '/exportSend', serialize(appModel.pagingQuery), 'exportSend');
+        download('/api/admin/' + modelName + '/exportSendExcel', serialize(appModel.pagingQuery), 'exportSendExcel');
+      } else if (ButtonPress === '匯出兩種格式') {
+        // download('/api/admin/' + modelName + '/exportSend', serialize(appModel.pagingQuery), 'exportSend');
+        // download('/api/admin/' + modelName + '/export', serialize(appModel.pagingQuery), 'export');
+        download('/api/admin/' + modelName + '/exportExcel', serialize(appModel.pagingQuery), 'exportExcel');
+        download('/api/admin/' + modelName + '/exportSendExcel', serialize(appModel.pagingQuery), 'exportSendExcel');
+      }
+
+    });
+
+  });
+
+  var dataTableState = api.state.loaded();
+  var productionStatus = dataTableState ? dataTableState.productionStatus : 'PAID';
+  var slesct = '<span>訂單狀態：</span>'+
+  '<select class="form-control input-sm" id="productionStatus" style="margin-right: 5px;">'+
+    '<option value="ALL"'+ (productionStatus == 'ALL' ? 'selected' : '') + '>全部</option>' +
+    '<option value="NEW" '+ (productionStatus == 'NEW' ? 'selected' : '') + '>NEW</option>' +
+    '<option value="SUBMITTED" '+ (productionStatus == 'SUBMITTED' ? 'selected' : '') +' >下訂單</option>' +
+    '<option value="PAID" '+ (productionStatus == 'PAID' ? 'selected' : '') +'>已付款</option>' +
+    '<option value="PROCESSING"'+ (productionStatus == 'PROCESSING' ? 'selected' : '') +' >製作中</option>' +
+    '<option value="CANCELLED"'+ (productionStatus == 'CANCELLED' ? 'selected' : '') +' >取消</option>' +
+    '<option value="SHIPPED"'+ (productionStatus == 'SHIPPED' ? 'selected' : '') +' >已寄出</option>' +
+    '<option value="DELIVERED"'+ (productionStatus == 'DELIVERED' ? 'selected' : '') +' >已交付</option>' +
+    '<option value="COMPLETED"'+ (productionStatus == 'COMPLETED' ? 'selected' : '') +' >完成</option>' +
+  '</select>';
+  $(slesct).prependTo('.DTTT_container');
+  $('#productionStatus').on('change', function(){
+    api.columns().search().draw();
+  })
+
+  $("#main-table").delegate("[name='editOrderButton']","click", function(e) {
+      var that = this;
+      $.SmartMessageBox({
+        title : "更新物流資料",
+        content :
+        "<select id='shipping' class='form-control'>" +
+          "<option value='EXPRESS' selected>順豐速運</option>" +
+          "<option value='HCT'>新竹貨運</option>" +
+        "</select> <br/>" +
+        "請輸入物流編號 :<br/>" +
+        "<input id='trackingNumber' type='text' class='form-control'/>" +
+        "<br/>",
+        buttons : "[更新][取消]"
+      }, function(ButtonPress) {
+           if(ButtonPress === "取消"){
+             return 0;
+           }
+
+           var trackingNumber = $("#trackingNumber").val();
+           var shipping = $("#shipping").val();
+           var recipeId = $(that).attr("data-recipeOrder-id");
+
+           if(!shipping || !trackingNumber){
+             messageApp.show({
+               desc: '更新資料失敗！ 請填寫完整資料 ',
+               type: 'error'
+             });
+             return 0;
+           }
+
+           var ajaxSuccess = function (result) {
+             location.href = '/admin/#/admin/' + modelName;
+             messageApp.show({
+             desc: '更新資料成功！',
+             type: 'success'
+             });
+           }; // end ajaxSuccess
+
+          var ajaxError = function (result) {
+            messageApp.show({
+              desc: '更新資料失敗！errorMessage: ' + result.responseJSON.message,
+              type: 'error'
+            });
+          };
+
+          $.ajax({
+            url: '/api/' + prefix + 'shipping' + '/' + recipeId,
+            type: 'PUT',
+            dataType: 'json',
+            data: {trackingNumber, shipping},
+            xhrFields: {
+            withCredentials: true,
+            },
+            success: ajaxSuccess,
+            error: ajaxError,
+          }).done(function(result){
+            defaultTable.api().ajax.reload(null, false);
+          });
+         }
+      );
+      e.preventDefault();
+  });
+
+  $("#main-table").delegate("[name='updateProductionStatus']", 'focus', function() {
+    $(this).attr('data-oldValue', $(this).val());
+  });
+
+  $("#main-table").delegate("[name='updateProductionStatus']", 'change', function() {
+    var that = this;
+    var id = $(this).data("id");
+    var allpayId = $(this).attr("data-allpayId");
+    var selectedDesc = $(this).find('option:selected').text();
+    var oldVal = $(this).attr('data-oldValue');
+    var newVal = $(this).val();
+
+    var msgInfo = {
+      title: '注意',
+      content: '確認更新訂單 ID: '+ allpayId +' 訂單狀態為: '+ selectedDesc,
+      btnArray: ['確認', '取消'],
+    };
+    var action = function(ButtonPressed) {
+      if (ButtonPressed === '確認') {
+        $(that).val(newVal);
+        $.ajax({
+          url: "/api/admin/labfnp/recipeorder/status/"+id,
+          method: "put",
+          dataType: 'json',
+          cache: false,
+          data:{
+            productionStatus: newVal
+          }
+        }).done(function (result) {
+          messageApp.show({
+            desc: result.message,
+            type: 'success'
+          });
+          defaultTable.api().ajax.reload(null, false);
+        });
+      } else {
+        $(that).val(oldVal);
+      }
+    };
+    messageApp.confirm(msgInfo, action);
+  });
+
+  //隱藏新增按鈕
+  $('#ToolTables_main-table_2').hide();
+
+  $('.loading-wrapper').removeClass('active');
+}
+
+
+appMain.customSaveParams = function(data) {
+  data['productionStatus'] = $('#productionStatus').val() || 'PAID';
+}
+appMain.customSearch = function(data) {
+  var stateParam = $('#main-table').dataTable().api().state.loaded();
+  var productionStatus = stateParam ? stateParam.productionStatus : null;
+  var searchProductionStatus = $('#productionStatus').val() || productionStatus || 'PAID';
+  if (searchProductionStatus == 'ALL'){
+    searchProductionStatus = undefined;
+  }
+
+  appModel.pagingQuery.columns.push({
+    data: 'RecipeOrderId',
+    searchable: true,
+    search: {
+      custom: {
+        where: {
+          $not: ''
+        }
+      }
+    }
+  });
+
+  if (searchProductionStatus) {
+    appModel.pagingQuery.columns.push({
+      data: '',
+      searchable: true,
+      findInclude: true,
+      search: {
+        model: 'RecipeOrder',
+        where: {
+          productionStatus: searchProductionStatus,
+        }
+      }
+    })
+  } else {
+    appModel.pagingQuery.columns.push({
+      data: '',
+      searchable: true,
+      findInclude: true,
+      search: {
+        model: 'RecipeOrder',
+        where: {
+          productionStatus: {
+            $not: ''
+          },
+        }
+      }
+    })
+  }
+
+  appModel.pagingQuery.columns.push({
+    data: 'recipient',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder',
+      column: 'recipient',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'email',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder',
+      column: 'email',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'phone',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder',
+      column: 'phone',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'invoiceNo',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder',
+      column: 'invoiceNo',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'perfumeName',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder.Recipe',
+      column: 'perfumeName',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'facebookId',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder.User',
+      column: 'facebookId',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'username',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder.User',
+      column: 'username',
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'lastName',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder.User',
+      concat: ['lastName', 'firstName'],
+    }
+  })
+  appModel.pagingQuery.columns.push({
+    data: 'lastName',
+    searchable: true,
+    findInclude: true,
+    search: {
+      model: 'RecipeOrder.User',
+      concat: ['firstName', 'lastName'],
+    }
+  })
+}

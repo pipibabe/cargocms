@@ -8,6 +8,6 @@
     "grunt": false
   },
   "paths": {
-    "views": "views-b2b"
+    "views": "views-motorworld"
   }
 }
