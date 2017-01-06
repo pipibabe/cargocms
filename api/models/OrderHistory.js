@@ -10,10 +10,6 @@ module.exports = {
       type: Sequelize.TEXT,
       allowNull: false,
     },
-    dateAdded: {
-      type: Sequelize.DATE,
-      allowNull: false,
-    },
   },
   associations: () => {
     OrderHistory.belongsTo(Order);
