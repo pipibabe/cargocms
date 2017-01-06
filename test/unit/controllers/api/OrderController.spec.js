@@ -143,6 +143,20 @@ describe('about Order controllers', () => {
 
       orderProduct.length.should.be.equal(3);
 
+      const orderHistory = await OrderHistory.findAll({
+        where: {
+          OrderId: order.id
+        }
+      });
+      orderHistory.length.should.be.equal(1);
+
+      const orderStatus = await OrderStatus.findOne({
+        where: {
+          name: 'NEW'
+        }
+      })
+      orderHistory[0].OrderStatusId.should.be.equal(orderStatus.id);
+
       // const orderPayment = await OrderPayment.findOne({
       //   where: {
       //     id: order.OrderPaymentId
