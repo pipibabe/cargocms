@@ -140,14 +140,18 @@ module.exports = {
         include:[ Order, Product]
       });
 
-      let orderInfo = {...order};
-      delete orderInfo.id;
+      let suppliers = [];
+      for( let order of orderProducts){
+        if(suppliers.indexOf(order.Product.SupplierId) === -1){
+          suppliers.push( order.Product.SupplierId );
+        }
+      }
 
-      for( let p of orderProducts ){
+      for( let supplier of suppliers){
 
         let supplierShipOrder = await SupplierShipOrder.create({
           OrderId: id,
-          SupplierId: p.Product.SupplierId,
+          SupplierId: supplier,
           invoiceNo: order.invoiceNo,
           invoicePrefix: order.invoicePrefix,
           firstname: order.firstname,
@@ -197,19 +201,26 @@ module.exports = {
           status: 'NEW',
         });
 
-        let supplierShipOrderProduct = await SupplierShipOrderProduct.create({
-          SupplierShipOrderId: supplierShipOrder.id,
-          ProductId: p.ProductId,
-          name: p.name,
-          model: p.model,
-          quantity: p.quantity,
-          price: p.price,
-          total: p.total,
-          tax: p.tax,
-          status: 'NEW',
-        });
+        for( let orderProduct of orderProducts ){
+          if( orderProduct.Product.SupplierId === supplier ){
 
+            await SupplierShipOrderProduct.create({
+              SupplierShipOrderId: supplierShipOrder.id,
+              ProductId: orderProduct.ProductId,
+              name: orderProduct.name,
+              model: orderProduct.model,
+              quantity: orderProduct.quantity,
+              price: orderProduct.price,
+              total: orderProduct.total,
+              tax: orderProduct.tax,
+              status: 'NEW',
+            });
+
+          }
+        }
       }
+
+
       const message = 'Success Confirm Order';
       const item = order;
       res.ok({ message, data: { item } });
