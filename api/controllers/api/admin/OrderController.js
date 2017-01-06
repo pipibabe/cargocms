@@ -129,9 +129,17 @@ module.exports = {
   confirm: async (req, res) => {
     try{
       const { id } = req.params;
+      const orderStatus = await OrderStatus.findOne({where:{name: 'PROCESSING'}})
       let order = await Order.findById(id);
       order.tracking = "CONFIRM";
+      order.OrderStatusId = orderStatus.id;
       await order.save();
+
+      await OrderHistory.create({
+        OrderId: order.id,
+        OrderStatusId: orderStatus.id,
+        comment: `User ID: ${order.UserId} ,CONFIRM Order ID: ${order.id}. Order Status: 'PROCESSING'. Order Data:${JSON.stringify(order, null, 2)}`,
+      });
 
       const orderProducts = await OrderProduct.findAll({
         where:{
