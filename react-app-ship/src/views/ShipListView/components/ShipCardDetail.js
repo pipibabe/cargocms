@@ -71,7 +71,7 @@ function ShipCardDetail(props) {
           <div className='col-xs-6'>
             <span className='title'>客戶資料</span>
             <p />
-            <table>
+            <table className='table'>
               <tr>
                 <th>發票號碼</th>
                 <td>{props.invoiceCode}</td>
@@ -105,7 +105,7 @@ function ShipCardDetail(props) {
           <div className='col-xs-6'>
             <span className='title'>{props.orderSupplier.name}</span>
             <p />
-            <table>
+            <table  className='table'>
               <tr>
                 <th>聯絡電話</th>
                 <td>{props.orderSupplier.telephone}</td>
@@ -161,7 +161,7 @@ function ShipCardDetail(props) {
                 props.orderDetail.map((item, i) => (
                   <tr key={i}>
                     <td>{item.name}</td>
-                    <td>{item.quantity}</td>
+                    <td>{item.quantity} 盒</td>
                     <td>{item.price}</td>
                     <td>{item.price * item.quantity}</td>
                   </tr>
