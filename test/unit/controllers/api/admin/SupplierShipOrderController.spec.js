@@ -4,7 +4,7 @@ import { mockAdmin, unMockAdmin } from "../../../../util/adminAuthHelper.js"
 describe('about admin Supplier Ship Order controllers', () => {
   let product1, product2, user, order, supplier1;
   let supplier2,  orderProduct1, orderProduct2, supplierShipOrder1, supplierShipOrder2;
-  let supplierShipOrderDescription1;
+  let supplierShipOrderProduct1;
   before(async function(done){
     try{
       user = await User.create({
@@ -26,7 +26,7 @@ describe('about admin Supplier Ship Order controllers', () => {
       await createHelper.supplierProduct(supplier1.id, product1.id);
       orderProduct1 = await createHelper.orderProduct(order.id, product1.id, 3);
       supplierShipOrder1 = await createHelper.supplierShipOrder(order.id, supplier1.id);
-      supplierShipOrderDescription1 = await createHelper.supplierShipOrderDescription(supplierShipOrder1.id, orderProduct1.id);
+      supplierShipOrderProduct1 = await createHelper.supplierShipOrderProduct(supplierShipOrder1.id, orderProduct1.id);
 
 
 
@@ -99,15 +99,15 @@ describe('about admin Supplier Ship Order controllers', () => {
         const res = await request(sails.hooks.http.app)
         .put(`/api/admin/suppliershiporder/status/${supplierShipOrder1.id}`)
         .send({
-          status: 'RECEIVED',
+          status: 'PROCESSING',
         });
         res.status.should.be.eq(200);
 
         const checkSupplierShipOrder = await SupplierShipOrder.findById(supplierShipOrder1.id);
-        checkSupplierShipOrder.status.should.be.eq('RECEIVED');
+        checkSupplierShipOrder.status.should.be.eq('PROCESSING');
 
-        const checkSupplierShipOrderDescription = await SupplierShipOrderDescription.findById(supplierShipOrderDescription1.id);
-        checkSupplierShipOrderDescription.status.should.be.eq('PROCESSING');
+        const checkSupplierShipOrderProduct = await SupplierShipOrderProduct.findById(supplierShipOrderProduct1.id);
+        checkSupplierShipOrderProduct.status.should.be.eq('PROCESSING');
 
         done();
       } catch (e) {
@@ -127,8 +127,8 @@ describe('about admin Supplier Ship Order controllers', () => {
         const checkSupplierShipOrder = await SupplierShipOrder.findById(supplierShipOrder1.id);
         checkSupplierShipOrder.status.should.be.eq('CANCELLED');
 
-        const checkSupplierShipOrderDescription = await SupplierShipOrderDescription.findById(supplierShipOrderDescription1.id);
-        checkSupplierShipOrderDescription.status.should.be.eq('CANCELLED');
+        const checkSupplierShipOrderProduct = await SupplierShipOrderProduct.findById(supplierShipOrderProduct1.id);
+        checkSupplierShipOrderProduct.status.should.be.eq('CANCELLED');
 
         done();
       } catch (e) {
@@ -143,7 +143,7 @@ describe('about admin Supplier Ship Order controllers', () => {
           let order2 = await createHelper.order(user.id);
           orderProduct1 = await createHelper.orderProduct(order2.id, product1.id, 3);
           supplierShipOrder1 = await createHelper.supplierShipOrder(order2.id, supplier1.id);
-          supplierShipOrderDescription1 = await createHelper.supplierShipOrderDescription(supplierShipOrder1.id, orderProduct1.id, 'COMPLETED');
+          supplierShipOrderProduct1 = await createHelper.supplierShipOrderProduct(supplierShipOrder1.id, orderProduct1.id, 'COMPLETED');
           done()
         } catch (e) {
           done(e)

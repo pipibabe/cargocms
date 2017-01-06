@@ -18,10 +18,10 @@ module.exports.init = async () => {
           name:"SHIPPED",
           languageId:0
         },{
-          name:"CANCELED",
+          name:"CANCELLED",
           languageId:0
         },{
-          name:"COMPLETE",
+          name:"COMPLETED",
           languageId:0
         },{
           name:"DENIED",

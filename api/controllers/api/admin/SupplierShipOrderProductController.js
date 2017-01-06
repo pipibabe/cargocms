@@ -24,7 +24,7 @@ module.exports = {
   findOne: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await SupplierShipOrderDescription.findOne({
+      const item = await SupplierShipOrderProduct.findOne({
         where:{
           id
         },
@@ -39,7 +39,7 @@ module.exports = {
   create: async (req, res) => {
     try {
       let data = req.body;
-      const item = await SupplierShipOrderDescription.create(data);
+      const item = await SupplierShipOrderProduct.create(data);
       let message = 'Create success.';
       res.ok({ message, data: { item } } );
     } catch (e) {
@@ -52,7 +52,7 @@ module.exports = {
       const { id } = req.params;
       const data = req.body;
       const message = 'Update success.';
-      const item = await SupplierShipOrderDescription.update(data ,{
+      const item = await SupplierShipOrderProduct.update(data ,{
         where: { id, },
       });
       res.ok({ message, data: { item } });
@@ -64,7 +64,7 @@ module.exports = {
   destroy: async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await SupplierShipOrderDescription.destroy({ where: { id } });
+      const item = await SupplierShipOrderProduct.destroy({ where: { id } });
       let message = 'Delete success';
       res.ok({message, data: {item}});
     } catch (e) {
@@ -77,11 +77,11 @@ module.exports = {
       const { id } = req.params;
       const { status } = req.body;
 
-      const supplierShipOrderDescription = await SupplierShipOrderDescription.findById(id);
+      const supplierShipOrderProduct = await SupplierShipOrderProduct.findById(id);
 
-      const updateSupplierShipOrderDescriptionStatus = (transaction) => {
+      const updateSupplierShipOrderProductStatus = (transaction) => {
         return new Promise(function(resolve, reject) {
-          SupplierShipOrderDescription.update({ status },{ where: { id }}, { transaction })
+          SupplierShipOrderProduct.update({ status },{ where: { id }}, { transaction })
           .then(function(updateSupplierShipOrder) {
             resolve(updateSupplierShipOrder);
           })
@@ -93,16 +93,16 @@ module.exports = {
 
       const checkNotCompletedShipOrder = (transaction) => {
         return new Promise(function(resolve, reject) {
-          SupplierShipOrderDescription.findAll({
+          SupplierShipOrderProduct.findAll({
             where: {
-              SupplierShipOrderId: supplierShipOrderDescription.SupplierShipOrderId,
+              SupplierShipOrderId: supplierShipOrderProduct.SupplierShipOrderId,
               status: {
                 $in: ['NEW', 'PROCESSING']
               }
             }
           })
-          .then(function(supplierShipOrderDescription) {
-            resolve(supplierShipOrderDescription);
+          .then(function(supplierShipOrderProduct) {
+            resolve(supplierShipOrderProduct);
           })
           .catch(function(err) {
             reject(err)
@@ -116,7 +116,7 @@ module.exports = {
           status
         }, {
           where: {
-            id: supplierShipOrderDescription.SupplierShipOrderId
+            id: supplierShipOrderProduct.SupplierShipOrderId
           }
         }, {transaction})
           .then(function(updateSupplierShipOrder) {
@@ -133,13 +133,13 @@ module.exports = {
       return sequelize.transaction({ isolationLevel })
       .then(function(t) {
         transaction = t;
-        return updateSupplierShipOrderDescriptionStatus(transaction)
+        return updateSupplierShipOrderProductStatus(transaction)
       })
       .then(function() {
         return checkNotCompletedShipOrder(transaction)
       })
-      .then(function(supplierShipOrderDescription) {
-        if (supplierShipOrderDescription.length <= 0) {
+      .then(function(supplierShipOrderProduct) {
+        if (supplierShipOrderProduct.length <= 0) {
           return updateSupplierShipOrderStatus('COMPLETED', transaction)
         }
       })

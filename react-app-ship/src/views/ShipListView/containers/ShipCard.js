@@ -69,7 +69,7 @@ export default class ShipCard extends React.Component {
     comment: 'no comment',
     total: 123456,
     tracking: '確認訂單',
-    status: '確定訂單',
+    status: 'NEW',
     OrderId: 1,
     Supplier: {
       id: 1,
