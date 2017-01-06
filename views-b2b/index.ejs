@@ -16,13 +16,15 @@
 		<div class="col-md-12">
 			<h1 style="
 		    height: 161px;
-		    background: #efefef;
+        background-image: url('https://unsplash.it/930/160?image=640');
+        background-repeat: no-repeat;
+        background-position: center;
 		    margin: 35px 10px 37px;
 		    text-align: center;
 		    line-height: 161px;
 		    font-size: 7em;
 		    color: #d6d6d6;
-		    text-transform: uppercase;">b2b</h1>
+		    text-transform: uppercase;"></h1>
 		</div>
 		<!--<div class="col-md-4">
 			<form class="b2b-login">
@@ -39,7 +41,7 @@
 	<div class="row b2b-content b2b-content-body">
 
     <% for(var p = 0, len = data.items.length; p < len; p++) { %>
-      <div class="col-sm-4 col-md-3 product product-promotion" data-id="<%= data.items[p].id %>">
+      <div class="col-sm-4 col-md-3 product" data-id="<%= data.items[p].id %>">
         <div class="product-img" style="background-image: url('<%= data.items[p].image%>');"></div>
         <h1><%= data.items[p].model %></h1>
         <span class="promotion-label">限量優惠</span>
@@ -47,7 +49,7 @@
   				<span><%= data.items[p].price %></span><small>起</small>
   			</p>
         <div class="form-group">
-  				<label class="control-label">特級 <%= data.items[p].price %>/包:</label>
+  				<label class="control-label">特級 <%= data.items[p].price %>/包</label>
   				<input class="form-control" type="number" value="0" min="0" max="10" />
   			</div>
       </div>
