@@ -36,6 +36,11 @@ module.exports = {
     //   type: Sequelize.INTEGER(8),
     //   allowNull: false,
     // },
+    status: {
+      type: Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','DELIVERED','CANCELLED','COMPLETED', 'SUBMITTED','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
+      allowNull: false,
+      defaultValue: 'NEW'
+    },
 
     createdDateTime:{
       type: Sequelize.VIRTUAL,
@@ -61,8 +66,8 @@ module.exports = {
 
   },
   associations: () => {
-    OrderProduct.belongsTo(Product);
-    OrderProduct.belongsTo(Order);
+    SupplierShipOrderProduct.belongsTo(SupplierShipOrder);
+    SupplierShipOrderProduct.belongsTo(Product);
   },
   options: {
     classMethods: {},

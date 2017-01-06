@@ -1,5 +1,6 @@
 module.exports = {
-  create: async function(name , supplierName, categoryType, categoryEng){
+
+  create: async function({productNames , supplierName, categoryType, categoryEng}){
 
     const initCategory = await Category.create({
       image: `catalog/demo/168_seafood_${categoryEng}.jpg`,
@@ -18,12 +19,6 @@ module.exports = {
       CategoryId: initCategory.id
     });
 
-    const image = await Image.create({
-      filePath: `/uploads/product_${name}.jpg`,
-      type: 'image/jpeg',
-      storage: 'local'
-    });
-
     const supplier = await Supplier.create({
       name: `${supplierName}`,
       email: '168_seafood@gmail.com',
@@ -32,14 +27,21 @@ module.exports = {
       address: '台中市清水區北提路'
     });
 
-    const numberOfProduct = 10;
+
     let productData, product, productDescription, productTag,
         productImage, option, optionValue, productOption,
         productOptionValue, optionDescription, optionValueDescription;
 
-    for(let i = 1; i <= numberOfProduct; i++){
+    for(let p of productNames){
+      let imageNo = Math.floor(Math.random() * 800 ) + 1;
+      let image = await Image.create({
+        filePath: `https://unsplash.it/400/320/?image=${ imageNo }`,
+        type: 'image/jpeg',
+        storage: 'url'
+      });
+
       productData = {
-        model: `${name} ${i}`,
+        model: `${p}`,
         sku: "ABC1234",
         upc: "512345678900",
         ean: "0012345678905",
@@ -48,9 +50,9 @@ module.exports = {
         mpn: "XYZ876A1B2C3",
         location: "台中市清水區",
         quantity: 200,
-        image: `catalog/demo/168_seafood_${categoryEng}.jpg`,
+        image: image.url,
         shipping: true,
-        price: 599,
+        price: Math.floor(Math.random() * 90 + 10 ) * 10,
         points: 200,
         dateAvailable: "2017-01-01",
         weight: 146.4,
@@ -69,8 +71,8 @@ module.exports = {
       product = await Product.create(productData);
 
       productDescription = await ProductDescription.create({
-          name: `${name}`,
-          description: `${name}`,
+          name: `${p}`,
+          description: `${p}`,
           tag: `${categoryType}`,
           metaTitle: `${categoryType}`,
           metaDescription: `${categoryType}`,
@@ -83,12 +85,25 @@ module.exports = {
         ProductId: product.id
       });
 
-      productImage = await ProductImage.create({
-        ProductId: product.id,
-        ImageId: image.id,
-        image: `catalog/demo/168_seafood_${categoryEng}.jpg`,
-        sortOrder: 0
-      });
+      // 每個 Product 建立 3 張 ProductImage
+      for(let i = 0; i < 3; i++){
+        imageNo += i;
+        let image = await Image.create({
+          filePath: `https://unsplash.it/400/320/?image=${ imageNo }`,
+          type: 'image/jpeg',
+          storage: 'url'
+        });
+
+        productImage = await ProductImage.create({
+          ProductId: product.id,
+          ImageId: image.id,
+          image: image.url,
+          sortOrder: i + 1
+        });
+
+      }
+
+
 
       option = await Option.create({
         type: 'textarea',
@@ -135,7 +150,7 @@ module.exports = {
       });
 
       await product.setCategories(initCategory);
-    }
+    };
 
     return product;
   },

@@ -5,7 +5,7 @@ module.exports = {
       const { query, method, body } = req;
       const { serverSidePaging } = query;
       const modelName = req.options.controller.split("/").reverse()[0];
-      const include = [ SupplierShipOrderDescription, Supplier ];
+      const include = [ SupplierShipOrderProduct, Supplier ];
       const isPost = method === 'POST';
       let mServerSidePaging = isPost ? body.serverSidePaging : serverSidePaging;
       let mQuery = isPost ? body : query;
@@ -80,25 +80,25 @@ module.exports = {
       const { id } = req.params;
       const { status } = req.body;
 
-      let findSupplierShipOrderDescription = await SupplierShipOrderDescription.findAll({
+      let findSupplierShipOrderProduct = await SupplierShipOrderProduct.findAll({
         where: {
           SupplierShipOrderId: id
         }
       });
 
-      let checkSupplierShipOrderDescriptionHasCOMPLETED = await SupplierShipOrderDescription.findAll({
+      let checkSupplierShipOrderProductHasCOMPLETED = await SupplierShipOrderProduct.findAll({
         where: {
           SupplierShipOrderId: id,
           status: 'COMPLETED',
         }
       });
-      if (checkSupplierShipOrderDescriptionHasCOMPLETED.length > 0) {
+      if (checkSupplierShipOrderProductHasCOMPLETED.length > 0) {
         throw Error('已有商品揀貨完成，不能取消訂單');
       }
 
-      let supplierShipOrderDescriptionIdArray = findSupplierShipOrderDescription.map((desc) => {
-        desc = desc.toJSON();
-        return desc.id;
+      let supplierShipOrderProductIdArray = findSupplierShipOrderProduct.map((prod) => {
+        prod = prod.toJSON();
+        return prod.id;
       })
 
       const updateSupplierShipOrderStatus = (transaction) => {
@@ -113,13 +113,13 @@ module.exports = {
         });
       }
 
-      const updateSupplierShipOrderDescriptionStatus = (status, transaction) => {
+      const updateSupplierShipOrderProductStatus = (status, transaction) => {
         return new Promise(function(resolve, reject) {
-          SupplierShipOrderDescription.update({
+          SupplierShipOrderProduct.update({
             status
           }, {
             where: {
-              id: supplierShipOrderDescriptionIdArray
+              id: supplierShipOrderProductIdArray
             }
           }, {transaction})
           .then(function(updateSupplierShipOrder) {
@@ -140,14 +140,14 @@ module.exports = {
       })
       .then(function() {
         switch (status) {
-          case 'RECEIVED':
-            return updateSupplierShipOrderDescriptionStatus('PROCESSING', transaction);
+          case 'PROCESSING':
+            return updateSupplierShipOrderProductStatus('PROCESSING', transaction);
             break;
           case 'CANCELLED':
-            return updateSupplierShipOrderDescriptionStatus('CANCELLED', transaction);
+            return updateSupplierShipOrderProductStatus('CANCELLED', transaction);
             break;
           default:
-            return updateSupplierShipOrderDescriptionStatus('NEW', transaction);
+            return updateSupplierShipOrderProductStatus('NEW', transaction);
         }
       })
       .then(function(){

@@ -7,6 +7,7 @@
 <% LayoutUtils.addMeta({ property:"og:description", content:"" }); %>
 <% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
 
+<% include partials/sideMenuForMobile.ejs %>
 <% include partials/sideMenu.ejs %>
 
 <!-- Interactive Slider v2 -->
@@ -16,13 +17,15 @@
 		<div class="col-md-12">
 			<h1 style="
 		    height: 161px;
-		    background: #efefef;
+        background-image: url('https://unsplash.it/930/160?image=640');
+        background-repeat: no-repeat;
+        background-position: center;
 		    margin: 35px 10px 37px;
 		    text-align: center;
 		    line-height: 161px;
 		    font-size: 7em;
 		    color: #d6d6d6;
-		    text-transform: uppercase;">b2b</h1>
+		    text-transform: uppercase;"></h1>
 		</div>
 		<!--<div class="col-md-4">
 			<form class="b2b-login">
@@ -57,7 +60,6 @@
           <label style="float: left;margin: 9px 8px 0 0;font-size: 1.2em;">訂購</label>
           <label style="float: right;margin: 9px 0 0 8px;font-size: 1.2em;">包</label>
           <input class="form-control" type="number" value="0" min="0" max="10" />
-
   			</div>
       </div>
     <% } %>

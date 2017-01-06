@@ -4,7 +4,9 @@
   </div>
 </div>
 <div class="container b2b-order-form">
+
   <div class="row">
+
     <div class="row col-lg-6" style="margin-top: 2em;">
       <div class="col-sm-3 col-lg-5">
         <i class="fa fa-user info-icon" aria-hidden="true"></i>
@@ -58,6 +60,7 @@
         </table>
       </div>
     </div>
+
   </div>
 
 
@@ -68,25 +71,23 @@
       </tr>
     </thead>
     <tbody>
-      <% var total = 0;%>
       <% for(var i = 0, len = data.product.length; i < len; i++) { %>
         <tr>
           <td><%= data.product[i].model %></td><td><%= data.product[i].price %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].total %></td>
         </tr>
-        <% total += data.product[i].total %>
       <% } %>
     </tbody>
   </table>
 
   <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
     <tr>
-      <td>合計</td><td><%= total %></td>
+      <td>合計</td><td><%= data.item.total %></td>
     </tr>
     <tr>
-      <td>營業稅</td><td><%= Math.round(total * 0.05) %></td>
+      <td>營業稅</td><td><%= Math.round(data.item.total * 0.05) %></td>
     </tr>
     <tr>
-      <td>總計</td><td><%= total %></td>
+      <td>總計</td><td><%= data.item.total %></td>
     </tr>
   </table>
 

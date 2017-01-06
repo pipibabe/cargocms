@@ -58,7 +58,7 @@ describe('about PaymentController controllers', () => {
     try{
       const paymentData = {
 
-        status: 'COMPLETE',
+        status: 'COMPLETED',
       };
 
       const res = await request(sails.hooks.http.app)

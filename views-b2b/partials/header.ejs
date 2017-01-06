@@ -39,8 +39,10 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span v-text="carts.length" v-show="carts.length > 0" class="badge"></span><span class="caret"></span></a>
             <ul class="dropdown-menu b2b-cart">
               <li v-for="cart in carts"><a href="#"><i v-on:click.stop="removeProduct(cart.id, $event)" class="fa fa-times" aria-hidden="true"></i><span>{{cart.name}} * {{cart.quantity}}</span></a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="/order/form" class="btn btn-sm">結帳</a></li>
+              <li v-show="carts.length > 0" role="separator" class="divider"></li>
+              <li v-show="carts.length > 0"><a href="/order/form" class="btn btn-sm">結帳</a></li>
+
+              <li v-show="carts.length === 0" style="text-align:center"><span>購物車是空的</span><li>
             </ul>
           </li>
         <% } %>
