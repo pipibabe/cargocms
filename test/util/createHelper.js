@@ -52,6 +52,12 @@ module.exports = {
 
   order: async (userId) => {
     try {
+      const orderStatus = await OrderStatus.findOne({
+        where:{
+          name: 'NEW'
+        }
+      })
+
       const data = {
         UserId: userId,
         invoiceNo: '12345678',
@@ -100,7 +106,8 @@ module.exports = {
         shippingMethod:'',
         shippingCode:'',
         comment:'',
-        tracking: '客戶訂購'
+        tracking: '客戶訂購',
+        OrderStatusId: orderStatus.id,
       }
       return await Order.create(data);
     } catch (e) {
@@ -202,13 +209,61 @@ module.exports = {
     }
   },
 
-  orderStatus: async( status ) => {
+  orderStatus: async() => {
     try{
-      const orderStatus = await OrderStatus.create({
-        languageId: 0,
-        name: status
-      })
-      return orderStatus;
+      const orderStatusData = [
+        {
+          name:"NEW",
+          languageId:0
+        },{
+          name:"PAID",
+          languageId:0
+        },{
+          name:"PROCESSING",
+          languageId:0
+        },{
+          name:"SHIPPED",
+          languageId:0
+        },{
+          name:"CANCELLED",
+          languageId:0
+        },{
+          name:"COMPLETED",
+          languageId:0
+        },{
+          name:"DENIED",
+          languageId:0
+        },{
+          name:"CANCELED REVERSAL",
+          languageId:0
+        },{
+          name:"FAILED",
+          languageId:0
+        },{
+          name:"REFUNDED",
+          languageId:0
+        },{
+          name:"REVERSED",
+          languageId:0
+        },{
+          name:"CHARGEBACK",
+          languageId:0
+        },{
+          name:"PENDING",
+          languageId:0
+        },{
+          name:"VOIDED",
+          languageId:0
+        },{
+          name:"PROCESSED",
+          languageId:0
+        },{
+          name:"EXPIRED",
+          languageId:0
+        }
+      ];
+
+      return await OrderStatus.bulkCreate(orderStatusData);
     } catch (e) {
       throw e;
     }
