@@ -1,0 +1,13 @@
+<ul class="b2b-sec-nav">
+  <% var regx = /category=([0-9]+)&/gi; %>
+  <% var category = regx.exec( req.url ); %>
+  <% for(var i = 0; i < data.categorys.length; i++) { %>
+    <% if( req.url === '/' && data.categorys[i].id  === 1 ){ %>
+      <li><a class="active" href="product?start=0&length=10&category=<%= data.categorys[i].id %>&limit=false"><%= data.categorys[i].CategoryDescription.name %></a></li>
+    <% } else if ( category && category[1] == data.categorys[i].id ) { %>
+      <li><a class="active" href="product?start=0&length=10&category=<%= data.categorys[i].id %>&limit=false"><%= data.categorys[i].CategoryDescription.name %></a></li>
+    <% } else { %>
+      <li><a href="product?start=0&length=10&category=<%= data.categorys[i].id %>&limit=false"><%= data.categorys[i].CategoryDescription.name %></a></li>
+    <% }%>
+  <% } %>
+</ul>

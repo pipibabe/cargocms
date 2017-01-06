@@ -288,7 +288,8 @@ module.exports = {
         }
       }
     },
-    totalMoney: {
+
+    formatTotal: {
       type: Sequelize.VIRTUAL,
       get: function(){
         try{
@@ -303,7 +304,7 @@ module.exports = {
         }
       }
     },
-    taxMoney: {
+    formatTax: {
       type: Sequelize.VIRTUAL,
       get: function(){
         try{
@@ -318,7 +319,35 @@ module.exports = {
           sails.log.error(e);
         }
       }
-    }
+    },
+
+    displayName: {
+      type: Sequelize.VIRTUAL,
+      get: function() {
+        const user = this.getDataValue('User');
+        const firstName = this.getDataValue('firstname');
+        const lastName = this.getDataValue('lastname');
+
+        let displayName = firstName + ' ' + lastName;
+        const isTw = user.locale === 'zh_TW';
+
+        var regExp = /^[\d|a-zA-Z| ]+$/;
+        var checkEng = regExp.test(displayName);
+
+        if (!checkEng) {
+          displayName = lastName + firstName;
+        } else if(isTw){
+          displayName = lastName + firstName;
+        }
+
+        if (displayName === '') {
+          displayName = this.getDataValue('email');
+        }
+
+        return displayName;
+      }
+    },
+
   },
   associations: () => {
     // Order.hasOne(OrderStatus);

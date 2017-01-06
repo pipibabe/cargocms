@@ -7,18 +7,19 @@
 <% LayoutUtils.addMeta({ property:"og:description", content:"" }); %>
 <% LayoutUtils.addMeta({ property:"og:type", content:"website" }); %>
 
+<% include partials/sideMenuForMobile.ejs %>
 <% include partials/sideMenu.ejs %>
 
 <!-- Interactive Slider v2 -->
 <div class="">
   <% include lib/login.inc.ejs %>
 	<div class="row b2b-content b2b-content-header" style="
-  background: url(http://i.imgur.com/Z2K6d9T.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 13%;
-  margin-top: -20px;
-  ">
+    background: url(http://i.imgur.com/Z2K6d9T.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 13%;
+    margin-top: -20px;"
+  >
 		<div class="col-md-12">
 			<h1 style="
       height: 161px;
@@ -45,16 +46,24 @@
 	<div class="row b2b-content b2b-content-body">
 
     <% for(var p = 0, len = data.items.length; p < len; p++) { %>
-      <div class="col-sm-4 col-md-3 product product-promotion" data-id="<%= data.items[p].id %>">
+      <div class="col-sm-4 col-md-3 product" data-id="<%= data.items[p].id %>">
         <div class="product-img" style="background-image: url('<%= data.items[p].image%>');"></div>
         <h1><%= data.items[p].model %></h1>
         <span class="promotion-label">限量優惠</span>
         <p class="product-price">
-  				<span><%= data.items[p].price %></span><small>起</small>
+  				<i class="fa fa-dollar"></i><span><%= data.items[p].price %></span><small>起</small>
   			</p>
         <div class="form-group">
-  				<label class="control-label">特級 <%= data.items[p].price %>/包:</label>
-  				<input class="form-control" type="number" value="0" min="0" max="10" />
+          <div>
+            <label class="control-label">特級 <%= data.items[p].price %> /包</label>
+          </div>
+          <div>
+            <label class="control-label"><%= data.items[p].weight %> 公克/包</label>
+          </div>
+
+          <label style="float: left;margin: 9px 8px 0 0;font-size: 1.2em;">訂購</label>
+          <label style="float: right;margin: 9px 0 0 8px;font-size: 1.2em;">包</label>
+          <input class="form-control" type="number" value="0" min="0" max="10" />
   			</div>
       </div>
     <% } %>

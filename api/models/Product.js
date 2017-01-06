@@ -207,6 +207,8 @@ module.exports = {
     Product.belongsToMany(Category, {
       through: 'ProductCategory',
     });
+
+    Product.hasMany(SupplierShipOrderProduct);
   },
   options: {
     paranoid: true,

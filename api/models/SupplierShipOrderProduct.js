@@ -36,6 +36,11 @@ module.exports = {
     //   type: Sequelize.INTEGER(8),
     //   allowNull: false,
     // },
+    status: {
+      type: Sequelize.ENUM('NEW','PAID','PROCESSING','SHIPPED','DELIVERED','CANCELLED','COMPLETED', 'SUBMITTED','DENIED','CANCELED REVERSAL','FAILED','REFUNDED','REVERSED','CHARGEBACK','PENDING','VOIDED','PROCESSED','EXPIRED'),
+      allowNull: false,
+      defaultValue: 'NEW'
+    },
 
     createdDateTime:{
       type: Sequelize.VIRTUAL,
@@ -57,43 +62,12 @@ module.exports = {
           sails.log.error(e);
         }
       }
-    },
-    formatTotal: {
-      type: Sequelize.VIRTUAL,
-      get: function(){
-        try{
-          let total = this.getDataValue('total');
-          if(!total){
-            return '';
-          }
-          return UtilsService.moneyFormat(total);
-
-        } catch(e){
-          sails.log.error(e);
-        }
-      }
-    },
-    formatPrice: {
-      type: Sequelize.VIRTUAL,
-      get: function(){
-        try{
-          let price = this.getDataValue('price');
-          if(!price){
-            return '';
-          }
-
-          return UtilsService.moneyFormat(price);
-
-        } catch(e){
-          sails.log.error(e);
-        }
-      }
     }
 
   },
   associations: () => {
-    OrderProduct.belongsTo(Product);
-    OrderProduct.belongsTo(Order);
+    SupplierShipOrderProduct.belongsTo(SupplierShipOrder);
+    SupplierShipOrderProduct.belongsTo(Product);
   },
   options: {
     classMethods: {},

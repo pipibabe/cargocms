@@ -1,9 +1,14 @@
 .b2b-navbar {
   .b2b-cart {
     li {
+      a span {
+        padding-right: 2em;
+        vertical-align: text-top;
+      }
       i {
         margin-left: 6px;
         padding: 5px;
+        float: right;
         &:hover {
           color: #b71010;
         }
