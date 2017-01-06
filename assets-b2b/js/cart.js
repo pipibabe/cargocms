@@ -103,5 +103,13 @@ var OrderForm = new Vue({
     $(window).on('modifyCart', function () {
       this.carts = JSON.parse(localStorage.cart || '[]');
     }.bind(this));
+  },
+
+  filters: {
+    moneyNum: function( n ){
+      var moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
+      return n.toString().replace( moneyFormat , "$1,");
+    }
   }
+
 });

@@ -1,3 +1,4 @@
+
 <div class="b2b-breadcrumbs">
   <div class="container" style="max-width: 960px;">
     <h1>確認訂購單</h1>
@@ -73,21 +74,23 @@
     <tbody>
       <% for(var i = 0, len = data.product.length; i < len; i++) { %>
         <tr>
-          <td><%= data.product[i].model %></td><td><%= data.product[i].price %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].total %></td>
+          <td><%= data.product[i].model %></td><td><%= data.product[i].formatPrice %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].formatTotal %></td>
         </tr>
       <% } %>
     </tbody>
   </table>
 
+  <hr style="border-top: 3px solid #eee"/>
+
   <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
     <tr>
-      <td>合計</td><td><%= data.item.total %></td>
+      <th>合計</th><td><%= data.item.formatTotal %></td>
     </tr>
     <tr>
-      <td>營業稅</td><td><%= Math.round(data.item.total * 0.05) %></td>
+      <th>營業稅</th><td><%= data.item.formatTax %></td>
     </tr>
     <tr>
-      <td>總計</td><td><%= data.item.total %></td>
+      <th>總計</th><td><%= data.item.formatTotal %></td>
     </tr>
   </table>
 

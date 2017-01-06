@@ -289,6 +289,38 @@ module.exports = {
       }
     },
 
+    formatTotal: {
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          let total = this.getDataValue('total');
+          if(!total){
+            return '';
+          }
+          return UtilsService.moneyFormat(total);
+
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
+    },
+    formatTax: {
+      type: Sequelize.VIRTUAL,
+      get: function(){
+        try{
+          let total = this.getDataValue('total');
+          if(!total){
+            return '';
+          }
+          total = Math.round(total * 0.05);
+          return UtilsService.moneyFormat(total);
+
+        } catch(e){
+          sails.log.error(e);
+        }
+      }
+    },
+
     displayName: {
       type: Sequelize.VIRTUAL,
       get: function() {
@@ -315,6 +347,7 @@ module.exports = {
         return displayName;
       }
     },
+
   },
   associations: () => {
     // Order.hasOne(OrderStatus);
