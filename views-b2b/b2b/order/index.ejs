@@ -1,62 +1,69 @@
+
 <div class="b2b-breadcrumbs">
   <div class="container" style="max-width: 960px;">
     <h1>確認訂購單</h1>
   </div>
 </div>
 <div class="container b2b-order-form">
-	<div class="row" style="margin-top: 2em;">
-    <div class="col-sm-4">
-      <i class="fa fa-user info-icon" aria-hidden="true"></i>
-    </div>
-    <div class="col-sm-8">
-      <table style="margin-top: 3.2em;">
-        <tbody>
-          <tr>
-            <td style="width: 6em;">客戶名稱：</td><td><%= data.item.User.displayName %></td>
-          </tr>
-          <tr>
-            <td>購買人：</td><td><%= data.item.displayName %></td>
-          </tr>
-          <tr>
-            <td>電子郵件：</td><td><%= data.item.email %></td>
-          </tr>
-          <tr>
-            <td>通訊地址：</td><td><%= data.item.User.address %></td>
-          </tr>
-          <tr>
-            <td>電話：</td><td><%= data.item.User.phone1 %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-	</div>
 
-  <div class="row" style="margin-top: 2em;">
-    <div class="col-sm-4">
-      <i class="fa fa-truck info-icon" aria-hidden="true"></i>
+  <div class="row">
+
+    <div class="row col-lg-6" style="margin-top: 2em;">
+      <div class="col-sm-3 col-lg-5">
+        <i class="fa fa-user info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-9 col-lg-7">
+        <table style="margin-top: 3.2em;">
+          <tbody>
+            <tr>
+              <td style="width: 6em;">客戶名稱：</td><td><%= data.item.User.lastName + data.item.User.firstName %></td>
+            </tr>
+            <tr>
+              <td>購買人：</td><td><%= data.item.lastname + data.item.firstname %></td>
+            </tr>
+            <tr>
+              <td>電子郵件：</td><td><%= data.item.email %></td>
+            </tr>
+            <tr>
+              <td>通訊地址：</td><td><%= data.item.User.address %></td>
+            </tr>
+            <tr>
+              <td>電話：</td><td><%= data.item.User.phone1 %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  	</div>
+
+    <div class="row col-lg-6" style="margin-top: 2em;">
+      <div class="col-sm-3 col-lg-5">
+        <i class="fa fa-truck info-icon" aria-hidden="true"></i>
+      </div>
+      <div class="col-sm-9 col-lg-7">
+        <table style="margin-top: 3.2em;">
+          <tbody>
+            <tr>
+              <td style="width: 6em;">運送方式：</td><td><%= data.item.shippingMethod %></td>
+            </tr>
+            <tr>
+              <td>運費：</td><td>免運費</td>
+            </tr>
+            <tr>
+              <td>收件地址：</td><td><%= data.item.shippingPostcode + ' ' + data.item.shippingAddress1 %></td>
+            </tr>
+            <tr>
+              <td>收件人：</td><td><%= data.item.shippingLastname + ' ' + data.item.shippingFirstname %></td>
+            </tr>
+            <tr>
+              <td>聯絡電話：</td><td><%= data.item.telephone %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="col-sm-8">
-      <table style="margin-top: 3.2em;">
-        <tbody>
-          <tr>
-            <td style="width: 6em;">運送方式：</td><td><%= data.item.shippingMethod %></td>
-          </tr>
-          <tr>
-            <td>運費：</td><td>免運費</td>
-          </tr>
-          <tr>
-            <td>收件地址：</td><td><%= data.item.shippingPostcode + ' ' + data.item.shippingCity +data.item.shippingAddress1 %></td>
-          </tr>
-          <tr>
-            <td>收件人：</td><td><%= data.item.shippingLastname + ' ' + data.item.shippingFirstname %></td>
-          </tr>
-          <tr>
-            <td>聯絡電話：</td><td><%= data.item.telephone %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+
   </div>
+
 
   <table class="table" style="margin-top: 3.2em;">
     <thead>
@@ -67,21 +74,23 @@
     <tbody>
       <% for(var i = 0, len = data.product.length; i < len; i++) { %>
         <tr>
-          <td><%= data.product[i].model %></td><td><%= data.product[i].price %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].total %></td>
+          <td><%= data.product[i].model %></td><td><%= data.product[i].formatPrice %></td><td><%= data.product[i].quantity %></td><td><%= data.product[i].formatTotal %></td>
         </tr>
       <% } %>
     </tbody>
   </table>
 
+  <hr style="border-top: 3px solid #eee"/>
+
   <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
     <tr>
-      <td>合計</td><td><%= data.item.total %></td>
+      <th>合計</th><td><%= data.item.formatTotal %></td>
     </tr>
     <tr>
-      <td>營業稅</td><td><%= Math.round(data.item.total * 0.05) %></td>
+      <th>營業稅</th><td><%= data.item.formatTax %></td>
     </tr>
     <tr>
-      <td>總計</td><td><%= data.item.total %></td>
+      <th>總計</th><td><%= data.item.formatTotal %></td>
     </tr>
   </table>
 

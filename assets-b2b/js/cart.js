@@ -73,7 +73,6 @@ var Cart = new Vue({
   },
   methods: {
     removeProduct: function (index, event) {
-      event.stopPropagation();
       removeFromCart(index);
       $(window).trigger('modifyCart');
       this.carts = JSON.parse(localStorage.cart || '[]');
@@ -104,5 +103,13 @@ var OrderForm = new Vue({
     $(window).on('modifyCart', function () {
       this.carts = JSON.parse(localStorage.cart || '[]');
     }.bind(this));
+  },
+
+  filters: {
+    moneyNum: function( n ){
+      var moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
+      return n.toString().replace( moneyFormat , "$1,");
+    }
   }
+
 });

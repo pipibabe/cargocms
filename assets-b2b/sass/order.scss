@@ -19,6 +19,7 @@
     text-align: center;
     border-radius: 50%;
     margin: 2px auto;
+    padding-right: 20px;
     @media (max-width: 767px) {
       display: none;
     }
@@ -36,11 +37,19 @@
     }
   }
   .b2b-bill-info {
+    th {
+      text-align: right;
+      padding: 0 75px 0 0;
+    }
     td {
       text-align: right;
+      letter-spacing: 0.1em;
       &:first-child {
         padding: 0 75px 0 0;
       }
     }
   }
+}
+em.invalid{
+  color: #a94442;
 }

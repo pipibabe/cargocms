@@ -1,8 +1,3 @@
-<style type="text/css">
-  em.invalid{
-    color: #a94442;
-  }
-</style>
 
 <div class="b2b-breadcrumbs">
   <div class="container" style="max-width: 960px;">
@@ -102,22 +97,23 @@
       </thead>
       <tbody>
         <tr v-for="cart in carts">
-          <td>{{cart.name}}</td><td>{{cart.price}}</td><td>{{cart.quantity}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.quantity)}}</td>
+          <td>{{cart.name}}</td><td>{{cart.price | moneyNum}}</td><td>{{cart.quantity}}</td><td>{{parseFloat(cart.price) * parseFloat(cart.quantity) | moneyNum }}</td>
         </tr>
       </tbody>
     </table>
 
     <input name="products" class="form-control hidden" v-bind:value=JSON.stringify(carts)>
 
-    <table class="b2b-bill-info pull-right" style="margin-top: 1em;">
+    <hr style="border-top: 2px solid #eee"/>
+    <table class="b2b-bill-info pull-right">
       <tr>
-        <td>合計</td><td>{{priceSum}}</td>
+        <th>合計</th><td>{{priceSum | moneyNum}}</td>
       </tr>
       <tr>
-        <td>營業稅</td><td>{{ Math.round(priceSum * 0.05)}}</td>
+        <th>營業稅</th><td>{{ Math.round(priceSum * 0.05) | moneyNum }}</td>
       </tr>
       <tr>
-        <td>總計</td><td>{{priceSum}}</td>
+        <th>總計</th><td>{{priceSum | moneyNum}}</td>
       </tr>
     </table>
     <button class="btn btn-default btn-lg pull-right" type="submit" style="clear:right; display:inline-block; margin:1.6em 0 3em;">確認訂單</button>
