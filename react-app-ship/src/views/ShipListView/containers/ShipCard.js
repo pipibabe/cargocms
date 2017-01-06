@@ -23,7 +23,7 @@ export default class ShipCard extends React.Component {
       date: '2016/12/21',
       time: '11:43:00',
     },
-    SupplierShipOrderDescriptions: [
+    SupplierShipOrderProducts: [
       {
         id: 3,
         name: '鮮甜飽滿無毒益菌蝦',
@@ -89,7 +89,7 @@ export default class ShipCard extends React.Component {
     displayName: PropTypes.string,
     createdDateTime: PropTypes.object,
     updatedDateTime: PropTypes.object,
-    SupplierShipOrderDescriptions: PropTypes.array,
+    SupplierShipOrderProducts: PropTypes.array,
     telephone: PropTypes.string,
     email: PropTypes.string,
     paymentCompany: PropTypes.string,
@@ -143,7 +143,7 @@ export default class ShipCard extends React.Component {
     const cardBody = {
       isExpend: this.state.open,
       invoiceCode: this.props.invoicePrefix + this.props.invoiceNo,
-      orderDetail: this.props.SupplierShipOrderDescriptions,
+      orderDetail: this.props.SupplierShipOrderProducts,
       orderSupplier: this.props.Supplier,
       ordrDate: {
         createdAt: this.props.createdDateTime.date,
