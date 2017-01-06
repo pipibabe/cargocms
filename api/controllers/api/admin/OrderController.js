@@ -138,8 +138,10 @@ module.exports = {
       await OrderHistory.create({
         OrderId: order.id,
         OrderStatusId: orderStatus.id,
-        comment: `User ID: ${order.UserId} ,CONFIRM Order ID: ${order.id}. Order Status: 'PROCESSING'. Order Data:${JSON.stringify(order, null, 2)}`,
+        comment: `User ID: ${order.UserId} ,CONFIRM Order ID: ${order.id}. Order Status: 'PROCESSING'.`,
       });
+
+      sails.log.info('Order History', Order);
 
       const orderProducts = await OrderProduct.findAll({
         where:{

@@ -85,7 +85,7 @@ module.exports = {
       await OrderHistory.create({
         OrderId: order.id,
         OrderStatusId: orderStatus.id,
-        comment: `User ID: ${data.UserId} ,Create New Order ID: ${order.id}. Order Data:${JSON.stringify(order, null, 2)}`,
+        comment: `User ID: ${data.UserId} ,Create New Order ID: ${order.id}`,
       });
 
       let orderProduct = [];
