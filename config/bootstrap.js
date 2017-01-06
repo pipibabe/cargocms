@@ -43,42 +43,45 @@ module.exports.bootstrap = async (cb) => {
 
     }
 
+    console.log("=== bootstrap create admin 0===");
+
     let adminRole = await Role.findOrCreate({
       where: {authority: 'admin'},
       defaults: {authority: 'admin'}
     });
-
+    console.log("=== bootstrap create admin 1===");
     let userRole = await Role.findOrCreate({
       where: {authority: 'user'},
       defaults: {authority: 'user'}
     });
 
-    User.findOrCreate({
-      where: {
-        username: 'admin'
-      },
-      defaults: {
+
+    let adminUser = await User.findOne({
+      where: {username: 'admin'}
+    });
+    if(adminUser == null){
+      adminUser = await User.create({
         username: 'admin',
         email: 'admin@example.com',
         firstName: '李仁',
         lastName: '管'
+      })
+    }
+    await Passport.findOrCreate({
+      where: {
+        provider: 'local',
+        UserId: adminUser.id
+      },
+      defaults: {
+        provider: 'local',
+        password: 'admin',
+        UserId: adminUser.id
       }
-    }).then(function(adminUsers) {
-      Passport.findOrCreate({
-        where: {
-          provider: 'local',
-          UserId: adminUsers[0].id
-        },
-        defaults: {
-          provider: 'local',
-          password: 'admin',
-          UserId: adminUsers[0].id
-        }
-      });
-      adminUsers[0].addRole(adminRole[0]);
     });
+    console.log("=== bootstrap create admin 4===");
+    await adminUser.addRole(adminRole[0]);
 
-
+    console.log("=== bootstrap create admin 5===");
     /*
      * 是否要匯入的判斷必須交給 init 定義的程式負責
      */
