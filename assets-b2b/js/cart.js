@@ -108,7 +108,7 @@ var OrderForm = new Vue({
 
   filters: {
     moneyNum: function( n ){
-      let moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
+      var moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
       return n.toString().replace( moneyFormat , "$1,");
     }
   }
