@@ -324,12 +324,12 @@ module.exports = {
     displayName: {
       type: Sequelize.VIRTUAL,
       get: function() {
-        const user = this.getDataValue('User');
         const firstName = this.getDataValue('firstname');
         const lastName = this.getDataValue('lastname');
 
         let displayName = firstName + ' ' + lastName;
-        const isTw = user.locale === 'zh_TW';
+        const user = this.getDataValue('User');
+        const isTw = user && user.locale === 'zh_TW';
 
         var regExp = /^[\d|a-zA-Z| ]+$/;
         var checkEng = regExp.test(displayName);

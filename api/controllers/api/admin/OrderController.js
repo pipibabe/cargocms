@@ -197,9 +197,9 @@ module.exports = {
           status: 'NEW',
         });
 
-        let supplierShipOrderDescription = await SupplierShipOrderDescription.create({
+        let supplierShipOrderProduct = await SupplierShipOrderProduct.create({
           SupplierShipOrderId: supplierShipOrder.id,
-          OrderProductId: p.id,
+          ProductId: p.ProductId,
           name: p.name,
           model: p.model,
           quantity: p.quantity,
