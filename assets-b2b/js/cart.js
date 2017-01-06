@@ -73,7 +73,6 @@ var Cart = new Vue({
   },
   methods: {
     removeProduct: function (index, event) {
-      event.stopPropagation();
       removeFromCart(index);
       $(window).trigger('modifyCart');
       this.carts = JSON.parse(localStorage.cart || '[]');
