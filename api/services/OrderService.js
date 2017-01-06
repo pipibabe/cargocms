@@ -23,6 +23,12 @@ module.exports = {
       data.shippingLastname = data.shippingLastname || data.lastname;
       data.shippingFirstname= data.shippingFirstname || data.firstname;
 
+      data.shippingCity = data.county;
+      data.shippingPostcode = data.zipcode;
+      data.shippingAddress1 = data.district + data.shippingAddress1;
+      delete data.county;
+      delete data.zipcode
+      delete data.district
       // data remove products
       delete data.products;
       //ignore columns
