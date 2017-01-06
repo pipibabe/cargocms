@@ -141,7 +141,7 @@ module.exports = {
         comment: `User ID: ${order.UserId} ,CONFIRM Order ID: ${order.id}. Order Status: 'PROCESSING'.`,
       });
 
-      sails.log.info('Order History', Order);
+      sails.log.info('Order CONFIRM', Order);
 
       const orderProducts = await OrderProduct.findAll({
         where:{
