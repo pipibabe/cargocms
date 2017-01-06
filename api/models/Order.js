@@ -296,8 +296,7 @@ module.exports = {
           if(!total){
             return '';
           }
-          const moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
-          return (total).toString().replace( moneyFormat , "$1,");
+          return UtilsService.moneyFormat(total);
 
         } catch(e){
           sails.log.error(e);
@@ -313,8 +312,7 @@ module.exports = {
             return '';
           }
           total = Math.round(total * 0.05);
-          const moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
-          return (total).toString().replace( moneyFormat , "$1,");
+          return UtilsService.moneyFormat(total);
 
         } catch(e){
           sails.log.error(e);

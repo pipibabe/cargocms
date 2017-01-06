@@ -66,7 +66,7 @@ module.exports = {
           if(!total){
             return '';
           }
-          return (total).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+          return UtilsService.moneyFormat(total);
 
         } catch(e){
           sails.log.error(e);
@@ -81,8 +81,8 @@ module.exports = {
           if(!price){
             return '';
           }
-          const moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
-          return (price).toString().replace( moneyFormat , "$1,");
+
+          return UtilsService.moneyFormat(price);
 
         } catch(e){
           sails.log.error(e);

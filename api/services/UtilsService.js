@@ -35,4 +35,13 @@ module.exports = {
       throw e
     }
   },
+
+  moneyFormat: function( number ) {
+    try{
+      const moneyFormat = /(\d)(?=(\d{3})+(?!\d))/g;
+      return (number).toString().replace( moneyFormat , "$1,");
+    } catch (e) {
+      throw e;
+    }
+  }
 }
