@@ -1,7 +1,7 @@
 import createHelper from "../../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../../util/adminAuthHelper.js"
 
-describe.skip('about admin Order controllers', () => {
+describe('about admin Order controllers', () => {
   let product1, product2, user, order, supplier1, supplier2,  orderProduct1, orderProduct2;
   before(async function(done){
     try{
@@ -25,6 +25,7 @@ describe.skip('about admin Order controllers', () => {
       supplier2 = await createHelper.supplier('活跳跳海產');
       await createHelper.supplierProduct(supplier2.id, product2.id);
 
+      await createHelper.orderStatus();
       order = await createHelper.order(user.id);
 
       orderProduct1 = await createHelper.orderProduct(order.id, product1.id, 2);
@@ -60,7 +61,7 @@ describe.skip('about admin Order controllers', () => {
       done();
     });
 
-    it('admin conform Order to Supplier shoubld success.', async (done) => {
+    it('admin confirm Order to Supplier shoubld success.', async (done) => {
       try{
         const res = await request(sails.hooks.http.app)
         .post(`/api/admin/order/confirm/${order.id}`);
@@ -82,13 +83,13 @@ describe.skip('about admin Order controllers', () => {
         });
         (supplierShipOrder2 !== null).should.be.true;
 
-        const supplierShipOrderDescription = await SupplierShipOrderDescription.findAll({
+        const supplierShipOrderProduct = await SupplierShipOrderProduct.findAll({
           where: {
             SupplierShipOrderId: supplierShipOrder1.id
           }
         });
-        supplierShipOrderDescription.length.should.be.eq(1);
-        supplierShipOrderDescription[0].OrderProductId.should.eq(orderProduct1.id)
+        supplierShipOrderProduct.length.should.be.eq(1);
+        supplierShipOrderProduct[0].ProductId.should.eq(orderProduct1.id)
         done();
       } catch (e) {
         done(e);
