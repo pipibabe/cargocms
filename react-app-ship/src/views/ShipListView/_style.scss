@@ -161,6 +161,15 @@
 
         .item {}
       }
+      th {
+        text-align: center;
+      }
+      td {
+        text-align: center;
+      }
+      td:first-child {
+        text-align: left;
+      }
     }
 
     .price-wrapper {
