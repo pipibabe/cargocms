@@ -19,6 +19,8 @@ describe('about admin Supplier Ship Order controllers', () => {
         address2: '台中市',
       });
 
+      await createHelper.orderStatus();
+
       order = await createHelper.order(user.id);
 
       product1 = await createHelper.product('毒刺水母涼拌海蜇皮');
@@ -34,6 +36,11 @@ describe('about admin Supplier Ship Order controllers', () => {
     } catch (e) {
       done(e);
     }
+  });
+
+  after(async (done) => {
+    await createHelper.deleteAllOrderStatus();
+    done();
   });
 
   describe('none admin', () => {

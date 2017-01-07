@@ -33,6 +33,7 @@ describe('about Order controllers', () => {
   });
 
   after(async (done) => {
+    await createHelper.deleteAllOrderStatus();
     await unMockAdmin();
     done();
   });

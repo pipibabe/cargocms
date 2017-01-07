@@ -37,6 +37,11 @@ describe('about admin Order controllers', () => {
     }
   });
 
+  after(async (done) => {
+    await createHelper.deleteAllOrderStatus();
+    done();
+  });
+
   describe('none admin', () => {
     it('should 403', async (done) => {
       try{
@@ -89,7 +94,7 @@ describe('about admin Order controllers', () => {
           }
         });
         supplierShipOrderProduct.length.should.be.eq(1);
-        supplierShipOrderProduct[0].ProductId.should.eq(orderProduct1.id)
+        supplierShipOrderProduct[0].ProductId.should.eq(orderProduct1.ProductId);
         done();
       } catch (e) {
         done(e);

@@ -1,7 +1,7 @@
 import createHelper from "../../../../util/createHelper.js"
 import { mockAdmin, unMockAdmin } from "../../../../util/adminAuthHelper.js"
 
-describe('about admin Supplier Ship Order Description controllers', () => {
+describe('about admin Supplier Ship Order Product controllers', () => {
   let product1, product2, user, order, supplier;
   let supplier2,  orderProduct1, orderProduct2, supplierShipOrder;
   let supplierShipOrderProduct1, supplierShipOrderProduct2;
@@ -18,6 +18,8 @@ describe('about admin Supplier Ship Order Description controllers', () => {
         address: '西區台灣大道二段2號16F-1',
         address2: '台中市',
       });
+
+      await createHelper.orderStatus();
 
       order = await createHelper.order(user.id);
 
@@ -37,6 +39,11 @@ describe('about admin Supplier Ship Order Description controllers', () => {
     } catch (e) {
       done(e);
     }
+  });
+
+  after(async (done) => {
+    await createHelper.deleteAllOrderStatus();
+    done();
   });
 
   describe('none admin', () => {
