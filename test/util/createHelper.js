@@ -269,6 +269,16 @@ module.exports = {
     }
   },
 
+  deleteAllOrderStatus: async() => {
+    try{
+      await OrderStatus.destroy({
+        where: {}
+      });
+    } catch (e) {
+      throw e;
+    }
+  },
+
   supplierCategory: async( categoryName ) => {
     try{
       const category = await Category.create({
