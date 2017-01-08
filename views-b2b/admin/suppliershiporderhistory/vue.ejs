@@ -15,7 +15,7 @@ var appModel = {
       comment: '',
       notify: '',
       SupplierShipOrderId: '',
-      
+
     },
     items: [],
     option: {}
@@ -41,3 +41,7 @@ appMain.editDisabled = function(){
 appMain.createHide = function () {
   $('.fn-create-hide').hide();
 };
+
+appMain.enableText = function () {
+  $('textarea').attr('disabled', false);
+}
