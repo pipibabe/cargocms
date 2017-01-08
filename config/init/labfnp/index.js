@@ -48,6 +48,7 @@ module.exports.init = async () => {
       { href: '/admin/supplier', title: '供應商清單', sequence: 20, ParentMenuItemId: 6},
       { href: '/admin/suppliershiporder', title: '供應商出貨訂單', sequence: 30, ParentMenuItemId: 6},
       { href: '/admin/suppliershiporderproduct', title: '供應商詳細出貨訂單', sequence: 40, ParentMenuItemId: 6},
+      { href: '/admin/suppliershiporderhistory', title: '供應商出貨單歷程', sequence: 50, ParentMenuItemId: 6},
 
     ]
 
