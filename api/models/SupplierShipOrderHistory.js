@@ -37,7 +37,9 @@ module.exports = {
       }
     }
   },
-  associations: () => {},
+  associations: () => {
+    SupplierShipOrderHistory.belongsTo(SupplierShipOrder);
+  },
   options: {
     classMethods: {},
     instanceMethods: {},

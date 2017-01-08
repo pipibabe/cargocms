@@ -276,6 +276,7 @@ module.exports = {
 		SupplierShipOrder.belongsTo(Supplier);
 		SupplierShipOrder.belongsTo(Order);
     SupplierShipOrder.hasMany(SupplierShipOrderProduct);
+    SupplierShipOrder.hasMany(SupplierShipOrderHistory);
 	},
 	options: {
 		classMethods: {},
