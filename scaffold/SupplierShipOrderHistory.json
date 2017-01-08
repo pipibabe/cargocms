@@ -1,0 +1,31 @@
+/* SAMPLE */
+// Do exactly on this pattern!
+
+{
+    "controllerBasePath": "/api/controllers",
+    "dest": "export",
+    "models": [{
+        "name": "supplier_ship_order_history", // 駝峰的話要用_分格開來
+        "crud": true,
+        "fields": [{
+            "name": "comment",
+            "type": "text",
+            "layout": {
+              "label": "註釋"
+            }
+        }, {
+            "name": "notify",
+            "type": "Boolean",
+            "layout": {
+              "label": "通知"
+            }
+        }, {
+            "name": "SupplierShipOrderId",
+            "type": "Int",
+            "length": "11",
+            "layout": {
+              "label": "供應商出貨單ID"
+            }
+        }]
+    }]
+}

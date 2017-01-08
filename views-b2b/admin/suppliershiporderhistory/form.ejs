@@ -1,0 +1,51 @@
+<fieldset>
+
+  
+    <section row="">
+      <label class="label">註釋</label>
+      <label class="input state-disabled ">
+      <input type="text" name="comment" placeholder="" v-model="data.item.comment" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入註釋</b></label>
+    </section>
+  
+    <section row="">
+      <label class="label">通知</label>
+      <label class="input state-disabled ">
+      <input type="text" name="notify" placeholder="" v-model="data.item.notify" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入通知</b></label>
+    </section>
+  
+    <section row="">
+      <label class="label">供應商出貨單ID</label>
+      <label class="input state-disabled ">
+      <input type="text" name="SupplierShipOrderId" placeholder="" v-model="data.item.SupplierShipOrderId" disabled>
+      <b class="tooltip tooltip-bottom-right">請輸入供應商出貨單ID</b></label>
+    </section>
+  
+
+</fieldset>
+<script>
+  var formRules = {
+    comment:{
+      required: true,
+    },
+    notify:{
+      required: true,
+    },
+    SupplierShipOrderId:{
+      required: true,
+    },
+  };
+
+  var formMessages = {
+    comment:{
+      required: "請給予 註釋",
+    },
+    notify:{
+      required: "請給予 通知",
+    },
+    SupplierShipOrderId:{
+      required: "請給予 供應商出貨單ID",
+    },
+  };
+</script>

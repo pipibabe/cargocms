@@ -1,0 +1,106 @@
+
+<!-- client -->
+<table id="main-table" class="table table-striped table-bordered table-hover" width="100%">
+  <thead>
+    <tr>
+      
+        
+        <th data-hide=""
+        data-class="" class="no-sort">
+          註釋
+        </th>
+      
+        
+        <th data-hide=""
+        data-class="" class="no-sort">
+          通知
+        </th>
+      
+        
+        <th data-hide=""
+        data-class="" class="no-sort">
+          供應商出貨單ID
+        </th>
+      
+      <th width="80" data-hide="phone,tablet"></th>
+    </tr>
+  </thead>
+  <!-- client only -->
+  <tbody>
+    <tr v-for="item in data.items">
+      
+        <td>{{ item.comment}}</td>
+      
+        <td>{{ item.notify}}</td>
+      
+        <td>{{ item.SupplierShipOrderId}}</td>
+      
+      <td align="center" style="cursor: pointer;">
+        <div class="row">
+          <a class="btn btn-default btn-xs" role="button" v-on:click="show(item.id)">
+            <i class="fa-fw fa fa-eye text-muted" />
+          </a>
+          <a class="btn btn-default btn-xs" role="button" v-on:click="edit(item.id)">
+            <i class="fa-fw fa fa-pencil-square-o text-muted"/>
+          </a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+ </table>
+
+
+<script type="text/javascript">
+  var pagefunction = function() {
+
+    // server only
+    var columns = [
+      
+        
+          { "data": "comment" },
+        
+      
+        
+          { "data": "notify" },
+        
+      
+        
+          { "data": "SupplierShipOrderId" },
+        
+      
+        { "data": null },
+    ]
+
+    // server only
+    var columnDefs = [
+      
+        
+      
+        
+      
+        
+      
+      {
+        "targets"  : 3,
+        "orderable": false,
+        "searchable": false,
+        "render": function ( data, type, row ) {
+          var colBody =
+          '<div class="row-action-buttons hidden-xs hidden-sm">'+
+          '<a name="showDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+          '<i class="fa-fw fa fa-eye text-muted" />'+
+          '</a>'+
+          '<a name="editDataButton" class="btn btn-default btn-xs" role="button" data-id="'+row.id+'">'+
+          '<i class="fa-fw fa fa-pencil-square-o text-muted"/>'+
+          '</a>'+
+          '</div>';
+          return colBody;
+        }
+      },
+    ]
+    var serverSidePaging = <%= (data.serverSidePaging != null)?data.serverSidePaging:false %>;
+    <%- include vue.ejs %>
+    appMain.$mount("#main-index");
+    appMain.loadItems(appMain.renderTable);
+  };
+</script>

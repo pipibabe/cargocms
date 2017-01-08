@@ -182,6 +182,13 @@ var defaultConfig = {
   'put /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.update',
   'delete /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.destroy',
 
+  'get /api/admin/suppliershiporderhistory': 'api/admin/SupplierShipOrderHistoryController.find',
+  'get /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.findOne',
+  'post /api/admin/suppliershiporderhistory': 'api/admin/SupplierShipOrderHistoryController.create',
+  'put /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.update',
+  'delete /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.destroy',
+
+
   'get /api/product': 'api/ProductController.find',
 
   'get /orderinfo/:id': 'api/OrderController.getOrderInfo',
