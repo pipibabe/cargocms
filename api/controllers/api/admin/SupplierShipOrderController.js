@@ -93,6 +93,11 @@ module.exports = {
         }
       });
       if (checkSupplierShipOrderProductHasCOMPLETED.length > 0) {
+        await SupplierShipOrderHistory.create({
+          notify: true,
+          comment: `取消出貨單操作：失敗，已有商品揀貨完成，不能取消訂單。 SupplierShipOrder ID: ${id}`,
+          SupplierShipOrderId: id
+        });
         throw Error('已有商品揀貨完成，不能取消訂單');
       }
 
@@ -109,6 +114,18 @@ module.exports = {
           })
           .catch(function(err) {
             reject(err)
+          });
+
+          SupplierShipOrderHistory.create({
+            notify: true,
+            comment: `出貨單 SupplierShipOrder ID: ${id}，狀態變更：${status}`,
+            SupplierShipOrderId: id
+          })
+          .then(function(supplierShipOrderHistory){
+            resolve(supplierShipOrderHistory);
+          })
+          .catch(function(err){
+            reject(err);
           });
         });
       }
