@@ -62,7 +62,13 @@ module.exports.init = async () => {
           status: 'NEW',
         });
 
-        let supplierShipOrderDescription = await SupplierShipOrderProduct.create({
+        let supplierShipOrderHistory = await SupplierShipOrderHistory.create({
+          comment: `Order Id: ${order.id} confirm. create New SupplierShipOrder ,ID : ${supplierShipOrder.id}`,
+          notify: true,
+          SupplierShipOrderId: supplierShipOrder.id
+        });
+
+        let supplierShipOrderProduct = await SupplierShipOrderProduct.create({
           SupplierShipOrderId: supplierShipOrder.id,
           ProductId: orderProduct.id,
           name: orderProduct.name,
