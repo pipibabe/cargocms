@@ -42,9 +42,14 @@ module.exports = {
     try{
       const orderId = req.params.id;
       const order = await Order.findById(orderId,{ include: [ User , OrderStatus ]});
+      const loginUser = AuthService.getSessionUser(req);
 
       if(!order){
         return res.notFound();
+      }
+
+      if(!loginUser || loginUser.id !== order.UserId){
+        return res.forbidden();
       }
 
       const orderProduct = await OrderProduct.findAll({
