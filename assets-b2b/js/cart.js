@@ -23,7 +23,7 @@ function storeToCart(product) {
     cart.push(product);
   }
   cart = $(cart).filter(function (i, e) {
-    if(e.number == 0) return false;
+    if(e.quantity == 0) return false;
     else return true;
   }).toArray();
   localStorage.cart = JSON.stringify(cart);
