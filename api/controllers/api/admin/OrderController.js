@@ -211,6 +211,14 @@ module.exports = {
           status: 'NEW',
         });
 
+        const supplierName = await Supplier.findById(supplier);
+
+        await SupplierShipOrderHistory.create({
+          SupplierShipOrderId: supplierShipOrder.id,
+          notify: true,
+          comment: `訂單 ID: ${supplierShipOrder.OrderId} 已確認，建立 ${supplierName.name} 供應商出貨單 ID:${supplierShipOrder.id}.`
+        });
+
         for( let orderProduct of orderProducts ){
           if( orderProduct.Product.SupplierId === supplier ){
 
