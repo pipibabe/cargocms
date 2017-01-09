@@ -39,3 +39,13 @@ var appModel = {
 <%- include ../default/vue.ejs %>
 // 需要新增函式可以對 appMain 進行定義，如：
 // appMain.log = function () {console.log("123")}
+
+appMain.DataTableInitComplete = function() {
+  $('#ToolTables_main-table_2').hide();
+  $('#ToolTables_main-table_3').hide();
+  $('.loading-wrapper').removeClass('active');
+}
+
+appMain.noEditButton = function(){
+  $('footer button.btn-primary').remove();
+}

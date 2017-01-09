@@ -178,15 +178,15 @@ var defaultConfig = {
 
   'get /api/admin/orderpaymenthistory': 'api/admin/OrderPaymentHistoryController.find',
   'get /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.findOne',
-  'post /api/admin/orderpaymenthistory': 'api/admin/OrderPaymentHistoryController.create',
-  'put /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.update',
-  'delete /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.destroy',
+  // 'post /api/admin/orderpaymenthistory': 'api/admin/OrderPaymentHistoryController.create',
+  // 'put /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.update',
+  // 'delete /api/admin/orderpaymenthistory/:id': 'api/admin/OrderPaymentHistoryController.destroy',
 
   'get /api/admin/suppliershiporderhistory': 'api/admin/SupplierShipOrderHistoryController.find',
   'get /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.findOne',
-  'post /api/admin/suppliershiporderhistory': 'api/admin/SupplierShipOrderHistoryController.create',
-  'put /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.update',
-  'delete /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.destroy',
+  // 'post /api/admin/suppliershiporderhistory': 'api/admin/SupplierShipOrderHistoryController.create',
+  // 'put /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.update',
+  // 'delete /api/admin/suppliershiporderhistory/:id': 'api/admin/SupplierShipOrderHistoryController.destroy',
 
 
   'get /api/product': 'api/ProductController.find',
