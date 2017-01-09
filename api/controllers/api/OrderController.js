@@ -49,6 +49,7 @@ module.exports = {
       }
 
       if(!loginUser || loginUser.id !== order.UserId){
+        message = '您沒有足夠權限瀏覽此網頁';
         return res.forbidden(message);
       }
 
