@@ -145,7 +145,7 @@ function ShipCardDetail(props) {
                 <th>產品名稱</th>
                 <th>數量</th>
                 <th>單價</th>
-                <th>小記</th>
+                <th>小計</th>
               </tr>
             </thead>
             <tfoot>
