@@ -20,15 +20,15 @@ before(function(done) {
       fs.statSync(logFileName);
       console.log("logging file alreay exist");
     } catch(e) {
-      fs.appendFile(logFileName, 
+      fs.appendFile(logFileName,
         "memory-rss" + '\t' +
-        "memory-heapUsed" + '\t' + 
+        "memory-heapUsed" + '\t' +
         "memory-heapTotal" + '\n', 'utf8');
       setInterval(function takeSnapshot() {
         var mem = process.memoryUsage();
-        fs.appendFile(logFileName, 
+        fs.appendFile(logFileName,
           mem.rss / 1024 / 1024 + '\t' +
-          mem.heapUsed / 1024 / 1024 + '\t' + 
+          mem.heapUsed / 1024 / 1024 + '\t' +
           mem.heapTotal / 1024 / 1024 + '\n', 'utf8');
       }, 1000);
     }
